@@ -19,5 +19,5 @@ ps aux | head -1 && ps aux | grep 程序名
 
 ### 4.杀掉进程
 ```bash
-kill-9 [pid]
+kill -9 [pid]
 ```

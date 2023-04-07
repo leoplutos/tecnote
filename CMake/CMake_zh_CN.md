@@ -38,17 +38,17 @@ add_compile_options(-Wall -g -fexec-charset=utf-8 -D UNICODE)
 project (Win32Sample LANGUAGES C)
 ```
 
-* 设定编译目标
- - 意思就是  
-   目标1：从messagebox.c编译成messagebox.exe  
-   目标2：从hello.c编译成hello.exe
- - WIN32为不带控制台的Windows应用
+* 设定编译目标  
+意思为  
+目标1：从messagebox.c编译成messagebox.exe  
+目标2：从hello.c编译成hello.exe  
+WIN32为不带控制台的Windows应用
 ```cmake
 add_executable(messagebox WIN32 messagebox.c)
 add_executable(hello WIN32 hello.c)
 ```
 
-# 4.运行CMake命令
+## 4.运行CMake命令
 
 下面的运行命令环境为Window的Git客户端git-bash.exe。  
 使用的工具链为MinGW。  

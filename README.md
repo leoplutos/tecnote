@@ -4,6 +4,9 @@
 ## Linux命令
 * [Linux命令](Linux/Linux_zh_CN.md)
 
+## Git命令
+* [Git命令](Git/Git_zh_CN.md)
+
 ## CMake
 * [Cmake笔记](CMake/CMake_zh_CN.md)
 
