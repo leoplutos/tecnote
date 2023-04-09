@@ -59,6 +59,6 @@ mv fromfile tofile(topath)
 
 ### 10.取得当前路径
 ```bash
-current_path=$( cd -- "$( dirname --"${BASH_SOURCE[0]}")" > /dev/null 2>$1 && pwd )
+current_path=$( cd -- "$( dirname --"${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd )
 echo $current_path
 ```
