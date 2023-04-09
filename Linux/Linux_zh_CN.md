@@ -21,3 +21,44 @@ ps aux | head -1 && ps aux | grep 程序名
 ```bash
 kill -9 [pid]
 ```
+
+### 5.静态库（.a）操作
+添加.o文件
+```bash
+ar r lib.a obj.o
+```
+删除.o文件
+```bash
+ar d lib.a obj.o
+```
+确认静态库.a
+```bash
+ar t lib.a
+```
+
+### 6.确认端口
+```bash
+netstat -tulpn
+```
+
+### 7.Shell调试Debug
+在sh第一行加上
+```
+#!bin/sh -xv
+```
+
+### 8.复制文件
+```bash
+cp -afp fromfile tofile(topath)
+```
+
+### 9.移动文件
+```bash
+mv fromfile tofile(topath)
+```
+
+### 10.取得当前路径
+```bash
+current_path=$( cd -- "$( dirname --"${BASH_SOURCE[0]}")" > /dev/null 2>$1 && pwd )
+echo $current_path
+```
