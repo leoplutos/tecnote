@@ -43,8 +43,8 @@ netstat -tulpn
 
 ### 7.Shell调试Debug
 在sh第一行加上
-```
-#!bin/sh -xv
+```console
+#!/bin/sh -xv
 ```
 
 ### 8.复制文件
@@ -59,6 +59,20 @@ mv fromfile tofile(topath)
 
 ### 10.取得当前路径
 ```bash
-current_path=$( cd -- "$( dirname --"${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd )
+current_path=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" > /dev/null 2>&1 && pwd )
 echo $current_path
+```
+
+### 11.查找命令绝对路径
+```bash
+which ll
+```
+
+### 12.终端输出颜色
+1：粗体  
+31：红色  
+33：黄色  
+0：重置
+```bash
+echo -e "\e[1;31m发生错误。\e[0m提示：参数错误。"
 ```

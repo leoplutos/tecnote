@@ -85,8 +85,8 @@ javap -v com/spring/net/a.class
 得到的内容找[Major Version]，去下表查询  
 | Java version | Major Version | Hex Code |
 |--------------|---------------|----------|
-| Java SE 19   | 62            | (0x3F)   |
-| Java SE 18   | 61            | (0x3E)   |
+| Java SE 19   | 63            | (0x3F)   |
+| Java SE 18   | 62            | (0x3E)   |
 | Java SE 17   | 61            | (0x3D)   |
 | Java SE 16   | 60            | (0x3C)   |
 | Java SE 15   | 59            | (0x3B)   |

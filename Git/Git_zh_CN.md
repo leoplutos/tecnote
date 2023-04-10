@@ -39,10 +39,16 @@ git clone -b master https://github.com/foo/bar.git /D/WorkSpace/bar
 
 ### 7.打开默认GUI画面  
 笔者个人习惯在GUI里面进行add/commit/push/pull操作  
-※在GUI中pull操作需要自己添加一下
 ```git
 git gui
 ```
+* 在GUI中pull操作需要自己添加一下：  
+Tools→Add...→  
+> Name：执行pull  
+Command：git pull  
+选中[Add globally]Checkbox
+* 查看log  
+Repository→Visualize xxx's History
 
 ### 8.查看状态  
 ```git
@@ -74,3 +80,8 @@ git config --global --list
 ```git
 git config --local --list
 ```
+
+## 四.其他
+
+### 快捷方式
+git-bash.exe可以建立快捷方式，然后右键→属性→起始位置：粘贴一个路径后。用这个快捷方式启动git-bash就默认这个路径。
