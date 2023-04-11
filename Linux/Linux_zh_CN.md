@@ -76,3 +76,8 @@ which ll
 ```bash
 echo -e "\e[1;31m发生错误。\e[0m提示：参数错误。"
 ```
+
+### 13.查找文件
+```bash
+find / -name "a.txt"
+```

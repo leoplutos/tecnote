@@ -42,7 +42,7 @@ git clone -b master https://github.com/foo/bar.git /D/WorkSpace/bar
 ```git
 git gui
 ```
-* 在GUI中pull操作需要自己添加一下：  
+* 在GUI中执行pull操作需要自己添加一下：  
 Tools→Add...→  
 > Name：执行pull  
 Command：git pull  
@@ -71,17 +71,73 @@ Git中有三层config文件：系统、全局、本地
 git config --system --list
 ```
 
-### 11.查看当前用户配置
+### 11.查看全局配置
 ```git
 git config --global --list
 ```
 
-### 12.查看当前仓库配置
+### 12.查看本地配置
 ```git
 git config --local --list
 ```
 
 ## 四.其他
 
-### 快捷方式
-git-bash.exe可以建立快捷方式，然后右键→属性→起始位置：粘贴一个路径后。用这个快捷方式启动git-bash就默认这个路径。
+### 13.快速路径
+git-bash.exe可以建立快捷方式，然后右键→属性→起始位置：粘贴一个路径后。用这个快捷方式启动git-bash就默认在这个路径下。
+
+
+### 14.git-bash.exe的环境变量设置
+在git-bash下，也是可以加载.bash_profile文件的。所以可以按如下设定。
+
+查看.bash_profile是否存在
+```bash
+ls ~/.bash_profile
+```
+
+如果不存在就新建一个
+```bash
+touch ~/.bash_profile
+ls ~/.bash_profile
+```
+
+用nano编辑文件
+```bash
+nano ~/.bash_profile
+```
+
+在nano编辑器复制粘贴如下内容（path按自己的路径修改下）
+```bash
+MINGW_HOME=/d/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin
+JAVA_HOME=/d/Tools/WorkTool/Java/jdk17.0.6/bin
+PYTHON_HOME=/d/Tools/WorkTool/Python/Python38-32
+VSCODE_HOME=/d/Tools/WorkTool/Text/VSCode-win32-x64-1.77.1
+CMAKE_HOME=/d/Tools/WorkTool/C/cmake-3.26.1-windows-x86_64/bin
+NINJA_HOME=/d/Tools/WorkTool/C/ninja-win
+PATH=$PATH:$MINGW_HOME:$JAVA_HOME:$PYTHON_HOME:$VSCODE_HOME:$CMAKE_HOME:$NINJA_HOME
+export PATH
+```
+Ctrl+O(不是数字是字母) 并且按回车保存文件  
+Ctrl+X 退出  
+
+确认添加内容
+```bash
+cat ~/.bash_profile
+```
+退出git-bash并重新打开  
+确认环境变量和设定是否成功
+```bash
+echo $PATH
+java -version
+which java
+```
+**如果遇到python有问题，可能是C:\Users\xxx\AppData\Local\Microsoft\WindowsApps下有python.exe。可尝试如下解决**
+* 1.以管理员身份运行 打开命令提示符cmd
+* 2.使用 del 命令进行删除
+```cmd
+cd C:\Users\xxx\AppData\Local\Microsoft\WindowsApps
+del python.exe
+del python3.exe
+```
+补充：
+如果要删除的文件属性勾选了“只读”，执行del 删除命令会提示“拒绝访问”，导致删除失败，我们可以取消勾选“只读”属性，即可删除成功。
