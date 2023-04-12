@@ -42,7 +42,7 @@ netstat -tulpn
 ```
 
 ### 7.Shell调试Debug
-在sh第一行加上
+在sh文件第一行加上
 ```console
 #!/bin/sh -xv
 ```
@@ -81,3 +81,78 @@ echo -e "\e[1;31m发生错误。\e[0m提示：参数错误。"
 ```bash
 find / -name "a.txt"
 ```
+
+### 14.source命令
+source命令也称为“点命令”，也就是一个点符号（.），是bash的内部命令。  
+source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。因为linux所有的操作都会变成文件的格式存在。  
+source 命令可用于：  
+**1.刷新当前shell环境**
+```bash
+[root@localhost ~]# echo "alias ll='ls -al'" >> ~/.bashrc
+[root@localhost ~]# source ~/.bashrc
+```
+**2.当前环境下执行shell脚本**
+```bash
+[root@localhost ~]# nano echo.sh
+#!/bin/bash
+echo $(id)
+[root@localhost ~]# source echo.sh
+```
+**3.从脚本中导入shell函数到当前环境**
+```bash
+[root@localhost ~]# nano func.sh
+#!/bin/bash
+foo(){
+  echo "test_function"
+}
+[root@localhost ~]# source func.sh
+[root@localhost ~]# foo
+test_function
+```
+**4.从另一个shell脚本中读取变量**
+```bash
+#创建var.sh脚本
+[root@localhost ~]# nano var.sh
+#!/bin/bash 
+a=1
+b=2
+c=3
+#创建read.sh
+[root@localhost ~]# nano read.sh
+#!/bin/bash
+source ~/var.sh
+echo $a
+echo $b
+echo $c
+```
+
+### 15.输出重定向“>”和“>>”
+**\>**  会覆盖目标的原有内容，当文件存在时，会先删除原文件，再重新创建文件，然后把内容写入该文件，否则直接创建文件。  
+```bash
+systemctl status wildfly-01 > /temp/status.log
+```
+**\>>**  会在目标原有内容后追加内容，当文件存在时直接在文件末尾进行内容追加，不会删除原文件，否则直接创建文件。
+```bash
+systemctl status wildfly-01 >> /temp/status.log
+```
+
+### 16.查看当前终端的序号
+```bash
+tty
+```
+
+### 17.文本编辑器nano
+终端下如果你不喜欢 Vim/Emacs 的话，Nano 是一个不错的选择，它是一个真正意义上的跨平台编辑器，基本上在所有 Linux 发行版上都默认自带 Nano，并且有 Windows 版本。
+```bash
+nano -l 文件名
+```
+-l 参数为显示行号  
+
+**常用快捷键**  
+CTRL+o 回车 保存  
+CTRL+x 退出  
+SHIFT+方向 选择  
+ALT+^ 复制  
+CTRL+u 粘贴  
+更多请参照  
+https://zhuanlan.zhihu.com/p/47794948
