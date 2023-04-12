@@ -8,9 +8,10 @@
 * [Git命令](Git/Git_zh_CN.md)
 
 ## 构建/编译系统
-构建系统一般选择为Meson+ninja，或者只用ninja，或者Cmake+make
-* [meson+ninja笔记](Meson/Meson_zh_CN.md)
-* [Cmake笔记](CMake/CMake_zh_CN.md)
+构建系统一般选择为只用Ninja，或者Meson+Ninja，或者CMake+make
+* [Ninja笔记](Ninja/Ninja_zh_CN.md)
+* [Meson笔记](Meson/Meson_zh_CN.md)
+* [CMake笔记](CMake/CMake_zh_CN.md)
 
 ## C相关
 * [C相关](C/C_zh_CN.md)

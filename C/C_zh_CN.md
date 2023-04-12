@@ -17,7 +17,7 @@ fprintf(stderr, TER_ERROR "[ERROR][%s at line:%d]" TER_RESET "这是错误\n", _
 ```
 
 #### 2.gdb调式
-在gdb调试之前，需要在编译的时候加上-g选项
+在gdb调试之前，需要在编译的时候加上 **-g** 选项，启动调试命令为：
 ```bash
 gdb -tui 程序名
 ```

@@ -1,0 +1,19 @@
+#build.ninja
+
+builddir = build
+
+cc = D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe
+coption = -Wall -g -fexec-charset=utf-8 -D UNICODE
+loption = -mwindows
+
+rule compile
+  command = $cc $coption -c $in -o $out
+
+rule link
+  command = $cc $loption $in -o $out
+
+build $builddir/hello.o: compile hello.c
+build $builddir/hello.exe: link $builddir/hello.o
+
+build $builddir/messagebox.o: compile messagebox.c
+build $builddir/messagebox.exe: link $builddir/messagebox.o

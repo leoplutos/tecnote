@@ -156,3 +156,9 @@ ALT+^ 复制
 CTRL+u 粘贴  
 更多请参照  
 https://zhuanlan.zhihu.com/p/47794948
+
+### 18.查看log日志
+在监视终端log日志的时候，有时候log是实时更新的，这种时候用tail命令会很方便
+```bash
+tail -f -n200 filename.log
+```
