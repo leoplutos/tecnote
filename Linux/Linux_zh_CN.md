@@ -152,8 +152,9 @@ nano -l 文件名
 CTRL+o 回车 保存  
 CTRL+x 退出  
 SHIFT+方向 选择  
-ALT+^ 复制  
+ALT+6 复制  
 CTRL+u 粘贴  
+CTRL+k 删除当前行（选择多行的时候为删除选择的内容）  
 更多请参照  
 https://zhuanlan.zhihu.com/p/47794948
 

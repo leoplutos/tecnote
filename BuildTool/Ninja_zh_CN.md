@@ -3,7 +3,7 @@
 ## Ninja简介
 Google 工程师要解决的问题是 Chromium：超过500万行代码的大型项目，且使用了非常多的开源项目，并且很多有自己的分支或者 Patch，为了提升构建效率，这帮工程师无所不用其极。所以Ninja诞生了，它的设计就是为了更快的编译。  
 Ninja的神奇之处在于，你不必使用一些混乱的构建语言，它们很难记住，因为你不经常使用它（比如 make）  
-在此md文件同路径下有build.ninja例子，CMake文件夹下有hello.c和messagebox.c。请参照食用。
+在此md文件同路径下有build.ninja例子。请参照食用。
 
 ## 1.使用前需要先安装Ninja
 https://ninja-build.org/

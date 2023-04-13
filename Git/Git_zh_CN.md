@@ -1,5 +1,9 @@
 # Git
 
+## 前言
+**如果你是Git初学者的话，强烈建议去下面网站把关卡全部完成。**  
+https://learngitbranching.js.org/?locale=zh_CN
+
 ## 一.基础设置
 
 ### 1.设定用户名和邮箱
@@ -43,12 +47,28 @@ git clone -b master https://github.com/foo/bar.git /D/WorkSpace/bar
 git gui
 ```
 * 在GUI中执行pull操作需要自己添加一下：  
-Tools→Add...→  
-> Name：执行pull  
-Command：git pull  
+Tools → Add... →  
+添加内容1：
+```
+Name：执行 pull
+Command：git pull
 选中[Add globally]Checkbox
+```
+添加内容2：
+```
+Name：执行 pull rebase
+Command：git pull --rebase
+选中[Add globally]Checkbox
+```
 * 查看log  
 Repository→Visualize xxx's History
+
+#### 关于git pull
+**git pull**  
+&nbsp;&nbsp;&nbsp;&nbsp;就是 fetch + merge 操作（适用于本地代码没有commit，单纯更新仓库，如果本地代码有commit，那么merge会产生一个叫做merge的commit）  
+**git pull --rebase**  
+&nbsp;&nbsp;&nbsp;&nbsp;就是 fetch + rebase 操作（适用于本地代码有commit，更新仓库并且合并过来，rebase不会产生commit）  
+**※**&nbsp;rebase使你的**提交树变得很干净**, 所有的提交都在一条线上，笔者个人更喜欢rebase
 
 ### 8.查看状态  
 ```git
@@ -103,7 +123,7 @@ ls ~/.bash_profile
 
 用nano编辑文件
 ```bash
-nano ~/.bash_profile
+nano -l ~/.bash_profile
 ```
 
 在nano编辑器复制粘贴如下内容（path按自己的路径修改下）
@@ -117,8 +137,8 @@ NINJA_HOME=/d/Tools/WorkTool/C/ninja-win
 PATH=$PATH:$MINGW_HOME:$JAVA_HOME:$PYTHON_HOME:$VSCODE_HOME:$CMAKE_HOME:$NINJA_HOME
 export PATH
 ```
-Ctrl+O(不是数字是字母) 并且按回车保存文件  
-Ctrl+X 退出  
+Ctrl+o(不是数字是字母) 并且按回车保存文件  
+Ctrl+x 退出  
 
 确认添加内容
 ```bash

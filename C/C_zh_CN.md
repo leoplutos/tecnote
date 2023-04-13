@@ -1,8 +1,6 @@
-# C相关
+# C语言相关
 
-## 一.C语言相关
-
-#### 1.终端输出颜色
+## 1.终端输出颜色
 1：粗体  
 31：红色  
 33：黄色  
@@ -16,7 +14,7 @@ printf(TER_WARN "[WARN][%s at line:%d]" TER_RESET "这是警告\n", __func__, __
 fprintf(stderr, TER_ERROR "[ERROR][%s at line:%d]" TER_RESET "这是错误\n", __func__, __LINE__);
 ```
 
-#### 2.gdb调式
+## 2.gdb调式
 在gdb调试之前，需要在编译的时候加上 **-g** 选项，启动调试命令为：
 ```bash
 gdb -tui 程序名
@@ -69,7 +67,7 @@ gdb终端的常用命令如下:
 (gdb) shell pwd
 ```
 
-#### 3.gdb插件
+## 3.gdb插件
 虽然默认的gdb有TUI，但是信息不够丰富。
 gdb支持python插件，这个时候可以用插件让显示内容丰富一些让开发者把注意力回到调式程序本身。  
 ~/.gdbinit 是一个 gdb配置脚本，可以设定一些由 python 编写的插件。  
@@ -170,23 +168,3 @@ tty
 >>>dashboard source -style height 0
 ```
 
----
-
-## 二.IDE相关
-#### CodeBlocks设定
-* **设置字体**  
-Setting → Editor... → General settings → Editor settings → Font  
-* **设置显示空格**  
-Setting → Editor... → General settings → Other editor settings → Show spaces in editor: Always  
-* **设置UTF-8编码**  
-Setting → Editor... → General settings → Encoding settings → Use encoding when opening files: UTF-8  
-* **设置背景色**  
-Setting → Editor... → Syntax highlighting → Background  
-* **设置格式化**  
-Setting → Editor... → Source formatter
-* **设置默认工程**  
-Setting → Environment... → General settings → Open Default workspace  
-* **设置编译参数**  
-Setting → Compiler... → Global compiler settings → Compiler settings → Other compiler options:-fexec-charset=utf-8  
-* **设置链接器**  
-Setting → Compiler... → Global compiler settings → Linker settings  
