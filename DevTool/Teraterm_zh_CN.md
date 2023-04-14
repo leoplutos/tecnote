@@ -1,5 +1,16 @@
 # Teraterm设定
 
+## TeraTerm下载方法
+#### 1，官网下载页面确定需要的软件版本号和对应编号
+**网址：**  
+https://zh.osdn.net/projects/ttssh2/releases/74780
+
+#### 2，该网页下将网址中编号和版本号改为想要下载的版本
+**安装版：**  
+https://osdn.net/projects/ttssh2/downloads/74780/teraterm-4.106.exe  
+**绿色版：**  
+https://osdn.net/projects/ttssh2/downloads/74780/teraterm-4.106.zip
+
 ## 1.Teraterm的宏脚本
 
 在使用teraterm连接终端的时候，每次都要输入用户名密码很繁琐。这里介绍用宏脚本文件ttl启动的的方法。  
@@ -104,7 +115,7 @@ User1=1026,3,50260
 User2=1027,0,pwd
 ```
 
-将User1和User1加到**[User keys]**代码块下面，并保存文件。
+将User1和User1加到[User keys]代码块下面，并保存文件。
 ```
 [User keys]
 User1=1026,3,50260
@@ -112,7 +123,7 @@ User2=1027,0,pwd
 ```
 
 #### 3-4.让小键盘的数字和符号生效
-同样是KEYBOARD.CNF，找到**[VT numeric keypad]**代码块，修改
+同样是KEYBOARD.CNF，找到[VT numeric keypad]代码块，修改
 ```
 Num0=xxx
 ```
@@ -120,7 +131,7 @@ Num0=xxx
 ```
 Num0=off
 ```
-将整个**[VT numeric keypad]**代码块的内容全部修改为off，并保存文件。
+将整个[VT numeric keypad]代码块的内容全部修改为off，并保存文件。
 ```
 [VT numeric keypad]
 ;Num pad 0 key
@@ -159,7 +170,7 @@ UILanguageFile=lang\Japanese.lng
 ;UILanguageFile=lang\Traditional Chinese.lng
 ```
 
-语言包可以在这里下载
+语言包可以在这里下载  
 https://github.com/Testato/TeraTerm/tree/master/installer/release/lang
 
 ## 6.设定文件的内容
@@ -187,3 +198,18 @@ ClearOnResize=off
 ```bash
 export TERM=gnome
 ```
+
+---
+
+## WinSCP下载
+
+**网址：**  
+https://sourceforge.net/projects/winscp/files/WinSCP/5.21.8/
+ * WinSCP-5.21.8-Portable.zip
+
+**语言包下载：**  
+https://winscp.net/eng/translations.php?v=5.21.8.13000&lang=0409&isinstalled=0&utm_source=winscp&utm_medium=app&utm_campaign=5.21.8  
+ * Simplified Chinese
+ * Japanese
+
+解压zip得到语言包后放到WinSCP的**子文件夹Translations**内即可。
