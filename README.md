@@ -20,8 +20,9 @@
 * [Java相关](Java/Java_zh_CN.md)
 
 ## 开发工具相关
-* [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
+* [Vim](DevTool/Vim_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
+* [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)

@@ -108,7 +108,8 @@ git-bash.exe可以建立快捷方式，然后右键→属性→起始位置：�
 
 
 ### 14.git-bash.exe的环境变量设置
-在git-bash下，也是可以加载.bash_profile文件的。所以可以按如下设定。
+在git-bash下，也是可以加载.bash_profile文件的。所以可以按如下设定。  
+在此md文件同路径下有例子文件，请参照使用。
 
 查看.bash_profile是否存在
 ```bash

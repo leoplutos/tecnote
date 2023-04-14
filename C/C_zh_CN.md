@@ -89,6 +89,7 @@ https://github.com/cyrus-and/gdb-dashboard
 ```bash
 wget -P ~ https://git.io/.gdbinit
 ```
+在此md同路径也有，哪里下载都可以
 
 **2.配置到终端上运行**  
 因为放到~/.gdbinit会影响到使用终端的所有人，为了不污染服务器，笔者习惯放到自己的路径下用参数运行。  
