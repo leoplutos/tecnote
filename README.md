@@ -27,5 +27,5 @@
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)
-* [废旧手机安装Linux](Android-Linux_zh_CN.md)
+* [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 
