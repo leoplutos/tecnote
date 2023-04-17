@@ -3,6 +3,7 @@
 
 ## Linux命令
 * [Linux命令](Linux/Linux_zh_CN.md)
+* [Linux用户做成](Linux/Linux-adduser_zh_CN.md)
 
 ## Git命令
 * [Git命令](Git/Git_zh_CN.md)
@@ -26,4 +27,5 @@
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)
+* [废旧手机安装Linux](Android-Linux_zh_CN.md)
 

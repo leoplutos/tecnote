@@ -39,6 +39,7 @@ ar t lib.a
 ### 6.确认端口
 ```bash
 netstat -tulpn
+netstat -anp | grep sshd
 ```
 
 ### 7.Shell调试Debug
