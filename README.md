@@ -16,7 +16,7 @@
 
 ## C相关
 * [C相关](C/C_zh_CN.md)
-* [libui](C-libui_zh_CN.md)
+* [libui](C/C-libui_zh_CN.md)
 
 ## Java相关
 * [Java相关](Java/Java_zh_CN.md)

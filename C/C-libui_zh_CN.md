@@ -5,7 +5,7 @@ libui是一个 C 语言编写，简单且可移植（但并非不灵活）的 GU
 
 ## 1.使用前需要先安装Meson
 libui需要meson构建，meson的具体安装方法详见：  
-[Meson笔记](BuildTool/Meson_zh_CN.md)
+[Meson笔记](../BuildTool/Meson_zh_CN.md)
 
 ## 2.下载libui代码
 libui的github网址如下：  
