@@ -166,3 +166,159 @@ proot-distro login ubuntu
 ```bash
 exit
 ```
+
+## 4.Ubuntu 初始化
+
+#### 4-1.换源
+换成清华镜像源：
+https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu-ports/
+```bash
+cp -afp /etc/apt/sources.list /etc/apt/sources.list_bak20230419
+nano -l /etc/apt/sources.list
+```
+将文件内容修改为网页内容。
+
+#### 4-2.运行update
+换好源后，记得update
+```bash
+apt update && apt upgrade
+```
+
+#### 4-3.安装vim
+```bash
+apt install vim
+vim --version
+```
+
+#### 4-4.安装中文
+安装中文支持包language-pack-zh-hans
+```bash
+apt-get install language-pack-zh-hans
+```
+修改/etc/environment文件
+```bash
+vim /etc/environment
+```
+在文件的末尾追加
+```
+LANG="zh_CN.UTF-8"
+LANGUAGE="zh_CN:zh:en_US:en"
+```
+
+再修改/var/lib/locales/supported.d/local文件(没有这个文件就新建)
+```bash
+touch /var/lib/locales/supported.d/local
+vim /var/lib/locales/supported.d/local
+```
+在文件的末尾追加
+```
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+zh_CN.GBK GBK
+zh_CN GB2312
+```
+
+最后，执行命令：
+```bash
+locale-gen
+```
+
+对于中文乱码是空格的情况，安装中文字体解决:
+```bash
+apt-get install fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming
+```
+
+#### 4-5.安装openssh-server
+```bash
+apt install openssh-server
+```
+修改配置文件:
+```bash
+vim /etc/ssh/sshd_config
+```
+**修改端口**  
+查找：
+```
+#Port 22
+```
+修改为: 
+```
+Port 8122
+```
+注意： 端口最好是4位数即以上的端口号，否则容易造成ssh启动失败，这儿Termux上Linux存在的问题。
+
+**支持root用户**  
+查找：
+```
+#PermitRootLogin prohibit-password
+或者
+#PermitRootLogin yes
+```
+修改为:
+```
+PermitRootLogin yes
+```
+**支持密码认证**  
+查找：
+```
+#PasswordAuthentication yes
+```
+修改为:
+```
+PasswordAuthentication yes
+```
+
+**启动ssh**  
+```bash
+service ssh start
+```
+或者:
+```bash
+/usr/sbin/sshd
+```
+ssh服务可用下面的命令
+```
+service ssh start | stop | restart | status
+```
+
+通过命令查看ssh是否启动成功:
+```bash
+ps -e | grep ssh
+netstat -anp | grep sshd
+```
+
+#### 4-5.安装开发工具
+**安装curl**
+```bash
+apt install curl
+```
+
+**安装gcc**
+```bash
+apt install build-essential
+```
+或者
+```bash
+apt install gcc
+apt install make
+apt install gdb
+```
+确认
+```bash
+gcc --version
+make --version
+gdb --version
+```
+
+**安装rust**
+```bash
+apt install cargo
+```
+由于 cargo 包含 rustc，所以笔者建议安装它，以便一次性安装所有必需的软件包。
+当然，你可以自由使用 apt install rustc，只安装 Rust。这取决于你的选择。
+
+确认
+```bash
+cargo --version
+rustc --version
+```
