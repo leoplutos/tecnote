@@ -100,7 +100,7 @@ wget -P ~ https://git.io/.gdbinit
 ```bash
 gdb -x /aaa/gdbinit/.gdbinit 你的程序名
 ```
-gdb启动后发现gdb的提示符从** (gdb)** 变成了 **\>\>\>**，证明脚本载入成功。  
+gdb启动后发现gdb的提示符从 (gdb) 变成了 **\>\>\>**，证明脚本载入成功。  
 gdb-dashboard不会改变任何gdb命令，只要添加1个断点，并且运行。那么gdb-dashboard的各个仪表盘就会表示出来
 ```gdb
 >>>b 64

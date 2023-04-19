@@ -69,4 +69,27 @@ mh 显示/隐藏 当前目录的标记文件
 隐藏（禁止匹配的文件显示：g:netrw_list_hide）  
 显示（只显示匹配的文件：g:netrw_list_hide）  
 
+## 在netrw中删除非空文件夹
+
+在默认设置中，你不能删除非空文件夹，如果想删非空文件夹的话，需要修改如下文件
+
+修改前备份
+```bash
+cd /usr/share/vim/vim80/autoload
+cp -afp netrw.vim netrw.vim_back20230418
+```
+
+在netrw.vim中找到如下内容
+```
+if delete(rmfile,"d")
+  call netrw#ErrorMsg(s:ERROR,"unable to delete directory <".rmfile.">!",103)
+```
+
+修改为
+```
+"if delete(rmfile,"d")
+if delete(rmfile,"rf")
+  call netrw#ErrorMsg(s:ERROR,"unable to delete directory <".rmfile.">!",103)
+```
+保存文件，然后重新启动vim即可
 

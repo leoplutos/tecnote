@@ -83,6 +83,7 @@ filetype on                              " 开启文件类型检测
 syntax on                                " 语法高亮
 colorscheme desert                       " 设置颜色主题
 set encoding=utf-8                       " 编码设置
+set fileencoding=utf-8                   " 编码设置
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
                                          " 自动识别文件编码，依照fileencodings提供的编码列表尝试
 set number                               " 显示行号
@@ -183,6 +184,8 @@ let g:netrw_altv = 1           " 水平分割时，文件浏览器始终显示�
 let g:netrw_preview=1          " 预览文件使用垂直分割
 let g:netrw_winsize = 20       " 设置文件浏览器窗口宽度为25%
 let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
+"let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
+
 " 自动打开文件浏览器
 " augroup ProjectDrawer
 "     autocmd!
