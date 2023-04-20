@@ -1,6 +1,73 @@
 # C语言相关
 
-## 1.终端输出颜色
+## 1.常用函数
+
+#### 1-1.环境变量取得
+```c
+bool b_debug_flg = false;
+char *env_debug = getenv("DEBUG_FLG");
+if ((env_debug != NULL) && (*env_debug == '1')) {
+	b_debug_flg = true;
+} else {
+	b_debug_flg = false;
+}
+```
+
+#### 1-2.ECPG打印sqlca结果
+```c
+if (b_debug_flg) {
+	printf("[DEBUG][%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\n", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);
+}
+```
+
+#### 1-3.atoi函数（字符串转int）
+```c
+// 需要导入#include <stdlib.h>
+char c_cnt[5+1] = "12345";
+int i_cnt;
+// 转换
+i_cnt = atoi(c_cnt);
+printf("转换后i_cnt : [%d]\n", i_cnt);
+```
+
+#### 1-4.sprintf函数（int转字符串）
+```
+int i_size = 67890;
+char c_size[5+1];
+// 转换
+sprintf(c_size, "%d", i_size);
+printf("转换后c_size : [%s]\n", c_size);
+```
+
+#### 1-5.字符串补空格
+```
+char c_target[5+1] = "abc";
+// 不满5位补空格
+sprintf(c_target, "%-5s", c_target);
+printf("补空格后c_target : [%s]\n", c_target);
+```
+
+#### 1-6.字符串解构/截取
+```c
+// 例子1
+char c_input1[300+1] = "2023-04-19 17:01:52  - table name : t_test_table1";
+char c_output_date[20+1];
+char c_output_time[20+1];
+char c_output_tablename[20+1];
+// 按照规则解构
+sscanf(c_input1, "%s %s  - table name : %s", c_output_date, c_output_time, c_output_tablename);
+printf("解构后 c_output_date:[%s] c_output_time:[%s] c_output_tablename:[%s]\n", c_output_date, c_output_time, c_output_tablename);
+```
+```
+// 例子2
+char * c_input2 = "table name : t_test_table2";
+char c_output_tablename2[20+1];
+// 按照规则解构
+sscanf(c_input2, "table name : %s", c_output_tablename2);
+printf("解构后 c_output_tablename2:[%s]\n", c_output_tablename2);
+```
+
+## 2.终端输出颜色
 1：粗体  
 31：红色  
 33：黄色  
@@ -14,7 +81,7 @@ printf(TER_WARN "[WARN][%s at line:%d]" TER_RESET "这是警告\n", __func__, __
 fprintf(stderr, TER_ERROR "[ERROR][%s at line:%d]" TER_RESET "这是错误\n", __func__, __LINE__);
 ```
 
-## 2.gdb调式
+## 3.gdb调式
 在gdb调试之前，需要在编译的时候加上 **-g** 选项，启动调试命令为：
 ```bash
 gdb -tui 程序名
@@ -67,7 +134,7 @@ gdb终端的常用命令如下:
 (gdb) shell pwd
 ```
 
-## 3.gdb插件
+## 4.gdb插件
 虽然默认的gdb有TUI，但是信息不够丰富。
 gdb支持python插件，这个时候可以用插件让显示内容丰富一些让开发者把注意力回到调式程序本身。  
 ~/.gdbinit 是一个 gdb配置脚本，可以设定一些由 python 编写的插件。  

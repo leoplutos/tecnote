@@ -14,6 +14,9 @@
 * [Meson笔记](BuildTool/Meson_zh_CN.md)
 * [CMake笔记](BuildTool/CMake_zh_CN.md)
 
+## Python相关
+* [Python相关](Python/Python_zh_CN.md)
+
 ## C相关
 * [C相关](C/C_zh_CN.md)
 * [libui](C/C-libui_zh_CN.md)

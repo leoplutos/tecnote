@@ -33,6 +33,11 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
+### 设置取消H换行符自动转换
+```git
+git config --global core.autoCRLF false
+```
+
 ## 二.代码管理命令
 
 ### 6.Clone仓库  
