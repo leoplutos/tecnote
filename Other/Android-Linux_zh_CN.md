@@ -170,7 +170,7 @@ exit
 ## 4.Ubuntu 初始化
 
 #### 4-1.换源
-换成清华镜像源：
+换成清华镜像源：  
 https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu-ports/
 ```bash
 cp -afp /etc/apt/sources.list /etc/apt/sources.list_bak20230419

@@ -14,6 +14,10 @@
 * [Meson笔记](BuildTool/Meson_zh_CN.md)
 * [CMake笔记](BuildTool/CMake_zh_CN.md)
 
+## Rust相关
+* [Rust环境构建](Rust/Rust-DevEnv_zh_CN.md)
+* [Rust语言圣经](Rust/Rust-Course_zh_CN.md)
+
 ## Python相关
 * [Python相关](Python/Python_zh_CN.md)
 
