@@ -16,7 +16,7 @@ https://forge.rust-lang.org/infra/other-installation-methods.html
 cd ~
 pwd
 ```
-在显示的路径下新建**.bash_profile**，内容如下
+在显示的路径下新建.bash_profile，内容如下
 ```bash
 MINGW_HOME=/d/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin
 RUST_HOME=/d/Tools/WorkTool/Rust/Rust_gnu_1.69/bin
