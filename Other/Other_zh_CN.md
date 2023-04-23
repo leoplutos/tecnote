@@ -14,9 +14,9 @@
   双击ttf文件，点击安装即可
 * Linux  
   将字体解压缩到 ~/.local/share/fonts（或 /usr/share/fonts，这个是系统全局路径）后，执行
+```bash
 fc-cache -f -v
-
-
+```
 
 ## 护眼色(RGB)
 
