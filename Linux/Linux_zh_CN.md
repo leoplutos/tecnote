@@ -164,3 +164,18 @@ https://zhuanlan.zhihu.com/p/47794948
 ```bash
 tail -f -n200 filename.log
 ```
+
+### 19.删除非空文件夹
+```bash
+rm -rf dir-name
+```
+
+### 20.按照时间倒序表示文件列表
+```bash
+ls -ltr
+```
+* -l 表示列表
+* -t 按时间排序
+* -r 顺序倒序
+
+
