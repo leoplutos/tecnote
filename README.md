@@ -4,7 +4,7 @@
 ## Linux命令
 * [Linux命令](Linux/Linux_zh_CN.md)
 * [Linux用户做成](Linux/Linux-adduser_zh_CN.md)
-* [Linux自定义欢迎界面](Linux/Linux-welcom-page_zh_CN.md)
+* [Linux自定义相关](Linux/Linux-customize_zh_CN.md)
 
 ## Git命令
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)

@@ -24,8 +24,10 @@ loadkeymap 'KEYBOARD.CNF'
 wait '#'
 
 ;自定义登录后的发行command
-sendln "export log=/aaa/app/log"
-;等待服务器的命令提示符%（有可能是'%' '$' '#' '>'）
+sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "'
+wait '#'
+
+sendln 'export log=/aaa/app/log'
 wait '#'
 
 end

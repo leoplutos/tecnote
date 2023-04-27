@@ -214,7 +214,10 @@ noremap <Leader>[ :tabprevious<CR>
 " 使用 \ + s 保存, \ + q 退出
 noremap <Leader>s :w<CR>
 noremap <Leader>q :q<CR>
-
+" 支持在Visual模式下，通过C-y复制到系统剪切板 （vnoremap视觉和选择模式下工作）
+vnoremap <C-y> "+y
+" 支持在normal模式下，通过C-p粘贴系统剪切板 （nnoremap在正常模式下工作）
+nnoremap <C-p> "*p
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 
