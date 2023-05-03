@@ -40,12 +40,18 @@ ar t lib.a
 ```bash
 netstat -tulpn
 netstat -anp | grep sshd
+netstat -antlp
 ```
 
 ### 7.Shell调试Debug
-在sh文件第一行加上
-```console
+* 方法1：在sh文件第一行加上
+```
 #!/bin/sh -xv
+```
+* 方法2：在启动shell的时候加上参数
+```bash
+sh -xv test.sh
+bash -xv test.sh
 ```
 
 ### 8.复制文件
@@ -178,4 +184,22 @@ ls -ltr
 * -t 按时间排序
 * -r 顺序倒序
 
+### 21.shell的启动方式
+shell有2种常用的启动方式。
+* 方法1：需要运行权限
+```bash
+./test.sh
+```
+* 方法2：不需要运行权限
+```bash
+sh test.sh
+bash test.sh
+```
 
+### 22.单引号与双引号
+```bash
+""双引用, 除了$\`的其他符号都变成纯文本符号
+```
+```bash
+''单引用, 所有符号都变成纯文本符号
+```

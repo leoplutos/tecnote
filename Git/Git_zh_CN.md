@@ -168,3 +168,19 @@ del python3.exe
 ```
 补充：
 如果要删除的文件属性勾选了“只读”，执行del 删除命令会提示“拒绝访问”，导致删除失败，我们可以取消勾选“只读”属性，即可删除成功。
+
+## 在git-bash快速打开资源浏览器
+在windows下是有start命令的。输入以下命令即可在当前路径下打开资源浏览器。
+```bash
+start .
+```
+
+## 在git-bash下运行python等交互式命令
+安装 Git Bash 的时候有提示，MinTTY 不支持交互操作，如 Python 和 Node , 用winpty + 命令就可以运行了。
+```bash
+winpty python
+```
+如果你实在不想每次都敲那么多东西，可以用alias键映射：
+```bash
+alias python='winpty python'
+```
