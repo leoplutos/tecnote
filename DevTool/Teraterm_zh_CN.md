@@ -116,16 +116,23 @@ User1=1026,3,50260
 ```
 
 **例子2：**  
-按下Ctrl + 2[1027]，就输出[pwd]
+按下Ctrl + 2[1027]，运行ttl路径下的lchenv.ttl脚本
 ```
-User2=1027,0,pwd
+User2=1027,2,ttl/lchenv.ttl
 ```
 
-将User1和User1加到[User keys]代码块下面，并保存文件。
+**例子3：**  
+按下Ctrl + 3[1028]，就输出[pwd]
+```
+User3=1028,0,pwd
+```
+
+将内容加到[User keys]代码块下面，并保存文件。
 ```
 [User keys]
 User1=1026,3,50260
-User2=1027,0,pwd
+User2=1027,2,ttl/lchenv.ttl
+User3=1028,0,pwd
 ```
 
 #### 3-4.让小键盘的数字和符号生效

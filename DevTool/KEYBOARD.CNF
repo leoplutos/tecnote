@@ -193,4 +193,5 @@ ScrollLock=70
 ;User5=1087,3,50110
 [User keys]
 User1=1026,3,50260
-User2=1027,0,pwd
+User2=1027,2,ttl/lchenv.ttl
+User3=1028,0,pwd

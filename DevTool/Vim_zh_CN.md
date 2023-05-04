@@ -26,7 +26,7 @@ vim file1 file2
 
 指定配置文件打开afile.txt
 ```bash
-vim -u ~/.vim/.myvimrc afile.txt
+vim -u /lch/workspace/vim/lchvimrc afile.txt
 ```
 
 不使用任何配置文件打开afile.txt
@@ -34,6 +34,10 @@ vim -u ~/.vim/.myvimrc afile.txt
 vim -u NONE afile.txt
 ```
 
+如果你实在不想每次都敲那么多东西，可以用alias键映射：
+```bash
+alias vim='vim -u /lch/workspace/vim/lchvimrc'
+```
 ## VIM 常用的有四个模式：
 
 * **正常模式 (Normal-mode)**

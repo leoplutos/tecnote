@@ -1,0 +1,28 @@
+;自定义发行command
+sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "'
+wait '#'
+sendln 'export app=/lch/workspace/rust/rusttest/src'
+wait '#'
+sendln 'export bin=/lch/workspace/rust/rusttest/target/debug'
+wait '#'
+sendln 'export log=/lch/workspace/rust/rusttest/log'
+wait '#'
+
+sendln "alias ll='ls -l --color=auto'"
+wait '#'
+sendln "alias lla='ls -al --color=auto'"
+wait '#'
+sendln "alias llt='ls -ltr --color=auto'"
+wait '#'
+sendln "alias gdbx='gdb -x /lch/workspace/gdbinit/.gdbinit'"
+wait '#'
+sendln "alias cda='cd $app'"
+wait '#'
+sendln "alias cdb='cd $bin'"
+wait '#'
+sendln "alias cdl='cd $log'"
+wait '#'
+sendln "alias vim='vim -u /lch/workspace/vim/lchvimrc'"
+wait '#'
+
+end

@@ -34,6 +34,7 @@
 * [Vim](DevTool/Vim_zh_CN.md)
 * [Vim-vimrc](DevTool/Vim-vimrc_zh_CN.md)
 * [Vim-netrw](DevTool/Vim-netrw_zh_CN.md)
+* [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
 * [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
 

@@ -196,7 +196,11 @@ wget -P ~ https://git.io/.gdbinit
 /aaa/gdbinit
 然后gdb启动的时候添加参数
 ```bash
-gdb -x /aaa/gdbinit/.gdbinit 你的程序名
+gdb -x /lch/workspace/gdbinit/.gdbinit 你的程序名
+```
+如果你实在不想每次都敲那么多东西，可以用alias键映射：
+```bash
+alias gdbx='gdb -x /lch/workspace/gdbinit/.gdbinit'
 ```
 gdb启动后发现gdb的提示符从 (gdb) 变成了 **\>\>\>**，证明脚本载入成功。  
 gdb-dashboard不会改变任何gdb命令，只要添加1个断点，并且运行。那么gdb-dashboard的各个仪表盘就会表示出来
