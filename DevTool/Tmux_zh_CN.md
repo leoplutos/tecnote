@@ -48,7 +48,7 @@ prefix w　　列出所有窗口，可进行切换
 prefix n　　进入下一个窗口  
 prefix p　　进入上一个窗口
 prefix l　　进入之前操作的窗口  
-prefix 0~9　　选择编号0~9对应的窗口  
+prefix 0\~9　　选择编号0~9对应的窗口  
 prefix . 修改当前窗口索引编号  
 prefix ' 切换至指定编号（可大于9）的窗口  
 prefix f　　根据显示的内容搜索窗格  

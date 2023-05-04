@@ -45,6 +45,11 @@ git config --global core.autoCRLF false
 git clone -b [分支名] [URL] [本地路径]
 git clone -b master https://github.com/foo/bar.git /D/WorkSpace/bar
 ```
+另外，如果你只是想clone最新版本来使用或学习，而不是参与整个项目的开发工作的话，可以用 depth 参数。
+```git
+git clone --depth=1 -b [分支名] [URL] [本地路径]
+```
+用 git clone --depth=1 的好处是限制 clone 的深度，不会下载 Git 协作的历史记录，这样可以大大加快克隆的速度，只取得最近一次commit的一个分支，这样这个项目文件就不会很大
 
 ### 7.打开默认GUI画面  
 笔者个人习惯在GUI里面进行add/commit/push/pull操作  

@@ -9,6 +9,7 @@
 ## Git命令
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
 * [Git命令](Git/Git_zh_CN.md)
+* [Git-bash安装pacman](Git/Git-pacman_zh_CN.md)
 
 ## 构建/编译系统
 构建系统一般选择为只用Ninja，或者Meson+Ninja，或者CMake+make
