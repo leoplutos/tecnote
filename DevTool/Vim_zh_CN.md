@@ -476,7 +476,7 @@ Ctrl+v 选中块区域以后，按下大写的 I 或者 A 可以在区域的前�
 ## VIM的系统剪切板操作
 查看是否支持
 ```
-vim --version | grep "clipboard"
+vim --version | grep clipboard
 ```
 如果clipboard前面有加号则代表支持，如果是减号或者没有代表不支持  
 把数据从vim拷贝到系统剪切板，需要在visual模式下执行
@@ -503,3 +503,19 @@ nnoremap <C-p> "*p
 ```
 效果就是在vim的visual模式下选中了要复制的内容，再用 Ctrl + y 复制到系统剪切板，直接去其他窗口中 Ctrl + v 粘贴
 在其他窗口中选择之后（不一定要Ctrl + c），可直接在vim中用 Ctrl + p 来粘贴
+
+#### 不支持系统剪切板的解决办法
+如果出现“-clipboard”则说明系统的vim版本不支持与系统剪贴板的交互操作，需要采用如下的命令安装新的vim
+```bash
+apt install vim-gtk
+```
+安装完成之后再利用代码检查一次，出现“+clipboard”，那么系统的vim没有问题。
+
+#### vim-tiny的解决办法
+大部分默认的 Linux 发行版安装的是精简版(Small version)的 vim，不太好用，但直接安装全功能(Huge version) vim 又弄了两个不同版本的 vim 在系统内，所以最好的办法是把精简版的替换为全功能版的。
+```bash
+apt remove --assume-yes vim-tiny
+apt update
+apt install --assume-yes vim
+```
+安装完成之后再利用代码检查一次，出现“Huge version without GUI”即可

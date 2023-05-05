@@ -1,4 +1,5 @@
 "这是一个Linux vim设置文件
+scriptencoding utf-8
 
 " When started as "evim", evim.vim will already have done these settings, bail
 " out.
@@ -18,7 +19,7 @@ source $VIMRUNTIME/defaults.vim
 set modelines=0                          " 禁用模式行（安全措施）
 filetype on                              " 开启文件类型检测
 syntax on                                " 语法高亮
-colorscheme desert                       " 设置颜色主题
+"colorscheme desert                       " 设置颜色主题
 set encoding=utf-8                       " 编码设置
 set fileencoding=utf-8                   " 编码设置
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
@@ -31,7 +32,7 @@ set nowrap                               " 不自动折行
 set smarttab                             " 根据文件中其他位置的缩进空格个数来决定一个tab是多少空格
 set tabstop=4                            " tab为4个空格
 set shiftwidth=4                         " 每一级缩进是4个空格
-set expandtab                            " 将tab替换为相应数量空格
+"set expandtab                            " 将tab替换为相应数量空格
 set softtabstop=4                        " 在编辑模式下按退格键的时候退回缩进的长度，配合expandtab时很有用
 set backspace=2                          " 设置 backspace可以删除任意字符
 set mouse=a                              " 使用鼠标
@@ -53,29 +54,41 @@ set sm!                                  " 高亮显示匹配括号
 set novisualbell                         " 不要闪烁
 set showcmd                              " 显示输入的命令
 set showtabline=2                        " 显示tab栏
+set ttyfast                              " 快速刷新屏幕显示
+set lazyredraw                           " 只在必要时刷新显示
+set ignorecase                           " 忽略大小写
 
 "行尾继续符，换行符，左右窗口大小不够时的提示符，半角空格的表示
 "tab：tab键，要指定2个字符
-"trail：换行符前的空格
+"trail：换行符后面的空格
 "eol：换行符（end of line）
 "extends：最后一列中的字符，表示下一行是换行的延续
 "precedes：第一列中的字符，表示此行是前一行的延续
 "nbsp：不可见空格
 "space：可见空格
+"特殊符号确认命令
+":dig
+":help digraphs-use
 set list
-"set listchars=tab:??,trail:-,eol:?,extends:?,precedes:?,nbsp:%,space:?
+"for linux
+set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
+"for windows:git-bash
+"set listchars=tab:￫￫,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+"set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 
 "颜色
 "非可见字符"eol"、"extends"、"precedes"是由NonText高亮组来控制显示颜色的，而"nbsp"、"tab"、"trail"则是由"SpecialKey"高亮组来定义的。
 ":highlight 可以确认当前的设定内容
-hi NonText      cterm=bold ctermfg=0 ctermbg=0 guibg=DarkGrey
-hi SpecialKey   cterm=bold ctermfg=0 ctermbg=0 guibg=DarkGrey
+":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
+hi NonText      term=bold cterm=bold ctermfg=0 ctermbg=0 gui=bold guifg=DarkGrey guibg=grey30
+hi SpecialKey   term=bold cterm=bold ctermfg=0 ctermbg=0 gui=bold guifg=DarkGrey guibg=grey30
+"hi StatusLine     term=bold,reverse cterm=bold,reverse gui=bold,reverse guifg=lightyellow guibg=darkblue ctermfg=lightyellow ctermbg=darkblue
+hi TabLineSel     term=bold cterm=bold gui=bold guifg=yellow guibg=darkblue ctermfg=yellow ctermbg=darkblue
 
 "set relativenumber                       " 显示相对行号
 "set wrap                                 " 自动折行
 "set termguicolors                        " 启用终端真色
 "set cursorcolumn                         " 高亮显示当前列
-"set ignorecase                           " 忽略大小写
 "set fdm=marker                           " 设置折叠方式
 "set nocompatible                         " 去除vi一致性，关闭所有扩展的功能，尽量模拟 vi 的行为
 
@@ -102,12 +115,13 @@ hi SpecialKey   cterm=bold ctermfg=0 ctermbg=0 guibg=DarkGrey
 " %{...} 评估表达式的值，并用值代替
 " %{"[fenc=".(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"")."]"} 显示文件编码
 " %{&ff} 显示文件类型
-set statusline=%1*%F%m%r%h%w%=\ 
-set statusline+=%2*\ %Y\ \|\  
-set statusline+=%3*%{\"\".(\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"\"}\ 
-set statusline+=%4*[%l:%v]\ 
-set statusline+=%5*%p%%\ \|\ 
-set statusline+=%6*%LL\ 
+set statusline=%F%m%r%h%w%=\ 
+set statusline+=\ FMT=%{&ff}\ \|\ 
+set statusline+=TYPE=%Y\ \|\ 
+set statusline+=CODE=%{\"\".(\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"\"}\ 
+set statusline+=[%l:%v]\ 
+set statusline+=%p%%\ \|\ 
+set statusline+=%LL\ 
 
 " 设置netrw-------------------------------------
 let g:netrw_banner = 0         " 设置是否显示横幅
