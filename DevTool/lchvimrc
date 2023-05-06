@@ -57,6 +57,7 @@ set showtabline=2                        " 显示tab栏
 set ttyfast                              " 快速刷新屏幕显示
 set lazyredraw                           " 只在必要时刷新显示
 set ignorecase                           " 忽略大小写
+set t_Co=256                             " 设置Vim支持256色
 
 "行尾继续符，换行符，左右窗口大小不够时的提示符，半角空格的表示
 "tab：tab键，要指定2个字符
@@ -76,14 +77,48 @@ set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
 "set listchars=tab:￫￫,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 "set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 
-"颜色
-"非可见字符"eol"、"extends"、"precedes"是由NonText高亮组来控制显示颜色的，而"nbsp"、"tab"、"trail"则是由"SpecialKey"高亮组来定义的。
-":highlight 可以确认当前的设定内容
+"-----------------------------------------------"
+"               颜色设置                        "
+"-----------------------------------------------"
+set background=dark
+"set background=light
+"hi Normal      term=none cterm=none ctermfg=white gui=none guifg=white
+":hi 可以确认当前的设定内容
 ":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
-hi NonText      term=bold cterm=bold ctermfg=0 ctermbg=0 gui=bold guifg=DarkGrey guibg=grey30
-hi SpecialKey   term=bold cterm=bold ctermfg=0 ctermbg=0 gui=bold guifg=DarkGrey guibg=grey30
-"hi StatusLine     term=bold,reverse cterm=bold,reverse gui=bold,reverse guifg=lightyellow guibg=darkblue ctermfg=lightyellow ctermbg=darkblue
-hi TabLineSel     term=bold cterm=bold gui=bold guifg=yellow guibg=darkblue ctermfg=yellow ctermbg=darkblue
+"NonText       : 换行符（深灰色）
+hi NonText      term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
+"SpecialKey    : TAB符（深灰色）
+hi SpecialKey   term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
+"StatusLine    : 底部状态栏（白底黑字，因为设定了reverse，所以gb和fb要反过来）
+hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=white ctermbg=black gui=bold,reverse
+"TabLineSel    : 上部TAB栏（蓝底黄字）
+hi TabLineSel   term=bold cterm=bold ctermfg=yellow ctermbg=darkblue gui=bold guifg=yellow guibg=darkblue
+
+"Comment    : 注释(灰色)
+hi Comment      term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
+"Constant   : 常量，例如数字、引号内字符串、布尔值(浅蓝色)
+hi Constant     term=none cterm=none ctermfg=lightblue gui=none guifg=lightblue
+"Identifier : 标识符(蓝绿色)
+hi Identifier   term=none cterm=none ctermfg=Cyan gui=none guifg=Cyan
+"Statement  : 编程语言的声明，一般是像“if”或“while”这样的关键字。(蓝色粗体)
+hi Statement    term=bold cterm=bold ctermfg=blue gui=bold guifg=blue
+"PreProc    : 预处理，例如C语言中的“#include”(绿色)
+hi PreProc      term=none cterm=none ctermfg=green gui=none guifg=green
+"Type       : 变量类型，例如“int”(红色粗体)
+hi Type         term=bold cterm=bold ctermfg=red gui=bold guifg=red
+"Special    : 特殊符号，通常是类似字符串中的“\n”“%s”(深紫红色)
+hi Special      term=none cterm=none ctermfg=darkmagenta gui=none guifg=darkmagenta
+"Underlined : 文本下划线。
+"Error      : 显示编程语言错误的文本。
+
+"Search     : 搜索高亮（黄底黑字）
+hi Search       term=reverse cterm=none ctermfg=black ctermbg=yellow gui=none guifg=black guibg=yellow
+"CursorLine : 光标所在行（灰底黑字）
+"hi CursorLine   term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
+"CursorLine : 光标（黄字）
+"hi Cursor       term=underline cterm=underline ctermfg=Yellow gui=underline guifg=Yellow
+"CursorLine : 光标所在行（灰底黑字）
+"hi cursorcolumn term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
 
 "set relativenumber                       " 显示相对行号
 "set wrap                                 " 自动折行

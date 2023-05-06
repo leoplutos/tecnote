@@ -511,7 +511,7 @@ apt install vim-gtk
 ```
 安装完成之后再利用代码检查一次，出现“+clipboard”，那么系统的vim没有问题。
 
-#### vim-tiny的解决办法
+## vim-tiny的解决办法
 大部分默认的 Linux 发行版安装的是精简版(Small version)的 vim，不太好用，但直接安装全功能(Huge version) vim 又弄了两个不同版本的 vim 在系统内，所以最好的办法是把精简版的替换为全功能版的。
 ```bash
 apt remove --assume-yes vim-tiny
