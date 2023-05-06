@@ -37,6 +37,7 @@
 * [Vim-netrw](DevTool/Vim-netrw_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
+* [Windows Terminal](DevTool/Windows-Terminal_zh_CN.md)
 * [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
 
 ## 其他
