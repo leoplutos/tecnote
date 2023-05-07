@@ -10,6 +10,8 @@ NINJA_HOME=/d/Tools/WorkTool/C/ninja-win
 PATH=$PATH:$MINGW_HOME:$RUST_HOME:$JAVA_HOME:$PYTHON_HOME:$VSCODE_HOME:$CMAKE_HOME:$NINJA_HOME
 export PATH
 
+export CDPATH=.:/d/WorkSpace:/d/Tools
+
 #export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "
 export app=/d/WorkSpace/Rust/RustTest/src
 export bin=/d/WorkSpace/Rust/RustTest/target/debug

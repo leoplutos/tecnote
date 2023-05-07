@@ -46,7 +46,7 @@ https://github.com/microsoft/terminal/releases
 
 在 bash.exe 后面加 --login -i -l 配置，这样激活 Git Bash 就会加载 ~/.bash_profile 的配置
 
-## 资源管理器地址妙用，直接在终端打开当前文件夹
+## 资源管理器地址妙用，直接在 Windows Terminal 打开当前文件夹
 
 alt + d 可以直接把光标移动到资源管理器地址栏
 
@@ -58,4 +58,21 @@ wt -d .
 用 cmd 打开当前路径
 ```
 cmd
+```
+
+## Windows Terminal 启动方式
+* 1.Windows键 + r，输入
+```
+wt
+```
+* 2.找到安装路径，创建桌面快捷方式  
+在 git bash下输入
+```bash
+which wt
+```
+得知路径为：  
+c:/Program Files/WindowsApps/Microsoft.WindowsTerminal_1.16.10262.0_x64__8wekyb3d8bbwe  
+* 3.在资源管理器地址栏输入
+```
+wt -d .
 ```

@@ -24,7 +24,9 @@ loadkeymap 'KEYBOARD.CNF'
 wait '#'
 
 ;自定义登录后的发行command
-sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "'
+sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\e[0m\e[34m\\$\e[0m "'
+wait '#'
+sendln 'export CDPATH=.:/lch/workspace:/usr/share'
 wait '#'
 sendln 'export app=/lch/workspace/rust/rusttest/src'
 wait '#'
