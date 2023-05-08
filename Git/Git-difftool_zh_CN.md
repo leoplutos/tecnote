@@ -18,10 +18,10 @@ https://winmerge.org/
 [difftool "winmerge"]
     name = WinMerge
     trustExitCode = true
-#    cmd = "/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe" -u -e $LOCAL $REMOTE
-#    cmd = "/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe" -e -ub -dl "Base" -dr "Mine" $LOCAL $REMOTE
-#    cmd = "/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe" -r -ub -dl "Remote" -dr "Local" $LOCAL $REMOTE
-    cmd = "/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe" -e -r -u -x -wl -wr -dl \"Remote-/$MERGED\" -dr \"Local-/$MERGED\" \"$LOCAL\" \"$REMOTE\"
+#    cmd = '/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe' -u -e $LOCAL $REMOTE
+#    cmd = '/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe' -e -ub -dl "Base" -dr "Mine" $LOCAL $REMOTE
+#    cmd = '/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe' -r -ub -dl "Remote" -dr "Local" $LOCAL $REMOTE
+    cmd = '/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe' -e -r -u -x -wl -wr -dl \"Remote-/$MERGED\" -dr \"Local-/$MERGED\" \"$LOCAL\" \"$REMOTE\"
 
 [merge]
     tool = winmerge
@@ -32,8 +32,8 @@ https://winmerge.org/
 [mergetool "winmerge"]
     name = WinMerge
     trustExitCode = true
-#    cmd = "/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe" -u -e -fm -wl -dl "Local" -wr -dr "Remote" $LOCAL $MERGED $REMOTE
-    cmd = "/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe" -e -u -fr -ar -wl -wm -dl \"Base File\" -dm \"Theirs File\" -dr \"Mine File\" \"$BASE\" \"$REMOTE\" \"$LOCAL\" -o \"$MERGED\"
+#    cmd = '/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe' -u -e -fm -wl -dl "Local" -wr -dr "Remote" $LOCAL $MERGED $REMOTE
+    cmd = '/d/Tools/WorkTool/Text/WinMerge-2.16.30-x64/WinMergeU.exe' -e -u -fr -ar -wl -wm -dl \"Base File\" -dm \"Theirs File\" -dr \"Mine File\" \"$BASE\" \"$REMOTE\" \"$LOCAL\" -o \"$MERGED\"
 ```
 
 ## 3.比较工具启动（difftool）
