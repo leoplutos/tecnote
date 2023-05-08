@@ -12,10 +12,12 @@ source $VIMRUNTIME/defaults.vim
 
 
 ".vimrc
+scriptencoding utf-8
 
 "-----------------------------------------------"
 "               基础设置                        "
 "-----------------------------------------------"
+let &t_ut=''                             " 调整终端和vim颜色
 set modelines=0                          " 禁用模式行（安全措施）
 filetype on                              " 开启文件类型检测
 syntax on                                " 语法高亮
@@ -38,8 +40,9 @@ set backspace=2                          " 设置 backspace可以删除任意字
 set mouse=a                              " 使用鼠标
 set mousehide                            " 输入时隐藏光标
 set clipboard^=unnamed,unnamedplus       " 和系统共享剪切板
-set nobackup                             " 设置取消备份
-set noswapfile                           " 禁止生成临时文件
+set nobackup                             " 不需要备份文件
+set noswapfile                           " 不创建临时交换文件
+set nowritebackup                        " 编辑的时候不需要备份文件
 set autoread                             " 文件自动检测外部更改
 set showmatch                            " 显示匹配,当输入一个左括号时会匹配相应的那个右括号
 set splitright                           " 设置左右分割窗口时，新窗口出现在右侧
@@ -47,7 +50,7 @@ set splitbelow                           " 设置水平分割窗口时，新窗�
 set laststatus=2                         " 命令行为两行
 set cursorline                           " 高亮显示当前行
 set hlsearch                             " 搜索时高亮显示被找到的文本
-set is                                   " 搜索时在未完全输入完毕要检索的文本时就开始检索
+set incsearch                            " 搜索时在未完全输入完毕要检索的文本时就开始检索
 set ambiwidth=double                     " 防止特殊符号无法正常显示。解决中文标点显示的问题
 set sidescroll=10                        " 移动到看不见的字符时，自动向右滚动是个字符
 set sm!                                  " 高亮显示匹配括号
@@ -56,10 +59,20 @@ set showcmd                              " 显示输入的命令
 set showtabline=2                        " 显示tab栏
 set ttyfast                              " 快速刷新屏幕显示
 set lazyredraw                           " 只在必要时刷新显示
-set ignorecase                           " 忽略大小写
+set ignorecase                           " 搜索时忽略大小写
+set smartcase                            " 智能搜索 - 搜索“test”会找到并突出显示 test 和 Test。搜索“Test”只突出显示或只找到 Test
 set t_Co=256                             " 设置Vim支持256色
+set showmode                             " 左下角显示如“—INSERT--”之类的状态栏
+set scrolloff=4                          " 垂直滚动时，光标保持在距顶部/底部 4 行的位置
+set autochdir                            " 自动切换工作目录
+set wildmenu                             " 在命令模式下，底部操作指令按下 Tab 键自动补全。
 
-"行尾继续符，换行符，左右窗口大小不够时的提示符，半角空格的表示
+"-----------------------------------------------"
+"               特殊符号设置                    "
+"-----------------------------------------------"
+"特殊符号确认命令
+":dig
+":help digraphs-use
 "tab：tab键，要指定2个字符
 "trail：换行符后面的空格
 "eol：换行符（end of line）
@@ -67,9 +80,6 @@ set t_Co=256                             " 设置Vim支持256色
 "precedes：第一列中的字符，表示此行是前一行的延续
 "nbsp：不可见空格
 "space：可见空格
-"特殊符号确认命令
-":dig
-":help digraphs-use
 set list
 "for linux
 set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
@@ -80,11 +90,11 @@ set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
 "-----------------------------------------------"
 "               颜色设置                        "
 "-----------------------------------------------"
+":hi 可以确认当前的设定内容
+":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
 set background=dark
 "set background=light
 "hi Normal      term=none cterm=none ctermfg=white gui=none guifg=white
-":hi 可以确认当前的设定内容
-":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
 "NonText       : 换行符（深灰色）
 hi NonText      term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
 "SpecialKey    : TAB符（深灰色）
@@ -120,6 +130,9 @@ hi Search       term=reverse cterm=none ctermfg=black ctermbg=yellow gui=none gu
 "CursorLine : 光标所在行（灰底黑字）
 "hi cursorcolumn term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
 
+"-----------------------------------------------"
+"               暂时不用                        "
+"-----------------------------------------------"
 "set relativenumber                       " 显示相对行号
 "set wrap                                 " 自动折行
 "set termguicolors                        " 启用终端真色
@@ -127,17 +140,20 @@ hi Search       term=reverse cterm=none ctermfg=black ctermbg=yellow gui=none gu
 "set fdm=marker                           " 设置折叠方式
 "set nocompatible                         " 去除vi一致性，关闭所有扩展的功能，尽量模拟 vi 的行为
 
-" 设置文件关联-----------------------------------
+"-----------------------------------------------"
+"               文件关联                        "
+"-----------------------------------------------"
 "augroup filetypedetect
 " PC
 "au BufNewFile,BufRead *.pc			setf c
 "augroup END
 
-" 设置状态行-----------------------------------
-" 设置状态行显示常用信息
+"-----------------------------------------------"
+"               设置状态栏                      "
+"-----------------------------------------------"
 " %F 完整文件路径名
 " %m 当前缓冲被修改标记
-" %m 当前缓冲只读标记
+" %r 当前缓冲只读标记
 " %h 帮助缓冲标记
 " %w 预览缓冲标记
 " %Y 文件类型
@@ -158,7 +174,9 @@ set statusline+=[%l:%v]\
 set statusline+=%p%%\ \|\ 
 set statusline+=%LL\ 
 
-" 设置netrw-------------------------------------
+"-----------------------------------------------"
+"               设置netrw                       "
+"-----------------------------------------------"
 let g:netrw_banner = 0         " 设置是否显示横幅
 let g:netrw_liststyle = 3      " 设置目录列表样式：树形
 "let g:netrw_browse_split = 4   " 在之前的窗口编辑文件
@@ -170,7 +188,7 @@ let g:netrw_altv = 1           " 水平分割时，文件浏览器始终显示�
 let g:netrw_preview=1          " 预览文件使用垂直分割
 let g:netrw_winsize = 20       " 设置文件浏览器窗口宽度为25%
 let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
-"let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
+let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
 
 " 自动打开文件浏览器
 " augroup ProjectDrawer
@@ -178,28 +196,29 @@ let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示�
 "     autocmd VimEnter * :Vexplore
 " augroup END
 
-nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树
+nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
 
 "-----------------------------------------------"
-"               自定义功能                      "
+"               快捷键绑定                      "
 "-----------------------------------------------"
-" 快捷键绑定-------------------------
-let mapleader='\'
+let mapleader='\'                    " 设定前缀为 \
+noremap J 10j                        " 大写J，向下10行
+noremap K 10k                        " 大写K，向上10行
 " 窗口移动快捷键
-noremap <TAB>w <C-w>w
-noremap <TAB><left> <C-w><left>
-noremap <TAB><right> <C-w><right>
-noremap <TAB><up> <C-w><up>
-noremap <TAB><down> <C-w><down>
+noremap <TAB>w <C-w>w                " tab+w：移动tab
+noremap <TAB><left> <C-w><left>      " tab+左：移动到左边tab
+noremap <TAB><right> <C-w><right>    " tab+右：移动到右边tab
+noremap <TAB><up> <C-w><up>          " tab+上：移动到上边tab
+noremap <TAB><down> <C-w><down>      " tab+下：移动到下边tab
 " 使用方向键切换buffer
-noremap <Leader><left> :bp<CR>
-noremap <Leader><right> :bn<CR>
+noremap <Leader><left> :bp<CR>       " \+左：上一个buffer
+noremap <Leader><right> :bn<CR>      " \+右：下一个buffer
 " 使用方括号切换tab
-noremap <Leader>] :tabnext<CR>
-noremap <Leader>[ :tabprevious<CR>
+noremap <Leader>] :tabnext<CR>       " \+]：上一个tab
+noremap <Leader>[ :tabprevious<CR>   " \+[：下一个tab
 " 使用 \ + s 保存, \ + q 退出
-noremap <Leader>s :w<CR>
-noremap <Leader>q :q<CR>
+noremap <Leader>s :w<CR>             " \+s：保存文件
+noremap <Leader>q :q<CR>             " \+q：退出
 " 支持在Visual模式下，通过C-y复制到系统剪切板 （vnoremap视觉和选择模式下工作）
 vnoremap <C-y> "+y
 " 支持在normal模式下，通过C-p粘贴系统剪切板 （nnoremap在正常模式下工作）
@@ -212,18 +231,12 @@ nnoremap <C-p> "*p
 "https://github.com/skywind3000/vim-auto-popmenu
 "从github上下载apc.vim，放到~/apc.vim
 source /lch/workspace/vim/apc.vim
-
 "Plug 'skywind3000/vim-auto-popmenu'
-
 " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
 let g:apc_enable_ft = {'*':1}
-
 " 设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
 set cpt=.,k,w,b
-
 " 不要自动选中第一个选项。
 set completeopt=menu,menuone,noselect
-
 " 禁止在下方显示一些啰嗦的提示
 set shortmess+=c
-

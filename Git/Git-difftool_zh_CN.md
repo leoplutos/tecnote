@@ -8,7 +8,7 @@
 https://winmerge.org/
 
 ## 2.修改配置文件
-文件为：C:\Users\User\.gitconfig  
+文件为：C:/Users/User/.gitconfig  
 加入如下内容
 ```
 [diff]
