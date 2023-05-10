@@ -259,3 +259,6 @@ tty名可以以下命令确认
 w
 ```
 使用Ctrl+d结束发送信息
+
+# 更多
+* [BASH CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/bash.sh)

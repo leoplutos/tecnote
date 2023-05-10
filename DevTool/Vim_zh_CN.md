@@ -519,3 +519,7 @@ apt update
 apt install --assume-yes vim
 ```
 安装完成之后再利用代码检查一次，出现“Huge version without GUI”即可
+
+# 更多
+* [VIM CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt)
+* [VimScript CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/vimscript.md)

@@ -24,11 +24,11 @@ loadkeymap 'KEYBOARD.CNF'
 wait '#'
 
 ;自定义登录后的发行command
-sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\e[0m\e[34m\\$\e[0m "'
+sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "'
 wait '#'
-sendln 'export CDPATH=.:/lch/workspace:/usr/share'
-wait '#'
-sendln 'export app=/lch/workspace/rust/rusttest/src'
+;sendln 'export CDPATH=.:/lch/workspace:/usr/share'
+;wait '#'
+sendln 'export app=/lch/workspace/rust/rusttest'
 wait '#'
 sendln 'export bin=/lch/workspace/rust/rusttest/target/debug'
 wait '#'
@@ -50,6 +50,10 @@ wait '#'
 sendln "alias cdl='cd $log'"
 wait '#'
 sendln "alias vim='vim -u /lch/workspace/vim/lchvimrc'"
+wait '#'
+sendln "alias tmuxn='tmux -2u -f /lch/workspace/tmux/tmux3.2.conf new-session -s lch_session -n lch_window'"
+wait '#'
+sendln "alias tmuxa='tmux -2u a -t lch_session'"
 wait '#'
 
 end

@@ -165,6 +165,9 @@ gdb终端的常用命令如下:
 (gdb) shell pwd
 ```
 
+### 更多
+* [GDB CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/gdb.txt)
+
 ## 4.gdb插件
 虽然默认的gdb有TUI，但是信息不够丰富。
 gdb支持python插件，这个时候可以用插件让显示内容丰富一些让开发者把注意力回到调式程序本身。  
@@ -188,6 +191,7 @@ https://github.com/cyrus-and/gdb-dashboard
 wget -P ~ https://git.io/.gdbinit
 ```
 在此md同路径也有，哪里下载都可以
+* [.gdbinit](.gdbinit)
 
 **2.配置到终端上运行**  
 因为放到~/.gdbinit会影响到使用终端的所有人，为了不污染服务器，笔者习惯放到自己的路径下用参数运行。  

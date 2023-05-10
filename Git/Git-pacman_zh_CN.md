@@ -35,9 +35,9 @@ pacman -Sy
 
 ## 4.添加清华源和中科大源
 git_home/etc/pacman.d 目录下有三个文件（修改前记得备份）
-* mirrorlist.msys
-* mirrorlist.mingw64
-* mirrorlist.mingw32
+* [mirrorlist.msys](mirrorlist.msys)
+* [mirrorlist.mingw64](mirrorlist.mingw64)
+* [mirrorlist.mingw32](mirrorlist.mingw32)
 
 首先是 **mirrorlist.msys**，将以下2行加到Primary的最上面（第1行和第2行）
 ```

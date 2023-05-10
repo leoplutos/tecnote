@@ -17,13 +17,31 @@ tmux的结构包括会话(session)、窗口(window)、窗格(pane)三部分，�
 绝大多数 Tmux 的快捷键都以一个 Prefix （前缀）开始，Tmux 默认的 Prefix 是 Ctrl + b。
 举个例子，快捷键 prefix d 的意思就是先同时按下 Ctrl 和 b，然后松开，然后再按 d。
 
-#### 支持鼠标操作
-prefix : 进入命令模式输入以下命令
-```tmux
-set-option -g mouse on
+#### 帮助文档
+https://man7.org/linux/man-pages/man1/tmux.1.html
+```
+usage: tmux [-2CluvV] [-c shell-command] [-f file] [-L socket-name]
+            [-S socket-path] [command [flags]]
 ```
 
-#### 会话管理
+#### 启动命令
+```
+tmux -2u -f /path/to/tmux/tmux.conf new-session -s lch_session -n lch_window
+```
+参数说明：  
+* -2  
+强制tmux终端支持256色。这相当于-T 256。  
+* -u  
+支持utf8
+* -f 文件  
+指定替代配置文件。默认情况下，tmux按顺序加载系统配置文件@SYSCONFDIR@/tmux.conf，~/.tmux.conf，$XDG_CONFIG_HOME/tmux/tmux.conf，~/.config/tmux/tmux.conf
+
+#### 恢复会话命令
+```
+tmux -2u a -t lch_session
+```
+
+#### 会话命令
 tmux new　　创建默认名称的会话  
 **tmux new -s mysession　　创建名为mysession的会话**  
 **tmux ls　　显示会话列表**  
@@ -73,3 +91,11 @@ prefix i　　显示当前窗格信息
 #### 其他命令
 tmux list-key　　列出所有绑定的键，等同于prefix ?  
 tmux list-command　　列出所有命令  
+
+## 设定文件例子
+* [tmux2.7.conf](tmux2.7.conf)
+* [tmux3.2.conf](tmux3.2.conf)
+
+# 更多
+* [TMUX CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/tmux.txt)
+

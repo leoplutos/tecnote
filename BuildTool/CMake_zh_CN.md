@@ -10,6 +10,8 @@ https://cmake.org/
 ## 2.创建Cmake文件
 在你的工程根目录下，新建**CMakeLists.txt**
 
+* [CMakeLists.txt](CMakeLists.txt)
+
 ## 3.CMakeLists.txt内容
 
 * 设定最低版本

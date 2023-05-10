@@ -13,6 +13,8 @@ https://ninja-build.org/
 
 ## 3.build.ninja内容
 
+* [build.ninja](build.ninja)
+
 * 设定编译文件夹
 ```ninja
 builddir = build

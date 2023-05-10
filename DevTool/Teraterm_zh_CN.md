@@ -16,7 +16,8 @@ https://osdn.net/projects/ttssh2/downloads/74780/teraterm-4.106.zip
 在使用teraterm连接终端的时候，每次都要输入用户名密码很繁琐。这里介绍用宏脚本文件ttl启动的的方法。  
 
 #### 首先，需要新建.ttl脚本文件
-※ ttl脚本文件中;为注释
+※ ttl脚本文件中;为注释  
+设定文件例子   
 ```ttl
 ;user@192.168.0.3-8122.ttl
 
@@ -211,6 +212,11 @@ ClearOnResize=off
 ```bash
 export TERM=gnome
 ```
+
+### 相关设定文件
+* [user@192.168.0.3-8122.ttl](user@192.168.0.3-8122.ttl)
+* [TERATERM.INI](TERATERM.INI)
+* [KEYBOARD.CNF](KEYBOARD.CNF)
 
 ---
 
