@@ -34,7 +34,7 @@ tmux -2u -f /path/to/tmux/tmux.conf new-session -s lch_session -n lch_window
 * -u  
 支持utf8
 * -f 文件  
-指定替代配置文件。默认情况下，tmux按顺序加载系统配置文件@SYSCONFDIR@/tmux.conf，~/.tmux.conf，$XDG_CONFIG_HOME/tmux/tmux.conf，~/.config/tmux/tmux.conf
+指定替代配置文件。默认情况下，tmux按顺序加载系统配置文件@SYSCONFDIR@/tmux.conf，\~/.tmux.conf，\$XDG_CONFIG_HOME/tmux/tmux.conf，\~/.config/tmux/tmux.conf
 
 #### 恢复会话命令
 ```
