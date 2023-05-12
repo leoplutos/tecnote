@@ -49,7 +49,7 @@ sendln "alias cdb='cd $bin'"
 wait '#'
 sendln "alias cdl='cd $log'"
 wait '#'
-sendln "alias vim='vim -u /lch/workspace/vim/lchvimrc'"
+sendln "alias vim='vim -u /lch/workspace/vim/.vimrc'"
 wait '#'
 sendln "alias tmuxn='tmux -2u -f /lch/workspace/tmux/tmux3.2.conf new-session -s lch_session -n lch_window'"
 wait '#'

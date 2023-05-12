@@ -1,0 +1,23 @@
+#
+# .minttyrc - Configuration file for mintty terminal
+#
+
+#BoldAsFont=-1
+Font=JetBrains Mono Light
+FontHeight=14
+Locale=C
+Charset=UTF-8
+CursorType=block
+Columns=120
+Rows=35
+Language=zh_CN
+MiddleClickAction=extend
+RightClickAction=paste
+
+CopyAsRTF=no
+PgUpDnScroll=yes
+FontWeight=200
+
+BackgroundColour=0,0,0
+ForegroundColour=191,191,191
+CursorColour=255,255,255

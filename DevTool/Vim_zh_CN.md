@@ -523,3 +523,4 @@ apt install --assume-yes vim
 # 更多
 * [VIM CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt)
 * [VimScript CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/vimscript.md)
+* [VIM 中文用户手册](https://yianwillis.github.io/vimcdoc/doc/usr_toc.html)

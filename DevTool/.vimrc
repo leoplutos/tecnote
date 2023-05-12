@@ -1,5 +1,14 @@
-".vimrc
 scriptencoding utf-8
+".vimrc
+
+" When started as "evim", evim.vim will already have done these settings, bail
+" out.
+if v:progname =~? "evim"
+  finish
+endif
+
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
 
 "-----------------------------------------------"
 "               基础设置                        "
@@ -7,11 +16,12 @@ scriptencoding utf-8
 let &t_ut=''                             " 调整终端和vim颜色
 set modelines=0                          " 禁用模式行（安全措施）
 filetype on                              " 开启文件类型检测
+syntax enable
 syntax on                                " 语法高亮
 "colorscheme desert                       " 设置颜色主题
 set encoding=utf-8                       " 编码设置
 set fileencoding=utf-8                   " 编码设置
-set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
+set fileencodings=utf-8,ucs-bom,shift-jis,cp932,euc-jp,gb18030,gbk,gb2312,cp936,utf-16,big5,latin1
                                          " 自动识别文件编码，依照fileencodings提供的编码列表尝试
 set number                               " 显示行号
 set smartindent                          " 智能缩进对齐
@@ -21,9 +31,9 @@ set nowrap                               " 不自动折行
 set smarttab                             " 根据文件中其他位置的缩进空格个数来决定一个tab是多少空格
 set tabstop=4                            " tab为4个空格
 set shiftwidth=4                         " 每一级缩进是4个空格
-"set expandtab                            " 将tab替换为相应数量空格
+set noexpandtab                          " 不将tab替换为相应数量空格         打开为set expandtab
 set softtabstop=4                        " 在编辑模式下按退格键的时候退回缩进的长度，配合expandtab时很有用
-set backspace=2                          " 设置 backspace可以删除任意字符
+set backspace=2                          " 设置 backspace可以删除任意字符，数值2同set backspace=indent,eol,start
 set mouse=a                              " 使用鼠标
 set mousehide                            " 输入时隐藏光标
 set clipboard^=unnamed,unnamedplus       " 和系统共享剪切板
@@ -34,7 +44,7 @@ set autoread                             " 文件自动检测外部更改
 set showmatch                            " 显示匹配,当输入一个左括号时会匹配相应的那个右括号
 set splitright                           " 设置左右分割窗口时，新窗口出现在右侧
 set splitbelow                           " 设置水平分割窗口时，新窗口出现在底部
-set laststatus=2                         " 命令行为两行
+set laststatus=2                         " 显示状态行 2: 总是
 set cursorline                           " 高亮显示当前行
 set hlsearch                             " 搜索时高亮显示被找到的文本
 set incsearch                            " 搜索时在未完全输入完毕要检索的文本时就开始检索
@@ -43,16 +53,21 @@ set sidescroll=10                        " 移动到看不见的字符时，自�
 set sm!                                  " 高亮显示匹配括号
 set novisualbell                         " 不要闪烁
 set showcmd                              " 显示输入的命令
-set showtabline=2                        " 显示tab栏
+set showtabline=2                        " 显示tab栏 2: 永远会
 set ttyfast                              " 快速刷新屏幕显示
 set lazyredraw                           " 只在必要时刷新显示
 set ignorecase                           " 搜索时忽略大小写
 set smartcase                            " 智能搜索 - 搜索“test”会找到并突出显示 test 和 Test。搜索“Test”只突出显示或只找到 Test
+set nowrapscan                           " 禁止在搜索到文件两端时重新搜索（不循环搜索）
 set t_Co=256                             " 设置Vim支持256色
 set showmode                             " 左下角显示如“—INSERT--”之类的状态栏
 set scrolloff=4                          " 垂直滚动时，光标保持在距顶部/底部 4 行的位置
 set autochdir                            " 自动切换工作目录
 set wildmenu                             " 在命令模式下，底部操作指令按下 Tab 键自动补全。
+set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
+set ttimeoutlen=50
+set formatoptions+=m                     " UniCode大于255的文本，不必等到空格再这行
+set formatoptions+=B                     " 合并两行中文时，不在中间加空格
 
 "-----------------------------------------------"
 "               特殊符号设置                    "
@@ -68,54 +83,24 @@ set wildmenu                             " 在命令模式下，底部操作指�
 "nbsp：不可见空格
 "space：可见空格
 set list
-"for linux
-"set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
-"for windows:git-bash
-"set listchars=tab:￫￫,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
-set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+if has('win32')
+  " Windows 环境
+  set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+elseif has('win32unix')
+  " Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
+  set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+else
+  " 其他环境（包含linux服务器，WSL）
+  set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
+endif
 
 "-----------------------------------------------"
 "               颜色设置                        "
 "-----------------------------------------------"
-":hi 可以确认当前的设定内容
-":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
-set background=dark
-"set background=light
-"hi Normal      term=none cterm=none ctermfg=white gui=none guifg=white
-"NonText       : 换行符（深灰色）
-hi NonText      term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
-"SpecialKey    : TAB符（深灰色）
-hi SpecialKey   term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
-"StatusLine    : 底部状态栏（白底黑字，因为设定了reverse，所以gb和fb要反过来）
-hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=white ctermbg=black gui=bold,reverse
-"TabLineSel    : 上部TAB栏（蓝底黄字）
-hi TabLineSel   term=bold cterm=bold ctermfg=yellow ctermbg=darkblue gui=bold guifg=yellow guibg=darkblue
-
-"Comment    : 注释(灰色)
-hi Comment      term=none cterm=none ctermfg=DarkGrey gui=none guifg=DarkGrey
-"Constant   : 常量，例如数字、引号内字符串、布尔值(浅蓝色)
-hi Constant     term=none cterm=none ctermfg=lightblue gui=none guifg=lightblue
-"Identifier : 标识符(蓝绿色)
-hi Identifier   term=none cterm=none ctermfg=Cyan gui=none guifg=Cyan
-"Statement  : 编程语言的声明，一般是像“if”或“while”这样的关键字。(蓝色粗体)
-hi Statement    term=bold cterm=bold ctermfg=blue gui=bold guifg=blue
-"PreProc    : 预处理，例如C语言中的“#include”(绿色)
-hi PreProc      term=none cterm=none ctermfg=green gui=none guifg=green
-"Type       : 变量类型，例如“int”(红色粗体)
-hi Type         term=bold cterm=bold ctermfg=red gui=bold guifg=red
-"Special    : 特殊符号，通常是类似字符串中的“\n”“%s”(深紫红色)
-hi Special      term=none cterm=none ctermfg=darkmagenta gui=none guifg=darkmagenta
-"Underlined : 文本下划线。
-"Error      : 显示编程语言错误的文本。
-
-"Search     : 搜索高亮（黄底黑字）
-hi Search       term=reverse cterm=none ctermfg=black ctermbg=yellow gui=none guifg=black guibg=yellow
-"CursorLine : 光标所在行（灰底黑字）
-"hi CursorLine   term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
-"CursorLine : 光标（黄字）
-"hi Cursor       term=underline cterm=underline ctermfg=Yellow gui=underline guifg=Yellow
-"CursorLine : 光标所在行（灰底黑字）
-"hi cursorcolumn term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
+let scriptPath = expand("<sfile>:p:h")
+"exec 'source' scriptPath . '/vim-color-16-rc.vim'
+exec 'source' scriptPath . '/vim-color-256-rc.vim'
+"exec 'source' scriptPath . '/vim-color-256-rc-light.vim'
 
 "-----------------------------------------------"
 "               暂时不用                        "
@@ -130,10 +115,10 @@ hi Search       term=reverse cterm=none ctermfg=black ctermbg=yellow gui=none gu
 "-----------------------------------------------"
 "               文件关联                        "
 "-----------------------------------------------"
-"augroup filetypedetect
-" PC
-"au BufNewFile,BufRead *.pc			setf c
-"augroup END
+augroup filetypedetect
+  "PC
+  au BufNewFile,BufRead *.pc              setf c
+augroup END
 
 "-----------------------------------------------"
 "               设置状态栏                      "
@@ -177,11 +162,11 @@ let g:netrw_winsize = 20       " 设置文件浏览器窗口宽度为25%
 let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
 let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
 
-" 自动打开文件浏览器
-" augroup ProjectDrawer
-"     autocmd!
-"     autocmd VimEnter * :Vexplore
-" augroup END
+" 自动打开netrw
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
 
@@ -210,15 +195,21 @@ noremap <Leader>q :q<CR>             " \+q：退出
 vnoremap <C-y> "+y
 " 支持在normal模式下，通过C-p粘贴系统剪切板 （nnoremap在正常模式下工作）
 nnoremap <C-p> "*p
+"在编程中经常要复制粘贴一些内容。为了解决寄存器混乱的问题，这里如下定义
+"<Leader>y  复制到字母寄存器c
+vnoremap <Leader>y "cy
+"<Leader>p  从字母寄存器c中粘贴内容
+nnoremap <Leader>p "cp
+nnoremap <Leader>P "cP
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 
 "载入韦易笑做的代码补全系统
 "https://zhuanlan.zhihu.com/p/349271041
 "https://github.com/skywind3000/vim-auto-popmenu
-"从github上下载apc.vim，和你的vimrc放到同路径下
-let scriptPath = expand("<sfile>:p:h")
+"从github上下载apc.vim，放到~/apc.vim
 exec 'source' scriptPath . '/apc.vim'
+"source ~/apc.vim
 "Plug 'skywind3000/vim-auto-popmenu'
 " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
 let g:apc_enable_ft = {'*':1}

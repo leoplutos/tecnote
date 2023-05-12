@@ -32,6 +32,19 @@ ls -al ~/.vimrc
 
 然后编辑.vimrc文件加入自定义内容即可
 
+## 笔者的vimrc
+
+主要为以下5个文件
+* [.vimrc](.vimrc) ： 主文件
+* [vim-color-16-rc.vim](vim-color-16-rc.vim) - 不支持256色的颜色设置
+* [vim-color-256-rc.vim](vim-color-256-rc.vim) - 支持256色的颜色设置（暗色系）
+* [vim-color-256-rc-light.vim](vim-color-256-rc-light.vim) - 支持256色的颜色设置（亮色系）
+* [apc.vim](apc.vim) - 自动补全
+
+颜色设置的3个文件选择1个即可。  
+另外，亮色系和暗色系要配合终端设置。  
+比如用git-bash的话，需要配置~/.minttyrc。
+
 ## 文件类型关联
 
 方法1：打开文件后用命令辅正
@@ -69,12 +82,6 @@ au BufNewFile,BufRead *.pc			setf c
 ```
 
 :wq保存文件即可
-
-## vimrc配置的例子
-
-参考同路径下的2个文件
-* .vimrc ： git-bash用
-* lchvimrc ： linux服务器用
 
 ## vimrc最小化设定
 有时候我们只是临时用一下，可以如下设定（注意备份）：

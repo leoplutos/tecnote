@@ -86,11 +86,21 @@ git status
 ```
 
 ### 9.取消本地修改从仓库重新取文件  
-笔者个人习惯为，比如本地的a.java想从仓库重新取。先把a.java重命名为a.java_bak，然后运行以下代码
+笔者个人习惯为，比如本地的a.java想从仓库重新取。先把a.java重命名为a.java_bak，然后运行以下代码。  
+旧版本:
 ```git
 git status
 git checkout /src/a.java
 ```
+新版本:
+```git
+git status
+git restore /src/a.java
+或者
+git restore .
+```
+由于git checkout这个命令还可以用于切换分支，容易引起混淆。
+Git最新版本中将git checkout命令的两项功能分别赋予两个新的命令，一个是git restore，另一个是git switch。
 
 ## 三.查看配置文件  
 
@@ -113,11 +123,11 @@ git config --local --list
 
 ## 四.其他
 
-### 13.快速路径
+### 快速路径
 git-bash.exe可以建立快捷方式，然后右键→属性→起始位置：粘贴一个路径后。用这个快捷方式启动git-bash就默认在这个路径下。
 
 
-### 14.git-bash.exe的环境变量设置
+### git-bash.exe的环境变量设置
 在git-bash下，也是可以加载.bash_profile文件的。所以可以按如下设定。  
 在此md文件同路径下有例子文件，请参照使用。
 
@@ -181,6 +191,34 @@ winpty python
 alias python='winpty python'
 ```
 
+## 快捷键打开Git Bash
+在桌面添加一个 Git Bash 的快捷方式 → 右键 → 属性 → 快捷键  
+设置即可，比如 Ctrl + Alt + G
+
+## Git Bash的颜色设置
+修改Git Bash配置文件
+进入用户主目录
+```bash
+cd ~
+```
+修改Git Bash配置文件
+```bash
+vim .minttyrc
+```
+.minttyrc 就是 git bash 的配置文件。
+
+#### 笔者的2个设定文件
+* [minttyrc-dark](minttyrc-dark) ： 暗色系
+* [minttyrc-light](minttyrc-light) - 亮色系
+
+选择1个粘贴到 \~/.minttyrc 即可
+
+#### 定制颜色方案
+* [定制终端颜色](http://ciembor.github.io/4bit/)
+* [256色颜色码](http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html)
+* [rgb转hex](https://www.w3schools.com/colors/colors_converter.asp)
+
 # 更多
 * [GIT CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/git.txt)
+* [团队项目开发的问题和解决方案](https://github.com/jackfrued/Python-100-Days/blob/master/Day91-100/91.%E5%9B%A2%E9%98%9F%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)
 
