@@ -83,7 +83,10 @@ set formatoptions+=B                     " 合并两行中文时，不在中间�
 "nbsp：不可见空格
 "space：可见空格
 set list
-if has('win32')
+if has('gui_running')
+  " Gvim 环境
+  set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:⏎
+elseif has('win32')
   " Windows 环境
   set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 elseif has('win32unix')
@@ -98,9 +101,12 @@ endif
 "               颜色设置                        "
 "-----------------------------------------------"
 let scriptPath = expand("<sfile>:p:h")
-"exec 'source' scriptPath . '/vim-color-16-rc.vim'
-exec 'source' scriptPath . '/vim-color-256-rc.vim'
-"exec 'source' scriptPath . '/vim-color-256-rc-light.vim'
+if has('gui_running')
+else
+  "exec 'source' scriptPath . '/vim-color-16-rc.vim'
+  "exec 'source' scriptPath . '/vim-color-256-rc.vim'
+  exec 'source' scriptPath . '/vim-color-256-rc-light.vim'
+endif
 
 "-----------------------------------------------"
 "               暂时不用                        "

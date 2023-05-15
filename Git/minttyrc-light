@@ -3,20 +3,20 @@
 #
 
 #BoldAsFont=-1
-Font=JetBrains Mono Light
+Font=Inconsolata
 FontHeight=14
 Locale=C
 Charset=UTF-8
 CursorType=block
 Columns=120
-Rows=35
+Rows=30
 Language=zh_CN
 MiddleClickAction=extend
 RightClickAction=paste
 
 CopyAsRTF=no
 PgUpDnScroll=yes
-FontWeight=200
+FontWeight=400
 
 #护眼-浅绿色
 BackgroundColour=255,251,240

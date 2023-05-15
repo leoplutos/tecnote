@@ -1,0 +1,21 @@
+# .bashrc for personal
+
+# Source global definitions
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
+
+export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m '
+export app=/lch/workspace/rust/rusttest
+export bin=/lch/workspace/rust/rusttest/target/debug
+export log=/lch/workspace/rust/rusttest/log
+alias ll='ls -l --color=auto'
+alias lla='ls -al --color=auto'
+alias llt='ls -ltr --color=auto'
+alias gdbx='gdb -x /lch/workspace/gdbinit/.gdbinit'
+alias cda='cd $app'
+alias cdb='cd $bin'
+alias cdl='cd $log'
+alias vim='vim -u /lch/workspace/vim/.vimrc'
+alias tmuxn='tmux -2u -f /lch/workspace/tmux/tmux3.2.conf new-session -s lch_session -n lch_window'
+alias tmuxa='tmux -2u a -t lch_session'
