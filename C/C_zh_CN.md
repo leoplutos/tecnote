@@ -124,6 +124,10 @@ gdb终端的常用命令如下:
 ```gdb
 (gdb)b 100
 ```
+设置断点为main函数
+```gdb
+(gdb)b main
+```
 运行程序
 ```gdb
 (gdb)run [param...]

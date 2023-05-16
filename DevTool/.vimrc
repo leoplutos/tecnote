@@ -155,16 +155,17 @@ set statusline+=%LL\
 "-----------------------------------------------"
 "               设置netrw                       "
 "-----------------------------------------------"
-let g:netrw_banner = 0         " 设置是否显示横幅
+let g:netrw_banner = 0         " 设置是否显示横幅 0: 关闭横幅,1: 显示横幅1 (缺省)
 let g:netrw_liststyle = 3      " 设置目录列表样式：树形
 "let g:netrw_browse_split = 4   " 在之前的窗口编辑文件
-let g:netrw_browse_split = 3   " 在新tab打开文件
+let g:netrw_browse_split = 3   " 在新tab打开文件 0: 重用同一个窗口 (缺省),1: 水平分割窗口,2: 垂直分割窗口,3: 在新tab打开文件,4: 同 "P" (即打开前次窗口)
 let g:netrw_sizestyle="H"      " 文件大小用(K,M,G)表示
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
                                " 日期格式用 yyyy/mm/dd(星期) hh:mm:ss
-let g:netrw_altv = 1           " 水平分割时，文件浏览器始终显示在左边
-let g:netrw_preview=1          " 预览文件使用垂直分割
-let g:netrw_winsize = 20       " 设置文件浏览器窗口宽度为25%
+let g:netrw_alto = 1           " 使用o水平分割时，置位此变量后，分割后的新窗口出现在下方而不是上方
+let g:netrw_altv = 1           " 使用v水平分割时，置位此变量后，分割后的新窗口出现在右方而不是左方
+let g:netrw_preview=1          " 使用p预览文件使用垂直分割 0 (缺省)水平分割,垂直分割
+let g:netrw_winsize = 70       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
 let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
 let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
 

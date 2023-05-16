@@ -26,3 +26,6 @@ alias cda='cd $app'
 alias cdb='cd $bin'
 alias cdl='cd $log'
 alias python='winpty python'
+#在mintty下删除屏幕buffer
+alias clearb='echo -e "\ec\e[3J"'
+alias tree='winpty tree.com'

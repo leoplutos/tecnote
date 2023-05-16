@@ -20,8 +20,10 @@ source $VIMRUNTIME/menu.vim
 "-----------------------------------------------"
 filetype indent plugin on
 " 设置字体、字号
-set guifont=SourceHanHWSC-Hybird-liga:h14,Inconsolata:h14:cANSI,JetBrains_Mono:h14:cANSI
-"set guifontwide=Microsoft_YaHei_UI:h14:cGB2312,MS\ Gothic:h14:cms932
+set guifont=Inconsolata:h14:cANSI:qDRAFT,JetBrains_Mono:h14:cANSI:qDRAFT
+"set guifontwide=ＭＳ_ゴシック:h14:cSHIFTJIS:qDRAFT,MS_Gothic:h14:cSHIFTJIS:qDRAFT,Microsoft_YaHei:h14:cGB2312:qDRAFT,Microsoft_YaHei_UI:h14:cGB2312:qDRAFT,SimSun:h14:cGB2312:qDRAFT,新宋体:h14:cGB2312:qDRAFT
+set guifontwide=Microsoft_YaHei:h14:cGB2312:qDRAFT,Microsoft_YaHei_UI:h14:cGB2312:qDRAFT,SimSun:h14:cGB2312:qDRAFT,新宋体:h14:cGB2312:qDRAFT,ＭＳ_ゴシック:h14:cSHIFTJIS:qDRAFT,MS_Gothic:h14:cSHIFTJIS:qDRAFT
+set mousehide                             " 当输入的时候隐藏鼠标
 set lines=35 columns=148                  " 窗口大小
 "colorscheme Tomorrow-Night                " 设置主题
 "colorscheme delek
