@@ -38,6 +38,7 @@
 * [Vim-vimrc](DevTool/Vim-vimrc_zh_CN.md)
 * [Vim-netrw](DevTool/Vim-netrw_zh_CN.md)
 * [Gvim](DevTool/Gvim_zh_CN.md)
+* [Vim调试：termdebug](DevTool/Vim_termdebug_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
 * [Windows Terminal](DevTool/Windows-Terminal_zh_CN.md)
