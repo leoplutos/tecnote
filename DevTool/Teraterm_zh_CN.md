@@ -11,6 +11,18 @@ https://osdn.net/projects/ttssh2/downloads/74780/teraterm-4.106.exe
 **绿色版：**  
 https://osdn.net/projects/ttssh2/downloads/74780/teraterm-4.106.zip
 
+## 相关设定文件
+* [user@192.168.0.3-8122-commad.ttl](user@192.168.0.3-8122-commad.ttl)  
+  自动登录后发行命令设定的脚本
+* [user@192.168.0.3-8122-bashrc.ttl](user@192.168.0.3-8122-bashrc.ttl)  
+  自动登录后source自定义bashrc的脚本
+* [.bashrc-personal](../Git/.bashrc-personal)  
+  自定义bashrc
+* [TERATERM.INI](TERATERM.INI)  
+  teraterm设定文件
+* [KEYBOARD.CNF](KEYBOARD.CNF)  
+  teraterm键盘定义文件
+
 ## 1.Teraterm的宏脚本
 
 在使用teraterm连接终端的时候，每次都要输入用户名密码很繁琐。这里介绍用宏脚本文件ttl启动的的方法。  
@@ -212,11 +224,6 @@ ClearOnResize=off
 ```bash
 export TERM=gnome
 ```
-
-### 相关设定文件
-* [user@192.168.0.3-8122.ttl](user@192.168.0.3-8122.ttl)
-* [TERATERM.INI](TERATERM.INI)
-* [KEYBOARD.CNF](KEYBOARD.CNF)
 
 ---
 

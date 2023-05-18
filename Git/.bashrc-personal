@@ -5,7 +5,7 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m '
+export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
 export app=/lch/workspace/rust/rusttest
 export bin=/lch/workspace/rust/rusttest/target/debug
 export log=/lch/workspace/rust/rusttest/log

@@ -1,0 +1,30 @@
+;user@192.168.0.3-8122.ttl
+
+;服务器信息
+host = '192.168.0.3'
+port = '8122'
+user = 'user'
+pass = 'password123'
+
+;使用ssh连接服务器
+COMMAND = host
+strconcat COMMAND ':'
+strconcat COMMAND port
+strconcat COMMAND ' /ssh /2 /auth=password /user='
+strconcat COMMAND user
+strconcat COMMAND ' /passwd="'
+strconcat COMMAND pass
+strconcat COMMAND '"'
+connect COMMAND
+
+;自动载入keymap文件
+loadkeymap 'KEYBOARD.CNF'
+
+;等待服务器的命令提示符（有可能是'%' '$' '#' '>'）
+wait '#'
+
+;自定义登录后的发行command
+sendln 'source /lch/workspace/bashrc/.bashrc-personal'
+wait '%' '#'
+
+end

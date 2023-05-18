@@ -1,21 +1,28 @@
 scriptencoding utf-8
 ".vimrc
 
-" When started as "evim", evim.vim will already have done these settings, bail
-" out.
+" When started as "evim", evim.vim will already have done these settings, bail out.
 if v:progname =~? "evim"
   finish
 endif
 
-" Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
+set nocompatible                         " 去除vi一致性
 
+" 8.0版本之后才导入defaults.vim
+if (v:version > 799)
+  source $VIMRUNTIME/defaults.vim
+endif
+
+"-----------------------------------------------"
+"               开始设置                        "
+"-----------------------------------------------"
+filetype off                             " 关闭文件类型检测，因为在这里开启之后，下面的[augroup filetypedetect]不会生效
+filetype plugin indent off
 "-----------------------------------------------"
 "               基础设置                        "
 "-----------------------------------------------"
 let &t_ut=''                             " 调整终端和vim颜色
 set modelines=0                          " 禁用模式行（安全措施）
-filetype on                              " 开启文件类型检测
 syntax enable
 syntax on                                " 语法高亮
 "colorscheme desert                       " 设置颜色主题
@@ -72,9 +79,7 @@ set formatoptions+=B                     " 合并两行中文时，不在中间�
 "-----------------------------------------------"
 "               特殊符号设置                    "
 "-----------------------------------------------"
-"特殊符号确认命令
-":dig
-":help digraphs-use
+"特殊符号确认命令 :dig :help digraphs-use
 "tab：tab键，要指定2个字符
 "trail：换行符后面的空格
 "eol：换行符（end of line）
@@ -94,18 +99,11 @@ elseif has('win32unix')
   set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 else
   " 其他环境（包含linux服务器，WSL）
-  set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
-endif
-
-"-----------------------------------------------"
-"               颜色设置                        "
-"-----------------------------------------------"
-let scriptPath = expand("<sfile>:p:h")
-if has('gui_running')
-else
-  "exec 'source' scriptPath . '/vim-color-16-rc.vim'
-  "exec 'source' scriptPath . '/vim-color-256-rc.vim'
-  exec 'source' scriptPath . '/vim-color-256-rc-light.vim'
+  if (v:version > 799)
+    set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
+  else
+    set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,eol:$
+  endif
 endif
 
 "-----------------------------------------------"
@@ -116,41 +114,134 @@ endif
 "set termguicolors                        " 启用终端真色
 "set cursorcolumn                         " 高亮显示当前列
 "set fdm=marker                           " 设置折叠方式
-"set nocompatible                         " 去除vi一致性，关闭所有扩展的功能，尽量模拟 vi 的行为
 
 "-----------------------------------------------"
 "               文件关联                        "
 "-----------------------------------------------"
 augroup filetypedetect
-  "PC
-  au BufNewFile,BufRead *.pc              setf c
+  autocmd! BufRead,BufNewFile *.pc     setfiletype c
 augroup END
 
 "-----------------------------------------------"
 "               设置状态栏                      "
 "-----------------------------------------------"
-" %F 完整文件路径名
-" %m 当前缓冲被修改标记
-" %r 当前缓冲只读标记
-" %h 帮助缓冲标记
-" %w 预览缓冲标记
-" %Y 文件类型
-" %b ASCII值
-" %B 十六进制值
-" %l 行数
-" %v 列数
-" %p 当前行数占总行数的的百分比
-" %L 总行数
 " %{...} 评估表达式的值，并用值代替
 " %{"[fenc=".(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"")."]"} 显示文件编码
 " %{&ff} 显示文件类型
-set statusline=%F%m%r%h%w%=\ 
-set statusline+=\ FMT=%{&ff}\ \|\ 
-set statusline+=TYPE=%Y\ \|\ 
-set statusline+=CODE=%{\"\".(\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"\"}\ 
-set statusline+=[%l:%v]\ 
-set statusline+=%p%%\ \|\ 
-set statusline+=%LL\ 
+"更多请看[:h statusline]
+"set statusline=%F%m%r%h%w%=\ 
+"set statusline+=\ FMT=%{&ff}\ \|\ 
+"set statusline+=TYPE=%Y\ \|\ 
+"set statusline+=CODE=%{\"\".(\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"\"}\ 
+"set statusline+=[%l:%v]\ 
+"set statusline+=%p%%\ \|\ 
+"set statusline+=%LL\ 
+"-----------------------------------------------
+" 设置仿照lightlint
+function! Statusline()
+  let l:show_mode_map={
+      \ 'n'  : 'NORMAL',
+      \ 'i'  : 'INSERT',
+      \ 'R'  : 'REPLACE',
+      \ 'v'  : 'VISUAL',
+      \ 'V'  : 'V-LINE',
+      \ "\<C-v>"  : 'V-BLOCK',
+      \ 'c'  : 'COMMAND',
+      \ 's'  : 'SELECT',
+      \ 'S'  : 'S-LINE',
+      \ "\<C-s>"  : 'S-BLOCK',
+      \ 't'  : 'TERMINAL'
+      \}
+  let l:currentMode = mode()
+  let l:showMode = show_mode_map[currentMode]
+  let l:resultStr = ''                              " 初始化
+  let l:resultStr .= '%1* ' . showMode . ' '        " 显示当前编辑模式，高亮为用户组1
+  let l:resultStr .= '%2* %t'                       " 显示当前文件(t)，高亮为用户组2
+  let l:resultStr .= '%3* %m%r%h%w %*%='            " 显示当前文件标记(mrhw)，高亮为用户组3，之后用=开始右对齐
+  let l:resultStr .= '%* %{&ff} | %{"".(""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"").""} | %Y '        " 显示换行符，编码，文件类型，高亮为默认（ LF | utf-8 | fomart ）
+  let l:resultStr .= '%2* [%l:%v] '                 " 显示当前行，列，高亮为用户组2
+  let l:resultStr .= '%1* %p%% %LL '                " 显示百分比，总行数，高亮为用户组4
+  return resultStr
+endfunction
+set statusline=%!Statusline()
+
+" 模式变换时的函数
+function! RestUserColor(pmode)
+  if a:pmode == 'ModeChanged'
+    let l:currentMode = mode()
+    if (currentMode == 'i')                "插入模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
+    elseif (currentMode == 'n')            "普通模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+    elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>")      "可视模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000000 guibg=#00ff87
+    elseif (currentMode == 'R')            "替换模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=160 gui=bold guifg=#ffffff guibg=#d70000
+    elseif (currentMode == 'c' || currentMode == '!')       "命令模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=201 gui=bold guifg=#ffffff guibg=#ff00ff
+    elseif (currentMode == 's' || currentMode == 'S' || currentMode == "\<C-s>")      "选择模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=178 gui=bold guifg=#000000 guibg=#d7af00
+    elseif (currentMode == 't')            "终端模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=16 gui=bold guifg=#ffffff guibg=#000000
+    endif
+  elseif a:pmode == 'InsertEnter'
+    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
+  elseif a:pmode == 'InsertLeave'
+    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+  endif
+endfunction
+
+" 添加模式变换时的自动命令
+augroup lchgroup
+  autocmd!
+  if exists("##ModeChanged")
+    "存在ModeChanged自动命令
+    autocmd ModeChanged *:* call RestUserColor('ModeChanged')
+  else
+    "不存在ModeChanged自动命令
+    autocmd InsertEnter * call RestUserColor('InsertEnter')
+    autocmd InsertLeave * call RestUserColor('InsertLeave')
+  endif
+augroup END
+
+hi StatuslineNC cterm=reverse gui=reverse 
+hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+hi User2        term=none cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
+hi User3        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffff00 guibg=#606060
+
+"-----------------------------------------------"
+"               设置tab                         "
+"-----------------------------------------------"
+" 设置结果为[3]file.txt [+]
+function! Tabline()
+  let resultStr = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let buflist = tabpagebuflist(tab)
+    let bufnr = buflist[winnr - 1]
+    let bufname = bufname(bufnr)
+    let bufmodified = getbufvar(bufnr, "&mod")
+
+    let resultStr .= '%' . tab . 'T'
+    let resultStr .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    "let resultStr .= ' ' . tab .':'
+    let resultStr .= ' [' . tab .']'
+    "let resultStr .= (bufname != '' ? '['. fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
+    let resultStr .= (bufname != '' ? ''. fnamemodify(bufname, ':t') . ' ' : '[NoName] ')
+
+    if bufmodified
+      let resultStr .= '[+] '
+    endif
+  endfor
+
+  let resultStr .= '%#TabLineFill#'
+  if (exists("g:tablineclosebutton"))
+    let resultStr .= '%=%999XX'
+  endif
+  return resultStr
+endfunction
+set tabline=%!Tabline()
 
 "-----------------------------------------------"
 "               设置netrw                       "
@@ -176,6 +267,17 @@ let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在�
 "augroup END
 
 nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
+
+"-----------------------------------------------"
+"               颜色设置                        "
+"-----------------------------------------------"
+let scriptPath = expand("<sfile>:p:h")
+if has('gui_running')
+else
+  "exec 'source' scriptPath . '/vim-color-16-rc.vim'
+  exec 'source' scriptPath . '/vim-color-256-rc.vim'
+  "exec 'source' scriptPath . '/vim-color-256-rc-light.vim'
+endif
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
@@ -209,20 +311,26 @@ vnoremap <Leader>y "cy
 nnoremap <Leader>p "cp
 nnoremap <Leader>P "cP
 
-""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------"
+"               其他设置                        "
+"-----------------------------------------------"
 
-"载入韦易笑做的代码补全系统
-"https://zhuanlan.zhihu.com/p/349271041
-"https://github.com/skywind3000/vim-auto-popmenu
-"从github上下载apc.vim，放到~/apc.vim
-exec 'source' scriptPath . '/apc.vim'
-"source ~/apc.vim
-"Plug 'skywind3000/vim-auto-popmenu'
-" 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
-let g:apc_enable_ft = {'*':1}
-" 设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
-set cpt=.,k,w,b
-" 不要自动选中第一个选项。
-set completeopt=menu,menuone,noselect
-" 禁止在下方显示一些啰嗦的提示
-set shortmess+=c
+if (v:version > 799)
+  "载入韦易笑做的代码补全系统
+  exec 'source' scriptPath . '/apc.vim'
+  "Plug 'skywind3000/vim-auto-popmenu'
+  " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
+  let g:apc_enable_ft = {'*':1}
+  " 设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
+  set cpt=.,k,w,b
+  " 不要自动选中第一个选项。
+  set completeopt=menu,menuone,noselect
+  " 禁止在下方显示一些啰嗦的提示
+  set shortmess+=c
+endif
+
+"-----------------------------------------------"
+"               结束设置                        "
+"-----------------------------------------------"
+filetype on                              " 开启文件类型检测
+filetype plugin indent on

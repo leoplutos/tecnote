@@ -520,6 +520,27 @@ apt install --assume-yes vim
 ```
 安装完成之后再利用代码检查一次，出现“Huge version without GUI”即可
 
+## vim 详细模式
+使用“详细模式”来了解 Vim 在做什么。你可以用详细模式启动 Vim：
+```bash
+cd ~
+vim -V9 vimlog.txt
+```
+
+这echo说明了 Vim 正在做什么（9表示冗长程度）。
+
+可以使用
+```
+:messages
+```
+检查输出，但使用该选项将输出写入文件通常很有用。这是为单个操作执行此操作的示例：
+
+```
+:set verbose=9
+:set verbosefile=/tmp/output.txt
+:verbose {some action}
+```
+
 # 更多
 * [VIM CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt)
 * [VimScript CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/vimscript.md)

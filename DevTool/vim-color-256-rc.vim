@@ -14,7 +14,8 @@ hi NonText      term=none cterm=none ctermfg=238 gui=none guifg=#444444
 "SpecialKey    : TAB符（深灰色）
 hi SpecialKey   term=none cterm=none ctermfg=238 gui=none guifg=#444444
 "StatusLine    : 底部状态栏（白底黑字粗体，因为设定了reverse，所以gb和fb要反过来）
-hi StatusLine   term=none,reverse cterm=none,reverse ctermfg=15 ctermbg=0 gui=none,reverse guifg=#4d5057 guibg=#f0c674
+"hi StatusLine   term=none,reverse cterm=none,reverse ctermfg=238 ctermbg=83 gui=none,reverse guifg=#4d5057 guibg=#f0c674
+hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=white ctermbg=black gui=bold,reverse guifg=white guibg=black
 "TabLineSel    : 上部TAB栏（蓝底黄字粗体）
 hi TabLineSel   term=bold cterm=bold ctermfg=11 ctermbg=27 gui=bold guifg=#ffff00 guibg=#005fff
 
@@ -38,11 +39,11 @@ hi Special      term=none cterm=none ctermfg=201 gui=none guifg=#ff00ff
 "Search     : 搜索高亮（黄底黑字）
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=11 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
-"CursorLine : 光标所在行（灰底）
-hi CursorLine   term=underline ctermbg=66 guibg=#5f8787
-"CursorLine : 光标（黄字）
+"CursorLine : 光标所在行
+hi CursorLine   term=underline cterm=underline ctermbg=16 gui=underline guibg=#1d1f21
+"Cursor     : 光标（黄字）
 "hi Cursor       term=underline cterm=underline ctermfg=Yellow gui=underline guifg=Yellow
-"CursorLine : 光标所在行（灰底黑字）
+"cursorcolumn : 光标所在列（灰底黑字）
 "hi cursorcolumn term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
 "LineNr     : 行号
 hi LineNr       term=none cterm=none ctermfg=219 gui=none guifg=#ffafff
