@@ -8,7 +8,8 @@ VSCODE_HOME=/d/Tools/WorkTool/Text/VSCode-win32-x64-1.77.1
 CMAKE_HOME=/d/Tools/WorkTool/C/cmake-3.26.1-windows-x86_64/bin
 NINJA_HOME=/d/Tools/WorkTool/C/ninja-win
 GVIM_HOME=/d/Tools/WorkTool/Text/vim90
-PATH=$PATH:$MINGW_HOME:$RUST_HOME:$JAVA_HOME:$PYTHON_HOME:$VSCODE_HOME:$CMAKE_HOME:$NINJA_HOME:$GVIM_HOME
+CTAGS_HOME=/d/Tools/WorkTool/C/ctags_6.0_x64
+PATH=$PATH:$MINGW_HOME:$RUST_HOME:$JAVA_HOME:$PYTHON_HOME:$VSCODE_HOME:$CMAKE_HOME:$NINJA_HOME:$GVIM_HOME:$CTAGS_HOME
 export PATH
 
 #export CDPATH=.:/d/WorkSpace:/d/Tools

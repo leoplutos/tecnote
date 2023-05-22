@@ -34,17 +34,15 @@ hi Type         term=bold cterm=bold ctermfg=202 gui=bold guifg=#ff5f00
 "Special    : 特殊符号，通常是类似字符串中的“\n”“%s”(深紫红色)
 hi Special      term=none cterm=none ctermfg=201 gui=none guifg=#ff00ff
 "Underlined : 文本下划线。
-"Error      : 显示编程语言错误的文本。
+"hi Underlined   term=underline cterm=underline ctermfg=21 gui=underline guifg=#0000ff
 
 "Search     : 搜索高亮（黄底黑字）
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=11 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
-"CursorLine : 光标所在行
-hi CursorLine   term=underline cterm=underline ctermbg=16 gui=underline guibg=#1d1f21
-"Cursor     : 光标（黄字）
-"hi Cursor       term=underline cterm=underline ctermfg=Yellow gui=underline guifg=Yellow
-"cursorcolumn : 光标所在列（灰底黑字）
-"hi cursorcolumn term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
+"Cursor：光标，CursorLine : 光标所在行，CursorColumn: 光标所在列
+hi Cursor       term=reverse ctermfg=16 ctermbg=231 guifg=#000000 guibg=#F8F8F0
+hi CursorLine   term=reverse ctermbg=234 guibg=#121212
+hi CursorColumn term=reverse ctermbg=234 guibg=#121212
 "LineNr     : 行号
 hi LineNr       term=none cterm=none ctermfg=219 gui=none guifg=#ffafff
 "LineNr     : 当前行号
@@ -54,7 +52,8 @@ hi ErrorMsg     term=bold cterm=bold ctermfg=White ctermbg=196 gui=bold guifg=Wh
 hi MoreMsg      term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 hi ModeMsg      term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 hi Question     term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
-hi Visual       term=reverse ctermfg=16 ctermbg=250 guifg=#000000 guibg=#bcbcbc
+"hi Visual       term=reverse ctermfg=16 ctermbg=250 guifg=#000000 guibg=#bcbcbc
+hi Visual       term=reverse ctermbg=234 guibg=#080808
 hi WarningMsg   term=bold cterm=bold ctermfg=226 gui=bold guifg=#ffff00
 hi Ignore       ctermfg=237 guifg=bg
 hi Error        term=reverse ctermfg=White ctermbg=196 guifg=White guibg=Red

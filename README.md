@@ -38,6 +38,7 @@
 * [Vim-vimrc](DevTool/Vim-vimrc_zh_CN.md)
 * [Vim-netrw](DevTool/Vim-netrw_zh_CN.md)
 * [Gvim](DevTool/Gvim_zh_CN.md)
+* [Vim-ctags](DevTool/Vim-ctags_zh_CN.md)
 * [Vim调试：termdebug](DevTool/Vim_termdebug_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
@@ -46,5 +47,6 @@
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)
+* [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 * [开发者书籍 - Open Developer Books](https://odb.lcjuves.com/)

@@ -1,0 +1,5 @@
+--append=yes
+--recurse=yes
+--langmap=C:+.pc
+--c-kinds=defghlmstuvxzLD
+--output-format=e-ctags

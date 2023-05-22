@@ -8,7 +8,7 @@ scriptencoding utf-8
 ":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
 set background=light
 
-hi Normal      term=none cterm=none ctermfg=0 ctermbg=255 gui=none guifg=black guibg=#fffbf0
+hi Normal      term=none cterm=none ctermfg=0 ctermbg=255 gui=none guifg=#000000 guibg=#fffbf0
 "NonText       : 换行符（深灰色）
 hi NonText      term=none cterm=none ctermfg=249 gui=none guifg=#b2b2b2
 "SpecialKey    : TAB符（深灰色）
@@ -34,17 +34,15 @@ hi Type         term=bold cterm=bold ctermfg=58 gui=bold guifg=#5f5f00
 "Special    : 特殊符号，通常是类似字符串中的“\n”“%s”(蓝色)
 hi Special      term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
 "Underlined : 文本下划线。
-"Error      : 显示编程语言错误的文本。
+"hi Underlined   term=underline cterm=underline ctermfg=21 gui=underline guifg=#0000ff
 
 "Search     : 搜索高亮（黄底黑字）
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=226 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
-"CursorLine : 光标所在行
-hi CursorLine   term=underline cterm=underline ctermbg=255 gui=underline guibg=#fffbf0
-"CursorLine : 光标（黄字）
-"hi Cursor       term=underline cterm=underline ctermfg=Yellow gui=underline guifg=Yellow
-"CursorLine : 光标所在行（灰底黑字）
-"hi cursorcolumn term=underline cterm=underline ctermfg=black ctermbg=grey gui=underline guifg=black guibg=grey
+"Cursor：光标，CursorLine : 光标所在行，CursorColumn: 光标所在列
+"hi Cursor      guifg=bg guibg=fg
+hi CursorLine   term=reverse ctermbg=251 guibg=#c6c6c6
+hi CursorColumn term=reverse ctermbg=251 guibg=#c6c6c6
 "LineNr     : 行号
 hi LineNr       term=none cterm=none ctermfg=52 gui=none guifg=#5f0000
 "LineNr     : 当前行号
@@ -54,7 +52,8 @@ hi ErrorMsg     term=bold cterm=bold ctermfg=White ctermbg=196 gui=bold guifg=Wh
 hi MoreMsg      term=bold cterm=bold ctermfg=16 ctermbg=231 gui=bold guifg=#000000 guibg=#ffffff
 hi ModeMsg      term=bold cterm=bold ctermfg=16 ctermbg=231 gui=bold guifg=#000000 guibg=#ffffff
 hi Question     term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000af
-hi Visual       term=reverse ctermfg=16 ctermbg=252 guifg=#000000 guibg=#d0d0d0
+"hi Visual       term=reverse ctermfg=16 ctermbg=252 guifg=#000000 guibg=#d0d0d0
+hi Visual       term=reverse ctermbg=219 guibg=#ffafff
 hi WarningMsg   term=bold cterm=bold ctermfg=0 ctermbg=226 guifg=Black guibg=Yellow
 "hi Ignore       ctermfg=237 guifg=bg
 hi Error        term=reverse ctermfg=White ctermbg=196 guifg=White guibg=Red

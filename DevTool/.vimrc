@@ -142,18 +142,25 @@ function! Statusline()
   let l:show_mode_map={
       \ 'n'  : 'NORMAL',
       \ 'i'  : 'INSERT',
+      \ 'r'  : 'CONFIRM',
       \ 'R'  : 'REPLACE',
       \ 'v'  : 'VISUAL',
       \ 'V'  : 'V-LINE',
       \ "\<C-v>"  : 'V-BLOCK',
       \ 'c'  : 'COMMAND',
+      \ '!'  : 'COMMAND',
       \ 's'  : 'SELECT',
       \ 'S'  : 'S-LINE',
       \ "\<C-s>"  : 'S-BLOCK',
       \ 't'  : 'TERMINAL'
       \}
   let l:currentMode = mode()
-  let l:showMode = show_mode_map[currentMode]
+  let l:showMode = ''
+  if (has_key(show_mode_map, currentMode))
+    let l:showMode .= show_mode_map[currentMode]
+  else
+    let l:showMode .= 'NORMAL'
+  endif
   let l:resultStr = ''                              " 初始化
   let l:resultStr .= '%1* ' . showMode . ' '        " 显示当前编辑模式，高亮为用户组1
   let l:resultStr .= '%2* %t'                       " 显示当前文件(t)，高亮为用户组2
@@ -173,7 +180,7 @@ function! RestUserColor(pmode)
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
     elseif (currentMode == 'n')            "普通模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
-    elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>")      "可视模式配色
+    elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>" || currentMode == "\<C-vs>")      "可视模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000000 guibg=#00ff87
     elseif (currentMode == 'R')            "替换模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=160 gui=bold guifg=#ffffff guibg=#d70000
@@ -183,6 +190,10 @@ function! RestUserColor(pmode)
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=178 gui=bold guifg=#000000 guibg=#d7af00
     elseif (currentMode == 't')            "终端模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=16 gui=bold guifg=#ffffff guibg=#000000
+    elseif (currentMode == 'r')            "确认模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000000 guibg=#d787ff
+    else            "默认普通模式配色
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
     endif
   elseif a:pmode == 'InsertEnter'
     hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
@@ -310,6 +321,11 @@ vnoremap <Leader>y "cy
 "<Leader>p  从字母寄存器c中粘贴内容
 nnoremap <Leader>p "cp
 nnoremap <Leader>P "cP
+
+"-----------------------------------------------"
+"               设置ctags                       "
+"-----------------------------------------------"
+set tags=./.tags;,.tags
 
 "-----------------------------------------------"
 "               其他设置                        "
