@@ -98,7 +98,7 @@ $HOME/.ctags.d/default.ctags
 | --append=yes               | 如果有tags文件则追加                                                                                                                    |
 | --recurse=yes              | 包含子文件夹(和-R相同)                                                                                                                  |
 | --langmap=C:+.pc           | 针对C语言追加.pc扩展名(.pc文件会作为C语言做成tags)                                                                                      |
-| --c-kinds=defghlmpstuvxzLD | 对象的选择内容的指定（可以用 ctags --list-kinds=C 确认）                                                                                |
+| --c-kinds=defghlmstuvxzLD  | 对象的选择内容的指定（可以用 ctags --list-kinds=C 确认）                                                                                |
 | --output-format=e-ctags    | 最新版 universal ctags 调用时需要加一个 --output-format=e-ctags，输出格式才和老的 exuberant ctags 兼容否则会有 windows 下路径名等小问题 |
 
 ## 在项目工程中使用ctags

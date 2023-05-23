@@ -31,15 +31,15 @@ set fileencoding=utf-8                   " 编码设置
 set fileencodings=utf-8,ucs-bom,shift-jis,cp932,euc-jp,gb18030,gbk,gb2312,cp936,utf-16,big5,latin1
                                          " 自动识别文件编码，依照fileencodings提供的编码列表尝试
 set number                               " 显示行号
-set smartindent                          " 智能缩进对齐
-set autoindent                           " 自动对齐
 set ruler                                " 显示光标所在位置的行号和列号，在右下角显示光标位置
 set nowrap                               " 不自动折行
-set smarttab                             " 根据文件中其他位置的缩进空格个数来决定一个tab是多少空格
 set tabstop=4                            " tab为4个空格
 set shiftwidth=4                         " 每一级缩进是4个空格
 set noexpandtab                          " 不将tab替换为相应数量空格         打开为set expandtab
 set softtabstop=4                        " 在编辑模式下按退格键的时候退回缩进的长度，配合expandtab时很有用
+set smarttab                             " 根据文件中其他位置的缩进空格个数来决定一个tab是多少空格
+"set smartindent                          " 智能缩进对齐（和autoindent开启一项即可，看个人喜好）
+set autoindent                           " 自动对齐
 set backspace=2                          " 设置 backspace可以删除任意字符，数值2同set backspace=indent,eol,start
 set mouse=a                              " 使用鼠标
 set mousehide                            " 输入时隐藏光标
@@ -49,6 +49,7 @@ set noswapfile                           " 不创建临时交换文件
 set nowritebackup                        " 编辑的时候不需要备份文件
 set autoread                             " 文件自动检测外部更改
 set showmatch                            " 显示匹配,当输入一个左括号时会匹配相应的那个右括号
+set matchtime=1                          " 显示括号时间，1秒
 set splitright                           " 设置左右分割窗口时，新窗口出现在右侧
 set splitbelow                           " 设置水平分割窗口时，新窗口出现在底部
 set laststatus=2                         " 显示状态行 2: 总是
@@ -57,7 +58,6 @@ set hlsearch                             " 搜索时高亮显示被找到的文�
 set incsearch                            " 搜索时在未完全输入完毕要检索的文本时就开始检索
 set ambiwidth=double                     " 防止特殊符号无法正常显示。解决中文标点显示的问题
 set sidescroll=10                        " 移动到看不见的字符时，自动向右滚动是个字符
-set sm!                                  " 高亮显示匹配括号
 set novisualbell                         " 不要闪烁
 set showcmd                              " 显示输入的命令
 set showtabline=2                        " 显示tab栏 2: 永远会
@@ -69,12 +69,19 @@ set nowrapscan                           " 禁止在搜索到文件两端时重�
 set t_Co=256                             " 设置Vim支持256色
 set showmode                             " 左下角显示如“—INSERT--”之类的状态栏
 set scrolloff=4                          " 垂直滚动时，光标保持在距顶部/底部 4 行的位置
+set sidescrolloff=8                      " 左右滚动时，光标保持在距左/右 8 列的位置
+set sidescroll=1                         " 左右滚动时，1个字符1个字符滚动
 set autochdir                            " 自动切换工作目录
 set wildmenu                             " 在命令模式下，底部操作指令按下 Tab 键自动补全。
+set showfulltag                          " 补全时，使用整行补全
+set wildoptions=tagfile                  " 开启tagfile的补全
 set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
 set ttimeoutlen=50
 set formatoptions+=m                     " UniCode大于255的文本，不必等到空格再这行
 set formatoptions+=B                     " 合并两行中文时，不在中间加空格
+
+let g:python_recommended_style = 0       " 不启用ftplugin/python.vim中的PEP8标准（启用设定修改值为1）
+let g:rust_recommended_style = 0         " 不启用ftplugin/rust.vim中的tab设定（启用设定修改值为1）
 
 "-----------------------------------------------"
 "               特殊符号设置                    "
@@ -296,12 +303,14 @@ endif
 let mapleader='\'                    " 设定前缀为 \
 noremap J 10j                        " 大写J，向下10行
 noremap K 10k                        " 大写K，向上10行
+nnoremap + <C-a>                     " +号，数字+1
+nnoremap - <C-x>                     " -号，数字-1
 " 窗口移动快捷键
-noremap <TAB>w <C-w>w                " tab+w：移动tab
-noremap <TAB><left> <C-w><left>      " tab+左：移动到左边tab
-noremap <TAB><right> <C-w><right>    " tab+右：移动到右边tab
-noremap <TAB><up> <C-w><up>          " tab+上：移动到上边tab
-noremap <TAB><down> <C-w><down>      " tab+下：移动到下边tab
+noremap <TAB>w <C-w>w                " tab+w：移动窗口
+noremap <TAB><left> <C-w><left>      " tab+左：移动到左边窗口
+noremap <TAB><right> <C-w><right>    " tab+右：移动到右边窗口
+noremap <TAB><up> <C-w><up>          " tab+上：移动到上边窗口
+noremap <TAB><down> <C-w><down>      " tab+下：移动到下边窗口
 " 使用方向键切换buffer
 noremap <Leader><left> :bp<CR>       " \+左：上一个buffer
 noremap <Leader><right> :bn<CR>      " \+右：下一个buffer
@@ -321,10 +330,54 @@ vnoremap <Leader>y "cy
 "<Leader>p  从字母寄存器c中粘贴内容
 nnoremap <Leader>p "cp
 nnoremap <Leader>P "cP
+" 设定文件只读模式切换：静默运行，快捷键 空格+s+空格
+nnoremap <silent> <SPACE>s<SPACE> :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
 
 "-----------------------------------------------"
 "               设置ctags                       "
 "-----------------------------------------------"
+function! Make_tags_gitdir()
+  " 执行[git rev-parse --show-toplevel]命令找到git的根目录
+  let l:toplevel = system('git rev-parse --show-toplevel')
+  if v:shell_error
+    echo 'failed: git root dir is not found'
+  endif
+  let l:toplevel = substitute(l:toplevel, '[\r\n]', '', 'g')
+
+  " 取得当前目录
+  let l:cache_pwd = ''
+  redir => l:cache_pwd
+    silent pwd
+  redir END
+  let l:cache_pwd = substitute(l:cache_pwd, '[\r\n]', '', 'g')
+
+  " 设定ctags参数
+  let l:opt = '--append=yes --recurse=yes --langmap=C:+.pc --c-kinds=defghlmstuvxzLD --output-format=e-ctags'
+  if &filetype ==# 'c'
+    let l:opt = l:opt.' --languages=C'
+  elseif &filetype !=# ''
+    let l:opt = l:opt.' --languages='.&filetype
+  endif
+
+  " 设定ctags文件名
+  "let l:tagfile = l:toplevel.'/.tags'
+  let l:tagfile = '.tags'
+
+  " 生成ctags文件
+  try
+    exe 'lcd '.l:toplevel
+    "call system('ctags --tag-relative --recurse --sort=yes --append=no '.l:opt.' -f '.l:tagfile.' '.l:toplevel) " 用绝对路径生成
+    call system('ctags '.l:opt.' -f '.l:tagfile)
+    echo 'done'
+  catch
+    echo 'error:' . v:exception
+  finally
+    exe 'lcd '.l:cache_pwd
+  endtry
+endfunction
+" 绑定运行函数快捷键 空格+tg
+nnoremap <SPACE>tg :call Make_tags_gitdir()
+
 set tags=./.tags;,.tags
 
 "-----------------------------------------------"
