@@ -19,6 +19,8 @@ export app=/d/WorkSpace/Rust/RustTest
 export bin=/d/WorkSpace/Rust/RustTest/target/debug
 export log=/d/WorkSpace/Rust/RustTest/log
 
+export COLORTERM=truecolor
+
 alias ll='ls -l --color=auto'
 alias lla='ls -al --color=auto'
 alias llt='ls -ltr --color=auto'

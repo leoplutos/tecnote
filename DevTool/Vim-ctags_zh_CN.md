@@ -12,6 +12,7 @@ Universal Ctags 是来自于 Exuberant-ctags 的分支，后者已经不再更�
 https://docs.ctags.io/en/latest/man/ctags.1.html
 
 ## 安装
+#### Windows平台
 Sakura Editor 2.4.0.0 之后的版本都会在安装文件里面自带 Universal Ctags ，
 在安装路径下会找到 ctags.exe
 如果不用 Sakura Editor 可以在下面的 github 网址下载  
@@ -25,6 +26,13 @@ export PATH
 ```
 然后重启 git-bash ，确认 ctags 版本
 ```bash
+ctags --version
+```
+
+#### Linux平台
+这里以Ubuntu举例
+```bash
+apt install universal-ctags
 ctags --version
 ```
 
@@ -106,6 +114,11 @@ $HOME/.ctags.d/default.ctags
 ```bash
 cd /d/path/to/yourPJ
 ctags -R --languages=C -f .tags
+```
+如果不使用设定文件，命令就会比较长
+```bash
+cd /path/to/yourPJ
+ctags -R --languages=C --append=yes --langmap=C:+.pc --c-kinds=defghlmstuvxzLD --output-format=e-ctags -f .tags
 ```
 
 ## 在vim中开启ctags跳转

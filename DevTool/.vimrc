@@ -66,7 +66,6 @@ set lazyredraw                           " 只在必要时刷新显示
 set ignorecase                           " 搜索时忽略大小写
 set smartcase                            " 智能搜索 - 搜索“test”会找到并突出显示 test 和 Test。搜索“Test”只突出显示或只找到 Test
 set nowrapscan                           " 禁止在搜索到文件两端时重新搜索（不循环搜索）
-set t_Co=256                             " 设置Vim支持256色
 set showmode                             " 左下角显示如“—INSERT--”之类的状态栏
 set scrolloff=4                          " 垂直滚动时，光标保持在距顶部/底部 4 行的位置
 set sidescrolloff=8                      " 左右滚动时，光标保持在距左/右 8 列的位置
@@ -79,12 +78,43 @@ set ttimeout                             " 让按 Esc 的生效更快速。通�
 set ttimeoutlen=50
 set formatoptions+=m                     " UniCode大于255的文本，不必等到空格再这行
 set formatoptions+=B                     " 合并两行中文时，不在中间加空格
+set t_Co=256                             " 设置Vim支持256色
+if (v:version > 799)
+  "从7.4.1830开始支持启用终端真彩色，可以让终端环境的Vim使用GUI的颜色定义，需要终端环境和环境内的组件（比如 tmux）都支持真彩色
+  set termguicolors
+endif
+"在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。
+"t_SI：插入模式开始，t_EI：插入或者替换模式结束，t_SR：替换模式开始
+if has('gui_running')
+  " Gvim 环境：在[.gvimrc]中设定
+elseif has('win32unix')
+  " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[1 q"
+  let &t_SR = "\e[3 q"
+else
+  if empty($TMUX)
+    " 其他环境（包含linux服务器，WSL）
+    let &t_SI = "\e[5 q"
+    let &t_EI = "\e[1 q"
+    if (v:version > 799)
+      let &t_SR = "\e[3 q"
+    endif
+  else
+    " Tmux下
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    if (v:version > 799)
+      let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    endif
+  endif
+endif
 
 let g:python_recommended_style = 0       " 不启用ftplugin/python.vim中的PEP8标准（启用设定修改值为1）
 let g:rust_recommended_style = 0         " 不启用ftplugin/rust.vim中的tab设定（启用设定修改值为1）
 
 "-----------------------------------------------"
-"               特殊符号设置                    "
+"               特殊符号设置                      "
 "-----------------------------------------------"
 "特殊符号确认命令 :dig :help digraphs-use
 "tab：tab键，要指定2个字符
@@ -96,13 +126,12 @@ let g:rust_recommended_style = 0         " 不启用ftplugin/rust.vim中的tab�
 "space：可见空格
 set list
 if has('gui_running')
-  " Gvim 环境
-  set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:⏎
+  " Gvim 环境：在[.gvimrc]中设定
 elseif has('win32')
   " Windows 环境
   set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 elseif has('win32unix')
-  " Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
+  " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
   set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 else
   " 其他环境（包含linux服务器，WSL）
@@ -118,9 +147,9 @@ endif
 "-----------------------------------------------"
 "set relativenumber                       " 显示相对行号
 "set wrap                                 " 自动折行
-"set termguicolors                        " 启用终端真色
 "set cursorcolumn                         " 高亮显示当前列
 "set fdm=marker                           " 设置折叠方式
+"set virtualedit=all                      " 允许光标放到当前行末尾之后
 
 "-----------------------------------------------"
 "               文件关联                        "
@@ -220,6 +249,9 @@ augroup lchgroup
     autocmd InsertEnter * call RestUserColor('InsertEnter')
     autocmd InsertLeave * call RestUserColor('InsertLeave')
   endif
+  "插入模式中关闭当前行高亮
+  "autocmd InsertEnter,WinLeave * set nocursorline
+  "autocmd InsertLeave,WinEnter * set cursorline
 augroup END
 
 hi StatuslineNC cterm=reverse gui=reverse 
@@ -291,6 +323,7 @@ nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
 "-----------------------------------------------"
 let scriptPath = expand("<sfile>:p:h")
 if has('gui_running')
+  " Gvim 环境：在[.gvimrc]中设定
 else
   "exec 'source' scriptPath . '/vim-color-16-rc.vim'
   exec 'source' scriptPath . '/vim-color-256-rc.vim'
@@ -330,6 +363,8 @@ vnoremap <Leader>y "cy
 "<Leader>p  从字母寄存器c中粘贴内容
 nnoremap <Leader>p "cp
 nnoremap <Leader>P "cP
+" 重新绘制当前的屏幕，并且取消字符的高亮，快捷键 \l
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " 设定文件只读模式切换：静默运行，快捷键 空格+s+空格
 nnoremap <silent> <SPACE>s<SPACE> :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
 

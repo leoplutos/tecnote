@@ -5,6 +5,7 @@
 * [Linux命令](Linux/Linux_zh_CN.md)
 * [Linux用户做成](Linux/Linux-adduser_zh_CN.md)
 * [Linux自定义相关](Linux/Linux-customize_zh_CN.md)
+* [终端颜色](Linux/Terminal-color_zh_CN.md)
 
 ## Git命令
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
@@ -28,6 +29,7 @@
 
 ## C相关
 * [C相关](C/C_zh_CN.md)
+* [gdb相关](C/Gdb_zh_CN.md)
 * [libui](C/C-libui_zh_CN.md)
 
 ## Java相关

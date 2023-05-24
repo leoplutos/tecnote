@@ -17,6 +17,7 @@ hi SpecialKey   term=none cterm=none ctermfg=249 gui=none guifg=#b2b2b2
 "hi StatusLine   term=none,reverse cterm=none,reverse ctermfg=23 ctermbg=255 gui=none,reverse guifg=#586e75 guibg=#eee8d5
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=249 ctermbg=17 gui=bold,reverse guifg=#b2b2b2 guibg=#00005f
 "TabLineSel    : 上部TAB栏（蓝底黄字粗体）
+hi TabLine      term=underline cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
 hi TabLineSel   term=bold cterm=bold ctermfg=226 ctermbg=27 gui=bold guifg=#ffff00 guibg=#005fff
 
 "Comment    : 注释(灰色)
@@ -40,7 +41,8 @@ hi Special      term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=226 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
 "Cursor：光标，CursorLine : 光标所在行，CursorColumn: 光标所在列
-"hi Cursor      guifg=bg guibg=fg
+hi Cursor       term=reverse ctermfg=231 ctermbg=16 guifg=#F8F8F0 guibg=#1d1f21
+hi iCursor      term=reverse ctermfg=231 ctermbg=52 guifg=#F8F8F0 guibg=#5f0000
 hi CursorLine   term=reverse ctermbg=251 guibg=#c6c6c6
 hi CursorColumn term=reverse ctermbg=251 guibg=#c6c6c6
 "LineNr     : 行号
