@@ -17,7 +17,7 @@ hi SpecialKey   term=none cterm=none ctermfg=238 gui=none guifg=#444444
 "hi StatusLine   term=none,reverse cterm=none,reverse ctermfg=238 ctermbg=83 gui=none,reverse guifg=#4d5057 guibg=#f0c674
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=white ctermbg=black gui=bold,reverse guifg=white guibg=black
 "TabLineSel    : 上部TAB栏（蓝底黄字粗体）
-hi TabLine      term=underline cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
+hi TabLine      term=underline cterm=reverse ctermfg=59 ctermbg=250 gui=reverse guifg=#4d5057 guibg=#c5c8c6
 hi TabLineSel   term=bold cterm=bold ctermfg=11 ctermbg=27 gui=bold guifg=#ffff00 guibg=#005fff
 
 "Comment    : 注释(灰色)
@@ -59,3 +59,14 @@ hi Visual       term=reverse ctermbg=234 guibg=#080808
 hi WarningMsg   term=bold cterm=bold ctermfg=226 gui=bold guifg=#ffff00
 hi Ignore       ctermfg=237 guifg=bg
 hi Error        term=reverse ctermfg=White ctermbg=196 guifg=White guibg=Red
+"弹出菜单
+hi Pmenu        term=bold ctermfg=White ctermbg=13 guifg=#ffffff guibg=#ff00ff
+hi PmenuSel     term=bold ctermfg=White ctermfg=8 guifg=#ffffff guibg=#808080
+hi VertSplit    term=reverse ctermfg=59 ctermbg=59 guifg=#4d5057 guibg=#4d5057
+hi DiffAdd      term=bold ctermbg=58 guibg=#4c4e39
+hi DiffChange   term=bold ctermbg=24 guibg=#2B5B77
+hi DiffDelete   term=bold ctermfg=16 ctermbg=167 gui=bold guifg=#1d1f21 guibg=#cc6666
+hi DiffText     term=reverse cterm=bold ctermfg=16 ctermbg=109 gui=bold guifg=#282a2e guibg=#81a2be
+hi Folded       term=standout ctermfg=245 ctermbg=16 guifg=#969896 guibg=#1d1f21
+hi FoldColumn   term=standout ctermfg=11 ctermbg=16 guifg=Cyan guibg=#1d1f21
+hi SignColumn   term=standout ctermfg=11 ctermbg=16 guifg=Cyan guibg=#1d1f21

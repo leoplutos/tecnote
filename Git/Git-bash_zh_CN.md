@@ -132,3 +132,17 @@ D:\Tools\WorkTool\Team\Git\usr\bin\mintty.exe ^
 REM 下面是另一种用法
 REM D:\Tool\Git\usr\bin\mintty.exe --loadconfig "%USERPROFILE%\minttyrc-light" --dir "%USERPROFILE%" --exec "/bin/bash" --login -i
 ```
+
+## mintty相关
+#### 笔者的设定文件
+* [.minttyrc](.minttyrc)   
+
+主页：  
+https://mintty.github.io/  
+手册：  
+https://mintty.github.io/mintty.1.html  
+使用技巧：  
+https://github.com/mintty/mintty/wiki/Tips  
+
+
+

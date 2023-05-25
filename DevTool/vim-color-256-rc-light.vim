@@ -59,3 +59,14 @@ hi Visual       term=reverse ctermbg=219 guibg=#ffafff
 hi WarningMsg   term=bold cterm=bold ctermfg=0 ctermbg=226 guifg=Black guibg=Yellow
 "hi Ignore       ctermfg=237 guifg=bg
 hi Error        term=reverse ctermfg=White ctermbg=196 guifg=White guibg=Red
+"弹出菜单
+hi Pmenu        term=bold ctermfg=White ctermbg=13 guifg=#ffffff guibg=#ff00ff
+hi PmenuSel     term=bold ctermfg=White ctermfg=8 guifg=#ffffff guibg=#808080
+hi VertSplit    term=reverse ctermfg=49 ctermbg=49 guifg=#00ffaf guibg=#00ffaf
+hi DiffAdd      term=bold ctermfg=71 ctermbg=251 guifg=#50a14f guibg=#d0d0d0
+hi DiffChange   term=bold ctermfg=94 ctermbg=251 guifg=#986801 guibg=#d0d0d0
+hi DiffDelete   term=bold ctermfg=166 ctermbg=251 gui=bold guifg=#e45649 guibg=#d0d0d0
+hi DiffText     term=reverse cterm=bold ctermfg=33 ctermbg=251 gui=bold guifg=#4078f2 guibg=#d0d0d0
+hi Folded       term=standout ctermfg=23 ctermbg=255 guifg=#494b53 guibg=#fafafa
+hi FoldColumn   term=standout ctermfg=145 ctermbg=254 guifg=#a0a1a7 guibg=#f0f0f0
+hi SignColumn   term=standout ctermfg=1 ctermbg=255 guifg=DarkBlue guibg=#fafafa

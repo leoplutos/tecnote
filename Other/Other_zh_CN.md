@@ -11,6 +11,9 @@
 * [RictyDiminished](https://github.com/edihbrandon/RictyDiminished)  
  Inconsolata 和 Circle M+ 1m 合成的日文字体
 
+* [Myrica](https://github.com/tomokuni/Myrica/blob/master/product/Myrica.md)  
+ Inconsolata 和 源真ゴシック(或者Mgen+) 合成的日文字体
+
 * [SourceHanSansHWSC](https://gitee.com/coderfei126/davids-hybird-fonts)  
  Inconsolata的中文合成字体  
  SourceHanSansHWSC-Ligconsolata-Regular（字体名为：SourceHanSansHWSC-Ligconsolata）字体不包含合字字符。  
@@ -59,6 +62,10 @@ RGB
 背景：0 0 0
 文字：191 191 191
 ```
+
+## 字体映射(Fontlink)
+
+* [通过字体映射 Fontlink 美化中文显示](https://zhuanlan.zhihu.com/p/205133009)
 
 ## 正则表达式
 

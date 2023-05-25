@@ -79,7 +79,7 @@ set ttimeoutlen=50
 set formatoptions+=m                     " UniCode大于255的文本，不必等到空格再这行
 set formatoptions+=B                     " 合并两行中文时，不在中间加空格
 set t_Co=256                             " 设置Vim支持256色
-if (v:version > 799)
+if (has("termguicolors"))
   "从7.4.1830开始支持启用终端真彩色，可以让终端环境的Vim使用GUI的颜色定义，需要终端环境和环境内的组件（比如 tmux）都支持真彩色
   set termguicolors
 endif

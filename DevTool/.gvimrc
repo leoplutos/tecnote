@@ -35,6 +35,7 @@ set rop=type:directx,renmode:4            " 开启Windows下DirectX，让字体�
 "set guioptions-=b
 "set guioptions-=e                        " 使用默认的tab样式，而不是系统的tab
 "set winaltkeys=no                        " 设置 alt 键不映射到菜单栏
+set shellslash                            " 使用/，不使用windows的\（在用netrw . 打开文件夹的时候特别有用）
 
 "在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。
 set guicursor=n-v:block-Cursor       "在普通和可视模式里，使用块光标和"Cursor"高亮组的颜色
