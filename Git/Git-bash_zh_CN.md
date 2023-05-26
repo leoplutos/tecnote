@@ -1,8 +1,16 @@
-# Git-bash使用
+# Git-bash-for-windows使用
 
 ## 前言
 git-bash是集成在MINGW64环境下的，而MINGW64用的默认终端是mintty。  
-\~/.minttyrc 是 mintty 的默认启动设定文件。下面记录一些使用git-bash的技巧。
+\~/.minttyrc 是 mintty 的默认启动设定文件。下面记录一些使用Git-bash-for-windows的技巧。
+
+## 下载绿色版
+打开下面网站：  
+https://git-scm.com/download/win  
+找到 Portable ("thumbdrive edition")  
+点击 64-bit Git for Windows Portable 下载  
+注意，扩展名不是.exe，是.7z.exe  
+下载好了以后双击.7z.exe会提示选择解压缩路径，选择一个路径解压缩即可。
 
 ## 快速路径
 git-bash.exe可以建立快捷方式，右键→属性→起始位置：粘贴一个路径后。用这个快捷方式启动git-bash就默认在这个路径下。

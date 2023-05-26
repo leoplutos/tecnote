@@ -2,35 +2,51 @@
 # .minttyrc - Configuration file for mintty terminal
 #
 
-#BoldAsFont=-1
-Font=Inconsolata
-FontHeight=14
+BoldAsFont=no
 Locale=C
 Charset=UTF-8
+Font=Inconsolata
+FontHeight=12
+Language=zh_CN
 CursorType=block
 Columns=120
 Rows=30
-Language=zh_CN
 MiddleClickAction=extend
 RightClickAction=paste
-
 CopyAsRTF=no
 PgUpDnScroll=yes
-FontWeight=400
+BoldAsColour=no
+CopyTab=yes
+RewrapOnResize=yes
 
 BackgroundColour=0,0,0
 ForegroundColour=191,191,191
 CursorColour=0,255,255
 
-HideMouse=on
+#Charwidth=unicode
+#内置的宽度属性，假设宽度不明确的字符是宽的。（对应于 xterm 资源cjkWidth:true。）
+Charwidth=ambig-wide
+
+#鼠标自动隐藏
+HideMouse=yes
+
 #TabBar=5
+#NewTabs=1
 #SessionGeomSync=3
-#备用字体，中日韩使用Font5,中文使用Font6
+
+#备用字体，中日韩使用Font5,中文使用Font6（版本>3.0.2）
 FontChoice=CJK:5;Han:6;
 Font5=MS Gothic
 Font6=新宋体
+#Font6=ＭＳ ゴシック
 
+#方案1
 #Ctrl + F1:输出clearb
 #Ctrl + F2:打开新tab
-#Ctrl + F3:输出date命令结果
-KeyFunctions=C+F1:"clearb";C+F2:new-tab-cwd;C+F3:`echo -n `date``;
+#Ctrl + F3:发行命令echo -n `date`
+#KeyFunctions=C+F1:"clearb";C+F2:new-tab-cwd;C+F3:`echo -n `date``;
+#方案2
+#Ctrl + F1:输出clearb
+#Ctrl + F2:输出gdb的dashboard命令-重定向代码
+#Ctrl + F3:输出gdb的dashboard命令-设定代码全屏显示
+KeyFunctions=C+F1:"clearb";C+F2:"dashboard source -output /dev/pts/x";C+F3:"dashboard source -style height 0";

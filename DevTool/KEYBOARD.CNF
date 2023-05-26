@@ -191,7 +191,12 @@ ScrollLock=70
 ;
 ;	Ctrl + F5 key: Executing a menu command
 ;User5=1087,3,50110
+
 [User keys]
+;Ctrl + 1:调用菜单50260清空buffer
+;Ctrl + 2:输出gdb的dashboard命令-重定向代码
+;Ctrl + 3:输出gdb的dashboard命令-设定代码全屏显示
 User1=1026,3,50260
-User2=1027,2,ttl/lchenv.ttl
-User3=1028,0,pwd
+;User2=1027,2,ttl/lchenv.ttl
+User2=1027,0,dashboard source -output /dev/pts/x
+User3=1028,0,dashboard source -style height 0

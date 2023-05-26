@@ -10,7 +10,7 @@
 ## Git命令
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
 * [Git命令](Git/Git_zh_CN.md)
-* [Git-bash](Git/Git-bash_zh_CN.md)
+* [Git-bash-for-windows](Git/Git-bash_zh_CN.md)
 * [Git-bash安装pacman](Git/Git-pacman_zh_CN.md)
 * [Git使用WinMerge作为difftool](Git/Git-difftool_zh_CN.md)
 
@@ -44,8 +44,12 @@
 * [Vim调试：termdebug](DevTool/Vim_termdebug_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
+* [WinSCP](DevTool/WinSCP_zh_CN.md)
 * [Windows Terminal](DevTool/Windows-Terminal_zh_CN.md)
 * [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
+
+## DB
+* [Postgresql](DB/Postgresql_zh_CN.md)
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)

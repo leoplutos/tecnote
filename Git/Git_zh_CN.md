@@ -1,4 +1,4 @@
-# Git
+# Git命令
 
 ## 前言
 **如果你是Git初学者的话，强烈建议去下面网站把关卡全部完成。**  
@@ -121,7 +121,37 @@ git config --global --list
 git config --local --list
 ```
 
+## 四.凭证存储模式
+使用Git 向远程仓库（例如：GitHub，gitee）提交代码 ，需要输入账号和密码。可能会遇到这样的情况密码输错一次，想修改，但是不知道去哪里修改。一直报错fatal: Authentication failed for 又不弹出用户名和密码输入框 。
+你需要了解Git是如何保存账号密码的，也就是凭据管理。
+### Git凭据管理的三种方式
+Git的凭据存储有cache、store、manager三种方式  
+Git 中有三种级别system 、global 、local ，可以针对不同的级别设置不同的凭据存储方式
+### 查询当前凭证存储模式
+```git
+git config credential.helper
+```
+global 、local 如果不设置，默认是没有的
+### 修改指定级别的凭据管理方式
+```git
+git config --system credential.helper manager
+```
+
+### 凭据管理模式
+相信你现在有几个疑问，我平时输入账号密码，用的是哪种？账号密码保存在哪里？如何进行修改？下面一一介绍
+#### 1.manager
+若安装Git时安装了GitGUI，自动会在system级别中设置credential.helper为manager。
+
+git-credential-manager.exe和 git-credential-wincred.exe 都是将凭据存储在系统的凭据管理器中，只不过前者是有图形界面，后者没有图形界面，需要在命令行中输入密码
+
+**凭据保存的位置**  
+在控制面板 → 用户账户 → 凭据管理器，可以看到对应的git账号凭据管理，可以修改或者删除。
+删除后，再次pull或者push，会重新输入密码
+#### 2.store
+如果你在输入账号密码的时候，关闭了manager 方式的输入框，就会要求你在命令行中输入账号
+#### 3.cache
+将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且默认在15分钟后从内存中清除。
+
 # 更多
 * [GIT CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/git.txt)
 * [团队项目开发的问题和解决方案](https://github.com/jackfrued/Python-100-Days/blob/master/Day91-100/91.%E5%9B%A2%E9%98%9F%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)
-

@@ -7,8 +7,13 @@
 	ui = true
 [guitool "执行pull"]
 	cmd = git pull
+[guitool "执行pull--rebase"]
+	cmd = git pull --rebase
 [core]
 	autoCRLF = false
+
+#[credential "helperselector"]
+#	selected = manager
 
 [diff]
     tool = winmerge
