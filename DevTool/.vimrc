@@ -338,6 +338,10 @@ noremap J 10j                        " 大写J，向下10行
 noremap K 10k                        " 大写K，向上10行
 nnoremap + <C-a>                     " +号，数字+1
 nnoremap - <C-x>                     " -号，数字-1
+noremap n nzz                        " 在画面中央表示搜索结果
+noremap N Nzz
+noremap * *zz
+noremap # #zz
 " 窗口移动快捷键
 noremap <TAB>w <C-w>w                " tab+w：移动窗口
 noremap <TAB><left> <C-w><left>      " tab+左：移动到左边窗口

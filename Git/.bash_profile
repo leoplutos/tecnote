@@ -4,7 +4,7 @@ MINGW_HOME=/d/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin
 RUST_HOME=/d/Tools/WorkTool/Rust/Rust_gnu_1.69/bin
 JAVA_HOME=/d/Tools/WorkTool/Java/jdk17.0.6/bin
 PYTHON_HOME=/d/Tools/WorkTool/Python/Python38-32
-VSCODE_HOME=/d/Tools/WorkTool/Text/VSCode-win32-x64-1.77.1
+VSCODE_HOME=/d/Tools/WorkTool/Text/VSCode-win32-x64-1.78.2
 CMAKE_HOME=/d/Tools/WorkTool/C/cmake-3.26.1-windows-x86_64/bin
 NINJA_HOME=/d/Tools/WorkTool/C/ninja-win
 GVIM_HOME=/d/Tools/WorkTool/Text/vim90
@@ -32,3 +32,7 @@ alias python='winpty python'
 #在mintty下删除屏幕buffer
 alias clearb='echo -e "\ec\e[3J"'
 alias tree='winpty tree.com'
+
+# ssh服务器
+alias ssh4='ssh -t user@1.2.3.4 -p 22 "/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal"'
+alias ssho4='ssh -oHostKeyAlgorithms=+ssh-dss -t user@1.2.3.4 -p 22 "/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal"'

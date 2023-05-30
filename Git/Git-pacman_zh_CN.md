@@ -12,6 +12,8 @@ https://github.com/git-for-windows/git-sdk-64
 ```git
 git clone --depth=1 https://github.com/git-for-windows/git-sdk-64.git /d/Tools/WorkTool/Team/git-sdk-64
 ```
+* 方法3：下载笔者整理好的zip(42.5M，整理于2023-05-29)  
+[git-bash-pacman.zip](git-bash-pacman.zip)
 
 ## 2.复制所需文件
 启动 git bash，运行以下命令复制并确认

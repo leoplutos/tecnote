@@ -1,8 +1,12 @@
 # .bashrc for personal
 
 # Source global definitions
+if [ -f ~/.bash_profile ]; then
+	. ~/.bash_profile
+fi
+
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+	. ~/.bashrc
 fi
 
 export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '

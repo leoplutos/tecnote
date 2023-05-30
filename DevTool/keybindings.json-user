@@ -1,0 +1,52 @@
+// 将键绑定放在此文件中以覆盖默认值
+[
+  {//ctrl+w关闭tab
+    "key": "ctrl+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {//ctrl+j选择下一个建议
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {//ctrl+k选择上一个建议
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {//shift+space -> o:打开/关闭辅助侧边栏
+    "key": "shift+space o",
+    "command": "workbench.action.toggleAuxiliaryBar"
+  },
+  {//[终端]shift+space -> a:全选
+    "key": "shift+space a",
+    "command": "workbench.action.terminal.selectAll",
+    "when": "terminalFocus && !isMac"
+  },
+  {//[终端]shift+space -> f:查找
+    "key": "shift+space f",
+    "command": "workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {//[终端]shift+space -> ctrl+f1:清空屏幕
+    "key": "shift+space ctrl+f1",
+    //"command": "workbench.action.terminal.sendSequence",
+    //"args": { "text": "clearb\n" },
+    //"args": { "text": "clearb\u000D" },
+    "command": "workbench.action.terminal.clear",
+    //"when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    "when": "terminalFocus"
+  },
+  {//[终端]shift+space -> ctrl+f2:发送gdb的dashboard命令-重定向代码
+    "key": "shift+space ctrl+f2",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "dashboard source -output /dev/pts/x" },
+    "when": "terminalFocus"
+  },
+  {//[终端]shift+space -> ctrl+f3:发送gdb的dashboard命令-设定代码全屏显示
+    "key": "shift+space ctrl+f3",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "dashboard source -style height 0" },
+    "when": "terminalFocus"
+  }
+]

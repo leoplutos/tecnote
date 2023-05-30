@@ -1,0 +1,147 @@
+{
+  //-----------------------------------------------"
+  //               基本设定                        "
+  //-----------------------------------------------"
+  "workbench.colorTheme": "Tomorrow Night", //设定主题
+  "editor.fontFamily": "Inconsolata, '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  //"editor.fontFamily": "Inconsolata, 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  "editor.fontSize": 18, //设置字体大小
+  "editor.fontWeight": "normal", //设置粗体
+  "editor.fontLigatures": true, //设置启用连字
+  "editor.formatOnSave": false, //在保存时格式化文件
+  "editor.minimap.enabled": false, //设定不显示右侧的minimap
+  "editor.renderWhitespace": "all", //设定显示tab和空格
+  "editor.renderControlCharacters": true, //设定显示控制字符
+  "editor.renderLineHighlight": "all", //高亮显示现在行号
+  "editor.insertSpaces": false, //按下tab时不替换为空格
+  "editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
+  "editor.autoClosingQuotes": "beforeWhitespace",
+  "editor.autoSurround": "languageDefined",
+  "editor.quickSuggestions": {
+    // 自动补全设定
+    "other": true, //字符串以外
+    "strings": false, //字符串
+    "comments": false //注释
+  },
+  //"window.title": "${dirty}${activeEditorMedium}${separator}${rootName}"
+  "files.autoSave": "off", //取消自动保存
+  "files.eol": "auto", //自动设定换行符，也可以设定 "\n"
+  "files.autoGuessEncoding": true, //自动判断文字编码
+  "files.associations": {
+    "*.pc": "c" //设定.pc扩展名关联为c程序
+  },
+  "security.workspace.trust.untrustedFiles": "open", //6.10号版本的VS Code加了个新功能: Workspace Trust就是会在你每打开一个文件夹的时候就询问是否信任
+  "update.mode": "manual", //禁止自动升级VSCode版本
+  "outline.showVariables": false, //outline不显示变量
+  "workbench.editor.showTabs": true, //每次都新打开
+  "workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
+  "workbench.colorCustomizations": {
+    "editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
+    //"editor.selectionBackground": "#000000", //选择内容的背景
+    "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+    "editorWhitespace.foreground": "#444444", //tab符号的颜色
+    "editorCursor.background": "#000000", //光标背景色
+    "editorCursor.foreground": "#00ffff", //光标前景色
+    "terminal.background": "#000000", //终端背景色
+    "terminal.foreground": "#BFBFBF", //终端前景色
+    "terminalCursor.background": "#000000", //终端光标背景色
+    "terminalCursor.foreground": "#00ffff" //终端光标前景色
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#606060", //设定注释颜色
+    //"numbers": "#00ffff", //设定数字颜色
+    //"strings": "#00ffff", //设定字符串颜色
+    //"variables": "#cc6666", //设定变量颜色
+    //"types": "#ff5f00", //设定类型颜色
+    "keywords": "#0087ff" //设定关键字颜色
+  },
+  "[python]": {
+    "editor.formatOnType": true,
+    //"editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  //-----------------------------------------------"
+  //               终端设定                        "
+  //-----------------------------------------------"
+  //设定默认终端为git-bash
+  "terminal.integrated.profiles.windows": {
+    "Git-Bash": {
+      "path": "D:\\Tools\\WorkTool\\Team\\Git\\bin\\bash.exe",
+      "args": ["-i", "-l"],
+      "overrideName": true,
+      "env": {
+        // "JAVA_HOME": "C:\\Program Files\\Java\\jdk-13.0.1"
+      },
+      "icon": "terminal-debian",
+      "color": "terminal.ansiRed"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Git-Bash",
+  "terminal.integrated.fontFamily": "Inconsolata, '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  //"terminal.integrated.fontFamily": "Inconsolata, 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  "terminal.integrated.fontLigatures": true, //设置启用连字
+  "terminal.integrated.fontSize": 18, //设置字体大小
+  "terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
+  "terminal.integrated.rightClickBehavior": "copyPaste", // 鼠标右键-粘贴
+  "terminal.integrated.sendKeybindingsToShell": true, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效）
+  "terminal.integrated.cursorBlinking": true, //光标闪烁
+  "terminal.integrated.defaultLocation": "editor", //新建终端在编辑器区域打开
+  "terminal.integrated.scrollback": 5000, //滚动历史
+  //"terminal.integrated.tabs.title": "${local}${sequence}",
+  //"terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
+  //-----------------------------------------------"
+  //               vim插件设定                     "
+  //-----------------------------------------------"
+  "vim.incsearch": true, //搜索时在未完全输入完毕要检索的文本时就开始检索
+  "vim.useSystemClipboard": true, //使用系统剪切板
+  "vim.useCtrlKeys": true, //使用Ctrl按键
+  "vim.hlsearch": true, //查询结果高亮
+  "vim.wrapscan": false, //禁止在搜索到文件两端时重新搜索（不循环搜索）
+  "vim.searchHighlightTextColor": "rgba(0, 0, 0, 1)", //设定查询结果高亮前景颜色
+  "vim.searchHighlightColor": "rgba(255, 255, 0, 1)", //设定查询结果高亮背景颜色
+  "vim.searchMatchTextColor": "rgba(255, 255, 255, 1)", //设定查询结果高亮前景颜色
+  "vim.searchMatchColor": "rgba(0, 0, 0, 1)", //设定查询结果高亮背景颜色
+  "vim.highlightedyank.enable": true, //复制时高亮显示
+  "vim.highlightedyank.color": "rgba(0, 240, 170, 0.5)", //设置 yank 高亮的颜色
+  "vim.highlightedyank.duration": 5000, //设置 yank 高亮的持续时间（5秒）
+  "vim.leader": "\\",
+  //"vim.autoindent": true, //智能缩进对齐
+  "vim.visualstar": true, //对光标上的文字使用*查询
+  "vim.timeout": 1200, //输入timeout
+  //"vim.statusBarColorControl": true, //设定根据当前模式改变状态栏颜色
+  //"vim.statusBarColors.normal": ["#00d7ff", "#000000"],
+  //"vim.statusBarColors.insert": "#ffff00",
+  //"vim.statusBarColors.visual": "#00ff87",
+  //"vim.statusBarColors.visualline": "#00ff87",
+  //"vim.statusBarColors.visualblock": "#00ff87",
+  //"vim.statusBarColors.replace": "#d70000",
+  //"vim.statusBarColors.commandlineinprogress": "#007ACC",
+  //"vim.statusBarColors.searchinprogressmode": "#007ACC",
+  //"vim.statusBarColors.easymotionmode": "#007ACC",
+  //"vim.statusBarColors.easymotioninputmode": "#007ACC",
+  //"vim.statusBarColors.surroundinputmode": "#007ACC",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    //{ "before": ["J"], "commands": [":.+10"], "silent": true },
+    //{ "before": ["K"], "commands": [":.-10"], "silent": true }
+    { "before": ["J"], "after": ["1", "0", "j"] }, //加速向下
+    { "before": ["K"], "after": ["1", "0", "k"] }, //加速向上
+    { "before": ["<leader>", "s"], "commands": [":w"] }, // 设定\+s保存文件
+    { "before": ["<leader>", "q"], "commands": [":q"] }, // 设定\+q关闭文件
+    { "before": ["<leader>", "l"], "commands": [":nohlsearch"] }, // 设定\+l关闭高亮
+    //{ "before": ["<Leader>", "h"], "after": ["<C-w>", "h"] }, //移动到左边的窗口
+    //{ "before": ["<Leader>", "j"], "after": ["<C-w>", "j"] }, //移动到下边的窗口
+    //{ "before": ["<Leader>", "k"], "after": ["<C-w>", "k"] }, //移动到上边的窗口
+    //{ "before": ["<Leader>", "l"], "after": ["<C-w>", "l"] }, //移动到右边的窗口
+    { "before": ["n"], "after": ["n", "z", "z"] }, // 在画面中央表示搜索结果
+    { "before": ["N"], "after": ["N", "z", "z"] },
+    { "before": ["*"], "after": ["*", "z", "z"] },
+    { "before": ["#"], "after": ["#", "z", "z"] }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["J"], "after": ["1", "0", "j"] }, //加速向下
+    { "before": ["K"], "after": ["1", "0", "k"] } //加速向上
+  ],
+  "vim.insertModeKeyBindings": [
+    { "before": ["j", "j"], "after": ["<Esc>"] }, //回到普通模式
+    { "before": [";", ";"], "commands": ["editor.action.triggerSuggest"] } //打开建议
+  ],
+}
