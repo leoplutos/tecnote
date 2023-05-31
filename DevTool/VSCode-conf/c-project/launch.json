@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "GCC 编译和运行", //这个是F1中出现的名字
+            "preLaunchTask": "gcc_build", //在launch之前运行的任务名，这个名字一定要跟tasks.json中的任务名字大小写一致
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false, // 选为true则会在打开控制台后停滞，暂时不执行程序
+            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
+            "environment": [],
+            "externalConsole": false, // 是否使用外部控制台
+            "MIMode": "gdb",
+            "miDebuggerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gdb.exe", // 命令是gdb
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "sourceFileMap": {
+                //"/c/": "C:/", //因为在git-bash中，/c/为c盘，当有相关问题时打开这个设定
+                //"/d/": "D:/",
+                //"/build/gcc-4.8-fNUjSI/gcc-4.8-4.8.4/build/i686-linux-gnu/libstdc++-v3/include/i686-linux-gnu": "/usr/include/i686-linux-gnu/c++/4.8",
+            }
+        }
+    ],
+}

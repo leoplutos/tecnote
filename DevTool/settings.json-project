@@ -1,5 +1,0 @@
-{
-  "C_Cpp.default.compilerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin",  //设定C语言默认编译器
-  "C_Cpp.default.cStandard": "c99",  //设定C99标准
-  "C_Cpp.errorSquiggles": "disabled"  //关于C的错误检查
-}

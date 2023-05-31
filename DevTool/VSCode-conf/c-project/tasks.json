@@ -1,0 +1,37 @@
+{
+    //调用这个task相当于运行 gcc.exe -Wall -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 'D:\WorkSpace\C\CTest/*.c' 'D:\WorkSpace\C\CTest/*.pc' -o 'D:\WorkSpace\C\CTest\bin\Debug\main.exe'
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "gcc_build", // 任务的名字叫gcc_build，注意是大小写区分的，等会在launch中调用这个名字
+            "type": "shell", // 任务执行的是shell命令，也可以是process
+            //"command": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe", // 命令是gcc，在cmd下使用这个
+            "command": "gcc.exe", // 命令是gcc，因为在git-bash下配置了.bash_profile所以直接使用gcc.exe
+            "args": [
+                "-Wall", //打开所有警告
+                "-fdiagnostics-color=always", //总是使用GCC_COLORS出力消息
+                "-g", //打开-g开启debug
+                "-x", //因为有扩展名为pc的文件，所以加上[ -x c ]指定c语言
+                "c",
+                "-fexec-charset=utf-8",
+                "'${workspaceFolder}/*.c'", //编译所有.c的文件
+                "'${workspaceFolder}/*.pc'", //编译所有.pc的文件
+                "-o",
+                "'${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe'" //当前文件名（去掉扩展名）.exe，因为执行模式为shell，在git-bash中必须要在有路径的地方加上单引号或者双引号
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc" // 使用gcc捕获错误
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+                // 任务分组，因为是tasks而不是task，意味着可以连着执行很多任务
+                // 在build组的任务们，可以通过在Command Palette(F1) 输入run build task来运行
+                // 当然，如果任务分组是test，你就可以用run test task来运行
+            },
+        }
+    ]
+}
