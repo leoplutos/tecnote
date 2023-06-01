@@ -1,19 +1,21 @@
 {
-    //调用这个task相当于运行 gcc.exe -Wall -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 'D:\WorkSpace\C\CTest/*.c' 'D:\WorkSpace\C\CTest/*.pc' -o 'D:\WorkSpace\C\CTest\bin\Debug\main.exe'
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "gcc_build", // 任务的名字叫gcc_build，注意是大小写区分的，等会在launch中调用这个名字
-            "type": "shell", // 任务执行的是shell命令，也可以是process
+        {//这个大括号里是‘构建（build）’任务，
+        // 启动方式1: Ctrl + Shift + B，启动方式2: Ctrl + Shift + P，然后输入[run build task]，因为是build组
+            "label": "gcc_build", //任务的名字叫gcc_build，注意是大小写区分的，等会在launch中调用这个名字
+            "type": "shell", //任务执行的是shell命令，也可以是process
             //"command": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe", // 命令是gcc，在cmd下使用这个
-            "command": "gcc.exe", // 命令是gcc，因为在git-bash下配置了.bash_profile所以直接使用gcc.exe
+            "command": "gcc.exe", //命令是gcc，因为在git-bash下配置了.bash_profile所以直接使用gcc.exe
             "args": [
                 "-Wall", //打开所有警告
                 "-fdiagnostics-color=always", //总是使用GCC_COLORS出力消息
                 "-g", //打开-g开启debug
                 "-x", //因为有扩展名为pc的文件，所以加上[ -x c ]指定c语言
                 "c",
-                "-fexec-charset=utf-8",
+                "-fexec-charset=utf-8", //生成的程序使用utf8
+                "-static-libgcc", //静态链接libgcc
+                "-std=c11", //语言标准，可根据自己的需要进行修改，写c++要换成c++的语言标准，比如c++11
                 "'${workspaceFolder}/*.c'", //编译所有.c的文件
                 "'${workspaceFolder}/*.pc'", //编译所有.pc的文件
                 "-o",
@@ -23,15 +25,43 @@
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
-                "$gcc" // 使用gcc捕获错误
+                "$gcc" //使用gcc捕获错误
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-                // 任务分组，因为是tasks而不是task，意味着可以连着执行很多任务
-                // 在build组的任务们，可以通过在Command Palette(F1) 输入run build task来运行
-                // 当然，如果任务分组是test，你就可以用run test task来运行
+            "presentation": { //执行这个任务时的一些其他设定
+                "echo": true,//表示在执行任务时在终端要有输出
+                "reveal": "always", //执行任务时是否跳转到终端面板，可以为always，silent，never
+                "focus": false, //设为true后可以使执行task时焦点聚集在终端，但对编译来说，设为true没有意义，因为运行的时候才涉及到输入
+                "panel": "new" //每次执行这个task时都新建一个终端面板，也可以设置为shared，共用一个面板，不过那样会出现‘任务将被终端重用’的提示，比较烦人
             },
+            "group": {//group表示‘组’，我们可以有很多的task，然后把他们放在一个‘组’里
+                "kind": "build", //表示这一组任务类型是构建
+                "isDefault": true //表示这个任务是当前这组任务中的默认任务
+            },
+        },
+        {//这个大括号里是‘运行(run)’任务，一些设置与上面的构建任务性质相同
+        // 启动方式1: 添加快捷键绑定（运行任务），启动方式2: Ctrl + Shift + P，然后输入[run test task]，因为是test组
+            "label": "gcc_run",
+            "type": "shell",
+            "dependsOn": "build", //任务依赖，因为要运行必须先构建，所以执行这个任务前必须先执行build任务，
+            "command": "chcp 65001 && ${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe", //执行exe文件，只需要指定这个exe文件在哪里就好
+            "group": {
+                "kind": "test", //这一组是‘测试’组，将run任务放在test组里方便我们用快捷键执行
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true, //这个就设置为true了，运行任务后将焦点聚集到终端，方便进行输入
+                "panel": "new"
+            },
+            "windows": {//因为无法在git-bash中运行，所以特定这个任务使用cmd
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": ["/d", "/c"]
+                    }
+                },
+            }
         }
     ]
 }

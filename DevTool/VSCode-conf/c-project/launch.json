@@ -2,18 +2,19 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "GCC 编译和运行", //这个是F1中出现的名字
+            "name": "GCC 编译和运行", //配置名称
             "preLaunchTask": "gcc_build", //在launch之前运行的任务名，这个名字一定要跟tasks.json中的任务名字大小写一致
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe",
-            "args": [],
-            "stopAtEntry": false, // 选为true则会在打开控制台后停滞，暂时不执行程序
-            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
-            "environment": [],
-            "externalConsole": false, // 是否使用外部控制台
-            "MIMode": "gdb",
-            "miDebuggerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gdb.exe", // 命令是gdb
+            "type": "cppdbg", //配置类型，cppdbg对应cpptools提供的调试功能；可以认为此处只能是cppdbg
+            "request": "launch", //请求配置类型，可以为launch（启动）或attach（附加）
+            "program": "${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe", //将要进行调试的程序的路径
+            "args": [], //程序调试时传递给程序的命令行参数，这里设为空即可
+            "stopAtEntry": false, //选为true则会在打开控制台后停滞，暂时不执行程序
+            "cwd": "${workspaceFolder}", //调试程序时的工作目录：当前文件所在的工作空间
+            "environment": [], //环境变量，这里设为空即可
+            "externalConsole": false, //为true时使用单独的cmd窗口，跳出小黑框；设为false则是用vscode的内置终端，建议用内置终端
+            "internalConsoleOptions": "neverOpen", //如果不设为neverOpen，调试时会跳到“调试控制台”选项卡，新手调试用不到
+            "MIMode": "gdb", //指定连接的调试器，gdb是minGW中的调试程序
+            "miDebuggerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gdb.exe", //指定调试器所在路径
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",

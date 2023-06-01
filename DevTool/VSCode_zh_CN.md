@@ -19,7 +19,8 @@ code .
 * [显示换行符](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)
 * [自动补全插件TabNine(可选)](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
 * [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-* [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+* [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance，只要这2个即可
+* [Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 * [Rust](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 
@@ -42,6 +43,16 @@ code .
 - Ctrl + Shift + O ： 列出函数名，选择后快速跳转
 - **Ctrl + P** ： 快速文件导航（最实用的功能）
 - Ctrl + Tab ： 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
+- **Alt + F12** ： 在预览窗口查看函数
+- **Shift + Alt + F12** ： 打开引用视图
+- **Ctrl + Space** ： 触发建议小部件。
+- **Ctrl + Shift + P** ： 打开命令导航  
+  run build task ： 运行构建任务（对应task.json的build组）  
+  run test task ： 运行测试任务（对应task.json的test组）
+- Shift + Alt + F ： 代码格式化
+- **Ctrl + KV** ： Markdown的编辑和预览左右分割表示（重新映射成 shift+space -> m）
+- Ctrl + Shift + V ： 预览markdown文件
+- Ctrl + \ ： 左右分割表示当前文件
 - Ctrl + Shift + F ： grep查找（重新映射成 shift+space -> g）
 - 将函数大纲（outline）拖动到右侧，在右侧[辅助侧边栏]显示
 - Shift + Alt + R ： 在os打开当前文件夹
@@ -91,7 +102,12 @@ C:\Users\user\AppData\Roaming\Code\User
 * [tasks.json](VSCode-conf/c-project/tasks.json)
 * [tasks.json-多个任务例子](VSCode-conf/c-project/tasks.json-multiple)
 
-## 使用VSCode编译和调试
+#### 文件夹设置（Python工程）
+* [settings.json](VSCode-conf/python-project/settings.json)
+* [.env](VSCode-conf/python-project/.env)
+* [main.py](VSCode-conf/python-project/main.py)
+
+## 使用VSCode编译和调试（C工程）
 
 tasks用于在launch前执行任务，launch用于读取执行文件。
 这两者经常组合起来用于需要编译语言的自动编译+自动执行，下面时以C为例的设定文件
@@ -125,6 +141,16 @@ tasks用于在launch前执行任务，launch用于读取执行文件。
 
 更多：  
 https://zhuanlan.zhihu.com/p/92175757?ivk_sa=1024320u&utm_id=0
+
+## Python工程的格式化代码
+
+Python插件是不支持格式代码的，这里笔者使用black格式代码。具体设置看设定文件即可。  
+除了设定还需要pip安装black。  
+使用清华源安装black
+```
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple black
+```
+安装好后会在python的Scripts内发现black.exe，配置到设定文件即可。
 
 ## 其他
 

@@ -36,6 +36,11 @@
     "command": "workbench.action.reloadWindow",
     "when": "editorFocus || editorIsOpen"
   },
+  {//shift+space -> m:Markdown的编辑和预览垂直分割表示
+    "key": "shift+space m",
+    "command": "markdown.showPreviewToSide",
+    "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+  },
   {//[终端]shift+space -> a:全选
     "key": "shift+space a",
     "command": "workbench.action.terminal.selectAll",

@@ -2,13 +2,31 @@
 
 在此md文件同路径下，有.py文件。
 
-## 1.学习Python
+## 学习Python
 * [Python - 100天从新手到大师](https://github.com/jackfrued/Python-100-Days)  
 * [Redis教程](https://github.com/jackfrued/Python-100-Days/blob/master/Day36-40/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%A5%E9%97%A8.md)  
 * [Selenium教程](https://github.com/jackfrued/Python-100-Days/blob/master/Day61-65/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.md)  
 * [Python CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/python.md)
 
-## 2.检查文件扩展名的例子
+## pip使用清华源
+
+#### 临时使用
+```
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+```
+注意，simple 不能少, 是 https 而不是 http
+
+#### 设为默认
+升级 pip 到最新的版本 (>=10.0.0) 后进行配置：
+```
+python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+更多：  
+https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+
+
+## 检查文件扩展名的例子
 [getFileExtension.py](getFileExtension.py)
 
 这是一个python的脚本，用来列出一个路径下文件的所有扩展名
@@ -16,7 +34,7 @@
 - 目标2：统计所有扩展名，出力
 - 目标3：check所有文件的换行符，出力(这个例子统计有换行符为CRLF的文件)
 
-## 3.复原Sakura Editor的grep替换操作
+## 复原Sakura Editor的grep替换操作
 [sakuraSkroldReset.py](sakuraSkroldReset.py)
 
 这是一个python的脚本，用来复原Sakura Editor的grep替换操作  
