@@ -2,8 +2,8 @@
   //-----------------------------------------------"
   //               基本设定                        "
   //-----------------------------------------------"
-  "editor.fontFamily": "Inconsolata, '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
-  //"editor.fontFamily": "Inconsolata, 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  "editor.fontFamily": "'Inconsolata', '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  //"editor.fontFamily": "'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
   "editor.fontSize": 18, //设置字体大小
   "editor.fontWeight": "normal", //设置粗体
   "editor.fontLigatures": true, //设置启用连字
@@ -51,6 +51,7 @@
       //"editor.foreground": "#c5c8c6", //设定编辑器前景
       //"editorLineNumber.foreground": "#5faf87", //设定行号颜色
       "editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
+      //"editor.lineHighlightBackground": "#e9ebfe" //当前行背景颜色
       //"editor.selectionBackground": "#000000", //选择内容的背景
       "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
       "editorWhitespace.foreground": "#444444", //tab符号的颜色
@@ -69,6 +70,7 @@
       "editor.foreground": "#000000", //设定编辑器前景
       "editorLineNumber.foreground": "#5faf87", //设定行号颜色
       "editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
+      "editor.lineHighlightBackground": "#e9ebfe", //当前行背景颜色
       //"editor.selectionBackground": "#000000", //选择内容的背景
       "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
       "editorWhitespace.foreground": "#c6c6c6", //tab符号的颜色
@@ -77,8 +79,8 @@
       "editor.findMatchBackground" : "#00d700", //查找内容颜色
       "editor.findMatchHighlightBackground" : "#ffff00", //查找内容颜色
       //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
-      "terminal.background": "#000000", //终端背景色
-      "terminal.foreground": "#BFBFBF", //终端前景色
+      "terminal.background": "#1d1f21", //终端背景色
+      "terminal.foreground": "#d0d0d0", //终端前景色
       "terminalCursor.background": "#000000", //终端光标背景色
       "terminalCursor.foreground": "#00ffff" //终端光标前景色
     }
@@ -91,14 +93,14 @@
       "variables": "#c5c8c6", //设定变量颜色
       //"types": "#ff0000", //设定类型颜色
       //"keywords": {"foreground":"#0087ff", "fontStyle": "bold"}, //设定关键字颜色
-      "keywords": {"foreground":"#c7edcc", "fontStyle": "bold"}, //设定关键字颜色
+      "keywords": {"foreground":"#00ff88", "fontStyle": "bold"}, //设定关键字颜色
       //"functions": "#008787", //设定函数颜色
       "textMateRules": [] //作用域所对应的颜色
     },
     "[Default Light+]": { //Default Light+主题的自定义
       "comments": "#a8a8a8", //设定注释颜色
-      "numbers": "#0087ff", //设定数字颜色
-      "strings": "#0087ff", //设定字符串颜色
+      //"numbers": "#0087ff", //设定数字颜色
+      //"strings": "#0087ff", //设定字符串颜色
       "variables": "#000000", //设定变量颜色
       "types": "#ff0000", //设定类型颜色
       "keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色
@@ -109,25 +111,40 @@
   //-----------------------------------------------"
   //               终端设定                        "
   //-----------------------------------------------"
-  //设定默认终端为git-bash
   "terminal.integrated.profiles.windows": {
     "Git-Bash": {
       "path": "D:\\Tools\\WorkTool\\Team\\Git\\bin\\bash.exe",
       "args": ["-i", "-l"],
       "overrideName": true,
       "env": {
-        //"JAVA_HOME": "C:\\Program Files\\Java\\jdk-13.0.1"
+        "TEST_HOME": "/d/Work",
+        "PATH": "${env:PATH}:/d/Work"
       },
       "icon": "terminal-debian",
       "color": "terminal.ansiRed"
-    }
+    },
+    "Win-Cmd": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": ["/k", "chcp", "65001", // 使用uft8启动
+               "&&", "doskey", "ssh4=ssh", "-t", "user@1.2.3.4", "-p", "22"], // 使用doskey命令注册一个别名，实际等于[doskey ssh4=ssh -t user@1.2.3.4 -p 22]
+      "overrideName": true,
+      "env": {
+        "TEST_HOME": "D:\\Work",
+        "PATH": "${env:path};D:\\Tools\\WorkTool\\Java\\jdk17.0.6\\bin;D:\\Tools\\WorkTool\\Python\\Python38-32;D:\\Tools\\WorkTool\\Team\\Git\\cmd"
+      },
+      "icon": "terminal-cmd",
+      "color": "terminal.ansiBlue"
+    },
   },
-  "terminal.integrated.env.windows": {
+  "terminal.integrated.env.windows": { //设定所有终端环境变量
     "PYTHONPATH": "${workspaceFolder};${workspaceFolder}/src;${workspaceFolder}/tests"
   },
-  "terminal.integrated.defaultProfile.windows": "Git-Bash",
-  "terminal.integrated.fontFamily": "Inconsolata, '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
-  //"terminal.integrated.fontFamily": "Inconsolata, 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  "terminal.integrated.defaultProfile.windows": "Git-Bash", //设定默认终端
+  "terminal.integrated.fontFamily": "'Inconsolata', '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  //"terminal.integrated.fontFamily": "'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
   "terminal.integrated.fontLigatures": true, //设置启用连字
   "terminal.integrated.fontSize": 16, //设置字体大小
   "terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
@@ -147,6 +164,7 @@
   //               其他设定                        "
   //-----------------------------------------------"
   //"git.path": "D:\\Tool\\Git\\cmd\\git.exe", // 设定git
+  "git.ignoreMissingGitWarning": true,
   //-----------------------------------------------"
   //               vim插件设定                     "
   //-----------------------------------------------"

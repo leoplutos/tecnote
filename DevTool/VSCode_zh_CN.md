@@ -22,6 +22,7 @@ code .
 * [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance，只要这2个即可
 * [Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 * [Rust](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+* [Hex Editor(可选)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 
 ## 主题插件
@@ -96,6 +97,8 @@ C:\Users\user\AppData\Roaming\Code\User
 * [keybindings.json](VSCode-conf/user/keybindings.json)
 
 #### 文件夹设置（C工程）
+&nbsp;&nbsp;所需插件数量：1  
+&nbsp;&nbsp;插件名称：C/C++  
 * [settings.json](VSCode-conf/c-project/settings.json)
 * [c_cpp_properties.json](VSCode-conf/c-project/c_cpp_properties.json)
 * [launch.json](VSCode-conf/c-project/launch.json)
@@ -103,6 +106,8 @@ C:\Users\user\AppData\Roaming\Code\User
 * [tasks.json-多个任务例子](VSCode-conf/c-project/tasks.json-multiple)
 
 #### 文件夹设置（Python工程）
+&nbsp;&nbsp;所需插件数量：2  
+&nbsp;&nbsp;插件名称：Python，Pylance  
 * [settings.json](VSCode-conf/python-project/settings.json)
 * [.env](VSCode-conf/python-project/.env)
 * [main.py](VSCode-conf/python-project/main.py)
@@ -121,8 +126,11 @@ tasks用于在launch前执行任务，launch用于读取执行文件。
 另外，在调试窗口，char数组变量是按照数组来表示内容的。
 如果想类似字符串一样表示全部内容可以在watch区域加上 &变量名[0] 来实现
 
-#### 预定义变量
-支持下面的预定义变量:  
+## 使用VSCode编译和调试（Python工程）
+无需特别设定tasks.json和launch.json，直接打开一个 .py 文件，点击右上角的“播放按钮”即可
+
+## 预定义变量
+VSCode支持下面的预定义变量:  
 
 * ${workspaceFolder} - 当前工作目录(根目录)
 * ${workspaceFolderBasename} - 当前文件的父目录

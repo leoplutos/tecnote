@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "GCC",
-            "includePath": [
+            "includePath": [//编译时-I参数后面指定的内容，需要加到这里
                 "${workspaceFolder}/**",
                 "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\include"
             ],
@@ -12,6 +12,9 @@
                 "_UNICODE"
             ],
             "compilerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe",
+            "compilerArgs": [//编译时-I参数后面指定的内容，需要加到这里
+                "-ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\include"
+            ],
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-gcc-x64"
