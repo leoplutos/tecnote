@@ -1,0 +1,131 @@
+{//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
+	// 添加Python文件头
+	"添加Python文件头": {
+		"prefix": ["!", "env"],
+		"body": [
+			"#!/usr/bin/env python",
+			"# coding=utf-8",
+		],
+		"description": "添加Python文件头"
+	},
+	// 导入包
+	"导入包": {
+		"prefix": ["fr", "fro", "from"],
+		"body": [
+			"from $1 import $2",
+		],
+		"description": "导入包"
+	},
+	// if语句块
+	"if语句块": {
+		"prefix": ["if"],
+		"body": [
+			"if True :",
+			"    #if code",
+			"    pass",
+		],
+		"description": "if语句块"
+	},
+	// if-else语句块
+	"if-else语句块": {
+		"prefix": ["if", "ife", "ifel"],
+		"body": [
+			"if True :",
+			"    #if code",
+			"    pass",
+			"else:",
+			"    #else code",
+			"    pass",
+		],
+		"description": "if-else语句块"
+	},
+	// if-else-if语句块
+	"if-else-if语句块": {
+		"prefix": ["if", "ife", "ifel", "ifeli"],
+		"body": [
+			"if True :",
+			"    #if code",
+			"    pass",
+			"elif True :",
+			"    #else if code",
+			"    pass",
+			"else:",
+			"    #else code",
+			"    pass",
+		],
+		"description": "if-else-if语句块"
+	},
+	// while语句块
+	"while语句块": {
+		"prefix": ["wh", "whi", "whil", "while"],
+		"body": [
+			"while True :",
+			"    #while code",
+			"    break",
+		],
+		"description": "while语句块"
+	},
+	// for语句块
+	"for语句块": {
+		"prefix": ["fo", "for"],
+		"body": [
+			"for $1 in $2:",
+			"    #for code",
+		],
+		"description": "for语句块"
+	},
+	// for-in-range语句块
+	"for-in-range语句块": {
+		"prefix": ["fo", "for", "fori"],
+		"body": [
+			"for $1 in range($2):",
+			"    #for code",
+		],
+		"description": "for-in-range语句块"
+	},
+	// try-except语句块
+	"try-except语句块": {
+		"prefix": ["tr", "try", "trye"],
+		"body": [
+			"try:",
+			"    #try code",
+			"    pass",
+			"except:",
+			"    #import traceback",
+			"    traceback.print_exc()",
+		],
+		"description": "try-except语句块"
+	},
+	// try-except-finally语句块
+	"try-except-finally语句块": {
+		"prefix": ["tr", "try", "trye", "tryf", "tryef"],
+		"body": [
+			"try:",
+			"    #try code",
+			"    pass",
+			"except:",
+			"    #import traceback",
+			"    traceback.print_exc()",
+			"finally:",
+			"    #finally code",
+			"    pass",
+		],
+		"description": "try-except-finally语句块"
+	},
+	"添加main函数": {
+		"prefix": ["ma", "mai", "main", "ifmain"],
+		"body": [
+			"if __name__ == \"__main__\":",
+			"    #main code",
+			"    $1",
+		],
+		"description": "添加main函数"
+	},
+	"添加Debug信息": {
+		"prefix": ["pr", "pri", "prin", "print"],
+		"body": [
+			"print (f\"$1:{$1}\")",
+		],
+		"description": "添加Debug信息"
+	},
+}

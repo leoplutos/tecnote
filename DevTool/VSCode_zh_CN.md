@@ -24,16 +24,27 @@ code .
 * [Rust](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 * [Hex Editor(可选)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
+* [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
+* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)&nbsp;&nbsp;&nbsp;&nbsp;REST API 测试工具
+* [Draw.io(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)
+* [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)&nbsp;&nbsp;&nbsp;&nbsp;代码截图
+* [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)&nbsp;&nbsp;&nbsp;&nbsp;json美化
+
+## DB插件
+* [Sql Tools(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
 
 ## 主题插件
 * [主题流行趋势](https://vscodethemes.com/)
-* [Tomorrow and Tomorrow Night Theme Kit（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)
+* [Tomorrow and Tomorrow Night Theme Kit（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
+* [Winter is Coming Theme（亮色系）](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
+* [Brackets Light Pro（亮色系）](https://marketplace.visualstudio.com/items?itemName=fehey.brackets-light-pro)
 * [One Dark Pro（暗色系）](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
 * [Min Theme（暗色系+亮色系）](https://marketplace.visualstudio.com/items?itemName=miguelsolorio.min-theme)
 * [Dracula（暗色系）](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
 * [Quiet Light for VSC（亮色系）](https://marketplace.visualstudio.com/items?itemName=onecrayon.theme-quietlight-vsc)
 
 ## 常用快捷键
+在VS Code中，符号的意思是指结构体，函数，变量等。
 - Ctrl+鼠标左键 ： 文件、函数等跳转。
 - F12 ： 转到定义
 - Ctrl + ] ： 转到定义（vim插件）
@@ -41,6 +52,7 @@ code .
 - **Shift + F12** ： 转到引用
 - Alt + ← ： 跳转后返回原处
 - Ctrl + t ： 跳转后返回原处（vim插件）
+- Ctrl + t ： 列出全局函数名，选择后快速跳转
 - Ctrl + Shift + O ： 列出函数名，选择后快速跳转
 - **Ctrl + P** ： 快速文件导航（最实用的功能）
 - Ctrl + Tab ： 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
@@ -95,6 +107,8 @@ C:\Users\user\AppData\Roaming\Code\User
 #### 用户设置（全局）
 * [settings.json](VSCode-conf/user/settings.json)
 * [keybindings.json](VSCode-conf/user/keybindings.json)
+* [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
+* [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 
 #### 文件夹设置（C工程）
 &nbsp;&nbsp;所需插件数量：1  
@@ -160,9 +174,40 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple black
 ```
 安装好后会在python的Scripts内发现black.exe，配置到设定文件即可。
 
+## 配置代码片段
+代码片段配置所在路径
+```
+C:\Users\user\AppData\Roaming\Code\User\snippets
+```
+按下 Ctrl + Shift + p，然后输入 snippets ，会有提示 Configure User Snippets。选择后再次选择对应的开发语言，即可打开配置文件。  
+下面以1个c语言举例(c.json)
+```
+{
+	// 添加main函数
+	"添加main函数": {
+		"prefix": ["ma", "mai", "main"],
+		"body": [
+			"#include <stdio.h>",
+			"int main (int argc, char *argv[]) {",
+			"\treturn 0;",
+			"}",
+		],
+		"description": "添加main函数"
+	},
+}
+```
+设置好以后，输入ma即可弹出建议，选择“添加main函数”即可。
+
 ## 其他
 
-#### 开发嵌入式SQL的时候EXEC SQL语句块的报错
+### 颜色查找
+
+* [colorhunt](https://colorhunt.co/palette/c4dfdfd2e9e9e3f4f4f8f6f4)
+
+### 旧版本
+VS Code 版本 1.70.3 是 Windows 7 用户的最后一个可用版本，版本 1.79.1 将是 Windows 8 和 8.1 用户的最后一个可用版本
+
+### 开发嵌入式SQL的时候EXEC SQL语句块的报错
 可以将 SQL 代码包装在下面语句块中
 ```c
 #ifndef __INTELLISENSE__

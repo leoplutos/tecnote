@@ -2,12 +2,18 @@
   //-----------------------------------------------"
   //               基本设定                        "
   //-----------------------------------------------"
-  "editor.fontFamily": "'Inconsolata', '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
-  //"editor.fontFamily": "'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
+  //"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
+  //"editor.fontFamily": "'Consolas', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //中文系统用
+  //"editor.fontFamily": "'Consolas', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //日文系统用
+  "editor.fontFamily": "'Inconsolata', 'Consolas', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Courier New', monospace", //Liang
+  //"editor.fontFamily": "'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Qiao
   "editor.fontSize": 18, //设置字体大小
-  "editor.fontWeight": "normal", //设置粗体
+  //"editor.fontWeight": "540", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行 Liang
+  "editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行 Qiao
   "editor.fontLigatures": true, //设置启用连字
   "editor.formatOnSave": false, //在保存时格式化文件
+  //"editor.letterSpacing": 0.3, //字母间距
+  //"editor.lineHeight": 22, //行高
   "editor.minimap.enabled": false, //设定不显示右侧的minimap
   "editor.renderWhitespace": "all", //设定显示tab和空格
   "editor.renderControlCharacters": true, //设定显示控制字符
@@ -24,7 +30,10 @@
   },
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?·～！￥…（）—【】、；：‘’“”，。《》？ ", //字符分割,双击选中一串字符序列时，VSCode就会依此来区分词
   "editor.suggest.localityBonus": true, //自动补全时显示离光标近的对象
+  "editor.find.loop": false, //控制在找不到其他匹配项时，不自动从开头(或结尾)重新开始搜索。
+  "editor.guides.bracketPairs": "active", //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
+  //"window.zoomLevel": 0.4, //缩放比例
   "explorer.compactFolders": false, // 资源管理器不采用紧凑模式
   "files.autoSave": "off", //取消自动保存
   "files.eol": "auto", //自动设定换行符，也可以设定 "\n"
@@ -41,6 +50,7 @@
   "workbench.editor.enablePreview": false, // 全局禁用预览模式
   "workbench.editor.showTabs": true, //每次都新打开
   "workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
+  "zenMode.centerLayout": false, //禅模式取消居中
   //-----------------------------------------------"
   //               颜色设定                        "
   //-----------------------------------------------"
@@ -66,6 +76,46 @@
       "terminalCursor.foreground": "#00ffff" //终端光标前景色
     },
     "[Default Light+]": { //Default Light+主题的自定义
+      //"editor.background": "#fffbf0", //设定编辑器背景-这个是SakuraEditor的颜色
+      "editor.background": "#fafafa", //设定编辑器背景
+      //"editor.background": "#F8F6F4", //设定编辑器背景
+      "editor.foreground": "#000000", //设定编辑器前景
+      "editorLineNumber.foreground": "#5faf87", //设定行号颜色
+      "editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
+      "editor.lineHighlightBackground": "#e9ebfe", //当前行背景颜色
+      //"editor.selectionBackground": "#000000", //选择内容的背景
+      "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+      "editorWhitespace.foreground": "#c6c6c6", //tab符号的颜色
+      "editorCursor.background": "#F8F8F0", //光标背景色
+      "editorCursor.foreground": "#1d1f21", //光标前景色
+      "editor.findMatchBackground" : "#00d700", //查找内容颜色
+      "editor.findMatchHighlightBackground" : "#ffff00", //查找内容颜色
+      //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
+      "terminal.background": "#1d1f21", //终端背景色
+      "terminal.foreground": "#d0d0d0", //终端前景色
+      "terminalCursor.background": "#000000", //终端光标背景色
+      "terminalCursor.foreground": "#00ffff" //终端光标前景色
+    },
+    "[Brackets Light Pro]": { //Brackets Light Pro主题的自定义
+      //"editor.background": "#fffbf0", //设定编辑器背景
+      "editor.foreground": "#000000", //设定编辑器前景
+      "editorLineNumber.foreground": "#5faf87", //设定行号颜色
+      "editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
+      "editor.lineHighlightBackground": "#e9ebfe", //当前行背景颜色
+      //"editor.selectionBackground": "#000000", //选择内容的背景
+      "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+      "editorWhitespace.foreground": "#c6c6c6", //tab符号的颜色
+      "editorCursor.background": "#F8F8F0", //光标背景色
+      "editorCursor.foreground": "#1d1f21", //光标前景色
+      "editor.findMatchBackground" : "#00d700", //查找内容颜色
+      "editor.findMatchHighlightBackground" : "#ffff00", //查找内容颜色
+      //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
+      "terminal.background": "#1d1f21", //终端背景色
+      "terminal.foreground": "#d0d0d0", //终端前景色
+      "terminalCursor.background": "#000000", //终端光标背景色
+      "terminalCursor.foreground": "#00ffff" //终端光标前景色
+    },
+    "[Winter is Coming (Light - No Italics)]": { //Winter is Coming (Light - No Italics)主题的自定义
       //"editor.background": "#fffbf0", //设定编辑器背景
       "editor.foreground": "#000000", //设定编辑器前景
       "editorLineNumber.foreground": "#5faf87", //设定行号颜色
@@ -95,17 +145,37 @@
       //"keywords": {"foreground":"#0087ff", "fontStyle": "bold"}, //设定关键字颜色
       "keywords": {"foreground":"#00ff88", "fontStyle": "bold"}, //设定关键字颜色
       //"functions": "#008787", //设定函数颜色
-      "textMateRules": [] //作用域所对应的颜色
+      "textMateRules": [], //作用域所对应的颜色
     },
     "[Default Light+]": { //Default Light+主题的自定义
       "comments": "#a8a8a8", //设定注释颜色
-      //"numbers": "#0087ff", //设定数字颜色
-      //"strings": "#0087ff", //设定字符串颜色
+      "numbers": "#0087ff", //设定数字颜色
+      "strings": "#408080", //设定字符串颜色
       "variables": "#000000", //设定变量颜色
       "types": "#ff0000", //设定类型颜色
       "keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色
       "functions": "#5f005f", //设定函数颜色
-      "textMateRules": [] //作用域所对应的颜色
+      "textMateRules": [], //作用域所对应的颜色
+    },
+    "[Brackets Light Pro]": { //Brackets Light Pro主题的自定义
+      "comments": "#a8a8a8", //设定注释颜色
+      "numbers": "#0087ff", //设定数字颜色
+      "strings": "#408080", //设定字符串颜色
+      "variables": "#000000", //设定变量颜色
+      "types": "#ff0000", //设定类型颜色
+      "keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色
+      "functions": "#5f005f", //设定函数颜色
+      "textMateRules": [], //作用域所对应的颜色
+    },
+    "[Winter is Coming (Light - No Italics)]": { //Winter is Coming (Light - No Italics)主题的自定义
+      "comments": "#a8a8a8", //设定注释颜色
+      "numbers": "#0087ff", //设定数字颜色
+      "strings": "#408080", //设定字符串颜色
+      "variables": "#000000", //设定变量颜色
+      "types": "#ff0000", //设定类型颜色
+      "keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色
+      "functions": "#5f005f", //设定函数颜色
+      "textMateRules": [], //作用域所对应的颜色
     }
   },
   //-----------------------------------------------"
@@ -143,10 +213,12 @@
     "PYTHONPATH": "${workspaceFolder};${workspaceFolder}/src;${workspaceFolder}/tests"
   },
   "terminal.integrated.defaultProfile.windows": "Git-Bash", //设定默认终端
-  "terminal.integrated.fontFamily": "'Inconsolata', '新宋体', 'MS Gothic', 'JetBrains Mono', 'ＭＳ ゴシック'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
-  //"terminal.integrated.fontFamily": "'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'JetBrains Mono', 'SimSun'", //设置字体，个人比较喜欢Inconsolata，从前向后优先显示
-  "terminal.integrated.fontLigatures": true, //设置启用连字
+  //"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
+  //"terminal.integrated.fontFamily": "'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //设置终端字体，日文系统用
+  "terminal.integrated.fontFamily": "'JetBrains Mono', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //Liang
   "terminal.integrated.fontSize": 16, //设置字体大小
+  "terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
+  "terminal.integrated.fontLigatures": true, //设置启用连字
   "terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
   "terminal.integrated.rightClickBehavior": "copyPaste", // 鼠标右键-粘贴
   "terminal.integrated.sendKeybindingsToShell": true, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效）

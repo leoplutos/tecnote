@@ -1,0 +1,29 @@
+{//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
+	// 添加main函数
+	"添加main函数": {
+		"prefix": ["ma", "mai", "main"],
+		"body": [
+			"#include <stdio.h>",
+			"int main (int argc, char *argv[]) {",
+			"\treturn 0;",
+			"}",
+		],
+		"description": "添加main函数"
+	},
+	// 添加Debug信息
+	"添加Debug信息": {
+		"prefix": ["pr", "pri", "prin", "print"],
+		"body": [
+			"printf(\"[DEBUG] [%s at line:%d] - $1:[%$2] \\n\", __func__, __LINE__, $3);"
+		],
+		"description": "添加Debug信息"
+	},
+	// 打印sqlca信息
+	"打印sqlca信息": {
+		"prefix": ["pr", "pri", "prin", "print"],
+		"body": [
+			"printf(\"[DEBUG] [%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\\n\", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);"
+		],
+		"description": "打印sqlca信息"
+	},
+}

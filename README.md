@@ -5,6 +5,7 @@
 * [Linux命令](Linux/Linux_zh_CN.md)
 * [Linux用户做成](Linux/Linux-adduser_zh_CN.md)
 * [Linux自定义相关](Linux/Linux-customize_zh_CN.md)
+* [SSH Config](Linux/Ssh-config_zh_CN.md)
 * [终端颜色](Linux/Terminal-color_zh_CN.md)
 
 ## Git命令
@@ -55,6 +56,7 @@
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)
+* [字体](Other/Font_zh_CN.md)
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 * [开发者书籍 - Open Developer Books](https://odb.lcjuves.com/)
