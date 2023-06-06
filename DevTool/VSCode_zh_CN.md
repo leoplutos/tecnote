@@ -12,30 +12,31 @@ code .
 ```
 
 ## 常用插件
-* [简体中文](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
-* [日文](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
-* [VSCodeVim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
-* [显示行尾空格](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
-* [显示换行符](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)
+* [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
+* [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
+* [VSCodeVim(可选)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
+* [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
+* [**Whitespace++**](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和下面的显示换行符选择一个即可，这个可自定义的内容多些
+* [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的Whitespace++选择一个即可
 * [自动补全插件TabNine(可选)](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
-* [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-* [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance，只要这2个即可
-* [Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
-* [Rust](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+* [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+* [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance，只要这2个即可
+* [**Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+* [**Rust**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 * [Hex Editor(可选)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 * [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
-* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)&nbsp;&nbsp;&nbsp;&nbsp;REST API 测试工具
+* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
 * [Draw.io(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)
-* [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)&nbsp;&nbsp;&nbsp;&nbsp;代码截图
-* [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)&nbsp;&nbsp;&nbsp;&nbsp;json美化
+* [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：代码截图
+* [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json美化
 
 ## DB插件
 * [Sql Tools(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
 
 ## 主题插件
 * [主题流行趋势](https://vscodethemes.com/)
-* [Tomorrow and Tomorrow Night Theme Kit（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
+* [**Tomorrow and Tomorrow Night Theme Kit**（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
 * [Winter is Coming Theme（亮色系）](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
 * [Brackets Light Pro（亮色系）](https://marketplace.visualstudio.com/items?itemName=fehey.brackets-light-pro)
 * [One Dark Pro（暗色系）](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
@@ -113,11 +114,12 @@ C:\Users\user\AppData\Roaming\Code\User
 #### 文件夹设置（C工程）
 &nbsp;&nbsp;所需插件数量：1  
 &nbsp;&nbsp;插件名称：C/C++  
-* [settings.json](VSCode-conf/c-project/settings.json)
-* [c_cpp_properties.json](VSCode-conf/c-project/c_cpp_properties.json)
-* [launch.json](VSCode-conf/c-project/launch.json)
-* [tasks.json](VSCode-conf/c-project/tasks.json)
-* [tasks.json-多个任务例子](VSCode-conf/c-project/tasks.json-multiple)
+&nbsp;&nbsp;[文件在这里](../C/CSampleProject/.vscode)
+* settings.json
+* c_cpp_properties.json
+* launch.json
+* tasks.json
+
 
 #### 文件夹设置（Python工程）
 &nbsp;&nbsp;所需插件数量：2  

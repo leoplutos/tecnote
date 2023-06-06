@@ -1,5 +1,10 @@
 // 将键绑定放在此文件中以覆盖默认值
 [
+  {//shift+space -> s:触发建议
+    "key": "shift+space s",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
   {//shift+space -> v 开启/关闭vim插件
       "key": "shift+space v",
       "command": "toggleVim"
@@ -8,8 +13,8 @@
     "key": "ctrl+w",
     "command": "workbench.action.closeActiveEditor"
   },
-  {//shift -> f:查找
-    "key": "shift+f",
+  {//shift+space -> f:查找
+    "key": "shift+space f",
     "command": "actions.find",
     "when": "editorFocus || editorIsOpen"
   },

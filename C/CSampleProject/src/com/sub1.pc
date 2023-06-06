@@ -1,0 +1,39 @@
+#include <stdarg.h>
+#include <stdio.h>
+
+#include "common.h"
+
+/*
+ *这个一个拥有可变参数的函数
+ *第一个参数num为固定值
+ *从第2个参数开始为可变参数
+ */
+int sub1(int num, ...) {
+	printf("[DEBUG] [%s at line:%d] - sub1 parameter num:[%d]\n", __func__, __LINE__, num);
+	// 返回值
+	int i_retCode = SUCCESS;
+	// 定义参数列表
+	va_list list;
+	// 初始化参数列表
+	va_start(list, num);
+	// 获取int类型参数
+	int i;
+	for (i = 0; i < 2; i++) {
+		int listIntVal = va_arg(list, int);
+		printf("[DEBUG] [%s at line:%d] - sub1 parameter inter[%d]=%d\n", __func__, __LINE__, i, listIntVal);
+	}
+	// 获取double类型参数 [Warning] 当通过 '...' 时，'float' 被强转为 'double'
+	for (i = 0; i < 3; i++) {
+		double listDouVal = va_arg(list, double);
+		printf("[DEBUG] [%s at line:%d] - sub1 parameter double[%d]=%lf\n", __func__, __LINE__, i, listDouVal);
+	}
+	// 获取char *类型参数
+	for (i = 0; i < 5; i++) {
+		char* listCharVal = va_arg(list, char*);
+		printf("[DEBUG] [%s at line:%d] - sub1 parameter char[%d]=%s\n", __func__, __LINE__, i, listCharVal);
+	}
+	// 清空参数列表
+	va_end(list);
+	printf("[DEBUG] [%s at line:%d] - sub1 end. \n", __func__, __LINE__);
+	return i_retCode;
+}

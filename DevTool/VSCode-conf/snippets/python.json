@@ -1,10 +1,10 @@
 {//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
 	// 添加Python文件头
 	"添加Python文件头": {
-		"prefix": ["!", "env"],
+		"prefix": ["#", "!", "#!", "en", "env"],
 		"body": [
-			"#!/usr/bin/env python",
-			"# coding=utf-8",
+			"#!/usr/bin/python3",
+			"# -*- coding: utf-8 -*-",
 		],
 		"description": "添加Python文件头"
 	},
@@ -20,8 +20,8 @@
 	"if语句块": {
 		"prefix": ["if"],
 		"body": [
-			"if True :",
-			"    #if code",
+			"if True:",
+			"    $1",
 			"    pass",
 		],
 		"description": "if语句块"
@@ -30,27 +30,27 @@
 	"if-else语句块": {
 		"prefix": ["if", "ife", "ifel"],
 		"body": [
-			"if True :",
-			"    #if code",
+			"if True:",
+			"    $1",
 			"    pass",
 			"else:",
-			"    #else code",
+			"    $2",
 			"    pass",
 		],
 		"description": "if-else语句块"
 	},
 	// if-else-if语句块
 	"if-else-if语句块": {
-		"prefix": ["if", "ife", "ifel", "ifeli"],
+		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
 		"body": [
-			"if True :",
-			"    #if code",
+			"if True:",
+			"    $1",
 			"    pass",
-			"elif True :",
-			"    #else if code",
+			"elif True:",
+			"    $2",
 			"    pass",
 			"else:",
-			"    #else code",
+			"    $3",
 			"    pass",
 		],
 		"description": "if-else-if语句块"
@@ -59,8 +59,8 @@
 	"while语句块": {
 		"prefix": ["wh", "whi", "whil", "while"],
 		"body": [
-			"while True :",
-			"    #while code",
+			"while True:",
+			"    $1",
 			"    break",
 		],
 		"description": "while语句块"
@@ -70,7 +70,7 @@
 		"prefix": ["fo", "for"],
 		"body": [
 			"for $1 in $2:",
-			"    #for code",
+			"    $3",
 		],
 		"description": "for语句块"
 	},
@@ -79,7 +79,7 @@
 		"prefix": ["fo", "for", "fori"],
 		"body": [
 			"for $1 in range($2):",
-			"    #for code",
+			"    $3",
 		],
 		"description": "for-in-range语句块"
 	},
@@ -88,10 +88,10 @@
 		"prefix": ["tr", "try", "trye"],
 		"body": [
 			"try:",
-			"    #try code",
+			"    $1",
 			"    pass",
 			"except:",
-			"    #import traceback",
+			"    # import traceback",
 			"    traceback.print_exc()",
 		],
 		"description": "try-except语句块"
@@ -101,31 +101,103 @@
 		"prefix": ["tr", "try", "trye", "tryf", "tryef"],
 		"body": [
 			"try:",
-			"    #try code",
+			"    $1",
 			"    pass",
 			"except:",
-			"    #import traceback",
+			"    # import traceback",
 			"    traceback.print_exc()",
 			"finally:",
-			"    #finally code",
+			"    $2",
 			"    pass",
 		],
 		"description": "try-except-finally语句块"
 	},
+	// 添加列表List
+	"添加列表List": {
+		"prefix": ["li", "lis", "list"],
+		"body": [
+			"$1 = [$2, $3, $4]",
+		],
+		"description": "添加列表List"
+	},
+	// 添加元组Tuple
+	"添加元组Tuple": {
+		"prefix": ["tu", "tup", "tupl", "tuple"],
+		"body": [
+			"$1 = ($2, $3, $4)",
+		],
+		"description": "添加元组Tuple"
+	},
+	// 添加字典Dictionary
+	"添加字典Dictionary": {
+		"prefix": ["di", "dic", "dict", "dicti", "dictio", "diction", "dictiona", "dictionar", "dictionary"],
+		"body": [
+			"$1 = {'$2': $3, '$4': $5}",
+		],
+		"description": "添加字典Dictionary"
+	},
+	// 添加集合Set
+	"添加集合Set": {
+		"prefix": ["se", "set"],
+		"body": [
+			"$1 = set((\"$2\", \"$3\", \"$4\"))",
+		],
+		"description": "添加集合Set"
+	},
+	// 添加类Class
+	"添加类Class": {
+		"prefix": ["cl", "cla", "clas", "class"],
+		"body": [
+			"class Testclass(object):",
+			"    def __init__(self, foo):",
+			"        self.__foo = foo",
+			"",
+			"    def function_name(self):",
+			"        $4",
+			"        pass",
+		],
+		"description": "添加类Class"
+	},
+	// 添加function函数
+	"添加function函数": {
+		"prefix": ["de", "def", "fu", "fun", "func", "funct", "functi"],
+		"body": [
+			"def function_name(arguments) {",
+			"    $1",
+			"    pass",
+			"}",
+		],
+		"description": "添加function函数"
+	},
+	// 添加main函数
 	"添加main函数": {
 		"prefix": ["ma", "mai", "main", "ifmain"],
 		"body": [
 			"if __name__ == \"__main__\":",
-			"    #main code",
 			"    $1",
 		],
 		"description": "添加main函数"
 	},
-	"添加Debug信息": {
+	// 添加print语句
+	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
-			"print (f\"$1:{$1}\")",
+			"print(f\"$1:{$1}\")",
 		],
-		"description": "添加Debug信息"
+		"description": "添加print语句"
+	},
+	// 添加多行注释
+	"添加多行注释": {
+		"prefix": ["co", "com", "comm", "comme", "commen", "comment"],
+		"body": [
+			"\"\"\"",
+			"  System:         $1",
+			"  Description:    $2",
+			"  GreatDate:      $3",
+			"  Author:         $4",
+			"  UpdateDate:     $5",
+			"\"\"\"",
+		],
+		"description": "添加多行注释"
 	},
 }

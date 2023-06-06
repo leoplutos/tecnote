@@ -110,3 +110,18 @@ Main function ended!
 printf(TER_WARN "[WARN][%s at line:%d]" TER_RESET "这是警告\n", __func__, __LINE__);
 fprintf(stderr, TER_ERROR "[ERROR][%s at line:%d]" TER_RESET "这是错误\n", __func__, __LINE__);
 ```
+
+## 3.其他
+
+### undefined reference to 错误
+在使用gcc编译时，如果使用了静态库（.a文件），发生了[undefined reference to]错误的话，
+是因为编译的时候没有把静态库（.a文件）放在命令最后。  
+比如，如下编译会发生错误  
+```
+gcc -o main.exe libtest.a main.o
+```
+修改为如下即可
+```
+gcc -o main.exe main.o libtest.a
+```
+

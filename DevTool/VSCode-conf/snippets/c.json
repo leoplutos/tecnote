@@ -1,4 +1,139 @@
 {//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
+	// include导入系统头文件<>
+	"include导入系统头文件<>": {
+		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu"],
+		"body": [
+			"#include <$1>"
+		],
+		"description": "include导入系统头文件<>"
+	},
+	// include导入用户头文件""
+	"include导入用户头文件\"\"": {
+		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu"],
+		"body": [
+			"#include \"$1\""
+		],
+		"description": "include导入用户头文件\"\""
+	},
+	// 添加define定义
+	"define定义": {
+		"prefix": ["#", "#d", "#de", "#def", "#defi", "#defin"],
+		"body": [
+			"#define $1 $2"
+		],
+		"description": "define定义"
+	},
+	// 添加#ifdef定义语句块
+	"添加#ifdef定义语句块": {
+		"prefix": ["#", "#i", "#if", "#ifd", "#ifde"],
+		"body": [
+			"#ifdef ${DEBUG}",
+			"\t$1",
+			"#endif"
+		],
+		"description": "添加#ifdef定义语句块"
+	},
+	// if语句块
+	"if语句块": {
+		"prefix": ["if"],
+		"body": [
+			"if ($1) {",
+			"\t$2",
+			"}"
+		],
+		"description": "if语句块"
+	},
+	// if-else语句块
+	"if-else语句块": {
+		"prefix": ["if", "ife", "ifel"],
+		"body": [
+			"if ($1) {",
+			"\t$2",
+			"} else {",
+			"\t$3",
+			"}",
+		],
+		"description": "if-else语句块"
+	},
+	// if-else-if语句块
+	"if-else-if语句块": {
+		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
+		"body": [
+			"if ($1) {",
+			"\t$2",
+			"} else if ($3) {",
+			"\t$4",
+			"} else {",
+			"\t$5",
+			"}",
+		],
+		"description": "if-else-if语句块"
+	},
+	// switch语句块
+	"switch语句块": {
+		"prefix": ["sw", "swi", "swit", "switc", "switch"],
+		"body": [
+			"switch ($1) {",
+			"\tcase $2:",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\tbreak;",
+			"}"
+		],
+		"description": "switch语句块"
+	},
+	// while语句块
+	"while语句块": {
+		"prefix": ["wh", "whi", "whil", "while"],
+		"body": [
+			"while ($1) {",
+			"\t$2",
+			"}"
+		],
+		"description": "while语句块"
+	},
+	// for语句块
+	"for语句块": {
+		"prefix": ["fo", "for"],
+		"body": [
+			"int i;",
+			"for (i = 0; i <= $1; i++) {",
+			"\t$2",
+			"}",
+		],
+		"description": "for语句块"
+	},
+	// 添加struct结构体
+	"添加struct结构体": {
+		"prefix": ["st", "str", "stru", "struc", "struct"],
+		"body": [
+			"struct ${MyStruct} {",
+			"\t$1",
+			"};",
+		],
+		"description": "添加struct结构体"
+	},
+	// 添加enum枚举
+	"添加enum枚举": {
+		"prefix": ["en", "enu", "enum"],
+		"body": [
+			"enum ${MyEnum} {",
+			"\t$1",
+			"};"
+		],
+		"description": "添加enum枚举"
+	},
+	// 添加function函数
+	"添加function函数": {
+		"prefix": ["fu", "fun", "func", "funct", "functi"],
+		"body": [
+			"int function_name(int arguments) {",
+			"\t$1",
+			"\treturn 0;",
+			"}",
+		],
+		"description": "添加function函数"
+	},
 	// 添加main函数
 	"添加main函数": {
 		"prefix": ["ma", "mai", "main"],
@@ -10,20 +145,34 @@
 		],
 		"description": "添加main函数"
 	},
-	// 添加Debug信息
-	"添加Debug信息": {
+	// 添加print语句
+	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
 			"printf(\"[DEBUG] [%s at line:%d] - $1:[%$2] \\n\", __func__, __LINE__, $3);"
 		],
-		"description": "添加Debug信息"
+		"description": "添加print语句"
 	},
-	// 打印sqlca信息
-	"打印sqlca信息": {
+	// 打印sqlca信息（嵌入式SQL）
+	"打印sqlca信息（嵌入式SQL）": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
 			"printf(\"[DEBUG] [%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\\n\", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);"
 		],
-		"description": "打印sqlca信息"
+		"description": "打印sqlca信息（嵌入式SQL）"
+	},
+	// 添加多行注释
+	"添加多行注释": {
+		"prefix": ["/", "/*", "co", "com", "comm", "comme", "commen", "comment"],
+		"body": [
+			"/**************************************************************",
+			" * System:         $1",
+			" * Description:    $2",
+			" * GreatDate:      $3",
+			" * Author:         $4",
+			" * UpdateDate:     $5",
+			" **************************************************************/",
+		],
+		"description": "添加多行注释"
 	},
 }
