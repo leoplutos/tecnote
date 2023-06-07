@@ -14,28 +14,40 @@ code .
 ## 常用插件
 * [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 * [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
+* [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
 * [VSCodeVim(可选)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
 * [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
 * [**Whitespace++**](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和下面的显示换行符选择一个即可，这个可自定义的内容多些
 * [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的Whitespace++选择一个即可
-* [自动补全插件TabNine(可选)](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
+* [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
 * [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 * [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance，只要这2个即可
 * [**Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 * [**Rust**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+* [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：使用正则表达式，来高亮代码中所有用户想要的文本
+* [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行多种语言的代码片段或代码文件，省掉保存的环节，直接可以运行
+* [Blockman](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：突出显示代码块来提高代码可读性
 * [Hex Editor(可选)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 * [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
-* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
 * [Debug Visualizer(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.debug-visualizer)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：调试过程可视化
 * [Regex Previewer(可选)](https://marketplace.visualstudio.com/items?itemName=chrmarti.regex)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：实时测试正则表达式的实用工具
 * [Draw.io(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：绘图工具
 * [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：代码截图
 * [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json美化
+* [Rainbow CSV(可选)](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
+* [Error Lens(可选)](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
+* [Log File Highlighter(可选)](https://marketplace.visualstudio.com/items?itemName=emilast.LogFileHighlighter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：高亮log文件
 
+## Web插件
+* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
+* [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
+* [Postcode(可选)](https://marketplace.visualstudio.com/items?itemName=rohinivsenthil.postcode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：于创建和测试简HTTP请求，以及查看响应
 
 ## DB插件
 * [Sql Tools(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
+* [Database Client(可选)](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client2)
+* [ppz(可选)](https://marketplace.visualstudio.com/items?itemName=ppz.ppz)
 
 ## 主题插件
 * [主题流行趋势](https://vscodethemes.com/)
@@ -51,6 +63,7 @@ code .
 * [Thief-Book](https://marketplace.visualstudio.com/items?itemName=C-TEAM.thief-book)
 * [小霸王](https://marketplace.visualstudio.com/items?itemName=gamedilong.anes)
 * [知乎](https://marketplace.visualstudio.com/items?itemName=niudai.vscode-zhihu)
+* [epub reader](https://marketplace.visualstudio.com/items?itemName=renkun.reader)
 
 ## 常用快捷键
 在VS Code中，符号的意思是指结构体，函数，变量等。
