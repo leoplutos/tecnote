@@ -1,0 +1,11 @@
+# 服务器1
+Host mysv
+	HostName 1.2.3.4
+	User user1
+	Port 8122
+	HostKeyAlgorithms +ssh-dss
+	#IdentityFile /path/to/key.pem
+	RequestTTY yes
+	#RemoteCommand exec bash --init-file <(echo 'source /lch/workspace/bashrc/.bashrc-personal && set -u')
+	RemoteCommand exec bash --rcfile /lch/workspace/bashrc/.bashrc-personal
+	#UserKnownHostsFile /dev/null

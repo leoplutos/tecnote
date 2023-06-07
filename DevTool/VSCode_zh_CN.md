@@ -27,9 +27,12 @@ code .
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 * [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
 * [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
-* [Draw.io(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)
+* [Debug Visualizer(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.debug-visualizer)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：调试过程可视化
+* [Regex Previewer(可选)](https://marketplace.visualstudio.com/items?itemName=chrmarti.regex)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：实时测试正则表达式的实用工具
+* [Draw.io(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：绘图工具
 * [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：代码截图
 * [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json美化
+
 
 ## DB插件
 * [Sql Tools(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
@@ -43,6 +46,11 @@ code .
 * [Min Theme（暗色系+亮色系）](https://marketplace.visualstudio.com/items?itemName=miguelsolorio.min-theme)
 * [Dracula（暗色系）](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
 * [Quiet Light for VSC（亮色系）](https://marketplace.visualstudio.com/items?itemName=onecrayon.theme-quietlight-vsc)
+
+## 其他插件
+* [Thief-Book](https://marketplace.visualstudio.com/items?itemName=C-TEAM.thief-book)
+* [小霸王](https://marketplace.visualstudio.com/items?itemName=gamedilong.anes)
+* [知乎](https://marketplace.visualstudio.com/items?itemName=niudai.vscode-zhihu)
 
 ## 常用快捷键
 在VS Code中，符号的意思是指结构体，函数，变量等。
@@ -201,6 +209,18 @@ C:\Users\user\AppData\Roaming\Code\User\snippets
 设置好以后，输入ma即可弹出建议，选择“添加main函数”即可。
 
 ## 其他
+
+### 使用VSCode集成终端配置Git-bash时，编码不是utf8的问题
+现象为使用VSCode的集成终端打开Git-bash不是utf8编码，发行chcp.com命令结果为
+```bash
+chcp.com
+活动代码页: 936
+```
+而用Git-bash的终端（minnty）打开时为utf8编码。
+将如下代码加到 ~/.bash_profile 即可解决
+```bash
+chcp.com 65001
+```
 
 ### 颜色查找
 

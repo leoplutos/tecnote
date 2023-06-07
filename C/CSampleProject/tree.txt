@@ -1,0 +1,14 @@
+目录结构
+
+CSampleProject
+├─.vscode
+├─bin
+│  ├─Debug
+│  └─Release
+├─include
+├─lib
+├─obj
+│  ├─Debug
+│  └─Release
+└─src
+    └─com
