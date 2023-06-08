@@ -3,7 +3,7 @@
 	"include导入系统头文件<>": {
 		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu"],
 		"body": [
-			"#include <$1>"
+			"#include <${1:system.h}>"
 		],
 		"description": "include导入系统头文件<>"
 	},
@@ -11,7 +11,7 @@
 	"include导入用户头文件\"\"": {
 		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu"],
 		"body": [
-			"#include \"$1\""
+			"#include \"${1:user.h}\""
 		],
 		"description": "include导入用户头文件\"\""
 	},
@@ -19,7 +19,7 @@
 	"define定义": {
 		"prefix": ["#", "#d", "#de", "#def", "#defi", "#defin"],
 		"body": [
-			"#define $1 $2"
+			"#define ${1:NAME} ${2:VALUE}"
 		],
 		"description": "define定义"
 	},
@@ -27,17 +27,30 @@
 	"添加#ifdef定义语句块": {
 		"prefix": ["#", "#i", "#if", "#ifd", "#ifde"],
 		"body": [
-			"#ifdef ${DEBUG}",
-			"\t$1",
+			"#ifdef ${1:DEBUG}",
+			"\t$2",
 			"#endif"
 		],
 		"description": "添加#ifdef定义语句块"
+	},
+	// 添加头文件模板语句块
+	"添加头文件模板语句块": {
+		"prefix": ["he", "hea", "head"],
+		"body": [
+			"#ifndef ${1:__FILENAME_H__}",
+			"#define ${1:__FILENAME_H__}",
+			"",
+			"$2",
+			"",
+			"#endif // ${1:__FILENAME_H__}",
+		],
+		"description": "添加头文件模板语句块"
 	},
 	// if语句块
 	"if语句块": {
 		"prefix": ["if"],
 		"body": [
-			"if ($1) {",
+			"if (${1:booltype}) {",
 			"\t$2",
 			"}"
 		],
@@ -47,7 +60,7 @@
 	"if-else语句块": {
 		"prefix": ["if", "ife", "ifel"],
 		"body": [
-			"if ($1) {",
+			"if (${1:booltype}) {",
 			"\t$2",
 			"} else {",
 			"\t$3",
@@ -59,9 +72,9 @@
 	"if-else-if语句块": {
 		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
 		"body": [
-			"if ($1) {",
+			"if (${1:booltype}) {",
 			"\t$2",
-			"} else if ($3) {",
+			"} else if (${3:booltype}) {",
 			"\t$4",
 			"} else {",
 			"\t$5",
@@ -73,8 +86,8 @@
 	"switch语句块": {
 		"prefix": ["sw", "swi", "swit", "switc", "switch"],
 		"body": [
-			"switch ($1) {",
-			"\tcase $2:",
+			"switch (${1:value}) {",
+			"\tcase ${2:item}:",
 			"\t\tbreak;",
 			"\tdefault:",
 			"\t\tbreak;",
@@ -86,8 +99,9 @@
 	"while语句块": {
 		"prefix": ["wh", "whi", "whil", "while"],
 		"body": [
-			"while ($1) {",
+			"while (${1:booltype}) {",
 			"\t$2",
+			"\t${3:break;}",
 			"}"
 		],
 		"description": "while语句块"
@@ -97,7 +111,7 @@
 		"prefix": ["fo", "for"],
 		"body": [
 			"int i;",
-			"for (i = 0; i <= $1; i++) {",
+			"for (i = 0; i <= ${1:size}; i++) {",
 			"\t$2",
 			"}",
 		],
@@ -107,8 +121,8 @@
 	"添加struct结构体": {
 		"prefix": ["st", "str", "stru", "struc", "struct"],
 		"body": [
-			"struct ${MyStruct} {",
-			"\t$1",
+			"struct ${1:name} {",
+			"\t$2",
 			"};",
 		],
 		"description": "添加struct结构体"
@@ -117,8 +131,8 @@
 	"添加enum枚举": {
 		"prefix": ["en", "enu", "enum"],
 		"body": [
-			"enum ${MyEnum} {",
-			"\t$1",
+			"enum ${1:name} {",
+			"\t$2",
 			"};"
 		],
 		"description": "添加enum枚举"
@@ -127,8 +141,8 @@
 	"添加function函数": {
 		"prefix": ["fu", "fun", "func", "funct", "functi"],
 		"body": [
-			"int function_name(int arguments) {",
-			"\t$1",
+			"int ${1:function_name}(int ${2:arguments}) {",
+			"\t$3",
 			"\treturn 0;",
 			"}",
 		],
@@ -140,6 +154,7 @@
 		"body": [
 			"#include <stdio.h>",
 			"int main (int argc, char *argv[]) {",
+			"\t$1",
 			"\treturn 0;",
 			"}",
 		],
@@ -149,7 +164,7 @@
 	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
-			"printf(\"[DEBUG] [%s at line:%d] - $1:[%$2] \\n\", __func__, __LINE__, $3);"
+			"printf(\"[DEBUG] [%s at line:%d] - ${1:variable}:[%${2:s}] \\n\", __func__, __LINE__, ${1:variable});"
 		],
 		"description": "添加print语句"
 	},
@@ -163,7 +178,7 @@
 	},
 	// 添加多行注释
 	"添加多行注释": {
-		"prefix": ["/", "/*", "co", "com", "comm", "comme", "commen", "comment"],
+		"prefix": ["co", "com", "comm", "comme", "commen", "comment"],
 		"body": [
 			"/**************************************************************",
 			" * System:         $1",
@@ -174,5 +189,27 @@
 			" **************************************************************/",
 		],
 		"description": "添加多行注释"
+	},
+	// 添加动态内存分配语句块(malloc)
+	"添加动态内存分配语句块(malloc)": {
+		"prefix": ["ma", "mal", "mall", "mallo", "malloc"],
+		"body": [
+			"#include <stdlib.h>",
+			"#include <string.h>",
+			"char *p_ptr;",
+			"p_ptr = malloc(${1:frombufsize} + 1);",
+			"if (p_ptr == NULL) {",
+			"\tfprintf(stderr, \"[ERROR] [%s at line:%d] - FATAL:Out of memory!\\n\" , __func__, __LINE__);",
+			"\treturn FAILED;",
+			"}",
+			"memcpy(p_ptr, ${2:frombuf}, ${1:frombufsize});",
+			"p_ptr[${1:frombufsize}] = '\\0';",
+			"",
+			"${3://use p_ptr here}",
+			"",
+			"free(p_ptr);",
+			"p_ptr = NULL;",
+		],
+		"description": "添加动态内存分配语句块(malloc)"
 	},
 }

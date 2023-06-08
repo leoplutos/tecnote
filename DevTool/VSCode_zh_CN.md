@@ -6,10 +6,6 @@ VSCode 全称 Visual Studio Code，是微软出的一款轻量级代码编辑器
 ## 下载安装
 https://code.visualstudio.com/#alt-downloads  
 选择windows平台的.zip（x64）即可。  
-将vscode的path设定到环境变量以后，可以用下面的命令打开当前文件夹
-```bash
-code .
-```
 
 ## 常用插件
 * [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
@@ -21,8 +17,26 @@ code .
 * [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的Whitespace++选择一个即可
 * [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
 * [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-* [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance，只要这2个即可
-* [**Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+* [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
+
+* **Java**  
+Java所需插件比较多。有2种安装方式：  
+方式1：直接下载插件包（不推荐）  
+  - [Java6合1插件包](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)  
+  包括6个插件（Language Support for Java，Debugger for Java，Test Runner for Java，Maven for Java，Project Manager for Java，Visual Studio IntelliCode）  
+
+  方式2：**按需下载（推荐）**
+  - [**Language Support for Java**](https://marketplace.visualstudio.com/items?itemName=redhat.java)&nbsp;&nbsp;提供基础支持，代码格式化，代码重构、代码片段、语法高亮、代码自动补全等等核心功能，**需要JDK17或更高**。可在[这里](https://jdk.java.net/archive/)下载
+  - [**Debugger for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)&nbsp;&nbsp;调试
+  - [**Project Manager for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency)&nbsp;&nbsp;管理Java项目、包括引用的库、资源文件、包、类和类成员
+  - [Test Runner for Java(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test)&nbsp;&nbsp;运行和调试 JUnit/TestNG 测试用例
+  - [Maven for Java(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven)&nbsp;&nbsp;Maven支持，管理 Maven 依赖
+  - [Visual Studio IntelliCode(可选)](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)&nbsp;&nbsp;智能代码，AI辅助开发，AI自动补全。支持Java和Python
+  - [Checkstyle for Java(可选)](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)&nbsp;&nbsp;检查错误
+  - [Spring3合1插件包](https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack)  包括3个插件（Spring Boot，Spring Initializr Java，Spring Boot Dashboard）也可按需下载  
+  - [Java Decompiler(可选)](https://marketplace.visualstudio.com/items?itemName=dgileadi.java-decompiler)&nbsp;&nbsp;反编译
+  - [Java Properties(可选)](https://marketplace.visualstudio.com/items?itemName=ithildir.java-properties)&nbsp;&nbsp;properties文件支持
+  - [Lombok Annotations Support(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-lombok)&nbsp;&nbsp;标注支持
 * [**Rust**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 * [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：使用正则表达式，来高亮代码中所有用户想要的文本
 * [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行多种语言的代码片段或代码文件，省掉保存的环节，直接可以运行
@@ -65,6 +79,13 @@ code .
 * [知乎](https://marketplace.visualstudio.com/items?itemName=niudai.vscode-zhihu)
 * [epub reader](https://marketplace.visualstudio.com/items?itemName=renkun.reader)
 
+## 插件的管理
+随着项目的增多，使用VSCode开发多种语言的时候会安装非常多的插件。为了节省内存开销和插件冲突。可以按如下方式设定：
+#### 1.禁用所有插件
+除了一些所有项目共用的插件（比如简体中文和主题）外，默认把其他所有插件全部禁用。
+#### 2.为每个文件夹(工作区)开启只有在这个工程下才使用的插件
+设定方法：点击插件旁边的小齿轮 → 启用(工作区)
+
 ## 常用快捷键
 在VS Code中，符号的意思是指结构体，函数，变量等。
 - Ctrl+鼠标左键 ： 文件、函数等跳转。
@@ -99,29 +120,60 @@ code .
 - Ctrl + n ： 选择第n个终端
 
 ## VSCode的设定层次关系
-系统默认设置（不可修改） → 用户设置 → 工作区设置 → 文件夹设置  
+系统默认设置（不可修改） → **用户设置** → 工作区设置 → **文件夹设置**  
 后者的设置会覆盖前者  
 
 注：工作区可以不打开不设置，即“无工作区设置”，这种情况的层次为：  
-用户设置 → 文件夹设置  
+**用户设置** → **文件夹设置**  
 
-## 工作区的使用
-新建一个工作区：  
+## 工作区的使用（不推荐）
+#### 新建一个工作区
 文件 → 将工作区另存为...   → 选择保存路径  
 保存的文件为[.code-workspace]扩展名，即工作区文件  
-笔者的习惯为为每一个项目保存一个工作区文件，将所有的工作区文件放到一个统一的地方方便快速打开。
+建立工作区后有些文件夹设定会失效，笔者更喜欢无工作区设置。
+
+## 无工作区设置下的管理项目（推荐）
+### 使用VSCode快速打开文件夹
+如果VSCode在环境变量里面的话，使用如下命令即可打开当前文件夹
+```
+code .
+```
+如果VSCode没有在环境变量里面（比如免安装版）的话，新建cmd文件
+```
+start /b D:\VSCode-win32-x64-1.xx.x\code D:\path\to\YourProject
+```
+双击cmd文件即可快速打开文件夹（工程）  
+注：前面加上 start /b 为不打开控制台  
+笔者更喜欢这种方式，只要将所有项目的cmd文件统一放到一起即可快速的打开任意工程
 
 ## 配置编辑器
-刚下载好的 VSCode 还不符合我们的需求，需要进行配置才能顺手。他们所在路径如下
-#### 全局用户设定文件位置
+刚下载好的 VSCode 还不符合我们的需求，需要进行配置才能顺手。各个设定所在路径如下
+### 全局用户设定文件位置
 ```
 C:\Users\user\AppData\Roaming\Code\User
 ```
 * settings.json
 * keybindings.json
 
-#### 工程设定文件位置
-工程根路径的 .vscode 文件夹
+### 工作区设定文件位置
+保存工作区的时候生成的扩展名 .code-workspace 文件，即为工作区设定文件  
+在settings语句块里面，加入设定即可
+```
+{
+	"folders": [
+		{
+			"path": "../path/to"
+		}
+	],
+	"settings": {
+		// 加入配置在这里
+		"python.languageServer": "Default"
+	}
+}
+```
+
+### 文件夹设定文件位置
+文件夹根路径下的 .vscode 文件夹
 * settings.json
 * c_cpp_properties.json
 
@@ -133,8 +185,7 @@ C:\Users\user\AppData\Roaming\Code\User
 * [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 
 #### 文件夹设置（C工程）
-&nbsp;&nbsp;所需插件数量：1  
-&nbsp;&nbsp;插件名称：C/C++  
+&nbsp;&nbsp;所需插件（1个）：C/C++  
 &nbsp;&nbsp;[文件在这里](../C/CSampleProject/.vscode)
 * settings.json
 * c_cpp_properties.json
@@ -143,11 +194,10 @@ C:\Users\user\AppData\Roaming\Code\User
 
 
 #### 文件夹设置（Python工程）
-&nbsp;&nbsp;所需插件数量：2  
-&nbsp;&nbsp;插件名称：Python，Pylance  
-* [settings.json](VSCode-conf/python-project/settings.json)
-* [.env](VSCode-conf/python-project/.env)
-* [main.py](VSCode-conf/python-project/main.py)
+&nbsp;&nbsp;所需插件（2个）：Python，Pylance  
+&nbsp;&nbsp;[文件在这里](../Python/PythonSampleProject/.vscode)
+* settings.json
+* .env
 
 ## 使用VSCode编译和调试（C工程）
 

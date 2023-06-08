@@ -1,28 +1,36 @@
 {//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
 	// 添加Python文件头
 	"添加Python文件头": {
-		"prefix": ["#", "!", "#!", "en", "env"],
+		"prefix": ["#!", "en", "env", "he", "hea", "head"],
 		"body": [
 			"#!/usr/bin/python3",
 			"# -*- coding: utf-8 -*-",
+			"$1",
 		],
 		"description": "添加Python文件头"
 	},
-	// 导入包
-	"导入包": {
+	// from-import导入包
+	"from-import导入包": {
 		"prefix": ["fr", "fro", "from"],
 		"body": [
-			"from $1 import $2",
+			"from ${1:py_file_name(module)} import ${2:function_name}",
 		],
-		"description": "导入包"
+		"description": "from-import导入包"
+	},
+	// import-导入包
+	"import-导入包": {
+		"prefix": ["im", "imp", "impo", "impor", "import"],
+		"body": [
+			"import ${1:py_file_name(module)}",
+		],
+		"description": "import-导入包"
 	},
 	// if语句块
 	"if语句块": {
 		"prefix": ["if"],
 		"body": [
-			"if True:",
-			"    $1",
-			"    pass",
+			"if ${1:True}:",
+			"    $2",
 		],
 		"description": "if语句块"
 	},
@@ -30,12 +38,10 @@
 	"if-else语句块": {
 		"prefix": ["if", "ife", "ifel"],
 		"body": [
-			"if True:",
-			"    $1",
-			"    pass",
-			"else:",
+			"if ${1:True}:",
 			"    $2",
-			"    pass",
+			"else:",
+			"    $3",
 		],
 		"description": "if-else语句块"
 	},
@@ -43,15 +49,12 @@
 	"if-else-if语句块": {
 		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
 		"body": [
-			"if True:",
-			"    $1",
-			"    pass",
-			"elif True:",
+			"if ${1:True}:",
 			"    $2",
-			"    pass",
+			"elif ${3:True}:",
+			"    $4",
 			"else:",
-			"    $3",
-			"    pass",
+			"    $5",
 		],
 		"description": "if-else-if语句块"
 	},
@@ -59,27 +62,27 @@
 	"while语句块": {
 		"prefix": ["wh", "whi", "whil", "while"],
 		"body": [
-			"while True:",
-			"    $1",
-			"    break",
+			"while ${1:True}:",
+			"    $2",
+			"    ${3:break}",
 		],
 		"description": "while语句块"
 	},
-	// for语句块
-	"for语句块": {
-		"prefix": ["fo", "for"],
+	// for-each语句块
+	"for-each语句块": {
+		"prefix": ["fo", "for", "fore"],
 		"body": [
-			"for $1 in $2:",
+			"for ${1:element} in ${2:list}:",
 			"    $3",
 		],
-		"description": "for语句块"
+		"description": "for-each语句块"
 	},
 	// for-in-range语句块
 	"for-in-range语句块": {
 		"prefix": ["fo", "for", "fori"],
 		"body": [
-			"for $1 in range($2):",
-			"    $3",
+			"for i in range(${1:size}):",
+			"    $2",
 		],
 		"description": "for-in-range语句块"
 	},
@@ -89,9 +92,8 @@
 		"body": [
 			"try:",
 			"    $1",
-			"    pass",
 			"except:",
-			"    # import traceback",
+			"    ${2:# import traceback}",
 			"    traceback.print_exc()",
 		],
 		"description": "try-except语句块"
@@ -102,13 +104,11 @@
 		"body": [
 			"try:",
 			"    $1",
-			"    pass",
 			"except:",
-			"    # import traceback",
+			"    ${2:# import traceback}",
 			"    traceback.print_exc()",
 			"finally:",
-			"    $2",
-			"    pass",
+			"    $3",
 		],
 		"description": "try-except-finally语句块"
 	},
@@ -116,7 +116,7 @@
 	"添加列表List": {
 		"prefix": ["li", "lis", "list"],
 		"body": [
-			"$1 = [$2, $3, $4]",
+			"${1:mylist} = [${2:1}, ${3:2}, ${4:3}]",
 		],
 		"description": "添加列表List"
 	},
@@ -124,7 +124,7 @@
 	"添加元组Tuple": {
 		"prefix": ["tu", "tup", "tupl", "tuple"],
 		"body": [
-			"$1 = ($2, $3, $4)",
+			"${1:mytuple} = (${2:'Apple'}, ${3:'Orange'}, ${4:123})",
 		],
 		"description": "添加元组Tuple"
 	},
@@ -132,7 +132,7 @@
 	"添加字典Dictionary": {
 		"prefix": ["di", "dic", "dict", "dicti", "dictio", "diction", "dictiona", "dictionar", "dictionary"],
 		"body": [
-			"$1 = {'$2': $3, '$4': $5}",
+			"${1:mydictionary} = {${2:'key1'}: ${3:'value1'}, ${4:'key2'}: ${5:123}}",
 		],
 		"description": "添加字典Dictionary"
 	},
@@ -140,7 +140,7 @@
 	"添加集合Set": {
 		"prefix": ["se", "set"],
 		"body": [
-			"$1 = set((\"$2\", \"$3\", \"$4\"))",
+			"${1:myset} = set((${2:'Apple'}, ${3:'Orange'}, ${4:'Banana'}))",
 		],
 		"description": "添加集合Set"
 	},
@@ -148,13 +148,12 @@
 	"添加类Class": {
 		"prefix": ["cl", "cla", "clas", "class"],
 		"body": [
-			"class Testclass(object):",
-			"    def __init__(self, foo):",
-			"        self.__foo = foo",
+			"class ${1:MyClass}(object):",
+			"    def __init__(self, ${2:field}):",
+			"        self.__${2:field} = ${2:field}",
 			"",
-			"    def function_name(self):",
+			"    def ${3:function_name}(self):",
 			"        $4",
-			"        pass",
 		],
 		"description": "添加类Class"
 	},
@@ -162,10 +161,8 @@
 	"添加function函数": {
 		"prefix": ["de", "def", "fu", "fun", "func", "funct", "functi"],
 		"body": [
-			"def function_name(arguments) {",
-			"    $1",
-			"    pass",
-			"}",
+			"def ${1:function_name}(${2:arguments=0}):",
+			"    $3",
 		],
 		"description": "添加function函数"
 	},
@@ -173,8 +170,10 @@
 	"添加main函数": {
 		"prefix": ["ma", "mai", "main", "ifmain"],
 		"body": [
-			"if __name__ == \"__main__\":",
+			"def main():",
 			"    $1",
+			"if __name__ == \"__main__\":",
+			"    main()",
 		],
 		"description": "添加main函数"
 	},
@@ -182,7 +181,7 @@
 	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
-			"print(f\"$1:{$1}\")",
+			"print(f\"[DEBUG] [{__name__}] - ${1:variable}:{${1:variable}}\")",
 		],
 		"description": "添加print语句"
 	},

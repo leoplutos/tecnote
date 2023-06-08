@@ -7,10 +7,10 @@
   //"editor.formatOnType": true, //输入最后一行时格式化
   "[c]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-vscode.cpptools"
+    //"editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "[cpp]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-vscode.cpptools"
+    //"editor.defaultFormatter": "ms-vscode.cpptools"
   },
 }

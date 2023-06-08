@@ -1,0 +1,12 @@
+目录结构
+
+PythonSampleProject
+│.env
+│tree.txt
+├.vscode
+│    settings.json
+└src
+  │  main.py
+  └─com
+          sub_mod1.py
+          sub_mod2.py
