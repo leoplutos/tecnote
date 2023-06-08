@@ -15,6 +15,16 @@ https://git-scm.com/download/win
 ## 快速路径
 git-bash.exe可以建立快捷方式，右键→属性→起始位置：粘贴一个路径后。用这个快捷方式启动git-bash就默认在这个路径下。
 
+## 快速打开git-gui
+虽然可以用快速路径打开一个目录，但是还是要输入 git gui 才可打开UI界面。可以用制作一个cmd达到更快的方式。
+```
+cd /d D:\path\to\YourProject
+start /b D:\githome\cmd\git-gui
+```
+双击cmd文件即可快速打开UI界面  
+注：前面加上 start /b 为不打开控制台  
+笔者更喜欢这种方式，只要将所有项目的cmd文件统一放到一起即可快速的打开任意工程的git界面
+
 ## git-bash.exe的环境变量设置
 在git-bash下，也是可以加载.bash_profile文件的。所以可以按如下设定。  
 这里的 [.bash_profile](.bash_profile) 例子文件，请参照使用。

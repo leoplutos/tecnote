@@ -1,7 +1,7 @@
 # Github访问
 
 ## 前言
-因为国内DNS污染等问题，访问github是非常不稳定的。这里介绍二个笔者使用的方法。
+因为国内DNS污染等问题，访问github是非常不稳定的。这里介绍几个笔者使用的方法。
 
 ## 方法1：使用steamcommunity302加速github访问（推荐）
 由羽翼城开发，用来加速steam等游戏领域的软件，它也是可以加速github的  
@@ -29,3 +29,19 @@ https://www.dogfight360.com/blog/475/
 
 然后再去访问 Github.com 就会快很多
 
+
+## 方法3：手动修改hosts文件
+有些时候有一些使用软件的限制，可以从下面挑选1个可以ping通过的ip手动添加到hosts文件中。（**注意备份**）
+#### hosts文件所在路径
+```
+C:\Windows\System32\drivers\etc
+```
+```
+20.27.177.113 github.com
+20.205.243.166 github.com
+20.248.137.48 github.com
+140.82.114.4 github.com
+140.82.113.3 github.com
+140.82.121.3 github.com
+104.244.46.165 github.com
+```
