@@ -125,3 +125,8 @@ gcc -o main.exe libtest.a main.o
 gcc -o main.exe main.o libtest.a
 ```
 
+## 日志库：log.c
+* [log.c](https://github.com/rxi/log.c)  
+如果想打印的内容带颜色，编译的时候需要加上参数 ``-DLOG_USE_COLOR``  
+
+

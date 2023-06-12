@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import logging
+
 
 def sub_fun2():
-    print("sub_fun2 is run.")
+    logging.debug("sub2 function is run.")
     data = [
         ('Apple', 'Fruit'),
         ('Beetroot', 'Vegetable'),
@@ -12,5 +14,5 @@ def sub_fun2():
         ('Eggplant', 'Vegetable'),
         ('Fig', 'Fruit'),
     ]
-    print(f"sub2 data:{data}")
+    logging.info(f"sub2 data:{data}")
     return 2

@@ -268,7 +268,9 @@ w
 ```
 使用Ctrl+d结束发送信息
 
-### 25. 在cmd中使用doskey来实现alias别名功能
+
+# DOS命令
+### 在cmd中使用doskey来实现alias别名功能
 生成doskey
 ```cmd
 doskey ssh4=ssh -t user1@1.2.3.4 -p 22
@@ -277,6 +279,12 @@ doskey ssh4=ssh -t user1@1.2.3.4 -p 22
 ```cmd
 doskey /macros
 ```
+
+### 确认端口
+```
+netstat -nao | find "8080"
+```
+
 
 # 更多
 * [BASH CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/bash.sh)

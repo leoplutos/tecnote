@@ -1,0 +1,26 @@
+目录结构
+
+JavaBatchProject
+├─.vscode
+│      settings.json
+│      tasks.json
+├─bin
+│  │  log4j.xml
+│  │  Main.class
+│  │
+│  └─my
+│      └─sample
+│              Sub1.class
+│              Sub2.class
+├─lib
+│      log4j-1.2.15.jar
+└─src
+    │  log4j.xml
+    │  Main.java
+    │
+    └─my
+        └─sample
+                Sub1.java
+                Sub2.java
+│  build.xml
+│  tree.txt

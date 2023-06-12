@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"configurations": [//按下F5即可开始Debug
+		{
+			"type": "java",
+			"name": "Debug",
+			"request": "attach",
+			"hostName": "localhost",
+			"port": 8000, //tomcat的jpda远程debug启动端口
+			"preLaunchTask": "start_tomcat"
+		}
+	]
+}

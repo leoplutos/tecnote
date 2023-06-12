@@ -1,0 +1,38 @@
+{
+	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6", //配置JDK，需要JDK17或更高，注意：是配置到根路径，不是配置到bin路径
+	"java.jdt.ls.vmargs": "-Dfile.encoding=UTF-8", //添加Java语言服务器的参数
+	"java.configuration.runtimes": [
+		 //配置不同的JDK版本编译项目，注意：是配置到根路径，不是配置到bin路径
+		{
+			"name": "JavaSE-1.7",
+			"path": "D:\\Tools\\WorkTool\\Java\\jdk1.7.0_25",
+		},
+		{
+			"name": "JavaSE-17",
+			"path": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
+			"default": true //默认JDK
+		},
+	],
+	"java.project.sourcePaths": [ //设置源码路径
+		"src"
+	],
+	"java.project.outputPath": "WebContent/WEB-INF/classes", //设置编译结果路径
+	"java.project.referencedLibraries": {
+		"include": [ //导入的jar
+			"WebContent/WEB-INF/lib/*.jar",
+		],
+		"exclude": [ //排除的jar
+			"WebContent/WEB-INF/lib/sources/**"
+		],
+		"sources": { //jar的代码设定
+			"WebContent/WEB-INF/lib/bar.jar": "lib/sources/bar-src.jar"
+		}
+	},
+	//"editor.codeLens": false, //不在编辑器中显示codeLens，不表示main函数上方的[Run | Debug]
+	"java.format.settings.profile": "GoogleStyle",//使用gogole样式格式化代码
+	"java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8", //添加Java运行调试的参数
+	"java.debug.settings.enableRunDebugCodeLens": false, //在main函数上方禁用[Run | Debug]标记
+	"java.dependency.packagePresentation": "hierarchical", //分层显示jar包结构
+	//"java.autobuild.enabled": false, //禁止自动编译
+	//"java.settings.url":".settings/org.eclipse.jdt.core.prefs", //设定Java设置文件地址
+}

@@ -1,0 +1,203 @@
+{
+	// if语句块
+	"if语句块": {
+		"prefix": ["if"],
+		"body": [
+			"if (${1:true}) {",
+			"\t$2",
+			"}"
+		],
+		"description": "if语句块"
+	},
+	// if-else语句块
+	"if-else语句块": {
+		"prefix": ["if", "ife", "ifel"],
+		"body": [
+			"if (${1:true}) {",
+			"\t$2",
+			"} else {",
+			"\t$3",
+			"}",
+		],
+		"description": "if-else语句块"
+	},
+	// if-else-if语句块
+	"if-else-if语句块": {
+		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
+		"body": [
+			"if (${1:true}) {",
+			"\t$2",
+			"} else if (${3:true}) {",
+			"\t$4",
+			"} else {",
+			"\t$5",
+			"}",
+		],
+		"description": "if-else-if语句块"
+	},
+	// switch语句块
+	"switch语句块": {
+		"prefix": ["sw", "swi", "swit", "switc", "switch"],
+		"body": [
+			"switch (${1:expression}) {",
+			"\tcase ${2:value }:",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\tbreak;",
+			"}"
+		],
+		"description": "switch语句块"
+	},
+	// while语句块
+	"while语句块": {
+		"prefix": ["wh", "whi", "whil", "while"],
+		"body": [
+			"while (${1:true}) {",
+			"\t$2",
+			"\t${3:break;}",
+			"}"
+		],
+		"description": "while语句块"
+	},
+	// while-iterator语句块
+	"while-iterator语句块": {
+		"prefix": ["wh", "whi", "whit", "while", "whilei"],
+		"body": [
+			"Iterator<${1:type}> it = ${2:list}.iterator();",
+			"while (it.hasNext()) {",
+			"\t${1:type} ${3:variable} = it.next();",
+			"}"
+		],
+		"description": "while-iterator语句块"
+	},
+	// for语句块
+	"for语句块": {
+		"prefix": ["fo", "for" , "fori"],
+		"body": [
+			"for (int i = 0; i <= ${1:size}; i++) {",
+			"\t$2",
+			"}",
+		],
+		"description": "for语句块"
+	},
+	// for-each语句块
+	"for-each语句块": {
+		"prefix": ["fo", "for", "fore"],
+		"body": [
+			"for (${1:type} ${2:variable} : ${3:list}) {",
+			"\t$4",
+			"}",
+		],
+		"description": "for-each语句块"
+	},
+	// try-catch语句块
+	"try-catch语句块": {
+		"prefix": ["tr", "try", "tryc"],
+		"body": [
+			"try {",
+			"\t$1",
+			"} catch (Exception e) {",
+			"\t${2:e.printStackTrace();}",
+			"}",
+		],
+		"description": "try-except语句块"
+	},
+	// try-catch-finally语句块
+	"try-catch-finally语句块": {
+		"prefix": ["tr", "try", "tryc", "tryf", "trycf"],
+		"body": [
+			"try {",
+			"\t$1",
+			"} catch (Exception e) {",
+			"\t${2:e.printStackTrace();}",
+			"} finally {",
+			"\t$3",
+			"}",
+		],
+		"description": "try-catch-finally语句块"
+	},
+	// 添加列表List
+	"添加列表List": {
+		"prefix": ["li", "lis", "list"],
+		"body": [
+			"List<${1:type}> ${2:variable} = new ArrayList<${1:type}>();",
+		],
+		"description": "添加列表List"
+	},
+	// 添加HashMap
+	"添加HashMap": {
+		"prefix": ["ma", "map"],
+		"body": [
+			"Map<${1:key}, ${2:value}> ${3:variable} = new LinkedHashMap<${1:key}, ${2:value}>();",
+		],
+		"description": "添加HashMap"
+	},
+	// 添加类Class
+	"添加类Class": {
+		"prefix": ["cl", "cla", "clas", "class"],
+		"body": [
+			"${1:public} class ${2:MyClass} {",
+			"\t$3",
+			"}",
+		],
+		"description": "添加类Class"
+	},
+	// 添加类的私有属性
+	"添加类的私有属性": {
+		"prefix": ["fi", "fie", "fiel", "field", "prf"],
+		"body": [
+			"private ${1:String} ${2:name};"
+		],
+		"description": "添加类的私有属性"
+	},
+	// 添加function函数
+	"添加function函数": {
+		"prefix": ["fu", "fun", "func", "funct", "functi"],
+		"body": [
+			"${1:protected} ${2:void} ${3:function_name}(${4:type} ${5:args}) {",
+			"\t$6",
+			"}",
+		],
+		"description": "添加function函数"
+	},
+	// 添加main函数
+	"添加main函数": {
+		"prefix": ["ma", "mai", "main"],
+		"body": [
+			"public static void main(String[] args) throws Exception {",
+			"\t$1",
+			"}",
+		],
+		"description": "添加main函数"
+	},
+	// 添加printf语句
+	"添加printf语句": {
+		"prefix": ["sys", "syso", "sysou", "sysout", "pr", "pri", "prin", "print"],
+		"body": [
+			"System.out.printf(\"[DEBUG] - ${1:variable}:[%${2:s}] \\n\", ${1:variable});"
+		],
+		"description": "添加print语句"
+	},
+	// 添加printf-error语句
+	"添加printf-error语句": {
+		"prefix": ["sys", "syse", "syser", "syserr", "pre", "prer", "prerr", "printerr"],
+		"body": [
+			"System.err.printf(\"[DEBUG] - ${1:variable}:[%${2:s}] \\n\", ${1:variable});"
+		],
+		"description": "添加printf-error语句"
+	},
+	// 添加多行注释
+	"添加多行注释": {
+		"prefix": ["co", "com", "comm", "comme", "commen", "comment"],
+		"body": [
+			"/**************************************************************",
+			" * System:         $1",
+			" * Description:    $2",
+			" * GreatDate:      $3",
+			" * Author:         $4",
+			" * UpdateDate:     $5",
+			" **************************************************************/",
+		],
+		"description": "添加多行注释"
+	},
+}

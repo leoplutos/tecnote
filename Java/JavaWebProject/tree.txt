@@ -1,0 +1,28 @@
+目录结构
+
+JavaWebProject
+├─.vscode
+│      launch.json
+│      settings.json
+│      tasks.json
+├─src
+│  │  log4j.xml
+│  └─my
+│      └─servlet
+│              HelloServlet.java
+│              WorldServlet.java
+│
+└─WebContent
+    └─WEB-INF
+        │  web.xml
+        ├─classes
+        │  │  log4j.xml
+        │  └─my
+        │      └─servlet
+        │              HelloServlet.class
+        │              WorldServlet.class
+        └─lib
+                log4j-1.2.15.jar
+                servlet-api.jar
+│  build.xml
+│  tree.txt

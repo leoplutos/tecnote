@@ -1,5 +1,9 @@
 # Java相关
 
+## Eclipse和VSCode用的warning设定文件
+* [org.eclipse.jdt.core.prefs](.settings/org.eclipse.jdt.core.prefs)
+
+
 ## 一.Wildfly
 
 ### 1.使用jconcole/jvisualvm连接wildfly
@@ -60,9 +64,74 @@ Connection Properties如下填写：
 > Host：服务器IP  
 Port：8787（默认端口）
 
----
 
-## 二.Jar/War相关
+## 二.Tomcat绿色版
+
+#### 普通模式启动
+在tomcat的bin路径下新建 tomat_startup.cmd ，内容如下
+```
+set CATALINA_HOME=D:\Tools\WorkTool\Java\apache-tomcat-9.0.76
+set JAVA_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
+set JRE_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
+%CATALINA_HOME%\bin\startup.bat
+```
+然后双击tomat_startup.cmd即可启动。
+
+#### 远程Debug模式启动
+在tomcat的bin路径下新建 tomat_startup-debug.cmd ，内容如下
+```
+set CATALINA_HOME=D:\Tools\WorkTool\Java\apache-tomcat-9.0.76
+set JAVA_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
+set JRE_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
+%CATALINA_HOME%\bin\catalina.bat jpda start
+```
+然后双击tomat_startup-debug.cmd即可启动。（默认8000端口）
+
+#### 端口冲突解决办法
+**确认端口是否有冲突**  
+```
+netstat -nao | find "8080"
+```
+
+#### 修改端口的设定文件
+```
+tomcathome/conf/server.xml
+```
+
+#### 有时候启动后控制台会闪退，这时看log即可
+```
+tomcathome/logs/catalina.log
+```
+
+#### 控制台乱码解决办法
+```
+tomcathome/conf/logging.properties
+```
+```
+#java.util.logging.ConsoleHandler.encoding = UTF-8
+#java.util.logging.ConsoleHandler.encoding = GBK
+java.util.logging.ConsoleHandler.encoding = SJIS
+```
+
+#### 添加用户
+```
+tomcathome/conf/tomcat-users.xml
+```
+```
+<user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status"/>
+```
+
+#### 配置工程
+```
+tomcathome/conf/Catalina/localhost/JavaWebProject.xml
+```
+```
+<Context path="/JavaWebProject" docBase="D:\Work\WorkSpace\Java\JavaWebProject\WebContent" workDir="D:\Work\WorkSpace\Java\JavaWebProject\Work" />
+```
+
+
+
+## 三.Jar/War相关
 #### war确认
 ```bash
 jar tf lib.war

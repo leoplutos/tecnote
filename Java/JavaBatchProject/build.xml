@@ -1,0 +1,64 @@
+<project name="JavaBatchProject" default="dist" basedir=".">
+	<!--编译好之后的运行命令为：java -Dfile.encoding=UTF-8 -jar JavaBatchProject-20230609.jar-->
+	<description>
+		Java工程的Ant构建例子
+	</description>
+	<!-- 设定全局变量 -->
+	<property name="jar.name" value="JavaBatchProject"/>
+	<property name="src.dir" location="src"/>
+	<property name="build.dir" location="build"/>
+	<property name="dist.dir" location="build_result"/>
+	<property name="lib.dir" value="lib" />
+
+	<target name="init" depends="clean">
+		<!-- 创建时间戳 -->
+		<tstamp/>
+		<!-- 创建build文件夹以构建 -->
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+
+	<!-- 定义第3方库所在路径，不导入sources和javadoc -->
+	<path id="classpath">
+		<fileset dir="${basedir}/">
+			<include name="${lib.dir}/*.jar" />
+			<exclude name="${lib.dir}/*sources.jar"/>
+			<exclude name="${lib.dir}/*javadoc.jar"/>
+		</fileset>
+	</path>
+
+	<target name="compile" depends="init" description="compile the source">
+		<!-- 复制log4j.xml等内容 -->
+		<echo>Copy non-java resources</echo>
+			<copy todir="${build.dir}" overwrite="true">
+			<fileset dir="${src.dir}" excludes="**/*.java"/>
+		</copy>
+		<echo>Start javac compile</echo>
+		<!-- 编译Java工程，从 ${src.dir} 到 ${build.dir} -->
+		<javac srcdir="${src.dir}" destdir="${build.dir}"
+				source="1.8" target="1.8" encoding="UTF-8" classpathref="classpath"
+				debug="on" verbose="off"
+				includeantruntime="false">
+				<compilerarg value="-Xlint:unchecked" />
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution">
+		<!-- 把 ${build.dir} 下编译好的所有内容打包到 JavaBatchProject-${DSTAMP}.jar -->
+		<jar jarfile="${dist.dir}/${jar.name}-${DSTAMP}.jar" basedir="${build.dir}">
+			<manifest>
+				<!-- 定义从jar文件运行的main函数 -->
+				<attribute name="Main-Class" value="Main"/>
+			</manifest>
+			<!-- 将lib文件夹下的第三方库也一起打包 -->
+			<zipgroupfileset dir="${lib.dir}" includes="*.jar">
+			</zipgroupfileset>
+		</jar>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- 删除 ${build.dir} 和 ${dist.dir} -->
+		<delete dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+</project>

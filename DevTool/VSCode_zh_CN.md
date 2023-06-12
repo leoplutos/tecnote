@@ -1,7 +1,8 @@
 # VS Code
 
 ## VSCode 简介
-VSCode 全称 Visual Studio Code，是微软出的一款轻量级代码编辑器，免费、开源而且功能强大。它支持几乎所有主流的程序语言的语法高亮、智能代码补全、自定义热键、括号匹配、代码片段、代码对比 Diff、GIT 等特性，支持插件扩展，并针对网页开发和云端应用开发做了优化。软件跨平台支持 Win、Mac 以及 Linux。
+VSCode 全称 Visual Studio Code，是微软出的一款轻量级代码编辑器，免费、开源而且功能强大。它支持几乎所有主流的程序语言的语法高亮、智能代码补全、自定义热键、括号匹配、代码片段、代码对比 Diff、GIT 等特性，支持插件扩展，并针对网页开发和云端应用开发做了优化。软件跨平台支持 Win、Mac 以及 Linux。  
+VSCode以目录为工程单元，再也没有 .proj, .vcproj, xcodeproj 等垃圾，不依赖工程构件文件。
 
 ## 下载安装
 https://code.visualstudio.com/#alt-downloads  
@@ -52,6 +53,9 @@ Java所需插件比较多。有2种安装方式：
 * [Rainbow CSV(可选)](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
 * [Error Lens(可选)](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
 * [Log File Highlighter(可选)](https://marketplace.visualstudio.com/items?itemName=emilast.LogFileHighlighter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：高亮log文件
+* [Peacock(可选)](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个工程设置不同的主题
+* [indent-rainbow(可选)](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个缩进显示不同的颜色（Python开发很有用）
+
 
 ## Web插件
 * [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
@@ -62,10 +66,12 @@ Java所需插件比较多。有2种安装方式：
 * [Sql Tools(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
 * [Database Client(可选)](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client2)
 * [ppz(可选)](https://marketplace.visualstudio.com/items?itemName=ppz.ppz)
+* [SQL Beautify(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：SQL语句格式化
+
 
 ## 主题插件
 * [主题流行趋势](https://vscodethemes.com/)
-* [**Tomorrow and Tomorrow Night Theme Kit**（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
+* [Tomorrow and Tomorrow Night Theme Kit（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
 * [Winter is Coming Theme（亮色系）](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
 * [Brackets Light Pro（亮色系）](https://marketplace.visualstudio.com/items?itemName=fehey.brackets-light-pro)
 * [One Dark Pro（暗色系）](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
@@ -87,9 +93,10 @@ Java所需插件比较多。有2种安装方式：
 设定方法：点击插件旁边的小齿轮 → 启用(工作区)
 
 ## 常用快捷键
-在VS Code中，符号的意思是指结构体，函数，变量等。
+在VS Code中，符号（Symbols）的意思是指结构体，函数，变量等。
 - Ctrl+鼠标左键 ： 文件、函数等跳转。
-- F12 ： 转到定义
+- F12 ： 文件、函数等跳转。
+- **Ctrl + .** ： 显示代码操作（就是左边的那个小灯泡）
 - Ctrl + ] ： 转到定义（vim插件）
 - **Ctrl + F12** ： 转到实现（对于接口和抽象方法）
 - **Shift + F12** ： 转到引用
@@ -100,11 +107,12 @@ Java所需插件比较多。有2种安装方式：
 - **Ctrl + P** ： 快速文件导航（最实用的功能）
 - Ctrl + Tab ： 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
 - **Alt + F12** ： 在预览窗口查看函数
-- **Shift + Alt + F12** ： 打开引用视图
+- **Shift + Alt + F12** ： 打开引用视图并表示所有调用
 - **Ctrl + Space** ： 触发建议小部件。
 - **Ctrl + Shift + P** ： 打开命令导航  
   run build task ： 运行构建任务（对应task.json的build组）  
-  run test task ： 运行测试任务（对应task.json的test组）
+  run test task ： 运行测试任务（对应task.json的test组）  
+  task 空格 ： 快速运行一个自定义task
 - Shift + Alt + F ： 代码格式化
 - **Ctrl + KV** ： Markdown的编辑和预览左右分割表示（重新映射成 shift+space -> m）
 - Ctrl + Shift + V ： 预览markdown文件
@@ -118,6 +126,21 @@ Java所需插件比较多。有2种安装方式：
 - Ctrl + 1 ： 选择第1个终端
 - Ctrl + 2 ： 选择第2个终端
 - Ctrl + n ： 选择第n个终端
+
+## 常用命令
+命令的运行方式为按下 F1 或者 Ctrl + Shift + P
+- 将缩进全部转换为制表符(TAB)
+```
+>Convert indentation to Tabs
+```
+- 将缩进全部转换为空格
+```
+>Convert indentation to Spaces
+```
+- 打开/关闭辅助侧边栏
+```
+>workbench.action.toggleAuxiliaryBar
+```
 
 ## VSCode的设定层次关系
 系统默认设置（不可修改） → **用户设置** → 工作区设置 → **文件夹设置**  
@@ -184,6 +207,12 @@ C:\Users\user\AppData\Roaming\Code\User
 * [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
 * [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 
+## VSCode里面跳转不可用时的解决办法
+#### 1.先把相关语言的所有插件全部禁用
+#### 2.关闭所有VSCode
+#### 3.重新打开VSCode
+#### 4.打开相关语言的插件
+
 #### 文件夹设置（C工程）
 &nbsp;&nbsp;所需插件（1个）：C/C++  
 &nbsp;&nbsp;[文件在这里](../C/CSampleProject/.vscode)
@@ -198,6 +227,27 @@ C:\Users\user\AppData\Roaming\Code\User
 &nbsp;&nbsp;[文件在这里](../Python/PythonSampleProject/.vscode)
 * settings.json
 * .env
+
+#### 文件夹设置（Java工程）
+&nbsp;&nbsp;所需插件（3个）：Language Support for Java，Debugger for Java，Project Manager for Java  
+&nbsp;&nbsp;[Batch工程](../Java/JavaBatchProject/.vscode)
+* settings.json
+* tasks.json  
+
+&nbsp;&nbsp;[Web工程](../Java/JavaWebProject/.vscode)
+* launch.json
+* settings.json
+* tasks.json
+
+#### VSCode导入Java工程时，不识别的问题
+有些项目的Java工程是Eclipse创建的，在导入的时候会有些问题。  
+可以把Java工程里面的Eclipse设定内容全部删除（比如.project）。  
+然后再VSCode中，按F1，然后输入 ``Java: Clean Java Language Server Workspace``  
+之后即可识别。
+
+#### 另外，强制编译的命令如下
+``Java: Force Java Compilation``
+
 
 ## 使用VSCode编译和调试（C工程）
 

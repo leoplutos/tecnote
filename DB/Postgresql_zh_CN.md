@@ -30,3 +30,6 @@ su - enterprisedb
 /usr/edb/as14/bin/pg_ctl reload
 ```
 
+## pgAdmin4里面格式化SQL快捷键
+Ctrl + Shift + k
+

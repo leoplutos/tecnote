@@ -1,0 +1,67 @@
+<project name="JavaWebProject" default="dist" basedir=".">
+	<description>
+		War工程的Ant构建例子
+	</description>
+	<!-- 设定全局变量 -->
+	<property name="war.name" value="JavaWebProject"/>
+	<property name="src.dir" location="src"/>
+	<property name="build.dir" location="build"/>
+	<property name="dist.dir" location="build_result"/>
+	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
+	<property name="build.webroot" location="build/WebContent"/>
+	<property name="build.classes.dir" location="build/WebContent/WEB-INF/classes"/>
+
+	<target name="init" depends="clean">
+		<!-- 创建文件夹以构建 -->
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+	</target>
+
+	<!-- 定义第3方库所在路径，不导入sources和javadoc -->
+	<path id="classpath">
+		<fileset dir="${basedir}/">
+			<include name="${lib.dir}/*.jar" />
+			<exclude name="${lib.dir}/*sources.jar"/>
+			<exclude name="${lib.dir}/*javadoc.jar"/>
+		</fileset>
+	</path>
+
+	<target name="compile" depends="init" description="compile the source">
+		<!-- 复制log4j.xml等内容 -->
+		<echo>Copy non-java resources</echo>
+		<copy todir="${build.webroot}" overwrite="true">
+			<fileset dir="WebContent">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.class" />
+			</fileset>
+		</copy>
+		<echo>Start javac compile</echo>
+		<!-- 编译Java工程，从 ${src.dir} 到 ${build.classes.dir} -->
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}"
+				source="1.8" target="1.8" encoding="UTF-8" classpathref="classpath"
+				debug="on" verbose="off"
+				includeantruntime="false">
+				<compilerarg value="-Xlint:unchecked" />
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution">
+		<!-- 把 ${build.classes.dir} 下编译好的所有内容打包到 ${war.name}.war -->
+		<war destfile="${dist.dir}/${war.name}.war" 
+						webxml="${build.webroot}/WEB-INF/web.xml">
+			<classes dir="${build.classes.dir}"/>
+			<fileset dir="${dist.dir}"/>
+			<lib dir="${lib.dir}"/>
+			<manifest>
+				<attribute name="AntCreateWar" value="ant.Create.War" />
+			</manifest>
+		</war>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- 删除 ${build.dir} 和 ${dist.dir} -->
+		<delete dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+</project>

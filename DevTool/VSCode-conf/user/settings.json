@@ -13,9 +13,11 @@
   //"editor.letterSpacing": 0.3, //字母间距
   //"editor.lineHeight": 22, //行高
   "editor.minimap.enabled": false, //设定不显示右侧的minimap
+  "editor.tabSize": 4, //设定tab长度
+  "editor.detectIndentation": false, //不要通过打开文件来计算制表符大小
   "editor.renderWhitespace": "selection", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
   "editor.renderControlCharacters": true, //设定显示控制字符
-  "editor.renderLineHighlight": "all", //高亮显示现在行号
+  "editor.renderLineHighlight": "all", //突出显示导航线和当前行
   "editor.insertSpaces": false, //按下tab时不替换为空格
   "editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
   "editor.autoClosingQuotes": "beforeWhitespace",
@@ -54,25 +56,26 @@
   //-----------------------------------------------"
   //               颜色设定                        "
   //-----------------------------------------------"
-  "workbench.colorTheme": "Default Light+", //设定主题
+  "workbench.colorTheme": "Default Dark+", //设定主题
   "workbench.colorCustomizations": {
-    "[Tomorrow Night]": { //Tomorrow Night主题的自定义
-      //"editor.background": "#fffbf0", //设定编辑器背景
-      //"editor.foreground": "#c5c8c6", //设定编辑器前景
+    "[Default Dark+]": { //Tomorrow Night主题的自定义
+      //"editor.background": "#1E1E1E", //设定编辑器背景
+      //"editor.foreground": "#D4D4D4", //设定编辑器前景
       //"editorLineNumber.foreground": "#5faf87", //设定行号颜色
       "editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
       //"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
       //"editor.lineHighlightBackground": "#e9ebfe" //当前行背景颜色
       "editor.selectionBackground": "#000000", //选择内容的背景
-      "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+      "editor.selectionHighlightBackground": "#000000", //选中变量的背景
+      //"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
       "editorWhitespace.foreground": "#444444", //选中的tab和空格的颜色，因为设定为selection
       "editorCursor.background": "#000000", //光标背景色
       "editorCursor.foreground": "#00ffff", //光标前景色
-      "editor.findMatchBackground" : "#00d700", //查找内容颜色
-      "editor.findMatchHighlightBackground" : "#ffff00", //查找内容颜色
+      "editor.findMatchBackground" : "#000000", //当前查找内容颜色。浅绿：#00d700
+      "editor.findMatchHighlightBackground" : "#314365", //所有查找内容颜色。黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
       //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
-      "terminal.background": "#000000", //终端背景色
-      "terminal.foreground": "#BFBFBF", //终端前景色
+      "terminal.background": "#1d1f21", //终端背景色
+      "terminal.foreground": "#c5c8c6", //终端前景色
       "terminalCursor.background": "#000000", //终端光标背景色
       "terminalCursor.foreground": "#00ffff" //终端光标前景色
     },
@@ -84,6 +87,7 @@
       //"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
       "editor.lineHighlightBackground": "#1073cf2d", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
       //"editor.selectionBackground": "#000000", //选择内容的背景
+      //"editor.selectionHighlightBackground": "#000000", //选中变量的背景
       "editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
       "editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
       "editorCursor.background": "#F8F8F0", //光标背景色
@@ -92,20 +96,21 @@
       "editor.findMatchHighlightBackground" : "#ffff00", //查找内容颜色
       //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
       "terminal.background": "#1d1f21", //终端背景色
-      "terminal.foreground": "#d0d0d0", //终端前景色
+      "terminal.foreground": "#c5c8c6", //终端前景色
       "terminalCursor.background": "#000000", //终端光标背景色
       "terminalCursor.foreground": "#00ffff" //终端光标前景色
     },
   },
   "editor.tokenColorCustomizations": {
-    "[Tomorrow Night]": { //Tomorrow Night主题的自定义
+    "[Default Dark+]": { //Tomorrow Night主题的自定义
       "comments": "#606060", //设定注释颜色
       //"numbers": "#00ffff", //设定数字颜色
       //"strings": "#408080", //设定字符串颜色
       "variables": "#c5c8c6", //设定变量颜色
       //"types": "#ff0000", //设定类型颜色
       //"keywords": {"foreground":"#0087ff", "fontStyle": "bold"}, //设定关键字颜色
-      "keywords": {"foreground":"#00ff88", "fontStyle": "bold"}, //设定关键字颜色
+      //"keywords": {"foreground":"#00ff88", "fontStyle": "bold"}, //设定关键字颜色
+	  "keywords": {"fontStyle": "bold"}, //设定关键字颜色
       //"functions": "#008787", //设定函数颜色
       "textMateRules": [], //作用域所对应的颜色
     },
@@ -180,7 +185,10 @@
   //-----------------------------------------------"
   //               其他设定                        "
   //-----------------------------------------------"
+  "git.enabled": false, //禁用git组件
   //"git.path": "D:\\Tool\\Git\\cmd\\git.exe", // 设定git
+  //"git.autofetch": false, // git不自动fetch
+  //"git.autorefresh": false, // git不自动刷新
   "git.ignoreMissingGitWarning": true, //忽略git警告
   "telemetry.telemetryLevel": "off", //禁用错误报告
   "workbench.enableExperiments": false, //禁用实验
@@ -197,18 +205,18 @@
   "whitespacepp.textEOF": "[EOF]", //EOF（文件结尾）的文本。您还可以指定 unicode 字符。
   //暗色系 宽空格#FF6464 tab#444444 换行符#444444
   //"whitespacepp.foreColorTAB": "#444444", //TAB (\t) 的文本颜色。
-  //"whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色#FF6464颜色一致
+  //"whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色trailing-spaces颜色一致
   //"whitespacepp.foreColorLF": "#444444", //换行 (\n) 的文本颜色。
-  //亮色系 宽空格#FF6464 tab#C0C0C0 换行符#C0C0C0
+  //亮色系 宽空格rgba(255,100,100,0.15) tab#C0C0C0 换行符#C0C0C0
   "whitespacepp.foreColorTAB": "#C0C0C0", //TAB (\t) 的文本颜色。
-  "whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色#FF6464颜色一致
+  "whitespacepp.foreColorWS": "rgba(255,100,100,0.15)", //宽空格的文本颜色，设定和trailing-spaces颜色一致
   "whitespacepp.foreColorLF": "#C0C0C0", //换行 (\n) 的文本颜色。
   "whitespacepp.foreColorEOF": "#00FFFF", //EOF（文件结尾）的文本颜色。
   "whitespacepp.changeBackColorTAB": false, //是否更改 TAB (\t) 的背景颜色。
   "whitespacepp.changeBackColorWS": true, //是否更改宽空格的背景颜色。
   "whitespacepp.changeBackColorEOF": true, //是否更改 EOF（文件结尾）的背景颜色。
   //"whitespacepp.backColorTAB": "", //TAB (\t) 的背景色。
-  "whitespacepp.backColorWS": "#FF6464", //宽空格的背景色。
+  "whitespacepp.backColorWS": "rgba(255,0,0,0.3)", //宽空格的背景色。
   "whitespacepp.backColorEOF": "#000000", //EOF（文件结尾）的背景色。
   "whitespacepp.renderingDelayMs": 5, //渲染延迟时间，以毫秒为单位。间隔短于延迟时间的绘图请求将被取消。
   "whitespacepp.adjustWidthEOF": 110, //以 % 为单位调整 EOF 的背景宽度。textEOF通过乘以by的长度adjustWidthEOF再除以 100 来计算。

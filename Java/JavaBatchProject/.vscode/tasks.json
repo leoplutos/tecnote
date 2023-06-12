@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{ //这个大括号里是‘Ant（build）’任务，
+			// 启动方式1: Ctrl + Shift + B，启动方式2: Ctrl + Shift + P，然后输入[run build task]，因为是build组
+			"label": "ant_build",
+			"type": "shell",
+			"command": "ant",
+			"args": [
+				"-verbose",
+				"-debug",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{ //这个大括号里是‘Ant（Clean）’任务，
+			// 启动方式1: Ctrl + Shift + p，输入task 空格，选择ant_clean
+			"label": "ant_clean",
+			"type": "shell",
+			"command": "ant clean",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+	]
+}
