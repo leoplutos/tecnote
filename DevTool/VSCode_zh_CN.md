@@ -55,6 +55,7 @@ Java所需插件比较多。有2种安装方式：
 * [Log File Highlighter(可选)](https://marketplace.visualstudio.com/items?itemName=emilast.LogFileHighlighter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：高亮log文件
 * [Peacock(可选)](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个工程设置不同的主题
 * [indent-rainbow(可选)](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个缩进显示不同的颜色（Python开发很有用）
+* [SonarLint(可选)](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：静态代码分析工具
 
 
 ## Web插件
@@ -94,26 +95,27 @@ Java所需插件比较多。有2种安装方式：
 
 ## 常用快捷键
 在VS Code中，符号（Symbols）的意思是指结构体，函数，变量等。
-- Ctrl+鼠标左键 ： 文件、函数等跳转。
-- F12 ： 文件、函数等跳转。
-- **Ctrl + .** ： 显示代码操作（就是左边的那个小灯泡）
-- Ctrl + ] ： 转到定义（vim插件）
+- Ctrl + 鼠标左键 ： 跳转到定义或者函数
+- F12 ： 跳转到定义或者函数
+- **Ctrl + .（点）** ： 显示代码操作（就是左边的那个小灯泡）
+- Ctrl + ] ： 跳转到定义或者函数（vim插件）
 - **Ctrl + F12** ： 转到实现（对于接口和抽象方法）
 - **Shift + F12** ： 转到引用
 - Alt + ← ： 跳转后返回原处
 - Ctrl + t ： 跳转后返回原处（vim插件）
 - Ctrl + t ： 列出全局函数名，选择后快速跳转
-- Ctrl + Shift + O ： 列出函数名，选择后快速跳转
+- Ctrl + Shift + O ： 列出当前文件函数名，选择后快速跳转
 - **Ctrl + P** ： 快速文件导航（最实用的功能）
 - Ctrl + Tab ： 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
 - **Alt + F12** ： 在预览窗口查看函数
-- **Shift + Alt + F12** ： 打开引用视图并表示所有调用
-- **Ctrl + Space** ： 触发建议小部件。
+- **Shift + Alt + F12** ： 打开引用视图并表示所有调用(很有用)
+- **Ctrl + Space** ： 触发建议
 - **Ctrl + Shift + P** ： 打开命令导航  
   run build task ： 运行构建任务（对应task.json的build组）  
   run test task ： 运行测试任务（对应task.json的test组）  
   task 空格 ： 快速运行一个自定义task
 - Shift + Alt + F ： 代码格式化
+- Alt + o ： 在源文件和头文件之间切换（比如log.c和log.h）
 - **Ctrl + KV** ： Markdown的编辑和预览左右分割表示（重新映射成 shift+space -> m）
 - Ctrl + Shift + V ： 预览markdown文件
 - Ctrl + \ ： 左右分割表示当前文件
@@ -126,6 +128,7 @@ Java所需插件比较多。有2种安装方式：
 - Ctrl + 1 ： 选择第1个终端
 - Ctrl + 2 ： 选择第2个终端
 - Ctrl + n ： 选择第n个终端
+
 
 ## 常用命令
 命令的运行方式为按下 F1 或者 Ctrl + Shift + P
@@ -149,13 +152,13 @@ Java所需插件比较多。有2种安装方式：
 注：工作区可以不打开不设置，即“无工作区设置”，这种情况的层次为：  
 **用户设置** → **文件夹设置**  
 
-## 工作区的使用（不推荐）
+## 工作区的使用（不推荐使用）
 #### 新建一个工作区
 文件 → 将工作区另存为...   → 选择保存路径  
 保存的文件为[.code-workspace]扩展名，即工作区文件  
 建立工作区后有些文件夹设定会失效，笔者更喜欢无工作区设置。
 
-## 无工作区设置下的管理项目（推荐）
+## 无工作区设置下的管理项目（推荐使用）
 ### 使用VSCode快速打开文件夹
 如果VSCode在环境变量里面的话，使用如下命令即可打开当前文件夹
 ```
@@ -178,7 +181,7 @@ C:\Users\user\AppData\Roaming\Code\User
 * settings.json
 * keybindings.json
 
-### 工作区设定文件位置
+### 工作区设定文件位置（不推荐使用）
 保存工作区的时候生成的扩展名 .code-workspace 文件，即为工作区设定文件  
 在settings语句块里面，加入设定即可
 ```
@@ -206,12 +209,8 @@ C:\Users\user\AppData\Roaming\Code\User
 * [keybindings.json](VSCode-conf/user/keybindings.json)
 * [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
 * [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
+* [java.json](VSCode-conf/snippets/java.json)&nbsp;&nbsp;&nbsp;&nbsp;java代码片段配置文件（snippets）
 
-## VSCode里面跳转不可用时的解决办法
-#### 1.先把相关语言的所有插件全部禁用
-#### 2.关闭所有VSCode
-#### 3.重新打开VSCode
-#### 4.打开相关语言的插件
 
 #### 文件夹设置（C工程）
 &nbsp;&nbsp;所需插件（1个）：C/C++  
@@ -239,15 +238,19 @@ C:\Users\user\AppData\Roaming\Code\User
 * settings.json
 * tasks.json
 
-#### VSCode导入Java工程时，不识别的问题
+## VSCode导入Java工程时，不识别的问题
 有些项目的Java工程是Eclipse创建的，在导入的时候会有些问题。  
 可以把Java工程里面的Eclipse设定内容全部删除（比如.project）。  
 然后再VSCode中，按F1，然后输入 ``Java: Clean Java Language Server Workspace``  
 之后即可识别。
-
-#### 另外，强制编译的命令如下
+#### 另外，Java工程的强制编译的命令如下
 ``Java: Force Java Compilation``
 
+## VSCode里面跳转不可用时的解决办法
+* 1.先把相关语言的所有插件全部禁用
+* 2.关闭所有VSCode
+* 3.重新打开VSCode
+* 4.启用相关语言的插件
 
 ## 使用VSCode编译和调试（C工程）
 

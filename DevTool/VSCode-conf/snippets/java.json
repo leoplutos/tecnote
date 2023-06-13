@@ -1,4 +1,4 @@
-{
+{//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
 	// if语句块
 	"if语句块": {
 		"prefix": ["if"],
@@ -169,6 +169,22 @@
 			"}",
 		],
 		"description": "添加main函数"
+	},
+	// 添加日志定义-log4j
+	"添加日志定义-log4j": {
+		"prefix": ["lo", "log", "logd", "logde", "addl"],
+		"body": [
+			"protected final Logger log = Logger.getLogger(this.getClass());",
+		],
+		"description": "添加日志定义-log4j"
+	},
+	// 添加打印日志-log4j
+	"添加打印日志-log4j": {
+		"prefix": ["lo", "log", "logd", "logde", "logdeb"],
+		"body": [
+			"log.${1:debug}(\"${2:message}\", ${3:exception});"
+		],
+		"description": "添加打印日志-log4j"
 	},
 	// 添加printf语句
 	"添加printf语句": {

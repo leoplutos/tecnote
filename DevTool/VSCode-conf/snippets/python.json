@@ -177,6 +177,34 @@
 		],
 		"description": "添加main函数"
 	},
+	// 添加日志定义
+	"添加日志定义": {
+		"prefix": ["lo", "log", "logd", "logde", "addl"],
+		"body": [
+			"import logging",
+			"",
+			"logging.basicConfig(",
+			"    level=logging.DEBUG,",
+			"    format='%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s',",
+			")",
+			"# logging.basicConfig(",
+			"#    handlers=[",
+			"#        logging.FileHandler(filename=\"./debug.log\", encoding='utf-8', mode='a+')",
+			"#    ],",
+			"#    level=logging.DEBUG,",
+			"#    format='%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s',",
+			"# )",
+		],
+		"description": "添加日志定义"
+	},
+	// 添加打印日志
+	"添加打印日志": {
+		"prefix": ["lo", "log", "logd", "logde", "logdeb"],
+		"body": [
+			"logging.${1:debug}(f\"${2:variable}:{${2:variable}}\")",
+		],
+		"description": "添加打印日志"
+	},
 	// 添加print语句
 	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],

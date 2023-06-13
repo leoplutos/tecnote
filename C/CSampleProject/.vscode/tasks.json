@@ -5,8 +5,8 @@
         // 启动方式1: Ctrl + Shift + B，启动方式2: Ctrl + Shift + P，然后输入[run build task]，因为是build组
             "label": "gcc_build", //任务的名字叫gcc_build，注意是大小写区分的，等会在launch中调用这个名字
             "type": "shell", //任务执行的是shell命令，也可以是process
-            //"command": "D:\\Tool\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe", //命令是gcc，在cmd下使用这个
-            "command": "gcc.exe", //命令是gcc，因为在git-bash下配置了.bash_profile所以直接使用gcc.exe
+            "command": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe", //命令是gcc，在cmd下使用这个
+            //"command": "gcc.exe", //命令是gcc，因为在git-bash下配置了.bash_profile所以直接使用gcc.exe
             "args": [
                 "-Wall", //打开所有警告
                 "-fdiagnostics-color=always", //总是使用GCC_COLORS出力消息
@@ -18,15 +18,15 @@
                 "-DDEBUG", //加入调试标记
                 "-static-libgcc", //静态链接libgcc
                 "-std=c11", //语言标准，可根据自己的需要进行修改，写c++要换成c++的语言标准，比如c++11
-                "-I./include", //导入include文件夹下的头文件
-                "src/*.c", //编译所有src下的.c的文件
-                "src/com/*.pc", //编译所有src/com下的.pc的文件
-                "src/com/*.c", //编译所有src/com下的.c的文件
+                "-I${workspaceFolder}\\include", //导入include文件夹下的头文件
+                "${workspaceFolder}\\src\\*.c", //编译所有src下的.c的文件
+                "${workspaceFolder}\\src\\com\\*.pc", //编译所有src/com下的.pc的文件
+                "${workspaceFolder}\\src\\com\\*.c", //编译所有src/com下的.c的文件
                 "-o",
-                "bin/Debug/${fileBasenameNoExtension}.exe" //当前文件名（去掉扩展名）.exe，因为执行模式为shell，在git-bash中必须要在有路径的地方加上单引号或者双引号
+                "${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe" //当前文件名（去掉扩展名）.exe，因为执行模式为shell，在git-bash中必须要在有路径的地方加上单引号或者双引号
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin"
             },
             "problemMatcher": [
                 "$gcc" //使用gcc捕获错误
@@ -41,6 +41,14 @@
                 "kind": "build", //表示这一组任务类型是构建
                 "isDefault": false //不是默认任务
             },
+            "windows": {//因为无法在git-bash中运行，所以特定这个任务使用cmd
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": ["/d", "/c"]
+                    }
+                },
+            }
         },
         {//这个大括号里是‘Ninja（build）’任务，
             // 启动方式1: Ctrl + Shift + B，启动方式2: Ctrl + Shift + P，然后输入[run build task]，因为是build组

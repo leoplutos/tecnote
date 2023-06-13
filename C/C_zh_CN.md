@@ -129,4 +129,7 @@ gcc -o main.exe main.o libtest.a
 * [log.c](https://github.com/rxi/log.c)  
 如果想打印的内容带颜色，编译的时候需要加上参数 ``-DLOG_USE_COLOR``  
 
+## 单元测试和Mock库：Cmockery
+* [Cmockery](https://github.com/google/cmockery)  
+
 

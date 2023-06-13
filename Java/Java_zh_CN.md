@@ -67,6 +67,10 @@ Port：8787（默认端口）
 
 ## 二.Tomcat绿色版
 
+#### Tomcat各个版本和JDK的对应关系
+https://tomcat.apache.org/whichversion.html
+
+
 #### 普通模式启动
 在tomcat的bin路径下新建 tomat_startup.cmd ，内容如下
 ```

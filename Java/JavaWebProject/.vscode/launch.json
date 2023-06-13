@@ -3,11 +3,18 @@
 	"configurations": [//按下F5即可开始Debug
 		{
 			"type": "java",
-			"name": "Debug",
+			"name": "Remote Debug (Attach Tomcat)",
 			"request": "attach",
 			"hostName": "localhost",
 			"port": 8000, //tomcat的jpda远程debug启动端口
 			"preLaunchTask": "start_tomcat"
-		}
+		},
+		{
+			"type": "java",
+			"name": "Remote Debug (Attach WildFly)",
+			"request": "attach",
+			"hostName": "1.2.3.4",
+			"port": 8787, //wildfly服务器设定的jdwp程debug启动端口
+		},
 	]
 }

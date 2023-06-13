@@ -34,6 +34,7 @@
   "editor.inlayHints.enabled": "offUnlessPressed", //在编辑器中启用内嵌提示。on/onUnlessPressed/offUnlessPressed/off，offUnlessPressed为默认不表示按下Ctrl+Alt表示
   "editor.guides.indentation": true, //缩进参考线
   "editor.guides.bracketPairs": "active", //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
+  "editor.unicodeHighlight.invisibleCharacters": false,//禁用不可见突出
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
   //"window.zoomLevel": 0.4, //缩放比例
   "explorer.compactFolders": false, // 资源管理器不采用紧凑模式
@@ -49,6 +50,7 @@
   "outline.showVariables": false, //outline不显示变量
   "search.mode": "newEditor", // 在新的编辑器中搜索
   "search.showLineNumbers": true, // 显示搜索结果所在行号
+  "search.smartCase": true, // 若搜索词全为小写，则不区分大小写进行搜索，否则区分大小写进行搜索。
   "workbench.editor.enablePreview": false, // 全局禁用预览模式
   "workbench.editor.showTabs": true, //每次都新打开
   "workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
@@ -75,7 +77,7 @@
       "editor.findMatchHighlightBackground" : "#314365", //所有查找内容颜色。黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
       //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
       "terminal.background": "#1d1f21", //终端背景色
-      "terminal.foreground": "#c5c8c6", //终端前景色
+      "terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
       "terminalCursor.background": "#000000", //终端光标背景色
       "terminalCursor.foreground": "#00ffff" //终端光标前景色
     },
@@ -92,11 +94,11 @@
       "editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
       "editorCursor.background": "#F8F8F0", //光标背景色
       "editorCursor.foreground": "#1d1f21", //光标前景色
-      "editor.findMatchBackground" : "#00d700", //查找内容颜色
-      "editor.findMatchHighlightBackground" : "#ffff00", //查找内容颜色
+      "editor.findMatchBackground" : "#00d700", //当前查找内容颜色
+      "editor.findMatchHighlightBackground" : "#ffff00", //所有查找内容颜色
       //"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
       "terminal.background": "#1d1f21", //终端背景色
-      "terminal.foreground": "#c5c8c6", //终端前景色
+      "terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
       "terminalCursor.background": "#000000", //终端光标背景色
       "terminalCursor.foreground": "#00ffff" //终端光标前景色
     },
@@ -147,8 +149,10 @@
         "${env:windir}\\Sysnative\\cmd.exe",
         "${env:windir}\\System32\\cmd.exe"
       ],
-      "args": ["/k", "chcp", "65001", // 发行chcp 65001改成utf8编码
-               "&&", "doskey", "ssh4=ssh", "-t", "user@1.2.3.4", "-p", "22"], // 使用doskey命令注册一个别名，实际等于[doskey ssh4=ssh -t user@1.2.3.4 -p 22]
+      "args": [
+      //"/k", "chcp", "65001", // 发行chcp 65001改成utf8编码
+      //         "&&", "doskey", "ssh23=ssh", "-t", "dtpdbat1@10.157.233.23", "-p", "22"], // 使用doskey命令注册一个别名，实际等于[doskey ssh23=ssh -t dtpdbat1@10.157.233.23 -p 22
+      ],
       "overrideName": true,
       "env": {
         "TEST_HOME": "D:\\Work",
@@ -171,7 +175,7 @@
   "terminal.integrated.fontLigatures": true, //设置启用连字
   "terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
   "terminal.integrated.rightClickBehavior": "copyPaste", // 鼠标右键-粘贴
-  "terminal.integrated.sendKeybindingsToShell": true, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效）
+  "terminal.integrated.sendKeybindingsToShell": true, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效，已经绑定到Shift+空格->F）
   "terminal.integrated.cursorBlinking": true, //光标闪烁
   "terminal.integrated.defaultLocation": "editor", //新建终端在编辑器区域打开
   "terminal.integrated.scrollback": 5000, //滚动历史
@@ -192,6 +196,7 @@
   "git.ignoreMissingGitWarning": true, //忽略git警告
   "telemetry.telemetryLevel": "off", //禁用错误报告
   "workbench.enableExperiments": false, //禁用实验
+  "extensions.ignoreRecommendations": true, //忽略插件建议
   //-----------------------------------------------"
   //              Whitespace++插件设定             "
   //-----------------------------------------------"
@@ -224,7 +229,7 @@
   //           Trailing Spaces插件设定             "
   //-----------------------------------------------"
   "trailing-spaces.deleteModifiedLinesOnly": true, //只删除修改的行
-  "trailing-spaces.trimOnSave": false, //保存时自动删除行尾空格（只对修改的行生效）
+  "trailing-spaces.trimOnSave": false, //保存时不自动删除行尾空格（只对修改的行生效）
   //-----------------------------------------------"
   //               vim插件设定                     "
   //-----------------------------------------------"

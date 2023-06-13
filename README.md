@@ -28,6 +28,7 @@
 ## Python相关
 * [Python相关](Python/Python_zh_CN.md)
 * [制作Python绿色版](Python/Python-portable_zh_CN.md)
+* [pdb相关](Python/Pdb_zh_CN.md)
 
 ## C相关
 * [C相关](C/C_zh_CN.md)

@@ -160,6 +160,35 @@
 		],
 		"description": "添加main函数"
 	},
+	// 添加日志定义-logc
+	"添加日志定义-logc": {
+		"prefix": ["lo", "log", "logd", "logde", "addl"],
+		"body": [
+			"#include \"log.h\"",
+			"",
+			"log_set_level(0);",
+			"log_set_quiet(0);",
+			"FILE *debug_log_file;",
+			"debug_log_file = fopen(\"./log_debug.log\", \"ab\");",
+			"if (debug_log_file == NULL) {",
+			"\treturn FAILED;",
+			"}",
+			"log_add_fp(debug_log_file, LOG_DEBUG);",
+			"",
+			"",
+			"",
+			"fclose(debug_log_file);",
+		],
+		"description": "添加日志定义-logc"
+	},
+	// 添加打印日志-logc
+	"添加打印日志-logc": {
+		"prefix": ["lo", "log", "logd", "logde", "logdeb"],
+		"body": [
+			"log_${1:debug}(\"${2:variable}:[%${3:s}]\", ${2:variable});"
+		],
+		"description": "添加打印日志-logc"
+	},
 	// 添加print语句
 	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
