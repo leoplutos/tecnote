@@ -22,7 +22,9 @@
 * [CMake笔记](BuildTool/CMake_zh_CN.md)
 
 ## Rust相关
-* [Rust环境构建](Rust/Rust-DevEnv_zh_CN.md)
+* [Rust环境构建-在线安装（推荐）](Rust/Rust-DevEnv_zh_CN.md)
+* [Rust环境构建-离线安装](Rust/Rust-DevEnv-OffLine_zh_CN.md)
+* [Rust-Cargo](Rust/Rust-Cargo_zh_CN.md)
 * [Rust语言圣经](Rust/Rust-Course_zh_CN.md)
 
 ## Python相关

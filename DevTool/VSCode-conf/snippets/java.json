@@ -136,15 +136,15 @@
 	"添加类Class": {
 		"prefix": ["cl", "cla", "clas", "class"],
 		"body": [
-			"${1:public} class ${2:MyClass} {",
-			"\t$3",
+			"${1|public,private,abstract,final|} class ${TM_FILENAME_BASE} {",
+			"\t$2",
 			"}",
 		],
 		"description": "添加类Class"
 	},
 	// 添加类的私有属性
 	"添加类的私有属性": {
-		"prefix": ["fi", "fie", "fiel", "field", "prf"],
+		"prefix": ["fi", "fie", "fiel", "field"],
 		"body": [
 			"private ${1:String} ${2:name};"
 		],
@@ -154,7 +154,7 @@
 	"添加function函数": {
 		"prefix": ["fu", "fun", "func", "funct", "functi"],
 		"body": [
-			"${1:protected} ${2:void} ${3:function_name}(${4:type} ${5:args}) {",
+			"${1|public,private,protected,final|} ${2:void} ${3:function_name}(${4:type} ${5:args}) {",
 			"\t$6",
 			"}",
 		],
@@ -172,7 +172,7 @@
 	},
 	// 添加日志定义-log4j
 	"添加日志定义-log4j": {
-		"prefix": ["lo", "log", "logd", "logde", "addl"],
+		"prefix": ["logd", "logde", "logdef", "logdefi", "logdefin", "logdefine"],
 		"body": [
 			"protected final Logger log = Logger.getLogger(this.getClass());",
 		],
@@ -180,9 +180,9 @@
 	},
 	// 添加打印日志-log4j
 	"添加打印日志-log4j": {
-		"prefix": ["lo", "log", "logd", "logde", "logdeb"],
+		"prefix": ["lo", "log", "logp", "logpr", "logpri"],
 		"body": [
-			"log.${1:debug}(\"${2:message}\", ${3:exception});"
+			"log.${1|debug,info,warn,error,fatal|}(\"${2:message}\", ${3:exception});"
 		],
 		"description": "添加打印日志-log4j"
 	},
@@ -190,7 +190,7 @@
 	"添加printf语句": {
 		"prefix": ["sys", "syso", "sysou", "sysout", "pr", "pri", "prin", "print"],
 		"body": [
-			"System.out.printf(\"[DEBUG] - ${1:variable}:[%${2:s}] \\n\", ${1:variable});"
+			"System.out.printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", ${2:variable});"
 		],
 		"description": "添加print语句"
 	},
@@ -198,7 +198,7 @@
 	"添加printf-error语句": {
 		"prefix": ["sys", "syse", "syser", "syserr", "pre", "prer", "prerr", "printerr"],
 		"body": [
-			"System.err.printf(\"[DEBUG] - ${1:variable}:[%${2:s}] \\n\", ${1:variable});"
+			"System.err.printf(\"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", ${2:variable});"
 		],
 		"description": "添加printf-error语句"
 	},

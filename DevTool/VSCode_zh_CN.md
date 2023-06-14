@@ -56,6 +56,8 @@ Java所需插件比较多。有2种安装方式：
 * [Peacock(可选)](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个工程设置不同的主题
 * [indent-rainbow(可选)](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个缩进显示不同的颜色（Python开发很有用）
 * [SonarLint(可选)](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：静态代码分析工具
+* [Paste JSON as Code(可选)](https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json转换成代码，主流语言都支持
+* [Compare Folders(可选)](https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹对比差分
 
 
 ## Web插件
@@ -105,11 +107,11 @@ Java所需插件比较多。有2种安装方式：
 - Ctrl + t ： 跳转后返回原处（vim插件）
 - Ctrl + t ： 列出全局函数名，选择后快速跳转
 - Ctrl + Shift + O ： 列出当前文件函数名，选择后快速跳转
-- **Ctrl + P** ： 快速文件导航（最实用的功能）
+- **Ctrl + p** 或者 Ctrl + e ： 快速文件导航（最实用的功能）
 - Ctrl + Tab ： 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
 - **Alt + F12** ： 在预览窗口查看函数
 - **Shift + Alt + F12** ： 打开引用视图并表示所有调用(很有用)
-- **Ctrl + Space** ： 触发建议
+- **Ctrl + Space** 或者 Ctrl + i ： 触发建议
 - **Ctrl + Shift + P** ： 打开命令导航  
   run build task ： 运行构建任务（对应task.json的build组）  
   run test task ： 运行测试任务（对应task.json的test组）  
@@ -128,6 +130,12 @@ Java所需插件比较多。有2种安装方式：
 - Ctrl + 1 ： 选择第1个终端
 - Ctrl + 2 ： 选择第2个终端
 - Ctrl + n ： 选择第n个终端
+- Ctrl + Shift + e ： 移动到左侧的资源管理器
+- Shift + Alt ： 列编辑模式
+- Shift + Alt + ↓ 或者 Shift + Alt + ↑ ： 复制当前行到新的一行
+- Alt + ↓ 或者 Alt + ↑ ： 移动当前行
+- Ctrl + x ： 删除当前行
+- Ctrl + g ： 跳转到特定行
 
 
 ## 常用命令
@@ -225,7 +233,12 @@ C:\Users\user\AppData\Roaming\Code\User
 &nbsp;&nbsp;所需插件（2个）：Python，Pylance  
 &nbsp;&nbsp;[文件在这里](../Python/PythonSampleProject/.vscode)
 * settings.json
-* .env
+* .env  
+注：笔者的工程设定里使用的格式化工具是black  
+需要pip安装black之后，即可出现在python的Scripts文件夹内
+```
+pip install black
+```
 
 #### 文件夹设置（Java工程）
 &nbsp;&nbsp;所需插件（3个）：Language Support for Java，Debugger for Java，Project Manager for Java  
@@ -351,3 +364,8 @@ VS Code 版本 1.70.3 是 Windows 7 用户的最后一个可用版本，版本 1
 #ifndef __INTELLISENSE__
 #endif
 ```
+
+
+# 更多
+* [VSCode提示和技巧](https://github.com/Microsoft/vscode-tips-and-tricks)
+* [awesome vscode](https://github.com/viatsko/awesome-vscode)

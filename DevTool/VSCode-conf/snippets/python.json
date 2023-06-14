@@ -148,7 +148,7 @@
 	"添加类Class": {
 		"prefix": ["cl", "cla", "clas", "class"],
 		"body": [
-			"class ${1:MyClass}(object):",
+			"class ${TM_FILENAME_BASE}(object):",
 			"    def __init__(self, ${2:field}):",
 			"        self.__${2:field} = ${2:field}",
 			"",
@@ -179,19 +179,19 @@
 	},
 	// 添加日志定义
 	"添加日志定义": {
-		"prefix": ["lo", "log", "logd", "logde", "addl"],
+		"prefix": ["logd", "logde", "logdef", "logdefi", "logdefin", "logdefine"],
 		"body": [
 			"import logging",
 			"",
 			"logging.basicConfig(",
-			"    level=logging.DEBUG,",
+			"    level=logging.${1|DEBUG,INFO,WARN,ERROR,FATAL|},",
 			"    format='%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s',",
 			")",
 			"# logging.basicConfig(",
 			"#    handlers=[",
-			"#        logging.FileHandler(filename=\"./debug.log\", encoding='utf-8', mode='a+')",
+			"#        logging.FileHandler(filename=\"./${TM_FILENAME_BASE}_${2|debug,info,warn,error,fatal|}.log\", encoding='utf-8', mode='a+')",
 			"#    ],",
-			"#    level=logging.DEBUG,",
+			"#    level=logging.$1,",
 			"#    format='%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s',",
 			"# )",
 		],
@@ -199,9 +199,9 @@
 	},
 	// 添加打印日志
 	"添加打印日志": {
-		"prefix": ["lo", "log", "logd", "logde", "logdeb"],
+		"prefix": ["lo", "log", "logp", "logpr", "logpri"],
 		"body": [
-			"logging.${1:debug}(f\"${2:variable}:{${2:variable}}\")",
+			"logging.${1|debug,info,warn,error,fatal|}(f\"${2:variable}:{${2:variable}}\")",
 		],
 		"description": "添加打印日志"
 	},
@@ -209,9 +209,17 @@
 	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
-			"print(f\"[DEBUG] [{__name__}] - ${1:variable}:{${1:variable}}\")",
+			"print(f\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [{__name__}] - ${2:variable}:{${2:variable}}\")",
 		],
 		"description": "添加print语句"
+	},
+	// 添加printf-error语句
+	"添加printf-error语句": {
+		"prefix": ["pre", "prer", "prerr", "printerr"],
+		"body": [
+			"print(f\"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] [{__name__}] - ${2:variable}:{${2:variable}}\", file=sys.stderr)",
+		],
+		"description": "添加printf-error语句"
 	},
 	// 添加多行注释
 	"添加多行注释": {

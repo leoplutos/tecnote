@@ -1,15 +1,15 @@
 {//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
 	// include导入系统头文件<>
 	"include导入系统头文件<>": {
-		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu"],
+		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu", "in", "ins"],
 		"body": [
-			"#include <${1:system.h}>"
+			"#include <${1|stdio.h,stdlib.h,string.h,errno.h|}>"
 		],
 		"description": "include导入系统头文件<>"
 	},
 	// include导入用户头文件""
 	"include导入用户头文件\"\"": {
-		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu"],
+		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu", "in", "inu"],
 		"body": [
 			"#include \"${1:user.h}\""
 		],
@@ -17,7 +17,7 @@
 	},
 	// 添加define定义
 	"define定义": {
-		"prefix": ["#", "#d", "#de", "#def", "#defi", "#defin"],
+		"prefix": ["#", "#d", "#de", "#def", "#defi", "#defin", "de", "def"],
 		"body": [
 			"#define ${1:NAME} ${2:VALUE}"
 		],
@@ -25,7 +25,7 @@
 	},
 	// 添加#ifdef定义语句块
 	"添加#ifdef定义语句块": {
-		"prefix": ["#", "#i", "#if", "#ifd", "#ifde"],
+		"prefix": ["#", "#i", "#if", "#ifd", "#ifde", "ifd"],
 		"body": [
 			"#ifdef ${1:DEBUG}",
 			"\t$2",
@@ -37,12 +37,12 @@
 	"添加头文件模板语句块": {
 		"prefix": ["he", "hea", "head"],
 		"body": [
-			"#ifndef ${1:__FILENAME_H__}",
-			"#define ${1:__FILENAME_H__}",
+			"#ifndef _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
+			"#define _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
 			"",
 			"$2",
 			"",
-			"#endif // ${1:__FILENAME_H__}",
+			"#endif // _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
 		],
 		"description": "添加头文件模板语句块"
 	},
@@ -162,30 +162,30 @@
 	},
 	// 添加日志定义-logc
 	"添加日志定义-logc": {
-		"prefix": ["lo", "log", "logd", "logde", "addl"],
+		"prefix": ["logd", "logde", "logdef", "logdefi", "logdefin", "logdefine"],
 		"body": [
 			"#include \"log.h\"",
 			"",
 			"log_set_level(0);",
 			"log_set_quiet(0);",
-			"FILE *debug_log_file;",
-			"debug_log_file = fopen(\"./log_debug.log\", \"ab\");",
-			"if (debug_log_file == NULL) {",
+			"FILE *${1|debug,trace,info,warn,error,fatal|}_log_file;",
+			"$1_log_file = fopen(\"./${TM_FILENAME_BASE}_$1.log\", \"ab\");",
+			"if ($1_log_file == NULL) {",
 			"\treturn FAILED;",
 			"}",
-			"log_add_fp(debug_log_file, LOG_DEBUG);",
+			"log_add_fp($1_log_file, LOG_${2|DEBUG,TRACE,INFO,WARN,ERROR,FATAL|});",
 			"",
+			"$3",
 			"",
-			"",
-			"fclose(debug_log_file);",
+			"fclose($1_log_file);",
 		],
 		"description": "添加日志定义-logc"
 	},
 	// 添加打印日志-logc
 	"添加打印日志-logc": {
-		"prefix": ["lo", "log", "logd", "logde", "logdeb"],
+		"prefix": ["lo", "log", "logp", "logpr", "logpri"],
 		"body": [
-			"log_${1:debug}(\"${2:variable}:[%${3:s}]\", ${2:variable});"
+			"log_${1|debug,trace,info,warn,error,fatal|}(\"${2:variable}:[%${3|s,d,p,f,ld,lf,c|}]\", ${2:variable});"
 		],
 		"description": "添加打印日志-logc"
 	},
@@ -193,15 +193,23 @@
 	"添加print语句": {
 		"prefix": ["pr", "pri", "prin", "print"],
 		"body": [
-			"printf(\"[DEBUG] [%s at line:%d] - ${1:variable}:[%${2:s}] \\n\", __func__, __LINE__, ${1:variable});"
+			"printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [%s at line:%d] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", __func__, __LINE__, ${2:variable});"
 		],
 		"description": "添加print语句"
 	},
+	// 添加printf-error语句
+	"添加printf-error语句": {
+		"prefix": ["pre", "prer", "prerr", "printerr"],
+		"body": [
+			"fprintf(stderr, \"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] [%s at line:%d] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", __func__, __LINE__, ${2:variable});"
+		],
+		"description": "添加printf-error语句"
+	},
 	// 打印sqlca信息（嵌入式SQL）
 	"打印sqlca信息（嵌入式SQL）": {
-		"prefix": ["pr", "pri", "prin", "print"],
+		"prefix": ["prs", "prints", "printsql", "printsqlca"],
 		"body": [
-			"printf(\"[DEBUG] [%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\\n\", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);"
+			"printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\\n\", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);"
 		],
 		"description": "打印sqlca信息（嵌入式SQL）"
 	},

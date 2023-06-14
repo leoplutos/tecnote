@@ -189,6 +189,7 @@
   //-----------------------------------------------"
   //               其他设定                        "
   //-----------------------------------------------"
+  "debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
   "git.enabled": false, //禁用git组件
   //"git.path": "D:\\Tool\\Git\\cmd\\git.exe", // 设定git
   //"git.autofetch": false, // git不自动fetch
@@ -197,6 +198,12 @@
   "telemetry.telemetryLevel": "off", //禁用错误报告
   "workbench.enableExperiments": false, //禁用实验
   "extensions.ignoreRecommendations": true, //忽略插件建议
+  //-----------------------------------------------"
+  //               特别语言设定                    "
+  //-----------------------------------------------"
+  "[python]": {
+    "editor.insertSpaces": true, //按下tab时替换为空格
+  },
   //-----------------------------------------------"
   //              Whitespace++插件设定             "
   //-----------------------------------------------"
