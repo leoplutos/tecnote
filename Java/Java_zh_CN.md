@@ -1,7 +1,10 @@
 # Java相关
 
-## Eclipse和VSCode用的warning设定文件
-* [org.eclipse.jdt.core.prefs](.settings/org.eclipse.jdt.core.prefs)
+## Eclipse和VSCode用的忽略问题设定文件（老旧工程用）
+
+- [org.eclipse.jdt.core.prefs](.settings/org.eclipse.jdt.core.prefs)
+- [官方文档](https://help.eclipse.org/neon/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/JavaCore.html)  
+
 
 
 ## 一.Wildfly

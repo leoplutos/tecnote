@@ -66,7 +66,7 @@
       //"editorLineNumber.foreground": "#5faf87", //设定行号颜色
       "editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
       //"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
-      //"editor.lineHighlightBackground": "#e9ebfe" //当前行背景颜色
+      "editor.lineHighlightBackground": "#121212", //当前行背景颜色
       "editor.selectionBackground": "#000000", //选择内容的背景
       "editor.selectionHighlightBackground": "#000000", //选中变量的背景
       //"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
@@ -137,9 +137,9 @@
       //"args": ["-c", "chcp.com 65001;exec bash -i -l"], //先发行chcp.com 65001改成utf8编码之后，运行bash -i -l
       "args": ["-i", "-l"],
       "overrideName": true,
-      "env": {
-        "TEST_HOME": "/d/Work",
-        "PATH": "${env:PATH}:/d/Work"
+      "env": {//在这里设定所需环境变量，设定好后需要重启
+        //"WORK_HOME": "/d/Work",
+        //"PATH": "${env:PATH}:/d/Work/bin"
       },
       "icon": "terminal-debian",
       "color": "terminal.ansiRed"
@@ -150,12 +150,13 @@
         "${env:windir}\\System32\\cmd.exe"
       ],
       "args": [
-      //"/k", "chcp", "65001", // 发行chcp 65001改成utf8编码
-      //         "&&", "doskey", "ssh23=ssh", "-t", "dtpdbat1@10.157.233.23", "-p", "22"], // 使用doskey命令注册一个别名，实际等于[doskey ssh23=ssh -t dtpdbat1@10.157.233.23 -p 22
+        //"/k", "chcp", "65001", // 发行chcp 65001改成utf8编码
+        //"&&", "doskey", "ssh23=ssh", "-t", "dtpdbat1@10.157.233.23", "-p", "22", // 使用doskey命令注册一个别名，实际等于[doskey ssh23=ssh -t dtpdbat1@10.157.233.23 -p 22]
       ],
       "overrideName": true,
-      "env": {
-        "TEST_HOME": "D:\\Work",
+      "env": {//在这里设定所需环境变量，设定好后需要重启
+        //"WORK_HOME": "D:\\Work",
+        //下面分别设定了cmd下的java,python,git
         "PATH": "${env:path};D:\\Tools\\WorkTool\\Java\\jdk17.0.6\\bin;D:\\Tools\\WorkTool\\Python\\Python38-32;D:\\Tools\\WorkTool\\Team\\Git\\cmd"
       },
       "icon": "terminal-cmd",
@@ -190,6 +191,7 @@
   //               其他设定                        "
   //-----------------------------------------------"
   "debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
+  "debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
   "git.enabled": false, //禁用git组件
   //"git.path": "D:\\Tool\\Git\\cmd\\git.exe", // 设定git
   //"git.autofetch": false, // git不自动fetch
@@ -202,6 +204,9 @@
   //               特别语言设定                    "
   //-----------------------------------------------"
   "[python]": {
+    "editor.insertSpaces": true, //按下tab时替换为空格
+  },
+  "[rust]": {
     "editor.insertSpaces": true, //按下tab时替换为空格
   },
   //-----------------------------------------------"

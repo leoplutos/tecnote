@@ -1,7 +1,8 @@
 # Rust环境构建-离线安装
 
 ## 关于离线安装
-离线安装会带rustc, cargo, rustdoc，标准库和官方文档，但是不会带rustup和rustfmt等其他工具，所以无法升级。不太推荐。
+离线安装会带rustc, cargo, rustdoc，标准库和官方文档，但是不会带rustup，rustfmt，clippy等其他工具，rust自身也所以无法用rustup命令升级。不太推荐。
+
 
 ## Windows环境（gnu工具链）
 #### 下载

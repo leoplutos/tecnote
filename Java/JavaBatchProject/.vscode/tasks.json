@@ -1,5 +1,20 @@
 {
 	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //在这里自定义环境变量
+			"ANT_HOME": "D:\\Tools\\WorkTool\\Java\\apache-ant-1.10.13",
+			"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
+			"CATALINA_HOME": "D:\\Tools\\WorkTool\\Java\\apache-tomcat-9.0.76",
+			"PATH": "${env:path};D:\\Tools\\WorkTool\\Java\\jdk17.0.6\\bin;D:\\Tools\\WorkTool\\Java\\apache-ant-1.10.13\\bin;D:\\Tools\\WorkTool\\Java\\apache-tomcat-9.0.76\\bin",
+		}
+	},
 	"tasks": [
 		{ //这个大括号里是‘Ant（build）’任务，
 			// 启动方式1: Ctrl + Shift + B，启动方式2: Ctrl + Shift + P，然后输入[run build task]，因为是build组
@@ -7,8 +22,8 @@
 			"type": "shell",
 			"command": "ant",
 			"args": [
-				"-verbose",
-				"-debug",
+				//"-verbose",
+				//"-debug",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -30,6 +45,27 @@
 			"label": "ant_clean",
 			"type": "shell",
 			"command": "ant clean",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+		{ //这个大括号里是‘start_tomcat’任务，
+			// 启动方式1: Ctrl + Shift + p，输入task 空格，选择start_tomcat
+			"label": "start_tomcat",
+			"type": "shell",
+			"command": "catalina.bat jpda start", //远程Debug模式启动tomcat，也可以换成普通模式startup.bat
 			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"

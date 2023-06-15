@@ -20,6 +20,7 @@ source $VIMRUNTIME/menu.vim
 "-----------------------------------------------"
 " 设置字体、字号
 set guifont=Inconsolata:h14:cANSI:qDRAFT,JetBrains_Mono:h14:cANSI:qDRAFT
+"set guifont=ＭＳ_ゴシック:h14:cANSI:qDRAFT,Inconsolata:h14:cANSI:qDRAFT,JetBrains_Mono:h14:cANSI:qDRAFT
 "set guifontwide=ＭＳ_ゴシック:h14:cSHIFTJIS:qDRAFT,MS_Gothic:h14:cSHIFTJIS:qDRAFT,Microsoft_YaHei:h14:cGB2312:qDRAFT,Microsoft_YaHei_UI:h14:cGB2312:qDRAFT,SimSun:h14:cGB2312:qDRAFT,新宋体:h14:cGB2312:qDRAFT
 set guifontwide=Microsoft_YaHei:h14:cGB2312:qDRAFT,Microsoft_YaHei_UI:h14:cGB2312:qDRAFT,SimSun:h14:cGB2312:qDRAFT,新宋体:h14:cGB2312:qDRAFT,ＭＳ_ゴシック:h14:cSHIFTJIS:qDRAFT,MS_Gothic:h14:cSHIFTJIS:qDRAFT
 set mousehide                             " 当输入的时候隐藏鼠标
@@ -57,13 +58,7 @@ augroup END
 "-----------------------------------------------"
 "               特殊符号设置                      "
 "-----------------------------------------------"
-set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:↲
+"set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 "set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:⏎
 "set listchars=tab:→\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
-
-"-----------------------------------------------"
-"               颜色设置                        "
-"-----------------------------------------------"
-let scriptPath = expand("<sfile>:p:h")
-exec 'source' scriptPath . '/vim-color-256-rc.vim'
-"exec 'source' scriptPath . '/vim-color-256-rc-light.vim'

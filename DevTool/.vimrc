@@ -320,15 +320,13 @@ nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
 
 "-----------------------------------------------"
 "               颜色设置                        "
+"  默认使用暗色系，修改使用下面的快捷键绑定     "
+"  快捷键：空格+d+空格 - 使用暗色系             "
+"  快捷键：空格+l+空格 - 使用亮色系             "
+"  快捷键：空格+16+空格 - 使用16色              "
 "-----------------------------------------------"
 let scriptPath = expand("<sfile>:p:h")
-if has('gui_running')
-  " Gvim 环境：在[.gvimrc]中设定
-else
-  "exec 'source' scriptPath . '/vim-color-16-rc.vim'
-  exec 'source' scriptPath . '/vim-color-256-rc.vim'
-  "exec 'source' scriptPath . '/vim-color-256-rc-light.vim'
-endif
+exec 'source' scriptPath . '/vim-color-256-rc.vim'
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
@@ -338,10 +336,10 @@ noremap J 10j                        " 大写J，向下10行
 noremap K 10k                        " 大写K，向上10行
 nnoremap + <C-a>                     " +号，数字+1
 nnoremap - <C-x>                     " -号，数字-1
-noremap n nzz                        " 在画面中央表示搜索结果
-noremap N Nzz
-noremap * *zz
-noremap # #zz
+"noremap n nzz                        " 在画面中央表示搜索结果
+"noremap N Nzz
+"noremap * *zz
+"noremap # #zz
 " 窗口移动快捷键
 noremap <TAB>w <C-w>w                " tab+w：移动窗口
 noremap <TAB><left> <C-w><left>      " tab+左：移动到左边窗口
@@ -371,6 +369,12 @@ nnoremap <Leader>P "cP
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " 设定文件只读模式切换：静默运行，快捷键 空格+s+空格
 nnoremap <silent> <SPACE>s<SPACE> :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
+" 载入暗色系配置，快捷键 空格+d+空格
+nnoremap <SPACE>d<SPACE> :exec 'source' scriptPath . '/vim-color-256-rc.vim'<CR>
+" 载入亮色系配置，快捷键 空格+l+空格
+nnoremap <SPACE>l<SPACE> :exec 'source' scriptPath . '/vim-color-256-rc-light.vim'<CR>
+" 载入16色配置，快捷键 空格+16+空格
+nnoremap <SPACE>16<SPACE> :exec 'source' scriptPath . '/vim-color-16-rc.vim'<CR>
 
 "-----------------------------------------------"
 "               设置ctags                       "

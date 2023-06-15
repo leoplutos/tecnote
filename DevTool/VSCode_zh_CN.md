@@ -61,8 +61,9 @@ Java所需插件比较多。有2种安装方式：
 
 
 ## Web插件
+* [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：这个比较全面，还支持SOAP（美中不足是POST内容需要SoupUI解析）
 * [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
-* [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
+
 * [Postcode(可选)](https://marketplace.visualstudio.com/items?itemName=rohinivsenthil.postcode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：于创建和测试简HTTP请求，以及查看响应
 
 ## DB插件
@@ -136,6 +137,7 @@ Java所需插件比较多。有2种安装方式：
 - Alt + ↓ 或者 Alt + ↑ ： 移动当前行
 - Ctrl + x ： 删除当前行
 - Ctrl + g ： 跳转到特定行
+- Ctrl + Alt ： 查看内嵌提示
 
 
 ## 常用命令
@@ -253,11 +255,29 @@ pip install black
 
 ## VSCode导入Java工程时，不识别的问题
 有些项目的Java工程是Eclipse创建的，在导入的时候会有些问题。  
-可以把Java工程里面的Eclipse设定内容全部删除（比如.project）。  
-然后再VSCode中，按F1，然后输入 ``Java: Clean Java Language Server Workspace``  
+可以把Java工程里面的Eclipse设定内容全部删除（比如 .project .settings）。  
+然后在VSCode中，按F1，输入以下命令清理Java语言服务器工作区
+```
+Java: Clean Java Language Server Workspace
+```
 之后即可识别。
-#### 另外，Java工程的强制编译的命令如下
-``Java: Force Java Compilation``
+#### 另外，Java工程的强制编译的命令为
+```
+Java: Force Java Compilation
+```
+也可以使用快捷键： ``Shift + Alt + b``
+
+## 关于老旧的Java工程
+有些项目，并不是开发新工程，而是维护老旧工程，这些工程大多数没有严格的执行代码规范，导致VSCode打开之后会提示很多的问题需要修复。  
+可以在 ``settings.json`` 的 ``java.settings.url`` 选项中，设置 ``org.eclipse.jdt.core.prefs`` 文件来忽略问题提示。  
+一个把绝大多数问题都忽略的设定文件如下：  
+- [org.eclipse.jdt.core.prefs](../Java/.settings/org.eclipse.jdt.core.prefs)  
+
+
+另外``org.eclipse.jdt.core.prefs``的官方文档在这里：
+- [官方文档](https://help.eclipse.org/neon/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/JavaCore.html)  
+
+
 
 ## VSCode里面跳转不可用时的解决办法
 * 1.先把相关语言的所有插件全部禁用
@@ -367,5 +387,6 @@ VS Code 版本 1.70.3 是 Windows 7 用户的最后一个可用版本，版本 1
 
 
 # 更多
+* [VSCode官方文档](https://code.visualstudio.com/docs)
 * [VSCode提示和技巧](https://github.com/Microsoft/vscode-tips-and-tricks)
 * [awesome vscode](https://github.com/viatsko/awesome-vscode)

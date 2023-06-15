@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "GCC 编译和运行", //配置名称
+            "name": "GDB Debug", //配置名称
             "preLaunchTask": "gcc_build", //在launch之前运行的任务名，这个名字一定要跟tasks.json中的任务名字大小写一致
             //"preLaunchTask": "ninja_build", //在launch之前运行的任务名，这个名字一定要跟tasks.json中的任务名字大小写一致
             "type": "cppdbg", //配置类型，cppdbg对应cpptools提供的调试功能；可以认为此处只能是cppdbg

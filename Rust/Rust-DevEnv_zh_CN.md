@@ -144,6 +144,25 @@ rustc --version
 rustup --version
 ```
 
+这些工具分别是
+- cargo ： 包管理器
+- rustc ： 编译器
+- rustfmt ： 格式化工具
+- clippy ： 静态代码分析工具
+- rust-docs ： 官方文档
+- rust-std ： 标准库
+
+## Rust的更新与卸载
+#### 更新rust
+```
+rustup update
+```
+#### 卸载rust
+```
+rustup self uninstall
+```
+
+
 ## Linux环境
 这里拿Ubuntu举例。Ubuntu的换源参照这里。  
 [废旧手机安装Linux](../Other/Android-Linux_zh_CN.md)

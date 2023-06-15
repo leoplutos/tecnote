@@ -6,7 +6,9 @@ import traceback
 import logging
 
 # 因为嵌入版python无法载入PYTHONPATH环境变量，所以用代码动态载入
-sys.path.extend(os.getenv("PYTHONPATH").split(os.pathsep))
+py_path = os.getenv("PYTHONPATH")
+if py_path:
+    sys.path.extend(py_path.split(os.pathsep))
 
 # 想要在VSCode右上角“Run Python File”运行的话，需要在settings.json里面的"terminal.integrated.env.windows"中设定对PYTHONPATH
 # 想要在VSCode右上角“Debug Python File”调试的话，需要在.env里面设定对PYTHONPATH
