@@ -372,7 +372,7 @@ chcp.com 65001
 ```
 
 ### 颜色查找
-
+* [brandcolors](https://brandcolors.net/)
 * [colorhunt](https://colorhunt.co/palette/c4dfdfd2e9e9e3f4f4f8f6f4)
 
 ### 旧版本
