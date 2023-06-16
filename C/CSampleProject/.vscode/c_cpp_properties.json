@@ -1,26 +1,26 @@
 {
-    "configurations": [
-        {
-            "name": "GCC",
-            "includePath": [//编译时-I参数后面指定的内容，需要加到这里
-                "${workspaceFolder}/**",
-                "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\include",
-                "${workspaceFolder}/include/**"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "compilerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe",
-            "compilerArgs": [//编译时-I参数后面指定的内容，需要加到这里
-                "-ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\include",
-                "-I./include"
-            ],
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "windows-gcc-x64"
-        }
-    ],
-    "version": 4
+	"configurations": [
+		{
+			"name": "GCC",
+			"includePath": [ //编译时-I参数后面指定的内容，需要加到这里
+				"${workspaceFolder}/**",
+				"D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\include",
+				"${workspaceFolder}/include/**"
+			],
+			"defines": [
+				"_DEBUG",
+				"UNICODE",
+				"_UNICODE"
+			],
+			"compilerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe",
+			"compilerArgs": [ //编译时-I参数后面指定的内容，需要加到这里
+				"-ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\include",
+				"-I./include"
+			],
+			"cStandard": "c17",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "windows-gcc-x64"
+		}
+	],
+	"version": 4
 }

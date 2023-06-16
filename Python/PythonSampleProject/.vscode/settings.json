@@ -34,4 +34,20 @@
 		"D:\\Tools\\WorkTool\\Python\\Python38-32\\Scripts",
 		"D:\\WorkSpace\\Python\\PythonSampleProject\\src\\com",
 	],
+	"terminal.integrated.automationProfile.windows": {
+		//自动化相关终端的设定(如Codelens上面的[Run]，[Debug]和其他的任务)（设定后需要重启）
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [
+			"/k",
+			"chcp",
+			"65001",
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+		"PYTHONPATH": "${workspaceFolder};${workspaceFolder}\\src;${workspaceFolder}\\src\\com;${workspaceFolder}\\tests;${env:PYTHONPATH}"
+	},
 }

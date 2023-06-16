@@ -1,0 +1,317 @@
+{ // 这是一个Snippet代码片段配置文件，请放在User/snippets路径下
+	// if语句块
+	"if语句块": {
+		"prefix": ["if"],
+		"body": [
+			"if ${1:condition} {",
+			"    $2",
+			"}$0"
+		],
+		"description": "if语句块"
+	},
+	// if-else语句块
+	"if-else语句块": {
+		"prefix": ["if", "ife", "ifel"],
+		"body": [
+			"if ${1:condition} {",
+			"    $2",
+			"} else {",
+			"    $3",
+			"}$0",
+		],
+		"description": "if-else语句块"
+	},
+	// if-else-if语句块
+	"if-else-if语句块": {
+		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
+		"body": [
+			"if ${1:condition} {",
+			"    $2",
+			"} else if ${3:condition} {",
+			"    $4",
+			"} else {",
+			"    $5",
+			"}$0"
+		],
+		"description": "if-else-if语句块"
+	},
+	// match匹配语句块
+	"match匹配语句块": {
+		"prefix": ["ma", "mat", "matc", "match"],
+		"body": [
+			"match ${1:target} {",
+			"    $2 => $3;",
+			"    $4 => {",
+			"        $5",
+			"    },",
+			"    _ => $6;",
+			"}"
+		],
+		"description": "match匹配语句块"
+	},
+	// while语句块
+	"while语句块": {
+		"prefix": ["wh", "whi", "whil", "while"],
+		"body": [
+			"while ${1:condition} {",
+			"    $0",
+			"}"
+		],
+		"description": "while语句块"
+	},
+	// loop语句块
+	"loop语句块": {
+		"prefix": ["lo", "loo", "loop"],
+		"body": [
+			"loop {",
+			"    $1",
+			"    break $0;",
+			"}"
+		],
+		"description": "loop语句块"
+	},
+	// for-i语句块
+	"for-i语句块": {
+		"prefix": ["fo", "for", "fori"],
+		"body": [
+			"for ${1|i,_|} in $2..=$3 {",
+			"    $0",
+			"}",
+		],
+		"description": "for-i语句块"
+	},
+	// for-each语句块
+	"for-each语句块": {
+		"prefix": ["fo", "for", "fore"],
+		"body": [
+			"for ${1:element} in ${2:&mut} &${3:list} {",
+			"    $0",
+			"}"
+		],
+		"description": "for-each语句块"
+	},
+	// 添加Result匹配语句块
+	"添加Result匹配语句块": {
+		"prefix": ["re", "res", "resu", "resul", "result"],
+		"body": [
+			"let ${1:ret} = match $1 {",
+			"    Ok(${2:type}) => ${2:type},",
+			"    Err(error) => {",
+			"        return Err(e)",
+			"    },",
+			"};"
+		],
+		"description": "添加Result匹配语句块"
+	},
+	// 添加struct结构体
+	"添加struct结构体": {
+		"prefix": ["st", "str", "stru", "struc", "struct"],
+		"body": [
+			"struct ${1:name} {",
+			"    ${2:field}: ${3:type},",
+			"    $4",
+			"}",
+		],
+		"description": "添加struct结构体"
+	},
+	// 添加enum枚举
+	"添加enum枚举": {
+		"prefix": ["en", "enu", "enum"],
+		"body": [
+			"enum ${1:Name} {",
+			"    ${2:Value},",
+			"}"
+		],
+		"description": "添加enum枚举"
+	},
+	// 添加String字符串
+	"添加String字符串": {
+		"prefix": ["str", "stri", "strin", "string"],
+		"body": [
+			"let ${1:mystr} = String::from(\"${2:value}\");$0",
+		],
+		"description": "添加String字符串"
+	},
+	// 添加Tuple元组
+	"添加Tuple元组": {
+		"prefix": ["tu", "tup", "tupl", "tuple"],
+		"body": [
+			"let ${1:mytuple}: (${2|u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize,isize|}, $2) = (${3:500}, ${4:321});$0",
+		],
+		"description": "添加Tuple元组"
+	},
+	// 添加Vector动态数组
+	"添加Vector动态数组": {
+		"prefix": ["ve", "vec"],
+		"body": [
+			"let mut v = Vec::new();",
+			"v.push(${1:value});",
+		],
+		"description": "添加Vector动态数组"
+	},
+	// 添加HashMap
+	"添加HashMap": {
+		"prefix": ["ma", "map"],
+		"body": [
+			"let mut ${1:map} = HashMap::new();",
+			"$1.insert(\"${2:key}\", ${3:value});",
+		],
+		"description": "添加HashMap"
+	},
+	// 添加function函数
+	"添加function函数": {
+		"prefix": ["fu", "fun", "func", "funct", "functi"],
+		"body": [
+			"fn ${1:function_name}(${2:arguments}: ${3:argstype}) -> ${4:returntype} {",
+			"    $0",
+			"}",
+		],
+		"description": "添加function函数"
+	},
+	// 添加main函数
+	"添加main函数": {
+		"prefix": ["ma", "mai", "main"],
+		"body": [
+			"fn main() {",
+			"    $1",
+			"}",
+		],
+		"description": "添加main函数"
+	},
+	// 添加Method方法
+	"添加Method方法": {
+		"prefix": ["me", "met", "meth", "metho", "method"],
+		"body": [
+			"struct ${1:name} {",
+			"    ${2:field}: ${3:type},",
+			"}",
+			"",
+			"impl $1 {",
+			"    fn new(${2}: ${3}) -> $1 {",
+			"        $1 {",
+			"            $2: $2,",
+			"        }",
+			"    }",
+			"    fn ${4:method_name}(&self) -> ${5:return_type} {",
+			"    }",
+			"}",
+		],
+		"description": "添加Method方法"
+	},
+	// 添加Associated functions关联函数
+	"添加关联函数": {
+		"prefix": ["assfun", "asso", "assoc", "associ", "associa"],
+		"body": [
+			"struct ${1:name} {",
+			"    ${2:field}: ${3:type},",
+			"}",
+			"",
+			"impl $1 {",
+			"    fn new(${2}: ${3}) -> $1 {",
+			"        $1 {",
+			"            $2: $2,",
+			"        }",
+			"    }",
+			"}",
+		],
+		"description": "添加关联函数"
+	},
+	// 添加Trait特征
+	"添加Trait特征": {
+		"prefix": ["tr", "tra", "trai", "trait"],
+		"body": [
+			"${1:pub} trait ${2:name} {",
+			"    fn ${3:method_name}(&self) -> ${4:return_type};",
+			"}",
+		],
+		"description": "添加Trait特征"
+	},
+	// 添加impl实现特征
+	"添加impl实现特征": {
+		"prefix": ["im", "imp", "impl"],
+		"body": [
+			"impl ${1:trait_name} for ${2:struct_name} {",
+			"    $0",
+			"}",
+		],
+		"description": "添加impl实现特征"
+	},
+	// allow屏蔽警告
+	"allow屏蔽警告": {
+		"prefix":  ["al", "all", "allo", "allow"],
+		"body": [
+			"#[allow(${1|unused_imports,dead_code,unused_variables,non_snake_case|})]$0"
+		],
+		"description": "allow屏蔽警告"
+	},
+	//as类型转换
+	"as类型转换": {
+		"prefix": ["as"],
+		"body": [
+			"as ${1|u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize,isize|}$0"
+		],
+		"description": "as类型转换"
+	},
+	//assert断言-假
+	"assert断言-假": {
+		"prefix": ["ass", "assf"],
+		"body": [
+			"assert!($1);$0"
+		],
+		"description": "assert断言-假"
+	},
+	//assert断言-相等
+	"assert断言-相等": {
+		"prefix": ["ase", "aseq"],
+		"body": [
+			"assert_eq!($1, $2);$0"
+		],
+		"description": "assert断言-相等"
+	},
+	//assert断言-不等
+	"assert断言-不等": {
+		"prefix": ["asn", "asnq"],
+		"body": [
+			"assert_ne!($1, $2);$0"
+		],
+		"description": "assert断言-不等"
+	},
+	//derive派生宏
+	"derive派生宏": {
+		"prefix": ["de", "der", "deri", "deriv", "derive"],
+		"body": [
+			"#[derive(${1|Debug,Copy,Clone,Default,Eq,Hash,Ord,PartialEq,PartialOrd|})]$0"
+		],
+		"description": "derive派生宏"
+	},
+	// 添加print语句
+	"添加print语句": {
+		"prefix": ["pr", "pri", "prin", "print"],
+		"body": [
+			"println!(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] - ${2:variable}:{}\", $2);"
+		],
+		"description": "添加print语句"
+	},
+	// 添加printf-error语句
+	"添加printf-error语句": {
+		"prefix": ["pre", "prer", "prerr", "printerr"],
+		"body": [
+			"eprintln!(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] - ${2:variable}:{}\", $2);"
+		],
+		"description": "添加printf-error语句"
+	},
+	// 添加多行注释
+	"添加多行注释": {
+		"prefix": ["co", "com", "comm", "comme", "commen", "comment"],
+		"body": [
+			"/**************************************************************",
+			" * System:         $1",
+			" * Description:    $2",
+			" * GreatDate:      $3",
+			" * Author:         $4",
+			" * UpdateDate:     $5",
+			" **************************************************************/",
+		],
+		"description": "添加多行注释"
+	},
+}

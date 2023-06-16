@@ -37,6 +37,7 @@
   "editor.unicodeHighlight.invisibleCharacters": false,//禁用不可见突出
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
   //"window.zoomLevel": 0.4, //缩放比例
+  "window.newWindowDimensions": "maximized", //总是最大化打开窗口
   "explorer.compactFolders": false, // 资源管理器不采用紧凑模式
   "files.autoSave": "off", //取消自动保存
   "files.eol": "auto", //自动设定换行符，也可以设定 "\n"
@@ -164,7 +165,7 @@
     },
   },
   "terminal.integrated.env.windows": { //设定所有终端环境变量
-    "PYTHONPATH": "${workspaceFolder};${workspaceFolder}\\src;${workspaceFolder}\\src\\com;${workspaceFolder}\\tests"
+    //这里尽量在每个工程设定
   },
   "terminal.integrated.defaultProfile.windows": "Git-Bash", //设定默认终端
   //"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
