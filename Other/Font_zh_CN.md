@@ -16,6 +16,9 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)  
  JetBrains推出的一款专门为了开发人员设计的字体
 
+* [更纱黑体(Sarasa Gothic)](https://github.com/be5invis/Sarasa-Gothic)  
+* [更纱黑体-清华源](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/)  
+
 * [RictyDiminished](https://github.com/edihbrandon/RictyDiminished)  
  Inconsolata 和 Circle M+ 1m 合成的日文字体
 

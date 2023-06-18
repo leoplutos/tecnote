@@ -8,6 +8,10 @@
 * [SSH Config](Linux/Ssh-config_zh_CN.md)
 * [终端颜色](Linux/Terminal-color_zh_CN.md)
 
+## Windows命令
+* [Cmd](Windows/Cmd_zh_CN.md)
+* [Powershell](Windows/Powershell_zh_CN.md)
+
 ## Git命令
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
 * [Git命令](Git/Git_zh_CN.md)
