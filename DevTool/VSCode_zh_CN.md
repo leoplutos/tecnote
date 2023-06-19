@@ -108,7 +108,9 @@ Java所需插件比较多。有2种安装方式：
 - Ctrl + t ： 跳转后返回原处（vim插件）
 - Ctrl + t ： 列出全局函数名，选择后快速跳转
 - Ctrl + Shift + O ： 列出当前文件函数名，选择后快速跳转
-- **Ctrl + p** 或者 Ctrl + e ： 快速文件导航（最实用的功能）
+- **Ctrl + P** 或者 Ctrl + e ： 快速文件导航（最实用的功能）
+- Ctrl + P 然后输入``?`` ： 显示帮助
+- Ctrl + R ： 打开最近使用过的文件
 - Ctrl + Tab ： 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
 - **Alt + F12** ： 在预览窗口查看函数
 - **Shift + Alt + F12** ： 打开引用视图并表示所有调用(很有用)
@@ -118,6 +120,9 @@ Java所需插件比较多。有2种安装方式：
   run test task ： 运行测试任务（对应task.json的test组）  
   task 空格 ： 快速运行一个自定义task
 - Shift + Alt + F ： 代码格式化
+- Shift + Alt ： 列编辑模式
+- Alt + 单击鼠标左键 ： 多光标选择，选中后 Ctrl+Alt+上 或 Ctrl+Alt+下 可以追加行
+- Alt + 鼠标滚轮 ： 快速滚动
 - Alt + o ： 在源文件和头文件之间切换（比如log.c和log.h）
 - **Ctrl + KV** ： Markdown的编辑和预览左右分割表示（重新映射成 shift+space -> m）
 - Ctrl + Shift + V ： 预览markdown文件
@@ -125,14 +130,14 @@ Java所需插件比较多。有2种安装方式：
 - Ctrl + Shift + F ： grep查找（重新映射成 shift+space -> g）
 - 将函数大纲（outline）拖动到右侧，在右侧[辅助侧边栏]显示
 - Shift + Alt + R ： 在os打开当前文件夹
-- Ctrl + Shift + ~ ： 打开新的终端
-- 文件 → 新建窗口 → Ctrl + Shift + ~ ： 打开一个新的VS Code当作终端使用
+- Ctrl + ` ： 打开终端
+- Ctrl + Shift + ` ： 打开新的终端
+- Ctrl + Shift + C ： 打开外部终端
 - Ctrl + Shift + 5 ： 垂直分割终端
 - Ctrl + 1 ： 选择第1个终端
 - Ctrl + 2 ： 选择第2个终端
 - Ctrl + n ： 选择第n个终端
 - Ctrl + Shift + e ： 移动到左侧的资源管理器
-- Shift + Alt ： 列编辑模式
 - Shift + Alt + ↓ 或者 Shift + Alt + ↑ ： 复制当前行到新的一行
 - Alt + ↓ 或者 Alt + ↑ ： 移动当前行
 - Ctrl + x ： 删除当前行
@@ -220,6 +225,7 @@ C:\Users\user\AppData\Roaming\Code\User
 * [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
 * [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 * [java.json](VSCode-conf/snippets/java.json)&nbsp;&nbsp;&nbsp;&nbsp;java代码片段配置文件（snippets）
+* [rust.json](VSCode-conf/snippets/rust.json)&nbsp;&nbsp;&nbsp;&nbsp;rust代码片段配置文件（snippets）
 
 
 #### 文件夹设置（C工程）

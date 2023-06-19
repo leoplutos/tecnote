@@ -369,6 +369,8 @@ nnoremap <Leader>P "cP
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " 设定文件只读模式切换：静默运行，快捷键 空格+s+空格
 nnoremap <silent> <SPACE>s<SPACE> :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
+" 在OS打开当前文件的路径，快捷键 空格+e+空格
+nnoremap <SPACE>e<SPACE> :!start .<CR>
 " 载入暗色系配置，快捷键 空格+d+空格
 nnoremap <SPACE>d<SPACE> :exec 'source' scriptPath . '/vim-color-256-rc.vim'<CR>
 " 载入亮色系配置，快捷键 空格+l+空格

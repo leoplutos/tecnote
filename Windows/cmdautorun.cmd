@@ -1,7 +1,11 @@
 ::设置utf-8
-chcp 65001
+::chcp 65001
 
 @echo off
+
+::设置命令提示符
+::set PROMPT=$P$G
+set PROMPT=$E[36m%computername%$E[0m:$E[33m$P$E[0m$E[35m#$E[0m 
 
 ::设置环境变量
 set MINGW_HOME=D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin
@@ -23,7 +27,8 @@ set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
 set PATH=%PATH%;%GVIM_HOME%
 set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
 set PATH=%PATH%;%ANT_HOME%\bin
-echo 环境变量载入完成
+::echo 环境变量载入完成
+echo Environment Variable Setting Complited
 
 ::设置常用路径
 set app=D:\WorkSpace\Rust\hello_world
@@ -55,8 +60,9 @@ doskey alias=doskey /macros
 doskey cda=cd /d %app%
 doskey cdb=cd /d %bin%
 doskey cdl=cd /d %log%
-echo 别名载入完成，键入alias查看
+::echo 别名载入完成，键入alias查看
+echo Alias Setting Complited
 
 @echo on
 
-::cmd
+::@cmd /k

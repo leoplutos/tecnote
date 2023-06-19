@@ -1,33 +1,17 @@
 # 其他
 
-## 护眼色
+## 常用颜色
 
-#### 护眼1-绿色：
-RGB
-```
-背景：202 234 206
-```
-HEX
-```
-背景：#caeace
-```
+#### 常用护眼色
 
-#### 护眼2-浅绿色（Sakura Editor）：
-RGB
-```
-背景：255 251 240
-```
-HEX
-```
-背景：#fffbf0
-```
-
-#### 终端用黑色：
-RGB
-```
-背景：0 0 0
-文字：191 191 191
-```
+**护眼绿色**： RGB（202, 234, 206） ， HEX（#caeace）  
+**Sakura Editor背景色**： RGB（255, 251, 240） ， HEX（#fffbf0）  
+**终端纯黑**：  
+&nbsp;&nbsp;&nbsp;&nbsp;背景：RGB（0, 0, 0） ， HEX（#000000）  
+&nbsp;&nbsp;&nbsp;&nbsp;前景：RGB（191, 191, 191） ， HEX（#bfbfbf）  
+**终端黑灰**：  
+&nbsp;&nbsp;&nbsp;&nbsp;背景：RGB（29, 31, 33） ， HEX（#1d1f21）  
+&nbsp;&nbsp;&nbsp;&nbsp;前景：RGB（218, 218, 218） ， HEX（#dadada）  
 
 #### 11种能减少眼睛疲劳的护眼色，附颜色代码及RGB值
 - 1、绿豆沙 #C7EDCC RGB(199, 237, 204)
@@ -42,6 +26,7 @@ RGB
 - 10、电脑管家 #CCE8CF RGB(204, 232, 207)
 - 11、WPS护眼色 #6E7B6C RGB(110, 123, 108)
 
+
 ## 正则表达式
 
 #### 1.正则表达式测试网站
@@ -55,3 +40,6 @@ https://regexr.com/
 ```Reg
 \(.*
 ```
+
+## 其他软件
+* [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌

@@ -1,80 +1,88 @@
 // 将键绑定放在此文件中以覆盖默认值
 [
-  {//shift+space -> s:触发建议
-    "key": "shift+space s",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
-  },
-  {//shift+space -> v 开启/关闭vim插件
-      "key": "shift+space v",
-      "command": "toggleVim"
-  },
-  {//ctrl+w关闭tab
-    "key": "ctrl+w",
-    "command": "workbench.action.closeActiveEditor"
-  },
-  {//shift+space -> f:查找
-    "key": "shift+space f",
-    "command": "actions.find",
-    "when": "editorFocus || editorIsOpen"
-  },
-  {//shift+space -> g:grep查找
-    "key": "shift+space g",
-    "command": "workbench.action.findInFiles"
-  },
-  {//ctrl+j选择下一个建议
-    "key": "ctrl+j",
-    "command": "selectNextSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {//ctrl+k选择上一个建议
-    "key": "ctrl+k",
-    "command": "selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {//shift+space -> o:打开/关闭辅助侧边栏
-    "key": "shift+space o",
-    "command": "workbench.action.toggleAuxiliaryBar"
-  },
-  {//shift+space -> r:重新载入文件（刷新error时可用）
-    "key": "shift+space r",
-    "command": "workbench.action.reloadWindow",
-    "when": "editorFocus || editorIsOpen"
-  },
-  {//shift+space -> m:Markdown的编辑和预览垂直分割表示
-    "key": "shift+space m",
-    "command": "markdown.showPreviewToSide",
-    "when": "!notebookEditorFocused && editorLangId == 'markdown'"
-  },
-  {//[终端]shift+space -> a:全选
-    "key": "shift+space a",
-    "command": "workbench.action.terminal.selectAll",
-    "when": "terminalFocus && !isMac"
-  },
-  {//[终端]shift+space -> f:查找
-    "key": "shift+space f",
-    "command": "workbench.action.terminal.focusFind",
-    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {//[终端]shift+space -> ctrl+f1:清空屏幕
-    "key": "shift+space ctrl+f1",
-    //"command": "workbench.action.terminal.sendSequence",
-    //"args": { "text": "clearb\n" },
-    //"args": { "text": "clearb\u000D" },
-    "command": "workbench.action.terminal.clear",
-    //"when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-    "when": "terminalFocus"
-  },
-  {//[终端]shift+space -> ctrl+f2:发送gdb的dashboard命令-重定向代码
-    "key": "shift+space ctrl+f2",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": { "text": "dashboard source -output /dev/pts/x" },
-    "when": "terminalFocus"
-  },
-  {//[终端]shift+space -> ctrl+f3:发送gdb的dashboard命令-设定代码全屏显示
-    "key": "shift+space ctrl+f3",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": { "text": "dashboard source -style height 0" },
-    "when": "terminalFocus"
-  }
+	{ //shift+space -> s:触发建议
+		"key": "shift+space s",
+		"command": "editor.action.triggerSuggest",
+		"when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+	},
+	{ //shift+space -> v 开启/关闭vim插件
+		"key": "shift+space v",
+		"command": "toggleVim"
+	},
+	{ //ctrl+w关闭tab
+		"key": "ctrl+w",
+		"command": "workbench.action.closeActiveEditor"
+	},
+	{ //shift+space -> f:查找
+		"key": "shift+space f",
+		"command": "actions.find",
+		"when": "editorFocus || editorIsOpen"
+	},
+	{ //shift+space -> g:grep查找
+		"key": "shift+space g",
+		"command": "workbench.action.findInFiles"
+	},
+	{ //ctrl+j选择下一个建议
+		"key": "ctrl+j",
+		"command": "selectNextSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+	},
+	{ //ctrl+k选择上一个建议
+		"key": "ctrl+k",
+		"command": "selectPrevSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+	},
+	{ //shift+space -> o:打开/关闭辅助侧边栏
+		"key": "shift+space o",
+		"command": "workbench.action.toggleAuxiliaryBar"
+	},
+	{ //shift+space -> r:重新载入文件（刷新error时可用）
+		"key": "shift+space r",
+		"command": "workbench.action.reloadWindow",
+		"when": "editorFocus || editorIsOpen"
+	},
+	{ //shift+space -> m:Markdown的编辑和预览垂直分割表示
+		"key": "shift+space m",
+		"command": "markdown.showPreviewToSide",
+		"when": "!notebookEditorFocused && editorLangId == 'markdown'"
+	},
+	{ //shift+space -> t:在编辑器区域内创建新终端
+		"key": "shift+space t",
+		"command": "workbench.action.createTerminalEditor"
+	},
+	{ //[终端]shift+space -> a:全选
+		"key": "shift+space a",
+		"command": "workbench.action.terminal.selectAll",
+		"when": "terminalFocus && !isMac"
+	},
+	{ //[终端]shift+space -> f:查找
+		"key": "shift+space f",
+		"command": "workbench.action.terminal.focusFind",
+		"when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+	},
+	{ //[终端]shift+space -> ctrl+f1:清空屏幕
+		"key": "shift+space ctrl+f1",
+		//"command": "workbench.action.terminal.sendSequence",
+		//"args": { "text": "clearb\n" },
+		//"args": { "text": "clearb\u000D" },
+		"command": "workbench.action.terminal.clear",
+		//"when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+		"when": "terminalFocus"
+	},
+	{ //[终端]shift+space -> ctrl+f2:发送gdb的dashboard命令-重定向代码
+		"key": "shift+space ctrl+f2",
+		"command": "workbench.action.terminal.sendSequence",
+		"args": {
+			"text": "dashboard source -output /dev/pts/x"
+		},
+		"when": "terminalFocus"
+	},
+	{ //[终端]shift+space -> ctrl+f3:发送gdb的dashboard命令-设定代码全屏显示
+		"key": "shift+space ctrl+f3",
+		"command": "workbench.action.terminal.sendSequence",
+		"args": {
+			"text": "dashboard source -style height 0"
+		},
+		"when": "terminalFocus"
+	},
 ]

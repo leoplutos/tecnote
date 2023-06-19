@@ -18,6 +18,32 @@ doskey /macros
 netstat -nao | find "8080"
 ```
 
+# 修改cmd的提示符
+cmd的提示符是在 ``PROMPT`` 环境变量中设置的，使用下面的命令可以确认
+```
+set PROMPT
+PROMPT=$P$G
+```
+得知默认的设置为 ``$P$G``  
+下面是2个设定例子
+```
+set PROMPT=$E[36m%computername%:$E[0m$E[33m$P$E[0m$E[35m#$E[0m 
+```
+```
+set PROMPT=[%computername%] $d$s$t$_$p$_$_$+$g
+```
+参数说明：
+- $E = Escape code (ASCII code 27)，可以设置颜色
+- $P = 当前目录的路径
+- $_ = 回车
+- $+ = PUSHD/POPD 堆栈中每个级别的加号。
+
+输入下面的命令可以查看参数说明
+```
+PROMPT /?
+```
+
+
 # 设定启动cmd的默认命令
 
 ## 方法1：修改注册表
@@ -41,9 +67,15 @@ netstat -nao | find "8080"
 数值数据中，输入cmd的路径 ``D:\Tools\WorkTool\Cmd\cmdautorun.cmd ``  
 重新打开一个cmd，输入 ``ll`` 确认
 
-## 方法2：使用快捷方式
+## 方法2：使用快捷方式（不推荐）
 有些时候，无法修改注册表，可以将上面的文件建立一个快捷方式，用快捷方式启动即可。  
-注意这个方式要把最下面一行的 ``cmd`` 注释打开
+注意这个方式要把最下面一行的 ``@cmd /k`` 注释打开
+
+## 方法3：使用快捷方式（推荐）
+新建快捷方式，内容如下
+```
+cmd.exe /k "D:\Tools\WorkTool\Cmd\cmdautorun.cmd"
+```
 
 # Windows下一些变量
 
