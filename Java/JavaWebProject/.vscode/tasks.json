@@ -9,10 +9,9 @@
 			]
 		},
 		"env": { //在这里自定义环境变量
-			"ANT_HOME": "D:\\Tools\\WorkTool\\Java\\apache-ant-1.10.13",
-			"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
-			"CATALINA_HOME": "D:\\Tools\\WorkTool\\Java\\apache-tomcat-9.0.76",
-			"PATH": "${env:path};D:\\Tools\\WorkTool\\Java\\jdk17.0.6\\bin;D:\\Tools\\WorkTool\\Java\\apache-ant-1.10.13\\bin;D:\\Tools\\WorkTool\\Java\\apache-tomcat-9.0.76\\bin",
+			"JAVA_HOME": "${config:java17.home}",
+			"CATALINA_HOME": "${config:tomcat.home}",
+			"PATH": "${env:path};${config:java17.home}\\bin;${config:ant.home};${config:tomcat.home}\\bin",
 		}
 	},
 	"tasks": [

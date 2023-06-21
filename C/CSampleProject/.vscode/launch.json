@@ -15,7 +15,7 @@
 			"externalConsole": false, //为true时使用单独的cmd窗口，跳出小黑框；设为false则是用vscode的内置终端，建议用内置终端
 			"internalConsoleOptions": "neverOpen", //如果不设为neverOpen，调试时会跳到“调试控制台”选项卡，新手调试用不到
 			"MIMode": "gdb", //指定连接的调试器，gdb是minGW中的调试程序
-			"miDebuggerPath": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gdb.exe", //指定调试器所在路径
+			"miDebuggerPath": "${config:mingw.home}\\bin\\gdb.exe", //指定调试器所在路径
 			"setupCommands": [
 				{
 					"description": "为 gdb 启用整齐打印",

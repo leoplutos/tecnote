@@ -50,6 +50,46 @@
 		"key": "shift+space t",
 		"command": "workbench.action.createTerminalEditor"
 	},
+	{ //shift+space -> q:最大化终端面板
+		"key": "shift+space q",
+		"command": "workbench.action.toggleMaximizedPanel"
+	},
+	{ //shift+space -> ctrl+u:转换大写
+		"key": "shift+space ctrl+u",
+		"command": "editor.action.transformToUppercase"
+	},
+	{ //shift+space -> ctrl+l:转换小写
+		"key": "shift+space ctrl+l",
+		"command": "editor.action.transformToLowercase"
+	},
+	{ //shift+space -> ctrl+s:将缩进转换为空格
+		"key": "shift+space ctrl+s",
+		"command": "editor.action.indentationToSpaces"
+	},
+	{ //shift+space -> ctrl+t:将缩进转换为制表符
+		"key": "shift+space ctrl+t",
+		"command": "editor.action.indentationToTabs"
+	},
+	{ //shift+space -> z:切换禅模式
+		"key": "shift+space z",
+		"command": "workbench.action.toggleZenMode"
+	},
+	{ //shift+space -> j:打开/关闭面板（Panel）
+		"key": "shift+space j",
+		"command": "workbench.action.togglePanel"
+	},
+	{ //shift+space -> ctrl+1:聚焦到终端1
+		"key": "shift+space ctrl+1",
+		"command": "workbench.action.terminal.focusAtIndex1"
+	},
+	{ //shift+space -> ctrl+2:聚焦到终端2
+		"key": "shift+space ctrl+2",
+		"command": "workbench.action.terminal.focusAtIndex2"
+	},
+	{ //shift+space -> ctrl+3:聚焦到终端3
+		"key": "shift+space ctrl+3",
+		"command": "workbench.action.terminal.focusAtIndex3"
+	},
 	{ //[终端]shift+space -> a:全选
 		"key": "shift+space a",
 		"command": "workbench.action.terminal.selectAll",
@@ -84,5 +124,9 @@
 			"text": "dashboard source -style height 0"
 		},
 		"when": "terminalFocus"
+	},
+	{ // [调试颜色]shift+space -> ctrl+i:打开范围检查器（用于调试语法和语义标记）
+		"key": "shift+space ctrl+i",
+		"command": "editor.action.inspectTMScopes"
 	},
 ]

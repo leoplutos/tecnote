@@ -102,6 +102,7 @@ Java所需插件比较多。有2种安装方式：
 - F12 ： 跳转到定义或者函数
 - **Ctrl + .（点）** ： 显示代码操作（就是左边的那个小灯泡）
 - Ctrl + ] ： 跳转到定义或者函数（vim插件）
+- **Ctrl + F2** ： 智能地选择字符串的所有出现，并且开启多光标
 - **Ctrl + F12** ： 转到实现（对于接口和抽象方法）
 - **Shift + F12** ： 转到引用
 - Alt + ← ： 跳转后返回原处
@@ -222,6 +223,7 @@ C:\Users\user\AppData\Roaming\Code\User
 #### 用户设置（全局）
 * [settings.json](VSCode-conf/user/settings.json)
 * [keybindings.json](VSCode-conf/user/keybindings.json)
+* [tasks.json](VSCode-conf/user/tasks.json)
 * [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
 * [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 * [java.json](VSCode-conf/snippets/java.json)&nbsp;&nbsp;&nbsp;&nbsp;java代码片段配置文件（snippets）

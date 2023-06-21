@@ -1,4 +1,8 @@
 {
+	"java17.home": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
+	"java7.home": "D:\\Tools\\WorkTool\\Java\\jdk1.7.0_25",
+	"ant.home": "D:\\Tools\\WorkTool\\Java\\apache-ant-1.10.13\\bin",
+	"tomcat.home": "D:\\Tools\\WorkTool\\Java\\apache-tomcat-9.0.76",
 	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6", //配置JDK，需要JDK17或更高，注意：是配置到根路径，不是配置到bin路径
 	"java.jdt.ls.vmargs": "-Dfile.encoding=UTF-8", //添加Java语言服务器的参数
 	"java.configuration.runtimes": [
@@ -49,6 +53,6 @@
 		"overrideName": true
 	},
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
-		"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6"
+		//"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6"
 	},
 }

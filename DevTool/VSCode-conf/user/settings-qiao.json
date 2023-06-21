@@ -3,15 +3,15 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'Inconsolata', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
+	//"editor.fontFamily": "'Inconsolata', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
 	//"editor.fontFamily": "'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //日文系统用
-	//"editor.fontFamily": "'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
-	"editor.fontSize": 18, //设置字体大小
+	"editor.fontFamily": "'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
+	"editor.fontSize": 13, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
 	"editor.formatOnSave": false, //在保存时格式化文件
-	//"editor.letterSpacing": 0.1, //字母间距
-	//"editor.lineHeight": 16, //行高
+	"editor.letterSpacing": 0.1, //字母间距
+	"editor.lineHeight": 14, //行高
 	"editor.minimap.enabled": false, //设定不显示右侧的minimap
 	"editor.tabSize": 4, //设定tab长度
 	"editor.rulers": [
@@ -19,9 +19,9 @@
 		200
 	], // 垂直标尺
 	"editor.detectIndentation": false, //不要通过打开文件来计算制表符大小
-	"editor.renderWhitespace": "selection", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
+	"editor.renderWhitespace": "none", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
 	"editor.renderControlCharacters": true, //设定显示控制字符
-	"editor.renderLineHighlight": "all", //突出显示导航线和当前行
+	//"editor.renderLineHighlight": "all", //突出显示导航线和当前行
 	"editor.insertSpaces": false, //按下tab时不替换为空格
 	"editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
 	"editor.autoClosingQuotes": "beforeWhitespace",
@@ -36,9 +36,9 @@
 	"editor.suggest.localityBonus": true, //自动补全时显示离光标近的对象
 	"editor.find.loop": false, //控制在找不到其他匹配项时，不自动从开头(或结尾)重新开始搜索。
 	"editor.inlayHints.enabled": "offUnlessPressed", //在编辑器中启用内嵌提示。on/onUnlessPressed/offUnlessPressed/off，offUnlessPressed为默认不表示按下Ctrl+Alt表示
-	"editor.guides.indentation": true, //缩进参考线
-	"editor.guides.bracketPairs": "active", //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
-	"editor.bracketPairColorization.enabled": true, //控制是否启用括号对着色
+	"editor.guides.indentation": false, //缩进参考线
+	"editor.guides.bracketPairs": false, //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
+	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
@@ -73,7 +73,7 @@
 	//-----------------------------------------------"
 	//               颜色设定                        "
 	//-----------------------------------------------"
-	"workbench.colorTheme": "Default Dark+", //设定主题
+	"workbench.colorTheme": "Default Light+", //设定主题
 	"workbench.colorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
 			//"editor.background": "#1E1E1E", //设定编辑器背景
@@ -97,36 +97,36 @@
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
 		},
 		"[Default Light+]": { //Default Light+主题的自定义
-			"editor.background": "#f9f9f9", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）
+			"editor.background": "#fffbf0", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）
 			"editor.foreground": "#000000", //设定编辑器前景
-			"editorLineNumber.foreground": "#90908a", //设定行号颜色
+			"editorLineNumber.foreground": "#0000ff", //设定行号颜色
 			"editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
-			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
-			"editor.lineHighlightBackground": "#1073cf2d", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
-			//"editor.selectionBackground": "#000000", //选择内容的背景
-			//"editor.selectionHighlightBackground": "#000000", //选中变量的背景
-			"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+			//"editor.lineHighlightBorder": "#9fced1", //当前边框背景颜色
+			"editor.lineHighlightBackground": "#ecece6", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
+			"editor.selectionBackground": "#7f94da65", //选择内容的背景
+			"editor.selectionHighlightBackground": "#7f94da65", //选中变量的背景
+			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
 			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
-			"editorCursor.background": "#F8F8F0", //光标背景色
+			"editorCursor.background": "#ebebe365", //光标背景色
 			"editorCursor.foreground": "#1d1f21", //光标前景色
-			"editor.findMatchBackground": "#00d700", //当前查找内容颜色
-			"editor.findMatchHighlightBackground": "#ffff00", //所有查找内容颜色
+			"editor.findMatchBackground": "#bbbb00", //当前查找内容颜色
+			"editor.findMatchHighlightBackground": "#ecec00", //所有查找内容颜色
 			"editorGroupHeader.border": "#36353562", //tab栏设置-边框
-			"editorGroupHeader.tabsBackground": "#f1f1f1", //tab栏设置-背景色
+			"editorGroupHeader.tabsBackground": "#eceee7", //tab栏设置-背景色
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			//panel设置
-			//"panel.background": "#f3f3f3",
+			"panel.background": "#eceee7",
 			"panel.border": "#36353562",
-			"panelTitle.activeForeground": "#2c2c2c",
-			"panelTitle.inactiveForeground": "#2c2c2c",
-			"panelTitle.activeBorder": "#2c2c2c",
+			"panelTitle.activeForeground": "#000000",
+			"panelTitle.inactiveForeground": "#000000",
+			"panelTitle.activeBorder": "#000000",
 			//终端设置
-			"terminal.background": "#1d1f21", //终端背景色
-			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			"terminal.background": "#e1e7d1", //终端背景色
+			"terminal.foreground": "#000000", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
-			"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			"terminalCursor.foreground": "#949696", //终端光标前景色
 			//资源管理器设置
-			//"sideBar.background": "#f3f3f3", //左部侧边栏背景色
+			"sideBar.background": "#eeeee5", //左部侧边栏背景色
 			"sideBar.foreground": "#2c2c2c", //左部侧边栏前景色
 			"sideBar.border": "#36353562", //侧边栏分割线颜色
 			"sideBarTitle.foreground": "#2c2c2c", //侧边栏标题前景色
@@ -134,20 +134,20 @@
 			"sideBarSectionHeader.foreground": "#2c2c2c", //侧边栏里面小Title前景色(比如时间线)
 			"sideBarSectionHeader.border": "#66666641", //侧边栏里面小Title边界线颜色(比如时间线)
 			//任务栏设置
-			//"activityBar.background": "#93b0cc",
-			//"activityBar.activeBorder": "#27313b",
-			//"activityBar.inactiveForeground": "#000000",
-			//"activityBar.activeBackground": "#8d98a1",
-			//"activityBar.activeFocusBorder": "#ff0000",
-			//"activityBar.foreground": "#ebebeb",
+			"activityBar.background": "#93b0cc",
+			"activityBar.activeBorder": "#27313b",
+			"activityBar.inactiveForeground": "#000000",
+			"activityBar.activeBackground": "#8d98a1",
+			"activityBar.activeFocusBorder": "#ff0000",
+			"activityBar.foreground": "#ebebeb",
 			//标题栏设置
 			"titleBar.activeBackground": "#93b8cc",
 			"titleBar.activeForeground": "#000000",
 			//状态栏设置
-			//"statusBar.background": "#718c9b",
-			//"statusBarItem.activeBackground": "#262a2c",
-			//"statusBarItem.errorBackground": "#495155",
-			//"statusBarItem.warningBackground": "#495155"
+			"statusBar.background": "#718c9b",
+			"statusBarItem.activeBackground": "#262a2c",
+			"statusBarItem.errorBackground": "#495155",
+			"statusBarItem.warningBackground": "#495155"
 		},
 	},
 	"editor.tokenColorCustomizations": {
@@ -166,28 +166,25 @@
 			"textMateRules": [], //作用域所对应的颜色
 		},
 		"[Default Light+]": { //Default Light+主题的自定义
-			"comments": "#a8a8a8", //设定注释颜色liang
+			"comments": "#0a881b", //设定注释颜色liang
 			//"comments": "#008000", //设定注释颜色qiao
-			"numbers": "#0087ff", //设定数字颜色
-			"strings": "#2f5e5e", //设定字符串颜色
+			"numbers": "#be0000", //设定数字颜色
+			"strings": "#991313", //设定字符串颜色
 			"variables": "#000000", //设定变量颜色
 			"types": "#ff0000", //设定类型颜色
-			"keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色
-			"functions": "#795E26", //设定函数颜色
+			"keywords": {
+				"foreground": "#0000ff"
+			}, //设定关键字颜色
+			"functions": "#000000", //设定函数颜色
 			"textMateRules": [ //作用域所对应的颜色
 				{
-					"scope": [ //grep搜索结果的文件路径和文件名
-						"meta.path.basename.search",
-						"meta.path.dirname.search",
+					"scope": [
+						"constant.other.placeholder.c"
 					],
-					"settings": {"foreground": "#0000ff"}
-				},
-				{
-					"scope": [ //grep搜索结果的行号
-						"meta.resultLinePrefix.lineNumber.search",
-					],
-					"settings": {"foreground":"#90908a", "fontStyle": ""}
-				},
+					"settings": {
+						"foreground": "#ff1717"
+					}
+				}
 			],
 		},
 	},
@@ -195,26 +192,27 @@
 	//               终端设定                        "
 	//-----------------------------------------------"
 	"terminal.integrated.profiles.windows": {
-		"Git-Bash": {
-			"path": "D:\\Tools\\WorkTool\\Team\\Git\\bin\\bash.exe",
-			//"args": ["-c", "chcp.com 65001;bash -i -l"], //先发行chcp.com 65001改成utf8编码之后，运行bash -i -l
-			"args": ["-i", "-l"],
-			"overrideName": true,
-			"env": {//在这里设定所需环境变量，设定好后需要重启
-				"LANG": "C.UTF-8"
-				//"WORK_HOME": "/d/Work",
-				//"PATH": "${env:PATH}:/d/Work/bin"
-			},
-			"icon": "terminal-debian",
-			"color": "terminal.ansiRed",
-		},
+		//"Git-Bash": {
+		//	"path": "D:\\Tools\\WorkTool\\Team\\Git\\bin\\bash.exe",
+		//	//"args": ["-c", "chcp.com 65001;bash -i -l"], //先发行chcp.com 65001改成utf8编码之后，运行bash -i -l
+		//	"args": ["-i", "-l"],
+		//	"overrideName": true,
+		//	"env": {//在这里设定所需环境变量，设定好后需要重启
+		//		"LANG": "C.UTF-8"
+		//		//"WORK_HOME": "/d/Work",
+		//		//"PATH": "${env:PATH}:/d/Work/bin"
+		//	},
+		//	"icon": "terminal-debian",
+		//	"color": "terminal.ansiRed",
+		//},
 		"Win-Cmd": {
 			"path": [
 				"${env:windir}\\Sysnative\\cmd.exe",
 				"${env:windir}\\System32\\cmd.exe"
 			],
 			"args": [
-				"/K", "D:\\Tools\\WorkTool\\Cmd\\cmdautorun.cmd" // 加载自定义命令
+				"/K",
+				"D:\\Tools\\WorkTool\\Cmd\\cmdautorun.cmd" // 加载自定义命令
 				//"/k", "chcp", "65001", // 发行chcp 65001改成utf8编码
 			],
 			"overrideName": true,
@@ -232,10 +230,10 @@
 	},
 	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
 	//"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
-	"terminal.integrated.fontFamily": "'JetBrains Mono', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'Inconsolata', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
+	//"terminal.integrated.fontFamily": "'JetBrains Mono', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'Inconsolata', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
 	//"terminal.integrated.fontFamily": "'JetBrains Mono', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //日文系统用
-	//"terminal.integrated.fontFamily": "'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //Win10低分辨率日文系统
-	"terminal.integrated.fontSize": 16, //设置字体大小
+	"terminal.integrated.fontFamily": "'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //Win10低分辨率日文系统
+	"terminal.integrated.fontSize": 13, //设置字体大小
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
 	"terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
@@ -289,13 +287,13 @@
 	"whitespacepp.textLF": "↵", //换行文本 (\n)。您还可以指定 unicode 字符，例如“↩”、“◂”、“▾”。
 	"whitespacepp.textEOF": "[EOF]", //EOF（文件结尾）的文本。您还可以指定 unicode 字符。
 	//暗色系 宽空格#FF6464 tab#444444 换行符#444444
-	"whitespacepp.foreColorTAB": "#444444", //TAB (\t) 的文本颜色。
-	"whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色trailing-spaces颜色一致
-	"whitespacepp.foreColorLF": "#444444", //换行 (\n) 的文本颜色。
+	//"whitespacepp.foreColorTAB": "#444444", //TAB (\t) 的文本颜色。
+	//"whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色trailing-spaces颜色一致
+	//"whitespacepp.foreColorLF": "#444444", //换行 (\n) 的文本颜色。
 	//亮色系 宽空格rgba(255,100,100,0.15) tab#C0C0C0 换行符#C0C0C0
-	//"whitespacepp.foreColorTAB": "#C0C0C0", //TAB (\t) 的文本颜色。
-	//"whitespacepp.foreColorWS": "rgba(255,100,100,0.15)", //宽空格的文本颜色，设定和trailing-spaces颜色一致
-	//"whitespacepp.foreColorLF": "#C0C0C0", //换行 (\n) 的文本颜色。
+	"whitespacepp.foreColorTAB": "#707070", //TAB (\t) 的文本颜色。
+	"whitespacepp.foreColorWS": "rgba(255,100,100,0.15)", //宽空格的文本颜色，设定和trailing-spaces颜色一致
+	"whitespacepp.foreColorLF": "#0472f0", //换行 (\n) 的文本颜色。
 	"whitespacepp.foreColorEOF": "#00FFFF", //EOF（文件结尾）的文本颜色。
 	"whitespacepp.changeBackColorTAB": false, //是否更改 TAB (\t) 的背景颜色。
 	"whitespacepp.changeBackColorWS": true, //是否更改宽空格的背景颜色。
@@ -310,68 +308,4 @@
 	//-----------------------------------------------"
 	"trailing-spaces.deleteModifiedLinesOnly": true, //只删除修改的行
 	"trailing-spaces.trimOnSave": false, //保存时不自动删除行尾空格（只对修改的行生效）
-	//-----------------------------------------------"
-	//               vim插件设定                     "
-	//-----------------------------------------------"
-	"vim.incsearch": true, //搜索时在未完全输入完毕要检索的文本时就开始检索
-	"vim.useSystemClipboard": true, //使用系统剪切板
-	"vim.useCtrlKeys": true, //启用 Vim ctrl 键覆盖常见的 VS 代码操作，例如复制、粘贴、查找等。
-	"vim.cursorStylePerMode": {
-		"Normal": "Block",
-		"Insert": "Line",
-		"Visual": "Block-outline",
-		"VisualBlock": "Block-outline",
-		"VisualLine": "Block-outline",
-		"Replace": "Underline",
-	},
-	"vim.hlsearch": true, //查询结果高亮
-	"vim.wrapscan": false, //禁止在搜索到文件两端时重新搜索（不循环搜索）
-	"vim.searchHighlightTextColor": "rgba(0, 0, 0, 1)", //设定查询结果高亮前景颜色
-	"vim.searchHighlightColor": "rgba(255, 255, 0, 1)", //设定查询结果高亮背景颜色
-	"vim.searchMatchTextColor": "rgba(255, 255, 255, 1)", //设定查询结果高亮前景颜色
-	"vim.searchMatchColor": "rgba(0, 0, 0, 1)", //设定查询结果高亮背景颜色
-	"vim.highlightedyank.enable": true, //复制时高亮显示
-	"vim.highlightedyank.color": "rgba(0, 240, 170, 0.5)", //设置 yank 高亮的颜色
-	"vim.highlightedyank.duration": 1000, //设置 yank 高亮的持续时间（1秒）
-	"vim.leader": "\\",
-	//"vim.autoindent": true, //智能缩进对齐
-	"vim.visualstar": true, //对光标上的文字使用*查询
-	"vim.timeout": 1200, //输入timeout
-	//"vim.statusBarColorControl": true, //设定根据当前模式改变状态栏颜色
-	//"vim.statusBarColors.normal": ["#00d7ff", "#000000"],
-	//"vim.statusBarColors.insert": "#ffff00",
-	//"vim.statusBarColors.visual": "#00ff87",
-	//"vim.statusBarColors.visualline": "#00ff87",
-	//"vim.statusBarColors.visualblock": "#00ff87",
-	//"vim.statusBarColors.replace": "#d70000",
-	//"vim.statusBarColors.commandlineinprogress": "#007ACC",
-	//"vim.statusBarColors.searchinprogressmode": "#007ACC",
-	//"vim.statusBarColors.easymotionmode": "#007ACC",
-	//"vim.statusBarColors.easymotioninputmode": "#007ACC",
-	//"vim.statusBarColors.surroundinputmode": "#007ACC",
-	"vim.normalModeKeyBindingsNonRecursive": [
-		//{ "before": ["J"], "commands": [":.+10"], "silent": true },
-		//{ "before": ["K"], "commands": [":.-10"], "silent": true }
-		{ "before": ["J"], "after": ["1", "0", "j"] }, //加速向下
-		{ "before": ["K"], "after": ["1", "0", "k"] }, //加速向上
-		{ "before": ["<leader>", "s"], "commands": [":w"] }, // 设定\+s保存文件
-		{ "before": ["<leader>", "q"], "commands": [":q"] }, // 设定\+q关闭文件
-		{ "before": ["<leader>", "l"], "commands": [":nohlsearch"] }, // 设定\+l关闭高亮
-		//{ "before": ["<Leader>", "h"], "after": ["<C-w>", "h"] }, //移动到左边的窗口
-		//{ "before": ["<Leader>", "j"], "after": ["<C-w>", "j"] }, //移动到下边的窗口
-		//{ "before": ["<Leader>", "k"], "after": ["<C-w>", "k"] }, //移动到上边的窗口
-		//{ "before": ["<Leader>", "l"], "after": ["<C-w>", "l"] }, //移动到右边的窗口
-		{ "before": ["n"], "after": ["n", "z", "z"] }, // 在画面中央表示搜索结果
-		{ "before": ["N"], "after": ["N", "z", "z"] },
-		{ "before": ["*"], "after": ["*", "z", "z"] },
-		{ "before": ["#"], "after": ["#", "z", "z"] }
-	],
-	"vim.visualModeKeyBindingsNonRecursive": [
-		{ "before": ["J"], "after": ["1", "0", "j"] }, //加速向下
-		{ "before": ["K"], "after": ["1", "0", "k"] } //加速向上
-	],
-	"vim.insertModeKeyBindings": [
-		{ "before": ["j", "j"], "after": ["<Esc>"] }, //回到普通模式
-		{ "before": [";", ";"], "commands": ["editor.action.triggerSuggest"] } //打开建议
-	],
 }
