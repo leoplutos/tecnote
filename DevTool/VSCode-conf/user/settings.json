@@ -38,7 +38,7 @@
 	"editor.inlayHints.enabled": "offUnlessPressed", //在编辑器中启用内嵌提示。on/onUnlessPressed/offUnlessPressed/off，offUnlessPressed为默认不表示按下Ctrl+Alt表示
 	"editor.guides.indentation": false, //缩进参考线
 	"editor.guides.bracketPairs": "active", //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
-	"editor.bracketPairColorization.enabled": true, //控制是否启用括号对着色
+	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
@@ -78,7 +78,7 @@
 		"[Default Dark+]": { //Default Dark+主题的自定义
 			//"editor.background": "#1E1E1E", //设定编辑器背景
 			//"editor.foreground": "#D4D4D4", //设定编辑器前景
-			//"editorLineNumber.foreground": "#5faf87", //设定行号颜色
+			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
 			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
 			"editor.lineHighlightBackground": "#121212", //当前行背景颜色
@@ -112,7 +112,7 @@
 			"editor.findMatchBackground": "#00d700", //当前查找内容颜色
 			"editor.findMatchHighlightBackground": "#ffff00", //所有查找内容颜色
 			"editorGroupHeader.border": "#36353562", //tab栏设置-边框
-			"editorGroupHeader.tabsBackground": "#f3f3f3", //tab栏设置-背景色
+			"editorGroupHeader.tabsBackground": "#efefef", //tab栏设置-背景色
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			//panel设置
 			//"panel.background": "#f3f3f3",
@@ -154,22 +154,22 @@
 		"[Default Dark+]": { //Default Dark+主题的自定义
 			"comments": "#606060", //设定注释颜色
 			"numbers": "#e5c07b", //设定数字颜色
-			"strings": "#dc6b74", //设定字符串颜色 (备用#CE9178)
+			"strings": "#809980", //设定字符串颜色 (备用#CE9178)
 			"variables": "#c5c8c6", //设定变量颜色
-			"types": "#4EC9B0", //设定类型颜色
-			"keywords": {"foreground":"#64afef", "fontStyle": "bold"}, //设定关键字颜色
-			"functions": "#c678dd", //设定函数颜色
+			"types": "#df6b74", //设定类型颜色
+			"keywords": {"foreground":"#64afef", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）
+			"functions": "#98c379", //设定函数颜色(备用#98c379)
 			"textMateRules": [], //作用域所对应的颜色
 		},
 		"[Default Light+]": { //Default Light+主题的自定义
 			"comments": "#a6a6a6", //设定注释颜色liang 备用#a8a8a8
 			//"comments": "#008000", //设定注释颜色qiao
 			"numbers": "#0087ff", //设定数字颜色
-			"strings": "#2f5e5e", //设定字符串颜色
+			"strings": "#2F5E5E", //设定字符串颜色 (备用#2F5E5E)
 			"variables": "#000000", //设定变量颜色
-			"types": "#ff0000", //设定类型颜色
-			"keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色
-			"functions": "#0000ff", //设定函数颜色(备用#795E26)
+			"types": "#df6b74", //设定类型颜色
+			"keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色（可加入"fontStyle": "bold"）
+			"functions": "#006400", //设定函数颜色(备用#795E26)(备用深绿#008300)
 			"textMateRules": [ //作用域所对应的颜色
 				{
 					"scope": [ //grep搜索结果的文件路径和文件名
@@ -291,7 +291,7 @@
 	"whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色trailing-spaces颜色一致
 	"whitespacepp.foreColorLF": "#444444", //换行 (\n) 的文本颜色。
 	//亮色系 宽空格rgba(255,100,100,0.15) tab#C0C0C0 换行符#C0C0C0
-	//"whitespacepp.foreColorTAB": "#C0C0C0", //TAB (\t) 的文本颜色。
+	//"whitespacepp.foreColorTAB": "#808080", //TAB (\t) 的文本颜色。（备用#C0C0C0）
 	//"whitespacepp.foreColorWS": "rgba(255,100,100,0.15)", //宽空格的文本颜色，设定和trailing-spaces颜色一致
 	//"whitespacepp.foreColorLF": "#C0C0C0", //换行 (\n) 的文本颜色。
 	"whitespacepp.foreColorEOF": "#00FFFF", //EOF（文件结尾）的文本颜色。

@@ -76,6 +76,7 @@ set showfulltag                          " 补全时，使用整行补全
 set wildoptions=tagfile                  " 开启tagfile的补全
 set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
 set ttimeoutlen=50
+set pumheight=15                         " 设定弹出菜单的大小为15
 set formatoptions+=m                     " UniCode大于255的文本，不必等到空格再这行
 set formatoptions+=B                     " 合并两行中文时，不在中间加空格
 set t_Co=256                             " 设置Vim支持256色
@@ -325,8 +326,17 @@ nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
 "  快捷键：空格+l+空格 - 使用亮色系             "
 "  快捷键：空格+16+空格 - 使用16色              "
 "-----------------------------------------------"
+"全局变量colorRcFile=1：256暗色系
+"全局变量colorRcFile=2：256亮色系
+"全局变量colorRcFile=3：16色系
+let g:colorRcFile=1
 let scriptPath = expand("<sfile>:p:h")
-exec 'source' scriptPath . '/vim-color-256-rc.vim'
+"exec 'source' scriptPath . '/vim-color-256-rc.vim'
+"syntax参数加载之后运行自定义颜色载入
+augroup customSyn
+  autocmd!
+  autocmd syntax * if (colorRcFile == 1) | exec 'source' scriptPath . '/vim-color-256-rc.vim' | elseif (colorRcFile == 2) | exec 'source' scriptPath . '/vim-color-256-rc-light.vim' | elseif (colorRcFile == 3) | exec 'source' scriptPath . '/vim-color-16-rc.vim' | endif
+augroup END
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
