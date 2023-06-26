@@ -12,6 +12,8 @@ https://code.visualstudio.com/#alt-downloads
 * [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 * [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
 * [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
+* [Sync-Rsync(可选)](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
+* [Diff Folders(可选)](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
 * [VSCodeVim(可选)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
 * [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
 * [**Whitespace++**](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和下面的显示换行符选择一个即可，这个可自定义的内容多些

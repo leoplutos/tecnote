@@ -11,7 +11,7 @@
 	"editor.fontLigatures": true, //设置启用连字
 	"editor.formatOnSave": false, //在保存时格式化文件
 	//"editor.letterSpacing": 0.1, //字母间距
-	//"editor.lineHeight": 16, //行高
+	"editor.lineHeight": 22, //行高
 	"editor.minimap.enabled": false, //设定不显示右侧的minimap
 	"editor.tabSize": 4, //设定tab长度
 	"editor.rulers": [
@@ -37,7 +37,7 @@
 	"editor.find.loop": false, //控制在找不到其他匹配项时，不自动从开头(或结尾)重新开始搜索。
 	"editor.inlayHints.enabled": "offUnlessPressed", //在编辑器中启用内嵌提示。on/onUnlessPressed/offUnlessPressed/off，offUnlessPressed为默认不表示按下Ctrl+Alt表示
 	"editor.guides.indentation": false, //缩进参考线
-	"editor.guides.bracketPairs": "active", //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
+	"editor.guides.bracketPairs": false, //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
 	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
@@ -81,22 +81,27 @@
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
 			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
-			"editor.lineHighlightBackground": "#121212", //当前行背景颜色
-			"editor.selectionBackground": "#000000", //选择内容的背景
-			"editor.selectionHighlightBackground": "#000000", //选中变量的背景
+			"editor.lineHighlightBackground": "#121212", //当前行背景颜色（备用：#121212）
+			"editor.selectionBackground": "#000000", //选择内容的背景（备用：#303541）
+			"editor.selectionHighlightBackground": "#000000", //选中变量的背景（备用：#4F435580）
+			//"editor.wordHighlightBackground": "#4F4355",
+			//"editor.wordHighlightStrongBackground": "#db45a280",
 			//"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
-			"editorWhitespace.foreground": "#444444", //选中的tab和空格的颜色，因为设定为selection
+			"editorWhitespace.foreground": "#5c5c5c", //选中的tab和空格的颜色，因为设定为selection
+			//"editorIndentGuide.background": "#333844", //缩进参考线的颜色
+			//"editorIndentGuide.activeBackground": "#585C66", //当前缩进参考线的颜色
+			"editorRuler.foreground": "#4F4355", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
-			"editor.findMatchBackground": "#000000", //当前查找内容颜色。浅绿：#00d700
-			"editor.findMatchHighlightBackground": "#314365", //所有查找内容颜色。黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
+			"editor.findMatchBackground": "#000000", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
+			"editor.findMatchHighlightBackground": "#314365", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
 		},
-		"[Default Light+]": { //Default Light+主题的自定义
+		"[Default Light+]": { //Default Light+主题的自定义(灰色背景)
 			"editor.background": "#f3f3f3", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
 			"editor.foreground": "#000000", //设定编辑器前景
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
@@ -149,27 +154,80 @@
 			//"statusBarItem.errorBackground": "#495155",
 			//"statusBarItem.warningBackground": "#495155"
 		},
+		"[Visual Studio Light]": { //Visual Studio Light主题的自定义(SakuraEditor风格)
+			"editor.background": "#fffbf0", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
+			"editor.foreground": "#000000", //设定编辑器前景
+			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
+			"editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
+			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
+			"editor.lineHighlightBackground": "#96ffff", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
+			//"editor.selectionBackground": "#000000", //选择内容的背景
+			//"editor.selectionHighlightBackground": "#000000", //选中变量的背景
+			"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
+			"editorCursor.background": "#F8F8F0", //光标背景色
+			"editorCursor.foreground": "#1d1f21", //光标前景色
+			"editor.findMatchBackground": "#00d700", //当前查找内容颜色
+			"editor.findMatchHighlightBackground": "#ffff00", //所有查找内容颜色
+			"editorGroupHeader.border": "#36353562", //tab栏设置-边框
+			"editorGroupHeader.tabsBackground": "#eceee7", //tab栏设置-背景色
+			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
+			//panel设置
+			//"panel.background": "#f3f3f3",
+			"panel.border": "#36353562",
+			"panelTitle.activeForeground": "#2c2c2c",
+			"panelTitle.inactiveForeground": "#2c2c2c",
+			"panelTitle.activeBorder": "#2c2c2c",
+			//终端设置
+			"terminal.background": "#1d1f21", //终端背景色
+			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			"terminalCursor.background": "#000000", //终端光标背景色
+			"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			//资源管理器设置
+			"sideBar.background": "#eeeee5", //左部侧边栏背景色
+			"sideBar.foreground": "#2c2c2c", //左部侧边栏前景色
+			"sideBar.border": "#36353562", //侧边栏分割线颜色
+			"sideBarTitle.foreground": "#2c2c2c", //侧边栏标题前景色
+			"sideBarSectionHeader.background": "#dcdcdc", //侧边栏里面小Title背景色(比如时间线)
+			"sideBarSectionHeader.foreground": "#2c2c2c", //侧边栏里面小Title前景色(比如时间线)
+			"sideBarSectionHeader.border": "#66666641", //侧边栏里面小Title边界线颜色(比如时间线)
+			//任务栏设置
+			//"activityBar.background": "#93b0cc",
+			//"activityBar.activeBorder": "#27313b",
+			//"activityBar.inactiveForeground": "#000000",
+			//"activityBar.activeBackground": "#8d98a1",
+			//"activityBar.activeFocusBorder": "#ff0000",
+			//"activityBar.foreground": "#ebebeb",
+			//标题栏设置
+			"titleBar.activeBackground": "#93b8cc",
+			"titleBar.activeForeground": "#000000",
+			//状态栏设置
+			"statusBar.background": "#007bd1",
+			//"statusBarItem.activeBackground": "#262a2c",
+			//"statusBarItem.errorBackground": "#495155",
+			//"statusBarItem.warningBackground": "#495155"
+		},
 	},
 	"editor.tokenColorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
-			"comments": "#606060", //设定注释颜色
-			"numbers": "#e5c07b", //设定数字颜色
-			"strings": "#809980", //设定字符串颜色 (备用#CE9178)
+			"comments": "#5f6167", //设定注释颜色(备用#606060)
+			"numbers": "#00e8c6", //设定数字颜色(备用#e5c07b)
+			"strings": "#809980", //设定字符串颜色(备用#669199)(备用#007f7f)(备用#809980)(备用#CE9178)(备用#01a252)
 			"variables": "#c5c8c6", //设定变量颜色
-			"types": "#df6b74", //设定类型颜色
-			"keywords": {"foreground":"#64afef", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）
-			"functions": "#98c379", //设定函数颜色(备用#98c379)
+			"types": "#ee5d43", //设定类型颜色(备用#df6b74)(备用#f92672)
+			"keywords": {"foreground":"#64afef", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）(备用#64afef)
+			"functions": "#96E072", //设定函数颜色(备用#98c379)(备用#61ce3c)(备用#90a959)
 			"textMateRules": [], //作用域所对应的颜色
 		},
-		"[Default Light+]": { //Default Light+主题的自定义
+		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
 			"comments": "#a6a6a6", //设定注释颜色liang 备用#a8a8a8
 			//"comments": "#008000", //设定注释颜色qiao
 			"numbers": "#0087ff", //设定数字颜色
-			"strings": "#2F5E5E", //设定字符串颜色 (备用#2F5E5E)
+			"strings": "#2F5E5E", //设定字符串颜色 (备用#2F5E5E)(备用01a252)
 			"variables": "#000000", //设定变量颜色
-			"types": "#df6b74", //设定类型颜色
+			"types": "#e02838", //设定类型颜色
 			"keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色（可加入"fontStyle": "bold"）
-			"functions": "#006400", //设定函数颜色(备用#795E26)(备用深绿#008300)
+			"functions": "#006400", //设定函数颜色(备用#795E26)(备用深绿#008300)(备用深绿#006400)
 			"textMateRules": [ //作用域所对应的颜色
 				{
 					"scope": [ //grep搜索结果的文件路径和文件名
@@ -183,6 +241,18 @@
 						"meta.resultLinePrefix.lineNumber.search",
 					],
 					"settings": {"foreground":"#90908a", "fontStyle": ""}
+				},
+				{
+					"scope": [ //c语言的%d等
+						"constant.other.placeholder.c",
+					],
+					"settings": {"foreground":"#001080", "fontStyle": ""}
+				},
+				{
+					"scope": [ //c语言的\n等
+						"constant.character.escape.c",
+					],
+					"settings": {"foreground":"#EE0000", "fontStyle": ""}
 				},
 			],
 		},
@@ -255,10 +325,11 @@
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
-	"git.enabled": false, //禁用git组件
-	//"git.path": "D:\\Tool\\Git\\cmd\\git.exe", // 设定git
-	//"git.autofetch": false, // git不自动fetch
-	//"git.autorefresh": false, // git不自动刷新
+	"git.enabled": false, //是否启用git组件
+	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git路径
+	"diffEditor.ignoreTrimWhitespace": false, //是否忽略空格或尾随空格
+	"git.autofetch": false, // git是否自动fetch
+	"git.autorefresh": true, // git是否自动刷新
 	"git.ignoreMissingGitWarning": true, //忽略git警告
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新

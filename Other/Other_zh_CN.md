@@ -2,6 +2,9 @@
 
 ## 常用颜色
 
+#### 取颜色码
+* [菜鸟工具-图片取色器](https://c.runoob.com/front-end/6214/)
+
 #### 常用护眼色
 
 **护眼绿色**： RGB（202, 234, 206） ， HEX（#caeace）  
@@ -12,6 +15,22 @@
 **终端黑灰**：  
 &nbsp;&nbsp;&nbsp;&nbsp;背景：RGB（29, 31, 33） ， HEX（#1d1f21）  
 &nbsp;&nbsp;&nbsp;&nbsp;前景：RGB（218, 218, 218） ， HEX（#dadada）  
+**One Dark Pro暗色系颜色：**  
+&nbsp;&nbsp;&nbsp;&nbsp;紫色 #c678dd  
+&nbsp;&nbsp;&nbsp;&nbsp;红色 #dc6b74  
+&nbsp;&nbsp;&nbsp;&nbsp;绿色 #98c379  
+&nbsp;&nbsp;&nbsp;&nbsp;黄色 #e5c07b  
+&nbsp;&nbsp;&nbsp;&nbsp;蓝色 #64afef  
+**暗色主题下，色弱用色：**  
+&nbsp;&nbsp;&nbsp;&nbsp;注释 #5f6167  
+&nbsp;&nbsp;&nbsp;&nbsp;Cyan #00e8c6  
+&nbsp;&nbsp;&nbsp;&nbsp;Orange #f39c12  
+&nbsp;&nbsp;&nbsp;&nbsp;Skyblue #87cefa  
+&nbsp;&nbsp;&nbsp;&nbsp;Pink #ff00aa  
+&nbsp;&nbsp;&nbsp;&nbsp;Hot Pink #f92672  
+&nbsp;&nbsp;&nbsp;&nbsp;Purple #7cb7ff  
+&nbsp;&nbsp;&nbsp;&nbsp;Red #ee5d43  
+&nbsp;&nbsp;&nbsp;&nbsp;Green #96E072  
 
 #### 11种能减少眼睛疲劳的护眼色，附颜色代码及RGB值
 - 1、绿豆沙 #C7EDCC RGB(199, 237, 204)

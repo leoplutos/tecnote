@@ -78,18 +78,23 @@
 		"[Default Dark+]": { //Default Dark+主题的自定义
 			//"editor.background": "#1E1E1E", //设定编辑器背景
 			//"editor.foreground": "#D4D4D4", //设定编辑器前景
-			//"editorLineNumber.foreground": "#5faf87", //设定行号颜色
+			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
 			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
-			"editor.lineHighlightBackground": "#121212", //当前行背景颜色
-			"editor.selectionBackground": "#000000", //选择内容的背景
-			"editor.selectionHighlightBackground": "#000000", //选中变量的背景
+			"editor.lineHighlightBackground": "#121212", //当前行背景颜色（备用：#121212）
+			"editor.selectionBackground": "#000000", //选择内容的背景（备用：#303541）
+			"editor.selectionHighlightBackground": "#000000", //选中变量的背景（备用：#4F435580）
+			//"editor.wordHighlightBackground": "#4F4355",
+			//"editor.wordHighlightStrongBackground": "#db45a280",
 			//"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
-			"editorWhitespace.foreground": "#444444", //选中的tab和空格的颜色，因为设定为selection
+			"editorWhitespace.foreground": "#5c5c5c", //选中的tab和空格的颜色，因为设定为selection
+			//"editorIndentGuide.background": "#333844", //缩进参考线的颜色
+			//"editorIndentGuide.activeBackground": "#585C66", //当前缩进参考线的颜色
+			"editorRuler.foreground": "#4F4355", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
-			"editor.findMatchBackground": "#000000", //当前查找内容颜色。浅绿：#00d700
-			"editor.findMatchHighlightBackground": "#314365", //所有查找内容颜色。黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
+			"editor.findMatchBackground": "#000000", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
+			"editor.findMatchHighlightBackground": "#314365", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
@@ -152,17 +157,13 @@
 	},
 	"editor.tokenColorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
-			"comments": "#606060", //设定注释颜色
-			//"numbers": "#00ffff", //设定数字颜色
-			//"strings": "#408080", //设定字符串颜色
+			"comments": "#5f6167", //设定注释颜色(备用#606060)
+			"numbers": "#00e8c6", //设定数字颜色(备用#e5c07b)
+			"strings": "#809980", //设定字符串颜色(备用#669199)(备用#007f7f)(备用#809980)(备用#CE9178)(备用#01a252)
 			"variables": "#c5c8c6", //设定变量颜色
-			//"types": "#ff0000", //设定类型颜色
-			//"keywords": {"foreground":"#0087ff", "fontStyle": "bold"}, //设定关键字颜色
-			//"keywords": {"foreground":"#00ff88", "fontStyle": "bold"}, //设定关键字颜色
-			"keywords": {
-				"fontStyle": "bold"
-			}, //设定关键字颜色
-			//"functions": "#008787", //设定函数颜色
+			"types": "#ee5d43", //设定类型颜色(备用#df6b74)(备用#f92672)
+			"keywords": {"foreground":"#64afef", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）(备用#64afef)
+			"functions": "#96E072", //设定函数颜色(备用#98c379)(备用#61ce3c)(备用#90a959)
 			"textMateRules": [], //作用域所对应的颜色
 		},
 		"[Default Light+]": { //Default Light+主题的自定义
@@ -257,10 +258,11 @@
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
-	"git.enabled": false, //禁用git组件
-	//"git.path": "D:\\Tool\\Git\\cmd\\git.exe", // 设定git
-	//"git.autofetch": false, // git不自动fetch
-	//"git.autorefresh": false, // git不自动刷新
+	"git.enabled": false, //是否启用git组件
+	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git路径
+	"diffEditor.ignoreTrimWhitespace": false, //是否忽略空格或尾随空格
+	"git.autofetch": false, // git是否自动fetch
+	"git.autorefresh": true, // git是否自动刷新
 	"git.ignoreMissingGitWarning": true, //忽略git警告
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新
@@ -271,9 +273,11 @@
 	//-----------------------------------------------"
 	"[python]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
+		"editor.guides.indentation": true, //缩进参考线
 	},
 	"[rust]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
+		"editor.guides.indentation": true, //缩进参考线
 	},
 	//-----------------------------------------------"
 	//              Whitespace++插件设定             "

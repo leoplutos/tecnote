@@ -25,7 +25,7 @@ hi TabLine      term=none cterm=none ctermfg=248 ctermbg=238 gui=none guifg=#a8a
 hi TabLineSel   term=underline cterm=none ctermfg=15 ctermbg=234 gui=none guifg=#ffffff guibg=#1E1E1E
 
 "Comment    : 注释(灰色)
-hi Comment      term=none cterm=none ctermfg=241 gui=none guifg=#606060
+hi Comment      term=none cterm=none ctermfg=241 gui=none guifg=#5f6167
 "Constant   : 常量，例如数字、引号内字符串、布尔值
 hi Constant     term=none cterm=none ctermfg=108 gui=none guifg=#809980
 "Identifier : 标识符
@@ -39,7 +39,7 @@ hi Type         term=none cterm=none ctermfg=177 gui=none guifg=#c678dd
 "Special    : 特殊符号，通常是类似字符串中的“\n”“%s”
 hi Special      term=none cterm=none ctermfg=123 gui=none guifg=#9CDCFE
 "Function   : 函数名
-hi Function     term=none cterm=none ctermfg=114 gui=none guifg=#98c379
+hi Function     term=none cterm=none ctermfg=114 gui=none guifg=#96E072
 "Underlined : 文本下划线。
 "hi Underlined   term=underline cterm=underline ctermfg=21 gui=underline guifg=#0000ff
 

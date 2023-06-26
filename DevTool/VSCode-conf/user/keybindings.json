@@ -70,6 +70,10 @@
 		"key": "shift+space ctrl+t",
 		"command": "editor.action.indentationToTabs"
 	},
+	{ //shift+space -> ctrl+e:切换换行符
+		"key": "shift+space ctrl+e",
+		"command": "workbench.action.editor.changeEOL"
+	},
 	{ //shift+space -> z:切换禅模式
 		"key": "shift+space z",
 		"command": "workbench.action.toggleZenMode"
