@@ -37,7 +37,7 @@ alias tree='winpty tree.com'
 
 # ssh服务器
 alias ssh4='ssh -t user@1.2.3.4 -p 22 "/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal"'
-alias ssho4='ssh -oHostKeyAlgorithms=+ssh-dss -t user@1.2.3.4 -p 22 "/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal"'
+alias ssho4='ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oHostKeyAlgorithms=+ssh-dss -t user@1.2.3.4 -p 22 "/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal"'
 
 # 修改终端编码为utf8
 chcp.com 65001

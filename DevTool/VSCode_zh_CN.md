@@ -381,6 +381,11 @@ chcp.com
 chcp.com 65001
 ```
 
+### 查看VSCode当前颜色设置
+按下 ``F1`` ，输入 ``color`` ，选择 ``Developer: Generate Color Theme From Current Settings``  
+即 ``开发人员：使用当前设置生成颜色主题``  
+会新打开一个未命名文件，里面是当前颜色设置代码
+
 ### 颜色查找
 * [brandcolors](https://brandcolors.net/)
 * [colorhunt](https://colorhunt.co/palette/c4dfdfd2e9e9e3f4f4f8f6f4)

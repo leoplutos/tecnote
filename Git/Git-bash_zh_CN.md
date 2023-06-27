@@ -118,14 +118,14 @@ vim .minttyrc
 ## 使用git-bash作为自己的终端
 git-bash下是默认自带ssh的。所以只要使用下面的命令就可以直接ssh到服务器
 ```bash
-ssh -t user@1.2.3.4 -p 22 '/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
+ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oHostKeyAlgorithms=+ssh-dss -t user@1.2.3.4 -p 22 '/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
 ```
  --rcfile参数为不使用默认bashrc，使用指定的文件
 
 ## 使用git-bash内置的mintty制作快捷方式
 制作如下快捷方式就可以直接ssh到服务器
 ```bash
-D:\Tools\WorkTool\Team\Git\usr\bin\mintty.exe /usr/bin/ssh -t user@1.2.3.4 -p 22 '/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
+D:\Tools\WorkTool\Team\Git\usr\bin\mintty.exe /usr/bin/ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oHostKeyAlgorithms=+ssh-dss -t user@1.2.3.4 -p 22 '/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
 ```
 
 ## git-bash指定minttyrc文件启动

@@ -1,3 +1,8 @@
+#全局设定
+host *
+	StrictHostKeyChecking no
+	UserKnownHostsFile=/dev/null
+
 # 服务器1
 Host mysv
 	HostName 1.2.3.4

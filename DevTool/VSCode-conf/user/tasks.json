@@ -15,7 +15,7 @@
 		{ //connect server - user1@1.2.3.4
 			"label": "connect server - user1@1.2.3.4",
 			"type": "shell",
-			"command": "chcp 65001 && ssh -t user1@1.2.3.4 -p 22 \"/bin/bash --rcfile /sb/dst/batch/batches/tmp/test_lch/bashrc/.bashrc\"",
+			"command": "chcp 65001 && ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oHostKeyAlgorithms=+ssh-dss -t user1@1.2.3.4 -p 22 \"/bin/bash --rcfile /sb/dst/batch/batches/tmp/test_lch/bashrc/.bashrc\"",
 			"args": [],
 			"problemMatcher": [],
 			"presentation": {

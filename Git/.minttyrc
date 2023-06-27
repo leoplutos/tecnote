@@ -2,15 +2,20 @@
 # .minttyrc - Configuration file for mintty terminal
 #
 
+#基础设定
 BoldAsFont=no
 Locale=C
 Charset=UTF-8
-Font=Inconsolata
-FontHeight=12
+#Font=Inconsolata
+#Font=ＭＳ ゴシック
+Font=JetBrains Mono
+FontHeight=14
 Language=zh_CN
 CursorType=block
 Columns=120
-Rows=30
+Rows=40
+X=200
+Y=50
 MiddleClickAction=extend
 RightClickAction=paste
 CopyAsRTF=no
@@ -19,9 +24,26 @@ BoldAsColour=no
 CopyTab=yes
 RewrapOnResize=yes
 
-BackgroundColour=0,0,0
-ForegroundColour=191,191,191
+#终端颜色设定
+BackgroundColour=29,31,33
+ForegroundColour=218,218,218
 CursorColour=0,255,255
+Black=0,0,0
+BoldBlack=102,102,102
+Red=205,49,49
+BoldRed=241,76,76
+Green=13,188,121
+BoldGreen=35,209,139
+Yellow=229,229,16
+BoldYellow=245,245,67
+Blue=36,114,200
+BoldBlue=59,142,234
+Magenta=188,63,188
+BoldMagenta=214,112,214
+Cyan=17,168,205
+BoldCyan=41,184,219
+White=229,229,229
+BoldWhite=229,229,229
 
 #Charwidth=unicode
 #内置的宽度属性，假设宽度不明确的字符是宽的。（对应于 xterm 资源cjkWidth:true。）

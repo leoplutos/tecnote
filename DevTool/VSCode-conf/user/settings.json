@@ -207,6 +207,22 @@
 			//"statusBarItem.errorBackground": "#495155",
 			//"statusBarItem.warningBackground": "#495155"
 		},
+		"terminal.ansiBlack": "#000000",
+		"terminal.ansiBlue": "#2472c8",
+		"terminal.ansiBrightBlack": "#666666",
+		"terminal.ansiBrightBlue": "#3b8eea",
+		"terminal.ansiBrightCyan": "#29b8db",
+		"terminal.ansiBrightGreen": "#23d18b",
+		"terminal.ansiBrightMagenta": "#d670d6",
+		"terminal.ansiBrightRed": "#f14c4c",
+		"terminal.ansiBrightWhite": "#e5e5e5",
+		"terminal.ansiBrightYellow": "#f5f543",
+		"terminal.ansiCyan": "#11a8cd",
+		"terminal.ansiGreen": "#0dbc79",
+		"terminal.ansiMagenta": "#bc3fbc",
+		"terminal.ansiRed": "#cd3131",
+		"terminal.ansiWhite": "#e5e5e5",
+		"terminal.ansiYellow": "#e5e510",
 	},
 	"editor.tokenColorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
@@ -217,7 +233,21 @@
 			"types": "#ee5d43", //设定类型颜色(备用#df6b74)(备用#f92672)
 			"keywords": {"foreground":"#64afef", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）(备用#64afef)
 			"functions": "#96E072", //设定函数颜色(备用#98c379)(备用#61ce3c)(备用#90a959)
-			"textMateRules": [], //作用域所对应的颜色
+			"textMateRules": [ //作用域所对应的颜色
+				{
+					"scope": [ //grep搜索结果的文件路径和文件名
+						"meta.path.basename.search",
+						"meta.path.dirname.search",
+					],
+					"settings": {"foreground": "#f39c12"}
+				},
+				{
+					"scope": [ //grep搜索结果的行号
+						"meta.resultLinePrefix.lineNumber.search",
+					],
+					"settings": {"foreground":"#6c8086", "fontStyle": ""}
+				},
+			], 
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
 			"comments": "#a6a6a6", //设定注释颜色liang 备用#a8a8a8
@@ -240,7 +270,7 @@
 					"scope": [ //grep搜索结果的行号
 						"meta.resultLinePrefix.lineNumber.search",
 					],
-					"settings": {"foreground":"#90908a", "fontStyle": ""}
+					"settings": {"foreground":"#6c8086", "fontStyle": ""}
 				},
 				{
 					"scope": [ //c语言的%d等
@@ -268,7 +298,6 @@
 			"overrideName": true,
 			"env": {//在这里设定所需环境变量，设定好后需要重启
 				"LANG": "C.UTF-8"
-				//"WORK_HOME": "/d/Work",
 				//"PATH": "${env:PATH}:/d/Work/bin"
 			},
 			"icon": "terminal-debian",
@@ -285,12 +314,25 @@
 			],
 			"overrideName": true,
 			"env": { //在这里设定所需环境变量，设定好后需要重启
-				//"WORK_HOME": "D:\\Work",
-				//下面分别设定了cmd下的java,python,git
 				//"PATH": "${env:path};D:\\Tool\\openjdk-8u312-b07\\bin;D:\\Tool\\python-3.8.10-embed-amd64;D:\\Tool\\Git\\cmd"
 			},
 			"icon": "terminal-cmd",
 			"color": "terminal.ansiBlue"
+		},
+		"Win-PowerShell": {
+			"path": [
+				"powershell",
+			],
+			"args": [
+				"-ExecutionPolicy",
+				 "RemoteSigned", // 执行策略为RemoteSigned（可以载入脚本）
+				 "-noexit"
+			],
+			"overrideName": true,
+			"env": { //在这里设定所需环境变量，设定好后需要重启
+			},
+			"icon": "terminal-powershell",
+			"color": "terminal.ansiYellow"
 		},
 	},
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
