@@ -24,6 +24,8 @@ Option Explicit
     '创建WshShell对象并开始终端外壳
     Dim wshShell
     Set wshShell = WScript.CreateObject ("WScript.Shell")
+    '[关闭日语IME输入模式] - 发行2个\，再发行2个Backspace
+    wshShell.SendKeys("\\{BS 2}")
     Dim runCmd
     If shellType = 0 Then
         'cmd外壳

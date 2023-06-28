@@ -41,6 +41,11 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 
 * [UbuntuMono](https://github.com/powerline/fonts/tree/master/UbuntuMono)  
 
+## Windows下cmd和PowerShell的字体
+网上有各种针对一些字体改动注册表的做法，感觉过于繁琐还有失败的情况，Microsoft YaHei Mono字体可以做到完美的控制台字体设置，  
+微软雅黑 + Consolas的外观符合审美也支持汉字，只需直接安装即可在配置使用。一些控制台常见的字体问题也没有出现。  
+* [Microsoft YaHei Mono](https://github.com/microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip)
+
 
 ## Nerd字体
 Nerd font是针对已有的字体打 patch，把一些 icon 字符插入进去。  

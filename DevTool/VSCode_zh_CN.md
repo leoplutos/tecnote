@@ -225,7 +225,7 @@ C:\Users\user\AppData\Roaming\Code\User
 #### 用户设置（全局）
 * [settings.json](VSCode-conf/user/settings.json)
 * [keybindings.json](VSCode-conf/user/keybindings.json)
-* [tasks.json](VSCode-conf/user/tasks.json)
+* [tasks.json](VSCode-conf/user/tasks.json) &nbsp;&nbsp;&nbsp;&nbsp;这里定义了使用vbs自动ssh登录服务器的任务，需要将[user@1.2.3.4.vbs](VSCode-conf/vbs/user@1.2.3.4.vbs)放到 ``%AppData%\Code\User\vbs`` 路径下
 * [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
 * [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 * [java.json](VSCode-conf/snippets/java.json)&nbsp;&nbsp;&nbsp;&nbsp;java代码片段配置文件（snippets）

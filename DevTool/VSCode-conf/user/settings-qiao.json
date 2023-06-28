@@ -164,7 +164,21 @@
 			"types": "#ee5d43", //设定类型颜色(备用#df6b74)(备用#f92672)
 			"keywords": {"foreground":"#64afef", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）(备用#64afef)
 			"functions": "#96E072", //设定函数颜色(备用#98c379)(备用#61ce3c)(备用#90a959)
-			"textMateRules": [], //作用域所对应的颜色
+			"textMateRules": [ //作用域所对应的颜色
+				{
+					"scope": [ //grep搜索结果的文件路径和文件名
+						"meta.path.basename.search",
+						"meta.path.dirname.search",
+					],
+					"settings": {"foreground": "#f39c12"}
+				},
+				{
+					"scope": [ //grep搜索结果的行号
+						"meta.resultLinePrefix.lineNumber.search",
+					],
+					"settings": {"foreground":"#6c8086", "fontStyle": ""}
+				},
+			], 
 		},
 		"[Default Light+]": { //Default Light+主题的自定义
 			"comments": "#0a881b", //设定注释颜色liang
@@ -218,8 +232,6 @@
 			],
 			"overrideName": true,
 			"env": { //在这里设定所需环境变量，设定好后需要重启
-				//"WORK_HOME": "D:\\Work",
-				//下面分别设定了cmd下的java,python,git
 				//"PATH": "${env:path};D:\\Tool\\openjdk-8u312-b07\\bin;D:\\Tool\\python-3.8.10-embed-amd64;D:\\Tool\\Git\\cmd"
 			},
 			"icon": "terminal-cmd",
@@ -238,7 +250,7 @@
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
 	"terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
-	"terminal.integrated.rightClickBehavior": "copyPaste", // 鼠标右键-粘贴
+	"terminal.integrated.rightClickBehavior": "paste", // 鼠标右键-粘贴
 	"terminal.integrated.sendKeybindingsToShell": true, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效，已经绑定到Shift+空格->F）
 	"terminal.integrated.cursorBlinking": true, //光标闪烁
 	"terminal.integrated.defaultLocation": "view", //在终端视图中创建终端
@@ -251,23 +263,32 @@
 	"terminal.integrated.enableBell": true, // 集成终端启用视觉化铃声
 	"terminal.integrated.gpuAcceleration": "on", // 集成终端使用GPU加速
 	"terminal.integrated.confirmOnExit": "hasChildProcesses", // 关闭VSCode时，如果终端有子进程运行则确认
+	"terminal.integrated.showExitAlert": false, // 退出时代码为非零时是否显示“终端进程已终止且显示退出代码”警报
 	"terminal.integrated.persistentSessionReviveProcess": "never", // 不还原终端缓冲区（历史记录）
 	"terminal.integrated.enablePersistentSessions": false, // 跨窗口重新加载保持工作区的终端会话
+	//-----------------------------------------------"
+	//               git设定                         "
+	//-----------------------------------------------"
+	"git.enabled": false, //是否启用git组件
+	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git路径
+	"git.autofetch": false, // git是否自动fetch
+	"git.autorefresh": true, // git是否自动刷新
+	"git.alwaysShowStagedChangesResourceGroup": true, // 始终显示“暂存的更改”资源组
+	"git.enableStatusBarSync": false, // 控制Git Sync命令是否出现在状态栏中
+	"git.showPushSuccessNotification": true, // 控制在推送成功时是否显示通知
+	"git.supportCancellation": true, // 控制在运行同步操作时是否出现通知，允许用户取消操作。
+	"git.terminalGitEditor": true, // 控制是否使 VS Code 成为集成终端中产生的 Git 进程的 Git 编辑器。请注意: 需要重启终端才能选择此设置中的更改。
+	"git.ignoreMissingGitWarning": true, //忽略“缺失 Git”的警告
 	//-----------------------------------------------"
 	//               其他设定                        "
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
-	"git.enabled": false, //是否启用git组件
-	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git路径
 	"diffEditor.ignoreTrimWhitespace": false, //是否忽略空格或尾随空格
-	"git.autofetch": false, // git是否自动fetch
-	"git.autorefresh": true, // git是否自动刷新
-	"git.ignoreMissingGitWarning": true, //忽略git警告
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新
-	"workbench.enableExperiments": false, //禁用实验
 	"extensions.ignoreRecommendations": true, //忽略插件建议
+	"workbench.enableExperiments": false, //禁用实验
 	//-----------------------------------------------"
 	//               特别语言设定                    "
 	//-----------------------------------------------"

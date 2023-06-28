@@ -1,15 +1,24 @@
 // 将键绑定放在此文件中以覆盖默认值
 [
+	{ //ctrl+r:查找与替换
+		"key": "ctrl+r",
+		"command": "editor.action.startFindReplaceAction",
+		"when": "editorFocus || editorIsOpen"
+	},
+	{ //ctrl+shift+r:快速打开（转到文件）
+		"key": "ctrl+shift+r",
+		"command": "workbench.action.quickOpen"
+	},
 	{ //shift+space -> s:触发建议
 		"key": "shift+space s",
 		"command": "editor.action.triggerSuggest",
 		"when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
 	},
-	{ //shift+space -> v 开启/关闭vim插件
+	{ //shift+space -> v:开启/关闭vim插件
 		"key": "shift+space v",
 		"command": "toggleVim"
 	},
-	{ //ctrl+w关闭tab
+	{ //ctrl+w:关闭tab
 		"key": "ctrl+w",
 		"command": "workbench.action.closeActiveEditor"
 	},
@@ -22,12 +31,12 @@
 		"key": "shift+space g",
 		"command": "workbench.action.findInFiles"
 	},
-	{ //ctrl+j选择下一个建议
+	{ //ctrl+j:选择下一个建议
 		"key": "ctrl+j",
 		"command": "selectNextSuggestion",
 		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
 	},
-	{ //ctrl+k选择上一个建议
+	{ //ctrl+k:选择上一个建议
 		"key": "ctrl+k",
 		"command": "selectPrevSuggestion",
 		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
@@ -46,9 +55,9 @@
 		"command": "markdown.showPreviewToSide",
 		"when": "!notebookEditorFocused && editorLangId == 'markdown'"
 	},
-	{ //shift+space -> t:在编辑器区域内创建新终端
+	{ //shift+space -> t:运行任务
 		"key": "shift+space t",
-		"command": "workbench.action.createTerminalEditor"
+		"command": "workbench.action.tasks.runTask"
 	},
 	{ //shift+space -> q:最大化终端面板
 		"key": "shift+space q",

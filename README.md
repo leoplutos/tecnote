@@ -11,7 +11,7 @@
 ## Windows命令
 * [Cmd](Windows/Cmd_zh_CN.md)
 * [Powershell](Windows/Powershell_zh_CN.md)
-* [VBScript自动ssh登录脚本](Windows/user@1.2.3.4-22.vbs)
+* [VBScript](Windows/VBScript_zh_CN.md)
 
 ## Git命令
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
