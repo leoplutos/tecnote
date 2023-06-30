@@ -9,6 +9,16 @@
 		"key": "ctrl+shift+r",
 		"command": "workbench.action.quickOpen"
 	},
+	{ //ctrl+down:跳转到下一个符号
+		"key": "ctrl+down",
+		"command": "editor.action.wordHighlight.next",
+		"when": "editorTextFocus && hasWordHighlights"
+	},
+	{ //ctrl+up:跳转到上一个符号
+		"key": "ctrl+up",
+		"command": "editor.action.wordHighlight.prev",
+		"when": "editorTextFocus && hasWordHighlights"
+	},
 	{ //shift+space -> s:触发建议
 		"key": "shift+space s",
 		"command": "editor.action.triggerSuggest",
@@ -21,6 +31,19 @@
 	{ //ctrl+w:关闭tab
 		"key": "ctrl+w",
 		"command": "workbench.action.closeActiveEditor"
+	},
+	{ //shift+space -> ctrl+w:关闭其他tab
+		"key": "shift+space ctrl+w",
+		"command": "workbench.action.closeOtherEditors"
+	},
+	{ //ctrl+d:删除行
+		"key": "ctrl+d",
+		"command": "editor.action.deleteLines",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{ //shift+alt+r:在资源管理器中显示
+		"key": "shift+alt+r",
+		"command": "revealFileInOS",
 	},
 	{ //shift+space -> f:查找
 		"key": "shift+space f",
@@ -63,29 +86,62 @@
 		"key": "shift+space q",
 		"command": "workbench.action.toggleMaximizedPanel"
 	},
+	{ //shift+space -> ctrl+f:格式化选定内容
+		"key": "shift+space ctrl+f",
+		"command": "editor.action.formatSelection",
+		"when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
+	},
 	{ //shift+space -> ctrl+u:转换大写
 		"key": "shift+space ctrl+u",
-		"command": "editor.action.transformToUppercase"
+		"command": "editor.action.transformToUppercase",
+		"when": "textInputFocus && !editorReadonly"
 	},
 	{ //shift+space -> ctrl+l:转换小写
 		"key": "shift+space ctrl+l",
-		"command": "editor.action.transformToLowercase"
+		"command": "editor.action.transformToLowercase",
+		"when": "textInputFocus && !editorReadonly"
 	},
 	{ //shift+space -> ctrl+s:将缩进转换为空格
 		"key": "shift+space ctrl+s",
-		"command": "editor.action.indentationToSpaces"
+		"command": "editor.action.indentationToSpaces",
+		"when": "textInputFocus && !editorReadonly"
 	},
 	{ //shift+space -> ctrl+t:将缩进转换为制表符
 		"key": "shift+space ctrl+t",
-		"command": "editor.action.indentationToTabs"
+		"command": "editor.action.indentationToTabs",
+		"when": "textInputFocus && !editorReadonly"
 	},
 	{ //shift+space -> ctrl+e:切换换行符
 		"key": "shift+space ctrl+e",
-		"command": "workbench.action.editor.changeEOL"
+		"command": "workbench.action.editor.changeEOL",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{ //shift+space -> ctrl+d:按降序排列行（需要选中内容）
+		"key": "shift+space ctrl+d",
+		"command": "editor.action.sortLinesDescending",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{ //shift+space -> ctrl+a:按升序排列行（需要选中内容）
+		"key": "shift+space ctrl+a",
+		"command": "editor.action.sortLinesAscending",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{ //shift+space -> ctrl+x:删除重复行（需要选中内容）
+		"key": "shift+space ctrl+x",
+		"command": "editor.action.removeDuplicateLines",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{ // shift+space -> ctrl+r:在只读和可写之间切换
+		"key": "shift+space ctrl+r",
+		"command": "workbench.action.files.toggleActiveEditorReadonlyInSession"
 	},
 	{ //shift+space -> z:切换禅模式
 		"key": "shift+space z",
 		"command": "workbench.action.toggleZenMode"
+	},
+	{ // shift+space -> ctrl+m:在深色主题和浅色主题之间切换
+		"key": "shift+space ctrl+m",
+		"command": "workbench.action.toggleLightDarkThemes"
 	},
 	{ //shift+space -> j:打开/关闭面板（Panel）
 		"key": "shift+space j",

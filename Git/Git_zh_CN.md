@@ -152,6 +152,21 @@ git-credential-manager.exe和 git-credential-wincred.exe 都是将凭据存储�
 #### 3.cache
 将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且默认在15分钟后从内存中清除。
 
+# 其他
+
+### .gitignore文件不生效问题
+原因是因为在git忽略目录中，新建的文件在git中会有缓存，如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的，
+这时候我们就应该先把本地缓存删除，然后再进行git的提交，这样就不会出现忽略的文件了。
+
+处理方式如下：
+```
+# 清除缓存文件
+git rm -r --cached .
+git add .
+git commit -m ".gitignore重写缓存成功"
+git push
+```
+
 # 更多
 * [GIT CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/git.txt)
 * [团队项目开发的问题和解决方案](https://github.com/jackfrued/Python-100-Days/blob/master/Day91-100/91.%E5%9B%A2%E9%98%9F%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)

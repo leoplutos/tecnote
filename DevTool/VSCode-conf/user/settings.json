@@ -3,12 +3,13 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'Inconsolata', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	//"editor.fontFamily": "'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //日文系统用
-	//"editor.fontFamily": "'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
+	"editor.fontFamily": "'Ligconsolata', 'Inconsolata', 'JetBrains Mono', 'Consolas', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'Cascadia Code', 'Courier New', monospace", //中文系统用
+	//"editor.fontFamily": "'Ligconsolata', 'Inconsolata', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //日文系统用
+	//"editor.fontFamily": "'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
 	"editor.fontSize": 18, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
+	"editor.fontVariations": "'Ligconsolata' 0.5",
 	"editor.formatOnSave": false, //在保存时格式化文件
 	//"editor.letterSpacing": 0.1, //字母间距
 	"editor.lineHeight": 22, //行高
@@ -28,9 +29,9 @@
 	"editor.autoSurround": "languageDefined",
 	"editor.quickSuggestions": {
 		// 自动补全设定
-		"other": true, //字符串以外
-		"strings": false, //字符串
-		"comments": false //注释
+		"other": "on",
+		"comments": "off",
+		"strings": "off"
 	},
 	"editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?·～！￥…（）—【】、；：‘’“”，。《》・「」＜＞＋－＊／｛｝｜～＆％＄＃　？ ", //字符分割,双击选中一串字符序列时，VSCode就会依此来区分词
 	"editor.suggest.localityBonus": true, //自动补全时显示离光标近的对象
@@ -40,6 +41,7 @@
 	"editor.guides.bracketPairs": false, //控制是否启用括号对指南。true: 启用括号对参考线。active: 仅为活动括号对启用括号对参考线。 false: 禁用括号对参考线。
 	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
+	"editor.multiCursorModifier": "alt", //多光标选择模式（Ctrl 或者 Alt）
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
 	"window.newWindowDimensions": "maximized", //总是最大化打开窗口
@@ -68,34 +70,42 @@
 	"workbench.editor.enablePreview": false, // 全局禁用预览模式
 	"workbench.editor.showTabs": true, //每次都新打开
 	"workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
+	//"workbench.editor.tabSizing": "fixed", //tab宽度自适应
 	"zenMode.centerLayout": false, //禅模式取消居中
 	"zenMode.hideLineNumbers": false, //禅模式显示行号
 	//-----------------------------------------------"
 	//               颜色设定                        "
 	//-----------------------------------------------"
-	"workbench.colorTheme": "Default Dark+", //设定主题
+	"workbench.preferredDarkColorTheme": "Default Dark+", // 深色主题首选项
+	"workbench.preferredLightColorTheme": "Default Light+", // 浅色主题首选项
+	"workbench.preferredHighContrastColorTheme": "Default Dark+", // 深色高对比度主题首选项
+	"workbench.preferredHighContrastLightColorTheme": "Default Light+", // 浅色高对比度主题首选项
+	"workbench.colorTheme": "Default Dark+", //设定主题（Default Dark Modern）（Default Light Modern）
 	"workbench.colorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
-			//"editor.background": "#1E1E1E", //设定编辑器背景
-			//"editor.foreground": "#D4D4D4", //设定编辑器前景
+			"editor.background": "#1E1E1E", //设定编辑器背景
+			"editor.foreground": "#D4D4D4", //设定编辑器前景
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
 			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
 			"editor.lineHighlightBackground": "#121212", //当前行背景颜色（备用：#121212）
-			"editor.selectionBackground": "#000000", //选择内容的背景（备用：#303541）
-			"editor.selectionHighlightBackground": "#000000", //选中变量的背景（备用：#4F435580）
+			"editor.selectionBackground": "#264f78", //选择内容的背景（备用：#303541）
+			"editor.selectionHighlightBackground": "#add6ff26", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。（备用：#4F435580）
+			"editor.inactiveSelectionBackground": "#3a3d4126", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
 			//"editor.wordHighlightBackground": "#4F4355",
 			//"editor.wordHighlightStrongBackground": "#db45a280",
 			//"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
-			"editorWhitespace.foreground": "#5c5c5c", //选中的tab和空格的颜色，因为设定为selection
+			"editorWhitespace.foreground": "#e3e4e250", //选中的tab和空格的颜色，因为设定为selection
 			//"editorIndentGuide.background": "#333844", //缩进参考线的颜色
 			//"editorIndentGuide.activeBackground": "#585C66", //当前缩进参考线的颜色
 			"editorRuler.foreground": "#4F4355", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
 			"editor.findMatchBackground": "#000000", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
-			"editor.findMatchHighlightBackground": "#314365", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
+			"editor.findMatchBorder": "#ffee00", // 当前查找内容边框颜色
+			"editor.findMatchHighlightBackground": "#ea5c0055", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
+			"editorCodeLens.foreground": "#DEDEF0", //代码镜头的颜色-main函数上方的[Run | Debug]
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
@@ -226,7 +236,7 @@
 	},
 	"editor.tokenColorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
-			"comments": "#5f6167", //设定注释颜色(备用#606060)
+			"comments": "#5f6167", //设定注释颜色(备用#606060)(备用#6A9955)
 			"numbers": "#00e8c6", //设定数字颜色(备用#e5c07b)
 			"strings": "#809980", //设定字符串颜色(备用#669199)(备用#007f7f)(备用#809980)(备用#CE9178)(备用#01a252)
 			"variables": "#c5c8c6", //设定变量颜色
@@ -256,7 +266,7 @@
 			"strings": "#2F5E5E", //设定字符串颜色 (备用#2F5E5E)(备用01a252)
 			"variables": "#000000", //设定变量颜色
 			"types": "#e02838", //设定类型颜色
-			"keywords": {"foreground":"#0000a0", "fontStyle": "bold"}, //设定关键字颜色（可加入"fontStyle": "bold"）
+			"keywords": {"foreground":"#0000a0", "fontStyle": ""}, //设定关键字颜色（可加入"fontStyle": "bold"）
 			"functions": "#006400", //设定函数颜色(备用#795E26)(备用深绿#008300)(备用深绿#006400)
 			"textMateRules": [ //作用域所对应的颜色
 				{
@@ -340,19 +350,21 @@
 	},
 	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
 	//"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
-	"terminal.integrated.fontFamily": "'JetBrains Mono', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'Inconsolata', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	//"terminal.integrated.fontFamily": "'JetBrains Mono', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //日文系统用
-	//"terminal.integrated.fontFamily": "'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Inconsolata', 'Courier New', monospace", //Win10低分辨率日文系统
+	"terminal.integrated.fontFamily": "'JetBrains Mono', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'Ligconsolata', 'Inconsolata', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
+	//"terminal.integrated.fontFamily": "'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'Cascadia Code', 'Courier New', monospace", //日文系统用
+	//"terminal.integrated.fontFamily": "'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Consolas', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Courier New', monospace", //Win10低分辨率日文系统
 	"terminal.integrated.fontSize": 16, //设置字体大小
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
 	"terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
 	"terminal.integrated.rightClickBehavior": "paste", // 鼠标右键-粘贴
-	"terminal.integrated.sendKeybindingsToShell": true, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效，已经绑定到Shift+空格->F）
+	"terminal.integrated.sendKeybindingsToShell": false, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效，已经绑定到Shift+空格->F）
 	"terminal.integrated.cursorBlinking": true, //光标闪烁
 	"terminal.integrated.defaultLocation": "view", //在终端视图中创建终端
+	"terminal.integrated.smoothScrolling": true, //启用平滑滚动
 	"terminal.integrated.scrollback": 5000, //滚动历史
-	"terminal.integrated.tabs.enabled": true,
+	"terminal.integrated.tabStopWidth": 4, // 制表符大小设置
+	"terminal.integrated.tabs.enabled": true, //控制终端选项卡是否以列表的形式显示在终端的一侧
 	"terminal.integrated.tabs.title": "${process}${separator}${local}${separator}${sequence}",
 	"terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
 	"terminal.integrated.tabs.showActions": "always", // 始终显示“新建终端”按钮旁的“终端拆分”和“终止”按钮
@@ -363,11 +375,14 @@
 	"terminal.integrated.showExitAlert": false, // 退出时代码为非零时是否显示“终端进程已终止且显示退出代码”警报
 	"terminal.integrated.persistentSessionReviveProcess": "never", // 不还原终端缓冲区（历史记录）
 	"terminal.integrated.enablePersistentSessions": false, // 跨窗口重新加载保持工作区的终端会话
+	"terminal.integrated.commandsToSkipShell": [ //设定在终端可以使用的快捷键命令，前面要加-
+		"-workbench.action.terminal.selectAll"
+	],
 	//-----------------------------------------------"
 	//               git设定                         "
 	//-----------------------------------------------"
 	"git.enabled": false, //是否启用git组件
-	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git路径
+	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git可执行文件的路径和文件名
 	"git.autofetch": false, // git是否自动fetch
 	"git.autorefresh": true, // git是否自动刷新
 	"git.alwaysShowStagedChangesResourceGroup": true, // 始终显示“暂存的更改”资源组
@@ -376,26 +391,32 @@
 	"git.supportCancellation": true, // 控制在运行同步操作时是否出现通知，允许用户取消操作。
 	"git.terminalGitEditor": true, // 控制是否使 VS Code 成为集成终端中产生的 Git 进程的 Git 编辑器。请注意: 需要重启终端才能选择此设置中的更改。
 	"git.ignoreMissingGitWarning": true, //忽略“缺失 Git”的警告
+	"git.openRepositoryInParentFolders": "always", //是否打开父文件夹的git仓库
 	//-----------------------------------------------"
 	//               其他设定                        "
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
-	"diffEditor.ignoreTrimWhitespace": false, //是否忽略空格或尾随空格
+	"diffEditor.ignoreTrimWhitespace": false, //差异编辑器-是否忽略空格或尾随空格
+	"diffEditor.diffAlgorithm": "advanced", // 差异编辑器-新差异算法
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新
 	"extensions.ignoreRecommendations": true, //忽略插件建议
 	"workbench.enableExperiments": false, //禁用实验
+	"update.showReleaseNotes": false, // 更新后不显示发行说明
 	//-----------------------------------------------"
 	//               特别语言设定                    "
 	//-----------------------------------------------"
 	"[python]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
-		"editor.guides.indentation": true, //缩进参考线
+		"editor.guides.indentation": true, //启用缩进参考线
 	},
 	"[rust]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
-		"editor.guides.indentation": true, //缩进参考线
+		"editor.guides.indentation": true, //启用缩进参考线
+	},
+	"[csv][dynamic csv][tsv][csv (semicolon)]": {
+		"editor.stickyScroll.enabled": true // 为csv和tsv打开粘性滚动(就是title固定)
 	},
 	//-----------------------------------------------"
 	//              Whitespace++插件设定             "
@@ -409,9 +430,9 @@
 	"whitespacepp.textLF": "↵", //换行文本 (\n)。您还可以指定 unicode 字符，例如“↩”、“◂”、“▾”。
 	"whitespacepp.textEOF": "[EOF]", //EOF（文件结尾）的文本。您还可以指定 unicode 字符。
 	//暗色系 宽空格#FF6464 tab#444444 换行符#444444
-	"whitespacepp.foreColorTAB": "#444444", //TAB (\t) 的文本颜色。
+	"whitespacepp.foreColorTAB": "#808080", //TAB (\t) 的文本颜色。
 	"whitespacepp.foreColorWS": "#FF6464", //宽空格的文本颜色，设定和背景色trailing-spaces颜色一致
-	"whitespacepp.foreColorLF": "#444444", //换行 (\n) 的文本颜色。
+	"whitespacepp.foreColorLF": "#808080", //换行 (\n) 的文本颜色。
 	//亮色系 宽空格rgba(255,100,100,0.15) tab#C0C0C0 换行符#C0C0C0
 	//"whitespacepp.foreColorTAB": "#808080", //TAB (\t) 的文本颜色。（备用#C0C0C0）
 	//"whitespacepp.foreColorWS": "rgba(255,100,100,0.15)", //宽空格的文本颜色，设定和trailing-spaces颜色一致
@@ -423,7 +444,7 @@
 	//"whitespacepp.backColorTAB": "", //TAB (\t) 的背景色。
 	"whitespacepp.backColorWS": "rgba(255,0,0,0.3)", //宽空格的背景色。
 	"whitespacepp.backColorEOF": "#000000", //EOF（文件结尾）的背景色。
-	"whitespacepp.renderingDelayMs": 5, //渲染延迟时间，以毫秒为单位。间隔短于延迟时间的绘图请求将被取消。
+	"whitespacepp.renderingDelayMs": 0, //渲染延迟时间，以毫秒为单位。间隔短于延迟时间的绘图请求将被取消。
 	"whitespacepp.adjustWidthEOF": 110, //以 % 为单位调整 EOF 的背景宽度。textEOF通过乘以by的长度adjustWidthEOF再除以 100 来计算。
 	//-----------------------------------------------"
 	//           Trailing Spaces插件设定             "

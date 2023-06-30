@@ -400,8 +400,16 @@ VS Code 版本 1.70.3 是 Windows 7 用户的最后一个可用版本，版本 1
 #endif
 ```
 
+### VSCode性能诊断
+当VSCode启动变慢的时候可按F1，输入下面的命令诊断
+```
+Developer: Show Running Extensions
+Developer: Startup Performance
+```
+
 
 # 更多
 * [VSCode官方文档](https://code.visualstudio.com/docs)
+* [VSCode官方API](https://code.visualstudio.com/api)
 * [VSCode提示和技巧](https://github.com/Microsoft/vscode-tips-and-tricks)
 * [awesome vscode](https://github.com/viatsko/awesome-vscode)

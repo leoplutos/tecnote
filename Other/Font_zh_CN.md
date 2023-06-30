@@ -11,7 +11,13 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 ## 程序员字体
 
 * [Inconsolata](https://github.com/googlefonts/Inconsolata/releases)  
- Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。
+Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。  
+Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。Ligconsolata的下载地址为：  
+[Ligconsolata-Bold.otf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/otf/Ligconsolata-Bold.otf)  
+[Ligconsolata-Regular.otf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/otf/Ligconsolata-Regular.otf)  
+[Ligconsolata-Bold.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Bold.ttf)  
+[Ligconsolata-Regular.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Regular.ttf)  
+
 
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)  
  JetBrains推出的一款专门为了开发人员设计的字体
@@ -35,6 +41,18 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 
 * [Fira Code](https://github.com/tonsky/FiraCode/releases)  
  Fira 是 Mozilla 主推的字体系列，Fira Code 是基于 Fira Mono 等宽字体的一个扩展，主要特点是加入了编程连字特性（ligatures）
+
+* [SF Mono](https://developer.apple.com/fonts/)  
+ MacOS下的编程等宽字体
+
+* [SF Mono SC](https://github.com/soytony/SF-Mono-SC)  
+ 一款用Sarasa Mono补全SF Mono的泛CJK等宽字体。 增加Code Page 936支持，可以在Windows CMD和Power Shell上使用。
+
+* [Roboto Mono](https://github.com/google/fonts/tree/main/apache/robotomono)  
+Roboto Mono是一个以Roboto为基础的等宽字体。该字体主要为显示程序码而设计，在字母、数字和符号的视觉设计上都有作出相应的优化。
+
+* [Fantasque-Sans](https://github.com/belluzj/fantasque-sans)  
+ 一种编程字体，在设计时考虑到了功能性，并且带有一些像手写体一样的模糊性，使其毫不张扬
 
 * [Hack](https://github.com/source-foundry/Hack)  
  Hack 字体基于 DejaVu Sans Mono，字如其名，为程序员编码而设计。它的数字零采用了纵向的 slashed zero，更利于显示器清晰渲染，小写字母 i 仿照了小写字母 L 的设计，底部向右弯，明显的跟数字 1 区分开来，且沿袭了字母 L 小写形式的优雅。

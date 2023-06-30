@@ -24,7 +24,8 @@
 				"echo": false,
 				"reveal": "never",
 				"focus": false,
-				"panel": "dedicated"
+				"panel": "dedicated",
+				"close": true, //控制任务退出时是否关闭运行任务的终端
 			},
 		},
 	]
