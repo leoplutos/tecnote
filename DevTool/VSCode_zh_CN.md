@@ -16,11 +16,13 @@ https://code.visualstudio.com/#alt-downloads
 * [Diff Folders(可选)](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
 * [VSCodeVim(可选)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
 * [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
-* [**Whitespace++**](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和下面的显示换行符选择一个即可，这个可自定义的内容多些
-* [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的Whitespace++选择一个即可
+* [**Visible Whitespace**](https://marketplace.visualstudio.com/items?itemName=yoshi389111.visible-whitespace)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以渲染 TAB符，全角空格，回车，文件结束符（EOF） 的显示内容和颜色
+* ~~[Whitespace++](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用[Visible Whitespace]~~
+* [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的 Visible Whitespace 选择一个即可
 * [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
 * [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 * [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
+* [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件，是个实验插件，将来会合并进 ``Python``
 
 * **Java**  
 Java所需插件比较多。有2种安装方式：  
@@ -243,14 +245,39 @@ C:\Users\user\AppData\Roaming\Code\User
 
 #### 文件夹设置（Python工程）
 &nbsp;&nbsp;所需插件（2个）：Python，Pylance  
+&nbsp;&nbsp;可选插件（1个）：Black Formatter  
 &nbsp;&nbsp;[文件在这里](../Python/PythonSampleProject/.vscode)
 * settings.json
 * .env  
-注：笔者的工程设定里使用的格式化工具是black  
-需要pip安装black之后，即可出现在python的Scripts文件夹内
+
+**关于Python的格式化**，有2种方案：
+1. 方案1：pip安装black
 ```
 pip install black
 ```
+安装后，在工程设定文件内，设定python/Scripts下的black.exe
+```
+"python.formatting.blackPath": "python_home\\Scripts\\black.exe",
+```
+2. 方案2：使用 [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter) 插件
+安装插件后在工程设定的settings.json内如下设定：
+```
+"editor.defaultFormatter": "ms-python.black-formatter", //使用Black Formatter插件
+"python.formatting.provider": "none",
+```
+如果使用的是嵌入版（绿色版）Python，需要修改插件脚本 ``lsp_server.py`` (修改前注意备份)
+```
+C:\Users\user\.vscode\extensions\ms-python.black-formatter-2023.2.0\bundled\tool\lsp_server.py
+```
+加入内容
+```
+update_sys_path(
+    os.fspath(pathlib.Path(__file__).parent),
+    os.getenv("LS_IMPORT_STRATEGY", "useBundled"),
+)
+```
+按下F1，输入 ```black```，选择 ``black formatter：重启服务器`` 重启后即可使用
+
 
 #### 文件夹设置（Java工程）
 &nbsp;&nbsp;所需插件（3个）：Language Support for Java，Debugger for Java，Project Manager for Java  
@@ -380,6 +407,42 @@ chcp.com
 ```bash
 chcp.com 65001
 ```
+
+### 关于TAB符和换行符的渲染
+有如下几套套方案：
+
+1. 使用默认 +  [显示换行符](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  
+设定文件中如下设定即可在选中的时候表示
+```
+"editor.renderWhitespace": "selection",
+```
+
+2. 使用插件 [Visible Whitespace](https://marketplace.visualstudio.com/items?itemName=yoshi389111.visible-whitespace)  
+Visible Whitespace这个插件可以渲染 TAB符，全角空格，回车，文件结束符（EOF） 的显示内容和颜色  
+
+
+3. 使用插件 [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  
+通过正则表达式匹配来渲染
+```
+"highlight.regexes": {
+	"(\\t)": [ // 匹配tab符号
+		{
+			"backgroundColor": "#FF646415", //设置背景色，一定要是透明色
+			//"color": "#1f1f1f",
+		}
+	],
+	"([\u3000])": [ // 匹配全角空格
+		{
+			"backgroundColor": "#5050ff15", //设置背景色，一定要是透明色
+			//"color": "#1f1f1f",
+		}
+	],
+},
+```
+
+4. 使用插件 [Whitespace++](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  
+基本同方案2的[Visible Whitespace]但是，这个插件有一些渲染时间的Bug，不太推荐使用
+
 
 ### 查看VSCode当前颜色设置
 按下 ``F1`` ，输入 ``color`` ，选择 ``Developer: Generate Color Theme From Current Settings``  

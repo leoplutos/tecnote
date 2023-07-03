@@ -10,6 +10,39 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 
 ## 程序员字体
 
+* [**更纱黑体(Sarasa Gothic)-github**](https://github.com/be5invis/Sarasa-Gothic)  
+* [**更纱黑体-清华源**](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/) 
+* [**更纱黑体-码云**](https://gitee.com/mirrors/Sarasa-Gothic)  
+
+更纱黑体的命名由6部分组成，分别是
+1. 字体家族名称：sarasa。每个文件名都由它开头，代表这是更纱黑体家族的字体。
+2. 字体风格 (Style)：fixed。字体风格决定了西文字符的字形，分为 Gothic、UI、Mono、Term、Fixed 五种。
+ - Gothic：不等宽，引号全角，破折号全角，不连字
+ - UI：不等宽，引号半角，破折号全角，不连字
+ - Mono：等宽，引号半角，破折号全角，连字
+ - Term：等宽，引号半角，破折号半角，连字
+ - Fixed：等宽，引号半角，破折号半角，不连字
+3. 字体衬线：slab。只有一部分文件有这个部分，代表其加入了衬线，数字和字母的笔画末端有短线修饰。
+4. 汉字字形 (Orthography)：cl。根据不同国家和地区的标准，字形分为 CL、HC、J、K、SC、TC 六种，例如中国大陆、中国香港、日本的“冷”字写法都不一样。
+ - CL：旧体字汉字
+ - HC：香港繁体
+ - J：日文
+ - K：韩文
+ - SC：简体中文
+ - TC：繁体中文
+5. 自重：regular。这一项代表的是字体的粗细，从细到粗为 extralight、light、regular、semibold、bold。加上 italic 后缀的为意大利体 (斜体)。
+6. 后缀名：ttf。最通用的字体格式，不解释。
+
+综上，对于程序员而言，可以选择  
+sarasa-等宽（连字）-无衬托-地区-regular.ttf  
+即：
+```
+sarasa-mono-sc-regular.ttf（中文开发）
+sarasa-mono-sc-light.ttf（中文开发）
+sarasa-mono-j-regular.ttf（日文开发）
+sarasa-mono-j-light.ttf（日文开发）
+```
+
 * [Inconsolata](https://github.com/googlefonts/Inconsolata/releases)  
 Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。  
 Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。Ligconsolata的下载地址为：  
@@ -21,9 +54,6 @@ Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolat
 
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)  
  JetBrains推出的一款专门为了开发人员设计的字体
-
-* [更纱黑体(Sarasa Gothic)](https://github.com/be5invis/Sarasa-Gothic)  
-* [更纱黑体-清华源](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/)  
 
 * [RictyDiminished](https://github.com/edihbrandon/RictyDiminished)  
  Inconsolata 和 Circle M+ 1m 合成的日文字体

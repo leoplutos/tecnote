@@ -126,20 +126,21 @@ let g:rust_recommended_style = 0         " 不启用ftplugin/rust.vim中的tab�
 "nbsp：不可见空格
 "space：可见空格
 set list
+set listchars=tab:^\ ,precedes:<,extends:>
 if has('gui_running')
   " Gvim 环境：在[.gvimrc]中设定
 elseif has('win32')
   " Windows 环境
-  set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+  "set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 elseif has('win32unix')
   " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
-  set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
+  "set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 else
   " 其他环境（包含linux服务器，WSL）
   if (v:version > 799)
-    set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
+    "set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
   else
-    set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,eol:$
+    "set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,eol:$
   endif
 endif
 

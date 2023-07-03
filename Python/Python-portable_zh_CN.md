@@ -42,16 +42,21 @@ Lib/site-packages下为第三方库，Scripts下安装有pip。
 pip安装是绝对路径，移动 python 文件夹后 pip 又会无法使用，需要进一步修改pip.exe文件。  
 进入Scripts文件夹，可删除pip.exe以外的pip(比如：pip3.exe，pip3.8.exe)文件，其实一模一样。  
 用 winhex 或者 VSCode的[Hex Editor]插件 打开pip.exe，查找 python 关键字，可以看到用的是绝对路径，修改为相对路径。  
-修改前
-```
-#!d:\work\python-3.8.10-embed-amd64\python.exe
-```
-修改后
-```
-#!..\python.exe
-```
-同样处理同文件夹下的wheel.exe等执行文件。
-此时可以随意复制python文件夹至别的地方进行使用。
+修改步骤：  
+
+1. 拉到exe文件的最下面，将 ``python.exe`` 从绝对路径修改成相对路径 
+``#!../python.exe``
+2. 在 ``#!../python.exe`` 后面加上 ``0D 0A``
+3. 一般修改之后后面会有一些残留，可以添加 ``20`` 补位
+
+注：
+| 符号  | 16进制 |
+|-------|--------|
+| LF    | 0A     |
+| CR LF | 0D 0A  |
+| CR    | 0D     |
+| #     | 23     |
+| 空格  | 20     |
 
 
 ### 安装pip方法2：采用独立的pip.pyz程序
