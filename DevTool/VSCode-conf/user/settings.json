@@ -6,7 +6,7 @@
 	"editor.fontFamily": "'等距更纱黑体 SC light', 'Ligconsolata', 'Inconsolata', '更紗等幅ゴシック J', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
 	//"editor.fontFamily": "'Ligconsolata', 'Inconsolata', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //日文系统用
 	//"editor.fontFamily": "'更紗等幅ゴシック J light', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
-	"editor.fontSize": 18, //设置字体大小
+	"editor.fontSize": 16, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
 	//"editor.fontVariations": "'Ligconsolata' 0.5",
@@ -23,6 +23,8 @@
 	"editor.renderWhitespace": "selection", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
 	"editor.renderControlCharacters": true, //设定显示控制字符
 	"editor.renderLineHighlight": "all", //突出显示导航线和当前行
+	"editor.selectionHighlight": true, // 控制编辑器是否应突出显示与所选内容类似的匹配项。
+	"editor.occurrencesHighlight": true, // 控制编辑器是否突出显示语义符号的匹配项。
 	"editor.insertSpaces": false, //按下tab时不替换为空格
 	"editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
 	"editor.autoClosingQuotes": "beforeWhitespace",
@@ -106,6 +108,12 @@
 			"editor.findMatchHighlightBackground": "#ea5c0055", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"editorCodeLens.foreground": "#DEDEF0", //代码镜头的颜色-main函数上方的[Run | Debug]
+			"editorInlayHint.background": "#6E7B6CDD", //内联提示的背景色
+			"editorInlayHint.foreground": "#ffffff", //内联提示的前景色
+			"editorInlayHint.parameterBackground": "#6E7B6CDD", //参数内联提示的背景色
+			"editorInlayHint.parameterForeground": "#ffffff", //参数内联提示的前景色
+			"editorInlayHint.typeBackground": "#6E7B6CDD", //类型内联提示的背景色
+			"editorInlayHint.typeForeground": "#ffffff", //类型内联提示的前景色
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
@@ -133,6 +141,12 @@
 			"editorGroupHeader.tabsBackground": "#efefef", //tab栏设置-背景色
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"editorCodeLens.foreground": "#146eb4", //代码镜头的颜色-main函数上方的[Run | Debug]
+			"editorInlayHint.background": "#6464FFDD", //内联提示的背景色
+			"editorInlayHint.foreground": "#FFFFFF", //内联提示的前景色
+			"editorInlayHint.parameterBackground": "#6464FFDD", //参数内联提示的背景色
+			"editorInlayHint.parameterForeground": "#FFFFFF", //参数内联提示的前景色
+			"editorInlayHint.typeBackground": "#6464FFDD", //类型内联提示的背景色
+			"editorInlayHint.typeForeground": "#FFFFFF", //类型内联提示的前景色
 			//panel设置
 			//"panel.background": "#f3f3f3",
 			"panel.border": "#36353562",
@@ -190,6 +204,12 @@
 			"editorGroupHeader.tabsBackground": "#efefef", //tab栏设置-背景色
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"editorCodeLens.foreground": "#146eb4", //代码镜头的颜色-main函数上方的[Run | Debug]
+			"editorInlayHint.background": "#6464FFDD", //内联提示的背景色
+			"editorInlayHint.foreground": "#FFFFFF", //内联提示的前景色
+			"editorInlayHint.parameterBackground": "#6464FFDD", //参数内联提示的背景色
+			"editorInlayHint.parameterForeground": "#FFFFFF", //参数内联提示的前景色
+			"editorInlayHint.typeBackground": "#6464FFDD", //类型内联提示的背景色
+			"editorInlayHint.typeForeground": "#FFFFFF", //类型内联提示的前景色
 			//panel设置
 			//"panel.background": "#f3f3f3",
 			"panel.border": "#36353562",

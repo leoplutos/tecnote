@@ -3,6 +3,11 @@
 	"python.defaultInterpreterPath": "${config:python.home}",
 	"python.envFile": "${workspaceFolder}/.env",
 	"python.analysis.typeCheckingMode": "basic",
+	"python.analysis.completeFunctionParens": true, // 添加括号以完成函数
+	"python.analysis.inlayHints.variableTypes": true, //变量类型的嵌入提示
+	"python.analysis.inlayHints.functionReturnTypes": true, //函数返回类型的嵌入提示
+	"python.analysis.inlayHints.callArgumentNames": true, //调用参数名称的嵌入提示
+	"python.analysis.inlayHints.pytestParameters": true, //pytest 函数参数的嵌入提示
 	"python.analysis.autoFormatStrings": true,
 	"python.analysis.autoImportCompletions": true,
 	"python.formatting.provider": "black",
