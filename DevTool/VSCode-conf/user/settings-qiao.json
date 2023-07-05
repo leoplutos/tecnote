@@ -13,7 +13,8 @@
 	"editor.formatOnSave": false, //在保存时格式化文件
 	"editor.letterSpacing": 0.1, //字母间距
 	"editor.lineHeight": 14, //行高
-	"editor.minimap.enabled": false, //设定不显示右侧的minimap
+	"editor.minimap.enabled": false, //控制是否显示缩略图(右侧的minimap)
+	"editor.minimap.autohide": true, //控制是否自动隐藏缩略图(右侧的minimap)
 	"editor.tabSize": 4, //设定tab长度
 	"editor.rulers": [
 		100,
@@ -24,7 +25,7 @@
 	"editor.renderControlCharacters": true, //设定显示控制字符
 	//"editor.renderLineHighlight": "all", //突出显示导航线和当前行
 	"editor.selectionHighlight": false, // 控制编辑器是否应突出显示与所选内容类似的匹配项。
-	"editor.occurrencesHighlight": false, // 控制编辑器是否突出显示语义符号的匹配项。
+	"editor.occurrencesHighlight": true, // 控制编辑器是否突出显示语义符号的匹配项。
 	"editor.insertSpaces": false, //按下tab时不替换为空格
 	"editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
 	"editor.autoClosingQuotes": "beforeWhitespace",
@@ -94,8 +95,9 @@
 			"editor.selectionBackground": "#264f78", //选择内容的背景（备用：#303541）
 			"editor.selectionHighlightBackground": "#add6ff26", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。（备用：#4F435580）
 			"editor.inactiveSelectionBackground": "#3a3d4126", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
-			//"editor.wordHighlightBackground": "#4F4355",
-			//"editor.wordHighlightStrongBackground": "#db45a280",
+			"editor.wordHighlightBackground": "#57575750", // 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果。
+			"editor.wordHighlightStrongBackground": "#00497250", // 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
+			"editor.wordHighlightTextBackground": "#57575750", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
 			"editorWhitespace.foreground": "#e3e4e2af", //选中的tab和空格的颜色，因为设定为selection
 			"editorIndentGuide.background": "#333844", //缩进参考线的颜色
@@ -103,9 +105,9 @@
 			"editorRuler.foreground": "#4F4355", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
-			"editor.findMatchBackground": "#000000", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
-			"editor.findMatchBorder": "#ffee00", // 当前查找内容边框颜色
-			"editor.findMatchHighlightBackground": "#ea5c0055", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
+			"editor.findMatchBackground": "#9e7a03fa", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
+			//"editor.findMatchBorder": "#ffee00", // 当前查找内容边框颜色
+			"editor.findMatchHighlightBackground": "#ea5c0040", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"editorCodeLens.foreground": "#DEDEF0", //代码镜头的颜色-main函数上方的[Run | Debug]
 			"editorInlayHint.background": "#6E7B6CDD", //内联提示的背景色
@@ -128,12 +130,19 @@
 			"editor.lineHighlightBackground": "#ecece6", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
 			"editor.selectionBackground": "#7f94da65", //选择内容的背景
 			"editor.selectionHighlightBackground": "#7f94da65", //选中变量的背景
+			"editor.inactiveSelectionBackground": "#e5ebf1", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
+			"editor.wordHighlightBackground": "#57575740", // 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果。
+			"editor.wordHighlightStrongBackground": "#0e639c40", // 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
+			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+			"editorIndentGuide.background": "#d3d3d3", //缩进参考线的颜色
+			"editorIndentGuide.activeBackground": "#939393", //当前缩进参考线的颜色
+			"editorRuler.foreground": "#d3d3d3", //标尺的颜色
 			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
 			"editorCursor.background": "#ebebe365", //光标背景色
 			"editorCursor.foreground": "#1d1f21", //光标前景色
 			"editor.findMatchBackground": "#bbbb00", //当前查找内容颜色
-			"editor.findMatchHighlightBackground": "#ecec00", //所有查找内容颜色
+			"editor.findMatchHighlightBackground": "#ffff0077", //所有查找内容颜色
 			"editorGroupHeader.border": "#36353562", //tab栏设置-边框
 			"editorGroupHeader.tabsBackground": "#eceee7", //tab栏设置-背景色
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色

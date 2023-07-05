@@ -61,7 +61,7 @@ char c_output_tablename[20+1];
 sscanf(c_input1, "%s %s  - table name : %s", c_output_date, c_output_time, c_output_tablename);
 printf("解构后 c_output_date:[%s] c_output_time:[%s] c_output_tablename:[%s]\n", c_output_date, c_output_time, c_output_tablename);
 ```
-```
+```c
 // 例子2
 char * c_input2 = "table name : t_test_table2";
 char c_output_tablename2[20+1];
@@ -69,6 +69,13 @@ char c_output_tablename2[20+1];
 sscanf(c_input2, "table name : %s", c_output_tablename2);
 printf("解构后 c_output_tablename2:[%s]\n", c_output_tablename2);
 ```
+
+**其他解构方法：**  
+```c
+scanf("%4[^,],%4[^,],%79[^,],%d", sem, type, title, &value)
+```
+``%4[^,]`` 表示最多读取四个字符或直到遇到逗号  
+
 
 #### 1-7.-DDEBUG编译标记
 大家都有利用输出函数如printf来帮助我们调试程序的经历，这是一种比较原始的程序调试辅助方法，在Linux下也可以为我们所用。不过这种方法有一个明显的缺点，就是在调试完后我们必须注释或删除掉这些辅助代码。Linux C提供了 -DDEBUG 这个编译标记来定义DEBUG这个符号，借助于该符号，我们可以在应用程序中添加额外代码并根据需要决定执行与否。
@@ -95,6 +102,21 @@ $ gcc -o dtest -DDEBUG dtest.c
 $ ./dtest
 Debug output......
 Main function ended!
+```
+
+#### 1-8.二维字符串数组的参数使用
+```c
+void test_function(char *str[], int n) {
+	for (int i = 0; i < n; i++) {
+		printf("%s \n", str[i]);
+	}
+}
+
+int main(int argc, char *argv[]) {
+	char *pstr[3] = {"cc", "bb", "dd"};
+	test_function(pstr, 3);
+	return 0;
+}
 ```
 
 ## 2.终端输出颜色

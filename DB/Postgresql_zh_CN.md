@@ -31,5 +31,22 @@ su - enterprisedb
 ```
 
 ## pgAdmin4里面格式化SQL快捷键
+```
 Ctrl + Shift + k
+```
 
+## 死锁的确认与kill
+
+#### 查找死锁的pid
+```
+SELECT l.pid,l.granted,d.datname,l.locktype,relation,relation::regclass,transactionid,l.mode
+FROM pg_locks l  LEFT JOIN pg_database d ON l.database = d.oid
+WHERE  l.pid != pg_backend_pid()
+ORDER BY l.pid;
+```
+
+### kill死锁的pid
+```
+SELECT pg_cancel_backend(2490);
+SELECT pg_terminate_backend(2490);
+```
