@@ -119,6 +119,75 @@ int main(int argc, char *argv[]) {
 }
 ```
 
+#### 1-9.二维和三维度字符串数组的动态开辟空间
+
+**二维数组**  
+```
+char **in_sqlcond_data;
+in_sqlcond_data = (char **)malloc(sizeof(char *) * count);
+for (i = 0; i < count; i++) {
+	in_sqlcond_data[i] = (char *)malloc(sizeof(char) * 800 + 1);
+}
+strcpy(in_sqlcond_data[0], "aaaaa");
+strcpy(in_sqlcond_data[1], "bbbbb");
+```
+
+**三维数组**  
+```
+char ***out_result_data;
+out_result_data = (char ***)malloc(sizeof(char **) * count1);
+for (i = 0; i < count1; i++) {
+	out_result_data[i] = (char **)malloc(sizeof(char *) * count2);
+	for (j = 0; j < count2; j++) {
+		out_result_data[i][j] = (char *)malloc(sizeof(char) * 800 + 1);
+	}
+}
+```
+
+#### 1-10.csv分割的函数
+
+**调用**  
+```
+char c_separator[6][800 + 1];
+memset(c_separator, 0, sizeof(c_separator[0][0]) * 6 * (800 + 1));
+i_retCode = com_divCSV(c_read_line_buf, sizeof(c_separator[0]), 6, c_separator);
+```
+
+**分割函数**  
+```
+int com_divCSV(char *c_iString, int i_iStrLen, int i_iCount, char *c_oString) {
+	int i;
+	int i_len;
+	int i_strPos = 0;
+	int i_strNum = 0;
+	char *c_pStr;
+
+	c_pStr = (char *)c_oString;
+
+	i_len = strlen(c_iString);
+	for (i = 0; i < i_len; i++) {
+		if (c_iString[i] == ',') {
+			strncpy(c_pStr + i_strNum * i_iStrLen, &c_iString[i_strPos], i - i_strPos);
+			*(c_pStr + i_strNum * i_iStrLen + i - i_strPos) = 0x00;
+
+			i_strNum++;
+			if (i_strNum == i_iCount) {
+				return FAILED;
+			}
+			i_strPos = i + 1;
+		}
+	}
+	strncpy(c_pStr + i_strNum * i_iStrLen, &c_iString[i_strPos], i - i_strPos);
+	*(c_pStr + i_strNum * i_iStrLen + i - i_strPos) = 0x00;
+	i_strNum++;
+	if (i_strNum == i_iCount) {
+		return SUCCESS;
+	} else {
+		return FAILED;
+	}
+}
+```
+
 ## 2.终端输出颜色
 1：粗体  
 31：红色  

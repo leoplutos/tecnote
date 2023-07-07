@@ -21,7 +21,7 @@ gdb -tui 程序名
 | -tui   | 打开TUI模式，会显示 command 窗口和 source 窗口 |
 | --args | 设置命令行参数                                 |
 
-## gdb终端的常用命令  
+## gdb终端的常用命令
 查看断点信息
 ```gdb
 (gdb)i breakpoint
@@ -49,6 +49,18 @@ gdb -tui 程序名
 执行一行源程序代码，如果此行代码中有函数调用，则进入该函数(单步跟踪进入)
 ```gdb
 (gdb)s
+(gdb)step
+```
+执行到当前函数结束(单步跟踪退出)
+```gdb
+(gdb)fin
+(gdb)finish
+```
+运行到x处(常用来跳过循环)
+```gdb
+(gdb)u 70
+(gdb)until 70
+(gdb)until main.c:60
 ```
 执行到下一个断点处（如果没有执行到程序结束）
 ```gdb
@@ -73,6 +85,12 @@ gdb -tui 程序名
 运行shell命令pwd
 ```gdb
 (gdb) shell pwd
+```
+
+### 获取GDB使用的Python版本
+系统上的 Python 版本不一定是用 GDB 编译的版本，可以通过以下方式找到：
+```
+gdb --batch -ex 'python import sys; print(sys.version)'
 ```
 
 ### 更多
@@ -184,6 +202,61 @@ tty
 ```gdb
 >>>dashboard source -style height 0
 ```
+
+#### 配置持久化
+每次打开 gdb-dashboard 都要为自己的定制敲上几行命令才顺手。为了解决这个问题（主要就是懒），可以将如下定义放到 ``/lch/workspace/gdbinit/.gdbinit`` 的最下面即可
+```
+#主分割线填充
+dashboard -style divider_fill_char_primary '#'
+#分割线颜色设置
+#dashboard -style divider_fill_style_primary '33'
+#关键字颜色设置
+#dashboard -style divider_label_style_on_primary '1;31'
+#定制显示内容
+dashboard -layout !assembly breakpoints expressions !history !memory !registers source stack threads variables
+#代码高度
+dashboard source -style height 25
+#变量单行显示
+#dashboard variables -style compact False
+#设定别名
+alias -a w = dashboard expression watch
+```
+
+#### gdb-dashboard里面source(代码窗口)的滚动
+首先在个人路径下新建 ``inputrc`` 文件
+```
+cd /lch/workspace
+mkdir readline
+cd readline
+touch inputrc
+vim inputrc
+```
+编辑，复制以下内容，保存
+```
+$include /etc/inputrc
+
+$if gdb
+    "\C-p": "\C-a\C-kserver dashboard source scroll 1\n\C-y"
+    "\C-n": "\C-a\C-kserver dashboard source scroll -1\n\C-y"
+    "\C-\M-p": "\C-a\C-kserver dashboard assembly scroll 1\n\C-y"
+    "\C-\M-n": "\C-a\C-kserver dashboard assembly scroll -1\n\C-y"
+$endif
+```
+笔者的inputrc
+* [inputrc](inputrc)
+
+然后在自定义 ``bashrc`` 中加入如下内容
+```
+export INPUTRC='/lch/workspace/readline/inputrc'
+```
+重新登录服务器，启动 ``gdb`` ，在 ``gdb-dashboard`` 窗口出现以后，即可 ``Ctrl+p`` 向上滚动代码，``Ctrl+n`` 向下滚动代码  
+
+**原理说明：**  
+Linux下的Readline初始化文件（即inputrc）的加载顺序为：
+ - 环境变量 ``INPUTRC`` 中
+ - ``~/.inputrc``
+ - ``/etc/inputrc``
+我们在自定义bashrc中设定了环境变量 ``INPUTRC`` 的路径，让 ``gdb`` 启动的时候可以加载自定义内容，以实现快捷键绑定
 
 ## 一些特殊情况下的调试
 

@@ -109,7 +109,7 @@
 			//"editor.findMatchBorder": "#ffee00", // 当前查找内容边框颜色
 			"editor.findMatchHighlightBackground": "#ea5c0040", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
-			"editorCodeLens.foreground": "#DEDEF0", //代码镜头的颜色-main函数上方的[Run | Debug]
+			"editorCodeLens.foreground": "#f0c674", //代码镜头的颜色-main函数上方的[Run | Debug]（备用：#DEDEF0）
 			"editorInlayHint.background": "#6E7B6CDD", //内联提示的背景色
 			"editorInlayHint.foreground": "#ffffff", //内联提示的前景色
 			"editorInlayHint.parameterBackground": "#6E7B6CDD", //参数内联提示的背景色
@@ -129,16 +129,16 @@
 			//"editor.lineHighlightBorder": "#9fced1", //当前边框背景颜色
 			"editor.lineHighlightBackground": "#ecece6", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
 			"editor.selectionBackground": "#7f94da65", //选择内容的背景
-			"editor.selectionHighlightBackground": "#7f94da65", //选中变量的背景
+			"editor.selectionHighlightBackground": "#7f94da65", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。
 			"editor.inactiveSelectionBackground": "#e5ebf1", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
 			"editor.wordHighlightBackground": "#57575740", // 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果。
 			"editor.wordHighlightStrongBackground": "#0e639c40", // 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
 			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
+			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
 			"editorIndentGuide.background": "#d3d3d3", //缩进参考线的颜色
 			"editorIndentGuide.activeBackground": "#939393", //当前缩进参考线的颜色
 			"editorRuler.foreground": "#d3d3d3", //标尺的颜色
-			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
 			"editorCursor.background": "#ebebe365", //光标背景色
 			"editorCursor.foreground": "#1d1f21", //光标前景色
 			"editor.findMatchBackground": "#bbbb00", //当前查找内容颜色
@@ -146,7 +146,7 @@
 			"editorGroupHeader.border": "#36353562", //tab栏设置-边框
 			"editorGroupHeader.tabsBackground": "#eceee7", //tab栏设置-背景色
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
-			"editorCodeLens.foreground": "#146eb4", //代码镜头的颜色-main函数上方的[Run | Debug]
+			"editorCodeLens.foreground": "#5f5fff", //代码镜头的颜色-main函数上方的[Run | Debug]
 			"editorInlayHint.background": "#6464FFDD", //内联提示的背景色
 			"editorInlayHint.foreground": "#FFFFFF", //内联提示的前景色
 			"editorInlayHint.parameterBackground": "#6464FFDD", //参数内联提示的背景色
@@ -353,6 +353,10 @@
 	"[csv][dynamic csv][tsv][csv (semicolon)]": {
 		"editor.stickyScroll.enabled": true // 为csv和tsv打开粘性滚动(就是title固定)
 	},
+	//-----------------------------------------------"
+	//               Remote-SSH设定                  "
+	//-----------------------------------------------"
+	"remote.SSH.localServerDownload": "always", //扩展将首先在客户端上安装 VS Code 服务器，然后通过 SCP 将其复制到服务器
 	//-----------------------------------------------"
 	//           visible-whitespace插件设定          "
 	//-----------------------------------------------"

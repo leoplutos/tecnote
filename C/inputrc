@@ -1,0 +1,9 @@
+$include /etc/inputrc
+
+$if gdb
+    "\C-p": "\C-a\C-kserver dashboard source scroll 1\n\C-y"
+    "\C-n": "\C-a\C-kserver dashboard source scroll -1\n\C-y"
+    "\C-\M-p": "\C-a\C-kserver dashboard assembly scroll 1\n\C-y"
+    "\C-\M-n": "\C-a\C-kserver dashboard assembly scroll -1\n\C-y"
+$endif
+
