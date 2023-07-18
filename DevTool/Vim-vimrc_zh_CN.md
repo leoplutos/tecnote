@@ -32,18 +32,86 @@ ls -al ~/.vimrc
 
 然后编辑.vimrc文件加入自定义内容即可
 
+## Vim的插件方式
+从 Vim7.4 开始，引入了包（package）的概念，可以方便的用包来管理插件。
+当 Vim 启动加载了 vimrc 之后，会在 ``packpath`` 里面寻找
+```
+/pack/*/opt
+/pack/*/start
+```
+这2个路径，并且加载其中的内容。opt为手动加载路径，start为自动加载路径。  
+只要将 ``github`` 上面下载的插件（文件夹）作为包直接放到路径内即可。  
+opt内的手动加载，需要运行
+```
+packadd (包名，也就是文件夹名)
+```
+
 ## 笔者的vimrc
+* [Vim-conf](Vim-conf/Vim-conf)
 
-主要为以下5个文件
-* [.vimrc](.vimrc) ： 主文件
-* [vim-color-16-rc.vim](vim-color-16-rc.vim) - 不支持256色的颜色设置
-* [vim-color-256-rc.vim](vim-color-256-rc.vim) - 支持256色的颜色设置（暗色系）
-* [vim-color-256-rc-light.vim](vim-color-256-rc-light.vim) - 支持256色的颜色设置（亮色系）
-* [apc.vim](apc.vim) - 自动补全
+按笔者的习惯，主要有如下几个考虑点
+ 1. 不污染服务器。（不放到 ``$HOME`` 下面）
+ 2. 尽量不用插件。（服务器网络限制）
 
-颜色设置的3个文件选择1个即可。  
-另外，亮色系和暗色系要配合终端设置。  
-比如用git-bash的话，需要配置~/.minttyrc。
+在服务器的个人bashrc下加入如下内容
+```
+export VIMINIT='source $MYVIMRC'
+export MYVIMRC='/lch/workspace/vim/.vimrc'
+```
+当 vim 启动时，会加载 通过 VIMINIT 设定的 MYVIMRC 的内容，作为 vim 的设定文件  
+也可以用起别名的方法
+```
+alias vim='vim -u /lch/workspace/vim/.vimrc'
+```
+
+#### 让自定义文件夹生效
+在 vimrc 加入如下内容
+```
+"在packpath,runtimepath最后添加个人设定的路径，用以载入插件等
+exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf'
+exec "set runtimepath+=" . g:g_s_rcfilepath . '/vimconf'
+"在runtimepath最后添加个人设定的后路径(after directory)，用以载入高亮的定制
+exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf/after'
+exec "set runtimepath+=" . g:g_s_rcfilepath . '/vimconf/after'
+```
+
+#### 笔者的vimrc目录树
+```
+vim (Root)
+  .vimrc
+  .gvimrc
+├─vimconf
+    └─after
+      └─syntax
+          c.vim
+          go.vim
+          java.vim
+          python.vim
+    ├─colors
+        lch-16.vim
+        lch-dark.vim
+        lch-light.vim
+    ├─dict
+        c.dict
+        python.dict
+        ...
+    ├─init
+        apc.vim
+        buildtask.vim
+        format.vim
+        keybindings.vim
+        snippets.vim
+        terminal.vim
+        vim_dict.vim
+    └─pack
+      └─vendor
+        └─start         ->这里放自动载入插件
+            nerdtree
+            ...
+        └─opt           ->这里放手动载入插件
+            tagbar
+            ...
+```
 
 ## 文件类型关联
 

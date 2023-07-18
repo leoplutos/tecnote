@@ -1,10 +1,8 @@
 scriptencoding utf-8
-"vim-color-16-rc.vim
+"lch-16.vim
 
-"全局变量colorRcFile=1：256暗色系
-"全局变量colorRcFile=2：256亮色系
-"全局变量colorRcFile=3：16色系
-let g:colorRcFile=3
+"全局变量g:g_i_colorflg（1：256暗色系，2：256亮色系，3：16色系）
+let g:g_i_colorflg=3
 
 "-----------------------------------------------"
 "               颜色设置                        "
@@ -12,6 +10,10 @@ let g:colorRcFile=3
 ":hi 可以确认当前的设定内容
 ":so $VIMRUNTIME/syntax/colortest.vim 可以确认颜色
 set background=dark
+"highlight clear
+"if exists("syntax_on")
+"  syntax reset
+"endif
 
 hi Normal       term=none cterm=none ctermfg=lightgray ctermbg=black gui=none guifg=lightgray guibg=black
 "NonText       : 换行符（深灰色）
@@ -23,6 +25,7 @@ hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=white ctermbg=black
 "TabLineSel    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=black ctermbg=lightgray gui=none guifg=black guibg=lightgray
 hi TabLineSel   term=underline cterm=none ctermfg=lightgray ctermbg=black gui=none guifg=lightgray guibg=black
+hi Directory    term=bold cterm=none ctermfg=cyan gui=none guifg=cyan
 
 "Comment    : 注释(灰色)
 hi Comment      term=none cterm=none ctermfg=darkgray gui=none guifg=darkgray
@@ -75,54 +78,19 @@ hi DiffText     term=reverse cterm=bold ctermfg=black ctermbg=cyan gui=bold guif
 hi Folded       term=standout ctermfg=lightgray ctermbg=darkblue guifg=lightgray guibg=darkblue
 hi FoldColumn   term=standout ctermfg=Cyan ctermbg=darkblue guifg=Cyan guibg=darkblue
 hi SignColumn   term=standout ctermfg=Cyan ctermbg=darkblue guifg=Cyan guibg=darkblue
+"终端颜色
+if has('terminal')
+  hi Terminal     term=none cterm=none ctermbg=lightgray ctermfg=black gui=none guibg=lightgray guifg=black
+  "let g:terminal_ansi_colors = [
+  "\ "#000000", "#cd3131", "#0dbc79", "#e5e510",
+  "\ "#2472c8", "#bc3fbc", "#11a8cd", "#e5e5e5",
+  "\ "#666666", "#f14c4c", "#23d18b", "#f5f543",
+  "\ "#3b8eea", "#d670d6", "#29b8db", "#e5e5e5"
+  "\ ]
+endif
+"QuickFi选中行
+hi QuickFixLine term=reverse cterm=none ctermbg=darkblue gui=none guibg=darkblue
 
 "Java语言高亮设定
 let java_highlight_all=1
 let java_highlight_functions=1
-
-"各种语言的函数(Function)高亮设定
-if (&ft=='c' || &ft=='cpp')
-  "C/C++
-  syn match    cCustomParen    "?=(" contains=cParen,cCppParen
-  syn match    cCustomFunc     "\w\+\s*(\@=" contains=cCustomParen
-  syn match    cCustomScope    "::"
-  syn match    cCustomClass    "\w\+\s*::" contains=cCustomScope
-  syn match    cCustomComment  "\/\/.*$"
-  syn region cCustomComment start="\/\*" end="\*\/"
-  hi def link cCustomFunc Function
-  hi def link cCustomClass Type
-  hi link cCustomComment Comment
-elseif (&ft=='java')
-  "Java
-  syn match javaCustomOperator "[-+&|<>=!\/~.,;:*%&^?()\[\]{}]"
-  syn match javaCustomParen "?=(" contains=javaParen
-  syn match javaCustomFunc "\.\s*\w\+\s*(\@=" contains=javaCustomOperator,javaCustomParen
-  syn match javaCustomComment "\/\/.*$"
-  syn region javaFuncDef start=+^\s\+\(\(public\|protected\|private\|static\|abstract\|final\|native\|synchronized\)\s\+\)*\(\(void\|boolean\|char\|byte\|short\|int\|long\|float\|double\|\([A-Za-z_][A-Za-z0-9_$]*\.\)*[A-Z][A-Za-z0-9_$]*\)\(<[^>]*>\)\=\(\[\]\)*\s\+[a-z][A-Za-z0-9_$]*\|[A-Z][A-Za-z0-9_$]*\)\s*\ze(+ end=+\ze(+ contains=javaScopeDecl,javaType,javaStorageClass,javaComment,javaLineComment,@javaClasses
-  syn region javaCustomComment start="\/\*" end="\*\/"
-  hi clear javaCustomOperator
-  hi link javaCustomFunc Function
-  hi link javaFuncDef Function
-  hi link javaCustomComment Comment
-  hi link javaC_JavaLang Type
-elseif (&ft=='python')
-  syn match pyCustomParen     "(" contains=cParen
-  syn match pyCustomFunc      "\w\+\s*(" contains=pyCustomParen
-  syn match pyCustomScope     "\."
-  syn match pyCustomAttribute "\.\w\+" contains=pyCustomScope
-  syn match pyCustomMethod    "\.\w\+\s*(" contains=pyCustomScope,pyCustomParen
-  hi def link pyCustomFunc  Function
-  hi def link pyCustomMethod Function
-  hi def link pyCustomAttribute Identifier
-elseif (&ft=='go')
-  syn match goCustomParen     "(" contains=cParen
-  syn match goCustomFuncDef   "func\s\+\w\+\s*(" contains=goDeclaration,goCustomParen
-  syn match goCustomFunc      "import\s\+(\|\(\w\+\s*\)(" contains=goCustomParen,goImport
-  syn match goCustomScope     "\."
-  syn match goCustomAttribute "\.\w\+" contains=goCustomScope
-  syn match goCustomMethod    "\.\w\+\s*(" contains=goCustomScope,goCustomParen
-  hi def link goCustomMethod Function
-  hi def link goCustomAttribute Identifier
-  hi def link goCustomFuncDef Function
-  hi def link goCustomFunc Function
-endif

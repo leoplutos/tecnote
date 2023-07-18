@@ -14,33 +14,76 @@ if (v:version > 799)
 endif
 
 "-----------------------------------------------"
+"               环境变量设置                    "
+"-----------------------------------------------"
+"全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
+if(has('win32') || has('win95') || has('win64') || has('win16'))
+  if has('gui_running')
+    let g:g_i_osflg=1
+  else
+    let g:g_i_osflg=2
+  endif
+elseif has('win32unix')
+  let g:g_i_osflg=3
+else
+  let g:g_i_osflg=4
+endif
+if(g:g_i_osflg==1 || g:g_i_osflg==2)
+  "Windows系统下加入GCC,Java,Python,Ctags,clang-format,black等环境变量
+  let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Java\jdk1.7.0_25\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32'
+  let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
+  let $PATH .= ';C:\Users\Leo-G5000\.vscode\extensions\ms-vscode.cpptools-1.16.3-win32-x64\LLVM\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32\Scripts'
+  let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
+  "设定内置终端专用shell
+  let g:terminal_shell='cmd.exe /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd'
+elseif (g:g_i_osflg==3)
+  let g:terminal_shell='/usr/bin/bash -l -i'
+else
+  let g:terminal_shell='/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
+endif
+"全局变量g:g_i_colorflg（1：256暗色系，2：256亮色系，3：16色系）
+let g:g_i_colorflg=1
+"全局变量g:g_s_rcfilepath（当前vimrc所在路径）
+let g_s_rcfilepath = expand("<sfile>:p:h")
+"判断工程跟路径关键字
+let g:g_s_rootmarkers = ['.git', '.svn', '.project', '.root', '.hg']
+"在packpath,runtimepath最后添加个人设定的路径，用以载入插件等
+if (v:version > 799)
+  exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf'
+endif
+exec "set runtimepath+=" . g:g_s_rcfilepath . '/vimconf'
+"在runtimepath最后添加个人设定的后路径(after directory)，用以载入高亮的定制
+if (v:version > 799)
+  exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf/after'
+endif
+exec "set runtimepath+=" . g:g_s_rcfilepath . '/vimconf/after'
+
+"-----------------------------------------------"
 "               开始设置                        "
 "-----------------------------------------------"
 filetype off                             " 关闭文件类型检测，因为在这里开启之后，下面的[augroup filetypedetect]不会生效
 filetype plugin indent off
+filetype plugin off                      " 关闭加载对应文件类型的插件
+
 "-----------------------------------------------"
 "               基础设置                        "
 "-----------------------------------------------"
 let &t_ut=''                             " 调整终端和vim颜色
 set modelines=0                          " 禁用模式行（安全措施）
-syntax enable
-syntax on                                " 语法高亮
+syntax enable                            " 开启语法高亮
+syntax on                                " 自动语法高亮
 "colorscheme desert                       " 设置颜色主题
 set encoding=utf-8                       " 编码设置
 set fileencoding=utf-8                   " 编码设置
 set fileencodings=utf-8,ucs-bom,shift-jis,cp932,euc-jp,gb18030,gbk,gb2312,cp936,utf-16,big5,latin1
                                          " 自动识别文件编码，依照fileencodings提供的编码列表尝试
+set termencoding=utf-8                   " 终端编码设置
 set number                               " 显示行号
 set ruler                                " 显示光标所在位置的行号和列号，在右下角显示光标位置
 set nowrap                               " 不自动折行
-set tabstop=4                            " tab为4个空格
-set shiftwidth=4                         " 每一级缩进是4个空格
-set noexpandtab                          " 不将tab替换为相应数量空格         打开为set expandtab
-set softtabstop=4                        " 在编辑模式下按退格键的时候退回缩进的长度，配合expandtab时很有用
-set smarttab                             " 根据文件中其他位置的缩进空格个数来决定一个tab是多少空格
-"set smartindent                          " 智能缩进对齐（和autoindent开启一项即可，看个人喜好）
-set autoindent                           " 自动对齐
-set backspace=2                          " 设置 backspace可以删除任意字符，数值2同set backspace=indent,eol,start
 set mouse=a                              " 使用鼠标
 set mousehide                            " 输入时隐藏光标
 set clipboard^=unnamed,unnamedplus       " 和系统共享剪切板
@@ -48,47 +91,88 @@ set nobackup                             " 不需要备份文件
 set noswapfile                           " 不创建临时交换文件
 set nowritebackup                        " 编辑的时候不需要备份文件
 set autoread                             " 文件自动检测外部更改
+set confirm                              " 在处理未保存或只读文件的时候，弹出确认
 set showmatch                            " 显示匹配,当输入一个左括号时会匹配相应的那个右括号
 set matchtime=1                          " 显示括号时间，1秒
-set splitright                           " 设置左右分割窗口时，新窗口出现在右侧
 set splitbelow                           " 设置水平分割窗口时，新窗口出现在底部
+set splitright                           " 设置左右分割窗口时，新窗口出现在右侧
 set laststatus=2                         " 显示状态行 2: 总是
 set cursorline                           " 高亮显示当前行
+set whichwrap+=<,>,h,l,[,]               " 设置光标键跨行
 set hlsearch                             " 搜索时高亮显示被找到的文本
 set incsearch                            " 搜索时在未完全输入完毕要检索的文本时就开始检索
+set ignorecase                           " 搜索时忽略大小写
+set smartcase                            " 智能搜索 - 搜索“test”会找到并突出显示 test 和 Test。搜索“Test”只突出显示或只找到 Test
 set ambiwidth=double                     " 防止特殊符号无法正常显示。解决中文标点显示的问题
 set sidescroll=10                        " 移动到看不见的字符时，自动向右滚动是个字符
+set nofoldenable                         " 禁用折叠代码
 set novisualbell                         " 不要闪烁
 set showcmd                              " 显示输入的命令
 set showtabline=2                        " 显示tab栏 2: 永远会
 set ttyfast                              " 快速刷新屏幕显示
 set lazyredraw                           " 只在必要时刷新显示
-set ignorecase                           " 搜索时忽略大小写
-set smartcase                            " 智能搜索 - 搜索“test”会找到并突出显示 test 和 Test。搜索“Test”只突出显示或只找到 Test
 set nowrapscan                           " 禁止在搜索到文件两端时重新搜索（不循环搜索）
 set showmode                             " 左下角显示如“—INSERT--”之类的状态栏
 set scrolloff=4                          " 垂直滚动时，光标保持在距顶部/底部 4 行的位置
 set sidescrolloff=8                      " 左右滚动时，光标保持在距左/右 8 列的位置
 set sidescroll=1                         " 左右滚动时，1个字符1个字符滚动
 set autochdir                            " 自动切换工作目录
-set wildmenu                             " 在命令模式下，底部操作指令按下 Tab 键自动补全。
+set wildmenu                             " vim自身命名行模式智能补全
 set showfulltag                          " 补全时，使用整行补全
 set wildoptions=tagfile                  " 开启tagfile的补全
+if (v:version > 799)
+  set completeopt=menu,menuone,noselect  " 补全时，不要自动选中第一个选项。
+else
+  set completeopt=menu,menuone           " 补全时，不要自动选中第一个选项。
+endif
+set shortmess+=c                         " 设置补全静默
+set cpt=.,k,w,b                          " 设定从字典文件以及当前打开的文件里收集补全单词
+set omnifunc=syntaxcomplete#Complete     " 设置全能补全
 set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
-set ttimeoutlen=50
+set ttimeoutlen=0                        " 设置<ESC>键响应时间
 set pumheight=15                         " 设定弹出菜单的大小为15
 set formatoptions+=m                     " UniCode大于255的文本，不必等到空格再这行
 set formatoptions+=B                     " 合并两行中文时，不在中间加空格
-set t_Co=256                             " 设置Vim支持256色
+set t_Co=256                             " 开启256色支持
+set hidden                               " 设置允许在未保存状态切换buffer
+set matchpairs+=<:>                      " 设置%匹配<>
+set shellslash                           " 使用/，不使用windows的\（在用netrw . 打开文件夹的时候特别有用）
+"set switchbuf+=newtab                    " QuickFix的条目将在单独的选项卡页面中打开
 if (has("termguicolors"))
   "从7.4.1830开始支持启用终端真彩色，可以让终端环境的Vim使用GUI的颜色定义，需要终端环境和环境内的组件（比如 tmux）都支持真彩色
   set termguicolors
 endif
+"set relativenumber                       " 显示相对行号
+"set wrap                                 " 自动折行
+"set cursorcolumn                         " 高亮显示当前列
+"set fdm=marker                           " 设置折叠方式
+"set virtualedit=all                      " 允许光标放到当前行末尾之后
+
+"-----------------------------------------------"
+"               缩进和排版                      "
+"-----------------------------------------------"
+set tabstop=4                            " tab为4个空格
+set shiftwidth=4                         " 每一级缩进是4个空格
+set noexpandtab                          " 不将tab替换为相应数量空格         打开为set expandtab
+set softtabstop=4                        " 在编辑模式下按退格键的时候退回缩进的长度，配合expandtab时很有用
+set smarttab                             " 在行和段开始处使用制表符
+"set smartindent                          " 智能缩进对齐（和autoindent开启一项即可，看个人喜好）
+"set cinwords=if,elif,else,else\ if,try,except,catch,finally,with,for,while,class,def
+set autoindent                           " 自动缩进
+filetype indent on                       " 自适应不同语言的智能缩进
+set cindent                              " 设置使用C/C++语言的自动缩进方式
+set cinoptions=g0,:0,N-s,(0              " 设置C/C++语言的具体缩进方式
+set backspace=2                          " 设置 backspace可以删除任意字符，数值2同set backspace=indent,eol,start
+set previewheight=100                    " 设置preview窗口高度
+
+"-----------------------------------------------"
+"               光标设置                        "
+"-----------------------------------------------"
 "在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。
 "t_SI：插入模式开始，t_EI：插入或者替换模式结束，t_SR：替换模式开始
-if has('gui_running')
+if(g:g_i_osflg==1 || g:g_i_osflg==2)
   " Gvim 环境：在[.gvimrc]中设定
-elseif has('win32unix')
+elseif(g:g_i_osflg==3)
   " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
   let &t_SI = "\e[5 q"
   let &t_EI = "\e[1 q"
@@ -111,47 +195,57 @@ else
   endif
 endif
 
-let g:python_recommended_style = 0       " 不启用ftplugin/python.vim中的PEP8标准（启用设定修改值为1）
-let g:rust_recommended_style = 0         " 不启用ftplugin/rust.vim中的tab设定（启用设定修改值为1）
-
 "-----------------------------------------------"
-"               特殊符号设置                      "
+"               工程跟路径函数定义              "
+"               使用s:project_root()函数取得    "
 "-----------------------------------------------"
-"特殊符号确认命令 :dig :help digraphs-use
-"tab：tab键，要指定2个字符
-"trail：换行符后面的空格
-"eol：换行符（end of line）
-"extends：最后一列中的字符，表示下一行是换行的延续
-"precedes：第一列中的字符，表示此行是前一行的延续
-"nbsp：不可见空格
-"space：可见空格
-set list
-set listchars=tab:^\ ,precedes:<,extends:>
-if has('gui_running')
-  " Gvim 环境：在[.gvimrc]中设定
-elseif has('win32')
-  " Windows 环境
-  "set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
-elseif has('win32unix')
-  " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
-  "set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
-else
-  " 其他环境（包含linux服务器，WSL）
-  if (v:version > 799)
-    "set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,space:.,eol:$
+function! s:project_root()
+  let name = expand('%:p')
+  return s:find_root(name, g:g_s_rootmarkers, 0)
+endfunc
+function! s:find_root(name, markers, strict)
+  let name = fnamemodify((a:name != '')? a:name : bufname('%'), ':p')
+  let finding = ''
+  " iterate all markers
+  for marker in a:markers
+    if marker != ''
+      " search as a file
+      let x = findfile(marker, name . '/;')
+      let x = (x == '')? '' : fnamemodify(x, ':p:h')
+      " search as a directory
+      let y = finddir(marker, name . '/;')
+      let y = (y == '')? '' : fnamemodify(y, ':p:h:h')
+      " which one is the nearest directory ?
+      let z = (strchars(x) > strchars(y))? x : y
+      " keep the nearest one in finding
+      let finding = (strchars(z) > strchars(finding))? z : finding
+    endif
+  endfor
+  if finding == ''
+    let path = (a:strict == 0)? fnamemodify(name, ':h') : ''
   else
-    "set listchars=tab:^\ ,trail:.,precedes:<,extends:>,nbsp:%,eol:$
+    let path = fnamemodify(finding, ':p')
   endif
-endif
+  if has('win32') || has('win16') || has('win64') || has('win95')
+    let path = substitute(path, '\/', '\', 'g')
+  endif
+  if path =~ '[\/\\]$'
+    let path = fnamemodify(path, ':h')
+  endif
+  return path
+endfunc
+" 使用s:project_root()函数找到跟目录
+let g:g_s_projectrootpath = s:project_root()
 
 "-----------------------------------------------"
-"               暂时不用                        "
+"               特殊符号设置                    "
 "-----------------------------------------------"
-"set relativenumber                       " 显示相对行号
-"set wrap                                 " 自动折行
-"set cursorcolumn                         " 高亮显示当前列
-"set fdm=marker                           " 设置折叠方式
-"set virtualedit=all                      " 允许光标放到当前行末尾之后
+set list
+" 把tab设置为对齐线样式 | ¦ ┆ │ ⎸ ▏
+set listchars=tab:¦\ ,precedes:<,extends:>
+"set listchars=tab:\|\ ,precedes:<,extends:>
+"set listchars=tab:^\ ,precedes:<,extends:>
+"set listchars=tab:^\ ,trail:␣,precedes:«,extends:»,nbsp:%,space:␣,eol:↲
 
 "-----------------------------------------------"
 "               文件关联                        "
@@ -161,21 +255,9 @@ augroup filetypedetect
 augroup END
 
 "-----------------------------------------------"
-"               设置状态栏                      "
+"               状态栏设置                      "
 "-----------------------------------------------"
-" %{...} 评估表达式的值，并用值代替
-" %{"[fenc=".(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"")."]"} 显示文件编码
-" %{&ff} 显示文件类型
-"更多请看[:h statusline]
-"set statusline=%F%m%r%h%w%=\ 
-"set statusline+=\ FMT=%{&ff}\ \|\ 
-"set statusline+=TYPE=%Y\ \|\ 
-"set statusline+=CODE=%{\"\".(\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"\"}\ 
-"set statusline+=[%l:%v]\ 
-"set statusline+=%p%%\ \|\ 
-"set statusline+=%LL\ 
-"-----------------------------------------------
-" 设置仿照lightlint
+" 设置仿照lightline
 function! Statusline()
   let l:show_mode_map={
       \ 'n'  : 'NORMAL',
@@ -227,7 +309,7 @@ function! RestUserColor(pmode)
     elseif (currentMode == 's' || currentMode == 'S' || currentMode == "\<C-s>")      "选择模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=178 gui=bold guifg=#000000 guibg=#d7af00
     elseif (currentMode == 't')            "终端模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=16 gui=bold guifg=#ffffff guibg=#000000
+      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#2472c8
     elseif (currentMode == 'r')            "确认模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000000 guibg=#d787ff
     else            "默认普通模式配色
@@ -241,7 +323,7 @@ function! RestUserColor(pmode)
 endfunction
 
 " 添加模式变换时的自动命令
-augroup lchgroup
+augroup lchModeChangedGroup
   autocmd!
   if exists("##ModeChanged")
     "存在ModeChanged自动命令
@@ -262,7 +344,7 @@ hi User2        term=none cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#fff
 hi User3        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffff00 guibg=#606060
 
 "-----------------------------------------------"
-"               设置tab                         "
+"               TAB设置                         "
 "-----------------------------------------------"
 " 设置结果为[3]file.txt [+]
 function! Tabline()
@@ -296,7 +378,7 @@ endfunction
 set tabline=%!Tabline()
 
 "-----------------------------------------------"
-"               设置netrw                       "
+"               netrw设置                       "
 "-----------------------------------------------"
 let g:netrw_banner = 0         " 设置是否显示横幅 0: 关闭横幅,1: 显示横幅1 (缺省)
 let g:netrw_liststyle = 3      " 设置目录列表样式：树形
@@ -308,150 +390,144 @@ let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 let g:netrw_alto = 1           " 使用o水平分割时，置位此变量后，分割后的新窗口出现在下方而不是上方
 let g:netrw_altv = 1           " 使用v水平分割时，置位此变量后，分割后的新窗口出现在右方而不是左方
 let g:netrw_preview=1          " 使用p预览文件使用垂直分割 0 (缺省)水平分割,垂直分割
-let g:netrw_winsize = 70       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
+let g:netrw_winsize = 80       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
 let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
 let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
 
 " 自动打开netrw
-"augroup ProjectDrawer
+"augroup ProjectDrawerGroup
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
 "augroup END
 
-nnoremap <SPACE>ft :Lexplore<CR>    " 打开或关闭目录树：空格+ft
-
 "-----------------------------------------------"
 "               颜色设置                        "
-"  默认使用暗色系，修改使用下面的快捷键绑定     "
-"  快捷键：空格+d+空格 - 使用暗色系             "
-"  快捷键：空格+l+空格 - 使用亮色系             "
-"  快捷键：空格+16+空格 - 使用16色              "
 "-----------------------------------------------"
-"全局变量colorRcFile=1：256暗色系
-"全局变量colorRcFile=2：256亮色系
-"全局变量colorRcFile=3：16色系
-let g:colorRcFile=1
-let scriptPath = expand("<sfile>:p:h")
-"exec 'source' scriptPath . '/vim-color-256-rc.vim'
-"syntax参数加载之后运行自定义颜色载入
-augroup customSyn
-  autocmd!
-  autocmd syntax * if (colorRcFile == 1) | exec 'source' scriptPath . '/vim-color-256-rc.vim' | elseif (colorRcFile == 2) | exec 'source' scriptPath . '/vim-color-256-rc-light.vim' | elseif (colorRcFile == 3) | exec 'source' scriptPath . '/vim-color-16-rc.vim' | endif
-augroup END
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
 "-----------------------------------------------"
-let mapleader='\'                    " 设定前缀为 \
-noremap J 10j                        " 大写J，向下10行
-noremap K 10k                        " 大写K，向上10行
-nnoremap + <C-a>                     " +号，数字+1
-nnoremap - <C-x>                     " -号，数字-1
-"noremap n nzz                        " 在画面中央表示搜索结果
-"noremap N Nzz
-"noremap * *zz
-"noremap # #zz
-" 窗口移动快捷键
-noremap <TAB>w <C-w>w                " tab+w：移动窗口
-noremap <TAB><left> <C-w><left>      " tab+左：移动到左边窗口
-noremap <TAB><right> <C-w><right>    " tab+右：移动到右边窗口
-noremap <TAB><up> <C-w><up>          " tab+上：移动到上边窗口
-noremap <TAB><down> <C-w><down>      " tab+下：移动到下边窗口
-" 使用方向键切换buffer
-noremap <Leader><left> :bp<CR>       " \+左：上一个buffer
-noremap <Leader><right> :bn<CR>      " \+右：下一个buffer
-" 使用方括号切换tab
-noremap <Leader>] :tabnext<CR>       " \+]：上一个tab
-noremap <Leader>[ :tabprevious<CR>   " \+[：下一个tab
-" 使用 \ + s 保存, \ + q 退出
-noremap <Leader>s :w<CR>             " \+s：保存文件
-noremap <Leader>q :q<CR>             " \+q：退出
-" 支持在Visual模式下，通过C-y复制到系统剪切板 （vnoremap视觉和选择模式下工作）
-vnoremap <C-y> "+y
-" 支持在normal模式下，通过C-p粘贴系统剪切板 （nnoremap在正常模式下工作）
-nnoremap <C-p> "*p
-"在编程中经常要复制粘贴一些内容。为了解决寄存器混乱的问题，这里如下定义
-"<Leader>y  复制到字母寄存器c
-vnoremap <Leader>y "cy
-"<Leader>p  从字母寄存器c中粘贴内容
-nnoremap <Leader>p "cp
-nnoremap <Leader>P "cP
-" 重新绘制当前的屏幕，并且取消字符的高亮，快捷键 \l
-nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
-" 设定文件只读模式切换：静默运行，快捷键 空格+s+空格
-nnoremap <silent> <SPACE>s<SPACE> :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
-" 在OS打开当前文件的路径，快捷键 空格+e+空格
-nnoremap <SPACE>e<SPACE> :!start .<CR>
-" 载入暗色系配置，快捷键 空格+d+空格
-nnoremap <SPACE>d<SPACE> :exec 'source' scriptPath . '/vim-color-256-rc.vim'<CR>
-" 载入亮色系配置，快捷键 空格+l+空格
-nnoremap <SPACE>l<SPACE> :exec 'source' scriptPath . '/vim-color-256-rc-light.vim'<CR>
-" 载入16色配置，快捷键 空格+16+空格
-nnoremap <SPACE>16<SPACE> :exec 'source' scriptPath . '/vim-color-16-rc.vim'<CR>
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/keybindings.vim'
 
 "-----------------------------------------------"
-"               设置ctags                       "
+"               终端设置                        "
+"               \+a：打开/关闭终端           "
 "-----------------------------------------------"
-function! Make_tags_gitdir()
-  " 执行[git rev-parse --show-toplevel]命令找到git的根目录
-  let l:toplevel = system('git rev-parse --show-toplevel')
-  if v:shell_error
-    echo 'failed: git root dir is not found'
-  endif
-  let l:toplevel = substitute(l:toplevel, '[\r\n]', '', 'g')
-
-  " 取得当前目录
-  let l:cache_pwd = ''
-  redir => l:cache_pwd
-    silent pwd
-  redir END
-  let l:cache_pwd = substitute(l:cache_pwd, '[\r\n]', '', 'g')
-
-  " 设定ctags参数
-  let l:opt = '--append=yes --recurse=yes --langmap=C:+.pc --c-kinds=defghlmstuvxzLD --output-format=e-ctags'
-  if &filetype ==# 'c'
-    let l:opt = l:opt.' --languages=C'
-  elseif &filetype !=# ''
-    let l:opt = l:opt.' --languages='.&filetype
-  endif
-
-  " 设定ctags文件名
-  "let l:tagfile = l:toplevel.'/.tags'
-  let l:tagfile = '.tags'
-
-  " 生成ctags文件
-  try
-    exe 'lcd '.l:toplevel
-    "call system('ctags --tag-relative --recurse --sort=yes --append=no '.l:opt.' -f '.l:tagfile.' '.l:toplevel) " 用绝对路径生成
-    call system('ctags '.l:opt.' -f '.l:tagfile)
-    echo 'done'
-  catch
-    echo 'error:' . v:exception
-  finally
-    exe 'lcd '.l:cache_pwd
-  endtry
-endfunction
-" 绑定运行函数快捷键 空格+tg
-nnoremap <SPACE>tg :call Make_tags_gitdir()
-
-set tags=./.tags;,.tags
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/terminal.vim'
 
 "-----------------------------------------------"
-"               其他设置                        "
+"               构筑设置                        "
+"               F5：编译                        "
+"               F6：运行                        "
+"               F7：生成tags                    "
 "-----------------------------------------------"
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/buildtask.vim'
 
+"-----------------------------------------------"
+"               格式化设置                      "
+"               F9：格式化从修改前的位置到修改后的位置"
+"               F10：格式化当前文件             "
+"-----------------------------------------------"
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/format.vim'
+
+"-----------------------------------------------"
+"               自定义代码段（snippets）设置    "
+"               全部以^开头                     "
+"-----------------------------------------------"
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/snippets.vim'
+
+"-----------------------------------------------"
+"               文件搜索设置                    "
+"               QuickFix设置                    "
+"               \+z：打开/关闭QuickFix          "
+"-----------------------------------------------"
+" 在工程跟路径下递归查找子文件
+"set path+=**
+exec "set path+=" . g:g_s_projectrootpath . "/**"
+set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.project,.root,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**          " 搜索除外内容
+
+augroup lchQuickFixGroup
+  autocmd!
+  "autocmd QuickFixCmdPost *vim* cwindow
+  " 使用vim[grep]的结果在QuickFix里面打开
+  autocmd QuickFixCmdPost *vim* copen 20
+  " 使用make的结果在QuickFix里面打开
+  autocmd QuickFixCmdPost *make* copen 20
+augroup END
+
+"-----------------------------------------------"
+"               特别语言设置                    "
+"-----------------------------------------------"
+let g:python_recommended_style = 1       " 是否启用ftplugin/python.vim中的PEP8标准（启用设定修改值为1）
+let g:rust_recommended_style = 1         " 是否启用ftplugin/rust.vim中的tab设定（启用设定修改值为1）
+
+"-----------------------------------------------"
+"               插件设置                        "
+"-----------------------------------------------"
 if (v:version > 799)
-  "载入韦易笑做的代码补全系统
-  exec 'source' scriptPath . '/apc.vim'
-  "Plug 'skywind3000/vim-auto-popmenu'
+
+  "vim-auto-popmenu（自动补全）
+  "https://github.com/skywind3000/vim-auto-popmenu
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
   " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
   let g:apc_enable_ft = {'*':1}
-  " 设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
-  set cpt=.,k,w,b
-  " 不要自动选中第一个选项。
-  set completeopt=menu,menuone,noselect
-  " 禁止在下方显示一些啰嗦的提示
-  set shortmess+=c
+  "let g:apc_enable_tab = 0
+
+  "vim-dict（自动补全词典）
+  "https://github.com/skywind3000/vim-dict
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/vim_dict.vim'
+  " 设定词典路径和匹配方式
+  let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
+  let g:vim_dict_dict = [s:vim_dict_path, '',]
+  let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
+
+  "tagbar（用tags表示代码大纲）
+  "https://github.com/preservim/tagbar
+  packadd tagbar
+  "按下F1表示
+  noremap <F1> :TagbarToggle<CR>
+
+  "indentLine（缩进参考线）
+  "https://github.com/Yggdroot/indentLine
+  "https://github.com/preservim/vim-indent-guides
+  "packadd indentLine
+  "let g:indentLine_defaultGroup = 'SpecialKey'
+  "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+  "let g:indentLine_enabled = 1
+
+  "ctrlp（模糊查找）
+  "https://github.com/ctrlpvim/ctrlp.vim
+  "packadd ctrlp
+  "let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
+  
+  "vim-mark（高亮选中单词）
+  "https://github.com/Yggdroot/vim-mark
+
+  "nerdtree（资源管理器）
+  "https://github.com/preservim/nerdtree
+  "packadd nerdtree
+
+  "ale,syntastic（代码检查Lint）
+  "https://github.com/dense-analysis/ale
+  "https://github.com/vim-syntastic/syntastic
+
+  "vim-snipmate（语法片段snippets）
+  "garbas/vim-snipmate是VimL写的，SirVer/ultisnips需要Python
+  "https://github.com/garbas/vim-snipmate
+  "https://github.com/SirVer/ultisnips
+  "片段仓库 https://github.com/honza/vim-snippets
+  "packadd tlib
+  "packadd vim-addon-mw-utils
+  "packadd vim-snipmate
+  "if has("python3")
+    "packadd ultisnips
+    "let g:UltiSnipsExpandTrigger="<tab>"
+    "let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    "let g:UltiSnipsSnippetsDir=g:g_s_rcfilepath . '/vimconf/snippets'
+  "endif
+
 endif
 
 "-----------------------------------------------"
@@ -459,3 +535,4 @@ endif
 "-----------------------------------------------"
 filetype on                              " 开启文件类型检测
 filetype plugin indent on
+filetype plugin on                       " 设置加载对应文件类型的插件

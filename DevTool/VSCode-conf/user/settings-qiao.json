@@ -45,6 +45,7 @@
 	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
 	"editor.multiCursorModifier": "alt", //多光标选择模式（Ctrl 或者 Alt）
+	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
 	"window.newWindowDimensions": "maximized", //总是最大化打开窗口
@@ -74,6 +75,7 @@
 	"workbench.editor.showTabs": true, //每次都新打开
 	"workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
 	//"workbench.editor.tabSizing": "fixed", //tab宽度自适应
+	//"workbench.list.horizontalScrolling": true, //资源管理器水平滚动
 	"zenMode.centerLayout": false, //禅模式取消居中
 	"zenMode.hideLineNumbers": false, //禅模式显示行号
 	//-----------------------------------------------"
@@ -90,6 +92,7 @@
 			"editor.foreground": "#D4D4D4", //设定编辑器前景
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
+			//"editorGutter.background": "#222222", // 编辑器导航线的背景色.导航线包括边缘符号和行号
 			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
 			"editor.lineHighlightBackground": "#121212", //当前行背景颜色（备用：#121212）
 			"editor.selectionBackground": "#264f78", //选择内容的背景（备用：#303541）
