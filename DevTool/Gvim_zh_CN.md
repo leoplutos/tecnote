@@ -28,7 +28,7 @@ colorscheme Tomorrow-Night
 即可
 
 ## 笔者的gvimrc
-* [Vim-conf](Vim-conf/Vim-conf)
+* [Vim-conf](Vim-conf)
 
 ## 关于设定字体
 guifont的参数说明（使用:分割）  

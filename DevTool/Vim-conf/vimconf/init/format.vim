@@ -14,8 +14,8 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
     autocmd FileType python setlocal equalprg=black\ -q\ 2>nul\ --stdin-filename\ %\ -
   augroup END
 
-  " [普通模式]F9：格式化从修改前的位置到修改后的位置
-  nnoremap <F9> gq[]
+  " [普通模式]F9：格式化当前函数
+  "在各个after/ftplugin中设置
   " [普通模式]F10：格式化当前文件
   nnoremap <F10> gggqG
 

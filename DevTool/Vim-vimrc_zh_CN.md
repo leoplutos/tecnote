@@ -47,7 +47,7 @@ packadd (包名，也就是文件夹名)
 ```
 
 ## 笔者的vimrc
-* [Vim-conf](Vim-conf/Vim-conf)
+* [Vim-conf](Vim-conf)
 
 按笔者的习惯，主要有如下几个考虑点
  1. 不污染服务器。（不放到 ``$HOME`` 下面）
@@ -82,6 +82,9 @@ vim (Root)
   .gvimrc
 ├─vimconf
     └─after
+      └─ftplugin
+          c.vim
+          python.vim
       └─syntax
           c.vim
           go.vim

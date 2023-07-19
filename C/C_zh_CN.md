@@ -1,5 +1,14 @@
 # C语言相关
 
+## 确认gcc的标准版本
+```
+gcc -dM -E - < /dev/null | grep "__STDC_"
+```
+1. 如果结果只有 ``__STDC__ 1`` ,那么默认为 ``C89``
+2. 如果结果有 ``__STDC_VERSION__ 201710L`` ，那么为C17  
+
+更多：[github-cpredef](https://github.com/cpredef/predef/blob/master/Standards.md)
+
 ## 1.常用函数
 
 #### 1-1.环境变量取得

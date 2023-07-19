@@ -9,6 +9,7 @@
 * [终端颜色](Linux/Terminal-color_zh_CN.md)
 
 ## Windows命令
+* [Windows](Windows/Windows_zh_CN.md)
 * [Cmd](Windows/Cmd_zh_CN.md)
 * [Powershell](Windows/Powershell_zh_CN.md)
 * [VBScript](Windows/VBScript_zh_CN.md)

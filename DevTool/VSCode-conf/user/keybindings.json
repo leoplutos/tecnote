@@ -198,4 +198,14 @@
 		"key": "shift+space ctrl+i",
 		"command": "editor.action.inspectTMScopes"
 	},
+	{ // [C语言]shift+space -> ctrl+f5:检查检查当前文件
+		"key": "shift+space ctrl+f5",
+		"command": "C_Cpp.RunCodeAnalysisOnActiveFile",
+		"when": "editorIsOpen && editorLangId == 'c'"
+	},
+	{ // [C语言]shift+space -> ctrl+f6:清楚静态检查错误
+		"key": "shift+space ctrl+f6",
+		"command": "C_Cpp.RemoveAllCodeAnalysisProblems",
+		"when": "editorIsOpen && editorLangId == 'c'"
+	},
 ]
