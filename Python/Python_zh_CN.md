@@ -25,6 +25,23 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 更多：  
 https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
+## 查看第三方库的路径
+```
+python -m site
+```
+```
+python -c "import sysconfig; print(sysconfig.get_path('purelib'))"
+```
+#### 添加其他第三方库路径的方法
+在 ``{PythonHome}\Lib\site-packages`` 路径下新建 ``app.pth``  
+``app.pth`` 里面记载第三方库路径即可，比如
+```
+C:\Users\Leo-G5000\Python3rdLib
+```
+然后确认
+```
+python -m site
+```
 
 ## 检查文件扩展名的例子
 [getFileExtension.py](getFileExtension.py)

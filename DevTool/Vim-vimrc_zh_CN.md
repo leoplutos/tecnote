@@ -85,6 +85,7 @@ vim (Root)
       └─ftplugin
           c.vim
           python.vim
+          ...
       └─syntax
           c.vim
           go.vim

@@ -261,7 +261,7 @@
 			//"statusBarItem.warningBackground": "#495155"
 		},
 		"terminal.ansiBlack": "#000000",
-		"terminal.ansiBlue": "#2472c8",
+		"terminal.ansiBlue": "#64afef", //备用：#2472c8
 		"terminal.ansiBrightBlack": "#666666",
 		"terminal.ansiBrightBlue": "#3b8eea",
 		"terminal.ansiBrightCyan": "#29b8db",
@@ -271,9 +271,9 @@
 		"terminal.ansiBrightWhite": "#e5e5e5",
 		"terminal.ansiBrightYellow": "#f5f543",
 		"terminal.ansiCyan": "#11a8cd",
-		"terminal.ansiGreen": "#0dbc79",
+		"terminal.ansiGreen": "#98c379", //备用：#0dbc79
 		"terminal.ansiMagenta": "#bc3fbc",
-		"terminal.ansiRed": "#cd3131",
+		"terminal.ansiRed": "#ee5d43", //备用：#cd3131
 		"terminal.ansiWhite": "#e5e5e5",
 		"terminal.ansiYellow": "#e5e510",
 	},
