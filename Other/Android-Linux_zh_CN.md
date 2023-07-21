@@ -245,7 +245,14 @@ vim /etc/ssh/sshd_config
 ```
 Port 8122
 ```
-注意： 端口最好是4位数即以上的端口号，否则容易造成ssh启动失败，这儿Termux上Linux存在的问题。
+注意： 端口最好是4位数即以上的端口号，否则容易造成ssh启动失败，这儿Termux上Linux存在的问题。  
+其他修改项目
+```
+PasswordAuthentication yes
+PrintMotd yes
+#Subsystem     sftp   /usr/lib/openssh/sftp-server
+Subsystem      sftp   /data/data/com.termux/files/usr/libexec/sftp-server
+```
 
 **支持root用户**  
 查找：
