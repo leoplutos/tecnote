@@ -1,5 +1,5 @@
 scriptencoding utf-8
-"c.vim
+"after/syntax/c.vim
 
 "C/C++
 syn match    cCustomParen    "?=(" contains=cParen,cCppParen
@@ -11,3 +11,6 @@ syn region cCustomComment start="\/\*" end="\*\/"
 hi def link cCustomFunc Function
 hi def link cCustomClass Structure
 hi link cCustomComment Comment
+
+"let c_comment_string=1
+"unlet c_comment_string

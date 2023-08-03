@@ -109,19 +109,28 @@ echo $PS1
 # 也可以这么写
 "`whoami`@`hostname -s`# "
 ```
+注意：颜色代码语言用``方括号``括起来，括号告诉 bash 不应该打印包含的文本  
+全部写成一行的话可读性很差，所以笔者用如下设定持久化的写法  
+``\e`` 等同于 ``\033``
+
 ## 设定持久化
 * **全局设置**  
 通过修改 ~/.bash_profile (或者 ~/.bashrc ) 文件来全局设置。在 ~/.bash_profile 中加入下面内容
 ```bash
-export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "
+PS_IP=$(hostname -I)
+PS_IP=`echo ${PS_IP}`
+PS_GREEN='\[\033[0;32m\]'
+PS_YELLOW='\[\033[0;33m\]'
+PS_BLUE='\[\033[0;34m\]'
+PS_MAGENTA='\[\033[0;35m\]'
+PS_CLEAR='\[\033[0m\]'
+export PS1="${PS_GREEN}[D1][${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
 ```
 * **非全局设置**  
-为了不污染服务器，笔者习惯加到自己teraterm的ttl文件里。
-```
-;自定义登录后的发行command
-sendln 'export PS1="\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\\$\e[0m "'
-wait '#'
-```
+为了不污染服务器，笔者习惯加到自己的 ``.bashrc-personal`` 中，然后在 ``ttl`` 中 ``source`` 一下  
+[.bashrc-personal](../Git/.bashrc-personal)  
+[user@192.168.0.3-8122-bashrc.ttl](../DevTool/user%40192.168.0.3-8122-bashrc.ttl)  
+
 
 ## 格式控制详解
 ```bash
@@ -199,3 +208,27 @@ export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\e[0m\\$ "
 export # 让$显示为蓝色，且不影响到后面的命令
 export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\e[0m\e[34m\\$\e[0m "
 ```
+
+## 更改ls的内容颜色
+设定文件所在位置：  
+全局
+```
+/etc/DIR_COLORS
+```
+用户
+```
+~/.dir_colors
+```
+#### 查看当前定义命令
+```
+dircolors -p
+```
+自定义方式
+```
+cp /etc/DIR_COLORS ~/.dir_colors
+or
+dircolors -p > ~/.dir_colors
+```
+然后修改 ``~/.dir_colors`` 即可
+
+

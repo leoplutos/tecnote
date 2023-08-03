@@ -33,6 +33,7 @@
    | !$ / Esc+. | 获得上一条命令最后一个参数                   |
    | Esc+b      | 移动到当前单词的开头                         |
    | Esc+f      | 移动到当前单词的结尾                         |
+
 # \$CDPATH变量
 假设你希望仅通过输入 cd html 就可以移至 /var/www/html 目录，并仅使用 cd 和简单目录名即可移至 /var/log 中的子目录。在这种情况下，此 \$CDPATH 就可以起作用：
 ```bash
@@ -40,6 +41,13 @@ export CDPATH=.:/var/log:/var/www
 ```
 当你输入的不是完整路径时，\$CDPATH 就会生效。它向下查看其目录列表，以查看指定的目录是否存在于其中一个目录中。找到匹配项后，它将带你到那里。  
 在 \$CDPATH 开头保持 . 意味着你可以进入本地目录，而不必在 $CDPATH 中定义它们。
+
+# Shebang
+在Linux系统下文件的第一行注释叫做  ``Shebang``
+一般推荐如下写法
+```
+#!/usr/bin/env bash
+```
 
 # Linux命令
 
@@ -268,6 +276,67 @@ w
 ```
 使用Ctrl+d结束发送信息
 
+### 运行程序并且取得pid
+```
+应用程序 & top -p $! -b > top_result.txt
+```
+比如运行sleep命令
+```
+sleep 10 & top -p $! -b > top_result.txt
+```
+如果想要将top的结果生成报表的话，可以使用这个库  
+[linux-top-parser-graph-maker](https://github.com/kaushikvelusamy/linux-top-parser-graph-maker)
+
+# 函数处理
+``$0`` ： 脚本名称  
+
+``$1`` ： -$9 第一个参数到第9个参数  
+
+``$#`` ： 返回参数个数(不包括$0)  
+
+``$*`` ： 返回所有参数(不包括$0)  
+
+``$@`` ： 返回所有参数(不包括$0)  
+
+``$$`` ： 脚本当前运行的进程ID  
+
+``$!`` ： 后台运行的最后一个进程ID  
+
+``$-`` ： 返回Shell使用的当前选项，与set命令相同  
+
+``$?`` ： 函数返回值  
+
+``$FUNCNAME`` ： 函数名称(仅再函数内部有值)  
+
+# 其他
+
+### 使用7-Zip归档tar
+
+**Windows归档：**
+```
+7z.exe a result_file target_folder
+"D:\Tools\7-Zip\7z.exe" a ziptest.tar ziptest
+```
+**Linux解档：**
+```
+tar -xvf file_name
+tar -xvf ziptest.tar
+```
+
+### 使用7-Zip压缩gz
+需要2次命令，第一次归档，第二次压缩  
+**Windows压缩：**
+```
+7z.exe a result_file target_tar_file_name
+"D:\Tools\7-Zip\7z.exe" a ziptest.tar.gz ziptest.tar
+```
+**Linux解档解压缩：**
+```
+tar -zxvf file_name
+tar -zxvf ziptest.tar.gz
+```
 
 # 更多
 * [BASH CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/bash.sh)
+* [Shell小教程](https://github.com/dunwu/blog/blob/master/source/_posts/02.%E7%BC%96%E7%A8%8B/02.%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/02.shell.md)
+

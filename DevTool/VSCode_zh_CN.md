@@ -464,6 +464,11 @@ VS Code 版本 1.70.3 是 Windows 7 用户的最后一个可用版本，版本 1
 #endif
 ```
 
+### VSCode开发人员工具
+```
+Developer: Toggle Developer Tools
+```
+
 ### VSCode性能诊断
 当VSCode启动变慢的时候可按F1，输入下面的命令诊断
 ```

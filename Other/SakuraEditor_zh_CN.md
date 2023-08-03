@@ -44,13 +44,21 @@ Ctrl + 空格
 Ctrl + /
 ```
 
-## 高亮正则表达式内容
+## 定义关键字高亮(要按顺序)
 设定位置：  
 設定 → タイプ別設定 → 正規表現キーワード  
 高亮设定：  
-1. 高亮行尾空格
+1. 关键字1:蓝色(0,0,255)
+```
+/(if|for|while|switch|return|sizeof)[ \t]*\(/k
+```
+2. 关键字2:行尾空格-红色(255,100,100)
 ```
 /\s+[\r\n]+/k
+```
+3. 关键字3:函数-绿色(0,100,0)
+```
+/[a-zA-Z_]+[0-9a-zA-Z_]*[ \t]*(?=\()/k
 ```
 
 ## 启用ctags
@@ -88,3 +96,25 @@ Ctrl + /
 * 短箭头
 * 长箭头
 
+## 开启CSV模式
+設定 → タブ別設定一覧 → 追加 → 設定変更  
+名字修改为 ``CSV`` ，扩展名修改为 ``csv,tsv``  
+在 ``TAB表示`` 下面的单选框，选择 ``CSV``  
+保存即可
+
+## 添加其他语言支持
+設定 → 共通設定 → 強調キーワード → セット追加 → 输入 ``Python``  
+インポート → 选择kwd文件路径( 安装路径下的 ``/keyword/python_2.5.kwd`` )
+
+## 定义Keyword文件（kwd）
+1. 将语言的keyword列出
+2. 将语言的类型列出
+存到文件，保存扩展名为kwd即可
+
+#### 一些语言的keyword
+- [Python keyword](https://github.com/python/cpython/blob/3.11/Lib/keyword.py)
+- [Python type](https://docs.python.org/zh-cn/3/library/stdtypes.html)
+- [Rust keyword](https://doc.rust-lang.org/book/appendix-01-keywords.html)
+- [Go keyword](https://go.dev/ref/spec)  
+
+另外，vim的syntax定义也可以参考

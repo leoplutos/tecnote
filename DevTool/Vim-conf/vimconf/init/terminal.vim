@@ -4,6 +4,8 @@ scriptencoding utf-8
 if has('terminal')
   "设定快捷键
   let g:terminal_key = '<Leader>a'
+  "终端窗口高度
+  let g:terminal_height=30
   "设置为 1 以在进程完成时关闭窗口
   let g:terminal_close=1
   " 0: vim's current working directory (which :pwd returns)

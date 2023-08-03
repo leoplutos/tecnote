@@ -1,5 +1,5 @@
 scriptencoding utf-8
-"java.vim
+"after/syntax/java.vim
 
 "Java
 syn match javaCustomOperator "[-+&|<>=!\/~.,;:*%&^?()\[\]{}]"
@@ -12,4 +12,7 @@ hi clear javaCustomOperator
 hi link javaCustomFunc Function
 hi link javaFuncDef Function
 hi link javaCustomComment Comment
-hi link javaC_JavaLang Type
+hi link javaX_JavaLang Structure
+hi link javaC_JavaLang Structure
+hi link javaR_JavaLang Structure
+hi link javaClassDecl Structure

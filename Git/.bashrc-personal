@@ -10,7 +10,15 @@ if [ -f ~/.bashrc ]; then
 fi
 
 export INPUTRC='/lch/workspace/readline/inputrc'
-export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
+#export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
+PS_IP=$(hostname -I)
+PS_IP=`echo ${PS_IP}`
+PS_GREEN='\[\033[0;32m\]'
+PS_YELLOW='\[\033[0;33m\]'
+PS_BLUE='\[\033[0;34m\]'
+PS_MAGENTA='\[\033[0;35m\]'
+PS_CLEAR='\[\033[0m\]'
+export PS1="${PS_GREEN}[D1][${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
 export app=/lch/workspace/rust/rusttest
 export bin=/lch/workspace/rust/rusttest/target/debug
 export log=/lch/workspace/rust/rusttest/log

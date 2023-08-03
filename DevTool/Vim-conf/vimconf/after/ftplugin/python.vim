@@ -7,3 +7,5 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
   nmap <buffer> <F9> [[v][Vgq
 
 endif
+
+setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4

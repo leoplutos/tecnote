@@ -196,3 +196,31 @@ Vim还支持三种输出设备：
 * GUI（图形化的用户接口：gui）  
 
 因为它们每一个都有自己独特的高亮能力，Vim为它们维护了三个独立的高亮方案。
+
+## 配色gui转term
+在有些不支持gui配色的服务器只能使用256color的配色  
+有一个python脚本支持gui颜色转256颜色  
+笔者整理的路径：  
+* [gui2term](../Python/gui2term)  
+
+所需文件为：  
+1. gui2term.py
+2. rgb.txt（可以在vim8之前的根路径下找到，需要和gui2term.py放在同路径下）  
+
+将要修改的vim脚本文件准备好，只留下gui的颜色设定，例如
+```
+hi Normal       gui=none guifg=#D4D4D4 guibg=#1E1E1E
+```
+运行命令：
+```
+python gui2term.py test.vim test2.vim
+```
+
+原文件传送门：[gui2term.py](https://github.com/lilydjwg/winterpy/blob/master/pyexe/gui2term.py)
+
+
+
+
+
+
+

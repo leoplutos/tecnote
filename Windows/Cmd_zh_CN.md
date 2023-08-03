@@ -19,12 +19,22 @@ netstat -nao | find "8080"
 ```
 
 # 修改cmd的提示符
-cmd的提示符是在 ``PROMPT`` 环境变量中设置的，使用下面的命令可以确认
+``cmd`` 的提示符是在 ``PROMPT`` 环境变量中设置的，使用下面的命令可以确认  
+1. Session 级别的设定(作用当前Session，不需要重启cmd)
 ```
 set PROMPT
 PROMPT=$P$G
 ```
-得知默认的设置为 ``$P$G``  
+2. 系统级别的设定(作用全局，需要重启cmd，不推荐)
+```
+setx prompt $P$G
+```
+默认设置为 ``$P$G``  
+
+注意：  
+Windows10之前的Windows：控制台上没有对 ANSI 颜色的支持  
+Windows10及更高：支持ANSI颜色  
+
 下面是2个设定例子
 ```
 set PROMPT=$E[36m%computername%:$E[0m$E[33m$P$E[0m$E[35m#$E[0m 

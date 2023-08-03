@@ -27,9 +27,11 @@ noremap <C-z> u
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
+inoremap < <><left>
 cnoremap ( ()<left>
 cnoremap [ []<left>
 cnoremap { {}<left>
+cnoremap < <><left>
 inoremap " ""<left>
 inoremap ' ''<left>
 " TAB/窗口移动快捷键
@@ -101,6 +103,16 @@ nnoremap <silent> <leader>rd :if &modifiable \| setl nomodifiable \| echo 'Curre
 nnoremap <leader>oe :!start .<CR>
 " [普通模式]\ds：删除行尾空格
 nnoremap <silent><nowait> <leader>ds :%s/ *$//g<cr>:noh<cr><c-o>
+" [普通模式]\df：差分另一个文件
+nnoremap <leader>df :ver diffsplit |
+" [普通模式]\dt：差分左右2个文件
+nnoremap <leader>dt :windo diffthis<CR>
+" [普通模式]\do：关闭差分
+nnoremap <leader>do :windo diffoff<CR>
+" [普通模式]\hi：进入16进制编辑器并开启高亮
+nnoremap <leader>hi :%!xxd<CR>:set ft=xxd<CR>
+" [普通模式]\ho：退出16进制编辑器
+nnoremap <leader>ho :%!xxd -r<CR>
 " [普通模式]\td：载入暗色系配置
 nnoremap <leader>td :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'<CR>
 " [普通模式]\tl：载入亮色系配置

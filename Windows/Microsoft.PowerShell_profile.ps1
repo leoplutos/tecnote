@@ -3,16 +3,20 @@
 
 #设置命令提示符
 function prompt {
-	#计算器名-深水色
-	Write-Host ($env:COMPUTERNAME) -NoNewline -ForegroundColor DarkCyan
+	$localIpAddresses =(Get-NetIPAddress | Where-Object {$_.AddressFamily -eq 'IPv4'} | Where-Object {$_.PrefixOrigin -eq 'Dhcp'}).IPAddress
+	#ip地址-绿色
+	Write-Host "[$localIpAddresses]" -NoNewLine -ForegroundColor Green
+	#用户名@计算机名-品红色
+	Write-Host "$env:USERNAME@$env:ComputerName" -NoNewLine -ForegroundColor Magenta
 	#:-白色
-	Write-Host (":") -NoNewline -ForegroundColor White
-	#当前路径-黄色
-	Write-Host ($(Get-Location)) -NoNewline -ForegroundColor Yellow
-	##-紫红色
-	Write-Host ("#") -NoNewline -ForegroundColor Magenta
+	Write-Host ":" -NoNewLine -ForegroundColor White
+	#当前路径-黄色(换行)
+	Write-Host ($(Get-Location)) -ForegroundColor Yellow
+	#井号-蓝色
+	Write-Host "#" -NoNewLine -ForegroundColor Blue
 	return " "
 }
+echo "Prompt Setting Complited"
 
 #设置环境变量
 $MINGW_HOME="D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin"

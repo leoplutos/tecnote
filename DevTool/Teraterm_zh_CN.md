@@ -224,3 +224,13 @@ ClearOnResize=off
 ```bash
 export TERM=gnome
 ```
+
+## 其他
+
+### TeraTerm下tree命令乱码解决办法
+使用如下参数即可
+```
+tree --charset=C -L 3
+```
+
+

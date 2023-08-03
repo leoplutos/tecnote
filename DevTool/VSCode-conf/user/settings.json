@@ -479,10 +479,12 @@
 	"[python]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
 		"editor.guides.indentation": true, //启用缩进参考线
+		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
 	},
 	"[rust]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
 		"editor.guides.indentation": true, //启用缩进参考线
+		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
 	},
 	"[csv][dynamic csv][tsv][csv (semicolon)]": {
 		"editor.stickyScroll.enabled": true // 为csv和tsv打开粘性滚动(就是title固定)
@@ -501,7 +503,7 @@
 	"visibleWhitespace.overlayColor": "#505050", //指定文本的颜色
 	"visibleWhitespace.newLine.color": "#8080af", //换行符颜色
 	"visibleWhitespace.htab.enable": true, //TAB符号
-	"visibleWhitespace.htab.text": "^", //TAB符号内容 默认为：→
+	"visibleWhitespace.htab.text": "┆", //TAB符号内容 默认为：→（备用：^）
 	"visibleWhitespace.newLine.enable": false, //换行符
 	"visibleWhitespace.newLine.lf": "⇣", //Linux换行符 默认：↓
 	"visibleWhitespace.newLine.crLf": "↵", //Windows换行符 默认：↲
@@ -552,7 +554,7 @@
 	"whitespacepp.renderWS": true, //是否渲染宽空格字符
 	"whitespacepp.renderLF": true, //是否渲染换行 (\n) 字符。
 	"whitespacepp.renderEOF": true, //是否在文件末尾渲染 [EOF] 标记
-	"whitespacepp.textTAB": "^", //TAB (\t) 的文本。建议指定1em大小的字符，也可以指定unicode字符，如“￫”、“‣”、“▸”、“▹”、“❯”。
+	"whitespacepp.textTAB": "┆", //TAB (\t) 的文本。建议指定1em大小的字符，也可以指定unicode字符，如“^”、“￫”、“‣”、“▸”、“▹”、“❯”。
 	"whitespacepp.textWS": " ", //宽空格的文本。建议指定2em大小的字符，也可以指定unicode字符，如“▢”、“▭”、“◌”、“▨”、“▒”、“🔲”。
 	"whitespacepp.textLF": "↵", //换行文本 (\n)。您还可以指定 unicode 字符，例如“↩”、“◂”、“▾”。
 	"whitespacepp.textEOF": "[EOF]", //EOF（文件结尾）的文本。您还可以指定 unicode 字符。

@@ -251,7 +251,8 @@ set listchars=tab:¦\ ,precedes:<,extends:>
 "               文件关联                        "
 "-----------------------------------------------"
 augroup filetypedetect
-  autocmd! BufRead,BufNewFile *.pc     setfiletype c
+  autocmd! BufRead,BufNewFile *.cc     setfiletype c
+  autocmd! BufRead,BufNewFile *.pc     setfiletype esqlc
 augroup END
 
 "-----------------------------------------------"
@@ -297,28 +298,28 @@ function! RestUserColor(pmode)
   if a:pmode == 'ModeChanged'
     let l:currentMode = mode()
     if (currentMode == 'i')                "插入模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
     elseif (currentMode == 'n')            "普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
     elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>" || currentMode == "\<C-vs>")      "可视模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000000 guibg=#00ff87
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000010 guibg=#00ff87
     elseif (currentMode == 'R')            "替换模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=160 gui=bold guifg=#ffffff guibg=#d70000
     elseif (currentMode == 'c' || currentMode == '!')       "命令模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=201 gui=bold guifg=#ffffff guibg=#ff00ff
     elseif (currentMode == 's' || currentMode == 'S' || currentMode == "\<C-s>")      "选择模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=178 gui=bold guifg=#000000 guibg=#d7af00
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=178 gui=bold guifg=#000010 guibg=#d7af00
     elseif (currentMode == 't')            "终端模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#2472c8
     elseif (currentMode == 'r')            "确认模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000000 guibg=#d787ff
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000010 guibg=#d787ff
     else            "默认普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
     endif
   elseif a:pmode == 'InsertEnter'
-    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
+    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
   elseif a:pmode == 'InsertLeave'
-    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
   endif
 endfunction
 
@@ -339,7 +340,7 @@ augroup lchModeChangedGroup
 augroup END
 
 hi StatuslineNC cterm=reverse gui=reverse 
-hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000000 guibg=#00d7ff
+hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
 hi User2        term=none cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
 hi User3        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffff00 guibg=#606060
 
@@ -391,7 +392,7 @@ let g:netrw_alto = 1           " 使用o水平分割时，置位此变量后，�
 let g:netrw_altv = 1           " 使用v水平分割时，置位此变量后，分割后的新窗口出现在右方而不是左方
 let g:netrw_preview=1          " 使用p预览文件使用垂直分割 0 (缺省)水平分割,垂直分割
 let g:netrw_winsize = 80       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
-let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
+"let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
 let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
 
 " 自动打开netrw

@@ -5,8 +5,28 @@
 
 ::设置命令提示符
 ::set PROMPT=$P$G
-set PROMPT=$E[36m%computername%$E[0m:$E[33m$P$E[0m$E[35m#$E[0m 
+::取得Windows版本(Windows10及更高则设定Prompt)
+for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
+set /a WIN_VERSION=VERSION+0
+::如果版本大于10则设置ANSI颜色
+if %WIN_VERSION% geq 10 (
+    goto SetPrompt
+) else (
+    goto GoOn
+)
 
+:SetPrompt
+for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do set PS_IP=%%a
+set PS_GREEN=$E[32m
+set PS_YELLOW=$E[33m
+set PS_BLUE=$E[34m
+set PS_MAGENTA=$E[35m
+set PS_CLEAR=$E[0m
+set PROMPT=%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
+echo Prompt Setting Complited
+goto GoOn
+
+:GoOn
 ::设置环境变量
 set MINGW_HOME=D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin
 set PATH=%PATH%;%MINGW_HOME%
@@ -45,6 +65,7 @@ doskey which=where $*
 doskey cat=type $*
 doskey rm=del $*
 doskey mv=move $*
+doskey cp=copy $*
 doskey cd=cd /d $*
 doskey pwd=chdir
 doskey mkdir=md $*
