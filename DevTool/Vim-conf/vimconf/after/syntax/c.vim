@@ -12,5 +12,5 @@ hi def link cCustomFunc Function
 hi def link cCustomClass Structure
 hi link cCustomComment Comment
 
-"let c_comment_string=1
-"unlet c_comment_string
+"let c_comment_strings=1
+"unlet c_comment_strings

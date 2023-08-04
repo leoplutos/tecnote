@@ -50,7 +50,8 @@ hi DiffChange   term=bold ctermbg=189 guibg=#c9cbfe
 hi DiffDelete   term=standout cterm=standout ctermfg=254 ctermbg=253 gui=standout guifg=#f1f1f1 guibg=#e4e4e4
 hi DiffText     term=reverse cterm=bold ctermfg=252 ctermbg=67 gui=bold guifg=#d0d0d0 guibg=#567fa8
 hi SignColumn   term=standout ctermfg=26 ctermbg=255 guifg=#005fd7 guibg=#f9f9f9
-hi Conceal      ctermfg=188 ctermbg=244 guifg=#d4d4d4 guibg=#808080
+hi clear Conceal
+hi! link Conceal SpecialKey
 hi SpellBad     term=reverse cterm=undercurl ctermfg=196 ctermbg=255 gui=undercurl guifg=#ff0000 guibg=#f9f9f9 guisp=#ff0000
 hi SpellCap     term=reverse cterm=undercurl ctermfg=196 ctermbg=255 gui=undercurl guifg=#ff0000 guibg=#f9f9f9 guisp=#ff0000
 hi SpellRare    term=reverse cterm=undercurl ctermfg=196 ctermbg=255 gui=undercurl guifg=#ff0000 guibg=#f9f9f9 guisp=#ff0000
@@ -59,11 +60,11 @@ hi SpellLocal   term=underline cterm=undercurl ctermfg=196 ctermbg=255 gui=under
 hi Pmenu        ctermfg=233 ctermbg=255 guifg=#121212 guibg=#efefef
 hi PmenuSel     ctermfg=255 ctermbg=25 guifg=#eeeeee guibg=#0060c0
 hi PmenuSbar    ctermbg=251 guibg=#c6c6c6
-hi PmenuThumb   ctermbg=234?guibg=#1e1e1e
+hi PmenuThumb   ctermbg=234 guibg=#1e1e1e
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=102 ctermbg=253 gui=none guifg=#8f8391 guibg=#dadada
 hi TabLineSel   term=underline cterm=none ctermfg=236 ctermbg=255 gui=none guifg=#2c2c2c guibg=#f3f3f3
-hi TablineFill  term=reverse cterm=none ctermfg=255 ctermbg=255 gui=none guifg=#f3f3f3 guibg=#f9f9f9
+hi TabLineFill  term=reverse cterm=none ctermfg=255 ctermbg=255 gui=none guifg=#f3f3f3 guibg=#f9f9f9
 hi CursorColumn term=reverse ctermbg=158 guibg=#afffd7
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
@@ -72,10 +73,10 @@ hi ColorColumn  term=reverse ctermbg=252 guibg=#d3d3d3
 hi QuickFixLine term=reverse cterm=none ctermbg=50 gui=none guibg=#00ffd7
 "终端的状态栏
 hi clear StatusLineTerm
-hi! link StatusLineterm StatusLine
+hi! link StatusLineTerm StatusLine
 "终端的状态栏（未选中）
 hi clear StatusLineTermNC
-hi! link StatusLinetermNC StatusLineNC
+hi! link StatusLineTermNC StatusLineNC
 "Cursor：光标，CursorLine : 光标所在行，CursorColumn: 光标所在列，iCursor：插入模式光标
 hi Cursor       term=reverse ctermfg=255 ctermbg=16 guifg=#f9f9f9 guibg=#000000
 hi iCursor      term=reverse ctermfg=255 ctermbg=21 guifg=#f9f9f9 guibg=#0000ff
@@ -116,6 +117,7 @@ hi Variables    term=none cterm=none ctermfg=90 gui=none guifg=#870087
 hi clear Typedef
 hi! link Typedef Structure
 hi ThinTitle    term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
+hi Annotation   term=none cterm=none ctermfg=89 gui=none guifg=#87005f
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -158,4 +160,4 @@ augroup END
 
 "tagbar插件高亮
 hi link TagbarKind ThinTitle
-hi link TagbatScope ThinTitle
+hi link TagbarScope ThinTitle

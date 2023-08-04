@@ -104,7 +104,7 @@ nnoremap <leader>oe :!start .<CR>
 " [普通模式]\ds：删除行尾空格
 nnoremap <silent><nowait> <leader>ds :%s/ *$//g<cr>:noh<cr><c-o>
 " [普通模式]\df：差分另一个文件
-nnoremap <leader>df :ver diffsplit |
+nnoremap <leader>df :vert diffsplit |
 " [普通模式]\dt：差分左右2个文件
 nnoremap <leader>dt :windo diffthis<CR>
 " [普通模式]\do：关闭差分

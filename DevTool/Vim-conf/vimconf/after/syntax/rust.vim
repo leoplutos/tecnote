@@ -8,3 +8,5 @@ hi link rustOperator Variables
 hi link rustAssert Function
 hi link rustPanic Structure
 hi link rustMacro Function
+hi link rustSigil Variables
+hi link rustAttribute Annotation

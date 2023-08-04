@@ -16,3 +16,4 @@ hi link javaX_JavaLang Structure
 hi link javaC_JavaLang Structure
 hi link javaR_JavaLang Structure
 hi link javaClassDecl Structure
+hi link javaAnnotation Annotation
