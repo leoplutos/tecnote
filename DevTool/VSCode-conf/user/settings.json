@@ -311,14 +311,14 @@
 			],
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
-			"comments": "#a6a6a6", //设定注释颜色liang 备用#a8a8a8
+			"comments": "#70a670", //设定注释颜色liang 备用#a8a8a8
 			//"comments": "#008000", //设定注释颜色qiao
 			"numbers": "#0087ff", //设定数字颜色
 			"strings": "#2F5E5E", //设定字符串颜色 (备用#2F5E5E)(备用01a252)
 			"variables": "#000000", //设定变量颜色
 			"types": "#e02838", //设定类型颜色
 			"keywords": { //设定关键字颜色（可加入"fontStyle": "bold"）
-				"foreground": "#0000a0",
+				"foreground": "#0000ff",
 				"fontStyle": ""
 			},
 			"functions": "#006400", //设定函数颜色(备用#795E26)(备用深绿#008300)(备用深绿#006400)

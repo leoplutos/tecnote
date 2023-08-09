@@ -23,7 +23,7 @@ hi Normal       term=none cterm=none ctermfg=188 ctermbg=234 gui=none guifg=#D4D
 hi SpecialKey   term=none cterm=none ctermfg=239 gui=none guifg=#505050
 "NonText       : 换行符
 hi NonText      term=none cterm=none ctermfg=239 gui=none guifg=#505050
-hi Directory    term=bold cterm=none ctermfg=87 gui=none guifg=#5fffff
+hi Directory    term=none cterm=none ctermfg=87 gui=none guifg=#5fffff
 "提示信息
 hi ErrorMsg     term=bold cterm=bold ctermfg=231 ctermbg=196 gui=bold guifg=#ffffff guibg=#ff0000
 "Search     : 搜索高亮
@@ -55,7 +55,7 @@ hi! link Conceal SpecialKey
 hi SpellBad     term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
 hi SpellCap     term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
 hi SpellRare    term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
-hi SpellLocal   term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
+hi SpellLocal   term=underline cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
 "弹出菜单
 hi Pmenu        ctermfg=188 ctermbg=236 guifg=#d4d4d4 guibg=#2d2d30
 hi PmenuSel     ctermfg=188 ctermbg=24 guifg=#d4d4d4 guibg=#073655
@@ -100,7 +100,7 @@ hi PreProc      term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 "Type       : 变量类型，例如“int”
 hi Type         term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 "Underlined : 文本下划线。
-"hi Underlined  term=underline cterm=underline ctermfg=21 gui=underline guifg=#0000ff
+hi UnderLined   term=underline cterm=underline ctermfg=33 gui=underline guifg=#3794ff
 hi Ignore       ctermfg=237 guifg=bg
 hi Error        term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 "String     : 字符串
@@ -118,6 +118,8 @@ hi clear Typedef
 hi! link Typedef Structure
 hi ThinTitle    term=none cterm=none ctermfg=214 gui=none guifg=#f39c12
 hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#00af00
+hi clear SpecialComment
+hi! link SpecialComment Comment
 
 "-----------------------------------------------"
 "               终端高亮                        "

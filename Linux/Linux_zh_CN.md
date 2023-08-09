@@ -287,6 +287,13 @@ sleep 10 & top -p $! -b > top_result.txt
 如果想要将top的结果生成报表的话，可以使用这个库  
 [linux-top-parser-graph-maker](https://github.com/kaushikvelusamy/linux-top-parser-graph-maker)
 
+### CPU核心数确认命令
+```
+lscpu
+nproc -all
+getconf _NPROCESSORS_ONLN
+```
+
 # 函数处理
 ``$0`` ： 脚本名称  
 

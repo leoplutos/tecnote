@@ -6,3 +6,6 @@ hi link vimCommentTitle Comment
 hi link vimVar Normal
 hi link vimEnvvar Variables
 hi link vimOption Variables
+hi link vimGroup Variables
+hi link vimHiTerm Variables
+hi link vimHiAttrib Normal

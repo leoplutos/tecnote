@@ -11,6 +11,7 @@ syn region cCustomComment start="\/\*" end="\*\/"
 hi def link cCustomFunc Function
 hi def link cCustomClass Structure
 hi link cCustomComment Comment
+hi link cUserLabel ThinTitle
 
 "let c_comment_strings=1
 "unlet c_comment_strings

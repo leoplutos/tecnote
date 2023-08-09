@@ -99,6 +99,8 @@ nnoremap <Leader>P "cP
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " [普通模式]\rd：在只读和可写之间切换
 nnoremap <silent> <leader>rd :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
+" [普通模式]\rp：replease替换
+nnoremap <leader>rp :%s///gc<LEFT><LEFT><LEFT><LEFT>
 " [普通模式]\oe：在OS打开当前文件的路径，快捷键 空格+e+空格
 nnoremap <leader>oe :!start .<CR>
 " [普通模式]\ds：删除行尾空格
@@ -117,6 +119,8 @@ nnoremap <leader>ho :%!xxd -r<CR>
 nnoremap <leader>td :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'<CR>
 " [普通模式]\tl：载入亮色系配置
 nnoremap <leader>tl :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-light.vim'<CR>
+" [普通模式]\tq：载入亮色系配置
+nnoremap <leader>tq :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/qy-light.vim'<CR>
 " [普通模式]\t16：载入16色配置
 nnoremap <leader>t16 :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-16.vim'<CR>
 " [普通模式]\@：复制命令模式回显消息

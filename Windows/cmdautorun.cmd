@@ -66,6 +66,7 @@ doskey cat=type $*
 doskey rm=del $*
 doskey mv=move $*
 doskey cp=copy $*
+doskey touch=copy nul $*
 doskey cd=cd /d $*
 doskey pwd=chdir
 doskey mkdir=md $*

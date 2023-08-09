@@ -1,8 +1,8 @@
 scriptencoding utf-8
-"lch-light.vim
+"qy-light.vim
 
 "全局变量g:g_i_colorflg（1：256暗色系，2：256亮色系，3：16色系）
-let g:g_i_colorflg=2
+let g:g_i_colorflg=4
 
 "-----------------------------------------------"
 "               颜色设置                        "
@@ -32,8 +32,8 @@ hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00
 hi MoreMsg      term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 hi ModeMsg      term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "LineNr     : 行号
-hi LineNr       term=none cterm=none ctermfg=66 gui=none guifg=#6c8086
-hi CursorLine   term=reverse ctermbg=158 guibg=#afffd7
+hi LineNr       term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
+hi CursorLine   term=reverse ctermbg=255 guibg=#ecece6
 hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=123 ctermbg=17 gui=bold,reverse guifg=#87ffff guibg=#00005f
@@ -86,11 +86,11 @@ hi MatchParen   term=reverse ctermbg=49 guibg=#20f5b0
 "               语法高亮                        "
 "-----------------------------------------------"
 "Comment    : 注释
-hi Comment      term=none cterm=none ctermfg=248 gui=none guifg=#70a670
+hi Comment      term=none cterm=none ctermfg=28 gui=none guifg=#0a881b
 "Constant   : 常量，例如__LINE__ __FILE__ __DATE__
 hi Constant     term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
 "Special    : 特殊符号，通常是类似字符串中的“\n”“%s”
-hi Special      term=none cterm=none ctermfg=18 gui=none guifg=#001080
+hi Special      term=none cterm=none ctermfg=196 gui=none guifg=#ff1717
 "Identifier : 变量名
 hi Identifier   term=none cterm=none ctermfg=90 gui=none guifg=#870087
 "Statement  : 编程语言的声明，一般是像“if”或“while”这样的关键字。
@@ -104,12 +104,12 @@ hi UnderLined   term=underline cterm=underline ctermfg=20 gui=underline guifg=#0
 hi Ignore       ctermfg=254 guifg=bg
 hi Error        term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 "String     : 字符串
-hi String       term=none cterm=none ctermfg=23 gui=none guifg=#2F5E5E
-hi Character    term=none cterm=none ctermfg=23 gui=none guifg=#2F5E5E
+hi String       term=none cterm=none ctermfg=88 gui=none guifg=#991313
+hi Character    term=none cterm=none ctermfg=88 gui=none guifg=#991313
 "Number     : 数字
-hi Number       term=none cterm=none ctermfg=33 gui=none guifg=#0087ff
+hi Number       term=none cterm=none ctermfg=124 gui=none guifg=#be0000
 "Function   : 函数名
-hi Function     term=none cterm=none ctermfg=22 gui=none guifg=#006400
+hi Function     term=none cterm=none ctermfg=16 gui=none guifg=#000000
 "Structure  : 结构体
 hi Structure    term=none cterm=none ctermfg=196 gui=none guifg=#ff0000
 "自定义-Variables
@@ -125,12 +125,12 @@ hi! link SpecialComment Comment
 "               终端高亮                        "
 "-----------------------------------------------"
 if has('terminal')
-  hi Terminal     term=none cterm=none ctermbg=234 ctermfg=253 gui=none guibg=#1d1f21 guifg=#dadada
+  hi Terminal     term=none cterm=none ctermbg=194 ctermfg=16 gui=none guibg=#e6edcd guifg=#000000
   let g:terminal_ansi_colors = [
-  \ "#000000", "#cd3131", "#0dbc79", "#e5e510",
-  \ "#2472c8", "#bc3fbc", "#11a8cd", "#e5e5e5",
-  \ "#666666", "#f14c4c", "#23d18b", "#f5f543",
-  \ "#3b8eea", "#d670d6", "#29b8db", "#e5e5e5"
+  \ "#000000", "#ff0000", "#00ff00", "#ffff00",
+  \ "#2020ff", "#ff00ff", "#00ffff", "#ffffff",
+  \ "#404040", "#c00000", "#00c000", "#c0c000",
+  \ "#4040c0", "#c000c0", "#00c0c0", "#c0c0c0"
   \ ]
 endif
 
@@ -154,11 +154,11 @@ let java_highlight_all=1
 let java_highlight_functions=1
 
 "高亮行尾空格(包括tab)
-hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
-augroup lchSyntaxGroup
-  autocmd!
-  autocmd Syntax * match ExtraWhitespace /\s\+$/
-augroup END
+"hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
+"augroup lchSyntaxGroup
+"  autocmd!
+"  autocmd Syntax * match ExtraWhitespace /\s\+$/
+"augroup END
 
 "tagbar插件高亮
 hi link TagbarKind ThinTitle

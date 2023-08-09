@@ -9,3 +9,4 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
 endif
 
 setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
+let g:indentLine_enabled = 1
