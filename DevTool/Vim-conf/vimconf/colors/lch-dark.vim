@@ -100,7 +100,7 @@ hi PreProc      term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 "Type       : 变量类型，例如“int”
 hi Type         term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 "Underlined : 文本下划线。
-hi UnderLined   term=underline cterm=underline ctermfg=33 gui=underline guifg=#3794ff
+hi Underlined   term=underline cterm=underline ctermfg=33 gui=underline guifg=#3794ff
 hi Ignore       ctermfg=237 guifg=bg
 hi Error        term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 "String     : 字符串

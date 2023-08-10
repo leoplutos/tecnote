@@ -90,7 +90,7 @@ hi Comment      term=none cterm=none ctermfg=248 gui=none guifg=#70a670
 "Constant   : 常量，例如__LINE__ __FILE__ __DATE__
 hi Constant     term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
 "Special    : 特殊符号，通常是类似字符串中的“\n”“%s”
-hi Special      term=none cterm=none ctermfg=18 gui=none guifg=#001080
+hi Special      term=none cterm=none ctermfg=202 gui=none guifg=#ec5800
 "Identifier : 变量名
 hi Identifier   term=none cterm=none ctermfg=90 gui=none guifg=#870087
 "Statement  : 编程语言的声明，一般是像“if”或“while”这样的关键字。
@@ -100,7 +100,7 @@ hi PreProc      term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
 "Type       : 变量类型，例如“int”
 hi Type         term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
 "Underlined : 文本下划线。
-hi UnderLined   term=underline cterm=underline ctermfg=20 gui=underline guifg=#002ad1
+hi Underlined   term=underline cterm=underline ctermfg=20 gui=underline guifg=#002ad1
 hi Ignore       ctermfg=254 guifg=bg
 hi Error        term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 "String     : 字符串

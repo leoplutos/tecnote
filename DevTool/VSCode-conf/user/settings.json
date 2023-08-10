@@ -342,11 +342,11 @@
 					}
 				},
 				{
-					"scope": [ //c语言的%d等
+					"scope": [ //c语言的%d等 备份（#001080）
 						"constant.other.placeholder.c",
 					],
 					"settings": {
-						"foreground": "#001080",
+						"foreground": "#ec5800",
 						"fontStyle": ""
 					}
 				},
