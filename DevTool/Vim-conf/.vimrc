@@ -284,7 +284,7 @@ function! Statusline()
   endif
   let l:resultStr = ''                              " 初始化
   let l:resultStr .= '%1* ' . showMode . ' '        " 显示当前编辑模式，高亮为用户组1
-  let l:resultStr .= '%2* %t'                       " 显示当前文件(t)，高亮为用户组2
+  let l:resultStr .= '%2* %F'                       " 显示当前文件，高亮为用户组2 (%f 相对文件路径, %F 绝对文件路径, %t 文件名)
   let l:resultStr .= '%3* %m%r%h%w %*%='            " 显示当前文件标记(mrhw)，高亮为用户组3，之后用=开始右对齐
   let l:resultStr .= '%* %{&ff} | %{"".(""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"").""} | %Y '        " 显示换行符，编码，文件类型，高亮为默认（ LF | utf-8 | fomart ）
   let l:resultStr .= '%2* [%l:%v] '                 " 显示当前行，列，高亮为用户组2
@@ -391,9 +391,11 @@ let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 let g:netrw_alto = 1           " 使用o水平分割时，置位此变量后，分割后的新窗口出现在下方而不是上方
 let g:netrw_altv = 1           " 使用v水平分割时，置位此变量后，分割后的新窗口出现在右方而不是左方
 let g:netrw_preview=1          " 使用p预览文件使用垂直分割 0 (缺省)水平分割,垂直分割
-let g:netrw_winsize = 80       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
+let g:netrw_winsize = 83       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
 "let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
 let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
+let g:netrw_sort_options = "i"   "忽略排序大小写
+"let g:netrw_special_syntax = 1  "高亮特定文件名
 
 " 自动打开netrw
 "augroup ProjectDrawerGroup
@@ -460,13 +462,66 @@ augroup END
 "-----------------------------------------------"
 "               特别语言设置                    "
 "-----------------------------------------------"
-let g:python_recommended_style = 1       " 是否启用ftplugin/python.vim中的PEP8标准（启用设定修改值为1）
-let g:rust_recommended_style = 1         " 是否启用ftplugin/rust.vim中的tab设定（启用设定修改值为1）
+"C语言高亮设定
+"关闭注释中的其他高亮
+if exists("c_comment_strings")
+  unlet c_comment_strings
+endif
+"高亮行尾空格和TAB之间的空格
+let c_space_errors = 1
+"开始GNU gcc高亮
+let c_gnu = 1
+
+"Java语言高亮设定
+let java_highlight_all = 1
+"let java_highlight_functions = "style"
+let java_highlight_debug = 1
+let java_ignore_javadoc = 1
+
+"Python语言高亮设定
+let python_highlight_all = 1
+"是否启用ftplugin/python.vim中的PEP8标准（启用设定修改值为1）
+let g:python_recommended_style = 1
+
+"Rust语言高亮
+"是否启用ftplugin/rust.vim中的tab设定（启用设定修改值为1）
+let g:rust_recommended_style = 1
+
+"Go语言高亮设定
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_variable_declarations = 1
+
+"html高亮设定
+let java_javascript = 1
+let java_css = 1
+let java_vb = 1
+
+"Shell高亮设定
+let g:is_bash = 1
+let g:is_posix = 1
 
 "-----------------------------------------------"
 "               插件设置                        "
 "-----------------------------------------------"
 if (v:version > 799)
+
+  "加载自带的matchit
+  packadd matchit
 
   "vim-auto-popmenu（自动补全）
   "https://github.com/skywind3000/vim-auto-popmenu
@@ -492,16 +547,18 @@ if (v:version > 799)
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
   "https://github.com/preservim/vim-indent-guides
-  "packadd indentLine
-  "let g:indentLine_defaultGroup = 'SpecialKey'
+  packadd indentLine
+  let g:indentLine_defaultGroup = 'SpecialKey'
   "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+  let g:indentLine_char_list = ['¦']
   "let g:indentLine_enabled = 1
+  let g:indentLine_enabled = 0
 
   "ctrlp（模糊查找）
   "https://github.com/ctrlpvim/ctrlp.vim
-  "packadd ctrlp
-  "let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
-  
+  packadd ctrlp
+  let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
+
   "vim-mark（高亮选中单词）
   "https://github.com/Yggdroot/vim-mark
 

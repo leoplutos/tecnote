@@ -1,4 +1,5 @@
 scriptencoding utf-8
 "after/syntax/json.vim
 
-hi link jsonKeyword Variables
+hi link jsonKeyword Special
+hi link jsonBraces Normal

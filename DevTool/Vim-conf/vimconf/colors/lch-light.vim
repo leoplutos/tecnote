@@ -89,8 +89,8 @@ hi MatchParen   term=reverse ctermbg=49 guibg=#20f5b0
 hi Comment      term=none cterm=none ctermfg=248 gui=none guifg=#70a670
 "Constant   : 常量，例如__LINE__ __FILE__ __DATE__
 hi Constant     term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
-"Special    : 特殊符号，通常是类似字符串中的“\n”“%s”
-hi Special      term=none cterm=none ctermfg=202 gui=none guifg=#ec5800
+"Special    : 特殊符号，通常是类似字符串中的“\n”“%s” (备份 #ec5800)
+hi Special      term=none cterm=none ctermfg=25 gui=none guifg=#0451a5
 "Identifier : 变量名
 hi Identifier   term=none cterm=none ctermfg=90 gui=none guifg=#870087
 "Statement  : 编程语言的声明，一般是像“if”或“while”这样的关键字。
@@ -120,6 +120,7 @@ hi ThinTitle    term=none cterm=none ctermfg=19 gui=none guifg=#0000a0
 hi Annotation   term=none cterm=none ctermfg=89 gui=none guifg=#87005f
 hi clear SpecialComment
 hi! link SpecialComment Comment
+hi CommonTag    term=none cterm=none ctermfg=88 gui=none guifg=#800000
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -149,10 +150,6 @@ hi netrwExe     term=standout ctermfg=23 guifg=#326464
 "-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
-"Java语言高亮设定
-let java_highlight_all=1
-let java_highlight_functions=1
-
 "高亮行尾空格(包括tab)
 hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
 augroup lchSyntaxGroup

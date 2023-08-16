@@ -220,5 +220,40 @@ inoremap <S-Space><C-a> <Esc>:sort!<CR>
 inoremap <S-Space><C-x> <Esc>:sort u<CR>
 " [普通模式]shift+space -> ctrl+r:在只读和可写之间切换
 nnoremap <silent> <S-Space><C-r> :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
+" [普通模式]shift+space -> z:禅模式
+nnoremap <silent> <S-Space>z :call <SID>enterZenMode()<CR>
 " [普通模式]shift+space -> ctrl+m:在深色主题和浅色主题之间切换
 nnoremap <silent> <S-Space><C-m> :if (g_i_colorflg == 1) \| exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-light.vim' \| else \| exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim' \| endif<CR>
+" [普通模式]\\\mg sj sc -> 切换字体
+nnoremap <silent> <leader><leader><leader>mg :call <SID>setFontMSGothic()<CR>
+nnoremap <silent> <leader><leader><leader>sj :call <SID>setFontSarasaGothicJ()<CR>
+nnoremap <silent> <leader><leader><leader>sc :call <SID>setFontSarasaGothicSC()<CR>
+
+function! s:enterZenMode()
+  leftabove vnew
+  wincmd l
+  execute "vertical resize " . ((winwidth(0) * 2) - 40)
+  "hi VertSplit guifg=bg guibg=bg
+  hi NonText guifg=bg
+endfunction
+
+function! s:setFontMSGothic()
+  if has('gui_running')
+    set guifont=ＭＳ_ゴシック:h12:cANSI:qDRAFT,MS_Gothic:h12:cANSI:qDRAFT
+    set guifontwide=ＭＳ_ゴシック:h12:cSHIFTJIS:qDRAFT,MS_Gothic:h12:cSHIFTJIS:qDRAFT
+  endif
+endfunction
+
+function! s:setFontSarasaGothicJ()
+  if has('gui_running')
+    set guifont=更紗等幅ゴシック_J_light:h12:cANSI:qDRAFT
+    set guifontwide=更紗等幅ゴシック_J_light:h12:cSHIFTJIS:qDRAFT
+  endif
+endfunction
+
+function! s:setFontSarasaGothicSC()
+  if has('gui_running')
+    set guifont=等距更纱黑体_SC_light:h12:cANSI:qDRAFT
+    set guifontwide=等距更纱黑体_SC_light:h12:cGB2312:qDRAFT
+  endif
+endfunction

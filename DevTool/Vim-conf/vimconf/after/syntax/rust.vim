@@ -10,3 +10,4 @@ hi link rustPanic Structure
 hi link rustMacro Function
 hi link rustSigil Variables
 hi link rustAttribute Annotation
+hi link rustEnumVariant Special

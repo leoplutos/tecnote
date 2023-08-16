@@ -85,7 +85,7 @@ hi MatchParen   term=reverse ctermbg=239 guibg=#51504f
 "-----------------------------------------------"
 "               语法高亮                        "
 "-----------------------------------------------"
-"Comment    : 注释
+"Comment    : 注释（备份 #676e95）
 hi Comment      term=none cterm=none ctermfg=241 gui=none guifg=#5f6167
 "Constant   : 常量，例如__LINE__ __FILE__ __DATE__
 hi Constant     term=none cterm=none ctermfg=75 gui=none guifg=#569CD6
@@ -120,6 +120,7 @@ hi ThinTitle    term=none cterm=none ctermfg=214 gui=none guifg=#f39c12
 hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#00af00
 hi clear SpecialComment
 hi! link SpecialComment Comment
+hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -149,10 +150,6 @@ hi netrwExe     term=standout ctermfg=150 guifg=#98c379
 "-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
-"Java语言高亮设定
-let java_highlight_all=1
-let java_highlight_functions=1
-
 "高亮行尾空格(包括tab)
 hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
 augroup lchSyntaxGroup

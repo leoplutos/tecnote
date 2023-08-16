@@ -120,6 +120,7 @@ hi ThinTitle    term=none cterm=none ctermfg=19 gui=none guifg=#0000a0
 hi Annotation   term=none cterm=none ctermfg=89 gui=none guifg=#87005f
 hi clear SpecialComment
 hi! link SpecialComment Comment
+hi CommonTag    term=none cterm=none ctermfg=88 gui=none guifg=#800000
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -149,10 +150,6 @@ hi netrwExe     term=standout ctermfg=23 guifg=#326464
 "-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
-"Java语言高亮设定
-let java_highlight_all=1
-let java_highlight_functions=1
-
 "高亮行尾空格(包括tab)
 "hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
 "augroup lchSyntaxGroup

@@ -10,3 +10,6 @@ endif
 
 setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
 let g:indentLine_enabled = 1
+let b:match_words = '\<if\>:\<elif\>:\<else\>,'
+    \ . '\<while\>:\<continue\>:\<breake\>,'
+    \ . '\<try\>:\<except\>:\<finally\>,'

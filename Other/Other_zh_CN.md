@@ -45,6 +45,9 @@
 - 10、电脑管家 #CCE8CF RGB(204, 232, 207)
 - 11、WPS护眼色 #6E7B6C RGB(110, 123, 108)
 
+#### **一些Vim颜色码**
+[vim-horizon主题](https://github.com/ntk148v/vim-horizon)  
+[onedark.vim主题](https://github.com/joshdick/onedark.vim)  
 
 ## 正则表达式
 

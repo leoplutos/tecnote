@@ -308,6 +308,15 @@
 						"fontStyle": ""
 					}
 				},
+				{
+					"scope": [ //rust的标注
+						"meta.attribute.rust",
+					],
+					"settings": {
+						"foreground": "#00af00",
+						"fontStyle": ""
+					}
+				},
 			],
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
@@ -342,11 +351,11 @@
 					}
 				},
 				{
-					"scope": [ //c语言的%d等 备份（#001080）
+					"scope": [ //c语言的%d等 备份 #001080, #ec5800
 						"constant.other.placeholder.c",
 					],
 					"settings": {
-						"foreground": "#ec5800",
+						"foreground": "#0451a5",
 						"fontStyle": ""
 					}
 				},
@@ -488,6 +497,21 @@
 	},
 	"[csv][dynamic csv][tsv][csv (semicolon)]": {
 		"editor.stickyScroll.enabled": true // 为csv和tsv打开粘性滚动(就是title固定)
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features",
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+	},
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features",
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "vscode.markdown-language-features",
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "

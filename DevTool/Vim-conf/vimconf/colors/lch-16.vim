@@ -90,7 +90,3 @@ if has('terminal')
 endif
 "QuickFi选中行
 hi QuickFixLine term=reverse cterm=none ctermbg=darkblue gui=none guibg=darkblue
-
-"Java语言高亮设定
-let java_highlight_all=1
-let java_highlight_functions=1
