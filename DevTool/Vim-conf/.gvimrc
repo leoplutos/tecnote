@@ -10,7 +10,8 @@ set langmenu=zh_CN.UTF-8                  " 菜单语言中文
 "set langmenu=en_US.UTF-8                  " 菜单语言英文
 "let $LANG = 'ja_JP.utf8'                  " 消息语言日文
 "set langmenu=ja_JP.UTF-8                  " 菜单语言日文
-lang message zh_CN.UTF-8
+language zh_CN
+language message zh_CN.UTF-8
 set helplang=cn                           " 设置帮助文档语言
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim

@@ -8,8 +8,15 @@ endif
 
 set nocompatible                         " 去除vi一致性
 
+" neovim判断
+if has('nvim')
+  let g:g_nvim_flg = 1
+else
+  let g:g_nvim_flg = 0
+endif
+
 " 8.0版本之后才导入defaults.vim
-if (v:version > 799)
+if (v:version > 799) && (g:g_nvim_flg == 0)
   source $VIMRUNTIME/defaults.vim
 endif
 
@@ -36,7 +43,9 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
   let $PATH .= ';C:\Users\Leo-G5000\.vscode\extensions\ms-vscode.cpptools-1.16.3-win32-x64\LLVM\bin'
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32\Scripts'
-  let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
+  if (g:g_nvim_flg == 0)
+    let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
+  endif
   "设定内置终端专用shell
   let g:terminal_shell='cmd.exe /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd'
 elseif (g:g_i_osflg==3)

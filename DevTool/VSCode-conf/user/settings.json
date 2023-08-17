@@ -45,6 +45,8 @@
 	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
 	"editor.multiCursorModifier": "alt", //多光标选择模式（Ctrl 或者 Alt）
+	"editor.cursorSurroundingLines": 4, // 控制光标周围可见行
+	"editor.cursorSurroundingLinesStyle": "all", // 始终强制执行
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
@@ -548,6 +550,11 @@
 	//-----------------------------------------------"
 	"trailing-spaces.deleteModifiedLinesOnly": true, //只删除修改的行
 	"trailing-spaces.trimOnSave": false, //保存时不自动删除行尾空格（只对修改的行生效）
+	//-----------------------------------------------"
+	//               Neovim插件设定                  "
+	//-----------------------------------------------"
+	"vscode-neovim.neovimExecutablePaths.win32": "D:\\Tools\\WorkTool\\Text\\nvim-win64\\bin\\nvim.exe",
+	"vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\Leo-G5000\\AppData\\Local\\nvim\\init.lua",
 	//-----------------------------------------------"
 	//              Highlight插件设定                "
 	//-----------------------------------------------"

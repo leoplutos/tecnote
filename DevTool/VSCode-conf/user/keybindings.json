@@ -26,7 +26,8 @@
 	},
 	{ //shift+space -> v:开启/关闭vim插件
 		"key": "shift+space v",
-		"command": "toggleVim"
+		//"command": "toggleVim",
+		"command": "vscode-neovim.toggle",
 	},
 	{ //ctrl+w:关闭tab
 		"key": "ctrl+w",
@@ -207,5 +208,26 @@
 		"key": "shift+space ctrl+f6",
 		"command": "C_Cpp.RemoveAllCodeAnalysisProblems",
 		"when": "editorIsOpen && editorLangId == 'c'"
+	},
+	{ // [Neovim插件]插入模式Ctrl+k:光标上移
+		"key": "ctrl+k",
+		"command": "cursorUp",
+		"when": "neovim.mode == insert && editorTextFocus",
+	},
+	{ // [Neovim插件]插入模式Ctrl+l:光标右移
+		"key": "ctrl+l",
+		"command": "cursorRight",
+		"when": "neovim.mode == insert && editorTextFocus",
+	},
+	{ // [Neovim插件]插入模式Ctrl+e:光标到行尾
+		"key": "ctrl+e",
+		"command": "cursorEnd",
+		"when": "neovim.mode == insert && editorTextFocus",
+	},
+	{ // [Neovim插件]插入模式Ctrl+f:移动到下一个单词
+		"key": "ctrl+f",
+		"command": "vscode-neovim.send",
+		"args": "<C-o>w",
+		"when": "neovim.mode == insert && editorTextFocus",
 	},
 ]

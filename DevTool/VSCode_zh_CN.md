@@ -13,12 +13,14 @@ https://code.visualstudio.com/#alt-downloads
 * [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
 * [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
 * [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
+* [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
+* ~~[VSCodeVim(不推荐)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)~~
 * [Sync-Rsync(可选)](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
 * [Diff Folders(可选)](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
-* [VSCodeVim(可选)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
+
 * [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
 * [**Visible Whitespace**](https://marketplace.visualstudio.com/items?itemName=yoshi389111.visible-whitespace)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以渲染 TAB符，全角空格，回车，文件结束符（EOF） 的显示内容和颜色
-* ~~[Whitespace++](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用[Visible Whitespace]~~
+* ~~[Whitespace++(不推荐)](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用[Visible Whitespace]~~
 * [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的 Visible Whitespace 选择一个即可
 * [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
 * [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
@@ -234,6 +236,13 @@ C:\Users\user\AppData\Roaming\Code\User
 * [java.json](VSCode-conf/snippets/java.json)&nbsp;&nbsp;&nbsp;&nbsp;java代码片段配置文件（snippets）
 * [rust.json](VSCode-conf/snippets/rust.json)&nbsp;&nbsp;&nbsp;&nbsp;rust代码片段配置文件（snippets）
 
+## Vim的绑定
+因为 Vim 插件是模仿 Vim 模式，很多 Bug，不太推荐使用。 Neovim 的插件是用 NeoVim 作为后端，使用起来体验很不错，所以更推荐使用后者。  
+Neovim 插件使用的话只要:  
+1. 安装 Neovim  
+2. 安装 Neovim 插件  
+3. 在 settings.json 配置好 Neovim 的 exe 文件路径  
+即可开箱即用。详见笔者的设定文件。
 
 #### 文件夹设置（C工程）
 &nbsp;&nbsp;所需插件（1个）：C/C++  

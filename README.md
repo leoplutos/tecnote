@@ -55,6 +55,7 @@
 * [Gvim](DevTool/Gvim_zh_CN.md)
 * [Vim-ctags](DevTool/Vim-ctags_zh_CN.md)
 * [Vim调试：termdebug](DevTool/Vim_termdebug_zh_CN.md)
+* [Neo-Vim](DevTool/NeoVim_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
 * [WinSCP](DevTool/WinSCP_zh_CN.md)

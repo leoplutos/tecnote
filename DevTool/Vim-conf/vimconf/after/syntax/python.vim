@@ -1,7 +1,9 @@
 scriptencoding utf-8
 "after/syntax/python.vim
 
-let g:python_highlight_all =1
+"内容取自 https://github.com/vim-python/python-syntax
+
+let g:python_highlight_all = 1
 let b:python_version_2 = 0
 
 " Enable option if it's not defined
