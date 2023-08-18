@@ -259,10 +259,11 @@ set listchars=tab:¦\ ,precedes:<,extends:>
 "-----------------------------------------------"
 "               文件关联                        "
 "-----------------------------------------------"
-augroup filetypedetect
-  autocmd! BufRead,BufNewFile *.cc     setfiletype c
-  autocmd! BufRead,BufNewFile *.pc     setfiletype esqlc
-augroup END
+"在 vimconf/ftdetect 文件夹设置
+"augroup filetypedetect
+"  autocmd! BufRead,BufNewFile *.cc     setfiletype c
+"  autocmd! BufRead,BufNewFile *.pc     setfiletype esqlc
+"augroup END
 
 "-----------------------------------------------"
 "               状态栏设置                      "
@@ -348,7 +349,6 @@ augroup lchModeChangedGroup
   "autocmd InsertLeave,WinEnter * set cursorline
 augroup END
 
-hi StatuslineNC cterm=reverse gui=reverse 
 hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
 hi User2        term=none cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
 hi User3        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffff00 guibg=#606060
@@ -433,6 +433,7 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/terminal.vim'
 "               F5：编译                        "
 "               F6：运行                        "
 "               F7：生成tags                    "
+"               F8：初始化工程文件夹            "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/buildtask.vim'
 

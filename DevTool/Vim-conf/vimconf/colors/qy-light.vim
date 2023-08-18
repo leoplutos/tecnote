@@ -43,11 +43,11 @@ hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
 hi WarningMsg   term=bold cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
 hi WildMenu     term=standout ctermfg=236 ctermbg=157 guifg=#333333 guibg=#c1f5b0
-hi Folded       term=standout cterm=standout ctermfg=224 ctermbg=246 gui=standout guifg=#f0d9d0 guibg=#949494
-hi FoldColumn   term=standout ctermfg=247 ctermbg=254 guifg=#a0a1a7 guibg=#f0f0f0
+hi Folded       term=standout cterm=none ctermfg=37 ctermbg=231 gui=none guifg=#25b0bc guibg=#fcfcfc
+hi FoldColumn   term=standout ctermfg=21 ctermbg=230 guifg=#1212ff guibg=#fffbf0
 hi DiffAdd      term=bold ctermbg=187 guibg=#d7e4aa
 hi DiffChange   term=bold ctermbg=189 guibg=#c9cbfe
-hi DiffDelete   term=standout cterm=standout ctermfg=254 ctermbg=253 gui=standout guifg=#f1f1f1 guibg=#e4e4e4
+hi DiffDelete   term=standout cterm=none ctermfg=253 ctermbg=230 gui=none guifg=#dadada guibg=#fffbf0
 hi DiffText     term=reverse cterm=bold ctermfg=252 ctermbg=67 gui=bold guifg=#d0d0d0 guibg=#567fa8
 hi SignColumn   term=standout ctermfg=26 ctermbg=230 guifg=#005fd7 guibg=#fffbf0
 hi clear Conceal

@@ -126,13 +126,18 @@ nnoremap <leader>t16 :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-1
 " [普通模式]\@：复制命令模式回显消息
 nnoremap <leader>@ :let @* = execute('message')<CR>
 
-if has('terminal')
-  " [终端模式]Shift+Insert：粘贴
-  tnoremap <S-Insert> <C-W>"+
+if (exists(':tnoremap') > 0)
+  if (g:g_nvim_flg == 0)
+    " [vim][终端模式]Shift+Insert：粘贴
+    tnoremap <S-Insert> <C-W>"+
+    " [vim][终端模式]Ctrl+o：使用gvim打开文件（需要自己输入文件名）
+    tnoremap <C-o> gvim --remote-tab 
+  else
+    " [neovim][终端模式]Shift+Insert：粘贴
+    tnoremap <S-Insert> <C-\><C-n>"+pa
+  endif
   " [终端模式]Ctrl+n：进入普通模式
   tnoremap <C-n> <C-\><C-n>
-  " [终端模式]Ctrl+o：使用gvim打开文件（需要自己输入文件名）
-  tnoremap <C-o> gvim --remote-tab 
 endif
 
 " [普通模式]QuickFix快捷键

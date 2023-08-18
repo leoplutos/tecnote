@@ -43,11 +43,11 @@ hi Title        term=bold cterm=bold ctermfg=214 gui=bold guifg=#f39c12
 hi Visual       term=reverse ctermbg=16 guibg=#000000
 hi WarningMsg   term=bold cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
 hi WildMenu     term=standout ctermfg=188 ctermbg=24 guifg=#d4d4d4 guibg=#264f78
-hi Folded       term=standout cterm=standout ctermfg=238 ctermbg=235 gui=standout guifg=#3f3f46 guibg=#252526
-hi FoldColumn   term=standout ctermfg=240 ctermbg=234 guifg=#5a5a5a guibg=#1e1e1e
+hi Folded       term=standout cterm=none ctermfg=73 ctermbg=236 gui=none guifg=#56b6c2 guibg=#202d39
+hi FoldColumn   term=standout ctermfg=170 ctermbg=234 guifg=#c678dd guibg=#1e1e1e
 hi DiffAdd      term=bold ctermbg=58 guibg=#4b5920
 hi DiffChange   term=bold ctermbg=24 guibg=#2b5b77
-hi DiffDelete   term=standout cterm=standout ctermfg=233 ctermbg=237 gui=standout guifg=#1a1a1a guibg=#3f3f3f
+hi DiffDelete   term=standout cterm=none ctermfg=238 ctermbg=234 gui=none guifg=#444444 guibg=#1c1c1c
 hi DiffText     term=reverse cterm=bold ctermfg=235 ctermbg=110 gui=bold guifg=#282a2e guibg=#81a2be
 hi SignColumn   term=standout ctermfg=51 ctermbg=234 guifg=#00ffff guibg=#1d1f21
 hi clear Conceal
@@ -64,7 +64,7 @@ hi PmenuThumb   ctermbg=250 guibg=#bbbbbb
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=248 ctermbg=238 gui=none guifg=#a8a8a8 guibg=#444444
 hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=234 gui=none guifg=#ffffff guibg=#1e1e1e
-hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=235 gui=none guifg=#d4d4d4 guibg=#252526
+hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=239 gui=none guifg=#d4d4d4 guibg=#4e4e4e
 hi CursorColumn term=reverse ctermbg=233 guibg=#121212
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=226 gui=none guifg=#ffff00

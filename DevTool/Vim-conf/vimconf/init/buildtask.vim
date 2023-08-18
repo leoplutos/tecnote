@@ -25,26 +25,24 @@ endfunction
 "GCC运行设定
 function! s:runGccApplication()
   let l:filename = expand("%:r")
-  call TerminalOpen()
-  let bid = get(t:, '__terminal_bid__', -1)
-  call term_sendkeys(bid, "chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
+  "call TerminalOpen()
+  "let bid = get(t:, '__terminal_bid__', -1)
+  "call term_sendkeys(bid, "chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
+  call TerminalSend("chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
 endfunction
 
 "Python运行设定
 function! s:runPythonApplication()
   let l:filename = expand("%")
-  call TerminalOpen()
-  let bid = get(t:, '__terminal_bid__', -1)
-  call term_sendkeys(bid, "python ".l:filename."\r\n")
+  call TerminalSend("python ".l:filename."\r\n")
 endfunction
 
 "Java运行设定
 function! s:runJavaApplication()
   let l:filename = expand("%:r")
-  call TerminalOpen()
-  let bid = get(t:, '__terminal_bid__', -1)
-  call term_sendkeys(bid, "cd ../bin\r\n")
-  call term_sendkeys(bid, "chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
+  call TerminalSend("cd ../bin\r\n")
+  sleep 100m
+  call TerminalSend("chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
 endfunction
 
 "按照文件类型自定义编译类型
@@ -110,3 +108,19 @@ endfunction
 
 " [普通模式]F7：生成tags
 nnoremap <F7> :call <SID>runMakeTags()<CR>
+
+"初始化工程文件夹
+function! s:initProjectFolder()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("rm .root\r\n")
+  sleep 100m
+  call TerminalSend("rm .tags\r\n")
+  sleep 100m
+  call TerminalSend("touch .root\r\n")
+  sleep 100m
+  call <SID>runMakeTags()
+endfunction
+
+" [普通模式]F8：初始化工程文件夹
+nnoremap <F8> :call <SID>initProjectFolder()<CR>
