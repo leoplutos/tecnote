@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"configurations": [
+		{
+			"name": "Rust lldb", //配置名称
+			"preLaunchTask": "cargo_build",
+			"type": "lldb",
+			"request": "launch",
+			"program": "${workspaceFolder}\\target\\debug\\${workspaceFolderBasename}.exe",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"internalConsoleOptions": "neverOpen",
+		}
+	],
+}

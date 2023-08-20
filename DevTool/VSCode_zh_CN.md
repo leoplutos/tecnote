@@ -26,6 +26,8 @@ https://code.visualstudio.com/#alt-downloads
 * [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 * [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
 * [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件，是个实验插件，将来会合并进 ``Python``
+* [**rust-analyzer**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust开发必备
+* [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust Debug
 
 * **Java**  
 Java所需插件比较多。有2种安装方式：  
@@ -244,7 +246,7 @@ Neovim 插件使用的话只要:
 3. 在 settings.json 配置好 Neovim 的 exe 文件路径  
 即可开箱即用。详见笔者的设定文件。
 
-#### 文件夹设置（C工程）
+## 文件夹设置（C工程）
 &nbsp;&nbsp;所需插件（1个）：C/C++  
 &nbsp;&nbsp;[文件在这里](../C/CSampleProject/.vscode)
 * settings.json
@@ -253,7 +255,7 @@ Neovim 插件使用的话只要:
 * tasks.json
 
 
-#### 文件夹设置（Python工程）
+## 文件夹设置（Python工程）
 &nbsp;&nbsp;所需插件（2个）：Python，Pylance  
 &nbsp;&nbsp;可选插件（1个）：Black Formatter  
 &nbsp;&nbsp;[文件在这里](../Python/PythonSampleProject/.vscode)
@@ -288,8 +290,24 @@ update_sys_path(
 ```
 按下F1，输入 ```black```，选择 ``black formatter：重启服务器`` 重启后即可使用
 
+## 文件夹设置（Rust工程）
+&nbsp;&nbsp;所需插件（2个）：rust-analyzer, CodeLLDB  
+&nbsp;&nbsp;[文件在这里](../Rust/minigrep/.vscode)
+* settings.json
+* launch.json
+* tasks.json
 
-#### 文件夹设置（Java工程）
+#### 项目运行方式
+```
+cargo test
+cargo run -- frog poem.txt
+cargo run -- body poem.txt
+cargo run -- monomorphization poem.txt
+大小写不敏感
+set IGNORE_CASE=1 && cargo run -- to poem.txt 
+```
+
+## 文件夹设置（Java工程）
 &nbsp;&nbsp;所需插件（3个）：Language Support for Java，Debugger for Java，Project Manager for Java  
 &nbsp;&nbsp;[Batch工程](../Java/JavaBatchProject/.vscode)
 * settings.json
@@ -300,7 +318,7 @@ update_sys_path(
 * settings.json
 * tasks.json
 
-## VSCode导入Java工程时，不识别的问题
+#### VSCode导入Java工程时，不识别的问题
 有些项目的Java工程是Eclipse创建的，在导入的时候会有些问题。  
 可以把Java工程里面的Eclipse设定内容全部删除（比如 .project .settings）。  
 然后在VSCode中，按F1，输入以下命令清理Java语言服务器工作区
