@@ -22,6 +22,12 @@ function! s:setJavaCompiler()
   setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ %
 endfunction
 
+"Rust编译设定
+function! s:setRustCompiler()
+  compiler cargo
+  setlocal makeprg=cargo\ build
+endfunction
+
 "GCC运行设定
 function! s:runGccApplication()
   let l:filename = expand("%:r")
@@ -45,13 +51,40 @@ function! s:runJavaApplication()
   call TerminalSend("chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
 endfunction
 
+"Rust编译设定
+function! s:runRustCargoBuild()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("chcp 65001 && cargo build\r\n")
+endfunction
+"Rust运行设定
+function! s:runRustCargoRun()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("chcp 65001 && cargo run\r\n")
+endfunction
+
 "按照文件类型自定义编译类型
 augroup lchBuildGroup
   autocmd!
   autocmd filetype c call s:setGccCompiler()
   autocmd filetype python call s:setPythonCompiler()
   autocmd filetype java call s:setJavaCompiler()
+  autocmd filetype rust call s:setRustCompiler()
 augroup END
+
+"编译设定
+function! s:runBuild()
+  if (&ft=='c')
+    make
+  elseif (&ft=='python')
+    make
+  elseif (&ft=='java')
+    make
+  elseif (&ft=='rust')
+    call s:runRustCargoBuild()
+  endif
+endfunction
 
 "运行设定
 function! s:runTask()
@@ -61,11 +94,13 @@ function! s:runTask()
     call s:runPythonApplication()
   elseif (&ft=='java')
     call s:runJavaApplication()
+  elseif (&ft=='rust')
+    call s:runRustCargoRun()
   endif
 endfunction
 
 " [普通模式]F5：编译
-nnoremap <F5> :make<CR>
+nnoremap <F5> :call <SID>runBuild()<CR>
 " [普通模式]F6：运行(<SID>意思为允许使用映射中的脚本本地函数，这里用s:会报错)
 nnoremap <F6> :call <SID>runTask()<CR>
 

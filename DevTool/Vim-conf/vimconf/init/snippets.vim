@@ -8,7 +8,7 @@ augroup lchSnippetsGroup
   autocmd Filetype c inoremap <buffer> ^in #include <><LEFT>
   autocmd Filetype c inoremap <buffer> ^if if () {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype c inoremap <buffer> ^ie if () {<CR>} else {<CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT>
-  autocmd Filetype c inoremap <buffer> ^ii () {<CR>} else if () {<CR>} else {<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype c inoremap <buffer> ^ii if() {<CR>} else if () {<CR>} else {<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype c inoremap <buffer> ^sw switch () {<CR>case:<CR>break;<CR>default:<CR>break;<CR>}<CR><UP><UP><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype c inoremap <buffer> ^wh while () {<CR><CR>break;<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype c inoremap <buffer> ^fo int i;<CR>for (i = 0; i <= ; i++) {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
@@ -62,5 +62,24 @@ augroup lchSnippetsGroup
   autocmd Filetype python inoremap <buffer> ^logp logging.debug(f":{}")<CR><UP><C-o>$<CR><UP><C-o>$<LEFT><LEFT><LEFT><LEFT><LEFT>
   autocmd Filetype python inoremap <buffer> ^pr print(f"[DEBUG] [{__name__}] - :{}")<CR><UP><C-o>$<LEFT><LEFT><LEFT><LEFT><LEFT>
   autocmd Filetype python inoremap <buffer> ^pe print(f"[ERROR] [{__name__}] - :{}", file=sys.stderr)<CR><UP><C-o>$<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+
+  " Rust语言定义
+  autocmd Filetype rust inoremap <buffer> ^if if  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^ie if  {<CR>} else {<CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^ii if  {<CR>} else if  {<CR>} else {<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^mc match  {<CR>a => 1,<CR>b => {<CR>2<CR>},<CR>_ => 3,<CR>}<CR><UP><UP><UP><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^wh while  {<CR><CR>break;<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^lo loop {<CR><CR>break;<CR>}<CR><UP><UP><UP><TAB><TAB>
+  autocmd Filetype rust inoremap <buffer> ^fo for i in 0..5 {<CR><CR>}<CR><UP><UP><TAB><TAB>
+  autocmd Filetype rust inoremap <buffer> ^fe for item in &mut collection {<CR><CR>}<CR><UP><UP><TAB><TAB>
+  autocmd Filetype rust inoremap <buffer> ^st struct  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^en enum  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^tu let mytuple: (i32, f64, u8) = (500, 6.4, 1);<CR><UP><C-o>$
+  autocmd Filetype rust inoremap <buffer> ^ve let mut myvec = Vec::new();<CR>myvec.push(1);<CR><UP><C-o>$
+  autocmd Filetype rust inoremap <buffer> ^mp let mut mymap = HashMap::new();<CR>mymap.insert("key1", 1);<CR><UP><C-o>$
+  autocmd Filetype rust inoremap <buffer> ^fu fn function_name(args: i32) -> i32 {<CR><CR>return 0;<CR>}<CR><UP><UP><UP><TAB>
+  autocmd Filetype rust inoremap <buffer> ^ma fn main() {<CR>println!("Hello, world!");<CR>}<UP><C-o>$
+  autocmd Filetype rust inoremap <buffer> ^pr println!("[DEBUG] - value:{}", );<CR><UP><C-o>$<LEFT><LEFT>
+  autocmd Filetype rust inoremap <buffer> ^pe eprintln!("[DEBUG] - value:{}", );<CR><UP><C-o>$<LEFT><LEFT>
 
 augroup END

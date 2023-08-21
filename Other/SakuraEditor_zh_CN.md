@@ -104,7 +104,9 @@ Ctrl + /
 
 ## 添加其他语言支持
 設定 → 共通設定 → 強調キーワード → セット追加 → 输入 ``Python``  
-インポート → 选择kwd文件路径( 安装路径下的 ``/keyword/python_2.5.kwd`` )
+インポート → 选择kwd文件路径( 安装路径下的 ``/keyword/python_2.5.kwd`` )  
+笔者整理的一些 ``keyword`` 文件
+- [sakura_keyword](sakura_keyword)
 
 ## 定义Keyword文件（kwd）
 1. 将语言的keyword列出

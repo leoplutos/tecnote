@@ -37,12 +37,16 @@ else
 endif
 if(g:g_i_osflg==1 || g:g_i_osflg==2)
   "Windows系统下加入GCC,Java,Python,Ctags,clang-format,black等环境变量
+  let $CARGO_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
+  let $RUSTUP_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
   let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
   let $PATH .= ';D:\Tools\WorkTool\Java\jdk1.7.0_25\bin'
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32'
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
-  let $PATH .= ';C:\Users\Leo-G5000\.vscode\extensions\ms-vscode.cpptools-1.16.3-win32-x64\LLVM\bin'
+  let $PATH .= ';D:\Tools\WorkTool\C\LLVM'
+  let $PATH .= ';D:\Tools\WorkTool\C\LLVM\clangd_16.0.2\bin'
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32\Scripts'
+  let $PATH .= ';D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin'
   if (g:g_nvim_flg == 0)
     let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
   endif

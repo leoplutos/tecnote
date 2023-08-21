@@ -12,6 +12,8 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
     autocmd FileType java,javascript,json,objc,proto,cs setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
     autocmd FileType python setlocal formatprg=black\ -q\ 2>nul\ --stdin-filename\ %\ -
     autocmd FileType python setlocal equalprg=black\ -q\ 2>nul\ --stdin-filename\ %\ -
+    autocmd FileType rust setlocal formatprg=rustfmt.exe\ %
+    autocmd FileType rust setlocal equalprg=rustfmt.exe\ %
   augroup END
 
   " [普通模式]F9：格式化当前函数
