@@ -8,8 +8,8 @@ exedir = bin/Debug
 
 cc      = D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe
 ar      = D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/ar.exe
-coption = -Wall -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include
-loption = -Wall -fdiagnostics-color=always -g -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include
+coption = -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include
+loption = -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include
 
 rule compile
   command = $cc $coption -c $in -o $out

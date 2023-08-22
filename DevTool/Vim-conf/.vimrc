@@ -35,6 +35,8 @@ elseif has('win32unix')
 else
   let g:g_i_osflg=4
 endif
+"全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pyls)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
+let g:g_use_lsp = 1
 if(g:g_i_osflg==1 || g:g_i_osflg==2)
   "Windows系统下加入GCC,Java,Python,Ctags,clang-format,black等环境变量
   let $CARGO_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
@@ -530,6 +532,36 @@ let g:is_bash = 1
 let g:is_posix = 1
 
 "-----------------------------------------------"
+"               vim-lsp设置                     "
+"-----------------------------------------------"
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nnoremap <buffer> gd <plug>(lsp-definition)
+  nnoremap <buffer> gs <plug>(lsp-document-symbol-search)
+  nnoremap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nnoremap <buffer> gr <plug>(lsp-references)
+  nnoremap <buffer> gi <plug>(lsp-implementation)
+  nnoremap <buffer> gt <plug>(lsp-type-definition)
+  nnoremap <buffer> <leader>rn <plug>(lsp-rename)
+  nnoremap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nnoremap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nnoremap <buffer> K <plug>(lsp-hover)
+  "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+  "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+  let g:lsp_format_sync_timeout = 1000
+  "autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+  autocmd!
+  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+"-----------------------------------------------"
 "               插件设置                        "
 "-----------------------------------------------"
 if (v:version > 799)
@@ -537,20 +569,58 @@ if (v:version > 799)
   "加载自带的matchit
   packadd matchit
 
-  "vim-auto-popmenu（自动补全）
-  "https://github.com/skywind3000/vim-auto-popmenu
-  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
-  " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
-  let g:apc_enable_ft = {'*':1}
-  "let g:apc_enable_tab = 0
+  if (g:g_use_lsp == 0)
+    "不使用LSP
 
-  "vim-dict（自动补全词典）
-  "https://github.com/skywind3000/vim-dict
-  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/vim_dict.vim'
-  " 设定词典路径和匹配方式
-  let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
-  let g:vim_dict_dict = [s:vim_dict_path, '',]
-  let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
+      "vim-auto-popmenu（自动补全）
+      "https://github.com/skywind3000/vim-auto-popmenu
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
+      " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
+      let g:apc_enable_ft = {'*':1}
+      "let g:apc_enable_tab = 0
+
+      "vim-dict（自动补全词典）
+      "https://github.com/skywind3000/vim-dict
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/vim_dict.vim'
+      " 设定词典路径和匹配方式
+      let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
+      let g:vim_dict_dict = [s:vim_dict_path, '',]
+      let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
+
+  elseif (g:g_use_lsp == 1)
+    "使用LSP 1：C/C++(clangd)
+    if executable('clangd')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'clangd',
+            \ 'cmd': {server_info->['clangd', '-background-index']},
+            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+            \ })
+    endif
+
+    "加载vim-lsp
+    packadd vim-lsp
+    packadd asyncomplete.vim
+    packadd asyncomplete-lsp.vim
+
+    if has('gui_running')
+      let g:lsp_diagnostics_signs_enabled = 1
+      let g:lsp_diagnostics_signs_error = {"text": "❌"}
+      let g:lsp_diagnostics_signs_warning = {"text": "🆖"}
+      let g:lsp_diagnostics_signs_information = {"text": "❗"}
+      let g:lsp_diagnostics_signs_hint = {"text": "❓"}
+      let g:lsp_document_code_action_signs_enabled = 1
+      let g:lsp_document_code_action_signs_hint = {"text": "💡"}
+    endif
+    let g:lsp_log_verbose = 0
+    " let g:lsp_log_file = expand("/logs/vim-lsp.log")
+    let g:lsp_log_file = ''
+    let g:asyncomplete_auto_popup = 1
+    let g:asyncomplete_auto_completeopt = 1
+    let g:asyncomplete_popup_delay = 200
+    let g:asyncomplete_matchfuzzy = 1
+    "let g:asyncomplete_log_file = expand("/logs/asyncomplete.log")
+
+  endif
 
   "tagbar（用tags表示代码大纲）
   "https://github.com/preservim/tagbar
@@ -579,10 +649,6 @@ if (v:version > 799)
   "nerdtree（资源管理器）
   "https://github.com/preservim/nerdtree
   "packadd nerdtree
-
-  "ale,syntastic（代码检查Lint）
-  "https://github.com/dense-analysis/ale
-  "https://github.com/vim-syntastic/syntastic
 
   "vim-snipmate（语法片段snippets）
   "garbas/vim-snipmate是VimL写的，SirVer/ultisnips需要Python

@@ -7,7 +7,7 @@ set tags=./.tags;,.tags
 "GCC编译设定
 function! s:setGccCompiler()
   compiler gcc
-  setlocal makeprg=gcc\ -Wall\ -fdiagnostics-color=never\ -g\ -x\ c\ -fexec-charset=utf-8\ -DLOG_USE_COLOR\ -DDEBUG\ -static-libgcc\ -std=c11\ -I../include\ -o\ ../bin/Debug/%<.exe\ %
+  setlocal makeprg=gcc\ -Wall\ -Werror\ -Wfatal-errors\ -Wextra\ -Wpedantic\ -fdiagnostics-color=never\ -g\ -x\ c\ -fexec-charset=utf-8\ -DLOG_USE_COLOR\ -DDEBUG\ -static-libgcc\ -std=c11\ -I../include\ -o\ ../bin/Debug/%<.exe\ %
 endfunction
 
 "Python编译设定
@@ -82,7 +82,8 @@ function! s:runBuild()
   elseif (&ft=='java')
     make
   elseif (&ft=='rust')
-    call s:runRustCargoBuild()
+    "call s:runRustCargoBuild()
+    make
   endif
 endfunction
 

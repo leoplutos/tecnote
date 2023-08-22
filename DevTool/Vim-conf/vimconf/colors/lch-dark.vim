@@ -148,6 +148,13 @@ hi! link netrwClassify Directory
 hi netrwExe     term=standout ctermfg=150 guifg=#98c379
 
 "-----------------------------------------------"
+"               vim-lsp高亮                     "
+"-----------------------------------------------"
+hi lspReference term=reverse ctermbg=237 guibg=#3a3d41
+hi LspErrorHighlight term=standout cterm=undercurl gui=undercurl guisp=#ff0000
+hi LspWarningHighlight term=standout cterm=undercurl gui=undercurl guisp=#ffff00
+
+"-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
 "高亮行尾空格(包括tab)

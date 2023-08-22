@@ -19,6 +19,10 @@
 			"command": "gcc.exe", //命令是gcc
 			"args": [
 				"-Wall", //打开所有警告
+				"-Werror",
+				"-Wfatal-errors",
+				"-Wextra",
+				"-Wpedantic",
 				"-fdiagnostics-color=always", //总是使用GCC_COLORS出力消息
 				"-g", //打开-g开启debug
 				"-x", //因为有扩展名为pc的文件，所以加上[ -x c ]指定c语言

@@ -30,6 +30,7 @@ endwhile
 for
 endfor
 return
+au
 augroup
 autocmd
 END
@@ -60,3 +61,11 @@ finally
 endtry
 sleep
 command
+and
+compiler
+encoding
+endofline
+match
+or
+unl
+

@@ -3,7 +3,7 @@
 builddir = build
 
 cc = D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe
-coption = -Wall -g -fexec-charset=utf-8 -D UNICODE
+coption = -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -g -fexec-charset=utf-8 -D UNICODE
 loption = -mwindows
 
 rule compile
