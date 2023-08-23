@@ -4,6 +4,9 @@
 #include "log.h"
 
 int main(int argc, char *argv[]) {
+	(void)argc;
+	(void)argv;
+
 	log_set_level(0);
 	log_set_quiet(0);
 

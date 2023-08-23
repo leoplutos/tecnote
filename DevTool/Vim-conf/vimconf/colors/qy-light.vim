@@ -153,6 +153,8 @@ hi netrwExe     term=standout ctermfg=23 guifg=#326464
 hi lspReference term=reverse ctermbg=153 guibg=#add6ff
 hi LspErrorHighlight term=standout cterm=undercurl gui=undercurl guisp=#ff0000
 hi LspWarningHighlight term=standout cterm=undercurl gui=undercurl guisp=#bf8803
+hi LspErrorVirtualText term=reverse ctermfg=235 ctermbg=203 guifg=#262626 guibg=#ff4050
+hi LspWarningVirtualText term=reverse ctermfg=238 ctermbg=186 guifg=#444444 guibg=#e5e590
 
 "-----------------------------------------------"
 "               其他高亮                        "

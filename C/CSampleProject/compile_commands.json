@@ -1,0 +1,32 @@
+[
+  {
+    "directory": "D:\\WorkSpace\\C\\CSampleProject",
+    "command": "D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include -ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\x86_64-w64-mingw32\\include -c src/com/sub1.pc -o obj/Debug/sub1.o",
+    "file": "src/com/sub1.pc",
+    "output": "obj/Debug/sub1.o"
+  },
+  {
+    "directory": "D:\\WorkSpace\\C\\CSampleProject",
+    "command": "D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include -ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\x86_64-w64-mingw32\\include -c src/com/sub2.c -o obj/Debug/sub2.o",
+    "file": "src/com/sub2.c",
+    "output": "obj/Debug/sub2.o"
+  },
+  {
+    "directory": "D:\\WorkSpace\\C\\CSampleProject",
+    "command": "D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include -ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\x86_64-w64-mingw32\\include -c src/com/log.c -o obj/Debug/log.o",
+    "file": "src/com/log.c",
+    "output": "obj/Debug/log.o"
+  },
+  {
+    "directory": "D:\\WorkSpace\\C\\CSampleProject",
+    "command": "D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/ar.exe crs lib/com.a obj/Debug/sub1.o obj/Debug/sub2.o obj/Debug/log.o",
+    "file": "obj/Debug/sub1.o",
+    "output": "lib/com.a"
+  },
+  {
+    "directory": "D:\\WorkSpace\\C\\CSampleProject",
+    "command": "D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include -ID:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\x86_64-w64-mingw32\\include src/main.c lib/com.a -o bin/Debug/main.exe",
+    "file": "src/main.c",
+    "output": "bin/Debug/main.exe"
+  }
+]
