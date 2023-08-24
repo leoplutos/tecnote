@@ -18,6 +18,7 @@ inoremap <C-h> <left>
 inoremap <C-e> <end>
 inoremap <C-a> <C-o>^
 inoremap <C-f> <C-o>w
+inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>dd
 vnoremap <C-d> <del>
 " 撤销

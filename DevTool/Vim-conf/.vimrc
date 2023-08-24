@@ -23,6 +23,8 @@ endif
 "-----------------------------------------------"
 "               环境变量设置                    "
 "-----------------------------------------------"
+"全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
+let g:g_use_lsp = 1
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -35,14 +37,12 @@ elseif has('win32unix')
 else
   let g:g_i_osflg=4
 endif
-"全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
-let g:g_use_lsp = 1
-if(g:g_i_osflg==1 || g:g_i_osflg==2)
+if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "Windows系统下加入GCC,Java,Python,Ctags,clang-format,black等环境变量
   let $CARGO_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
   let $RUSTUP_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
   let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
-  let $PATH .= ';D:\Tools\WorkTool\Java\jdk1.7.0_25\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Java\jdk17.0.6\bin'
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32'
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM'
@@ -60,7 +60,7 @@ else
   let g:terminal_shell='/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
 endif
 "全局变量g:g_i_colorflg（1：256暗色系，2：256亮色系，3：16色系）
-let g:g_i_colorflg=1
+let g:g_i_colorflg = 1
 "全局变量g:g_s_rcfilepath（当前vimrc所在路径）
 let g_s_rcfilepath = expand("<sfile>:p:h")
 "判断工程跟路径关键字
@@ -185,7 +185,7 @@ set previewheight=100                    " 设置preview窗口高度
 "-----------------------------------------------"
 "在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。
 "t_SI：插入模式开始，t_EI：插入或者替换模式结束，t_SR：替换模式开始
-if(g:g_i_osflg==1 || g:g_i_osflg==2)
+if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   " Gvim 环境：在[.gvimrc]中设定
 elseif(g:g_i_osflg==3)
   " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
@@ -560,6 +560,7 @@ if (v:version > 799)
   else
     "使用LSP
 
+    "加载LSP设置
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
 
   endif

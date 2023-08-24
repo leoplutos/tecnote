@@ -37,7 +37,7 @@ ninja -t compdb > compile_commands.json
 ```
 #### cmake生成命令
 ```
-cmake -DCMAKE_EXPORT_COMPILE_COMMANDS .
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 ```
 #### make生成命令（需要安装bear）
 ```

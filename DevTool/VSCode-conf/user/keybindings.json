@@ -230,4 +230,10 @@
 		"args": "<C-o>w",
 		"when": "neovim.mode == insert && editorTextFocus",
 	},
+	{ // [Neovim插件]插入模式Ctrl+b:移动到上一个单词
+		"key": "ctrl+b",
+		"command": "vscode-neovim.send",
+		"args": "<C-o>b",
+		"when": "neovim.mode == insert && editorTextFocus",
+	},
 ]

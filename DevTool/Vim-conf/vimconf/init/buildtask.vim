@@ -19,7 +19,11 @@ endfunction
 "Java编译设定
 function! s:setJavaCompiler()
   compiler javac
-  setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ %
+  setlocal errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+  "如果编译时的编码不是utf8时需要设定makeencoding
+  "setlocal makeencoding=sjis
+  setlocal makeencoding=euc-cn
+  setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ -J-Duser.language=en\ %
 endfunction
 
 "Rust编译设定

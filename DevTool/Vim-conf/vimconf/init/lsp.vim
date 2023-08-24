@@ -5,10 +5,14 @@ scriptencoding utf-8
 "               vim-lsp设置                     "
 "-----------------------------------------------"
 
-if (v:version > 799)
+if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 
   function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
+    if (&ft=='python')
+      "因为jedi安装后出现问题，所以python时候默认的补全
+    else
+      setlocal omnifunc=lsp#complete
+    endif
     setlocal signcolumn=yes
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nnoremap <buffer> <Space>lo :LspDocumentDiagnostics<CR><C-w>w
@@ -23,14 +27,14 @@ if (v:version > 799)
     nnoremap <buffer> <Space>rn <plug>(lsp-rename)
     nnoremap <buffer> <Space>[g <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> <Space>]g <plug>(lsp-next-diagnostic)
-    nnoremap <buffer> <Space>h <plug>(lsp-hover)
+    nnoremap <buffer> <Space>h <plug>(lsp-hover-float)
     "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
     "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
     let g:lsp_format_sync_timeout = 1000
     "autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
     let g:lsp_log_verbose = 0
-    "let g:lsp_log_file = expand("~/vim-lsp.log")
+    "let g:lsp_log_file = expand('~/vim-lsp.log')
     let g:lsp_log_file = ''
   endfunction
 
@@ -46,7 +50,7 @@ if (v:version > 799)
     if executable('clangd')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'clangd',
-            \ 'cmd': {server_info->['clangd', '-background-index']},
+            \ 'cmd': {server_info->['clangd', '--background-index', '--clang-tidy', '--enable-config']},
             \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
             \ })
     endif
@@ -60,10 +64,10 @@ if (v:version > 799)
             \ 'cmd': {server_info->['pylsp']},
             \ 'whitelist': ['python'],
             \ 'workspace_config': {'pylsp': {'plugins': {
-            \    'pydocstyle': {'enabled': v:true},
-            \    'jedi_definition': {
-            \      'follow_imports': v:true,
-            \      'follow_builtin_imports': v:true
+            \     'pydocstyle': {'enabled': v:false},
+            \     'jedi_definition': {
+            \         'follow_imports': v:true,
+            \         'follow_builtin_imports': v:true
             \     },
             \ }}}
             \ })
@@ -72,7 +76,7 @@ if (v:version > 799)
   elseif (g:g_use_lsp == 3)
     "使用LSP 3：Java(eclipse.jdt.ls)
 
-    if executable('java') && filereadable('D:/Tools/Java/lsp/xxxx.jar')
+    if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'eclipse.jdt.ls',
             \ 'cmd': {server_info->[
@@ -85,13 +89,13 @@ if (v:version > 799)
             \     '-Dfile.encoding=UTF-8',
             \     '-Xmx1G',
             \     '-jar',
-            "\     expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'),
-            \      'xxxx.jar',
+           "\     expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'),
+            \     'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
             \     '-configuration',
-            "\     expand('~/lsp/eclipse.jdt.ls/config_win'),
-            \   'xxxxx/config_win',
+           "\     expand('~/lsp/eclipse.jdt.ls/config_win'),
+            \     'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win',
             \     '-data',
-            "\     getcwd()
+           "\     getcwd()
             \     g:g_s_projectrootpath.'/.lsp'
             \ ]},
             \ 'whitelist': ['java'],
@@ -105,8 +109,14 @@ if (v:version > 799)
   "https://github.com/prabirshrestha/asyncomplete-lsp.vim
   "加载vim-lsp
   packadd vim-lsp
-  packadd asyncomplete.vim
-  packadd asyncomplete-lsp.vim
+  if (&ft=='python')
+    "因为jedi安装后出现问题，所以python时候默认的补全
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
+    let g:apc_enable_ft = {'*':1}
+  else
+    packadd asyncomplete.vim
+    packadd asyncomplete-lsp.vim
+  endif
 
   "vim-lsp
   if has('gui_running')
@@ -124,6 +134,6 @@ if (v:version > 799)
   let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_popup_delay = 200
   let g:asyncomplete_matchfuzzy = 1
-  "let g:asyncomplete_log_file = expand("~/asyncomplete.log")
+  "let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 endif
