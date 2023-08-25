@@ -8,7 +8,7 @@ scriptencoding utf-8
 if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 
   function! s:on_lsp_buffer_enabled() abort
-    if (&ft=='python')
+    if (g:g_use_lsp == 2)
       "因为jedi安装后出现问题，所以python时候默认的补全
     else
       setlocal omnifunc=lsp#complete
@@ -50,8 +50,16 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     if executable('clangd')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'clangd',
-            \ 'cmd': {server_info->['clangd', '--background-index', '--clang-tidy', '--enable-config']},
-            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+            \ 'cmd': {server_info->[
+            \     'clangd',
+            \     '--background-index',
+            \     '--clang-tidy',
+            \     '--all-scopes-completion',
+            \     '--completion-style=detailed',
+            \     '--header-insertion=iwyu',
+            "\     '--enable-config',
+            \     ]},
+            \ 'whitelist': ['c', 'pc', 'cpp', 'objc', 'objcpp'],
             \ })
     endif
 
@@ -109,7 +117,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "https://github.com/prabirshrestha/asyncomplete-lsp.vim
   "加载vim-lsp
   packadd vim-lsp
-  if (&ft=='python')
+  if (g:g_use_lsp == 2)
     "因为jedi安装后出现问题，所以python时候默认的补全
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
     let g:apc_enable_ft = {'*':1}

@@ -40,4 +40,50 @@ else
   --加载vim的vimrc配置
   vim.cmd('source ~\\.vimrc')
 
+  -- 加载nvim-tree
+  vim.cmd('packadd nvim-tree.lua')
+  -- 禁用netrw
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+  -- 开启gui高亮
+  vim.opt.termguicolors = true
+
+  -- 自定义快捷键
+  local function my_on_attach(bufnr)
+    local api = require "nvim-tree.api"
+
+    local function opts(desc)
+      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    -- default mappings
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- custom mappings
+    vim.keymap.set('n', '<CR>', api.node.open.tab,        opts('Open: New Tab'))
+    vim.keymap.set('n', 't',    api.node.open.tab,        opts('Open: New Tab'))
+    vim.keymap.set('n', 'v',    api.node.open.edit,       opts('Open'))
+  end
+
+  -- 加载nvim-tree参数
+  require("nvim-tree").setup({
+    sort = {
+      sorter = "case_sensitive",
+    },
+    view = {
+      width = 30,
+    },
+    renderer = {
+      group_empty = true,
+    },
+    filters = {
+      dotfiles = true,
+    },
+    git = {
+      enable = false,
+    },
+    on_attach = my_on_attach,
+  })
+
+
 end

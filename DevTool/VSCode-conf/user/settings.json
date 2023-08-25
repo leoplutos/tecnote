@@ -96,7 +96,7 @@
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
 			//"editorGutter.background": "#222222", // 编辑器导航线的背景色.导航线包括边缘符号和行号
 			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
-			"editor.lineHighlightBackground": "#121212", //当前行背景颜色（备用：#121212）
+			"editor.lineHighlightBackground": "#292e42", //当前行背景颜色（备用：#121212）
 			"editor.selectionBackground": "#264f78", //选择内容的背景（备用：#303541）
 			"editor.selectionHighlightBackground": "#add6ff26", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。（备用：#4F435580）
 			"editor.inactiveSelectionBackground": "#3a3d4126", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
@@ -125,6 +125,18 @@
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			"editorError.foreground": "#ff0000",
+			"editorWarning.foreground": "#ffff00",
+			"editorInfo.foreground": "#0db9d7",
+			"editorHint.foreground": "#1abc9c",
+			"errorLens.errorForeground": "#db4b4b",
+			"errorLens.errorMessageBackground": "#362c3d",
+			"errorLens.warningForeground": "#e0af68",
+			"errorLens.warningMessageBackground": "#373640",
+			"errorLens.infoForeground": "#0db9d7",
+			"errorLens.infoMessageBackground": "#22374b",
+			"errorLens.hintForeground": "#1abc9c",
+			"errorLens.hintMessageBackground": "#233745",
 		},
 		"[Default Light+]": { //Default Light+主题的自定义(灰色背景)
 			"editor.background": "#f9f9f9", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
@@ -193,6 +205,18 @@
 			//"statusBarItem.activeBackground": "#262a2c",
 			//"statusBarItem.errorBackground": "#495155",
 			//"statusBarItem.warningBackground": "#495155"
+			"editorError.foreground": "#ff0000",
+			"editorWarning.foreground": "#bf8803",
+			"editorInfo.foreground": "#1a85ff",
+			"editorHint.foreground": "#118c74",
+			"errorLens.errorForegroundLight": "#ff0000",
+			"errorLens.errorMessageBackground": "#fce6dc",
+			"errorLens.warningForegroundLight": "#bf8808",
+			"errorLens.warningMessageBackground": "#fce6dc",
+			"errorLens.infoForegroundLight": "#1a85ff",
+			"errorLens.infoMessageBackground": "#fce6dc",
+			"errorLens.hintForegroundLight": "#118c74",
+			"errorLens.hintMessageBackground": "#fce6dc",
 		},
 		"[Visual Studio Light]": { //Visual Studio Light主题的自定义(SakuraEditor风格)
 			"editor.background": "#fffbf0", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
@@ -261,6 +285,18 @@
 			//"statusBarItem.activeBackground": "#262a2c",
 			//"statusBarItem.errorBackground": "#495155",
 			//"statusBarItem.warningBackground": "#495155"
+			"editorError.foreground": "#ff0000",
+			"editorWarning.foreground": "#bf8803",
+			"editorInfo.foreground": "#1a85ff",
+			"editorHint.foreground": "#118c74",
+			"errorLens.errorForegroundLight": "#ff0000",
+			"errorLens.errorMessageBackground": "#fce6dc",
+			"errorLens.warningForegroundLight": "#bf8808",
+			"errorLens.warningMessageBackground": "#fce6dc",
+			"errorLens.infoForegroundLight": "#1a85ff",
+			"errorLens.infoMessageBackground": "#fce6dc",
+			"errorLens.hintForegroundLight": "#118c74",
+			"errorLens.hintMessageBackground": "#fce6dc",
 		},
 		"terminal.ansiBlack": "#000000",
 		"terminal.ansiBlue": "#64afef", //备用：#2472c8
@@ -555,6 +591,10 @@
 	//-----------------------------------------------"
 	"vscode-neovim.neovimExecutablePaths.win32": "D:\\Tools\\WorkTool\\Text\\nvim-win64\\bin\\nvim.exe",
 	"vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\Leo-G5000\\AppData\\Local\\nvim\\init.lua",
+	//-----------------------------------------------"
+	//               ErrorLens插件设定               "
+	//-----------------------------------------------"
+	"errorLens.messageBackgroundMode": "message",
 	//-----------------------------------------------"
 	//              Highlight插件设定                "
 	//-----------------------------------------------"

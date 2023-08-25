@@ -25,7 +25,7 @@ hi SpecialKey   term=none cterm=none ctermfg=250 gui=none guifg=#C0C0C0
 hi NonText      term=none cterm=none ctermfg=250 gui=none guifg=#C0C0C0
 hi Directory    term=none cterm=none ctermfg=18 gui=none guifg=#000087
 "提示信息
-hi ErrorMsg     term=bold cterm=bold ctermfg=231 ctermbg=196 gui=bold guifg=#ffffff guibg=#ff0000
+hi ErrorMsg     term=bold cterm=bold ctermfg=196 ctermbg=230 gui=bold guifg=#ff0000 guibg=#fffbf0
 "Search     : 搜索高亮
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=226 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
@@ -41,7 +41,7 @@ hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=17 gui=reverse gu
 hi VertSplit    term=reverse ctermfg=49 ctermbg=49 guifg=#00ffaf guibg=#00ffaf
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
-hi WarningMsg   term=bold cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
+hi WarningMsg   term=bold cterm=bold ctermfg=94 ctermbg=230 gui=bold guifg=#8c6c3e guibg=#fffbf0
 hi WildMenu     term=standout ctermfg=236 ctermbg=157 guifg=#333333 guibg=#c1f5b0
 hi Folded       term=standout cterm=none ctermfg=37 ctermbg=231 gui=none guifg=#25b0bc guibg=#fcfcfc
 hi FoldColumn   term=standout ctermfg=21 ctermbg=230 guifg=#1212ff guibg=#fffbf0
@@ -77,6 +77,10 @@ hi! link StatusLineTerm StatusLine
 "终端的状态栏（未选中）
 hi clear StatusLineTermNC
 hi! link StatusLineTermNC StatusLineNC
+hi clear LineNrAbove
+hi! link LineNrAbove LineNr
+hi clear LineNrBelow
+hi! link LineNrBelow LineNr
 "Cursor：光标，CursorLine : 光标所在行，CursorColumn: 光标所在列，iCursor：插入模式光标
 hi Cursor       term=reverse ctermfg=255 ctermbg=16 guifg=#f9f9f9 guibg=#000000
 hi iCursor      term=reverse ctermfg=255 ctermbg=21 guifg=#f9f9f9 guibg=#0000ff
@@ -151,16 +155,24 @@ hi netrwExe     term=standout ctermfg=23 guifg=#326464
 "               vim-lsp高亮                     "
 "-----------------------------------------------"
 hi lspReference term=reverse ctermbg=153 guibg=#add6ff
+hi LspErrorText term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
+hi LspWarningText term=reverse ctermfg=16 ctermbg=226 guifg=#000000 guibg=#ffff00
+hi LspInformationText term=reverse ctermfg=16 ctermbg=33 guifg=#000000 guibg=#1a85ff
+hi LspHintText term=reverse ctermfg=16 ctermbg=29 guifg=#000000 guibg=#118c74
 hi LspErrorHighlight term=standout cterm=undercurl gui=undercurl guisp=#ff0000
 hi LspWarningHighlight term=standout cterm=undercurl gui=undercurl guisp=#bf8803
-hi LspErrorVirtualText term=reverse ctermfg=235 ctermbg=203 guifg=#262626 guibg=#ff4050
-hi LspWarningVirtualText term=reverse ctermfg=238 ctermbg=186 guifg=#444444 guibg=#e5e590
+hi LspInformationHighlight term=standout cterm=undercurl gui=undercurl guisp=#1a85ff
+hi LspHintHighlight term=standout cterm=undercurl gui=undercurl guisp=#118c74
+hi LspErrorVirtualText term=reverse ctermfg=196 ctermbg=224 guifg=#ff0000 guibg=#fce6dc
+hi LspWarningVirtualText term=reverse ctermfg=136 ctermbg=224     guifg=#bf8803 guibg=#fce6dc
+hi LspInformationVirtualText term=reverse ctermfg=33 ctermbg=224 guifg=#1a85ff guibg=#fce6dc
+hi LspHintVirtualText term=reverse ctermfg=29 ctermbg=224 guifg=#118c74 guibg=#fce6dc
 
 "-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
 "高亮行尾空格(包括tab)
-"hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
+"hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=217 guifg=#c0c0c0 guibg=#fbaeae
 "augroup lchSyntaxGroup
 "  autocmd!
 "  autocmd Syntax * match ExtraWhitespace /\s\+$/
@@ -169,3 +181,10 @@ hi LspWarningVirtualText term=reverse ctermfg=238 ctermbg=186 guifg=#444444 guib
 "tagbar插件高亮
 hi link TagbarKind ThinTitle
 hi link TagbarScope ThinTitle
+
+"-----------------------------------------------"
+"               NeoVim高亮                      "
+"-----------------------------------------------"
+if has('nvim')
+  hi! link Winseparator VertSplit
+endif

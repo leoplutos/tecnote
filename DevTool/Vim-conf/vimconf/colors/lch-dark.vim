@@ -18,14 +18,14 @@ set background=dark
 "-----------------------------------------------"
 "               文本高亮                        "
 "-----------------------------------------------"
-hi Normal       term=none cterm=none ctermfg=188 ctermbg=234 gui=none guifg=#D4D4D4 guibg=#1E1E1E
+hi Normal       term=none cterm=none ctermfg=188 ctermbg=234 gui=none guifg=#d4d4d4 guibg=#1e1e1e
 "SpecialKey    : TAB符
 hi SpecialKey   term=none cterm=none ctermfg=239 gui=none guifg=#505050
 "NonText       : 换行符
 hi NonText      term=none cterm=none ctermfg=239 gui=none guifg=#505050
 hi Directory    term=none cterm=none ctermfg=87 gui=none guifg=#5fffff
 "提示信息
-hi ErrorMsg     term=bold cterm=bold ctermfg=231 ctermbg=196 gui=bold guifg=#ffffff guibg=#ff0000
+hi ErrorMsg     term=bold cterm=bold ctermfg=196 ctermbg=234 gui=bold guifg=#ff0000 guibg=#1e1e1e
 "Search     : 搜索高亮
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=226 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
@@ -33,15 +33,15 @@ hi MoreMsg      term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 hi ModeMsg      term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 "LineNr     : 行号
 hi LineNr       term=none cterm=none ctermfg=66 gui=none guifg=#6c8086
-hi CursorLine   term=reverse ctermbg=233 guibg=#121212
+hi CursorLine   term=reverse ctermbg=236 guibg=#292e42
 hi Question     term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=231 ctermbg=16 gui=bold,reverse guifg=#ffffff guibg=#000000
 hi StatusLineNC term=reverse cterm=reverse ctermfg=249 ctermbg=235 gui=reverse guifg=#b2b2b2 guibg=#252526
 hi VertSplit    term=reverse ctermfg=236 ctermbg=236 guifg=#303030 guibg=#303030
 hi Title        term=bold cterm=bold ctermfg=214 gui=bold guifg=#f39c12
-hi Visual       term=reverse ctermbg=16 guibg=#000000
-hi WarningMsg   term=bold cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000000 guibg=#ffff00
+hi Visual       term=reverse ctermbg=60 guibg=#2e3c64
+hi WarningMsg   term=bold cterm=bold ctermfg=226 ctermbg=234 gui=bold guifg=#ffff00 guibg=#1e1e1e
 hi WildMenu     term=standout ctermfg=188 ctermbg=24 guifg=#d4d4d4 guibg=#264f78
 hi Folded       term=standout cterm=none ctermfg=73 ctermbg=236 gui=none guifg=#56b6c2 guibg=#202d39
 hi FoldColumn   term=standout ctermfg=170 ctermbg=234 guifg=#c678dd guibg=#1e1e1e
@@ -77,6 +77,10 @@ hi! link StatusLineTerm StatusLine
 "终端的状态栏（未选中）
 hi clear StatusLineTermNC
 hi! link StatusLineTermNC StatusLineNC
+hi clear LineNrAbove
+hi! link LineNrAbove LineNr
+hi clear LineNrBelow
+hi! link LineNrBelow LineNr
 "Cursor：光标，CursorLine : 光标所在行，CursorColumn: 光标所在列，iCursor：插入模式光标
 hi Cursor       term=reverse ctermfg=234 ctermbg=188 guifg=#1e1e1e guibg=#d4d4d4
 hi iCursor      term=reverse ctermfg=234 ctermbg=226 guifg=#1e1e1e guibg=#ffff00
@@ -151,16 +155,24 @@ hi netrwExe     term=standout ctermfg=150 guifg=#98c379
 "               vim-lsp高亮                     "
 "-----------------------------------------------"
 hi lspReference term=reverse ctermbg=237 guibg=#3a3d41
+hi LspErrorText term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
+hi LspWarningText term=reverse ctermfg=16 ctermbg=226 guifg=#000000 guibg=#ffff00
+hi LspInformationText term=reverse ctermfg=16 ctermbg=38 guifg=#000000 guibg=#0db9d7
+hi LspHintText term=reverse ctermfg=16 ctermbg=36 guifg=#000000 guibg=#1abc9c
 hi LspErrorHighlight term=standout cterm=undercurl gui=undercurl guisp=#ff0000
 hi LspWarningHighlight term=standout cterm=undercurl gui=undercurl guisp=#ffff00
-hi LspErrorVirtualText term=reverse ctermfg=203 ctermbg=236 guifg=#ff4050 guibg=#2e2e2e
-hi LspWarningVirtualText term=reverse ctermfg=179 ctermbg=236 guifg=#e5c07b guibg=#2e2e2e
+hi LspInformationHighlight term=standout cterm=undercurl gui=undercurl guisp=#0db9d7
+hi LspHintHighlight term=standout cterm=undercurl gui=undercurl guisp=#1abc9c
+hi LspErrorVirtualText term=reverse ctermfg=166 ctermbg=236 guifg=#db4b4b guibg=#362c3d
+hi LspWarningVirtualText term=reverse ctermfg=179 ctermbg=237     guifg=#e0af68 guibg=#373640
+hi LspInformationVirtualText term=reverse ctermfg=38 ctermbg=237 guifg=#0db9d7 guibg=#22374b
+hi LspHintVirtualText term=reverse ctermfg=36 ctermbg=236 guifg=#1abc9c guibg=#233745
 
 "-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
 "高亮行尾空格(包括tab)
-hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=203 guifg=#C0C0C0 guibg=#FF6464
+hi ExtraWhitespace  term=standout ctermfg=239 ctermbg=52 guifg=#505050 guibg=#611414
 augroup lchSyntaxGroup
   autocmd!
   autocmd Syntax * match ExtraWhitespace /\s\+$/
@@ -169,3 +181,10 @@ augroup END
 "tagbar插件高亮
 hi link TagbarKind ThinTitle
 hi link TagbarScope ThinTitle
+
+"-----------------------------------------------"
+"               NeoVim高亮                      "
+"-----------------------------------------------"
+if has('nvim')
+  hi! link Winseparator VertSplit
+endif
