@@ -8,11 +8,11 @@ scriptencoding utf-8
 if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 
   function! s:on_lsp_buffer_enabled() abort
-    if (g:g_use_lsp == 2)
+    "if (g:g_use_lsp == 2)
       "因为jedi安装后出现问题，所以python时候默认的补全
-    else
+    "else
       setlocal omnifunc=lsp#complete
-    endif
+    "endif
     setlocal signcolumn=yes
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nnoremap <buffer> <Space>lo :LspDocumentDiagnostics<CR><C-w>w
@@ -67,17 +67,23 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     "使用LSP 2：Python(pylsp)
 
     if executable('pylsp')
+        "设定参数参照这里
+        "https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
         au User lsp_setup call lsp#register_server({
             \ 'name': 'pylsp',
             \ 'cmd': {server_info->['pylsp']},
             \ 'whitelist': ['python'],
-            \ 'workspace_config': {'pylsp': {'plugins': {
-            \     'pydocstyle': {'enabled': v:false},
-            \     'jedi_definition': {
-            \         'follow_imports': v:true,
-            \         'follow_builtin_imports': v:true
-            \     },
-            \ }}}
+            \ 'workspace_config': {'pylsp': {
+            \     'configurationSources': ['flake8'],
+            \     'plugins': {
+            \         'flake8': {'enabled': v:true},
+            \         'pylint': {'enabled': v:true},
+            \         'jedi_definition': {
+            \             'follow_imports': v:true,
+            \             'follow_builtin_imports': v:true
+            \         },
+            \     }
+            \ }}
             \ })
     endif
 
@@ -110,6 +116,17 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
+  elseif (g:g_use_lsp == 4)
+    "使用LSP 4：Rust(rust-analyzer)
+
+    if executable('rustup')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'rust-analyzer',
+            \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rust-analyzer']},
+            \ 'allowlist': ['rust'],
+            \ })
+    endif
+
   endif
 
   "https://github.com/prabirshrestha/vim-lsp
@@ -117,14 +134,14 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "https://github.com/prabirshrestha/asyncomplete-lsp.vim
   "加载vim-lsp
   packadd vim-lsp
-  if (g:g_use_lsp == 2)
-    "因为jedi安装后出现问题，所以python时候默认的补全
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
-    let g:apc_enable_ft = {'*':1}
-  else
+  "if (g:g_use_lsp == 2)
+  "  "因为jedi安装后出现问题，所以python时候默认的补全
+  "  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
+  "  let g:apc_enable_ft = {'*':1}
+  "else
     packadd asyncomplete.vim
     packadd asyncomplete-lsp.vim
-  endif
+  "endif
 
   "vim-lsp
   if has('gui_running')

@@ -10,6 +10,9 @@
 	"python.analysis.inlayHints.pytestParameters": true, //pytest 函数参数的嵌入提示
 	"python.analysis.autoFormatStrings": true,
 	"python.analysis.autoImportCompletions": true,
+	"python.linting.enabled": true, //开启代码检查
+	//"python.linting.pylintEnabled": true, //开启pylint
+	//"python.linting.flake8Enabled": true,
 	"python.formatting.provider": "black",
 	"python.formatting.blackPath": "D:\\Tools\\WorkTool\\Python\\Python38-32\\Scripts\\black.exe",
 	"python.formatting.blackArgs": [

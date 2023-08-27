@@ -24,7 +24,7 @@ endif
 "               环境变量设置                    "
 "-----------------------------------------------"
 "全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
-let g:g_use_lsp = 1
+let g:g_use_lsp = 4
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -42,12 +42,12 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $CARGO_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
   let $RUSTUP_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
   let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
-  let $PATH .= ';D:\Tools\WorkTool\Java\jdk17.0.6\bin'
-  let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32'
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM\clangd_16.0.2\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32'
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32\Scripts'
+  let $PATH .= ';D:\Tools\WorkTool\Java\jdk17.0.6\bin'
   let $PATH .= ';D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin'
   if (g:g_nvim_flg == 0)
     let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'

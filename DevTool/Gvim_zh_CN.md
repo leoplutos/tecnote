@@ -104,6 +104,30 @@ let &pythonthreedll = 'D:\Tool\python-3.8.10-embed-win32\python38.dll'
 :!python %
 ```
 
+## 在Gvim中使用Lua
+有些 ``vim`` 插件，如果有 ``lua`` 支持会得到很大的性能提升，可以按如下方法配置
+
+#### 检查 lua 的版本
+在Gvim中输入
+```
+:lua print(1)
+```
+一般会报如下错误
+```
+E370: Could not load library lua53.dll: Lua library cannot be loaded.
+```
+得知需要 ``lua53.dll`` 动态库  
+去 http://luabinaries.sourceforge.net/ 找到对应版本（一般5.3.x）  
+笔者选择的为  
+``LuaBinaries 5.3.6 - Release 1``  
+↓  
+``lua-5.3.6_Win32_bin.zip``  
+下载解压后，把 ``lua53.dll`` 拷贝到 ``gvim.exe`` 同级目录中再次运行  ``gvim.exe``，然后再次运行命令
+```
+:lua print(1)
+```
+正确运行命令即可
+
 #### 将GUI配色转化为终端配色的VIM插件–gui2term.py
 这款插件实现了将gvim的配色转化成终端配色的解决方案  
 地址：  

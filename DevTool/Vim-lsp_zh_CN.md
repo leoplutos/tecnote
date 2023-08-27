@@ -83,6 +83,19 @@ pip install -U setuptools
 ignore = E401,E402,E501
 ```
 
+## Rust语言LSP配置
+
+1. 安装 ``rust-analyzer``  
+使用 ``rustup`` 安装
+```
+rustup component add rust-analyzer
+```
+或者参照官方帮助文档安装：[帮助文档](https://rust-analyzer.github.io/manual.html#installation)  
+2. 在 ``Vim`` 中安装 ``vim-lsp``, ``asyncomplete``, ``asyncomplete-lsp`` 这3个插件
+3. 参照笔者的配置
+- [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
+
+
 ## 其他
 
 #### 颜文字的使用
