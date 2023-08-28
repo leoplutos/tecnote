@@ -211,7 +211,7 @@
 			"editorHint.foreground": "#118c74",
 			"errorLens.errorForegroundLight": "#ff0000",
 			"errorLens.errorMessageBackground": "#fce6dc",
-			"errorLens.warningForegroundLight": "#bf8808",
+			"errorLens.warningForegroundLight": "#bf8803",
 			"errorLens.warningMessageBackground": "#fce6dc",
 			"errorLens.infoForegroundLight": "#1a85ff",
 			"errorLens.infoMessageBackground": "#fce6dc",

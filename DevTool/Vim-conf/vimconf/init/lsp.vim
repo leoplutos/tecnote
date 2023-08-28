@@ -27,7 +27,11 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     nnoremap <buffer> <Space>rn <plug>(lsp-rename)
     nnoremap <buffer> <Space>[g <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> <Space>]g <plug>(lsp-next-diagnostic)
-    nnoremap <buffer> <Space>h <plug>(lsp-hover-float)
+    nnoremap <buffer> <Space>h  <plug>(lsp-hover-float)
+    nnoremap <buffer> <C-UP>    <plug>(lsp-previous-reference)
+    nnoremap <buffer> <C-Down>  <plug>(lsp-next-reference)
+    nnoremap <buffer> <Space>nd <plug>(lsp-next-diagnostic)
+    nnoremap <buffer> <Space>pd <plug>(lsp-previous-diagnostic)
     "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
     "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
@@ -36,6 +40,45 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     let g:lsp_log_verbose = 0
     "let g:lsp_log_file = expand('~/vim-lsp.log')
     let g:lsp_log_file = ''
+
+    hi clear LspSemanticNamespace
+    hi link LspSemanticNamespace Property
+    hi clear LspSemanticType
+    hi link LspSemanticType Structure
+    hi clear LspSemanticClass
+    hi link LspSemanticClass Structure
+    hi clear LspSemanticEnum
+    hi link LspSemanticEnum Structure
+    hi clear LspSemanticInterface
+    hi link LspSemanticInterface Interface
+    "LspSemanticStruct
+    "LspSemanticTypeParameter
+    hi clear LspSemanticParameter
+    hi link LspSemanticParameter Parameter
+    hi clear LspSemanticVariable
+    hi link LspSemanticVariable Normal
+    hi clear LspSemanticProperty
+    hi link LspSemanticProperty Property
+    hi clear LspSemanticEnumMember
+    hi link LspSemanticEnumMember Property
+    "LspSemanticEvents
+    hi clear LspSemanticFunction
+    hi link LspSemanticFunction Function
+    hi clear LspSemanticMethod
+    hi link LspSemanticMethod Function
+    hi clear LspSemanticKeyword
+    hi link LspSemanticKeyword Statement
+    hi clear LspSemanticModifier
+    hi link LspSemanticModifier Statement
+    "LspSemanticComment
+    "LspSemanticString
+    "LspSemanticNumber
+    "LspSemanticRegexp
+    hi clear LspSemanticOperator
+    hi link LspSemanticOperator Special
+    hi clear LspSemanticMacro
+    hi link LspSemanticMacro Function
+
   endfunction
 
   augroup lsp_install
@@ -57,7 +100,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '--all-scopes-completion',
             \     '--completion-style=detailed',
             \     '--header-insertion=iwyu',
-            "\     '--enable-config',
+            \     '--function-arg-placeholders',
+            \     '--enable-config'
             \     ]},
             \ 'whitelist': ['c', 'pc', 'cpp', 'objc', 'objcpp'],
             \ })
@@ -76,7 +120,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ 'workspace_config': {'pylsp': {
             \     'configurationSources': ['flake8'],
             \     'plugins': {
-            \         'flake8': {'enabled': v:true},
+            \         'flake8': {'enabled': v:false},
             \         'pylint': {'enabled': v:true},
             \         'jedi_definition': {
             \             'follow_imports': v:true,
@@ -99,9 +143,13 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '-Dosgi.bundles.defaultStartLevel=4',
             \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
             \     '-Dlog.level=ALL',
-            \     '-noverify',
+           "\     '-noverify',
             \     '-Dfile.encoding=UTF-8',
             \     '-Xmx1G',
+            \     '--add-opens',
+            \     'java.base/java.util=ALL-UNNAMED',
+            \     '--add-opens',
+            \     'java.base/java.lang=ALL-UNNAMED',
             \     '-jar',
            "\     expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'),
             \     'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
@@ -110,9 +158,11 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win',
             \     '-data',
            "\     getcwd()
-            \     g:g_s_projectrootpath.'/.lsp'
+           "\     g:g_s_projectrootpath.'/.lsp'
+            \     'D:/WorkSpace/Java',
             \ ]},
             \ 'whitelist': ['java'],
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ })
     endif
 
@@ -144,6 +194,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "endif
 
   "vim-lsp
+  "let g:lsp_diagnostics_float_cursor = 1
+  let g:lsp_inlay_hints_enabled = 1
+  let g:lsp_semantic_enabled = 1
   if has('gui_running')
     let g:lsp_diagnostics_signs_enabled = 1
     let g:lsp_diagnostics_signs_error = {"text": "❌"}
@@ -152,6 +205,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     let g:lsp_diagnostics_signs_hint = {"text": "❓"}
     let g:lsp_document_code_action_signs_enabled = 1
     let g:lsp_document_code_action_signs_hint = {"text": "💡"}
+    let g:lsp_diagnostics_virtual_text_prefix = " > "
   endif
 
   "asyncomplete.vim

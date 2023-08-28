@@ -125,6 +125,9 @@ hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#00af00
 hi clear SpecialComment
 hi! link SpecialComment Comment
 hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
+hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#c678dd
+hi Property     term=none cterm=none ctermfg=43 gui=none guifg=#4ec9b0
+hi Parameter    term=none cterm=none ctermfg=242 gui=none guifg=#666666
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -186,5 +189,6 @@ hi link TagbarScope ThinTitle
 "               NeoVim高亮                      "
 "-----------------------------------------------"
 if has('nvim')
+  hi clear Winseparator
   hi! link Winseparator VertSplit
 endif

@@ -24,7 +24,7 @@ endif
 "               环境变量设置                    "
 "-----------------------------------------------"
 "全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
-let g:g_use_lsp = 4
+let g:g_use_lsp = 0
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -577,9 +577,9 @@ if (v:version > 799)
 
   "tagbar（用tags表示代码大纲）
   "https://github.com/preservim/tagbar
-  packadd tagbar
+  "packadd tagbar
   "按下F1表示
-  noremap <F1> :TagbarToggle<CR>
+  "noremap <F1> :TagbarToggle<CR>
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
@@ -590,6 +590,13 @@ if (v:version > 799)
   let g:indentLine_char_list = ['¦']
   "let g:indentLine_enabled = 1
   let g:indentLine_enabled = 0
+
+  "ctrlp-funky（查看outline，因为依赖少平替tagbar）
+  "https://github.com/tacahiroy/ctrlp-funky
+  packadd ctrlp-funky
+  let g:ctrlp_funky_matchtype = 'path'
+  let g:ctrlp_funky_syntax_highlight = 1
+  noremap <F1> :CtrlPFunky<CR>
 
   "ctrlp（模糊查找）
   "https://github.com/ctrlpvim/ctrlp.vim

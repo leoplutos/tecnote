@@ -12,8 +12,8 @@ endfunction
 
 "Python编译设定
 function! s:setPythonCompiler()
-  compiler pylint
-  setlocal makeprg=python\ %
+  "compiler pylint
+  setlocal makeprg=pylint\ %
 endfunction
 
 "Java编译设定
@@ -28,7 +28,17 @@ endfunction
 
 "Rust编译设定
 function! s:setRustCompiler()
-  compiler cargo
+  "compiler cargo
+  setlocal errorformat+=
+              \%-G%\\s%#Downloading%.%#,
+              \%-G%\\s%#Checking%.%#,
+              \%-G%\\s%#Compiling%.%#,
+              \%-G%\\s%#Finished%.%#,
+              \%-G%\\s%#error:\ Could\ not\ compile\ %.%#,
+              \%-G%\\s%#To\ learn\ more\\,%.%#,
+              \%-G%\\s%#For\ more\ information\ about\ this\ error\\,%.%#,
+              \%-Gnote:\ Run\ with\ \`RUST_BACKTRACE=%.%#,
+              \%.%#panicked\ at\ \\'%m\\'\\,\ %f:%l:%c
   setlocal makeprg=cargo\ build
 endfunction
 

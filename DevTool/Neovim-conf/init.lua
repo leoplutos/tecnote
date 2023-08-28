@@ -75,6 +75,22 @@ else
     },
     renderer = {
       group_empty = true,
+      icons = {
+        show = {
+          file = false,
+          folder = false,
+          folder_arrow = true,
+          git = false,
+          modified = false,
+        },
+        glyphs = {
+          bookmark = "=",
+          folder = {
+            arrow_closed = "⏵",
+            arrow_open = "⏷",
+          },
+        },
+      },
     },
     filters = {
       dotfiles = true,
