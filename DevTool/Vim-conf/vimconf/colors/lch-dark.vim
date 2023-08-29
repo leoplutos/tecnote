@@ -126,8 +126,12 @@ hi clear SpecialComment
 hi! link SpecialComment Comment
 hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
 hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#c678dd
+hi EnumMember   term=none cterm=none ctermfg=39 gui=none guifg=#4fc1ff
 hi Property     term=none cterm=none ctermfg=43 gui=none guifg=#4ec9b0
-hi Parameter    term=none cterm=none ctermfg=242 gui=none guifg=#666666
+hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#404080
+hi Struct       term=none cterm=none ctermfg=202 gui=none guifg=#ee5d43
+hi Regexp       term=none cterm=none ctermfg=60 gui=none guifg=#646695
+hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#569cd6
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -166,7 +170,7 @@ hi LspErrorHighlight term=standout cterm=undercurl gui=undercurl guisp=#ff0000
 hi LspWarningHighlight term=standout cterm=undercurl gui=undercurl guisp=#ffff00
 hi LspInformationHighlight term=standout cterm=undercurl gui=undercurl guisp=#0db9d7
 hi LspHintHighlight term=standout cterm=undercurl gui=undercurl guisp=#1abc9c
-hi LspErrorVirtualText term=reverse ctermfg=166 ctermbg=236 guifg=#db4b4b guibg=#362c3d
+hi LspErrorVirtualText term=reverse ctermfg=167 ctermbg=236 guifg=#db4b4b guibg=#362c3d
 hi LspWarningVirtualText term=reverse ctermfg=179 ctermbg=237     guifg=#e0af68 guibg=#373640
 hi LspInformationVirtualText term=reverse ctermfg=38 ctermbg=237 guifg=#0db9d7 guibg=#22374b
 hi LspHintVirtualText term=reverse ctermfg=36 ctermbg=236 guifg=#1abc9c guibg=#233745
@@ -189,6 +193,6 @@ hi link TagbarScope ThinTitle
 "               NeoVim高亮                      "
 "-----------------------------------------------"
 if has('nvim')
-  hi clear Winseparator
-  hi! link Winseparator VertSplit
+  hi clear WinSeparator
+  hi! link WinSeparator VertSplit
 endif

@@ -41,18 +41,22 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     "let g:lsp_log_file = expand('~/vim-lsp.log')
     let g:lsp_log_file = ''
 
+    hi clear Structure
+    hi link Structure Statement
     hi clear LspSemanticNamespace
     hi link LspSemanticNamespace Property
     hi clear LspSemanticType
-    hi link LspSemanticType Structure
+    hi link LspSemanticType Struct
     hi clear LspSemanticClass
-    hi link LspSemanticClass Structure
+    hi link LspSemanticClass Struct
     hi clear LspSemanticEnum
-    hi link LspSemanticEnum Structure
+    hi link LspSemanticEnum Struct
     hi clear LspSemanticInterface
     hi link LspSemanticInterface Interface
-    "LspSemanticStruct
-    "LspSemanticTypeParameter
+    hi clear LspSemanticStruct
+    hi link LspSemanticStruct Struct
+    hi clear LspSemanticTypeParameter
+    hi link LspSemanticTypeParameter Parameter
     hi clear LspSemanticParameter
     hi link LspSemanticParameter Parameter
     hi clear LspSemanticVariable
@@ -60,8 +64,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     hi clear LspSemanticProperty
     hi link LspSemanticProperty Property
     hi clear LspSemanticEnumMember
-    hi link LspSemanticEnumMember Property
-    "LspSemanticEvents
+    hi link LspSemanticEnumMember EnumMember
+    hi clear LspSemanticEvents
+    hi link LspSemanticEvents Struct
     hi clear LspSemanticFunction
     hi link LspSemanticFunction Function
     hi clear LspSemanticMethod
@@ -70,14 +75,22 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     hi link LspSemanticKeyword Statement
     hi clear LspSemanticModifier
     hi link LspSemanticModifier Statement
-    "LspSemanticComment
-    "LspSemanticString
-    "LspSemanticNumber
-    "LspSemanticRegexp
+    hi clear LspSemanticComment
+    hi link LspSemanticComment Comment
+    hi clear LspSemanticString
+    hi link LspSemanticString String
+    hi clear LspSemanticNumber
+    hi link LspSemanticNumber Number
+    hi clear LspSemanticRegexp
+    hi link LspSemanticRegexp Regexp
     hi clear LspSemanticOperator
     hi link LspSemanticOperator Special
     hi clear LspSemanticMacro
-    hi link LspSemanticMacro Function
+    hi link LspSemanticMacro Macro
+    hi clear LspSemanticGlobalScopeMacro
+    hi link LspSemanticGlobalScopeMacro Macro
+    hi clear LspSemanticDeclarationGlobalScopeMacro
+    hi link LspSemanticDeclarationGlobalScopeMacro Macro
 
   endfunction
 
@@ -101,7 +114,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '--completion-style=detailed',
             \     '--header-insertion=iwyu',
             \     '--function-arg-placeholders',
-            \     '--enable-config'
+            \     '--enable-config',
             \     ]},
             \ 'whitelist': ['c', 'pc', 'cpp', 'objc', 'objcpp'],
             \ })
@@ -146,6 +159,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
            "\     '-noverify',
             \     '-Dfile.encoding=UTF-8',
             \     '-Xmx1G',
+            \     '--add-modules=ALL-SYSTEM',
             \     '--add-opens',
             \     'java.base/java.util=ALL-UNNAMED',
             \     '--add-opens',
@@ -161,8 +175,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
            "\     g:g_s_projectrootpath.'/.lsp'
             \     'D:/WorkSpace/Java',
             \ ]},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.project'))},
             \ 'whitelist': ['java'],
-            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ })
     endif
 

@@ -47,6 +47,7 @@
 	"editor.multiCursorModifier": "alt", //多光标选择模式（Ctrl 或者 Alt）
 	"editor.cursorSurroundingLines": 4, // 控制光标周围可见行
 	"editor.cursorSurroundingLinesStyle": "all", // 始终强制执行
+	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
@@ -291,7 +292,7 @@
 			"editorHint.foreground": "#118c74",
 			"errorLens.errorForegroundLight": "#ff0000",
 			"errorLens.errorMessageBackground": "#fce6dc",
-			"errorLens.warningForegroundLight": "#bf8808",
+			"errorLens.warningForegroundLight": "#bf8803",
 			"errorLens.warningMessageBackground": "#fce6dc",
 			"errorLens.infoForegroundLight": "#1a85ff",
 			"errorLens.infoMessageBackground": "#fce6dc",
@@ -355,6 +356,14 @@
 						"fontStyle": ""
 					}
 				},
+				{
+					"scope": [ //Java的变量名
+						"storage.type.primitive.java",
+					],
+					"settings": {
+						"foreground": "#64afef",
+					}
+				},
 			],
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
@@ -406,7 +415,76 @@
 						"fontStyle": ""
 					}
 				},
+				{
+					"scope": [ //Java的变量名
+						"storage.type.primitive.java",
+					],
+					"settings": {
+						"foreground": "#0000ff",
+					}
+				},
 			],
+		},
+	},
+	"editor.semanticTokenColorCustomizations": {
+		//基于语义的颜色自定义
+		"[Default Dark+]": { //Default Dark+主题的自定义
+			"enabled": true,
+			"rules": {
+				"variable": {
+					"foreground": "#d4d4d4"
+				},
+				"parameter": {
+					"foreground": "#408080"
+				},
+				"typeParameter": {
+					"foreground": "#408080"
+				},
+				"property": {
+					"foreground": "#4ec9b0"
+				},
+				"cliProperty": {
+					"foreground": "#4ec9b0"
+				},
+				"interface": {
+					"foreground": "#c678dd"
+				},
+				"class": {
+					"foreground": "#ee5d43"
+				},
+				"macro": {
+					"foreground": "#569cd6"
+				},
+			}
+		},
+		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
+			"enabled": true,
+			"rules": {
+				"variable": {
+					"foreground": "#000000"
+				},
+				"parameter": {
+					"foreground": "#408080"
+				},
+				"typeParameter": {
+					"foreground": "#408080"
+				},
+				"property": {
+					"foreground": "#be00be"
+				},
+				"cliProperty": {
+					"foreground": "#be00be"
+				},
+				"interface": {
+					"foreground": "#0080ff"
+				},
+				"class": {
+					"foreground": "#ff0000"
+				},
+				"macro": {
+					"foreground": "#0000a0"
+				},
+			}
 		},
 	},
 	//-----------------------------------------------"

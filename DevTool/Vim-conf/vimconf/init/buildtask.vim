@@ -28,19 +28,72 @@ endfunction
 
 "Rust编译设定
 function! s:setRustCompiler()
-  "compiler cargo
-  setlocal errorformat+=
-              \%-G%\\s%#Downloading%.%#,
-              \%-G%\\s%#Checking%.%#,
-              \%-G%\\s%#Compiling%.%#,
-              \%-G%\\s%#Finished%.%#,
-              \%-G%\\s%#error:\ Could\ not\ compile\ %.%#,
-              \%-G%\\s%#To\ learn\ more\\,%.%#,
-              \%-G%\\s%#For\ more\ information\ about\ this\ error\\,%.%#,
-              \%-Gnote:\ Run\ with\ \`RUST_BACKTRACE=%.%#,
-              \%.%#panicked\ at\ \\'%m\\'\\,\ %f:%l:%c
-  setlocal makeprg=cargo\ build
+  compiler cargo
 endfunction
+
+"从这里开始的几个函数是为了修复cargo build命令的时候QuickFix的问题
+function! s:cargo_quickfix_CmdPre() abort
+    if &filetype ==# 'rust' && get(b:, 'current_compiler', '') ==# 'cargo' &&
+         \ &makeprg =~ '\V\^cargo\ \.\*'
+        let b:rust_compiler_cargo_qf_has_lcd = haslocaldir()
+        let b:rust_compiler_cargo_qf_prev_cd = getcwd()
+        let b:rust_compiler_cargo_qf_prev_cd_saved = 1
+        let l:nearest = fnamemodify(s:cargo_nearestRootCargo(0), ':h')
+        execute 'lchdir! '.l:nearest
+    else
+        let b:rust_compiler_cargo_qf_prev_cd_saved = 0
+    endif
+endfunction
+
+function! s:cargo_quickfix_CmdPost() abort
+    if exists("b:rust_compiler_cargo_qf_prev_cd_saved") && b:rust_compiler_cargo_qf_prev_cd_saved
+        if b:rust_compiler_cargo_qf_has_lcd
+            execute 'lchdir! '.b:rust_compiler_cargo_qf_prev_cd
+        else
+            execute 'chdir! '.b:rust_compiler_cargo_qf_prev_cd
+        endif
+        let b:rust_compiler_cargo_qf_prev_cd_saved = 0
+    endif
+endfunction
+
+function! s:cargo_nearestRootCargo(is_getcwd) abort
+    let l:workspace_cargo = s:cargo_nearestWorkspaceCargo(a:is_getcwd)
+    if l:workspace_cargo !=# ''
+        return l:workspace_cargo
+    endif
+    return s:nearest_cargo(a:is_getcwd)
+endfunction
+
+function! s:cargo_nearestWorkspaceCargo(is_getcwd) abort
+    let l:nearest = s:nearest_cargo(a:is_getcwd)
+    while l:nearest !=# ''
+        for l:line in readfile(l:nearest, '', 0x100)
+            if l:line =~# '\V[workspace]'
+                return l:nearest
+            endif
+        endfor
+        let l:next = fnamemodify(l:nearest, ':p:h:h')
+        let l:nearest = s:nearest_cargo(0, l:next)
+    endwhile
+    return ''
+endfunction
+
+function! s:nearest_cargo(...) abort
+    let l:is_getcwd = get(a:, 1, 0)
+    if l:is_getcwd 
+        let l:starting_path = get(a:, 2, getcwd())
+    else
+        let l:starting_path = get(a:, 2, expand('%:p:h'))
+    endif
+
+    return findfile('Cargo.toml', l:starting_path . ';')
+endfunction
+
+augroup RustCargoQuickFixHooks
+    autocmd!
+    autocmd QuickFixCmdPre make call <SID>cargo_quickfix_CmdPre()
+    autocmd QuickFixCmdPost make call <SID>cargo_quickfix_CmdPost()
+augroup END
 
 "GCC运行设定
 function! s:runGccApplication()
@@ -97,7 +150,10 @@ function! s:runBuild()
     make
   elseif (&ft=='rust')
     "call s:runRustCargoBuild()
-    make
+    "mark c = make check = cargo check
+    "mark b = make build = cargo build
+    "mark t = make test = cargo test
+    make b
   endif
 endfunction
 

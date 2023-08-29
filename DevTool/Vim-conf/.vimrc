@@ -24,7 +24,7 @@ endif
 "               环境变量设置                    "
 "-----------------------------------------------"
 "全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
-let g:g_use_lsp = 0
+let g:g_use_lsp = 1
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -423,7 +423,7 @@ if (g:g_nvim_flg == 0)
 else
 
   "neovim的时候禁用netrw
-  let g:load_netrw =1
+  let g:load_netrw = 1
   let g:loaded_netrwPlugin = 1
 
 endif
@@ -575,11 +575,10 @@ if (v:version > 799)
 
   endif
 
-  "tagbar（用tags表示代码大纲）
-  "https://github.com/preservim/tagbar
-  "packadd tagbar
-  "按下F1表示
-  "noremap <F1> :TagbarToggle<CR>
+  "加载DAP插件
+  "https://github.com/puremourning/vimspector
+  "packadd vimspector
+  "let g:vimspector_enable_mappings = 'HUMAN'
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
@@ -591,17 +590,23 @@ if (v:version > 799)
   "let g:indentLine_enabled = 1
   let g:indentLine_enabled = 0
 
-  "ctrlp-funky（查看outline，因为依赖少平替tagbar）
+  "ctrlp（模糊查找）
+  "https://github.com/ctrlpvim/ctrlp.vim
+  packadd ctrlp
+  let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
+
+  "ctrlp-funky（查看outline，因为依赖少所以平替掉tagbar）
   "https://github.com/tacahiroy/ctrlp-funky
   packadd ctrlp-funky
   let g:ctrlp_funky_matchtype = 'path'
   let g:ctrlp_funky_syntax_highlight = 1
   noremap <F1> :CtrlPFunky<CR>
 
-  "ctrlp（模糊查找）
-  "https://github.com/ctrlpvim/ctrlp.vim
-  packadd ctrlp
-  let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
+  "tagbar（用tags表示代码大纲）
+  "https://github.com/preservim/tagbar
+  "packadd tagbar
+  "按下F1表示
+  "noremap <F1> :TagbarToggle<CR>
 
   "vim-mark（高亮选中单词）
   "https://github.com/Yggdroot/vim-mark
