@@ -1,0 +1,21 @@
+{
+	"configurations": {
+		"Launch": {
+			"adapter": "debugpy",
+			"filetypes": [
+				"python"
+			],
+			"configuration": {
+				"name": "Launch",
+				"type": "python",
+				"request": "launch",
+				"cwd": "${workspaceRoot}\\testdir",
+				"python": "D:\\Tools\\WorkTool\\Python\\Python38-32\\python.exe",
+				"stopOnEntry": true,
+				"console": "integratedTerminal",
+				"debugOptions": [],
+				"program": "${workspaceRoot}\\src\\${fileBasenameNoExtension}.py"
+			}
+		}
+	}
+}

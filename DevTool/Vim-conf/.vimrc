@@ -575,10 +575,8 @@ if (v:version > 799)
 
   endif
 
-  "加载DAP插件
-  "https://github.com/puremourning/vimspector
-  "packadd vimspector
-  "let g:vimspector_enable_mappings = 'HUMAN'
+    "加载DAP设置
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine

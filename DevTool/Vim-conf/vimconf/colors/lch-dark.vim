@@ -106,7 +106,8 @@ hi Type         term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 "Underlined : 文本下划线。
 hi Underlined   term=underline cterm=underline ctermfg=33 gui=underline guifg=#3794ff
 hi Ignore       ctermfg=237 guifg=bg
-hi Error        term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
+hi Error        term=reverse ctermfg=231 ctermbg=124 guifg=#ffffff guibg=#aa1414
+hi Todo         term=standout ctermfg=17 ctermbg=226 guifg=#000030 guibg=#eeee00
 "String     : 字符串
 hi String       term=none cterm=none ctermfg=108 gui=none guifg=#809980
 hi Character    term=none cterm=none ctermfg=108 gui=none guifg=#809980
@@ -128,10 +129,16 @@ hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
 hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#c678dd
 hi EnumMember   term=none cterm=none ctermfg=39 gui=none guifg=#4fc1ff
 hi Property     term=none cterm=none ctermfg=43 gui=none guifg=#4ec9b0
-hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#404080
+hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#408080
 hi Struct       term=none cterm=none ctermfg=202 gui=none guifg=#ee5d43
 hi Regexp       term=none cterm=none ctermfg=60 gui=none guifg=#646695
 hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#569cd6
+hi BreakPoint   term=none cterm=none ctermfg=160 gui=none guifg=#e51400
+hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
+hi ProgramCounter   term=reverse ctermbg=17 guibg=#292e52
+hi DebugLine    term=reverse ctermbg=58 guibg=#545835
+hi ToolbarLine  term=underline ctermbg=244 guibg=#7f7f7f
+hi ToolbarButton cterm=bold ctermfg=234 ctermbg=230 gui=bold guifg=#1d202f guibg=#eee8d5
 
 "-----------------------------------------------"
 "               终端高亮                        "
