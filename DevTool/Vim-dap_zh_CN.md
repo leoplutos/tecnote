@@ -30,6 +30,10 @@ vimspactor安装目录/gadgets/os
 ```
 .gadgets.json
 ```
+比如笔者的设定文件位置为：
+```
+C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.json
+```
 
 这是一个配置文件例子，其中debugpy是用``VimspectorInstall``命令安装的，cpptools是下载的vscode的插件
 ```
@@ -46,7 +50,7 @@ vimspactor安装目录/gadgets/os
 			"custom_handler": "vimspector.custom.python.Debugpy",
 			"name": "debugpy"
 		},
-		"muti-session": {
+		"multi-session": {
 			"host": "${host}",
 			"port": "${port}"
 		},
@@ -141,7 +145,13 @@ vimspactor安装目录/gadgets/os
 
 ### 错误处理
 
-如果使用的时候 ``debug_sesstion.py`` 出错说文件 ``encoding`` 不对，需要手动修改一下。
+如果使用的时候报错
+```
+pack/vendor/opt/vimspector/python3/vimspector/debug_session.py
+
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xba in position 628: illegal multibyte sequence
+```
+的话，原因是 ``debug_sesstion.py`` 里面open文件的时候 ``encoding`` 不对，需要手动修改一下。
 位置在 ``debug_sesstion.py`` 的191行，``with open`` 这里打开文件的函数加上参数
 ```
 , encoding="utf-8"

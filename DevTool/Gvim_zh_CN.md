@@ -57,7 +57,7 @@ start /b D:\Tool\vim90\gvim D:\path\to\YourProject
 
 ## 将Gvim添加到Windows的发送到
 
-1. 开始->运行，输入sendto
+1. 开始->运行，输入 ``shell:sendto``
 2. 在弹出的窗口中，单击右键，选择新建快捷方式
 3. 在需要填入项目位置处（即gvim.exe的路径，以及执行参数），输入
 ```
@@ -87,7 +87,8 @@ MS-Windows 32-bit GUI version with OLE support
 #### vimrc设定
 在 vimrc 中加入
 ```
-let &pythonthreedll = 'D:\Tool\python-3.8.10-embed-win32\python38.dll'
+let &pythonthreehome = 'D:\Tools\WorkTool\Python\Python38-32'
+let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
 ```
 **注意：dll也一定要是32bit的，如果你的gvim是64bit的话就用64bit的dll**
 
@@ -96,7 +97,6 @@ let &pythonthreedll = 'D:\Tool\python-3.8.10-embed-win32\python38.dll'
 ```
 :python3 import sys; print(sys.version)
 ```
-如果发生
 
 #### 使用内置Python运行程序
 打开一个python文件，如下运行即可

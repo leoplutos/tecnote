@@ -24,7 +24,9 @@ endif
 "               环境变量设置                    "
 "-----------------------------------------------"
 "全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
-let g:g_use_lsp = 1
+let g:g_use_lsp = 0
+"全局变量g:g_use_dap（0：不使用dap，1：使用dap）
+let g:g_use_dap = 0
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -50,6 +52,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\Java\jdk17.0.6\bin'
   let $PATH .= ';D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin'
   if (g:g_nvim_flg == 0)
+    let &pythonthreehome = 'D:\Tools\WorkTool\Python\Python38-32'
     let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
   endif
   "设定内置终端专用shell
@@ -435,6 +438,20 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
+"               F1：ctrlp-funky                 "
+"               F2：lsp-重命名                  "
+"               F3：不切换窗口的前提下，滚动另一个窗口"
+"               F4：不切换窗口的前提下，滚动另一个窗口"
+"               F5：dap-开始调试                "
+"               F6：dap-添加断点                "
+"               F7：dap-下一步                  "
+"               F8：dap-运行到光标处初始化工程文件夹"
+"               F9：编译                        "
+"               F10：运行                       "
+"               F11：测试                       "
+"               F12：格式化                     "
+"               命令 :Maketag 生成tags          "
+"               命令 :Init 初始化工程文件夹     "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/keybindings.vim'
 
@@ -446,10 +463,10 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/terminal.vim'
 
 "-----------------------------------------------"
 "               构筑设置                        "
-"               F5：编译                        "
-"               F6：运行                        "
-"               F7：生成tags                    "
-"               F8：初始化工程文件夹            "
+"               F9：编译                        "
+"               F10：运行                       "
+"               F11：测试                       "
+"               F12：初始化工程文件夹           "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/buildtask.vim'
 
@@ -575,8 +592,13 @@ if (v:version > 799)
 
   endif
 
+  if (g:g_use_dap == 0)
+    "不使用DAP
+  else
+    "使用DAP
     "加载DAP设置
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
+  endif
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine

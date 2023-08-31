@@ -21,7 +21,7 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
 
   " [普通模式]F9：格式化当前函数
   "在各个after/ftplugin中设置
-  " [普通模式]F10：格式化当前文件
-  nnoremap <F10> gggqG
+  " [普通模式]F12：格式化当前文件
+  nnoremap <F12> gggqG
 
 endif

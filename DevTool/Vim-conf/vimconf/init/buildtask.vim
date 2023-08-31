@@ -170,10 +170,10 @@ function! s:runTask()
   endif
 endfunction
 
-" [普通模式]F5：编译
-nnoremap <F5> :call <SID>runBuild()<CR>
-" [普通模式]F6：运行(<SID>意思为允许使用映射中的脚本本地函数，这里用s:会报错)
-nnoremap <F6> :call <SID>runTask()<CR>
+" [普通模式]F9：编译
+nnoremap <F9> :call <SID>runBuild()<CR>
+" [普通模式]F10：运行(<SID>意思为允许使用映射中的脚本本地函数，这里用s:会报错)
+nnoremap <F10> :call <SID>runTask()<CR>
 
 "运行tags生成
 function! s:runMakeTags()
@@ -212,9 +212,6 @@ function! s:runMakeTags()
   endtry
 endfunction
 
-" [普通模式]F7：生成tags
-nnoremap <F7> :call <SID>runMakeTags()<CR>
-
 "初始化工程文件夹
 function! s:initProjectFolder()
   call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
@@ -228,5 +225,7 @@ function! s:initProjectFolder()
   call <SID>runMakeTags()
 endfunction
 
-" [普通模式]F8：初始化工程文件夹
-nnoremap <F8> :call <SID>initProjectFolder()<CR>
+"命令 :Maketag 生成tags
+command! -nargs=? Maketag call <SID>runMakeTags()
+"命令 :Init 初始化工程文件夹
+command! -nargs=? Init call <SID>initProjectFolder()

@@ -129,7 +129,7 @@ hi CommonTag    term=none cterm=none ctermfg=88 gui=none guifg=#800000
 hi Interface    term=none cterm=none ctermfg=33 gui=none guifg=#0080ff
 hi EnumMember   term=none cterm=none ctermfg=25 gui=none guifg=#0070c1
 hi Property     term=none cterm=none ctermfg=127 gui=none guifg=#be00be
-hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#404080
+hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#408080
 hi Struct       term=none cterm=none ctermfg=196 gui=none guifg=#ff0000
 hi Regexp       term=none cterm=none ctermfg=125 gui=none guifg=#811f3f
 hi Macro        term=none cterm=none ctermfg=19 gui=none guifg=#0000a0
