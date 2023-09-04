@@ -162,6 +162,19 @@ rustup update
 rustup self uninstall
 ```
 
+## Rust使用国内源
+在 ``rust_home`` 环境变量的路径下新建 ``config.toml``
+内容如下即可
+```
+[source.crates-io]
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+[http]
+check-revoke = false
+```
 
 ## Linux环境
 这里拿Ubuntu举例。Ubuntu的换源参照这里。  

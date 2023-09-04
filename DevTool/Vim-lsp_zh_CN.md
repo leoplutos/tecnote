@@ -60,6 +60,10 @@ bear make all
 ```
 pip install "python-lsp-server[all]"
 ```
+使用国内源为
+```
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "python-lsp-server[all]"
+```
 下载后会在 ``Scripts`` 文件夹里看到 ``pylsp.exe``，测试运行一下  
 ```
 pylsp --help
@@ -67,6 +71,7 @@ pylsp --help
 如果报错 ``No module named 'pkg_resource'`` 的话，运行
 ```
 pip install -U setuptools
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U setuptools
 ```
 修复即可
 

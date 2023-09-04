@@ -14,7 +14,17 @@
 				"stopOnEntry": true,
 				"console": "integratedTerminal",
 				"debugOptions": [],
-				"program": "${workspaceRoot}\\src\\${fileBasenameNoExtension}.py"
+				"program": "${workspaceRoot}\\src\\${fileBasenameNoExtension}.py",
+				"env": {
+					"PYTHONPATH": "D:/WorkSpace/Python/PythonSampleProject/src;D:/WorkSpace/Python/PythonSampleProject/src/com"
+				}
+			},
+			"breakpoints": {
+				"exception": {
+					"raised": "N",
+					"uncaught": "",
+					"userUnhandled": ""
+				}
 			}
 		}
 	}

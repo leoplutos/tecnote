@@ -50,6 +50,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32'
   let $PATH .= ';D:\Tools\WorkTool\Python\Python38-32\Scripts'
   let $PATH .= ';D:\Tools\WorkTool\Java\jdk17.0.6\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Java\apache-ant-1.10.13\bin'
   let $PATH .= ';D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin'
   if (g:g_nvim_flg == 0)
     let &pythonthreehome = 'D:\Tools\WorkTool\Python\Python38-32'
@@ -609,6 +610,8 @@ if (v:version > 799)
   let g:indentLine_char_list = ['¦']
   "let g:indentLine_enabled = 1
   let g:indentLine_enabled = 0
+  let g:vim_json_conceal = 0
+  let g:markdown_syntax_conceal = 0
 
   "ctrlp（模糊查找）
   "https://github.com/ctrlpvim/ctrlp.vim

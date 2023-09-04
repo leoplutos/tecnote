@@ -20,7 +20,12 @@ https://microsoft.github.io/debug-adapter-protocol/
 ``vimspector`` 并不提供DAP服务端，需要自己配置。  
 一般有2种方式：  
 - 方式1：使用VSCode下载插件，然后把插件路径配置好。
-- 方式2：使用 ``:VimspectorInstall debugpy`` 命令安装
+- 方式2：使用 ``:VimspectorInstall debugpy`` 命令安装  
+如果想要显示安装时候的详细信息可以使用命令
+```
+VimspectorInstall! --verbose debugpy
+```
+
 
 小工具的配置目录为：
 ```

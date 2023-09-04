@@ -20,7 +20,7 @@ https://code.visualstudio.com/#alt-downloads
 
 * [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
 * [**Visible Whitespace**](https://marketplace.visualstudio.com/items?itemName=yoshi389111.visible-whitespace)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以渲染 TAB符，全角空格，回车，文件结束符（EOF） 的显示内容和颜色
-* [**Error Lens**](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将错误信息显示在错误行
+* [**Error Lens**](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
 * ~~[Whitespace++(不推荐)](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用[Visible Whitespace]~~
 * [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的 Visible Whitespace 选择一个即可
 * [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
@@ -48,7 +48,6 @@ Java所需插件比较多。有2种安装方式：
   - [Java Decompiler(可选)](https://marketplace.visualstudio.com/items?itemName=dgileadi.java-decompiler)&nbsp;&nbsp;反编译
   - [Java Properties(可选)](https://marketplace.visualstudio.com/items?itemName=ithildir.java-properties)&nbsp;&nbsp;properties文件支持
   - [Lombok Annotations Support(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-lombok)&nbsp;&nbsp;标注支持
-* [**Rust**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 * [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：使用正则表达式，来高亮代码中所有用户想要的文本
 * [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行多种语言的代码片段或代码文件，省掉保存的环节，直接可以运行
 * [Blockman](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：突出显示代码块来提高代码可读性
@@ -61,7 +60,6 @@ Java所需插件比较多。有2种安装方式：
 * [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：代码截图
 * [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json美化
 * [Rainbow CSV(可选)](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
-* [Error Lens(可选)](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
 * [Log File Highlighter(可选)](https://marketplace.visualstudio.com/items?itemName=emilast.LogFileHighlighter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：高亮log文件
 * [Peacock(可选)](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个工程设置不同的主题
 * [indent-rainbow(可选)](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个缩进显示不同的颜色（Python开发很有用）
@@ -98,6 +96,22 @@ Java所需插件比较多。有2种安装方式：
 * [小霸王](https://marketplace.visualstudio.com/items?itemName=gamedilong.anes)
 * [知乎](https://marketplace.visualstudio.com/items?itemName=niudai.vscode-zhihu)
 * [epub reader](https://marketplace.visualstudio.com/items?itemName=renkun.reader)
+
+## VSCode下载太慢的解决办法
+首先在官网找到需要下载的文件，点击下载。  
+在浏览器或者下载软件中就可以看到下载地址了，将其复制。
+然后将站点内容更换为：
+```
+vscode.cdn.azure.cn
+```
+比如:
+```
+https://az764295.vo.msecnd.net/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/VSCode-win32-x64-1.81.1.zip
+```
+替换为
+```
+https://vscode.cdn.azure.cn/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/VSCode-win32-x64-1.81.1.zip
+```
 
 ## 插件的管理
 随着项目的增多，使用VSCode开发多种语言的时候会安装非常多的插件。为了节省内存开销和插件冲突。可以按如下方式设定：
@@ -267,6 +281,8 @@ Neovim 插件使用的话只要:
 1. 方案1：pip安装black
 ```
 pip install black
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple black
+
 ```
 安装后，在工程设定文件内，设定python/Scripts下的black.exe
 ```
@@ -297,6 +313,17 @@ update_sys_path(
 * settings.json
 * launch.json
 * tasks.json
+
+如果LSP服务-rust-analyzer启动失败，很有可能是环境变量设置导致的问题。  
+在没有设置环境变量的情况下 ``C:\Users\用户\.rustup`` 这里是默认位置  
+``settings.toml`` 文件和 ``config.toml`` 文件定义了一些基本信息，可以从你的rust安装路径复制过来即可。
+
+#### 另外
+启动 ``rust-analyzer`` 需要安装 ``rust-src``
+```
+rustup component add rust-src
+rustup component add rust-analyzer
+```
 
 #### 项目运行方式
 ```

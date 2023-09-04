@@ -135,7 +135,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     'configurationSources': ['flake8'],
             \     'plugins': {
             \         'flake8': {'enabled': v:false},
-            \         'pylint': {'enabled': v:true},
+            \         'pylint': {'enabled': v:false},
+            \         'pycodestyle': {'enabled': v:false},
             \         'jedi_definition': {
             \             'follow_imports': v:true,
             \             'follow_builtin_imports': v:true

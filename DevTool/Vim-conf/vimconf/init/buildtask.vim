@@ -4,11 +4,51 @@ scriptencoding utf-8
 "设置tags
 set tags=./.tags;,.tags
 
-"GCC编译设定
+"-----------------------------------------------
+
+"C/Cpp设定编译器
 function! s:setGccCompiler()
-  compiler gcc
-  setlocal makeprg=gcc\ -Wall\ -Werror\ -Wfatal-errors\ -Wextra\ -Wpedantic\ -fdiagnostics-color=never\ -g\ -x\ c\ -fexec-charset=utf-8\ -DLOG_USE_COLOR\ -DDEBUG\ -static-libgcc\ -std=c11\ -I../include\ -o\ ../bin/Debug/%<.exe\ %
+  if filereadable(g:g_s_projectrootpath.'/build.ninja')
+    "[ninja]判断build.ninja是否存在"
+  elseif filereadable(g:g_s_projectrootpath.'/CMakeLists.txt')
+    "[cmake]判断CMakeLists.txt是否存在"
+  else
+    "gcc编译
+    compiler gcc
+    setlocal makeprg=gcc\ -Wall\ -Werror\ -Wfatal-errors\ -Wextra\ -Wpedantic\ -fdiagnostics-color=never\ -g\ -x\ c\ -fexec-charset=utf-8\ -DLOG_USE_COLOR\ -DDEBUG\ -static-libgcc\ -std=c11\ -I../include\ -o\ ../bin/Debug/%<.exe\ %
+  endif
 endfunction
+
+"C/Cpp开始编译
+function! s:runCCppBuild()
+  if filereadable(g:g_s_projectrootpath.'/build.ninja')
+    "[ninja]判断build.ninja是否存在"
+    call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+    sleep 100m
+    let l:filename = expand("%")
+    call TerminalSend("ninja\r\n")
+  elseif filereadable(g:g_s_projectrootpath.'/CMakeLists.txt')
+    "[cmake]判断CMakeLists.txt是否存在"
+    call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+    sleep 100m
+    let l:filename = expand("%")
+    call TerminalSend("cmake --build build\r\n")
+  else
+    "gcc编译
+    make
+  endif
+endfunction
+
+"C/Cpp开始运行
+function! s:runGccApplication()
+  let l:filename = expand("%:r")
+  "call TerminalOpen()
+  "let bid = get(t:, '__terminal_bid__', -1)
+  "call term_sendkeys(bid, "chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
+  call TerminalSend("chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
+endfunction
+
+"-----------------------------------------------
 
 "Python编译设定
 function! s:setPythonCompiler()
@@ -16,19 +56,81 @@ function! s:setPythonCompiler()
   setlocal makeprg=pylint\ %
 endfunction
 
-"Java编译设定
-function! s:setJavaCompiler()
-  compiler javac
-  setlocal errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
-  "如果编译时的编码不是utf8时需要设定makeencoding
-  "setlocal makeencoding=sjis
-  setlocal makeencoding=euc-cn
-  setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ -J-Duser.language=en\ %
+"Python运行设定
+function! s:runPythonApplication()
+  let l:filename = expand("%")
+  call TerminalSend("set PYTHONPATH=".g:g_s_projectrootpath."\\src;".g:g_s_projectrootpath."\\src\\com\r\n")
+  sleep 100m
+  call TerminalSend("python ".l:filename."\r\n")
 endfunction
+
+"-----------------------------------------------
+
+"Java设定编译器
+function! s:setJavaCompiler()
+  if filereadable(g:g_s_projectrootpath.'/build.xml')
+    "[ant]判断build.xml是否存在"
+    compiler ant
+    "setlocal makeencoding=sjis
+    "setlocal makeencoding=euc-cn
+    setlocal makeencoding=gbk
+  elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
+    "[maven]判断pom.xml是否存在"
+  else
+    "javac编译
+    compiler javac
+    setlocal errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+    "如果编译时的编码不是utf8时需要设定makeencoding
+    "setlocal makeencoding=sjis
+    "setlocal makeencoding=euc-cn
+    setlocal makeencoding=gbk
+    setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ -J-Duser.language=en\ %  endif
+  endif
+endfunction
+
+"Java开始编译
+function! s:runJavaBuild()
+  if filereadable(g:g_s_projectrootpath.'/build.xml')
+    "[ant]判断build.xml是否存在"
+    exe 'lcd '.g:g_s_projectrootpath
+    make
+  elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
+    "[maven]判断pom.xml是否存在"
+    call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+    sleep 100m
+    let l:filename = expand("%")
+    call TerminalSend("mvn compile\r\n")
+  else
+    make
+  endif
+endfunction
+
+"Java运行设定
+function! s:runJavaApplication()
+  let l:filename = expand("%:r")
+  call TerminalSend("cd ../bin\r\n")
+  sleep 100m
+  call TerminalSend("chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
+endfunction
+
+"-----------------------------------------------
 
 "Rust编译设定
 function! s:setRustCompiler()
   compiler cargo
+endfunction
+"Rust编译设定
+"function! s:runRustCargoBuild()
+"  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+"  sleep 100m
+"  call TerminalSend("chcp 65001 && cargo build\r\n")
+"endfunction
+
+"Rust运行设定
+function! s:runRustCargoRun()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("chcp 65001 && cargo run\r\n")
 endfunction
 
 "从这里开始的几个函数是为了修复cargo build命令的时候QuickFix的问题
@@ -95,85 +197,7 @@ augroup RustCargoQuickFixHooks
     autocmd QuickFixCmdPost make call <SID>cargo_quickfix_CmdPost()
 augroup END
 
-"GCC运行设定
-function! s:runGccApplication()
-  let l:filename = expand("%:r")
-  "call TerminalOpen()
-  "let bid = get(t:, '__terminal_bid__', -1)
-  "call term_sendkeys(bid, "chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
-  call TerminalSend("chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
-endfunction
-
-"Python运行设定
-function! s:runPythonApplication()
-  let l:filename = expand("%")
-  call TerminalSend("python ".l:filename."\r\n")
-endfunction
-
-"Java运行设定
-function! s:runJavaApplication()
-  let l:filename = expand("%:r")
-  call TerminalSend("cd ../bin\r\n")
-  sleep 100m
-  call TerminalSend("chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
-endfunction
-
-"Rust编译设定
-function! s:runRustCargoBuild()
-  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
-  sleep 100m
-  call TerminalSend("chcp 65001 && cargo build\r\n")
-endfunction
-"Rust运行设定
-function! s:runRustCargoRun()
-  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
-  sleep 100m
-  call TerminalSend("chcp 65001 && cargo run\r\n")
-endfunction
-
-"按照文件类型自定义编译类型
-augroup lchBuildGroup
-  autocmd!
-  autocmd filetype c call s:setGccCompiler()
-  autocmd filetype python call s:setPythonCompiler()
-  autocmd filetype java call s:setJavaCompiler()
-  autocmd filetype rust call s:setRustCompiler()
-augroup END
-
-"编译设定
-function! s:runBuild()
-  if (&ft=='c')
-    make
-  elseif (&ft=='python')
-    make
-  elseif (&ft=='java')
-    make
-  elseif (&ft=='rust')
-    "call s:runRustCargoBuild()
-    "mark c = make check = cargo check
-    "mark b = make build = cargo build
-    "mark t = make test = cargo test
-    make b
-  endif
-endfunction
-
-"运行设定
-function! s:runTask()
-  if (&ft=='c')
-    call s:runGccApplication()
-  elseif (&ft=='python')
-    call s:runPythonApplication()
-  elseif (&ft=='java')
-    call s:runJavaApplication()
-  elseif (&ft=='rust')
-    call s:runRustCargoRun()
-  endif
-endfunction
-
-" [普通模式]F9：编译
-nnoremap <F9> :call <SID>runBuild()<CR>
-" [普通模式]F10：运行(<SID>意思为允许使用映射中的脚本本地函数，这里用s:会报错)
-nnoremap <F10> :call <SID>runTask()<CR>
+"-----------------------------------------------
 
 "运行tags生成
 function! s:runMakeTags()
@@ -212,6 +236,8 @@ function! s:runMakeTags()
   endtry
 endfunction
 
+"-----------------------------------------------
+
 "初始化工程文件夹
 function! s:initProjectFolder()
   call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
@@ -222,9 +248,68 @@ function! s:initProjectFolder()
   sleep 100m
   call TerminalSend("touch .root\r\n")
   sleep 100m
-  call <SID>runMakeTags()
+  "call <SID>runMakeTags()
 endfunction
 
+"-----------------------------------------------"
+"               编译设定                        "
+"-----------------------------------------------"
+function! s:runBuild()
+  if (&ft=='c')
+    "make
+    call s:runCCppBuild()
+  elseif (&ft=='python')
+    make
+  elseif (&ft=='java')
+    "make
+    call s:runJavaBuild()
+  elseif (&ft=='rust')
+    "call s:runRustCargoBuild()
+    "mark c = make check = cargo check
+    "mark b = make build = cargo build
+    "mark t = make test = cargo test
+    make b
+  endif
+endfunction
+
+"-----------------------------------------------"
+"               运行设定                        "
+"-----------------------------------------------"
+function! s:runTask()
+  if (&ft=='c')
+    call s:runGccApplication()
+  elseif (&ft=='python')
+    call s:runPythonApplication()
+  elseif (&ft=='java')
+    call s:runJavaApplication()
+  elseif (&ft=='rust')
+    call s:runRustCargoRun()
+  endif
+endfunction
+
+"
+"-----------------------------------------------"
+"          按照文件类型自定义编译类型           "
+"-----------------------------------------------"
+augroup lchBuildGroup
+  autocmd!
+  autocmd filetype c call s:setGccCompiler()
+  autocmd filetype python call s:setPythonCompiler()
+  autocmd filetype java call s:setJavaCompiler()
+  autocmd filetype rust call s:setRustCompiler()
+augroup END
+
+"-----------------------------------------------"
+"               快捷键绑定                      "
+"-----------------------------------------------"
+" [普通模式]F9：编译
+nnoremap <F9> :call <SID>runBuild()<CR>
+" [普通模式]F10：运行(<SID>意思为允许使用映射中的脚本本地函数，这里用s:会报错)
+nnoremap <F10> :call <SID>runTask()<CR>
+
+"-----------------------------------------------"
+"               命令绑定                        "
+"-----------------------------------------------"
 "命令 :Maketag 生成tags
 command! -nargs=? Maketag call <SID>runMakeTags()
 "命令 :Init 初始化工程文件夹

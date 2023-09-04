@@ -45,3 +45,8 @@ C:\Windows\System32\drivers\etc
 140.82.121.3 github.com
 104.244.46.165 github.com
 ```
+
+## github下载加速
+https://gh.api.99988866.xyz/
+
+

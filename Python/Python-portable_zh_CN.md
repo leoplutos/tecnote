@@ -35,6 +35,10 @@ import site
 ```
 python get-pip.py
 ```
+使用国内科大源的命令为
+```
+python get-pip.py -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
 会自动安装 pip，setuptools，wheel 等几个工具。  
 Lib/site-packages下为第三方库，Scripts下安装有pip。
 

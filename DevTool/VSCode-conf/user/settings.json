@@ -48,6 +48,7 @@
 	"editor.cursorSurroundingLines": 4, // 控制光标周围可见行
 	"editor.cursorSurroundingLinesStyle": "all", // 始终强制执行
 	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
+	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
