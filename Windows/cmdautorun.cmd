@@ -32,6 +32,7 @@ set MINGW_HOME=D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin
 set PATH=%PATH%;%MINGW_HOME%
 set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
 set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
+set RUST_SRC_PATH=D:\Tools\WorkTool\Rust\Rust_gnu_1.70\toolchains\stable-x86_64-pc-windows-gnu\lib\rustlib\src\rust\src
 set PATH=%PATH%;%CARGO_HOME%\bin
 set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
 set PATH=%PATH%;%GIT_HOME%
@@ -47,6 +48,12 @@ set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
 set PATH=%PATH%;%GVIM_HOME%
 set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
 set PATH=%PATH%;%ANT_HOME%\bin
+set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
+set PATH=%PATH%;%MAVEN_HOME%\bin
+set NODEJS_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64
+set PATH=%PATH%;%NODEJS_HOME%
+set NODEJS_GLOBAL_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global
+set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 

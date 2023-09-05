@@ -52,9 +52,11 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\Java\jdk17.0.6\bin'
   let $PATH .= ';D:\Tools\WorkTool\Java\apache-ant-1.10.13\bin'
   let $PATH .= ';D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin'
+  let $PATH .= ';D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64'
+  let $PATH .= ';D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global'
   if (g:g_nvim_flg == 0)
-    let &pythonthreehome = 'D:\Tools\WorkTool\Python\Python38-32'
-    let &pythonthreedll = 'D:\Tools\WorkTool\Python\Python38-32\python38.dll'
+    let &pythonthreehome = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32'
+    let &pythonthreedll = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32\python38.dll'
   endif
   "设定内置终端专用shell
   let g:terminal_shell='cmd.exe /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd'
@@ -218,7 +220,7 @@ endif
 "               工程跟路径函数定义              "
 "               使用s:project_root()函数取得    "
 "-----------------------------------------------"
-function! s:project_root()
+function! GetProjectRoot()
   let name = expand('%:p')
   return s:find_root(name, g:g_s_rootmarkers, 0)
 endfunc
@@ -253,8 +255,8 @@ function! s:find_root(name, markers, strict)
   endif
   return path
 endfunc
-" 使用s:project_root()函数找到跟目录
-let g:g_s_projectrootpath = s:project_root()
+" 使用GetProjectRoot()函数找到跟目录
+let g:g_s_projectrootpath = GetProjectRoot()
 
 "-----------------------------------------------"
 "               特殊符号设置                    "
@@ -600,6 +602,53 @@ if (v:version > 799)
     "加载DAP设置
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
   endif
+
+  "vim-startify（启动页导航）
+  "https://github.com/mhinz/vim-startify
+  packadd vim-startify
+  "设置显示列表
+  let g:startify_lists = [
+    "\    { 'type': 'files',     'header': ['   MRU']            },
+    "\    { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+    "\    { 'type': 'sessions',  'header': ['   Sessions']       },
+    \    { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+    "\    { 'type': 'commands',  'header': ['   Commands']       },
+    \]
+  "设置工程书签
+  let g:startify_bookmarks = [
+    \    'D:/WorkSpace/C/CSampleProject',
+    \    'D:/WorkSpace/Java/JavaBatchProject',
+    \    'D:/WorkSpace/Java/JavaMavenBatProject',
+    \    'D:/WorkSpace/Python/PythonSampleProject',
+    \    'D:/WorkSpace/Rust/minigrep',
+  \]
+  "起始页显示的列表长度
+  let g:startify_files_number = 20
+  "自动加载session
+  "let g:startify_session_autoload = 1
+  "过滤列表，支持正则表达式
+  "let g:startify_skiplist = [
+  "  \    '^/tmp',
+  "\]
+  "自定义Header和Footer
+  let g:startify_custom_header = [
+    \ ' ⠀⠀⠀⠀⠀⠀⢀⣀⡠⠤⠤⠴⠶⠶⠶⠶⠦⠤⠤⢄⣀⡀⠀⠀⠀⠀⠀⠀⠀',
+    \ ' ⠀⠀⠀⣠⠖⢛⣩⣤⠂⠀⠀⠀⣶⡀⢀⣶⠀⠀⠀⠐⣤⣍⡛⠲⣄⠀⠀⠀⠀',
+    \ ' ⢀⡴⢋⣴⣾⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣷⣦⡙⢦⡀⠀',
+    \ ' ⡞⢠⣿⣿⣿⣿⣿⣿⣷⣤⣤⣴⣿⣿⣿⣿⣦⣤⣤⣾⣿⣿⣿⣿⣿⣿⡆⢳⠀',
+    \ ' ⡁⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢈⠆',
+    \ ' ⢧⡈⢿⣿⣿⣿⠿⠿⣿⡿⠿⠿⣿⣿⣿⣿⠿⠿⢿⣿⠿⠿⣿⣿⣿⡿⢁⡼⠀',
+    \ ' ⠀⠳⢄⡙⠿⣇⠀⠀⠈⠁⠀⠀⠈⢿⡿⠁⠀⠀⠈⠁⠀⠀⣸⠿⢋⡠⠞⠀⠀',
+    \ ' ⠀⠀⠀⠉⠲⢤⣀⡀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⢀⣀⡤⠖⠉⠀⠀⠀⠀',
+    \ ' ⠀⠀⠀⠀⠀⠀⠈⠉⠉⠐⠒⠒⠒⠒⠒⠒⠒⠒⠒⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀',
+  \]
+  "let g:startify_custom_footer = [
+  "  \ '+------------------------------+',
+  "  \ '| Do one thing and do it well. |',
+  "  \ '+------------------------------+',
+  "\]
+  "按下Ctrl+F1表示启动页导航
+  noremap <C-F1> :Startify<CR>
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine

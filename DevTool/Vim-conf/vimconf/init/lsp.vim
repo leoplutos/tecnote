@@ -149,6 +149,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   elseif (g:g_use_lsp == 3)
     "使用LSP 3：Java(eclipse.jdt.ls)
 
+    " 使用GetProjectRoot()函数找到跟目录
+    let g:g_s_projectrootpath = GetProjectRoot()
+
     if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'eclipse.jdt.ls',

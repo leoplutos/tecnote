@@ -45,6 +45,7 @@
 
 ## Java相关
 * [Java相关](Java/Java_zh_CN.md)
+* [Java-Maven相关](Java/Java-Maven_zh_CN.md)
 
 ## 开发工具相关
 * [VS Code](DevTool/VSCode_zh_CN.md)

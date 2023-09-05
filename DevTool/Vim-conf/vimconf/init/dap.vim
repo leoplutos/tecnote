@@ -13,6 +13,12 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let g:vimspector_enable_mappings = ''
   packadd vimspector
 
+  "设定尺寸
+  let g:vimspector_sidebar_width = 50
+  let g:vimspector_code_minwidth = 70
+  let g:vimspector_bottombar_height = 9
+  let g:vimspector_terminal_minwidth = 9
+
   "F5：开始调试
   nnoremap <F5> <Plug>VimspectorContinue
   "F6：添加断点

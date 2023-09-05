@@ -21,11 +21,12 @@ https://microsoft.github.io/debug-adapter-protocol/
 一般有2种方式：  
 - 方式1：使用VSCode下载插件，然后把插件路径配置好。
 - 方式2：使用 ``:VimspectorInstall debugpy`` 命令安装  
-如果想要显示安装时候的详细信息可以使用命令
-```
-VimspectorInstall! --verbose debugpy
-```
 
+**注**：在网络不好的时候，经常会发生 ``VimspectorInstall`` 命令失败，这个时候可以用如下方法，使用命令
+```
+:VimspectorInstall! --verbose CodeLLDB
+```
+取得下载url，手动下载 ``.vsix`` 文件，然后复制到 ``VimspectorInstall`` 的下载位置即可
 
 小工具的配置目录为：
 ```
@@ -44,6 +45,25 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 ```
 {
 	"adapters": {
+		"CodeLLDB": {
+			"command": [
+				"${gadgetDir}/CodeLLDB/adapter/codelldb",
+				"--port",
+				"${unusedLocalPort}"
+			],
+			"configuration": {
+				"args": [],
+				"cargo": {},
+				"cwd": "${workspaceRoot}",
+				"env": {},
+				"name": "lldb",
+				"terminal": "integrated",
+				"type": "lldb"
+			},
+			"name": "CodeLLDB",
+			"port": "${unusedLocalPort}",
+			"type": "CodeLLDB"
+		},
 		"debugpy": {
 			"command": [
 				"D:\\Tools\\WorkTool\\Python\\Python38-32\\python.exe",
@@ -65,7 +85,7 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 				"pidSelect": "ask"
 			},
 			"command": [
-				"C:/Users/Leo-G5000/.vscode/extensions/ms-vscode.cpptools-1.17.4-win32-x64/debugAdapters/bin/OpenDebugAD7.exe"
+				"C:/Users/admin/.vscode/extensions/ms-vscode.cpptools-1.17.5-win32-x64/debugAdapters/bin/OpenDebugAD7.exe"
 			],
 			"name": "cppdbg"
 		}
@@ -81,6 +101,7 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 ```
 
 #### C工程配置例子
+使用 ``VSCode`` 的 ``cpp-tools``插件
 ```
 {
 	"configurations": {
@@ -124,6 +145,11 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 ```
 
 #### Python工程配置例子
+使用
+```
+:VimspectorInstall! --verbose debugpy
+```
+命令安装小工具
 ```
 {
 	"configurations": {
@@ -142,6 +168,35 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 				"console": "integratedTerminal",
 				"debugOptions": [],
 				"program": "${workspaceRoot}\\src\\${fileBasenameNoExtension}.py"
+			}
+		}
+	}
+}
+```
+
+#### Rust工程配置例子
+使用
+```
+:VimspectorInstall! --verbose CodeLLDB
+```
+命令安装小工具
+```
+{
+	"configurations": {
+		"Launch": {
+			"adapter": "CodeLLDB",
+			"filetypes": [
+				"rust"
+			],
+			"configuration": {
+				"request": "launch",
+				"type": "CodeLLDB",
+				"program": "${workspaceRoot}/target/debug/minigrep.exe",
+				"args": ["body", "poem.txt"],
+				"stopAtEntry": true,
+				"cwd": "${workspaceRoot}",
+				"environment": [],
+				"externalConsole": false
 			}
 		}
 	}

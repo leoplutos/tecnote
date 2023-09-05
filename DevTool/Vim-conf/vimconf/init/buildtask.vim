@@ -8,6 +8,8 @@ set tags=./.tags;,.tags
 
 "C/Cpp设定编译器
 function! s:setGccCompiler()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.ninja')
     "[ninja]判断build.ninja是否存在"
   elseif filereadable(g:g_s_projectrootpath.'/CMakeLists.txt')
@@ -21,6 +23,8 @@ endfunction
 
 "C/Cpp开始编译
 function! s:runCCppBuild()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.ninja')
     "[ninja]判断build.ninja是否存在"
     call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
@@ -41,11 +45,18 @@ endfunction
 
 "C/Cpp开始运行
 function! s:runGccApplication()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  call TerminalSend("chcp 65001\r\n")
+  sleep 100m
   let l:filename = expand("%:r")
-  "call TerminalOpen()
-  "let bid = get(t:, '__terminal_bid__', -1)
-  "call term_sendkeys(bid, "chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
-  call TerminalSend("chcp 65001 && ..\\bin\\Debug\\".l:filename.".exe\r\n")
+  call TerminalSend("cd ".g:g_s_projectrootpath."\\bin\\Debug\r\n")
+  sleep 100m
+  call TerminalSend(l:filename.".exe\r\n")
+endfunction
+
+"C/Cpp测试
+function! s:runCTest()
 endfunction
 
 "-----------------------------------------------
@@ -59,15 +70,24 @@ endfunction
 "Python运行设定
 function! s:runPythonApplication()
   let l:filename = expand("%")
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   call TerminalSend("set PYTHONPATH=".g:g_s_projectrootpath."\\src;".g:g_s_projectrootpath."\\src\\com\r\n")
   sleep 100m
   call TerminalSend("python ".l:filename."\r\n")
+endfunction
+
+
+"Python测试设定
+function! s:runPythonTest()
 endfunction
 
 "-----------------------------------------------
 
 "Java设定编译器
 function! s:setJavaCompiler()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
     "[ant]判断build.xml是否存在"
     compiler ant
@@ -84,12 +104,14 @@ function! s:setJavaCompiler()
     "setlocal makeencoding=sjis
     "setlocal makeencoding=euc-cn
     setlocal makeencoding=gbk
-    setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ -J-Duser.language=en\ %  endif
+    setlocal makeprg=javac\ -sourcepath\ .\ -d\ ../bin\ -classpath\ .;../lib/*\ -encoding\ UTF-8\ -J-Duser.language=en\ %
   endif
 endfunction
 
 "Java开始编译
 function! s:runJavaBuild()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
     "[ant]判断build.xml是否存在"
     exe 'lcd '.g:g_s_projectrootpath
@@ -107,10 +129,37 @@ endfunction
 
 "Java运行设定
 function! s:runJavaApplication()
-  let l:filename = expand("%:r")
-  call TerminalSend("cd ../bin\r\n")
-  sleep 100m
-  call TerminalSend("chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  if filereadable(g:g_s_projectrootpath.'/build.xml')
+    "[ant]判断build.xml是否存在"
+  elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
+    "[maven]判断pom.xml是否存在"
+    call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+    sleep 100m
+    call TerminalSend("mvn exec:java -Dexec.mainClass=\"my.mavenbatsample.App\" -Dexec.args=\"arg0 arg1 arg2\"\r\n")
+  else
+    let l:filename = expand("%:r")
+    call TerminalSend("cd ".g:g_s_projectrootpath."/bin\r\n")
+    sleep 100m
+    call TerminalSend("chcp 65001 && java -classpath \.;\.\./lib/* -Dfile\.encoding=UTF-8 ".l:filename."\r\n")
+  endif
+endfunction
+
+"Java测试设定
+function! s:runJavaTest()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  if filereadable(g:g_s_projectrootpath.'/build.xml')
+    "[ant]判断build.xml是否存在"
+  elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
+    "[maven]判断pom.xml是否存在"
+    call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+    sleep 100m
+    let l:filename = expand("%")
+    call TerminalSend("mvn test\r\n")
+  else
+  endif
 endfunction
 
 "-----------------------------------------------
@@ -128,9 +177,20 @@ endfunction
 
 "Rust运行设定
 function! s:runRustCargoRun()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
   sleep 100m
   call TerminalSend("chcp 65001 && cargo run\r\n")
+endfunction
+
+"Rust测试设定
+function! s:runRustCargoTest()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("chcp 65001 && cargo test\r\n")
 endfunction
 
 "从这里开始的几个函数是为了修复cargo build命令的时候QuickFix的问题
@@ -203,6 +263,7 @@ augroup END
 function! s:runMakeTags()
   " 执行[git rev-parse --show-toplevel]命令找到git的根目录
   "let l:g_s_projectrootpath = system('git rev-parse --show-toplevel')
+  let g:g_s_projectrootpath = GetProjectRoot()
 
   " 取得当前目录
   let l:cache_pwd = ''
@@ -240,6 +301,8 @@ endfunction
 
 "初始化工程文件夹
 function! s:initProjectFolder()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
   call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
   sleep 100m
   call TerminalSend("rm .root\r\n")
@@ -287,7 +350,21 @@ function! s:runTask()
   endif
 endfunction
 
-"
+"-----------------------------------------------"
+"               运行测试                        "
+"-----------------------------------------------"
+function! s:runTest()
+  if (&ft=='c')
+    call s:runCTest()
+  elseif (&ft=='python')
+    call s:runPythonTest()
+  elseif (&ft=='java')
+    call s:runJavaTest()
+  elseif (&ft=='rust')
+    call s:runRustCargoTest()
+  endif
+endfunction
+
 "-----------------------------------------------"
 "          按照文件类型自定义编译类型           "
 "-----------------------------------------------"
@@ -306,6 +383,8 @@ augroup END
 nnoremap <F9> :call <SID>runBuild()<CR>
 " [普通模式]F10：运行(<SID>意思为允许使用映射中的脚本本地函数，这里用s:会报错)
 nnoremap <F10> :call <SID>runTask()<CR>
+" [普通模式]F11：测试
+nnoremap <F11> :call <SID>runTest()<CR>
 
 "-----------------------------------------------"
 "               命令绑定                        "

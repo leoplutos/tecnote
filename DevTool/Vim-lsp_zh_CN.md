@@ -52,7 +52,9 @@ bear make all
 3. 参照笔者的配置
 - [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
 4. Vim配置  
-第一次启动后会在工程跟路径下生成一个.lsp的文件夹，这个文件夹中的  ``src_xxxxxxxx`` 是设置路径，基本和 ``eclipse`` 一致，修改其中的 ``.classpath`` 即可导入第三方jar
+第一次启动后会在工程跟路径下生成一个.lsp的文件夹，这个文件夹中的  ``src_xxxxxxxx`` 是设置路径，基本和 ``eclipse`` 一致，修改其中的 ``.classpath`` 即可导入第三方jar  
+
+**注**：如果打开的工程为 ``maven`` 工程的话，用 ``eclipe`` 打开一下这个 ``maven`` 工程后，即可成功载入
 
 ## Python语言LSP配置
 
