@@ -29,6 +29,7 @@ https://code.visualstudio.com/#alt-downloads
 * [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件，是个实验插件，将来会合并进 ``Python``
 * [**rust-analyzer**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust开发必备
 * [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust Debug
+* [**Go**](https://marketplace.visualstudio.com/items?itemName=golang.go) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Go开发必备
 
 * **Java**  
 Java所需插件比较多。有2种安装方式：  
@@ -334,6 +335,10 @@ cargo run -- monomorphization poem.txt
 大小写不敏感
 set IGNORE_CASE=1 && cargo run -- to poem.txt 
 ```
+
+## 文件夹设置（Go工程）
+&nbsp;&nbsp;所需插件（1个）：Go  
+&nbsp;&nbsp;[文件夹在这里](../Go/GoSampleProject/)
 
 ## 文件夹设置（Java工程）
 &nbsp;&nbsp;所需插件（3个）：Language Support for Java，Debugger for Java，Project Manager for Java  

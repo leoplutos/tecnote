@@ -20,7 +20,14 @@ LSP 协议就是一套解偶合的标准，比如 C/C++ 补全，以前是 NoteP
 ## 在 Vim 中使用 LSP
 
 笔者主要使用
-- [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+- [vim-lsp](https://github.com/prabirshrestha/vim-lsp)  
+完全vimscript实现，自动补全需要其他插件，客户端功能比较多，但是速度有些慢
+
+- [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim/)  
+使用rust作为后端，速度快，但是已经不维护了，虽然支持的服务端多，但是客户端功能比较少。在安装上，需要从git上下载rust编译好的可执行文件复制到bin路径下，并且修改文件名为【languageclient.exe】
+
+- [vim-lsc](https://github.com/natebosch/vim-lsc)  
+完全vimscript实现，没有其他依赖，这个插件内部实现了自动补全，速度比vim-lsp快，但是客户端功能比较少
 
 ## C/C++语言LSP配置
 

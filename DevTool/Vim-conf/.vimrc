@@ -23,7 +23,7 @@ endif
 "-----------------------------------------------"
 "               环境变量设置                    "
 "-----------------------------------------------"
-"全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)）
+"全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)，5：Go(gopls)，6：Vue(vls)）
 let g:g_use_lsp = 0
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
 let g:g_use_dap = 0
@@ -590,8 +590,12 @@ if (v:version > 799)
   else
     "使用LSP
 
-    "加载LSP设置
+    "加载LSP设置（vim-lsp）
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
+    "加载LSP设置（LanguageClient-neovim）
+    "exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
+    "加载LSP设置（vim-lsc）
+    "exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsc.vim'
 
   endif
 
@@ -621,6 +625,8 @@ if (v:version > 799)
     \    'D:/WorkSpace/Java/JavaMavenBatProject',
     \    'D:/WorkSpace/Python/PythonSampleProject',
     \    'D:/WorkSpace/Rust/minigrep',
+    \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
+    \    'D:/WorkSpace/Vue/VueTestProject',
   \]
   "起始页显示的列表长度
   let g:startify_files_number = 20

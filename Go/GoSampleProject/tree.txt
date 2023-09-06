@@ -1,0 +1,12 @@
+目录结构
+
+GoSampleProject
+├─.vscode
+├─bin
+└─src
+        main.go
+    └─sub
+        sub1.go
+│.golangci.yml
+│go.mod
+│tree.txt

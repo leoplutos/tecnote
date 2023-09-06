@@ -1,0 +1,29 @@
+{
+	"go.goroot": "D:\\Tools\\WorkTool\\Go\\go1.21.0.windows-amd64",
+	"go.gopath": "D:\\Tools\\WorkTool\\Go\\go_global",
+	"gopls": {
+		"ui.semanticTokens": true
+	},
+	"go.formatTool": "gofmt",
+	"go.lintTool": "golangci-lint",
+	"go.lintFlags": [
+		"--fast"
+	],
+	"go.enableCodeLens": {
+		"runtest": true
+	},
+	"go.inlayHints.assignVariableTypes": true,
+	"go.inlayHints.compositeLiteralFields": true,
+	"go.inlayHints.compositeLiteralTypes": true,
+	"go.inlayHints.constantValues": true,
+	"go.inlayHints.functionTypeParameters": true,
+	"go.inlayHints.parameterNames": true,
+	"go.inlayHints.rangeVariableTypes": true,
+	"[go]": {
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": false,
+			"source.organizeImports": false
+		}
+	},
+}

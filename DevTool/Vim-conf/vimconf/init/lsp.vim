@@ -17,6 +17,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nnoremap <buffer> <Space>lo :LspDocumentDiagnostics<CR><C-w>w
     nnoremap <buffer> <Space>lc :lclose<CR>
+    nnoremap <buffer> <C-j> :lnext<cr>
+    nnoremap <buffer> <C-k> :lprevious<cr>
     nnoremap <buffer> <Space>ca <plug>(lsp-code-action-float)
     nnoremap <buffer> <Space>gd <plug>(lsp-definition)
     nnoremap <buffer> <Space>gs <plug>(lsp-document-symbol-search)
@@ -111,12 +113,14 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     'clangd',
             \     '--background-index',
             \     '--clang-tidy',
+            \     '--clang-tidy-checks=*',
             \     '--all-scopes-completion',
             \     '--completion-style=detailed',
             \     '--header-insertion=iwyu',
             \     '--function-arg-placeholders',
             \     '--enable-config',
             \     ]},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'whitelist': ['c', 'pc', 'cpp', 'objc', 'objcpp'],
             \ })
     endif
@@ -130,6 +134,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
         au User lsp_setup call lsp#register_server({
             \ 'name': 'pylsp',
             \ 'cmd': {server_info->['pylsp']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'whitelist': ['python'],
             \ 'workspace_config': {'pylsp': {
             \     'configurationSources': ['flake8'],
@@ -180,7 +185,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
            "\     g:g_s_projectrootpath.'/.lsp'
             \     'D:/WorkSpace/Java',
             \ ]},
-            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.project'))},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'whitelist': ['java'],
             \ })
     endif
@@ -192,7 +197,20 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
         au User lsp_setup call lsp#register_server({
             \ 'name': 'rust-analyzer',
             \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rust-analyzer']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['rust'],
+            \ })
+    endif
+
+  elseif (g:g_use_lsp == 6)
+    "使用LSP 6：Vue(vls)
+
+    if executable('vls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'vls',
+            \ 'cmd': {server_info->['vls.cmd', '--stdio']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+            \ 'allowlist': ['vue'],
             \ })
     endif
 
