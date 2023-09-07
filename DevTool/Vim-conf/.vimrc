@@ -43,6 +43,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "Windows系统下加入GCC,Java,Python,Ctags,clang-format,black等环境变量
   let $CARGO_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
   let $RUSTUP_HOME = 'D:\Tools\WorkTool\Rust\Rust_gnu_1.70'
+  let $GOROOT = 'D:\Tools\WorkTool\Go\go1.21.0.windows-amd64'
+  let $GOPATH = 'D:\Tools\WorkTool\Go\go_global'
   let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM'
@@ -54,6 +56,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin'
   let $PATH .= ';D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64'
   let $PATH .= ';D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global'
+  let $PATH .= ';D:\Tools\WorkTool\Go\go1.21.0.windows-amd64\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Go\go_global\bin'
   if (g:g_nvim_flg == 0)
     let &pythonthreehome = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32'
     let &pythonthreedll = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32\python38.dll'
@@ -625,8 +629,9 @@ if (v:version > 799)
     \    'D:/WorkSpace/Java/JavaMavenBatProject',
     \    'D:/WorkSpace/Python/PythonSampleProject',
     \    'D:/WorkSpace/Rust/minigrep',
-    \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
+    \    'D:/WorkSpace/Go/GoSampleProject',
     \    'D:/WorkSpace/Vue/VueTestProject',
+    \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
   \]
   "起始页显示的列表长度
   let g:startify_files_number = 20

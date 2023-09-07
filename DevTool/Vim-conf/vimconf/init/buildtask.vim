@@ -257,6 +257,40 @@ augroup RustCargoQuickFixHooks
     autocmd QuickFixCmdPost make call <SID>cargo_quickfix_CmdPost()
 augroup END
 
+
+"-----------------------------------------------
+
+"Go编译设定
+function! s:setGoCompiler()
+  compiler go
+  setlocal makeprg=go\ build\ -o\ ./bin/main.exe\ ./src
+endfunction
+"Go编译设定
+function! s:runGoBuild()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  exe 'lcd '.g:g_s_projectrootpath
+  make
+endfunction
+
+"Go运行设定
+function! s:runGoRun()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("go run ./src/main.go\r\n")
+endfunction
+
+"Go测试设定
+function! s:runGoTest()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
+  sleep 100m
+  call TerminalSend("go test ./src/sub\r\n")
+endfunction
+
 "-----------------------------------------------
 
 "运行tags生成
@@ -332,6 +366,8 @@ function! s:runBuild()
     "mark b = make build = cargo build
     "mark t = make test = cargo test
     make b
+  elseif (&ft=='go')
+    call s:runGoBuild()
   endif
 endfunction
 
@@ -347,6 +383,8 @@ function! s:runTask()
     call s:runJavaApplication()
   elseif (&ft=='rust')
     call s:runRustCargoRun()
+  elseif (&ft=='go')
+    call s:runGoRun()
   endif
 endfunction
 
@@ -362,6 +400,8 @@ function! s:runTest()
     call s:runJavaTest()
   elseif (&ft=='rust')
     call s:runRustCargoTest()
+  elseif (&ft=='go')
+    call s:runGoTest()
   endif
 endfunction
 
@@ -374,6 +414,7 @@ augroup lchBuildGroup
   autocmd filetype python call s:setPythonCompiler()
   autocmd filetype java call s:setJavaCompiler()
   autocmd filetype rust call s:setRustCompiler()
+  autocmd filetype go call s:setGoCompiler()
 augroup END
 
 "-----------------------------------------------"

@@ -19,20 +19,58 @@ LSP 协议就是一套解偶合的标准，比如 C/C++ 补全，以前是 NoteP
 
 ## 在 Vim 中使用 LSP
 
-笔者主要使用
+笔者主要使用 **vim-lsp**，下面是以下 lsp客户端的对比
+
 - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)  
-完全vimscript实现，自动补全需要其他插件，客户端功能比较多，但是速度有些慢
+异步，完全vimscript实现，自动补全需要其他插件，客户端功能比较多，但是速度有些慢。支持asyncomplete, deoplete和ncm2三个补全框架。
 
 - [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim/)  
-使用rust作为后端，速度快，但是已经不维护了，虽然支持的服务端多，但是客户端功能比较少。在安装上，需要从git上下载rust编译好的可执行文件复制到bin路径下，并且修改文件名为【languageclient.exe】
+异步，python插件，使用rust作为后端，速度快，但是已经不维护了，虽然支持的服务端多，但是客户端功能比较少。在安装上，需要从git上下载rust编译好的可执行文件复制到bin路径下，并且修改文件名为【languageclient.exe】
 
 - [vim-lsc](https://github.com/natebosch/vim-lsc)  
-完全vimscript实现，没有其他依赖，这个插件内部实现了自动补全，速度比vim-lsp快，但是客户端功能比较少
+异步，完全vimscript实现，没有其他依赖，这个插件内部实现了自动补全，速度比vim-lsp快，但是客户端功能比较少
 
 ## C/C++语言LSP配置
 
 1. 安装 ``clangd``  
-在 [这里](https://github.com/clangd/clangd/releases/download/16.0.2/clangd-windows-16.0.2.zip) 可以下载到zip包
+在 [这里](https://github.com/clangd/clangd/releases/download/16.0.2/clangd-windows-16.0.2.zip) 可以下载到zip包  
+2. 配置 ``clangd``  
+新建文件  
+```
+%LocalAppData%\clangd\config.yaml
+```
+内容如下
+```
+CompileFlags:
+    Add: 
+      [
+        -xc++,
+        -Wno-documentation,
+        -Wno-missing-prototypes,
+      ]
+    #Remove: -W*
+    Compiler: gcc
+
+Diagnostics:
+  ClangTidy:
+    Add:
+    [
+        performance-*,
+        bugprone-*,
+        modernize-*,
+        clang-analyzer-*,
+        readability-identifier*,
+        readability-magic-number*,
+    ]
+    CheckOptions:
+      readability-identifier-naming.VariableCase: camelCase
+
+InlayHints:
+  Designators: Yes
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes
+```
 2. 在 ``Vim`` 中安装 ``vim-lsp``, ``asyncomplete``, ``asyncomplete-lsp`` 这3个插件
 3. 参照笔者的配置
 - [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
@@ -109,6 +147,20 @@ rustup component add rust-analyzer
 3. 参照笔者的配置
 - [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
 
+## Go语言的LSP配置
+安装 ``gopls``，配置好VSCode的环境，会自动要求安装 ``gopls``  
+或者使用如下命令安装
+```
+go install golang.org/x/tools/gopls@latest
+```
+其他配置同上
+
+## Vue的LSP配置
+安装 ``vls``
+```
+npm install vls -g
+```
+其他配置同上
 
 ## 其他
 

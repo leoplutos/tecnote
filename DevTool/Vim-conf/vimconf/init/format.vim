@@ -14,6 +14,8 @@ if(g:g_i_osflg==1 || g:g_i_osflg==2)
     autocmd FileType python setlocal equalprg=black\ -q\ 2>nul\ --skip-string-normalization\ --stdin-filename\ %\ -
     autocmd FileType rust setlocal formatprg=rustfmt\ -q\ --edition\ 2021\ --emit\ stdout\ %
     autocmd FileType rust setlocal equalprg=rustfmt\ -q\ --edition\ 2021\ --emit\ stdout\ %
+    autocmd FileType go setlocal formatprg=gofmt\ %
+    autocmd FileType go setlocal equalprg=gofmt\ %
     "typescript的格式化在after/ftplugin/typescript.vim中设定
     "autocmd FileType typescript setlocal formatprg=clang-format\ --assume-filename=example.js\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0,\ Language:\ JavaScript,\ SeparateDefinitionBlocks:\ Always,\ MaxEmptyLinesToKeep:\ 1}\"
     "autocmd FileType typescript setlocal equalprg=clang-format\ --assume-filename=example.js\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0,\ Language:\ JavaScript,\ SeparateDefinitionBlocks:\ Always,\ MaxEmptyLinesToKeep:\ 1}\"

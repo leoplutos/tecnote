@@ -103,6 +103,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
   augroup END
 
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+
   if (g:g_use_lsp == 1)
     "使用LSP 1：C/C++(clangd)
 
@@ -113,12 +116,16 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     'clangd',
             \     '--background-index',
             \     '--clang-tidy',
-            \     '--clang-tidy-checks=*',
+            "\     '--compile-commands-dir=build',
+            \     '-j=12',
             \     '--all-scopes-completion',
             \     '--completion-style=detailed',
             \     '--header-insertion=iwyu',
+            \     '--pch-storage=memory',
+            \     '--fallback-style=Google',
             \     '--function-arg-placeholders',
             \     '--enable-config',
+            \     '--query-driver=gcc',
             \     ]},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'whitelist': ['c', 'pc', 'cpp', 'objc', 'objcpp'],
@@ -153,9 +160,6 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 
   elseif (g:g_use_lsp == 3)
     "使用LSP 3：Java(eclipse.jdt.ls)
-
-    " 使用GetProjectRoot()函数找到跟目录
-    let g:g_s_projectrootpath = GetProjectRoot()
 
     if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
         au User lsp_setup call lsp#register_server({
@@ -202,6 +206,35 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
+  elseif (g:g_use_lsp == 5)
+    "使用LSP 5：Go(gopls)
+
+    if executable('gopls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'gopls',
+            \ 'cmd': {server_info->['gopls', '-remote=auto']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+            \ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl'],
+            \ 'workspace_config': {'gopls': {
+            \     'analyses': {
+            \         'nilness': v:true,
+            \         'unusedwrite': v:true,
+            \         'unusedparams': v:true,
+            \     },
+            \     'ui.diagnostic.annotations': {
+            \         'bounds': v:true,
+            \         'inline': v:true,
+            \         'escape': v:true,
+            \     },
+            \     'ui.diagnostic.staticcheck': v:true,
+            \     'ui.semanticTokens': v:true,
+            \ }}
+            \ })
+        "autocmd BufWritePre *.go
+        "    \ call execute('LspDocumentFormatSync') |
+        "    \ call execute('LspCodeActionSync source.organizeImports')
+    endif
+
   elseif (g:g_use_lsp == 6)
     "使用LSP 6：Vue(vls)
 
@@ -234,6 +267,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "let g:lsp_diagnostics_float_cursor = 1
   let g:lsp_inlay_hints_enabled = 1
   let g:lsp_semantic_enabled = 1
+  let g:lsp_completion_documentation_delay = 0
+  let g:lsp_completion_resolve_timeout = 0
   if has('gui_running')
     let g:lsp_diagnostics_signs_enabled = 1
     let g:lsp_diagnostics_signs_error = {"text": "❌"}
@@ -251,5 +286,10 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let g:asyncomplete_popup_delay = 200
   let g:asyncomplete_matchfuzzy = 1
   "let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+
+  "TAB键选择补全内容，回车键选择
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
 endif

@@ -6,6 +6,9 @@ import (
 )
 
 func main() {
+	var int1 = 123
+	//var str2 = "这是一个测试字符串"
 	fmt.Println("Hello World")
-	sub.Sub1()
+	var ret = sub.Sub1(int1)
+	fmt.Println("调用函数的返回值为：", ret)
 }

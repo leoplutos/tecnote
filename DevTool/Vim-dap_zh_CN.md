@@ -75,6 +75,22 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 			"custom_handler": "vimspector.custom.python.Debugpy",
 			"name": "debugpy"
 		},
+		"delve": {
+			"command": [
+				"${gadgetDir}/delve/bin/dlv",
+				"dap",
+				"--listen",
+				"${listenOn}:${port}",
+				"*${dlvFlags}"
+			],
+			"port": "${port}",
+			"tty": true,
+			"variables": {
+				"dlvFlags": "",
+				"listenOn": "127.0.0.1",
+				"port": "${unusedLocalPort}"
+			}
+		},
 		"multi-session": {
 			"host": "${host}",
 			"port": "${port}"
@@ -88,6 +104,17 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 				"C:/Users/admin/.vscode/extensions/ms-vscode.cpptools-1.17.5-win32-x64/debugAdapters/bin/OpenDebugAD7.exe"
 			],
 			"name": "cppdbg"
+		},
+		"vscode-go": {
+			"command": [
+				"node",
+				"${gadgetDir}/vscode-go/dist/debugAdapter.js"
+			],
+			"configuration": {
+				"cwd": "${workspaceRoot}",
+				"dlvToolPath": "${gadgetDir}/delve/bin/dlv"
+			},
+			"name": "delve"
 		}
 	}
 }
@@ -100,7 +127,7 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 .vimspector.json
 ```
 
-#### C工程配置例子
+## C工程配置例子
 使用 ``VSCode`` 的 ``cpp-tools``插件
 ```
 {
@@ -144,7 +171,7 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 }
 ```
 
-#### Python工程配置例子
+## Python工程配置例子
 使用
 ```
 :VimspectorInstall! --verbose debugpy
@@ -174,7 +201,7 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 }
 ```
 
-#### Rust工程配置例子
+## Rust工程配置例子
 使用
 ```
 :VimspectorInstall! --verbose CodeLLDB
@@ -201,6 +228,14 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 		}
 	}
 }
+```
+
+## Go工程配置例子
+使用
+```
+:VimspectorInstall! --verbose delve
+```
+命令安装小工具
 ```
 
 ### 错误处理
