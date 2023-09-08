@@ -25,6 +25,8 @@ endif
 "-----------------------------------------------"
 "全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)，5：Go(gopls)，6：Vue(vls)）
 let g:g_use_lsp = 0
+"全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim）
+let g:g_lsp_type = 0
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
 let g:g_use_dap = 0
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
@@ -308,10 +310,17 @@ function! Statusline()
   else
     let l:showMode .= 'NORMAL'
   endif
+  let l:lspMsg = 'LSP:'
+  if exists('*GetLspStatus')
+    let l:lspMsg .= GetLspStatus()
+  else
+    let l:lspMsg .= '❌'
+  endif
   let l:resultStr = ''                              " 初始化
   let l:resultStr .= '%1* ' . showMode . ' '        " 显示当前编辑模式，高亮为用户组1
   let l:resultStr .= '%2* %F'                       " 显示当前文件，高亮为用户组2 (%f 相对文件路径, %F 绝对文件路径, %t 文件名)
   let l:resultStr .= '%3* %m%r%h%w %*%='            " 显示当前文件标记(mrhw)，高亮为用户组3，之后用=开始右对齐
+  let l:resultStr .= '%4* ' . lspMsg . ' '          " 显示LSP状态，高亮为用户组4
   let l:resultStr .= '%* %{&ff} | %{"".(""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"").""} | %Y '        " 显示换行符，编码，文件类型，高亮为默认（ LF | utf-8 | fomart ）
   let l:resultStr .= '%2* [%l:%v] '                 " 显示当前行，列，高亮为用户组2
   let l:resultStr .= '%1* %p%% %LL '                " 显示百分比，总行数，高亮为用户组4
@@ -365,9 +374,14 @@ augroup lchModeChangedGroup
   "autocmd InsertLeave,WinEnter * set cursorline
 augroup END
 
+"当前编辑模式
 hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
+"文件名
 hi User2        term=none cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
+"文件编辑状态
 hi User3        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffff00 guibg=#606060
+"LSP服务器状态
+hi User4        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffffff guibg=#2c323c
 
 "-----------------------------------------------"
 "               TAB设置                         "
@@ -594,12 +608,16 @@ if (v:version > 799)
   else
     "使用LSP
 
-    "加载LSP设置（vim-lsp）
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
-    "加载LSP设置（LanguageClient-neovim）
-    "exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
-    "加载LSP设置（vim-lsc）
-    "exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsc.vim'
+    if (g:g_lsp_type == 0)
+      "加载LSP设置（vim-lsp）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
+    elseif (g:g_lsp_type == 1)
+      "加载LSP设置（vim-lsc）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsc.vim'
+    elseif (g:g_lsp_type == 2)
+      "加载LSP设置（LanguageClient-neovim）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
+    endif
 
   endif
 

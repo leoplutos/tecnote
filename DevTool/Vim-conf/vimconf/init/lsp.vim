@@ -292,4 +292,27 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
+  "给状态栏设置的调用函数（返回LSP状态显示到状态栏）
+  function! GetLspStatus() abort
+    let lspServerName = ''
+    if (&ft=='c') || (&ft=='pc') || (&ft=='cpp') || (&ft=='objc') || (&ft=='objcpp')
+      let lspServerName = 'clangd'
+    elseif (&ft=='python')
+      let lspServerName = 'pylsp'
+    elseif (&ft=='java')
+      let lspServerName = 'eclipse.jdt.ls'
+    elseif (&ft=='rust')
+      let lspServerName = 'rust-analyzer'
+    elseif (&ft=='go')
+      let lspServerName = 'gopls'
+    elseif (&ft=='vue')
+      let lspServerName = 'vls'
+    endif
+    let lspStatus = lsp#get_server_status(lspServerName)
+    if (lspStatus == '') || (lspStatus == 'unknown server')
+      let lspStatus = '❌'
+    endif
+    return lspStatus
+  endfunction
+
 endif

@@ -21,6 +21,8 @@ inoremap <C-f> <C-o>w
 inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>dd
 vnoremap <C-d> <del>
+" 插入模式下Ctrl+i：打开omni补全（代码智能补全，在omnifunc设置）
+inoremap <C-i> <C-x><C-o>
 " 撤销
 inoremap <C-z> <C-o>u
 noremap <C-z> u

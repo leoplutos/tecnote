@@ -11,9 +11,9 @@ function! s:setGccCompiler()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.ninja')
-    "[ninja]判断build.ninja是否存在"
+    "[ninja]判断build.ninja是否存在
   elseif filereadable(g:g_s_projectrootpath.'/CMakeLists.txt')
-    "[cmake]判断CMakeLists.txt是否存在"
+    "[cmake]判断CMakeLists.txt是否存在
   else
     "gcc编译
     compiler gcc
@@ -26,13 +26,13 @@ function! s:runCCppBuild()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.ninja')
-    "[ninja]判断build.ninja是否存在"
+    "[ninja]判断build.ninja是否存在
     call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
     sleep 100m
     let l:filename = expand("%")
     call TerminalSend("ninja\r\n")
   elseif filereadable(g:g_s_projectrootpath.'/CMakeLists.txt')
-    "[cmake]判断CMakeLists.txt是否存在"
+    "[cmake]判断CMakeLists.txt是否存在
     call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
     sleep 100m
     let l:filename = expand("%")
@@ -89,13 +89,13 @@ function! s:setJavaCompiler()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在"
+    "[ant]判断build.xml是否存在
     compiler ant
     "setlocal makeencoding=sjis
     "setlocal makeencoding=euc-cn
     setlocal makeencoding=gbk
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在"
+    "[maven]判断pom.xml是否存在
   else
     "javac编译
     compiler javac
@@ -113,11 +113,11 @@ function! s:runJavaBuild()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在"
+    "[ant]判断build.xml是否存在
     exe 'lcd '.g:g_s_projectrootpath
     make
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在"
+    "[maven]判断pom.xml是否存在
     call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
     sleep 100m
     let l:filename = expand("%")
@@ -132,9 +132,10 @@ function! s:runJavaApplication()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在"
+    "[ant]判断build.xml是否存在
+    echo 'ant project! please run by yourself!' 
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在"
+    "[maven]判断pom.xml是否存在
     call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
     sleep 100m
     call TerminalSend("mvn exec:java -Dexec.mainClass=\"my.mavenbatsample.App\" -Dexec.args=\"arg0 arg1 arg2\"\r\n")
@@ -151,9 +152,9 @@ function! s:runJavaTest()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在"
+    "[ant]判断build.xml是否存在
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在"
+    "[maven]判断pom.xml是否存在
     call TerminalSend("cd ".g:g_s_projectrootpath."\r\n")
     sleep 100m
     let l:filename = expand("%")
