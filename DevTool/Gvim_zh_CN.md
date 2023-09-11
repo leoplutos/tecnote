@@ -128,9 +128,12 @@ E370: Could not load library lua53.dll: Lua library cannot be loaded.
 ```
 正确运行命令即可
 
-#### 将GUI配色转化为终端配色的VIM插件–gui2term.py
+## 将GUI配色转化为终端配色的VIM插件–gui2term.py
+所需文件在这里
+* [gui2term](../Python/gui2term/)  
+
 这款插件实现了将gvim的配色转化成终端配色的解决方案  
-地址：  
+原文件地址：  
 [vim官网](https://www.vim.org/scripts/script.php?script_id=2778)  
 [github](https://github.com/lilydjwg/winterpy/blob/master/pyexe/gui2term.py)  
 主要命令
@@ -146,6 +149,9 @@ python3 gui2term.py sourcefile newfile
 
 注：``rgb.txt``在vim9开始不存在，要去老版本找  
 注2：``gui2term.py`` 默认是不支持utf8的，把所有 ``open(`` 的地方后面加上 ``, encoding='utf-8')`` 即可
+
+#### 关于256color颜色码
+可以用 ``colortest.py`` 这个代码来打印256颜色码
 
 ## 关于 Windows7 下使用 Gvim
 在 Windows7 使用 gvim，默认是无法使用内置终端的，需要一个叫做 winpty 的中间件

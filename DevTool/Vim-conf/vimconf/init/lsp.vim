@@ -44,8 +44,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     "let g:lsp_log_file = expand('~/vim-lsp.log')
     let g:lsp_log_file = ''
 
-    hi clear Structure
-    hi link Structure Statement
+    "hi clear Structure
+    "hi link Structure Statement
     hi clear LspSemanticNamespace
     hi link LspSemanticNamespace Property
     hi clear LspSemanticType
@@ -269,6 +269,17 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let g:lsp_semantic_enabled = 1
   let g:lsp_completion_documentation_delay = 0
   let g:lsp_completion_resolve_timeout = 0
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_diagnostics_echo_delay = 0
+  let g:lsp_diagnostics_float_delay = 0
+  let g:lsp_diagnostics_highlights_delay = 0
+  let g:lsp_diagnostics_signs_delay = 0
+  let g:lsp_diagnostics_virtual_text_delay = 0
+  let g:lsp_document_code_action_signs_delay = 0
+  let g:lsp_inlay_hints_delay = 0
+  let g:lsp_document_highlight_delay = 0
+  let g:lsp_semantic_delay = 0
+  let g:lsp_text_document_did_save_delay = 0
   if has('gui_running')
     let g:lsp_diagnostics_signs_enabled = 1
     let g:lsp_diagnostics_signs_error = {"text": "❌"}

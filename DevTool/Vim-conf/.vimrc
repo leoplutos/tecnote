@@ -377,11 +377,11 @@ augroup END
 "当前编辑模式
 hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
 "文件名
-hi User2        term=none cterm=none ctermfg=231 ctermbg=241 gui=none guifg=#ffffff guibg=#606060
+hi User2        term=none cterm=none ctermfg=231 ctermbg=59 gui=none guifg=#ffffff guibg=#606060
 "文件编辑状态
-hi User3        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffff00 guibg=#606060
+hi User3        term=none cterm=none ctermfg=226 ctermbg=59 gui=none guifg=#ffff00 guibg=#606060
 "LSP服务器状态
-hi User4        term=none cterm=none ctermfg=226 ctermbg=241 gui=none guifg=#ffffff guibg=#2c323c
+hi User4        term=none cterm=none ctermfg=231 ctermbg=236 gui=none guifg=#ffffff guibg=#2c323c
 
 "-----------------------------------------------"
 "               TAB设置                         "

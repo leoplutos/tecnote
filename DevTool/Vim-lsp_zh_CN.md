@@ -35,14 +35,22 @@ LSP 协议就是一套解偶合的标准，比如 C/C++ 补全，以前是 NoteP
 1. 安装 ``clangd``  
 在 [这里](https://github.com/clangd/clangd/releases/download/16.0.2/clangd-windows-16.0.2.zip) 可以下载到zip包  
 2. 配置 ``clangd``  
-新建文件  
+``clangd`` 有全局设定和项目设定，2选1即可  
+
+#### 全局设定文件  
 ```
 %LocalAppData%\clangd\config.yaml
 ```
+#### 项目设定文件  
+在项目跟路径下
+```
+project_root/.clangd
+```
+
 内容如下
 ```
 CompileFlags:
-    Add: 
+    Add:
       [
         -xc++,
         -Wno-documentation,

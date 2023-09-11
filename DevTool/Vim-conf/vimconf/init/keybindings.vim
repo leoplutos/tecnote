@@ -86,18 +86,18 @@ noremap <Leader><right> :bn<CR>|      " [普通模式/选择模式]\+右：下�
 " [普通模式][tags]\s：保存,\q：退出
 noremap <Leader>s :w<CR>|             " [普通模式/选择模式]\+s：保存文件
 noremap <Leader>q :q<CR>|             " [普通模式/选择模式]\+q：退出
-" 通过C-y复制到系统剪切板
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-cnoremap <C-y> "+y
-" 通过C-p粘贴系统剪切板
-nnoremap <C-p> "*p
+" 通过Leader-y复制到系统剪切板
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
+cnoremap <Leader>y "+y
+" 通过Leader-p粘贴系统剪切板
+nnoremap <Leader>p "*p
 " 在编程中经常要复制粘贴一些内容。为了解决寄存器混乱的问题，这里如下定义
-" [选择模式]\y  复制到字母寄存器c
-vnoremap <Leader>y "cy
-" [普通模式]\p  从字母寄存器c中粘贴内容
-nnoremap <Leader>p "cp
-nnoremap <Leader>P "cP
+" [选择模式]Ctrl+y  复制到字母寄存器c
+vnoremap <C-y> "cy
+" [普通模式]Ctrl+p  从字母寄存器c中粘贴内容
+nnoremap <C-p> "cp
+nnoremap <C-p> "cP
 " [普通模式]\l：重新绘制当前的屏幕，并且取消字符的高亮
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " [普通模式]\rd：在只读和可写之间切换

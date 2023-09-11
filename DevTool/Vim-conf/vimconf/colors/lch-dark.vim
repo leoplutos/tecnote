@@ -38,7 +38,8 @@ hi Question     term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=231 ctermbg=16 gui=bold,reverse guifg=#ffffff guibg=#000000
 hi StatusLineNC term=reverse cterm=reverse ctermfg=249 ctermbg=235 gui=reverse guifg=#b2b2b2 guibg=#252526
-hi VertSplit    term=reverse ctermfg=236 ctermbg=236 guifg=#303030 guibg=#303030
+"分割窗口线
+hi VertSplit    term=reverse ctermfg=237 ctermbg=237 guifg=#3e3e3e guibg=#3e3e3e
 hi Title        term=bold cterm=bold ctermfg=214 gui=bold guifg=#f39c12
 hi Visual       term=reverse ctermbg=60 guibg=#2e3c64
 hi WarningMsg   term=bold cterm=bold ctermfg=226 ctermbg=234 gui=bold guifg=#ffff00 guibg=#1e1e1e
@@ -49,7 +50,8 @@ hi DiffAdd      term=bold ctermbg=58 guibg=#4b5920
 hi DiffChange   term=bold ctermbg=24 guibg=#2b5b77
 hi DiffDelete   term=standout cterm=none ctermfg=238 ctermbg=234 gui=none guifg=#444444 guibg=#1c1c1c
 hi DiffText     term=reverse cterm=bold ctermfg=235 ctermbg=110 gui=bold guifg=#282a2e guibg=#81a2be
-hi SignColumn   term=standout ctermfg=51 ctermbg=234 guifg=#00ffff guibg=#1d1f21
+"左侧导航线（和TabLineFill相同即可）
+hi SignColumn   term=standout ctermfg=51 ctermbg=236 guifg=#00ffff guibg=#2e2e2e
 hi clear Conceal
 hi! link Conceal SpecialKey
 hi SpellBad     term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
@@ -64,7 +66,7 @@ hi PmenuThumb   ctermbg=250 guibg=#bbbbbb
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=248 ctermbg=238 gui=none guifg=#a8a8a8 guibg=#444444
 hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=234 gui=none guifg=#ffffff guibg=#1e1e1e
-hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=239 gui=none guifg=#d4d4d4 guibg=#4e4e4e
+hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=236 gui=none guifg=#d4d4d4 guibg=#2e2e2e
 hi CursorColumn term=reverse ctermbg=233 guibg=#121212
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=226 gui=none guifg=#ffff00

@@ -38,6 +38,7 @@ hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=123 ctermbg=17 gui=bold,reverse guifg=#87ffff guibg=#00005f
 hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=17 gui=reverse guifg=#afffff guibg=#00005f
+"分割窗口线
 hi VertSplit    term=reverse ctermfg=49 ctermbg=49 guifg=#00ffaf guibg=#00ffaf
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
@@ -49,6 +50,7 @@ hi DiffAdd      term=bold ctermbg=187 guibg=#d7e4aa
 hi DiffChange   term=bold ctermbg=189 guibg=#c9cbfe
 hi DiffDelete   term=standout cterm=none ctermfg=253 ctermbg=230 gui=none guifg=#dadada guibg=#fffbf0
 hi DiffText     term=reverse cterm=bold ctermfg=252 ctermbg=67 gui=bold guifg=#d0d0d0 guibg=#567fa8
+"左侧导航线（和TabLineFill相同即可）
 hi SignColumn   term=standout ctermfg=26 ctermbg=230 guifg=#005fd7 guibg=#fffbf0
 hi clear Conceal
 hi! link Conceal SpecialKey

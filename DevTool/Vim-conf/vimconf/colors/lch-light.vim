@@ -18,14 +18,14 @@ set background=light
 "-----------------------------------------------"
 "               文本高亮                        "
 "-----------------------------------------------"
-hi Normal       term=none cterm=none ctermfg=16 ctermbg=230 gui=none guifg=#000000 guibg=#fffbf0
+hi Normal       term=none cterm=none ctermfg=16 ctermbg=231 gui=none guifg=#000000 guibg=#f8f8ff
 "SpecialKey    : TAB符
 hi SpecialKey   term=none cterm=none ctermfg=250 gui=none guifg=#C0C0C0
 "NonText       : 换行符
 hi NonText      term=none cterm=none ctermfg=250 gui=none guifg=#C0C0C0
 hi Directory    term=none cterm=none ctermfg=18 gui=none guifg=#000087
 "提示信息
-hi ErrorMsg     term=bold cterm=bold ctermfg=196 ctermbg=230 gui=bold guifg=#ff0000 guibg=#fffbf0
+hi ErrorMsg     term=bold cterm=bold ctermfg=196 ctermbg=231 gui=bold guifg=#ff0000 guibg=#f8f8ff
 "Search     : 搜索高亮
 hi Search       term=reverse cterm=none ctermfg=17 ctermbg=226 gui=none guifg=#00005f guibg=#ffff00
 hi CurSearch    term=reverse cterm=none ctermfg=17 ctermbg=40 gui=none guifg=#00005f guibg=#00d700
@@ -38,33 +38,35 @@ hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=123 ctermbg=17 gui=bold,reverse guifg=#87ffff guibg=#00005f
 hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=17 gui=reverse guifg=#afffff guibg=#00005f
-hi VertSplit    term=reverse ctermfg=49 ctermbg=49 guifg=#00ffaf guibg=#00ffaf
+"分割窗口线
+hi VertSplit    term=reverse ctermfg=253 ctermbg=253 guifg=#d9d9df guibg=#d9d9df
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
-hi WarningMsg   term=bold cterm=bold ctermfg=94 ctermbg=230 gui=bold guifg=#8c6c3e guibg=#fffbf0
+hi WarningMsg   term=bold cterm=bold ctermfg=94 ctermbg=231 gui=bold guifg=#8c6c3e guibg=#f8f8ff
 hi WildMenu     term=standout ctermfg=236 ctermbg=157 guifg=#333333 guibg=#c1f5b0
 hi Folded       term=standout cterm=none ctermfg=37 ctermbg=231 gui=none guifg=#25b0bc guibg=#fcfcfc
-hi FoldColumn   term=standout ctermfg=21 ctermbg=230 guifg=#1212ff guibg=#fffbf0
+hi FoldColumn   term=standout ctermfg=21 ctermbg=231 guifg=#1212ff guibg=#f8f8ff
 hi DiffAdd      term=bold ctermbg=187 guibg=#d7e4aa
 hi DiffChange   term=bold ctermbg=189 guibg=#c9cbfe
-hi DiffDelete   term=standout cterm=none ctermfg=253 ctermbg=230 gui=none guifg=#dadada guibg=#fffbf0
+hi DiffDelete   term=standout cterm=none ctermfg=253 ctermbg=231 gui=none guifg=#dadada guibg=#f8f8ff
 hi DiffText     term=reverse cterm=bold ctermfg=252 ctermbg=67 gui=bold guifg=#d0d0d0 guibg=#567fa8
-hi SignColumn   term=standout ctermfg=26 ctermbg=230 guifg=#005fd7 guibg=#fffbf0
+"左侧导航线（和TabLineFill相同即可）
+hi SignColumn   term=standout ctermfg=26 ctermbg=255 guifg=#005fd7 guibg=#f1f1f6
 hi clear Conceal
 hi! link Conceal SpecialKey
-hi SpellBad     term=reverse cterm=undercurl ctermfg=196 ctermbg=230 gui=undercurl guifg=#ff0000 guibg=#fffbf0 guisp=#ff0000
-hi SpellCap     term=reverse cterm=undercurl ctermfg=196 ctermbg=230 gui=undercurl guifg=#ff0000 guibg=#fffbf0 guisp=#ff0000
-hi SpellRare    term=reverse cterm=undercurl ctermfg=196 ctermbg=230 gui=undercurl guifg=#ff0000 guibg=#fffbf0 guisp=#ff0000
-hi SpellLocal   term=underline cterm=undercurl ctermfg=196 ctermbg=230 gui=undercurl guifg=#ff0000 guibg=#fffbf0 guisp=#ff0000
+hi SpellBad     term=reverse cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
+hi SpellCap     term=reverse cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
+hi SpellRare    term=reverse cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
+hi SpellLocal   term=underline cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
 "弹出菜单
-hi Pmenu        ctermfg=233 ctermbg=255 guifg=#121212 guibg=#efefef
-hi PmenuSel     ctermfg=255 ctermbg=25 guifg=#eeeeee guibg=#0060c0
+hi Pmenu        ctermfg=16 ctermbg=255 guifg=#000000 guibg=#efeff6
+hi PmenuSel     ctermfg=231 ctermbg=25 guifg=#ffffff guibg=#0060c0
 hi PmenuSbar    ctermbg=251 guibg=#c6c6c6
 hi PmenuThumb   ctermbg=234 guibg=#1e1e1e
 "TabLine    : 上部TAB栏
-hi TabLine      term=none cterm=none ctermfg=102 ctermbg=253 gui=none guifg=#8f8391 guibg=#dadada
-hi TabLineSel   term=underline cterm=none ctermfg=236 ctermbg=230 gui=none guifg=#2c2c2c guibg=#fffbf0
-hi TabLineFill  term=reverse cterm=none ctermfg=255 ctermbg=255 gui=none guifg=#f3f3f3 guibg=#efebe0
+hi TabLine      term=none cterm=none ctermfg=102 ctermbg=254 gui=none guifg=#8f8391 guibg=#e8e8ef
+hi TabLineSel   term=underline cterm=none ctermfg=236 ctermbg=231 gui=none guifg=#2c2c2c guibg=#f8f8ff
+hi TabLineFill  term=reverse cterm=none ctermfg=255 ctermbg=255 gui=none guifg=#f3f3f3 guibg=#f1f1f6
 hi CursorColumn term=reverse ctermbg=158 guibg=#afffd7
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=21 gui=none guifg=#0000ff

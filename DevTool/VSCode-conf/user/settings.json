@@ -86,9 +86,9 @@
 	//               颜色设定                        "
 	//-----------------------------------------------"
 	"workbench.preferredDarkColorTheme": "Default Dark+", // 深色主题首选项
-	"workbench.preferredLightColorTheme": "Visual Studio Light", // 浅色主题首选项
+	"workbench.preferredLightColorTheme": "Default Light+", // 浅色主题首选项
 	"workbench.preferredHighContrastColorTheme": "Default Dark+", // 深色高对比度主题首选项
-	"workbench.preferredHighContrastLightColorTheme": "Visual Studio Light", // 浅色高对比度主题首选项
+	"workbench.preferredHighContrastLightColorTheme": "Default Light+", // 浅色高对比度主题首选项
 	"workbench.colorTheme": "Default Dark+", //设定主题（Default Dark Modern）（Default Light Modern）
 	"workbench.colorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
@@ -127,6 +127,9 @@
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			//智能提示（建议小部件）设置
+			"editorSuggestWidget.background": "#252526",
+			"editorSuggestWidget.border": "#949494",
 			"editorError.foreground": "#ff0000",
 			"editorWarning.foreground": "#ffff00",
 			"editorInfo.foreground": "#0db9d7",
@@ -140,8 +143,8 @@
 			"errorLens.hintForeground": "#1abc9c",
 			"errorLens.hintMessageBackground": "#233745",
 		},
-		"[Default Light+]": { //Default Light+主题的自定义(灰色背景)
-			"editor.background": "#f9f9f9", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
+		"[Default Light+]": { //Default Light+主题的自定义(淡蓝背景)
+			"editor.background": "#f8f8ff", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
 			"editor.foreground": "#000000", //设定编辑器前景
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
@@ -163,8 +166,7 @@
 			"editorCursor.foreground": "#1d1f21", //光标前景色
 			"editor.findMatchBackground": "#00d700", //当前查找内容颜色
 			"editor.findMatchHighlightBackground": "#ffff0077", //所有查找内容颜色
-			"editorGroupHeader.border": "#36353562", //tab栏设置-边框
-			"editorGroupHeader.tabsBackground": "#efefef", //tab栏设置-背景色
+			"editorGroupHeader.border": "#36353562", //面包屑设置-边框
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"editorCodeLens.foreground": "#5f5fff", //代码镜头的颜色-main函数上方的[Run | Debug]（备用：#146eb4）
 			"editorInlayHint.background": "#6464FFDD", //内联提示的背景色
@@ -174,7 +176,7 @@
 			"editorInlayHint.typeBackground": "#6464FFDD", //类型内联提示的背景色
 			"editorInlayHint.typeForeground": "#FFFFFF", //类型内联提示的前景色
 			//panel设置
-			//"panel.background": "#f3f3f3",
+			//"panel.background": "#f3f3f9",
 			"panel.border": "#36353562",
 			"panelTitle.activeForeground": "#2c2c2c",
 			"panelTitle.inactiveForeground": "#2c2c2c",
@@ -184,12 +186,20 @@
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			//tab标题设置
+			"editorGroupHeader.tabsBackground": "#f3f3f9",
+			"tab.activeBackground": "#f8f8ff",
+			"tab.activeForeground": "#2c2c2c",
+			"tab.inactiveBackground": "#efeff9",
+			//智能提示（建议小部件）设置
+			"editorSuggestWidget.background": "#efeff6",
+			"editorSuggestWidget.border": "#2c2c2c",
 			//资源管理器设置
-			"sideBar.background": "#f0f0f0", //左部侧边栏背景色
+			"sideBar.background": "#f3f3f9", //左部侧边栏背景色
 			"sideBar.foreground": "#2c2c2c", //左部侧边栏前景色
 			"sideBar.border": "#36353562", //侧边栏分割线颜色
 			"sideBarTitle.foreground": "#2c2c2c", //侧边栏标题前景色
-			"sideBarSectionHeader.background": "#dcdcdc", //侧边栏里面小Title背景色(比如时间线)
+			"sideBarSectionHeader.background": "#dcdcec", //侧边栏里面小Title背景色(比如时间线)
 			"sideBarSectionHeader.foreground": "#2c2c2c", //侧边栏里面小Title前景色(比如时间线)
 			"sideBarSectionHeader.border": "#66666641", //侧边栏里面小Title边界线颜色(比如时间线)
 			//任务栏设置
@@ -455,6 +465,56 @@
 				},
 				"macro": {
 					"foreground": "#569cd6"
+				},
+				"type": {
+					"foreground": "#ee5d43",
+				},
+				"comment": {
+					"foreground": "#5f6167",
+				},
+				"decorator": {
+					"foreground": "#00af00",
+				},
+				"enum": {
+					"foreground": "#ee5d43",
+				},
+				"enumMember": {
+					"foreground": "#4fc1ff",
+				},
+				"event": {
+					"foreground": "#ee5d43",
+				},
+				"function": {
+					"foreground": "#96E072",
+				},
+				"keyword": {
+					"foreground": "#64afef",
+				},
+				//"label": {
+				//},
+				"method": {
+					"foreground": "#96E072",
+				},
+				"namespace": {
+					"foreground": "#4ec9b0",
+				},
+				"number": {
+					"foreground": "#00e8ef",
+				},
+				"string": {
+					"foreground": "#809980",
+				},
+				"operator": {
+					"foreground": "#9CDCFE",
+				},
+				"regexp": {
+					"foreground": "#646695",
+				},
+				"struct": {
+					"foreground": "#ee5d43",
+				},
+				"*.deprecated": {
+					"strikethrough": true
 				},
 			}
 		},

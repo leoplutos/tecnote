@@ -1,9 +1,9 @@
 // 将键绑定放在此文件中以覆盖默认值
 [
 	{ //ctrl+r:查找与替换
-		"key": "ctrl+r",
-		"command": "editor.action.startFindReplaceAction",
-		"when": "editorFocus || editorIsOpen"
+		//"key": "ctrl+r",
+		//"command": "editor.action.startFindReplaceAction",
+		//"when": "editorFocus || editorIsOpen"
 	},
 	{ //ctrl+shift+r:快速打开（转到文件）
 		"key": "ctrl+shift+r",
