@@ -153,6 +153,27 @@ python3 gui2term.py sourcefile newfile
 #### 关于256color颜色码
 可以用 ``colortest.py`` 这个代码来打印256颜色码
 
+## Gvim格式化使用的程序
+#### prettier格式化
+安装命令
+```
+npm install -g --save-dev --save-exact prettier
+```
+确认命令
+```
+prettier.cmd --version
+```
+
+#### sql-formatter格式化
+安装命令
+```
+npm install -g sql-formatter
+```
+确认命令
+```
+sql-formatter.cmd --version
+```
+
 ## 关于 Windows7 下使用 Gvim
 在 Windows7 使用 gvim，默认是无法使用内置终端的，需要一个叫做 winpty 的中间件
 

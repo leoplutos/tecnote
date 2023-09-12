@@ -106,8 +106,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
 
-  if (g:g_use_lsp == 1)
+  "if (g:g_use_lsp == 1)
     "使用LSP 1：C/C++(clangd)
+    "在这里下载 https://github.com/clangd/clangd/releases/
 
     if executable('clangd')
         au User lsp_setup call lsp#register_server({
@@ -132,8 +133,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
-  elseif (g:g_use_lsp == 2)
+  "elseif (g:g_use_lsp == 2)
     "使用LSP 2：Python(pylsp)
+    "安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "python-lsp-server[all]"
 
     if executable('pylsp')
         "设定参数参照这里
@@ -158,8 +160,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
-  elseif (g:g_use_lsp == 3)
+  "elseif (g:g_use_lsp == 3)
     "使用LSP 3：Java(eclipse.jdt.ls)
+    "在这里下载 https://download.eclipse.org/jdtls/milestones/
 
     if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
         au User lsp_setup call lsp#register_server({
@@ -194,8 +197,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
-  elseif (g:g_use_lsp == 4)
+  "elseif (g:g_use_lsp == 4)
     "使用LSP 4：Rust(rust-analyzer)
+    "安装命令：rustup component add rust-analyzer
 
     if executable('rustup')
         au User lsp_setup call lsp#register_server({
@@ -206,8 +210,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
-  elseif (g:g_use_lsp == 5)
+  "elseif (g:g_use_lsp == 5)
     "使用LSP 5：Go(gopls)
+    "安装命令：go install golang.org/x/tools/gopls@latest
 
     if executable('gopls')
         au User lsp_setup call lsp#register_server({
@@ -235,8 +240,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
         "    \ call execute('LspCodeActionSync source.organizeImports')
     endif
 
-  elseif (g:g_use_lsp == 6)
+  "elseif (g:g_use_lsp == 6)
     "使用LSP 6：Vue(vls)
+    "安装命令：npm install vls -g
 
     if executable('vls')
         au User lsp_setup call lsp#register_server({
@@ -247,7 +253,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ })
     endif
 
-  endif
+  "endif
 
   "https://github.com/prabirshrestha/vim-lsp
   "https://github.com/prabirshrestha/asyncomplete.vim

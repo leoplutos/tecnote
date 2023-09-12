@@ -236,7 +236,6 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 :VimspectorInstall! --verbose delve
 ```
 命令安装小工具
-```
 
 ### 错误处理
 

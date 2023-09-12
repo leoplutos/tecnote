@@ -46,6 +46,13 @@ C:\Windows\System32\drivers\etc
 104.244.46.165 github.com
 ```
 
+## 方法4：手动修改hosts文件（推荐）
+``ineo6-hosts`` 是一个定时更新的社区维护项目。  
+Github地址：https://github.com/ineo6/hosts  
+Gitlab地址：https://gitlab.com/ineo6/hosts  
+
+**hosts文件内容取得URL**：https://gitlab.com/ineo6/hosts/-/raw/master/hosts  
+
 ## github下载加速
 https://gh.api.99988866.xyz/
 

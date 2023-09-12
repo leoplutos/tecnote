@@ -23,8 +23,9 @@ endif
 "-----------------------------------------------"
 "               环境变量设置                    "
 "-----------------------------------------------"
-"全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)，5：Go(gopls)，6：Vue(vls)）
-let g:g_use_lsp = 0
+"旧：全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)，5：Go(gopls)，6：Vue(vls)）
+"新：全局变量g:g_use_lsp（0：不使用lsp，1：使用lsp）
+let g:g_use_lsp = 1
 "全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim）
 let g:g_lsp_type = 0
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
@@ -650,6 +651,7 @@ if (v:version > 799)
     \    'D:/WorkSpace/Go/GoSampleProject',
     \    'D:/WorkSpace/Vue/VueTestProject',
     \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
+    \    'D:/WorkSpace/Test/LanguagTest',
   \]
   "起始页显示的列表长度
   let g:startify_files_number = 20

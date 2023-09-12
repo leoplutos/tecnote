@@ -60,4 +60,25 @@ npm instal <packagename> -g
 npm uninstall -g <package>
 ```
 
+## 几个实用的第三方包
+
+#### prettier格式化
+安装命令
+```
+npm install -g --save-dev --save-exact prettier
+```
+确认命令
+```
+prettier.cmd --version
+```
+
+#### sql-formatter格式化
+安装命令
+```
+npm install -g sql-formatter
+```
+确认命令
+```
+sql-formatter.cmd --version
+```
 
