@@ -88,12 +88,39 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     hi link LspSemanticRegexp Regexp
     hi clear LspSemanticOperator
     hi link LspSemanticOperator Special
+    hi clear LspSemanticAnnotation
+    hi link LspSemanticAnnotation Annotation
     hi clear LspSemanticMacro
     hi link LspSemanticMacro Macro
     hi clear LspSemanticGlobalScopeMacro
     hi link LspSemanticGlobalScopeMacro Macro
     hi clear LspSemanticDeclarationGlobalScopeMacro
     hi link LspSemanticDeclarationGlobalScopeMacro Macro
+    hi clear LspSemanticGeneric
+    hi link LspSemanticGeneric Property
+    hi clear LspSemanticBuiltinType
+    hi link LspSemanticBuiltinType Statement
+    hi clear LspSemanticLifetime
+    hi link LspSemanticLifetime Lifetime
+    "废弃/过时的高亮组加上取消线
+    hi clear LspSemanticDeprecatedGenericPublicMethod
+    hi link LspSemanticDeprecatedGenericPublicMethod Deprecated
+    hi clear LspSemanticDeprecatedPublicInterface
+    hi link LspSemanticDeprecatedPublicInterface Deprecated
+    hi clear LspSemanticDeprecatedPublicClass
+    hi link LspSemanticDeprecatedPublicClass Deprecated
+    hi clear LspSemanticConstructorDeprecatedPublicClass
+    hi link LspSemanticConstructorDeprecatedPublicClass Deprecated
+    hi clear LspSemanticDeprecatedPublicReadonlyStaticProperty
+    hi link LspSemanticDeprecatedPublicReadonlyStaticProperty Deprecated
+    hi clear LspSemanticDeclarationDeprecatedPublicClass
+    hi link LspSemanticDeclarationDeprecatedPublicClass Deprecated
+    hi clear LspSemanticDeprecatedProtectedProperty
+    hi link LspSemanticDeprecatedProtectedProperty Deprecated
+    hi clear LspSemanticDeprecatedPublicMethod
+    hi link LspSemanticDeprecatedPublicMethod Deprecated
+    hi clear LspSemanticAbstractDeprecatedPublicMethod
+    hi link LspSemanticAbstractDeprecatedPublicMethod Deprecated
 
   endfunction
 
@@ -135,7 +162,13 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 
   "elseif (g:g_use_lsp == 2)
     "使用LSP 2：Python(pylsp)
-    "安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "python-lsp-server[all]"
+    "Windows7：使用jedi-language-server
+    "    安装命令：pip install -U jedi-language-server -i https://pypi.tuna.tsinghua.edu.cn/simple
+    "Windows10以后：使用python-lsp-server
+    "    安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "python-lsp-server[all]"
+
+    if (g:g_python_lsp_type == 0)
+    "0：使用pylsp
 
     if executable('pylsp')
         "设定参数参照这里
@@ -158,6 +191,58 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     }
             \ }}
             \ })
+    endif
+    endif
+
+    if (g:g_python_lsp_type == 1)
+    "1：使用jedi-language-server
+
+    if executable('jedi-language-server')
+        "设定参数参照这里
+        "https://github.com/pappasam/jedi-language-server
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'jedi-language-server',
+            \ 'cmd': {server_info->['jedi-language-server']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+            \ 'whitelist': ['python'],
+            \ 'workspace_config': {},
+            \ 'initialization_options': {
+            \     'codeAction': {
+            \         'nameExtractVariable': 'jls_extract_var',
+            \         'nameExtractFunction': 'jls_extract_def',
+            \     },
+            \     'completion': {
+            \         'disableSnippets': v:false,
+            \         'resolveEagerly': v:false,
+            \         'ignorePatterns': [],
+            \     },
+            \     'diagnostics': {
+            \         'enable': v:true,
+            \         'didOpen': v:true,
+            \         'didChange': v:true,
+            \         'didSave': v:true,
+            \     },
+            \     'hover': {
+            \         'enable': v:true,
+            \         'disable': {},
+            \     },
+            \     'jediSettings': {
+            \         'autoImportModules': [],
+            \         'caseInsensitiveCompletion': v:true,
+            \         'debug': v:false,
+            \     },
+            \     'markupKindPreferred': 'markdown',
+            \     'workspace': {
+            \         'extraPaths': [],
+            "\         'environmentPath': '/path/to/venv/bin/python',
+            \         'symbols': {
+            \             'ignoreFolders': ['__pycache__', 'venv'],
+            "\             'maxSymbols': 20,
+            \         },
+            \     },
+            \ },
+            \ })
+    endif
     endif
 
   "elseif (g:g_use_lsp == 3)
@@ -201,10 +286,24 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     "使用LSP 4：Rust(rust-analyzer)
     "安装命令：rustup component add rust-analyzer
 
-    if executable('rustup')
+    "if executable('rustup')
+    if executable('rust-analyzer')
+        "设定参数参照这里
+        "https://rust-analyzer.github.io/manual.html#configuration
         au User lsp_setup call lsp#register_server({
             \ 'name': 'rust-analyzer',
-            \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rust-analyzer']},
+            "\ 'cmd': {server_info->['rustup', 'run', 'stable', 'rust-analyzer']},
+            \ 'cmd': {server_info->['rust-analyzer']},
+            \ 'initialization_options': {
+            \     'cargo': {
+            \         'buildScripts': {
+            \             'enable': v:true,
+            \         },
+            \     },
+            \     'procMacro': {
+            \         'enable': v:true,
+            \     },
+            \ },
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['rust'],
             \ })
@@ -316,6 +415,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
       let lspServerName = 'clangd'
     elseif (&ft=='python')
       let lspServerName = 'pylsp'
+      if (g:g_python_lsp_type == 1)
+        let lspServerName = 'jedi-language-server'
+      endif
     elseif (&ft=='java')
       let lspServerName = 'eclipse.jdt.ls'
     elseif (&ft=='rust')

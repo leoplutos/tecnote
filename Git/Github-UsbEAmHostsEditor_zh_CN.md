@@ -53,6 +53,19 @@ Gitlab地址：https://gitlab.com/ineo6/hosts
 
 **hosts文件内容取得URL**：https://gitlab.com/ineo6/hosts/-/raw/master/hosts  
 
+**实现自动设定的Python脚本**  
+下面是一个自动设定的脚本，当访问不了的时候运行一下即可  
+* [updateGithubHosts.py](../Python/updateGithubHosts.py)  
+运行方式：  
+新建 ``updateGitHub.cmd``，内容如下
+```
+set PYTHON_HOME=D:\Tools\WorkTool\Python\Python38-32
+set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
+python D:\WorkSpace\Python\PythonSampleProject\src\updateGithubHosts.py
+```
+然后用 ``管理员`` 运行这个 ``cmd`` 即可
+
+
 ## github下载加速
 https://gh.api.99988866.xyz/
 

@@ -135,12 +135,14 @@ hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#408080
 hi Struct       term=none cterm=none ctermfg=202 gui=none guifg=#ee5d43
 hi Regexp       term=none cterm=none ctermfg=60 gui=none guifg=#646695
 hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#569cd6
+hi Lifetime     term=none cterm=none ctermfg=189 gui=none guifg=#cdcdff
 hi BreakPoint   term=none cterm=none ctermfg=160 gui=none guifg=#e51400
 hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
 hi ProgramCounter   term=reverse ctermbg=17 guibg=#292e52
 hi DebugLine    term=reverse ctermbg=58 guibg=#545835
 hi ToolbarLine  term=underline ctermbg=244 guibg=#7f7f7f
 hi ToolbarButton cterm=bold ctermfg=234 ctermbg=230 gui=bold guifg=#1d202f guibg=#eee8d5
+hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough
 
 "-----------------------------------------------"
 "               终端高亮                        "

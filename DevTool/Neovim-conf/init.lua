@@ -34,6 +34,7 @@ if vim.g.vscode then
   vim.keymap.set({"n", "v"}, "<leader>8", "<Cmd>call VSCodeNotify('workbench.action.openEditorAtIndex8')<CR>", { noremap = true })
   vim.keymap.set({"n", "v"}, "<leader>9", "<Cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<CR>", { noremap = true })
   vim.keymap.set({"n", "v"}, "<leader>e", "<Cmd>call VSCodeNotify('workbench.action.focusSideBar')<CR>", { noremap = true })
+  vim.keymap.set({"n", "v"}, "<leader>ca", "ggVG\"+y", { noremap = true })
 
 else
   --默认neovim设置

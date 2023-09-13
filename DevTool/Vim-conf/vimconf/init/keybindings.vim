@@ -85,11 +85,14 @@ noremap <Leader><left> :bp<CR>|       " [普通模式/选择模式]\+左：上�
 noremap <Leader><right> :bn<CR>|      " [普通模式/选择模式]\+右：下一个buffer
 " [普通模式][tags]\s：保存,\q：退出
 noremap <Leader>s :w<CR>|             " [普通模式/选择模式]\+s：保存文件
-noremap <Leader>q :q<CR>|             " [普通模式/选择模式]\+q：退出
+"noremap <Leader>q :q<CR>|             " [普通模式/选择模式]\+q：退出
+noremap <Leader>q :call CloseTab()<CR>
 " 通过Leader-y复制到系统剪切板
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
 cnoremap <Leader>y "+y
+" 复制所有到系统剪切板
+nnoremap <Leader>ca ggVG"+y
 " 通过Leader-p粘贴系统剪切板
 nnoremap <Leader>p "*p
 " 在编程中经常要复制粘贴一些内容。为了解决寄存器混乱的问题，这里如下定义
@@ -144,8 +147,8 @@ if (exists(':tnoremap') > 0)
 endif
 
 " [普通模式]QuickFix快捷键
-nnoremap <C-j> :cnext<cr>
-nnoremap <C-k> :cprevious<cr>
+nnoremap <C-n> :cnext<cr>
+nnoremap <C-m> :cprevious<cr>
 nnoremap <Leader>j :<C-u>cfirst<CR>
 nnoremap <Leader>k :<C-u>clast<CR>
 "nnoremap <C-q> :cclose<cr>

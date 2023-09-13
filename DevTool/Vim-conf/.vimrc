@@ -28,6 +28,8 @@ endif
 let g:g_use_lsp = 1
 "全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim）
 let g:g_lsp_type = 0
+"全局变量g:g_python_lsp_type（0：pylsp，1：jedi-language-server）
+let g:g_python_lsp_type = 0
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
 let g:g_use_dap = 0
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
@@ -385,40 +387,6 @@ hi User3        term=none cterm=none ctermfg=226 ctermbg=59 gui=none guifg=#ffff
 hi User4        term=none cterm=none ctermfg=231 ctermbg=236 gui=none guifg=#ffffff guibg=#2c323c
 
 "-----------------------------------------------"
-"               TAB设置                         "
-"-----------------------------------------------"
-" 设置结果为[3]file.txt [+]
-function! Tabline()
-  let resultStr = ''
-  for i in range(tabpagenr('$'))
-    let tab = i + 1
-    let winnr = tabpagewinnr(tab)
-    let buflist = tabpagebuflist(tab)
-    let bufnr = buflist[winnr - 1]
-    let bufname = bufname(bufnr)
-    let bufmodified = getbufvar(bufnr, "&mod")
-
-    let resultStr .= '%' . tab . 'T'
-    let resultStr .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    "let resultStr .= ' ' . tab .':'
-    let resultStr .= ' [' . tab .']'
-    "let resultStr .= (bufname != '' ? '['. fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
-    let resultStr .= (bufname != '' ? ''. fnamemodify(bufname, ':t') . ' ' : '[NoName] ')
-
-    if bufmodified
-      let resultStr .= '[+] '
-    endif
-  endfor
-
-  let resultStr .= '%#TabLineFill#'
-  if (exists("g:tablineclosebutton"))
-    let resultStr .= '%=%999XX'
-  endif
-  return resultStr
-endfunction
-set tabline=%!Tabline()
-
-"-----------------------------------------------"
 "               netrw设置                       "
 "-----------------------------------------------"
 if (g:g_nvim_flg == 0)
@@ -476,6 +444,11 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
 "               命令 :Init 初始化工程文件夹     "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/keybindings.vim'
+
+"-----------------------------------------------"
+"               Tab设置                         "
+"-----------------------------------------------"
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tab.vim'
 
 "-----------------------------------------------"
 "               终端设置                        "
