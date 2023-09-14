@@ -32,6 +32,7 @@ augroup lchSnippetsGroup
   autocmd Filetype java inoremap <buffer> ^li List<String>  = new ArrayList<String>();<CR><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype java inoremap <buffer> ^mp Map<String, String>  = new LinkedHashMap<String, String>();<CR><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype java inoremap <buffer> ^cl public class  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype java inoremap <buffer> ^it public interface  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype java inoremap <buffer> ^fi private String ;<CR><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype java inoremap <buffer> ^fu int funname (int argument) {<CR><CR>return 0;<CR>}<CR><UP><UP><UP><TAB>
   autocmd Filetype java inoremap <buffer> ^ma public static void main(String[] args) throws Exception {<CR><CR>}<CR><UP><UP><TAB>
@@ -56,7 +57,8 @@ augroup lchSnippetsGroup
   autocmd Filetype python inoremap <buffer> ^tu mytuple = ('Apple', 'Orange', '')<CR><UP><C-o>$<LEFT><LEFT>
   autocmd Filetype python inoremap <buffer> ^di mydictionary = {'key1': 'value1', 'key2': ''}<CR><UP><C-o>$<LEFT><LEFT>
   autocmd Filetype python inoremap <buffer> ^cl class (object):<CR>def __init__(self, field):<CR>self.__field = field<CR><CR><BACKSPACE>def function_name(self):<CR><CR><UP><UP><UP><UP><UP><UP><C-o>0<C-o>f(
-  autocmd Filetype python inoremap <buffer> ^fu def (arguments=0):<CR><CR><UP><UP><C-o>0<C-o>f(
+  autocmd Filetype python inoremap <buffer> ^it import abc<CR>class interface_name(metaclass=abc.ABCMeta):<CR><CR>@abc.abstractmethod<CR>def abc_method(self):<CR>pass<CR><UP><UP><UP><UP><UP><C-o>w<C-o>w
+  autocmd Filetype python inoremap <buffer> ^fu def function_name(arguments: int = 0) -> None:<CR><CR><UP><UP><C-o>0<C-o>f(
   autocmd Filetype python inoremap <buffer> ^ma def main():<CR><CR><BACKSPACE>if __name__ == "__main__":<CR>main()<CR><UP><UP><UP><TAB>
   autocmd Filetype python inoremap <buffer> ^logd import logging<CR><CR>logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s',)<CR>
   autocmd Filetype python inoremap <buffer> ^logp logging.debug(f":{}")<CR><UP><C-o>$<CR><UP><C-o>$<LEFT><LEFT><LEFT><LEFT><LEFT>
@@ -74,6 +76,7 @@ augroup lchSnippetsGroup
   autocmd Filetype rust inoremap <buffer> ^fe for item in &mut collection {<CR><CR>}<CR><UP><UP><TAB><TAB>
   autocmd Filetype rust inoremap <buffer> ^st struct  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
   autocmd Filetype rust inoremap <buffer> ^en enum  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype rust inoremap <buffer> ^it pub trait InterfaceName {<CR>fn abc_method(&self) -> String;<CR>}<CR><UP><UP><UP><C-o>w<C-o>w<C-o>w<LEFT>
   autocmd Filetype rust inoremap <buffer> ^tu let mytuple: (i32, f64, u8) = (500, 6.4, 1);<CR><UP><C-o>$
   autocmd Filetype rust inoremap <buffer> ^ve let mut myvec = Vec::new();<CR>myvec.push(1);<CR><UP><C-o>$
   autocmd Filetype rust inoremap <buffer> ^mp let mut mymap = HashMap::new();<CR>mymap.insert("key1", 1);<CR><UP><C-o>$
@@ -81,5 +84,22 @@ augroup lchSnippetsGroup
   autocmd Filetype rust inoremap <buffer> ^ma fn main() {<CR>println!("Hello, world!");<CR>}<UP><C-o>$
   autocmd Filetype rust inoremap <buffer> ^pr println!("[DEBUG] - value:{}", );<CR><UP><C-o>$<LEFT><LEFT>
   autocmd Filetype rust inoremap <buffer> ^pe eprintln!("[DEBUG] - value:{}", );<CR><UP><C-o>$<LEFT><LEFT>
+
+  " Go语言定义
+  autocmd Filetype go inoremap <buffer> ^if if  {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^ie if  {<CR>} else {<CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^ii if  {<CR>} else if  {<CR>} else {<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^sw switch  {<CR>case 0:<CR>default:<CR>}<CR><UP><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^wh for i < 5 {<CR>}<CR><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^fo for i := 0; i < 100; i++ {<CR>}<CR><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^lo for {<CR><CR>break<CR>}<CR><UP><UP><UP><TAB><TAB>
+  autocmd Filetype go inoremap <buffer> ^st type s struct {<CR><CR>}<CR><UP><UP><UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
+  autocmd Filetype go inoremap <buffer> ^it type InterfaceName interface {<CR>AbcMethod() int<CR>}<CR><UP><UP><UP><C-o>w<C-o>w<LEFT>
+  autocmd Filetype go inoremap <buffer> ^li import "container/list"<CR>mylist := list.New()<CR>mylist.PushBack(1)<CR><UP><C-o>$
+  autocmd Filetype go inoremap <buffer> ^mp mymap := make(map[string]int)<CR>mymap["key1"] = 1<CR><UP><C-o>$
+  autocmd Filetype go inoremap <buffer> ^fu func function_name(args int) (int) {<CR><CR>return 0<CR>}<CR><UP><UP><UP><TAB>
+  autocmd Filetype go inoremap <buffer> ^ma func main() {<CR>fmt.Println("Hello World")<CR>}<UP><C-o>$
+  autocmd Filetype go inoremap <buffer> ^pr fmt.Println()<CR><UP><C-o>$<LEFT>
+  autocmd Filetype go inoremap <buffer> ^pe fmt.Fprintln(os.Stderr, )<CR><UP><C-o>$<LEFT>
 
 augroup END

@@ -21,6 +21,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     nnoremap <buffer> <C-k> :lprevious<cr>
     nnoremap <buffer> <Space>ca <plug>(lsp-code-action-float)
     nnoremap <buffer> <Space>gd <plug>(lsp-definition)
+    nnoremap <buffer> <C-]>     <plug>(lsp-definition)
     nnoremap <buffer> <Space>gs <plug>(lsp-document-symbol-search)
     nnoremap <buffer> <Space>gS <plug>(lsp-workspace-symbol-search)
     nnoremap <buffer> <Space>gr <plug>(lsp-references)
@@ -181,13 +182,30 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ 'workspace_config': {'pylsp': {
             \     'configurationSources': ['flake8'],
             \     'plugins': {
+            \         'autopep8': {'enabled': v:true},
             \         'flake8': {'enabled': v:false},
             \         'pylint': {'enabled': v:false},
             \         'pycodestyle': {'enabled': v:false},
+            \         'jedi': {
+            \             'auto_import_modules': ['gi'],
+            \             'extra_paths': ['src', 'src/com', 'com'],
+            \         },
+            \         'jedi_completion': {
+            \             'enabled': v:true,
+            \             'include_params': v:true,
+            \             'include_class_objects': v:false,
+            \             'include_function_objects': v:false,
+            \             'fuzzy': v:false,
+            \             'eager': v:false,
+            \         },
             \         'jedi_definition': {
             \             'follow_imports': v:true,
             \             'follow_builtin_imports': v:true
             \         },
+            \         'jedi_hover': {'enabled': v:true},
+            \         'jedi_references': {'enabled': v:true},
+            \         'jedi_signature_help': {'enabled': v:true},
+            \         'jedi_symbolss': {'enabled': v:true},
             \     }
             \ }}
             \ })
@@ -227,13 +245,13 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \         'disable': {},
             \     },
             \     'jediSettings': {
-            \         'autoImportModules': [],
+            \         'autoImportModules': ['gi'],
             \         'caseInsensitiveCompletion': v:true,
             \         'debug': v:false,
             \     },
             \     'markupKindPreferred': 'markdown',
             \     'workspace': {
-            \         'extraPaths': [],
+            \         'extraPaths': ['src', 'src/com', 'com'],
             "\         'environmentPath': '/path/to/venv/bin/python',
             \         'symbols': {
             \             'ignoreFolders': ['__pycache__', 'venv'],
@@ -303,6 +321,15 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     'procMacro': {
             \         'enable': v:true,
             \     },
+            \     'lens': { 'enable': v:true, },
+            \     'check': {
+            \         'command': 'clippy',
+            \         'extraArgs': ['--', '-A', 'clippy::needless_return'],
+            \     },
+            \     'diagnostics': {
+            \         'enable': v:true,
+            \         'experimental': { 'enable': v:true, },
+            \     },
             \ },
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['rust'],
@@ -314,25 +341,55 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     "安装命令：go install golang.org/x/tools/gopls@latest
 
     if executable('gopls')
+        "设定参数参照这里
+        "https://github.com/golang/tools/blob/master/gopls/doc/settings.md
         au User lsp_setup call lsp#register_server({
             \ 'name': 'gopls',
             \ 'cmd': {server_info->['gopls', '-remote=auto']},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl'],
-            \ 'workspace_config': {'gopls': {
+            \ 'workspace_config': {},
+            \ 'initialization_options': {
+            "\     'formatting.gofumpt': v:true,
             \     'analyses': {
+            \         'ST1000': v:false,
+            \         'ST1003': v:false,
+            \         'SA5001': v:false,
             \         'nilness': v:true,
             \         'unusedwrite': v:true,
             \         'unusedparams': v:true,
+            \         'fieldalignment': v:false,
+            \         'shadow': v:false,
+            \         'composites': v:false,
+            \     },
+            \     'ui.codelenses': {
+            \         'generate': v:true,
+            \         'regenerate_cgo': v:true,
+            \         'test': v:true,
+            \         'vendor': v:true,
+            \         'tidy': v:true,
+            \         'upgrade_dependency': v:true,
+            \         'gc_details': v:true
             \     },
             \     'ui.diagnostic.annotations': {
             \         'bounds': v:true,
             \         'inline': v:true,
-            \         'escape': v:true,
+            \         'escape': v:false,
+            \         'nil': v:false
             \     },
             \     'ui.diagnostic.staticcheck': v:true,
+            \     'ui.completion.usePlaceholders': v:true,
+            \     'ui.navigation.importShortcut': 'Definition',
+            \     'ui.completion.matcher': 'Fuzzy',
+            \     'ui.navigation.symbolMatcher': 'Fuzzy',
+            \     'ui.navigation.symbolStyle': 'Dynamic',
+            \     'ui.completion.completionBudget': '500ms',
             \     'ui.semanticTokens': v:true,
-            \ }}
+            \     'build.directoryFilters': [
+            \         '-node_modules',
+            \         '-data'
+            \     ],
+            \ },
             \ })
         "autocmd BufWritePre *.go
         "    \ call execute('LspDocumentFormatSync') |
@@ -390,7 +447,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     let g:lsp_diagnostics_signs_error = {"text": "❌"}
     let g:lsp_diagnostics_signs_warning = {"text": "🆖"}
     let g:lsp_diagnostics_signs_information = {"text": "❗"}
-    let g:lsp_diagnostics_signs_hint = {"text": "❓"}
+    " ❓ 💊 🛠 ⚒ 🗝 🔑 🔔 ✨ 💧 🔥 ☄ ⚡ 🌨 🪐 🛎
+    "let g:lsp_diagnostics_signs_hint = {"text": "❓"}
+    let g:lsp_diagnostics_signs_hint = {"text": "🗝"}
     let g:lsp_document_code_action_signs_enabled = 1
     let g:lsp_document_code_action_signs_hint = {"text": "💡"}
     let g:lsp_diagnostics_virtual_text_prefix = " > "

@@ -26,6 +26,8 @@
 	"rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "always",
 	"rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
 	"rust-analyzer.inlayHints.typeHints.hideClosureInitialization": true,
+	"rust-analyzer.diagnostics.enable": true,
+	"rust-analyzer.diagnostics.experimental.enable": true,
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
 	"terminal.integrated.automationProfile.windows": {
 		//自动化相关终端的设定(如Codelens上面的[Run]，[Debug]和其他的任务)（设定后需要重启）
