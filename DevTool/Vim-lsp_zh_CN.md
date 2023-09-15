@@ -133,13 +133,25 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U setuptools
 2. 在 ``Vim`` 中安装 ``vim-lsp``, ``asyncomplete``, ``asyncomplete-lsp`` 这3个插件
 3. 参照笔者的配置
 - [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
-4. ``pylsp`` 默认用 ``pycodestyle`` 进行检查，配置文件为
+4. ``pylsp`` 默认用 ``pycodestyle`` 进行检查，配置文件为  
+
+全局配置
 ```
 ~\.pycodestyle
 ```
-文件中输入如下内容即可
+工程配置
+```
+{项目根目录}\setup.cfg
+```
+下面是一个设定文件例子
 ```
 [pycodestyle]
+ignore = E401,E402,E501
+
+[flake8]
+ignore = E401,E402,E501
+
+[pep8]
 ignore = E401,E402,E501
 ```
 

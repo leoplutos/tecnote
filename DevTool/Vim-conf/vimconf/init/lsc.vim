@@ -69,7 +69,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let g:lsc_server_commands.objcpp = g:lsc_server_commands.c
 
   "Python(pylsp)设定
-  "Windows7：使用jedi-language-server
+  "Windows7：使用anakin-language-server（推荐） 或者 jedi-language-server
+  "    安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple anakin-language-server
   "    安装命令：pip install -U jedi-language-server -i https://pypi.tuna.tsinghua.edu.cn/simple
   "Windows10以后：使用python-lsp-server
   "    安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "python-lsp-server[all]"
@@ -94,12 +95,13 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '$/analyzerStatus': function('<SID>HandleStatus'),
             \ },
             \ 'workspace_config': {'pylsp': {
-            \     'configurationSources': ['flake8'],
+            "\     'configurationSources': ['flake8'],
+            \     'configurationSources': ['pycodestyle'],
             \     'plugins': {
-            \         'autopep8': {'enabled': v:true},
+            \         'autopep8': {'enabled': v:false},
             \         'flake8': {'enabled': v:false},
             \         'pylint': {'enabled': v:false},
-            \         'pycodestyle': {'enabled': v:false},
+            \         'pycodestyle': {'enabled': v:true},
             \         'jedi': {
             \             'auto_import_modules': ['gi'],
             \             'extra_paths': ['src', 'src/com', 'com'],
@@ -179,6 +181,45 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '$/analyzerStatus': function('<SID>HandleStatus'),
             \ },
             \ 'workspace_config': {},
+            \}
+
+  endif
+
+  if (g:g_python_lsp_type == 2)
+    "2：使用anakin-language-server
+    "设定参数参照这里
+    "https://github.com/muffinmad/anakin-language-server
+
+  let g:lsc_server_commands.python = {
+            \ 'name': 'anakinls',
+            \ 'command': 'anakinls',
+            \ 'enabled': v:true,
+            \ 'suppress_stderr': v:true,
+            \ 'message_hooks': {
+            \     'initialize': {
+            \         'initializationOptions': {
+            "\             'venv': 'path/to/virtualenv'
+            \         },
+            \         'rootUri': {method, params -> lsc#uri#documentUri(GetProjectRoot())},
+            \     },
+            \ },
+            \ 'notifications': {
+            \     '$/analyzerStatus': function('<SID>HandleStatus'),
+            \ },
+            \ 'workspace_config': {'anakinls': {
+            \     'help_on_hover': v:true,
+            \     'completion_fuzzy': v:false,
+            \     'diagnostic_on_open': v:true,
+            \     'diagnostic_on_change': v:true,
+            \     'diagnostic_on_save': v:true,
+            \     'pycodestyle_config': '',
+            \     'mypy_enabled': v:false,
+            \     'yapf_style_config': 'pep8',
+            \     'jedi_settings': {
+            \         'add_bracket_after_function': v:true,
+            \         'auto_import_modules': ['gi'],
+            \     },
+            \ }},
             \}
 
   endif

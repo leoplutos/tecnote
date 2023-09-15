@@ -23,12 +23,11 @@ endif
 "-----------------------------------------------"
 "               环境变量设置                    "
 "-----------------------------------------------"
-"旧：全局变量g:g_use_lsp（0：不使用lsp，1：C/C++(clangd)，2：Python(pylsp)，3：Java(eclipse.jdt.ls)，4：Rust(rust-analyzer)，5：Go(gopls)，6：Vue(vls)）
-"新：全局变量g:g_use_lsp（0：不使用lsp，1：使用lsp）
+"全局变量g:g_use_lsp（0：不使用lsp，1：使用lsp）
 let g:g_use_lsp = 1
 "全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim）
 let g:g_lsp_type = 0
-"全局变量g:g_python_lsp_type（0：pylsp，1：jedi-language-server）
+"全局变量g:g_python_lsp_type（0：pylsp，1：jedi-language-server，2：anakin-language-server）
 let g:g_python_lsp_type = 0
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
 let g:g_use_dap = 0
@@ -63,6 +62,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global'
   let $PATH .= ';D:\Tools\WorkTool\Go\go1.21.0.windows-amd64\bin'
   let $PATH .= ';D:\Tools\WorkTool\Go\go_global\bin'
+  let $PATH .= ';D:\Tools\WorkTool\DotNet\omnisharp-win-x64'
   if (g:g_nvim_flg == 0)
     let &pythonthreehome = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32'
     let &pythonthreedll = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32\python38.dll'
@@ -90,6 +90,8 @@ if (v:version > 799)
   exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf/after'
 endif
 exec "set runtimepath+=" . g:g_s_rcfilepath . '/vimconf/after'
+"工程根路径
+let g:g_s_projectrootpath = ''
 
 "-----------------------------------------------"
 "               开始设置                        "
@@ -264,8 +266,6 @@ function! s:find_root(name, markers, strict)
   endif
   return path
 endfunc
-" 使用GetProjectRoot()函数找到跟目录
-let g:g_s_projectrootpath = GetProjectRoot()
 
 "-----------------------------------------------"
 "               特殊符号设置                    "
@@ -282,6 +282,7 @@ set listchars=tab:¦\ ,precedes:<,extends:>
 "-----------------------------------------------"
 "在 vimconf/ftdetect 文件夹设置
 "augroup filetypedetect
+"  autocmd!
 "  autocmd! BufRead,BufNewFile *.cc     setfiletype c
 "  autocmd! BufRead,BufNewFile *.pc     setfiletype esqlc
 "augroup END
@@ -413,6 +414,14 @@ if (g:g_nvim_flg == 0)
   "  autocmd VimEnter * :Vexplore
   "augroup END
 
+  " 进入netrw的自动命令设置
+  augroup lchtNetrwGroup
+    autocmd!
+    autocmd FileType netrw call <SID>NetrwBufEnter()
+    "autocmd FileType netrw au BufEnter <buffer> call <SID>NetrwBufEnter()
+    "autocmd FileType netrw au BufLeave <buffer> hi clear CursorLine
+  augroup END
+
 else
 
   "neovim的时候禁用netrw
@@ -420,6 +429,28 @@ else
   let g:loaded_netrwPlugin = 1
 
 endif
+
+"进入netrw时候运行的内容
+"因为使用了vim-startify（启动页导航）插件，所以需要进入每个netrw的时候刷新设置
+function! s:NetrwBufEnter()
+
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+
+  " 在工程跟路径下递归查找子文件
+  "set path+=**
+  exec 'set path='
+  exec 'set path+=' . g:g_s_projectrootpath . '/**'
+  " 搜索除外内容
+  set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**
+
+  " 设定环境变量
+  let $PYTHONPATH = ''
+  let $PYTHONPATH .= g:g_s_projectrootpath
+  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src'
+  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src\com'
+
+endfunction
 
 "-----------------------------------------------"
 "               颜色设置                        "
@@ -483,11 +514,6 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/snippets.vim'
 "               QuickFix设置                    "
 "               \+z：打开/关闭QuickFix          "
 "-----------------------------------------------"
-" 在工程跟路径下递归查找子文件
-"set path+=**
-exec "set path+=" . g:g_s_projectrootpath . "/**"
-set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.project,.root,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**          " 搜索除外内容
-
 augroup lchQuickFixGroup
   autocmd!
   "autocmd QuickFixCmdPost *vim* cwindow
@@ -603,56 +629,8 @@ if (v:version > 799)
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
   endif
 
-  "vim-startify（启动页导航）
-  "https://github.com/mhinz/vim-startify
-  packadd vim-startify
-  "设置显示列表
-  let g:startify_lists = [
-    "\    { 'type': 'files',     'header': ['   MRU']            },
-    "\    { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-    "\    { 'type': 'sessions',  'header': ['   Sessions']       },
-    \    { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-    "\    { 'type': 'commands',  'header': ['   Commands']       },
-    \]
-  "设置工程书签
-  let g:startify_bookmarks = [
-    \    'D:/WorkSpace/C/CSampleProject',
-    \    'D:/WorkSpace/Java/JavaBatchProject',
-    \    'D:/WorkSpace/Java/JavaMavenBatProject',
-    \    'D:/WorkSpace/Python/PythonSampleProject',
-    \    'D:/WorkSpace/Rust/minigrep',
-    \    'D:/WorkSpace/Go/GoSampleProject',
-    \    'D:/WorkSpace/Vue/VueTestProject',
-    \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
-    \    'D:/WorkSpace/Test/LanguagTest',
-  \]
-  "起始页显示的列表长度
-  let g:startify_files_number = 20
-  "自动加载session
-  "let g:startify_session_autoload = 1
-  "过滤列表，支持正则表达式
-  "let g:startify_skiplist = [
-  "  \    '^/tmp',
-  "\]
-  "自定义Header和Footer
-  let g:startify_custom_header = [
-    \ ' ⠀⠀⠀⠀⠀⠀⢀⣀⡠⠤⠤⠴⠶⠶⠶⠶⠦⠤⠤⢄⣀⡀⠀⠀⠀⠀⠀⠀⠀',
-    \ ' ⠀⠀⠀⣠⠖⢛⣩⣤⠂⠀⠀⠀⣶⡀⢀⣶⠀⠀⠀⠐⣤⣍⡛⠲⣄⠀⠀⠀⠀',
-    \ ' ⢀⡴⢋⣴⣾⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣷⣦⡙⢦⡀⠀',
-    \ ' ⡞⢠⣿⣿⣿⣿⣿⣿⣷⣤⣤⣴⣿⣿⣿⣿⣦⣤⣤⣾⣿⣿⣿⣿⣿⣿⡆⢳⠀',
-    \ ' ⡁⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢈⠆',
-    \ ' ⢧⡈⢿⣿⣿⣿⠿⠿⣿⡿⠿⠿⣿⣿⣿⣿⠿⠿⢿⣿⠿⠿⣿⣿⣿⡿⢁⡼⠀',
-    \ ' ⠀⠳⢄⡙⠿⣇⠀⠀⠈⠁⠀⠀⠈⢿⡿⠁⠀⠀⠈⠁⠀⠀⣸⠿⢋⡠⠞⠀⠀',
-    \ ' ⠀⠀⠀⠉⠲⢤⣀⡀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⢀⣀⡤⠖⠉⠀⠀⠀⠀',
-    \ ' ⠀⠀⠀⠀⠀⠀⠈⠉⠉⠐⠒⠒⠒⠒⠒⠒⠒⠒⠒⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀',
-  \]
-  "let g:startify_custom_footer = [
-  "  \ '+------------------------------+',
-  "  \ '| Do one thing and do it well. |',
-  "  \ '+------------------------------+',
-  "\]
-  "按下Ctrl+F1表示启动页导航
-  noremap <C-F1> :Startify<CR>
+  "加载开始导航页面设置
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
