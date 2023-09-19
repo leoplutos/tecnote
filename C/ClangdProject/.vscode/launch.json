@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"configurations": [
+		{
+			"name": "Debug_lldb", //配置名称
+			"preLaunchTask": "ninja_build",
+			"type": "lldb",
+			"request": "launch",
+			"program": "${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"internalConsoleOptions": "neverOpen",
+		}
+	],
+}

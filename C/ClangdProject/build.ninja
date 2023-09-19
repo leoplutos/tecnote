@@ -1,0 +1,29 @@
+# build.ninja
+builddir = build
+comdir = src/com
+maindir = src
+libdir = lib
+objdir = obj/Debug
+exedir = bin/Debug
+
+cc      = D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/gcc.exe
+ar      = D:/Tools/WorkTool/C/codeblocks-20.03mingw-nosetup/MinGW/bin/ar.exe
+coption = -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -x c -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include -ID:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\x86_64-w64-mingw32\include
+loption = -Wall -Werror -Wfatal-errors -Wextra -Wpedantic -fdiagnostics-color=always -g -fexec-charset=utf-8 -DLOG_USE_COLOR -DDEBUG -static-libgcc -std=c11 -I./include -ID:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\x86_64-w64-mingw32\include
+
+rule compile
+  command = $cc $coption -c $in -o $out
+  description = GCC $out
+
+rule ar
+  command = $ar crs $out $in
+  description = AR $out
+
+rule link
+  command = $cc $loption $in -o $out
+
+build $objdir/sub1.o: compile $comdir/sub1.pc
+build $objdir/sub2.o: compile $comdir/sub2.c
+build $objdir/log.o: compile $comdir/log.c
+build $libdir/com.a: ar $objdir/sub1.o $objdir/sub2.o $objdir/log.o
+build $exedir/main.exe: link $maindir/main.c $libdir/com.a

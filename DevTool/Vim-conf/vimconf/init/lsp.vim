@@ -17,13 +17,14 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nnoremap <buffer> <Space>lo :LspDocumentDiagnostics<CR><C-w>w
     nnoremap <buffer> <Space>lc :lclose<CR>
-    nnoremap <buffer> <C-j> :lnext<cr>
-    nnoremap <buffer> <C-k> :lprevious<cr>
+    nnoremap <buffer> <C-j> :lnext<CR>
+    nnoremap <buffer> <C-k> :lprevious<CR>
     nnoremap <buffer> <Space>ca <plug>(lsp-code-action-float)
     nnoremap <buffer> <Space>gd <plug>(lsp-definition)
     nnoremap <buffer> <C-]>     <plug>(lsp-definition)
     nnoremap <buffer> <Space>gs <plug>(lsp-document-symbol-search)
     nnoremap <buffer> <Space>gS <plug>(lsp-workspace-symbol-search)
+    nnoremap <buffer> <Space>p <plug>(lsp-workspace-symbol-search)
     nnoremap <buffer> <Space>gr <plug>(lsp-references)
     nnoremap <buffer> <Space>gi <plug>(lsp-implementation)
     nnoremap <buffer> <Space>gt <plug>(lsp-type-definition)
@@ -36,6 +37,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     nnoremap <buffer> <C-Down>  <plug>(lsp-next-reference)
     nnoremap <buffer> <Space>nd <plug>(lsp-next-diagnostic)
     nnoremap <buffer> <Space>pd <plug>(lsp-previous-diagnostic)
+    nnoremap <buffer> <C-S-f> :LspDocumentFormat<CR>
+    vnoremap <buffer> <C-S-f> :LspDocumentRangeFormat<CR>
+    nnoremap <buffer> <C-F2> :LspStatus<CR>
     "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
     "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 

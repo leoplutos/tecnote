@@ -1,0 +1,12 @@
+目录结构
+
+DotnetSampleProject
+├─.vscode
+│      settings.json
+├─bin
+├─obj
+│  .root
+│  omnisharp.json
+│  omnisharp.json_bak
+│  Program.cs
+│  tree.txt

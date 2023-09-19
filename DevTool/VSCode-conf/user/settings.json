@@ -129,7 +129,7 @@
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
 			//智能提示（建议小部件）设置
 			"editorSuggestWidget.background": "#252526",
-			"editorSuggestWidget.border": "#949494",
+			"editorSuggestWidget.border": "#535973",
 			"editorError.foreground": "#ff0000",
 			"editorWarning.foreground": "#ffff00",
 			"editorInfo.foreground": "#0db9d7",
@@ -446,10 +446,10 @@
 					"foreground": "#d4d4d4"
 				},
 				"parameter": {
-					"foreground": "#408080"
+					"foreground": "#4d8a94"
 				},
 				"typeParameter": {
-					"foreground": "#408080"
+					"foreground": "#4d8a94"
 				},
 				"property": {
 					"foreground": "#4ec9b0"
@@ -458,7 +458,7 @@
 					"foreground": "#4ec9b0"
 				},
 				"interface": {
-					"foreground": "#c678dd"
+					"foreground": "#dd50dd"
 				},
 				"class": {
 					"foreground": "#ee5d43"
@@ -467,51 +467,60 @@
 					"foreground": "#569cd6"
 				},
 				"type": {
-					"foreground": "#ee5d43",
+					"foreground": "#ee5d43"
 				},
 				"comment": {
-					"foreground": "#5f6167",
+					"foreground": "#5f6167"
 				},
 				"decorator": {
-					"foreground": "#00af00",
+					"foreground": "#00af00"
 				},
 				"enum": {
-					"foreground": "#ee5d43",
+					"foreground": "#ee5d43"
 				},
 				"enumMember": {
-					"foreground": "#4fc1ff",
+					"foreground": "#4fc1ff"
 				},
 				"event": {
-					"foreground": "#ee5d43",
+					"foreground": "#ee5d43"
 				},
 				"function": {
-					"foreground": "#96E072",
+					"foreground": "#96E072"
 				},
 				"keyword": {
-					"foreground": "#64afef",
+					"foreground": "#64afef"
 				},
 				//"label": {
 				//},
 				"method": {
-					"foreground": "#96E072",
+					"foreground": "#96E072"
 				},
 				"namespace": {
-					"foreground": "#4ec9b0",
+					"foreground": "#4ec9b0"
 				},
 				"number": {
-					"foreground": "#00e8ef",
+					"foreground": "#00e8ef"
 				},
 				"string": {
-					"foreground": "#809980",
+					"foreground": "#809980"
 				},
 				"operator": {
-					"foreground": "#9CDCFE",
+					"foreground": "#9CDCFE"
 				},
 				"regexp": {
-					"foreground": "#646695",
+					"foreground": "#646695"
 				},
 				"struct": {
-					"foreground": "#ee5d43",
+					"foreground": "#ee5d43"
+				},
+				"generic": {
+					"foreground": "#00af00"
+				},
+				"annotation": {
+					"foreground": "#00af00"
+				},
+				"lifetime": {
+					"foreground": "#cdcdff"
 				},
 				"*.deprecated": {
 					"strikethrough": true
@@ -730,6 +739,9 @@
 	//-----------------------------------------------"
 	"vscode-neovim.neovimExecutablePaths.win32": "D:\\Tools\\WorkTool\\Text\\nvim-win64\\bin\\nvim.exe",
 	"vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\Leo-G5000\\AppData\\Local\\nvim\\init.lua",
+	"extensions.experimental.affinity": { //分配关联值以提高性能
+		"asvetliakov.vscode-neovim": 1
+	},
 	//-----------------------------------------------"
 	//               ErrorLens插件设定               "
 	//-----------------------------------------------"

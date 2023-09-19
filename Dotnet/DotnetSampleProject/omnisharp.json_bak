@@ -1,0 +1,123 @@
+{
+	"msbuild": {
+		"enabled": true,
+		"ToolsVersion": "Current",
+		"VisualStudioVersion": "17.5.002.0",
+		"Configuration": "Debug",
+		"Platform": "x64",
+		"EnablePackageAutoRestore": false,
+		"MSBuildExtensionsPath": "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild",
+		"TargetFrameworkRootPath": "C:\Windows\Microsoft.NET\Framework64\v4.0.30319",
+		"MSBuildSDKsPath": "C:\Program Files\dotnet\sdk\7.0.400\Sdks",
+		"RoslynTargetsPath": "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Roslyn",
+		"CscToolPath": "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Roslyn",
+		"CscToolExe": "csc.exe",
+		"loadProjectsOnDemand": false,
+		"GenerateBinaryLogs": false,
+		"useBundledOnly": true
+	},
+	"script": {
+		"enabled": true,
+		"defaultTargetFramework": "net6.0",
+		"enableScriptNuGetReferences": false
+	},
+	"cake": {
+		"enabled": true,
+		"bakeryPath ": null
+	},
+	"sdk": {
+		"version": "7.0.400"
+	},
+	"FormattingOptions": {
+		"EnableEditorConfigSupport": false,
+		"OrganizeImports": false,
+		"NewLine": "\n",
+		"UseTabs": false,
+		"TabSize": 4,
+		"IndentationSize": 4,
+		"SpacingAfterMethodDeclarationName": false,
+		"SpaceWithinMethodDeclarationParenthesis": false,
+		"SpaceBetweenEmptyMethodDeclarationParentheses": false,
+		"SpaceAfterMethodCallName": false,
+		"SpaceWithinMethodCallParentheses": false,
+		"SpaceBetweenEmptyMethodCallParentheses": false,
+		"SpaceAfterControlFlowStatementKeyword": true,
+		"SpaceWithinExpressionParentheses": false,
+		"SpaceWithinCastParentheses": false,
+		"SpaceWithinOtherParentheses": false,
+		"SpaceAfterCast": false,
+		"SpacesIgnoreAroundVariableDeclaration": false,
+		"SpaceBeforeOpenSquareBracket": false,
+		"SpaceBetweenEmptySquareBrackets": false,
+		"SpaceWithinSquareBrackets": false,
+		"SpaceAfterColonInBaseTypeDeclaration": true,
+		"SpaceAfterComma": true,
+		"SpaceAfterDot": false,
+		"SpaceAfterSemicolonsInForStatement": true,
+		"SpaceBeforeColonInBaseTypeDeclaration": true,
+		"SpaceBeforeComma": false,
+		"SpaceBeforeDot": false,
+		"SpaceBeforeSemicolonsInForStatement": false,
+		"SpacingAroundBinaryOperator": "single",
+		"IndentBraces": false,
+		"IndentBlock": true,
+		"IndentSwitchSection": true,
+		"IndentSwitchCaseSection": true,
+		"IndentSwitchCaseSectionWhenBlock": true,
+		"LabelPositioning": "oneLess",
+		"WrappingPreserveSingleLine": true,
+		"WrappingKeepStatementsOnSingleLine": true,
+		"NewLinesForBracesInTypes": true,
+		"NewLinesForBracesInMethods": true,
+		"NewLinesForBracesInProperties": true,
+		"NewLinesForBracesInAccessors": true,
+		"NewLinesForBracesInAnonymousMethods": true,
+		"NewLinesForBracesInControlBlocks": true,
+		"NewLinesForBracesInAnonymousTypes": true,
+		"NewLinesForBracesInObjectCollectionArrayInitializers": true,
+		"NewLinesForBracesInLambdaExpressionBody": true,
+		"NewLineForElse": true,
+		"NewLineForCatch": true,
+		"NewLineForFinally": true,
+		"NewLineForMembersInObjectInit": true,
+		"NewLineForMembersInAnonymousTypes": true,
+		"NewLineForClausesInQuery": true
+	},
+	"RoslynExtensionsOptions": {
+		"documentAnalysisTimeoutMs": 30000,
+		"enableDecompilationSupport": true,
+		"enableImportCompletion": true,
+		"enableAnalyzersSupport": true,
+		"diagnosticWorkersThreadCount": 8,
+		"locationPaths": [
+			"//path_to/code_actions.dll"
+		],
+		"inlayHintsOptions": {
+			"enableForParameters": true,
+			"forLiteralParameters": true,
+			"forIndexerParameters": true,
+			"forObjectCreationParameters": true,
+			"forOtherParameters": true,
+			"suppressForParametersThatDifferOnlyBySuffix": false,
+			"suppressForParametersThatMatchMethodIntent": false,
+			"suppressForParametersThatMatchArgumentName": false,
+			"enableForTypes": true,
+			"forImplicitVariableTypes": true,
+			"forLambdaParameterTypes": true,
+			"forImplicitObjectCreation": true
+		}
+	},
+	"fileOptions": {
+		"systemExcludeSearchPatterns": [
+			"**/node_modules/**/*",
+			"**/bin/**/*",
+			"**/obj/**/*"
+		],
+		"excludeSearchPatterns": []
+	},
+	"RenameOptions": {
+		"RenameInComments": false,
+		"RenameOverloads": false,
+		"RenameInStrings": false
+	}
+}

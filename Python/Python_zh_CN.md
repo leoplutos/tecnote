@@ -25,6 +25,14 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 更多：  
 https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
+## Python自带的编辑器 ``IDLE``
+安装 ``Python`` 之后，在如下路径可以找到 ``idle.bat``
+```
+{Python安装路径}\Lib\idlelib
+```
+双击即可启动
+
+
 ## 查看第三方库的路径
 ```
 python -m site

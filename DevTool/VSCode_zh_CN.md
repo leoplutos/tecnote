@@ -24,7 +24,12 @@ https://code.visualstudio.com/#alt-downloads
 * ~~[Whitespace++(不推荐)](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用[Visible Whitespace]~~
 * [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的 Visible Whitespace 选择一个即可
 * [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
-* [**C/C++**](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+
+* **C/C++**  
+有2套方案：  
+  - 方案1：[微软的cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)  
+  - 方案2：[clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd) + [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)  
+
 * [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
 * [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件，是个实验插件，将来会合并进 ``Python``
 * [**rust-analyzer**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust开发必备
@@ -376,6 +381,9 @@ Java: Force Java Compilation
 - [官方文档](https://help.eclipse.org/neon/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/JavaCore.html)  
 
 
+## 文件夹设置（C#工程）
+&nbsp;&nbsp;所需插件（1个）：C# Dev Kit  
+&nbsp;&nbsp;[文件夹在这里](../Dotnet/DotnetSampleProject/)
 
 ## VSCode里面跳转不可用时的解决办法
 * 1.先把相关语言的所有插件全部禁用

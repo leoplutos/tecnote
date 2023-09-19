@@ -1,0 +1,29 @@
+CompileFlags:
+    Add: 
+      [
+        -xc,
+        -Wno-documentation,
+        -Wno-missing-prototypes,
+      ]
+    #Remove: -W*
+    Compiler: gcc
+
+Diagnostics:
+  ClangTidy:
+    Add:
+    [
+        performance-*,
+        bugprone-*,
+        modernize-*,
+        clang-analyzer-*,
+        readability-identifier*,
+        readability-magic-number*,
+    ]
+    CheckOptions:
+      readability-identifier-naming.VariableCase: camelCase
+
+InlayHints:
+  Designators: Yes
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes

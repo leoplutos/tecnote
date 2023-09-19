@@ -59,7 +59,7 @@ hi SpellCap     term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercu
 hi SpellRare    term=reverse cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
 hi SpellLocal   term=underline cterm=undercurl ctermfg=203 ctermbg=234 gui=undercurl guifg=#f44747 guibg=#1e1e1e guisp=#f44747
 "弹出菜单
-hi Pmenu        ctermfg=188 ctermbg=236 guifg=#d4d4d4 guibg=#2d2d30
+hi Pmenu        ctermfg=188 ctermbg=237 guifg=#d4d4d4 guibg=#3d3d45
 hi PmenuSel     ctermfg=188 ctermbg=24 guifg=#d4d4d4 guibg=#073655
 hi PmenuSbar    ctermbg=237 guibg=#3d3d40
 hi PmenuThumb   ctermbg=250 guibg=#bbbbbb
@@ -128,10 +128,10 @@ hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#00af00
 hi clear SpecialComment
 hi! link SpecialComment Comment
 hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
-hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#c678dd
+hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#dd50dd
 hi EnumMember   term=none cterm=none ctermfg=39 gui=none guifg=#4fc1ff
 hi Property     term=none cterm=none ctermfg=43 gui=none guifg=#4ec9b0
-hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#408080
+hi Parameter    term=none cterm=none ctermfg=66 gui=none guifg=#4d8a94
 hi Struct       term=none cterm=none ctermfg=202 gui=none guifg=#ee5d43
 hi Regexp       term=none cterm=none ctermfg=60 gui=none guifg=#646695
 hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#569cd6
@@ -140,8 +140,10 @@ hi BreakPoint   term=none cterm=none ctermfg=160 gui=none guifg=#e51400
 hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
 hi ProgramCounter   term=reverse ctermbg=17 guibg=#292e52
 hi DebugLine    term=reverse ctermbg=58 guibg=#545835
-hi ToolbarLine  term=underline ctermbg=244 guibg=#7f7f7f
-hi ToolbarButton cterm=bold ctermfg=234 ctermbg=230 gui=bold guifg=#1d202f guibg=#eee8d5
+"hi ToolbarLine  term=underline ctermbg=244 guibg=#7f7f7f
+"hi ToolbarButton cterm=bold ctermfg=234 ctermbg=230 gui=bold guifg=#1d202f guibg=#eee8d5
+hi ToolbarLine  term=underline ctermbg=60 guibg=#46475c
+hi ToolbarButton cterm=bold ctermfg=234 ctermbg=73 gui=bold guifg=#1d202f guibg=#4abcc1
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough
 
 "-----------------------------------------------"

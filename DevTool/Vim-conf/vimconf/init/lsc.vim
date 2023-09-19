@@ -372,18 +372,25 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
       \ 'PreviousReference': '<C-UP>',
       \ 'FindImplementations': '<Space>gi',
       \ 'FindCodeActions': '<Space>ca',
-      \ 'Rename': '<F2>',
+      \ 'Rename': '<Space>rn',
       \ 'ShowHover': '<Space>h',
       \ 'DocumentSymbol': '<Space>gs',
       \ 'WorkspaceSymbol': '<Space>gS',
       \ 'SignatureHelp': '<Space>gm',
       \ 'Completion': 'completefunc',
       \}
+  nnoremap <Space>p  :LSClientWorkspaceSymbol<CR>
+  nnoremap <F2>      :LSClientRename<CR>
   nnoremap <C-]>     :LSClientGoToDefinition<CR>
-  "nnoremap <Space>lo :LSClientAllDiagnostics<CR><C-w>w
   nnoremap <Space>lo :LSClientWindowDiagnostics<CR><C-w>w
-  "nnoremap <Space>lc :cclose<CR>
   nnoremap <Space>lc :lclose<CR>
+  nnoremap <C-j>     :lnext<CR>
+  nnoremap <C-k>     :lprevious<CR>
+  nnoremap <Space>pd :lbefore<CR>
+  nnoremap <Space>nd :lafter<CR>
+  "nnoremap <C-S-f> :LSClientFormat<CR>
+  "vnoremap <C-S-f> :LSClientRangeFormat<CR>
+  nnoremap <C-F2>   :echo LSCServerStatus()<CR>
 
   "高亮设置
   hi clear lscReference

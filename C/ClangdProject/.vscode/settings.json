@@ -1,0 +1,40 @@
+{
+	"mingw.home": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW",
+	"ninja.home": "D:\\Tools\\WorkTool\\C\\ninja-win",
+	"clangd.path": "D:\\Tools\\WorkTool\\C\\LLVM\\clangd_16.0.2\\bin\\clangd.exe",
+	"clangd.checkUpdates": false,
+	"clangd.arguments": [
+		"--background-index", /// 在后台自动分析文件（基于complie_commands)
+		"--clang-tidy", /// clang-tidy功能
+		//"--compile-commands-dir=${workspaceFolder}/build", /// 标记compelie_commands.json文件的目录位置
+		"-j=12", /// 同时开启的任务数量
+		"--all-scopes-completion", /// 全局补全（会自动补充头文件）
+		"--completion-style=detailed", /// 更详细的补全内容
+		"--header-insertion=iwyu", /// 补充头文件的形式
+		"--pch-storage=memory", /// pch优化的位置
+		"--fallback-style=Google",
+		"--function-arg-placeholders",
+		"--enable-config",
+		"--query-driver=D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW\\bin\\gcc.exe", /// clang 路径，使用命令 which clang++ 获取的的路径
+	],
+	"terminal.integrated.automationProfile.windows": {
+		//自动化相关终端的设定(如Codelens上面的[Run]，[Debug]和其他的任务)（设定后需要重启）
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [
+			"/k",
+			"chcp",
+			"65001",
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+		//
+	},
+	"files.associations": {
+		"*.pc": "c",
+		"common.h": "c"
+	},
+}

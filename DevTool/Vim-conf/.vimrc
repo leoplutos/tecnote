@@ -339,7 +339,7 @@ function! RestUserColor(pmode)
     if (currentMode == 'i')                "插入模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
     elseif (currentMode == 'n')            "普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
     elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>" || currentMode == "\<C-vs>")      "可视模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000010 guibg=#00ff87
     elseif (currentMode == 'R')            "替换模式配色
@@ -353,12 +353,12 @@ function! RestUserColor(pmode)
     elseif (currentMode == 'r')            "确认模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000010 guibg=#d787ff
     else            "默认普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
     endif
   elseif a:pmode == 'InsertEnter'
     hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
   elseif a:pmode == 'InsertLeave'
-    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
+    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
   endif
 endfunction
 
@@ -379,13 +379,13 @@ augroup lchModeChangedGroup
 augroup END
 
 "当前编辑模式
-hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=45 gui=bold guifg=#000010 guibg=#00d7ff
+hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
 "文件名
-hi User2        term=none cterm=none ctermfg=231 ctermbg=59 gui=none guifg=#ffffff guibg=#606060
+hi User2        term=none cterm=none ctermfg=116 ctermbg=238 gui=none guifg=#7beafc guibg=#434759
 "文件编辑状态
-hi User3        term=none cterm=none ctermfg=226 ctermbg=59 gui=none guifg=#ffff00 guibg=#606060
+hi User3        term=none cterm=none ctermfg=226 ctermbg=238 gui=none guifg=#ffff00 guibg=#434759
 "LSP服务器状态
-hi User4        term=none cterm=none ctermfg=231 ctermbg=236 gui=none guifg=#ffffff guibg=#2c323c
+hi User4        term=none cterm=none ctermfg=231 ctermbg=67 gui=none guifg=#f7f7f0 guibg=#5e74a2
 
 "-----------------------------------------------"
 "               netrw设置                       "

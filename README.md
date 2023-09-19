@@ -69,6 +69,7 @@
 * [Vim-lsp](DevTool/Vim-lsp_zh_CN.md)
 * [Vim-dap](DevTool/Vim-dap_zh_CN.md)
 * [Neo-Vim](DevTool/NeoVim_zh_CN.md)
+* [Eclipse](DevTool/Eclipse_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
 * [WinSCP](DevTool/WinSCP_zh_CN.md)
@@ -76,6 +77,9 @@
 
 ## DB
 * [Postgresql](DB/Postgresql_zh_CN.md)
+
+## Mac相关
+* [Mac相关](MacOS/MacOS_zh_CN.md)
 
 ## 其他
 * [其他](Other/Other_zh_CN.md)

@@ -1,0 +1,98 @@
+{
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"PATH": "${env:path};${config:mingw.home}\\bin;${config:ninja.home}"
+		}
+	},
+	"tasks": [
+		{
+			"label": "gcc_build", //任务的名字叫gcc_build
+			"type": "shell", //任务执行的是shell命令，也可以是process
+			"command": "gcc.exe", //命令是gcc
+			"args": [
+				"-Wall", //打开所有警告
+				"-Werror",
+				"-Wfatal-errors",
+				"-Wextra",
+				"-Wpedantic",
+				"-fdiagnostics-color=always", //总是使用GCC_COLORS出力消息
+				"-g", //打开-g开启debug
+				"-x", //因为有扩展名为pc的文件，所以加上[ -x c ]指定c语言
+				"c",
+				"-fexec-charset=utf-8", //生成的程序使用utf8
+				"-DLOG_USE_COLOR", //加入log.c的彩色打印选项
+				"-DDEBUG", //加入调试标记
+				"-static-libgcc", //静态链接libgcc
+				"-std=c11", //语言标准
+				"-I./include", //导入include文件夹下的头文件
+				"src/*.c", //编译所有src下的.c的文件
+				"src/com/*.pc", //编译所有src/com下的.pc的文件
+				"src/com/*.c", //编译所有src/com下的.c的文件
+				"-o",
+				"bin/Debug/${fileBasenameNoExtension}.exe" //当前文件名（去掉扩展名）.exe
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc" //使用gcc捕获错误
+			],
+			"presentation": { //执行这个任务时的一些其他设定
+				"echo": true, //表示在执行任务时在终端要有输出
+				"reveal": "always", //执行任务时是否跳转到终端面板
+				"focus": true, //焦点聚集在终端
+				"panel": "new" //每次执行这个task时都新建一个终端面板
+			},
+			"group": { //group表示‘组’，我们可以有很多的task，然后把他们放在一个‘组’里
+				"kind": "build", //表示这一组任务类型是构建
+				"isDefault": true //默认任务
+			},
+		},
+		{
+			"label": "ninja_build",
+			"type": "shell",
+			"command": "ninja.exe",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		},
+		{
+			"label": "gcc_run",
+			"type": "shell",
+			"dependsOn": "build", //任务依赖，因为要运行必须先构建
+			"command": "chcp 65001 && ${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe",
+			"group": {
+				"kind": "test", //这一组是‘测试’组
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+	]
+}
