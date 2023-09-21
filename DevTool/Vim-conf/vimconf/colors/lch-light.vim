@@ -59,7 +59,7 @@ hi SpellCap     term=reverse cterm=undercurl ctermfg=196 ctermbg=231 gui=undercu
 hi SpellRare    term=reverse cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
 hi SpellLocal   term=underline cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
 "弹出菜单
-hi Pmenu        ctermfg=16 ctermbg=255 guifg=#000000 guibg=#efeff6
+hi Pmenu        ctermfg=16 ctermbg=230 guifg=#000000 guibg=#fdf7e5
 hi PmenuSel     ctermfg=231 ctermbg=25 guifg=#ffffff guibg=#0060c0
 hi PmenuSbar    ctermbg=251 guibg=#c6c6c6
 hi PmenuThumb   ctermbg=234 guibg=#1e1e1e
@@ -70,7 +70,7 @@ hi TabLineFill  term=reverse cterm=none ctermfg=255 ctermbg=255 gui=none guifg=#
 hi CursorColumn term=reverse ctermbg=158 guibg=#afffd7
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
-hi ColorColumn  term=reverse ctermbg=252 guibg=#d3d3d3
+hi ColorColumn  term=reverse ctermbg=254 guibg=#e8e8ef
 "QuickFixLine选中行
 hi QuickFixLine term=reverse cterm=none ctermbg=50 gui=none guibg=#00ffd7
 "终端的状态栏
@@ -134,12 +134,14 @@ hi Property     term=none cterm=none ctermfg=127 gui=none guifg=#be00be
 hi Parameter    term=none cterm=none ctermfg=30 gui=none guifg=#408080
 hi Struct       term=none cterm=none ctermfg=196 gui=none guifg=#ff0000
 hi Regexp       term=none cterm=none ctermfg=125 gui=none guifg=#811f3f
-hi Macro        term=none cterm=none ctermfg=19 gui=none guifg=#0000a0
+hi Macro        term=none cterm=none ctermfg=19 gui=none guifg=#0930aa
 hi Lifetime     term=none cterm=none ctermfg=18 gui=none guifg=#000087
 hi BreakPoint   term=none cterm=none ctermfg=160 gui=none guifg=#e51400
 hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
 hi ProgramCounter   term=reverse ctermbg=153 guibg=#cee1f2
 hi DebugLine    term=reverse ctermbg=229 guibg=#e4efb3
+"hi ToolbarLine  term=underline ctermbg=252 guibg=#d3d3d3
+"hi ToolbarButton cterm=bold ctermfg=231 ctermbg=241 gui=bold guifg=#ffffff guibg=#666666
 hi ToolbarLine  term=underline ctermbg=252 guibg=#d3d3d3
 hi ToolbarButton cterm=bold ctermfg=231 ctermbg=241 gui=bold guifg=#ffffff guibg=#666666
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough
@@ -173,6 +175,7 @@ hi netrwExe     term=standout ctermfg=23 guifg=#326464
 "               vim-lsp高亮                     "
 "-----------------------------------------------"
 hi lspReference term=reverse ctermbg=153 guibg=#add6ff
+"hi LspCodeActionText term=reverse ctermfg=16 ctermbg=143 guifg=#000000 guibg=#b5bd68
 hi LspErrorText term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 hi LspWarningText term=reverse ctermfg=16 ctermbg=226 guifg=#000000 guibg=#ffff00
 hi LspInformationText term=reverse ctermfg=16 ctermbg=33 guifg=#000000 guibg=#1a85ff

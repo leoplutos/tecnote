@@ -388,9 +388,9 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   nnoremap <C-k>     :lprevious<CR>
   nnoremap <Space>pd :lbefore<CR>
   nnoremap <Space>nd :lafter<CR>
-  "nnoremap <C-S-f> :LSClientFormat<CR>
-  "vnoremap <C-S-f> :LSClientRangeFormat<CR>
-  nnoremap <C-F2>   :echo LSCServerStatus()<CR>
+  "nnoremap <Space>fm :LSClientFormat<CR>
+  "vnoremap <Space>fr :LSClientRangeFormat<CR>
+  nnoremap <C-F2>    :echo LSCServerStatus()<CR>
 
   "高亮设置
   hi clear lscReference

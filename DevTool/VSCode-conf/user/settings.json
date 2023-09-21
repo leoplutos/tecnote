@@ -647,6 +647,7 @@
 	//-----------------------------------------------"
 	"git.enabled": false, //是否启用git组件
 	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git可执行文件的路径和文件名
+	"git.mergeEditor": true, // 启用三向合并编辑器
 	"git.autofetch": false, // git是否自动fetch
 	"git.autorefresh": true, // git是否自动刷新
 	"git.alwaysShowStagedChangesResourceGroup": true, // 始终显示“暂存的更改”资源组

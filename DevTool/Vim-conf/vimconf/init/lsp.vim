@@ -37,9 +37,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     nnoremap <buffer> <C-Down>  <plug>(lsp-next-reference)
     nnoremap <buffer> <Space>nd <plug>(lsp-next-diagnostic)
     nnoremap <buffer> <Space>pd <plug>(lsp-previous-diagnostic)
-    nnoremap <buffer> <C-S-f> :LspDocumentFormat<CR>
-    vnoremap <buffer> <C-S-f> :LspDocumentRangeFormat<CR>
-    nnoremap <buffer> <C-F2> :LspStatus<CR>
+    nnoremap <buffer> <Space>fm :LspDocumentFormat<CR>
+    vnoremap <buffer> <Space>fr :LspDocumentRangeFormat<CR>
     "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
     "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
@@ -138,6 +137,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
   augroup END
+
+  "更多语言的设定参照这里：https://github.com/mattn/vim-lsp-settings
 
   "if (g:g_use_lsp == 1)
     "使用LSP 1：C/C++(clangd)
@@ -451,6 +452,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "endif
 
     "使用CSharp（OmniSharp）
+    "在这里下载 https://github.com/OmniSharp/omnisharp-roslyn/releases
     if executable('OmniSharp')
         "设定参数参照这里
         "https://github.com/OmniSharp/omnisharp-roslyn/wiki/Configuration-Options
@@ -459,6 +461,32 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ 'cmd': {server_info->['OmniSharp', '--languageserver']},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['cs', 'solution'],
+            \ 'initialization_options': {
+            \ },
+            \ })
+    endif
+
+    "使用Cobol（che-che4z-lsp-for-cobol）
+    "在这里下载 https://github.com/eclipse-che4z/che-che4z-lsp-for-cobol/releases/download/1.2.1/cobol-language-support-1.2.1.vsix
+    "需要Java，经过测试：2.0.1至2.0.3使用都有问题，可用版本为1.2.1
+    if executable('java')
+        "设定参数参照这里
+        "https://github.com/eclipse-che4z/che-che4z-lsp-for-cobol
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'che-che4z-lsp-for-cobol',
+            \ 'cmd': {server_info->[
+            \     'java',
+            \     '--add-opens',
+            \     'java.base/java.lang=ALL-UNNAMED',
+            \     '-Dline.speparator=\r\n',
+            \     '-jar',
+            \     'D:\Tools\WorkTool\Cobol\cobol-language-support-1.2.1\extension\server\jar\server.jar',
+            "\     'D:\Tools\WorkTool\Cobol\cobol-language-support-win32-x64-2.0.3-signed\extension\server\jar\server.jar',
+            \     'pipeEnabled',
+            \     ]},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+            \ 'allowlist': ['cobol'],
+            \ 'languageId': {server_info->'cbl'},
             \ 'initialization_options': {
             \ },
             \ })
@@ -519,6 +547,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+  "Ctrl+F2显示LSP服务器状态
+  nnoremap <C-F2> :LspStatus<CR>
 
   "给状态栏设置的调用函数（返回LSP状态显示到状态栏）
   function! GetLspStatus() abort
@@ -542,6 +572,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
       let lspServerName = 'vls'
     elseif (&ft=='cs')
       let lspServerName = 'OmniSharp'
+    elseif (&ft=='cobol')
+      let lspServerName = 'che-che4z-lsp-for-cobol'
     endif
     let lspStatus = lsp#get_server_status(lspServerName)
     if (lspStatus == '') || (lspStatus == 'unknown server')

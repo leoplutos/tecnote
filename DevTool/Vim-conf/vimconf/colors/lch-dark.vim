@@ -70,7 +70,7 @@ hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=236 gui=none guifg=#
 hi CursorColumn term=reverse ctermbg=233 guibg=#121212
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=226 gui=none guifg=#ffff00
-hi ColorColumn  term=reverse ctermbg=238 guibg=#4f4355
+hi ColorColumn  term=reverse ctermbg=236 guibg=#2e2e2e
 "QuickFixLine选中行
 hi QuickFixLine term=reverse cterm=none ctermbg=24 gui=none guibg=#264f78
 "终端的状态栏
@@ -175,6 +175,7 @@ hi netrwExe     term=standout ctermfg=150 guifg=#98c379
 "               vim-lsp高亮                     "
 "-----------------------------------------------"
 hi lspReference term=reverse ctermbg=237 guibg=#3a3d41
+"hi LspCodeActionText term=reverse ctermfg=16 ctermbg=143 guifg=#000000 guibg=#b5bd68
 hi LspErrorText term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 hi LspWarningText term=reverse ctermfg=16 ctermbg=226 guifg=#000000 guibg=#ffff00
 hi LspInformationText term=reverse ctermfg=16 ctermbg=38 guifg=#000000 guibg=#0db9d7
