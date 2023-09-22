@@ -1,5 +1,9 @@
 # Go语言相关
 
+## Go语言教程
+微软出品的Go语言教程：  
+https://learn.microsoft.com/zh-cn/training/paths/go-first-steps/  
+
 ## 下载
 Go语言的官方下载地址是：  
 https://golang.org/dl/  

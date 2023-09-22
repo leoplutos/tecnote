@@ -49,6 +49,7 @@
 ## Java相关
 * [Java相关](Java/Java_zh_CN.md)
 * [Java-Maven相关](Java/Java-Maven_zh_CN.md)
+* [Kotlin相关](Java/Kotlin_zh_CN.md)
 
 ## Dotnet相关
 * [Dotnet相关](Dotnet/Dotnet_zh_CN.md)
@@ -84,6 +85,7 @@
 ## 其他
 * [其他](Other/Other_zh_CN.md)
 * [字体](Other/Font_zh_CN.md)
+* [Chrome](Other/Chrome_zh_CN.md)
 * [Cobol](Other/Cobol_zh_CN.md)
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)

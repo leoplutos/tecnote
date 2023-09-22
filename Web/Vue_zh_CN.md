@@ -1,5 +1,8 @@
 # Vue相关
 
+## Vue官方中文教程：  
+https://cn.vuejs.org/guide/introduction.html  
+
 ## 创建 vue工程
 ``Vue`` 需要 ``Node.js``，安装好 ``Node.js``后运行如下命令创建 ``Vue`` 工程
 ```

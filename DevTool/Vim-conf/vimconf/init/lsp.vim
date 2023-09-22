@@ -163,7 +163,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '--query-driver=gcc',
             \     ]},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-            \ 'whitelist': ['c', 'pc', 'cpp', 'objc', 'objcpp'],
+            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
             \ })
     endif
 
@@ -453,6 +453,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 
     "使用CSharp（OmniSharp）
     "在这里下载 https://github.com/OmniSharp/omnisharp-roslyn/releases
+    "遇到出错，删除bin和obj文件夹下所有内容即可
     if executable('OmniSharp')
         "设定参数参照这里
         "https://github.com/OmniSharp/omnisharp-roslyn/wiki/Configuration-Options
@@ -489,6 +490,32 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ 'languageId': {server_info->'cbl'},
             \ 'initialization_options': {
             \ },
+            \ })
+    endif
+
+    "使用JavaScript和TypeScript（typescript-language-server）
+    "安装命令：npm install -g typescript typescript-language-server
+    if executable('typescript-language-server')
+        "设定参数参照这里
+        "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'typescript-language-server',
+            \ 'cmd': {server_info->['typescript-language-server.cmd', '--stdio']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+            \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
+            \ })
+    endif
+
+    "使用Kotlin（kotlin-language-server）
+    "在这里下载 https://github.com/fwcd/kotlin-language-server/releases/
+    if executable('kotlin-language-server')
+        "设定参数参照这里
+        "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'kotlin-language-server',
+            \ 'cmd': {server_info->['kotlin-language-server.bat']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+            \ 'allowlist': ['kotlin'],
             \ })
     endif
 
@@ -553,7 +580,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "给状态栏设置的调用函数（返回LSP状态显示到状态栏）
   function! GetLspStatus() abort
     let lspServerName = ''
-    if (&ft=='c') || (&ft=='pc') || (&ft=='cpp') || (&ft=='objc') || (&ft=='objcpp')
+    if (&ft=='c') || (&ft=='cpp') || (&ft=='objc') || (&ft=='objcpp')
       let lspServerName = 'clangd'
     elseif (&ft=='python')
       let lspServerName = 'pylsp'
@@ -566,14 +593,18 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
       let lspServerName = 'eclipse.jdt.ls'
     elseif (&ft=='rust')
       let lspServerName = 'rust-analyzer'
-    elseif (&ft=='go')
+    elseif (&ft=='go') || (&ft=='gomod') || (&ft=='gohtmltmpl') || (&ft=='gotexttmpl')
       let lspServerName = 'gopls'
     elseif (&ft=='vue')
       let lspServerName = 'vls'
-    elseif (&ft=='cs')
+    elseif (&ft=='cs') || (&ft=='solution')
       let lspServerName = 'OmniSharp'
     elseif (&ft=='cobol')
       let lspServerName = 'che-che4z-lsp-for-cobol'
+    elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')
+      let lspServerName = 'typescript-language-server'
+    elseif (&ft=='kotlin')
+      let lspServerName = 'kotlin-language-server'
     endif
     let lspStatus = lsp#get_server_status(lspServerName)
     if (lspStatus == '') || (lspStatus == 'unknown server')
