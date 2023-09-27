@@ -51,4 +51,61 @@ ginit.vim
 笔者主要用 ``VS Code`` 的 ``Neovim`` 插件，所以配置主要用于 ``VS Code`` 的使用
 * [Neovim-conf](Neovim-conf)
 
+## Neovim安装插件
+在路径
+```
+%LOCALAPPDATA%\nvim
+```
+下依次新建文件夹
+```
+pack/vendor/opt
+pack/vendor/start
+```
+将插件放到 ``opt`` 文件夹内，``packadd`` 即可
+
+## GUI前端Neovide
+NeoVim 自带的 GUI 前端是基于 qt 的，笔者不太喜欢，用起来延迟很高。  
+使用 ``Neovide`` 这个 rust 开发的 GUI 前端体验会更好  
+官网：https://neovide.dev/  
+Github：https://github.com/neovide/neovide  
+下载：https://github.com/neovide/neovide/releases  
+最新版：https://github.com/neovide/neovide/releases/download/0.11.2/neovide.exe.zip  
+
+#### 启动
+下载好执行文件之后，如果 ``nvim.exe`` 在环境变量里直接运行 ``neovide.exe`` 即可  
+如果环境受限无法修改环境变量可以用如下方式启动，新建 ``neovide.cmd`` 内容如下
+```
+set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
+start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe
+::start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe --neovim-bin D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
+```
+
+## LSP
+Neovim 内置 LSP 的 client 端。只需要4步
+1. 安装 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+2. 安装对应 language server
+3. 配置对应语言 ``require('lspconfig').xx.setup{…}``
+4. ``:lua print(vim.inspect(vim.lsp.buf_get_clients()))`` 查看 LSP 连接状态
+
+## 其他
+
+#### 查看高亮组信息
+Neovim 的内部命令 ``:Inspect`` 可以查看当前光标下的高亮组信息
+
+#### 发生错误 E576
+```
+E576: Error while reading ShaDa file: last entry specified that it occupies 143 bytes Windows Neovim
+```
+删除如下文件夹当中的内容即可  
+Linux
+```
+rm ~/.local/share/nvim/shada/*
+```
+Windows
+```
+%LOCALAPPDATA%\nvim-data
+```
+
+#### 在 neovim 中使用 Lua
+https://gitee.com/zhengqijun/nvim-lua-guide-zh
 

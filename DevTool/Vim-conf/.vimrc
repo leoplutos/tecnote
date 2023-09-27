@@ -460,6 +460,7 @@ endfunction
 "               颜色设置                        "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
+"exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-light.vim'
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
@@ -615,6 +616,8 @@ if (v:version > 799)
   else
     "使用LSP
 
+    if (g:g_nvim_flg == 0)
+    "非neovim下使用LSP插件（neovim下使用nvim-lspconfig，在init.lua中设置）
     if (g:g_lsp_type == 0)
       "加载LSP设置（vim-lsp）
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
@@ -624,6 +627,7 @@ if (v:version > 799)
     elseif (g:g_lsp_type == 2)
       "加载LSP设置（LanguageClient-neovim）
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
+    endif
     endif
 
     "vim-auto-popmenu（自动补全）
@@ -637,7 +641,7 @@ if (v:version > 799)
     \    'bc':1, 'bdf':1, 'bib':1, 'bindzone':1, 'blank':1, 'bsdl':1, 'bst':1, 'btm':1, 'bzl':1, 'bzr':1, 'cabal':1, 'cabalconfig':1, 'cabalproject':1, 'calendar':1, 'catalog':1,
     \    'cdl':1, 'cdrdaoconf':1, 'cdrtoc':1, 'cf':1, 'cfg':1, 'ch':1, 'chaiscript':1, 'change':1, 'changelog':1, 'chaskell':1, 'cheetah':1, 'chicken':1, 'chill':1, 'chordpro':1, 'cl':1,
     \    'clean':1, 'clipper':1, 'clojure':1, 'cmake':1, 'cmod':1, 'cmusrc':1, 'coco':1, 'colortest':1, 'conaryrecipe':1, 'conf':1, 'config':1, 'confini':1, 'context':1,
-    \    'crm':1, 'crontab':1, 'csc':1, 'csdl':1, 'csh':1, 'csp':1, 'css':1, 'cterm':1, 'ctrlh':1, 'cucumber':1, 'cuda':1, 'cupl':1, 'cuplsim':1, 'cvs':1, 'cvsrc':1, 'cweb':1,
+    \    'crm':1, 'crontab':1, 'csc':1, 'csdl':1, 'csh':1, 'csp':1, 'css':1, 'cterm':1, 'ctrlh':1, 'cucumber':1, 'cupl':1, 'cuplsim':1, 'cvs':1, 'cvsrc':1, 'cweb':1,
     \    'cynlib':1, 'cynpp':1, 'd':1, 'dart':1, 'datascript':1, 'dcd':1, 'dcl':1, 'debchangelog':1, 'debcontrol':1, 'debcopyright':1, 'debsources':1, 'def':1, 'denyhosts':1, 'dep3patch':1,
     \    'desc':1, 'desktop':1, 'dictconf':1, 'dictdconf':1, 'diff':1, 'dircolors':1, 'dirpager':1, 'diva':1, 'django':1, 'dns':1, 'dnsmasq':1, 'docbk':1, 'docbksgml':1, 'docbkxml':1, 'dockerfile':1,
     \    'dosbatch':1, 'dosini':1, 'dot':1, 'doxygen':1, 'dracula':1, 'dsl':1, 'dtd':1, 'dtml':1, 'dtrace':1, 'dts':1, 'dune':1, 'dylan':1, 'dylanintr':1, 'dylanlid':1, 'ecd':1, 'edif':1,
@@ -657,7 +661,7 @@ if (v:version > 799)
     \    'neomuttrc':1, 'netrc':1, 'netrw':1, 'nginx':1, 'ninja':1, 'nosyntax':1, 'nqc':1, 'nroff':1, 'nsis':1, 'obj':1, 'ocaml':1, 'occam':1, 'omnimark':1, 'opam':1, 'openroad':1,
     \    'openscad':1, 'opl':1, 'ora':1, 'pamconf':1, 'pamenv':1, 'papp':1, 'pascal':1, 'passwd':1, 'pbtxt':1, 'pcap':1, 'pccts':1, 'pdf':1, 'perl':1, 'pf':1, 'pfmain':1, 'php':1, 'phtml':1, 'pic':1,
     \    'pike':1, 'pilrc':1, 'pine':1, 'pinfo':1, 'plaintex':1, 'pli':1, 'plm':1, 'plp':1, 'plsql':1, 'po':1, 'pod':1, 'poke':1, 'postscr':1, 'pov':1, 'povini':1, 'ppd':1, 'ppwiz':1, 'prescribe':1,
-    \    'privoxy':1, 'procmail':1, 'progress':1, 'prolog':1, 'promela':1, 'proto':1, 'protocols':1, 'ps1':1, 'ps1xml':1, 'psf':1, 'psl':1, 'ptcap':1, 'purifylog':1, 'pyrex':1, 'qb64':1,
+    \    'privoxy':1, 'procmail':1, 'progress':1, 'prolog':1, 'promela':1, 'protocols':1, 'ps1':1, 'ps1xml':1, 'psf':1, 'psl':1, 'ptcap':1, 'purifylog':1, 'pyrex':1, 'qb64':1,
     \    'qf':1, 'quake':1, 'r':1, 'racc':1, 'radiance':1, 'raku':1, 'raml':1, 'ratpoison':1, 'rc':1, 'rcs':1, 'rcslog':1, 'readline':1, 'README.txt':1, 'rebol':1, 'redif':1, 'registry':1, 'rego':1,
     \    'remind':1, 'resolv':1, 'reva':1, 'rexx':1, 'rhelp':1, 'rib':1, 'rmd':1, 'rnc':1, 'rng':1, 'rnoweb':1, 'robots':1, 'routeros':1, 'rpcgen':1, 'rpl':1, 'rrst':1, 'rst':1, 'rtf':1, 'ruby':1,
     \    'samba':1, 'sas':1, 'sass':1, 'sather':1, 'sbt':1, 'scala':1, 'scdoc':1, 'scheme':1, 'scilab':1, 'screen':1, 'scss':1, 'sd':1, 'sdc':1, 'sdl':1, 'sed':1, 'sendpr':1, 'sensors':1,
@@ -672,7 +676,7 @@ if (v:version > 799)
     \    'usserverlog':1, 'usw2kagtlog':1, 'valgrind':1, 'vb':1, 'vera':1, 'verilog':1, 'verilogams':1, 'vgrindefs':1, 'vhdl':1, 'vim':1, 'viminfo':1, 'virata':1, 'vmasm':1, 'voscm':1, 'vrml':1,
     \    'vroom':1, 'vsejcl':1, 'wast':1, 'wdiff':1, 'web':1, 'webmacro':1, 'wget':1, 'wget2':1, 'whitespace':1, 'winbatch':1, 'wml':1, 'wsh':1, 'wsml':1, 'wvdial':1, 'xbl':1, 'xdefaults':1,
     \    'xf86conf':1, 'xhtml':1, 'xinetd':1, 'xkb':1, 'xmath':1, 'xml':1, 'xmodmap':1, 'xpm':1, 'xpm2':1, 'xquery':1, 'xs':1, 'xsd':1, 'xslt':1, 'xxd':1, 'yacc':1, 'yaml':1, 'z8a':1, 'zimbu':1, 'zsh':1,
-    "\    'c':1, 'cpp':1, 'objc':1, 'objcpp':1,
+    "\    'c':1, 'cpp':1, 'objc':1, 'objcpp':1, 'cuda':1, 'proto':1,
     "\    'python':1,
     "\    'java':1,
     "\    'rust':1,
@@ -699,8 +703,13 @@ if (v:version > 799)
     "不使用DAP
   else
     "使用DAP
+
+    if (g:g_nvim_flg == 0)
+    "非neovim下使用DAP插件（neovim下使用nvim-dap，在init.lua中设置）
     "加载DAP设置
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
+    endif
+
   endif
 
   "加载开始导航页面设置

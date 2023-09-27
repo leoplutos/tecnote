@@ -1,4 +1,4 @@
---init.lua for neovim
+--init.lua
 --配置路径为 %LOCALAPPDATA%\nvim
 
 --设置语言
@@ -42,66 +42,77 @@ else
   --加载vim的vimrc配置
   vim.cmd('source ~\\.vimrc')
 
-  -- 加载nvim-tree
-  vim.cmd('packadd nvim-tree.lua')
-  -- 禁用netrw
-  vim.g.loaded_netrw = 1
-  vim.g.loaded_netrwPlugin = 1
+  --设置package.path路径以便加载lua文件夹下的内容
+  package.path = package.path ..';..\\?.lua';
+  -- vim.cmd [[set packpath+=" . g:g_s_rcfilepath . '/vimconf]]
+  -- vim.cmd [[set runtimepath+=" . g:g_s_rcfilepath . '/vimconf]]
+
   -- 开启gui高亮
   vim.opt.termguicolors = true
+  vim.g.mapleader = "\\"
 
-  -- 自定义快捷键
-  local function my_on_attach(bufnr)
-    local api = require "nvim-tree.api"
+  -- 加载lua/tree.lua
+  require('tree')
+  -- 加载lua/webdevicons.lua
+  --require('webdevicons')
+  -- 加载lua/lsp.lua
+  require('lsp')
 
-    local function opts(desc)
-      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-    end
+  -- 加载tokyonight.nvim
+  --vim.cmd('packadd tokyonight.nvim')
+  --vim.cmd('colorscheme tokyonight-storm')
+  --vim.cmd('colorscheme tokyonight-day')
 
-    -- default mappings
-    api.config.mappings.default_on_attach(bufnr)
+  if vim.g.neovide then
+    -- GUI前端Neovide的设定
+    vim.o.guifont = "等距更纱黑体_SC,更紗等幅ゴシック_J:h12"
+    vim.opt.linespace = 0
+    -- vim.g.neovide_scale_factor = 1.0
+    -- vim.g.neovide_padding_top = 0
+    -- vim.g.neovide_padding_bottom = 0
+    -- vim.g.neovide_padding_right = 0
+    -- vim.g.neovide_padding_left = 0
+    -- vim.g.neovide_floating_blur_amount_x = 2.0
+    -- vim.g.neovide_floating_blur_amount_y = 2.0
+    -- vim.g.neovide_transparency = 0.8
+    -- vim.g.neovide_scroll_animation_length = 0.3
+    vim.g.neovide_hide_mouse_when_typing = true
+    -- vim.g.neovide_underline_automatic_scaling = false
+    -- vim.g.neovide_theme = 'auto'
+    -- vim.g.neovide_refresh_rate = 60
+    -- vim.g.neovide_refresh_rate_idle = 5
+    -- vim.g.neovide_no_idle = true
+    vim.g.neovide_confirm_quit = true
+     -- vim.g.neovide_fullscreen = true
+    -- vim.g.neovide_remember_window_size = true
+    -- vim.g.neovide_profiler = false
+    -- vim.g.neovide_input_macos_alt_is_meta = false
+    -- vim.g.neovide_input_ime = true
+    -- vim.g.neovide_touch_deadzone = 6.0
+    -- vim.g.neovide_touch_drag_timeout = 0.17
+    -- vim.g.neovide_cursor_animation_length = 0.13
+    -- vim.g.neovide_cursor_trail_size = 0.8
+    -- vim.g.neovide_cursor_antialiasing = true
+    -- vim.g.neovide_cursor_animate_in_insert_mode = true
+    -- vim.g.neovide_cursor_animate_command_line = true
+    -- vim.g.neovide_cursor_unfocused_outline_width = 0.125
+    -- vim.g.neovide_cursor_vfx_mode = ""
+    -- vim.g.neovide_cursor_vfx_mode = "railgun"
+    -- vim.g.neovide_cursor_vfx_mode = "torpedo"
+    -- vim.g.neovide_cursor_vfx_mode = "pixiedust"
+    -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
+    -- vim.g.neovide_cursor_vfx_mode = "ripple"
+    -- vim.g.neovide_cursor_vfx_mode = "wireframe"
+    -- vim.g.neovide_cursor_vfx_opacity = 200.0
+    -- vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
+    -- vim.g.neovide_cursor_vfx_particle_density = 7.0
+    -- vim.g.neovide_cursor_vfx_particle_speed = 10.0
+    -- vim.g.neovide_cursor_vfx_particle_phase = 1.5
+    -- vim.g.neovide_cursor_vfx_particle_curl = 1.0
 
-    -- custom mappings
-    vim.keymap.set('n', '<CR>', api.node.open.tab,        opts('Open: New Tab'))
-    vim.keymap.set('n', 't',    api.node.open.tab,        opts('Open: New Tab'))
-    vim.keymap.set('n', 'v',    api.node.open.edit,       opts('Open'))
+    -- 添加快捷键绑定
+    -- Shift+Insert：粘贴
+    vim.keymap.set({"c", "i"}, "<S-Insert>", "<C-R>+", { noremap = true })
   end
-
-  -- 加载nvim-tree参数
-  require("nvim-tree").setup({
-    sort = {
-      sorter = "case_sensitive",
-    },
-    view = {
-      width = 30,
-    },
-    renderer = {
-      group_empty = true,
-      icons = {
-        show = {
-          file = false,
-          folder = false,
-          folder_arrow = true,
-          git = false,
-          modified = false,
-        },
-        glyphs = {
-          bookmark = "=",
-          folder = {
-            arrow_closed = "⏵",
-            arrow_open = "⏷",
-          },
-        },
-      },
-    },
-    filters = {
-      dotfiles = true,
-    },
-    git = {
-      enable = false,
-    },
-    on_attach = my_on_attach,
-  })
-
 
 end

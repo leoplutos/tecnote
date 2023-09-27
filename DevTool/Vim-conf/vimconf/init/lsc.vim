@@ -364,30 +364,30 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \}
 
   "快捷键映射
-  let g:lsc_auto_map = {
-      \ 'GoToDefinition': '<Space>gd',
-      "\ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
-      \ 'FindReferences': '<Space>gr',
-      \ 'NextReference': '<C-Down>',
-      \ 'PreviousReference': '<C-UP>',
-      \ 'FindImplementations': '<Space>gi',
-      \ 'FindCodeActions': '<Space>ca',
-      \ 'Rename': '<Space>rn',
-      \ 'ShowHover': '<Space>h',
-      \ 'DocumentSymbol': '<Space>gs',
-      \ 'WorkspaceSymbol': '<Space>gS',
-      \ 'SignatureHelp': '<Space>gm',
-      \ 'Completion': 'completefunc',
-      \}
-  nnoremap <Space>p  :LSClientWorkspaceSymbol<CR>
-  nnoremap <F2>      :LSClientRename<CR>
-  nnoremap <C-]>     :LSClientGoToDefinition<CR>
   nnoremap <Space>lo :LSClientWindowDiagnostics<CR><C-w>w
   nnoremap <Space>lc :lclose<CR>
   nnoremap <C-j>     :lnext<CR>
   nnoremap <C-k>     :lprevious<CR>
-  nnoremap <Space>pd :lbefore<CR>
-  nnoremap <Space>nd :lafter<CR>
+  let g:lsc_auto_map = {
+      \ 'FindCodeActions': '<Space>ca',
+      \ 'GoToDefinition': '<Space>gd',
+      "\ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
+      \ 'DocumentSymbol': '<Space>gs',
+      \ 'WorkspaceSymbol': '<Space>gS',
+      \ 'FindReferences': '<Space>gr',
+      \ 'FindImplementations': '<Space>gi',
+      \ 'Rename': '<Space>rn',
+      \ 'ShowHover': '<Space>h',
+      \ 'PreviousReference': '<C-UP>',
+      \ 'NextReference': '<C-Down>',
+      \ 'SignatureHelp': '<Space>gm',
+      \ 'Completion': 'completefunc',
+      \}
+  nnoremap <C-]>     :LSClientGoToDefinition<CR>
+  nnoremap <Space>p  :LSClientWorkspaceSymbol<CR>
+  nnoremap <F2>      :LSClientRename<CR>
+  nnoremap <Space>gn :lafter<CR>
+  nnoremap <Space>gp :lbefore<CR>
   "nnoremap <Space>fm :LSClientFormat<CR>
   "vnoremap <Space>fr :LSClientRangeFormat<CR>
   nnoremap <C-F2>    :echo LSCServerStatus()<CR>

@@ -57,16 +57,16 @@ set NODEJS_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64
 set PATH=%PATH%;%NODEJS_HOME%
 set NODEJS_GLOBAL_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global
 set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
-set GOROOT=D:\Tools\WorkTool\Go\go1.21.0.windows-amd64
+set GOROOT=D:\Tools\WorkTool\Go\go1.21.1.windows-amd64
 set GOPATH=D:\Tools\WorkTool\Go\go_global
 set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 
 ::设置常用路径
-set app=D:\WorkSpace\Rust\hello_world
-set bin=D:\WorkSpace\Rust\hello_world\target\debug
-set log=D:\WorkSpace\Rust\hello_world\log
+set app=D:\WorkSpace\Rust\minigrep
+set bin=D:\WorkSpace\Rust\minigrep\target\debug
+set log=D:\WorkSpace\Rust\minigrep\testdir
 
 ::设置别名
 doskey ls=dir /b $*

@@ -21,7 +21,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     nnoremap <buffer> <C-k> :lprevious<CR>
     nnoremap <buffer> <Space>ca <plug>(lsp-code-action-float)
     nnoremap <buffer> <Space>gd <plug>(lsp-definition)
-    nnoremap <buffer> <C-]>     <plug>(lsp-definition)
+    "nnoremap <buffer> <C-]>     <plug>(lsp-definition)
     nnoremap <buffer> <Space>gs <plug>(lsp-document-symbol-search)
     nnoremap <buffer> <Space>gS <plug>(lsp-workspace-symbol-search)
     nnoremap <buffer> <Space>p <plug>(lsp-workspace-symbol-search)
@@ -30,17 +30,17 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     nnoremap <buffer> <Space>gt <plug>(lsp-type-definition)
     nnoremap <buffer> <Space>rn <plug>(lsp-rename)
     nnoremap <buffer> <F2> <plug>(lsp-rename)
-    nnoremap <buffer> <Space>[g <plug>(lsp-previous-diagnostic)
-    nnoremap <buffer> <Space>]g <plug>(lsp-next-diagnostic)
+    "nnoremap <buffer> <Space>[g <plug>(lsp-previous-diagnostic)
+    "nnoremap <buffer> <Space>]g <plug>(lsp-next-diagnostic)
+    nnoremap <buffer> <Space>gn <plug>(lsp-next-diagnostic)
+    nnoremap <buffer> <Space>gp <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> <Space>h  <plug>(lsp-hover-float)
     nnoremap <buffer> <C-UP>    <plug>(lsp-previous-reference)
     nnoremap <buffer> <C-Down>  <plug>(lsp-next-reference)
-    nnoremap <buffer> <Space>nd <plug>(lsp-next-diagnostic)
-    nnoremap <buffer> <Space>pd <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> <Space>fm :LspDocumentFormat<CR>
     vnoremap <buffer> <Space>fr :LspDocumentRangeFormat<CR>
-    "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+    nnoremap <buffer> <expr><C-d> lsp#scroll(+4)
+    nnoremap <buffer> <expr><C-u> lsp#scroll(-4)
 
     let g:lsp_format_sync_timeout = 1000
     "autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
@@ -163,7 +163,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '--query-driver=gcc',
             \     ]},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto'],
             \ })
     endif
 
@@ -193,7 +193,10 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \         'autopep8': {'enabled': v:false},
             \         'flake8': {'enabled': v:false},
             \         'pylint': {'enabled': v:false},
-            \         'pycodestyle': {'enabled': v:true},
+            \         'pycodestyle': {
+            \             'enabled': v:true,
+            \             'ignore': ['E401', 'E402', 'E501'],
+            \         },
             \         'jedi': {
             \             'auto_import_modules': ['gi'],
             \             'extra_paths': ['src', 'src/com', 'com'],
@@ -306,7 +309,6 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "elseif (g:g_use_lsp == 3)
     "使用LSP 3：Java(eclipse.jdt.ls)
     "在这里下载 https://download.eclipse.org/jdtls/milestones/
-
     if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'eclipse.jdt.ls',
@@ -333,7 +335,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \     '-data',
            "\     getcwd()
            "\     g:g_s_projectrootpath.'/.lsp'
-            \     'D:/WorkSpace/Java',
+           "\     'D:/WorkSpace/Java',
+            \     $HOME.'/.cache/vim-lsp-jdtls',
             \ ]},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'whitelist': ['java'],
@@ -387,7 +390,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
             \ 'name': 'gopls',
             \ 'cmd': {server_info->['gopls', '-remote=auto']},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-            \ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl'],
+            \ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl', 'gowork', 'gotmpl'],
             \ 'workspace_config': {},
             \ 'initialization_options': {
             "\     'formatting.gofumpt': v:true,
@@ -437,17 +440,34 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     endif
 
   "elseif (g:g_use_lsp == 6)
-    "使用LSP 6：Vue(vls)
-    "安装命令：npm install vls -g
-
-    if executable('vls')
+    "使用LSP 6：Vue(volar-language-server)
+    "注：@vue/language-server即是Volar，而下面的vls是Vetur
+    "安装命令：npm install -g @vue/language-server
+    if executable('vue-language-server')
+        "设定参数参照这里
+        "https://github.com/vuejs/language-tools
         au User lsp_setup call lsp#register_server({
-            \ 'name': 'vls',
-            \ 'cmd': {server_info->['vls.cmd', '--stdio']},
+            \ 'name': 'volar-language-server',
+            \ 'cmd': {server_info->['vue-language-server.cmd', '--stdio']},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['vue'],
+            \ 'initialization_options': {
+            \     'textDocumentSync': 2,
+            \     'typescript': {
+            \         'tsdk': 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib',
+            \     },
+            \ },
             \ })
     endif
+    "[废弃]安装命令：npm install vls -g
+    "if executable('vls')
+    "    au User lsp_setup call lsp#register_server({
+    "        \ 'name': 'vls',
+    "        \ 'cmd': {server_info->['vls.cmd', '--stdio']},
+    "        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+    "        \ 'allowlist': ['vue'],
+    "        \ })
+    "endif
 
   "endif
 
@@ -459,7 +479,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
         "https://github.com/OmniSharp/omnisharp-roslyn/wiki/Configuration-Options
         au User lsp_setup call lsp#register_server({
             \ 'name': 'OmniSharp',
-            \ 'cmd': {server_info->['OmniSharp', '--languageserver']},
+            \ 'cmd': {server_info->['OmniSharp', '-z', '--languageserver', '--encoding', 'utf-8', 'DotNet:enablePackageRestore=false']},
             \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
             \ 'allowlist': ['cs', 'solution'],
             \ 'initialization_options': {
@@ -580,7 +600,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "给状态栏设置的调用函数（返回LSP状态显示到状态栏）
   function! GetLspStatus() abort
     let lspServerName = ''
-    if (&ft=='c') || (&ft=='cpp') || (&ft=='objc') || (&ft=='objcpp')
+    if (&ft=='c') || (&ft=='cpp') || (&ft=='objc') || (&ft=='objcpp') || (&ft=='cuda') || (&ft=='proto')
       let lspServerName = 'clangd'
     elseif (&ft=='python')
       let lspServerName = 'pylsp'
@@ -596,7 +616,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
     elseif (&ft=='go') || (&ft=='gomod') || (&ft=='gohtmltmpl') || (&ft=='gotexttmpl')
       let lspServerName = 'gopls'
     elseif (&ft=='vue')
-      let lspServerName = 'vls'
+      let lspServerName = 'volar-language-server'
     elseif (&ft=='cs') || (&ft=='solution')
       let lspServerName = 'OmniSharp'
     elseif (&ft=='cobol')

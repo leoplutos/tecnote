@@ -1,6 +1,7 @@
 scriptencoding utf-8
 "ginit.vim
 "配置路径为 %LOCALAPPDATA%\nvim
+"nvim-qt专用配置文件
 
 "设置字体
 GuiFont 等距更纱黑体 SC:h10

@@ -63,10 +63,13 @@ hi Pmenu        ctermfg=188 ctermbg=237 guifg=#d4d4d4 guibg=#3d3d45
 hi PmenuSel     ctermfg=188 ctermbg=24 guifg=#d4d4d4 guibg=#073655
 hi PmenuSbar    ctermbg=237 guibg=#3d3d40
 hi PmenuThumb   ctermbg=250 guibg=#bbbbbb
+hi PmenuMatch   cterm=bold ctermfg=74 gui=bold guifg=#009fd7
+hi PmenuMatchFuzzy cterm=bold ctermfg=149 gui=bold guifg=#bde052
+hi PmenuDeprecated   term=strikethrough cterm=strikethrough ctermfg=241 gui=strikethrough guifg=#5f6167 guisp=#ff0000
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=248 ctermbg=238 gui=none guifg=#a8a8a8 guibg=#444444
-hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=234 gui=none guifg=#ffffff guibg=#1e1e1e
-hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=236 gui=none guifg=#d4d4d4 guibg=#2e2e2e
+hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=108 gui=none guifg=#ffffff guibg=#96b38c
+hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=239 gui=none guifg=#d4d4d4 guibg=#514746
 hi CursorColumn term=reverse ctermbg=233 guibg=#121212
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=226 gui=none guifg=#ffff00
@@ -119,6 +122,7 @@ hi Number       term=none cterm=none ctermfg=45 gui=none guifg=#00e8ef
 hi Function     term=none cterm=none ctermfg=113 gui=none guifg=#96E072
 "Structure  : 结构体
 hi Structure    term=none cterm=none ctermfg=202 gui=none guifg=#ee5d43
+hi Debug        term=none cterm=none ctermfg=216 gui=none guifg=#ff9e64
 "自定义-Variables
 hi Variables    term=none cterm=none ctermfg=187 gui=none guifg=#d4d4b0
 hi clear Typedef
@@ -144,7 +148,7 @@ hi DebugLine    term=reverse ctermbg=58 guibg=#545835
 "hi ToolbarButton cterm=bold ctermfg=234 ctermbg=230 gui=bold guifg=#1d202f guibg=#eee8d5
 hi ToolbarLine  term=underline ctermbg=60 guibg=#46475c
 hi ToolbarButton cterm=bold ctermfg=234 ctermbg=73 gui=bold guifg=#1d202f guibg=#4abcc1
-hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough
+hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -184,8 +188,8 @@ hi LspErrorHighlight term=standout cterm=undercurl gui=undercurl guisp=#ff0000
 hi LspWarningHighlight term=standout cterm=undercurl gui=undercurl guisp=#ffff00
 hi LspInformationHighlight term=standout cterm=undercurl gui=undercurl guisp=#0db9d7
 hi LspHintHighlight term=standout cterm=undercurl gui=undercurl guisp=#1abc9c
-hi LspErrorVirtualText term=reverse ctermfg=167 ctermbg=236 guifg=#db4b4b guibg=#362c3d
-hi LspWarningVirtualText term=reverse ctermfg=179 ctermbg=237     guifg=#e0af68 guibg=#373640
+hi LspErrorVirtualText term=reverse ctermfg=203 ctermbg=236 guifg=#ff4b4b guibg=#362c3d
+hi LspWarningVirtualText term=reverse ctermfg=178 ctermbg=237 guifg=#e0af30 guibg=#373640
 hi LspInformationVirtualText term=reverse ctermfg=38 ctermbg=237 guifg=#0db9d7 guibg=#22374b
 hi LspHintVirtualText term=reverse ctermfg=36 ctermbg=236 guifg=#1abc9c guibg=#233745
 
@@ -207,6 +211,163 @@ hi link TagbarScope ThinTitle
 "               NeoVim高亮                      "
 "-----------------------------------------------"
 if has('nvim')
+  "基础区域
+  hi clear TermCursor
+  hi! link TermCursor Cursor
+  "TermCursorNC
+  hi MsgArea term=none cterm=none ctermfg=189 gui=none guifg=#c0caf5
+  hi MsgSeparator term=none cterm=none ctermfg=146 ctermbg=235 gui=none guifg=#a9b1d6 guibg=#1f2335
+  hi clear NormalFloat
+  hi! link NormalFloat Pmenu
+  hi FloatBorder term=none cterm=none ctermfg=51 ctermbg=51 gui=none guifg=#00ffff guibg=#00ffff
+  hi clear FloatTitle
+  hi! link FloatTitle Title
+  "hi clear NormalNC
+  "hi! link NormalNC Normal
   hi clear WinSeparator
   hi! link WinSeparator VertSplit
+  "hi clear PmenuKind
+  "hi! link PmenuKind Pmenu
+  "hi clear PmenuKindSel
+  "hi! link PmenuKindSel PmenuSel
+  "hi clear PmenuExtra
+  "hi! link PmenuExtra PmenuSel
+  "hi clear PmenuExtraSel
+  "hi! link PmenuExtraSel Normal
+  "hi clear Whitespace
+  "hi! link Whitespace NonText
+  hi clear WinBar
+  hi! link WinBar ToolbarButton
+  "hi clear WinBarNC
+  "hi! link WinBarNC WinBar
+  hi Substitute term=none cterm=none ctermfg=234 ctermbg=204 gui=none guifg=#1d202f guibg=#f7768e
+
+  "TreeSitter区域
+  hi clear @parameter
+  hi! link @parameter Parameter
+  hi clear @field
+  hi! link @field Identifier
+  hi clear @property
+  hi! link @property Property
+  hi clear @variable
+  hi! link @variable Variables
+  hi clear @namespace
+  hi! link @namespace Property
+
+  "Lsp区域
+  hi clear LspReferenceText
+  hi! link LspReferenceText lspReference
+  hi clear LspReferenceRead
+  hi! link LspReferenceRead lspReference
+  hi clear LspReferenceWrite
+  hi! link LspReferenceWrite lspReference
+  hi clear DiagnosticError
+  hi! DiagnosticError ctermfg=203 guifg=#ff4b4b
+  hi clear DiagnosticWarn
+  "hi! DiagnosticWarn ctermfg=226 guifg=#ffff00
+  hi! DiagnosticWarn ctermfg=214 guifg=#ffa500
+  hi clear DiagnosticInfo
+  hi! DiagnosticInfo ctermfg=38 guifg=#0db9d7
+  hi clear DiagnosticHint
+  hi! DiagnosticHint ctermfg=36 guifg=#1abc9c
+  hi clear DiagnosticOk
+  hi! DiagnosticOk ctermfg=114 guifg=#88e088
+  hi clear DiagnosticUnderlineError
+  hi! DiagnosticUnderlineError cterm=underline gui=underline guisp=#ff0000
+  hi clear DiagnosticUnderlineWarn
+  hi! DiagnosticUnderlineWarn cterm=underline gui=underline guisp=#ffa500
+  hi clear DiagnosticUnderlineInfo
+  hi! DiagnosticUnderlineInfo cterm=underline gui=underline guisp=#0db9d7
+  hi clear DiagnosticUnderlineHint
+  hi! DiagnosticUnderlineHint cterm=underline gui=underline guisp=#1abc9c
+  hi clear DiagnosticUnderlineOk
+  hi! DiagnosticUnderlineOk cterm=underline gui=underline guisp=#88e088
+  hi clear DiagnosticVirtualTextError
+  hi! link DiagnosticVirtualTextError LspErrorVirtualText
+  hi clear DiagnosticVirtualTextWarn
+  hi! link DiagnosticVirtualTextWarn LspWarningVirtualText
+  hi clear DiagnosticVirtualTextInfo
+  hi! link DiagnosticVirtualTextInfo LspInformationVirtualText
+  hi clear DiagnosticVirtualTextHint
+  hi! link DiagnosticVirtualTextHint LspHintVirtualText
+  hi clear DiagnosticVirtualTextOk
+  hi! DiagnosticVirtualTextOk term=reverse ctermfg=114 ctermbg=236 guifg=#88e088 guibg=#233745
+  hi clear DiagnosticFloatingError
+  hi! link DiagnosticFloatingError DiagnosticError
+  hi clear DiagnosticFloatingWarn
+  hi! link DiagnosticFloatingWarn DiagnosticWarn
+  hi clear DiagnosticFloatingInfo
+  hi! link DiagnosticFloatingInfo DiagnosticInfo
+  hi clear DiagnosticFloatingHint
+  hi! link DiagnosticFloatingHint DiagnosticHint
+  hi clear DiagnosticFloatingOk
+  hi! link DiagnosticFloatingOk DiagnosticOk
+  hi clear DiagnosticSignError
+  hi! link DiagnosticSignError LspErrorText
+  hi clear DiagnosticSignWarn
+  hi! link DiagnosticSignWarn LspWarningText
+  hi clear DiagnosticSignInfo
+  hi! link DiagnosticSignInfo LspInformationText
+  hi clear DiagnosticSignHint
+  hi! link DiagnosticSignHint LspHintText
+  hi clear DiagnosticSignOk
+  hi! DiagnosticSignOk term=reverse ctermfg=16 ctermbg=114 guifg=#000000 guibg=#88e088
+  hi clear DiagnosticDeprecated
+  hi! link DiagnosticDeprecated Deprecated
+  "hi clear DiagnosticUnnecessary
+  "hi clear LspInlayHint
+  "hi clear LspCodeLens
+  "hi clear LspCodeLensSeparator
+  "hi clear LspSignatureActiveParameter
+  hi clear LspInfoBorder
+  hi! link LspInfoBorder FloatBorder
+  "hi clear ALEErrorSign
+  "hi clear ALEWarningSign
+  "hi clear DapStoppedLine
+  hi clear @lsp.type.class
+  hi! link @lsp.type.class Struct
+  hi clear @lsp.type.decorator
+  hi! link @lsp.type.decorator Annotation
+  hi clear @lsp.type.enum
+  hi! link @lsp.type.enum Struct
+  hi clear @lsp.type.enumMember
+  hi! link @lsp.type.enumMember EnumMember
+  hi clear @lsp.type.function
+  hi! link @lsp.type.function Function
+  hi clear @lsp.type.interface
+  hi! link @lsp.type.interface Interface
+  hi clear @lsp.type.macro
+  hi! link @lsp.type.macro Macro
+  hi clear @lsp.type.method
+  hi! link @lsp.type.method Function
+  hi clear @lsp.type.namespace
+  hi! link @lsp.type.namespace Property
+  hi clear @lsp.type.parameter
+  hi! link @lsp.type.parameter Parameter
+  hi clear @lsp.type.property
+  hi! link @lsp.type.property Property
+  hi clear @lsp.type.struct
+  hi! link @lsp.type.struct Struct
+  hi clear @lsp.type.type
+  hi! link @lsp.type.type Struct
+  hi clear @lsp.type.typeParameter
+  hi! link @lsp.type.typeParameter Parameter
+  hi clear @lsp.type.variable
+  hi! link @lsp.type.variable Normal
+  hi clear @lsp.type.comment
+  hi! link @lsp.type.comment Comment
+  hi clear @lsp.type.number
+  hi! link @lsp.type.number Number
+  hi clear @lsp.type.string
+  hi! link @lsp.type.string String
+  hi clear @lsp.type.generic
+  hi! link @lsp.type.generic Property
+  hi clear @lsp.type.keyword
+  hi! link @lsp.type.keyword Statement
+  hi clear @lsp.type.lifetime
+  hi! link @lsp.type.lifetime Lifetime
+  hi clear @lsp.type.operator
+  hi! link @lsp.type.operator Special
+  hi clear @lsp.type.builtinType
+  hi! link @lsp.type.builtinType Statement
 endif

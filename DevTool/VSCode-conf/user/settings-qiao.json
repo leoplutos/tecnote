@@ -24,7 +24,7 @@
 	"editor.renderWhitespace": "none", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
 	"editor.renderControlCharacters": true, //设定显示控制字符
 	//"editor.renderLineHighlight": "all", //突出显示导航线和当前行
-	"editor.selectionHighlight": false, // 控制编辑器是否应突出显示与所选内容类似的匹配项。
+	"editor.selectionHighlight": true, // 控制编辑器是否应突出显示与所选内容类似的匹配项。
 	"editor.occurrencesHighlight": true, // 控制编辑器是否突出显示语义符号的匹配项。
 	"editor.insertSpaces": false, //按下tab时不替换为空格
 	"editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
@@ -45,6 +45,10 @@
 	"editor.bracketPairColorization.enabled": false, //控制是否启用括号对着色
 	"editor.unicodeHighlight.invisibleCharacters": false, //禁用不可见突出
 	"editor.multiCursorModifier": "alt", //多光标选择模式（Ctrl 或者 Alt）
+	"editor.cursorSurroundingLines": 4, // 控制光标周围可见行
+	"editor.cursorSurroundingLinesStyle": "all", // 始终强制执行
+	"editor.semanticHighlighting.enabled": false, //开启基于LSP语义的高亮
+	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
@@ -321,6 +325,7 @@
 	//-----------------------------------------------"
 	"git.enabled": false, //是否启用git组件
 	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git可执行文件的路径和文件名
+	"git.mergeEditor": true, // 启用三向合并编辑器
 	"git.autofetch": false, // git是否自动fetch
 	"git.autorefresh": true, // git是否自动刷新
 	"git.alwaysShowStagedChangesResourceGroup": true, // 始终显示“暂存的更改”资源组
@@ -348,13 +353,30 @@
 	"[python]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
 		"editor.guides.indentation": true, //启用缩进参考线
+		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
 	},
 	"[rust]": {
 		"editor.insertSpaces": true, //按下tab时替换为空格
 		"editor.guides.indentation": true, //启用缩进参考线
+		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
 	},
 	"[csv][dynamic csv][tsv][csv (semicolon)]": {
 		"editor.stickyScroll.enabled": true // 为csv和tsv打开粘性滚动(就是title固定)
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features",
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+	},
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features",
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "vscode.markdown-language-features",
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
@@ -391,6 +413,10 @@
 	//-----------------------------------------------"
 	"trailing-spaces.deleteModifiedLinesOnly": true, //只删除修改的行
 	"trailing-spaces.trimOnSave": false, //保存时不自动删除行尾空格（只对修改的行生效）
+	//-----------------------------------------------"
+	//               ErrorLens插件设定               "
+	//-----------------------------------------------"
+	"errorLens.messageBackgroundMode": "message",
 	//-----------------------------------------------"
 	//              Whitespace++插件设定             "
 	//-----------------------------------------------"
