@@ -4,14 +4,20 @@
 --https://github.com/neovim/nvim-lspconfig
 --https://github.com/hrsh7th/nvim-cmp
 --https://github.com/hrsh7th/cmp-nvim-lsp
+--https://github.com/hrsh7th/cmp-buffer
+--https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
 --设定参数参考 https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 -- 加载nvim-lspconfig插件
 vim.cmd('packadd nvim-lspconfig')
--- 加载nvim-cmp插件（自动完成）
+-- 加载nvim-cmp插件（自动完成内核）
 vim.cmd('packadd nvim-cmp')
--- 加载cmp-nvim-lsp插件（LSP自动完成）
+-- 加载cmp-nvim-lsp插件（自动完成内容-LSP）
 vim.cmd('packadd cmp-nvim-lsp')
+-- 加载cmp-nvim-lsp-signature-help插件（自动完成内容-LSP符号帮助）
+vim.cmd('packadd cmp-nvim-lsp-signature-help')
+-- 加载cmp-buffer插件（自动完成内容-Buffer）
+vim.cmd('packadd cmp-buffer')
 
 --给状态栏设置的调用函数（返回LSP状态显示到状态栏）
 --做一个全局dict保存每个lsp的服务状态，存在即为启动中
@@ -399,7 +405,7 @@ cmp.setup({
     completion = {
        border = 'rounded',
        --winhighlight = 'Normal:Pmenu,FloatBorder:None,CursorLine:PmenuSel,Search:None',
-       winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSel,Search:None',
+       winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSelBg,Search:None',
        zindex = 1001,
        scrolloff = 0,
        col_offset = 0,
@@ -410,7 +416,7 @@ cmp.setup({
     documentation = {
        border = 'rounded',
        --winhighlight = 'Normal:Pmenu,FloatBorder:None,CursorLine:PmenuSel,Search:None',
-       winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSel,Search:None',
+       winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSelBg,Search:None',
        zindex = 1002,
        scrolloff = 0,
        col_offset = 0,
@@ -444,6 +450,7 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
     -- { name = 'vsnip' }, -- For vsnip users.
     -- { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
@@ -492,15 +499,17 @@ vim.cmd(
 "CmpItemKind%KIND_NAME%* - 特定的种类
 "CmpItemMenu - 菜单字段
 hi clear CmpItemAbbr
-hi! link CmpItemAbbr Normal
+hi! link CmpItemAbbr PmenuFg
+hi clear CmpItemAbbrDefault
+hi! link CmpItemAbbrDefault PmenuFg
 hi clear CmpItemAbbrDeprecated
 hi! link CmpItemAbbrDeprecated PmenuDeprecated
 hi clear CmpItemAbbrMatch
 hi! link CmpItemAbbrMatch PmenuMatch
 hi clear CmpItemAbbrMatchFuzzy
 hi! link CmpItemAbbrMatchFuzzy PmenuMatchFuzzy
-"hi clear CmpItemKindDefault
-"hi! link CmpItemKindDefault Normal
+hi clear CmpItemKindDefault
+hi! link CmpItemKindDefault PmenuFg
 hi clear CmpItemKindKeyword
 hi! link CmpItemKindKeyword Keyword
 hi clear CmpItemKindVariable
@@ -508,7 +517,7 @@ hi! link CmpItemKindVariable Variables
 hi clear CmpItemKindConstant
 hi! link CmpItemKindConstant Constant
 hi clear CmpItemKindReference
-hi! link CmpItemKindReference Normal
+hi! link CmpItemKindReference Lifetime
 hi clear CmpItemKindValue
 hi! link CmpItemKindValue String
 hi clear CmpItemKindCopilot
@@ -571,3 +580,19 @@ sign define DiagnosticSignWarn text=🆖 texthl=DiagnosticSignWarn linehl= numhl
 sign define DiagnosticSignInfo text=❗ texthl=DiagnosticSignInfo linehl= numhl=
 sign define DiagnosticSignHint text=🗝 texthl=DiagnosticSignHint linehl= numhl=
 ]])
+
+-- diagnostics设定
+vim.diagnostic.config({
+    virtual_text = true,
+    underline = true,
+    float = {
+        source = "always",
+    },
+    severity_sort = true,
+    virtual_text = {
+      prefix = "→",
+      spacing = 4,
+    },
+    signs = true,
+    update_in_insert = false,
+})

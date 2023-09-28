@@ -21,6 +21,9 @@ inoremap <C-f> <C-o>w
 inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>dd
 vnoremap <C-d> <del>
+" 选择模式下使用Ctrl+上/Ctrl+下移动所选代码
+vnoremap <C-UP> dkPV`]
+vnoremap <C-Down> dpV`]
 " 插入模式下Ctrl+i：打开omni补全（代码智能补全，在omnifunc设置）
 inoremap <C-i> <C-x><C-o>
 " 撤销
@@ -62,6 +65,8 @@ nnoremap <TAB>h <C-w><left>|          " [普通模式]tab+h：移动到左边窗
 nnoremap <TAB>l <C-w><right>|         " [普通模式]tab+l：移动到右边窗口
 nnoremap <TAB>k <C-w><up>|            " [普通模式]tab+k：移动到上边窗口
 nnoremap <TAB>j <C-w><down>|          " [普通模式]tab+j：移动到下边窗口
+nnoremap <Leader>v <C-w>v|            " [普通模式]\+v：左右分割
+"nnoremap <Leader>n <C-w>n|            " [普通模式]\+n：水平分割
 " [普通模式][tags]\]：在预览窗口打开定义-右侧打开
 nnoremap <Leader>] :execute "vertical ptag " . expand("<cword>")<CR>
 " [普通模式][tags]\c：关闭预览窗口

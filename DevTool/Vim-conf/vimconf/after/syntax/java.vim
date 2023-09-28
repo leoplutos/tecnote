@@ -118,7 +118,7 @@ hi def link javaTodoNote        javaTodo
 hi def link javaTodoWarn        javaTodo
 
 hi! link javaConstant Variables
-hi! link javaIdentifier Normal
+hi clear javaIdentifier
 hi! link javaOperator Variables
 hi! link javaPreProc Annotation
 hi link javaC_JavaLang Special
@@ -126,7 +126,7 @@ hi link javaX_JavaLang Structure
 hi link javaR_JavaLang Structure
 hi link javaClassDecl Structure
 hi link javaAnnotation Annotation
-hi link javaDelimiter Normal
+hi clear javaDelimiter
 
 "Java
 "syn match javaCustomOperator "[-+&|<>=!\/~.,;:*%&^?()\[\]{}]"

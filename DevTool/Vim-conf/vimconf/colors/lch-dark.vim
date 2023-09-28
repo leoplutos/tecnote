@@ -66,6 +66,8 @@ hi PmenuThumb   ctermbg=250 guibg=#bbbbbb
 hi PmenuMatch   cterm=bold ctermfg=74 gui=bold guifg=#009fd7
 hi PmenuMatchFuzzy cterm=bold ctermfg=149 gui=bold guifg=#bde052
 hi PmenuDeprecated   term=strikethrough cterm=strikethrough ctermfg=241 gui=strikethrough guifg=#5f6167 guisp=#ff0000
+hi PmenuFg      ctermfg=188 guifg=#d4d4d4
+hi PmenuSelBg   ctermbg=24 guibg=#073655
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=248 ctermbg=238 gui=none guifg=#a8a8a8 guibg=#444444
 hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=108 gui=none guifg=#ffffff guibg=#96b38c
@@ -149,6 +151,7 @@ hi DebugLine    term=reverse ctermbg=58 guibg=#545835
 hi ToolbarLine  term=underline ctermbg=60 guibg=#46475c
 hi ToolbarButton cterm=bold ctermfg=234 ctermbg=73 gui=bold guifg=#1d202f guibg=#4abcc1
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
+hi FileExplorerNormal term=none cterm=none ctermfg=188 ctermbg=234 gui=none guifg=#cccccc guibg=#252526
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -353,7 +356,7 @@ if has('nvim')
   hi clear @lsp.type.typeParameter
   hi! link @lsp.type.typeParameter Parameter
   hi clear @lsp.type.variable
-  hi! link @lsp.type.variable Normal
+  hi! link @lsp.type.variable @lsp
   hi clear @lsp.type.comment
   hi! link @lsp.type.comment Comment
   hi clear @lsp.type.number

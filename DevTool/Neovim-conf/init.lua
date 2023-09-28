@@ -1,4 +1,4 @@
---init.lua
+--init.lua for neovim
 --配置路径为 %LOCALAPPDATA%\nvim
 
 --设置语言
@@ -49,6 +49,7 @@ else
 
   -- 开启gui高亮
   vim.opt.termguicolors = true
+  vim.opt.jumpoptions = 'stack'
   vim.g.mapleader = "\\"
 
   -- 加载lua/tree.lua

@@ -8,7 +8,7 @@ endif
 
 set nocompatible                         " 去除vi一致性
 
-" neovim判断
+" NeoVim判断
 if has('nvim')
   let g:g_nvim_flg = 1
 else
@@ -164,6 +164,7 @@ endif
 set shortmess+=c                         " 设置补全静默
 set cpt=.,k,w,b                          " 设定从字典文件以及当前打开的文件里收集补全单词
 set omnifunc=syntaxcomplete#Complete     " 设置全能补全
+set notimeout
 set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
 set ttimeoutlen=0                        " 设置<ESC>键响应时间
 set pumheight=15                         " 设定弹出菜单的大小为15
@@ -343,7 +344,7 @@ function! RestUserColor(pmode)
     if (currentMode == 'i')                "插入模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
     elseif (currentMode == 'n')            "普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
     elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>" || currentMode == "\<C-vs>")      "可视模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000010 guibg=#00ff87
     elseif (currentMode == 'R')            "替换模式配色
@@ -357,12 +358,12 @@ function! RestUserColor(pmode)
     elseif (currentMode == 'r')            "确认模式配色
       hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000010 guibg=#d787ff
     else            "默认普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
+      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
     endif
   elseif a:pmode == 'InsertEnter'
     hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
   elseif a:pmode == 'InsertLeave'
-    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
+    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
   endif
 endfunction
 
@@ -383,13 +384,13 @@ augroup lchModeChangedGroup
 augroup END
 
 "当前编辑模式
-hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=141 gui=bold guifg=#000010 guibg=#bd97f6
+hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
 "文件名
-hi User2        term=none cterm=none ctermfg=116 ctermbg=238 gui=none guifg=#7beafc guibg=#434759
+hi User2        term=none cterm=none ctermfg=189 ctermbg=236 gui=none guifg=#c3cef7 guibg=#292e41
 "文件编辑状态
-hi User3        term=none cterm=none ctermfg=226 ctermbg=238 gui=none guifg=#ffff00 guibg=#434759
+hi User3        term=none cterm=none ctermfg=226 ctermbg=238 gui=none guifg=#ffff00 guibg=#292e41
 "LSP服务器状态
-hi User4        term=none cterm=none ctermfg=231 ctermbg=67 gui=none guifg=#f7f7f0 guibg=#5e74a2
+hi User4        term=none cterm=none ctermfg=231 ctermbg=60 gui=none guifg=#f7f7f0 guibg=#545c7c
 
 "-----------------------------------------------"
 "               netrw设置                       "
@@ -591,9 +592,39 @@ let g:cobol_inline_comment = 1
 "               插件设置                        "
 "-----------------------------------------------"
 if (v:version > 799)
+  "版本大于8的通用插件加载（Vim + NeoVim）
 
   "加载自带的matchit
   packadd matchit
+
+  "加载开始导航页面设置
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
+
+  "indentLine（缩进参考线）
+  "https://github.com/Yggdroot/indentLine
+  packadd indentLine
+  let g:indentLine_defaultGroup = 'SpecialKey'
+  "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+  let g:indentLine_char_list = ['¦']
+  "let g:indentLine_enabled = 1
+  let g:indentLine_enabled = 0
+  let g:vim_json_conceal = 0
+  let g:markdown_syntax_conceal = 0
+
+  if (g:g_use_dap == 0)
+    "不使用DAP
+  else
+    "使用DAP
+
+    "加载DAP设置
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
+
+  endif
+
+endif
+
+if (v:version > 799) && (g:g_nvim_flg == 0)
+  "版本大于8并且不是NeoVim的插件加载（NeoVim在init.lua下加载）
 
   if (g:g_use_lsp == 0)
     "不使用LSP
@@ -616,8 +647,6 @@ if (v:version > 799)
   else
     "使用LSP
 
-    if (g:g_nvim_flg == 0)
-    "非neovim下使用LSP插件（neovim下使用nvim-lspconfig，在init.lua中设置）
     if (g:g_lsp_type == 0)
       "加载LSP设置（vim-lsp）
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
@@ -627,7 +656,6 @@ if (v:version > 799)
     elseif (g:g_lsp_type == 2)
       "加载LSP设置（LanguageClient-neovim）
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
-    endif
     endif
 
     "vim-auto-popmenu（自动补全）
@@ -698,34 +726,6 @@ if (v:version > 799)
     let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
 
   endif
-
-  if (g:g_use_dap == 0)
-    "不使用DAP
-  else
-    "使用DAP
-
-    if (g:g_nvim_flg == 0)
-    "非neovim下使用DAP插件（neovim下使用nvim-dap，在init.lua中设置）
-    "加载DAP设置
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
-    endif
-
-  endif
-
-  "加载开始导航页面设置
-  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
-
-  "indentLine（缩进参考线）
-  "https://github.com/Yggdroot/indentLine
-  "https://github.com/preservim/vim-indent-guides
-  packadd indentLine
-  let g:indentLine_defaultGroup = 'SpecialKey'
-  "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-  let g:indentLine_char_list = ['¦']
-  "let g:indentLine_enabled = 1
-  let g:indentLine_enabled = 0
-  let g:vim_json_conceal = 0
-  let g:markdown_syntax_conceal = 0
 
   "ctrlp（模糊查找）
   "https://github.com/ctrlpvim/ctrlp.vim

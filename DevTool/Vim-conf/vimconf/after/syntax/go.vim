@@ -3,8 +3,8 @@ scriptencoding utf-8
 
 hi link goDeclType Structure
 hi link goFunctionCall Function
-hi link goVarDefs Normal
-hi link goVarAssign Normal
+hi clear goVarDefs
+hi clear goVarAssign
 hi link goBuiltins Function
 
 

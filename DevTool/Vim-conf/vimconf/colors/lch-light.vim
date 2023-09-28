@@ -66,6 +66,8 @@ hi PmenuThumb   ctermbg=234 guibg=#1e1e1e
 hi PmenuMatch   cterm=bold ctermfg=19 gui=bold guifg=#1212af
 hi PmenuMatchFuzzy cterm=bold ctermfg=33 gui=bold guifg=#3f8adb
 hi PmenuDeprecated   term=strikethrough cterm=strikethrough ctermfg=146 gui=strikethrough guifg=#a8aecb guisp=#ff0000
+hi PmenuFg      ctermfg=16 guifg=#000000
+hi PmenuSelBg   ctermbg=25 guibg=#0060c0
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=102 ctermbg=254 gui=none guifg=#8f8391 guibg=#e8e8ef
 hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=67 gui=none guifg=#f7f7f0 guibg=#5e74a2
@@ -353,7 +355,7 @@ if has('nvim')
   hi clear @lsp.type.typeParameter
   hi! link @lsp.type.typeParameter Parameter
   hi clear @lsp.type.variable
-  hi! link @lsp.type.variable Normal
+  hi! link @lsp.type.variable @lsp
   hi clear @lsp.type.comment
   hi! link @lsp.type.comment Comment
   hi clear @lsp.type.number

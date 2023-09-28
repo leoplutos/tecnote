@@ -85,3 +85,11 @@ require("nvim-tree").setup({
   },
   on_attach = my_on_attach,
 })
+
+--nvim-tree.lua插件的高亮设定
+vim.cmd(
+[[
+hi clear NvimTreeNormal
+hi! link NvimTreeNormal FileExplorerNormal
+]]
+)

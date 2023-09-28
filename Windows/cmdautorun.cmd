@@ -45,6 +45,7 @@ set PYTHON_HOME=D:\Tools\WorkTool\Python\Python38-32
 set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
 set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64-1.81.1
 set PATH=%PATH%;%VSCODE_HOME%
+set PATH=%PATH%;%VSCODE_HOME%\resources\app\node_modules.asar.unpacked\@vscode\ripgrep\bin
 set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
 set PATH=%PATH%;%NINJA_HOME%
 set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
@@ -62,6 +63,9 @@ set GOPATH=D:\Tools\WorkTool\Go\go_global
 set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
+
+::进入用户文件夹
+cd /d %USERPROFILE%
 
 ::设置常用路径
 set app=D:\WorkSpace\Rust\minigrep

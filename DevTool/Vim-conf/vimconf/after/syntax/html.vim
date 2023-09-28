@@ -6,4 +6,4 @@ hi link htmlH1 ThinTitle
 hi link htmlTag CommonTag
 hi link htmlEndTag CommonTag
 hi link htmlArg Special
-hi link javaScript Normal
+hi clear javaScript

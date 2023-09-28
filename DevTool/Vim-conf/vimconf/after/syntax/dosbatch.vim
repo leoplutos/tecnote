@@ -3,5 +3,5 @@ scriptencoding utf-8
 
 hi link dosbatchImplicit Statement
 hi link dosbatchLabel ThinTitle
-hi link dosbatchIdentifier Normal
+hi clear dosbatchIdentifier
 hi link dosbatchVariable Variables

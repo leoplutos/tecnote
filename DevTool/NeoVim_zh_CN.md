@@ -47,9 +47,24 @@ init.vim
 ginit.vim
 ```
 
+## 健康检查
+Neovim 新加了一个健康检查的命令
+```
+:checkhealth
+```
+可以查看当前的运行情况
+
 ## 笔者的设定文件
 笔者主要用 ``VS Code`` 的 ``Neovim`` 插件，所以配置主要用于 ``VS Code`` 的使用
 * [Neovim-conf](Neovim-conf)
+
+## Python支持
+Neovim 的 ``Python`` 支持方式和 Vim 不一样
+需要运行下面的命令
+```
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pynvim
+```
+运行之后运行 ``:checkhealth`` 确认
 
 ## Neovim安装插件
 在路径
@@ -73,8 +88,45 @@ Github：https://github.com/neovide/neovide
 
 #### 启动
 下载好执行文件之后，如果 ``nvim.exe`` 在环境变量里直接运行 ``neovide.exe`` 即可  
-如果环境受限无法修改环境变量可以用如下方式启动，新建 ``neovide.cmd`` 内容如下
+如果环境受限无法修改环境变量可以用如下方式启动，新建 ``neovide.cmd`` 内容如下  
+因为 vim 会产生很多 log 文件，下面这个批处理也会顺便删除 log  
 ```
+::删除_viminfo(~/_viminfo)
+SET TmpDeleteFile=%USERPROFILE%\_viminfo
+if exist %TmpDeleteFile% (
+    del %TmpDeleteFile%
+) else (
+    echo %TmpDeleteFile% is not exist!
+)
+::删除vim-lsp的log(~/vim-lsp.log)
+SET TmpDeleteFile=%USERPROFILE%\vim-lsp.log
+if exist %TmpDeleteFile% (
+    del %TmpDeleteFile%
+) else (
+    echo %TmpDeleteFile% is not exist!
+)
+::删除vim-dap vimspector的log(~/.vimspector.log)
+SET TmpDeleteFile=%USERPROFILE%\.vimspector.log
+if exist %TmpDeleteFile% (
+    del %TmpDeleteFile%
+) else (
+    echo %TmpDeleteFile% is not exist!
+)
+::删除neovim-lsp的log(%LOCALAPPDATA%\nvim-data\lsp.log)
+SET TmpDeleteFile=%LOCALAPPDATA%\nvim-data\lsp.log
+if exist %TmpDeleteFile% (
+    del %TmpDeleteFile%
+) else (
+    echo %TmpDeleteFile% is not exist!
+)
+::删除cobol-lsp的log文件夹(~/LSPCobol/logs)
+SET TmpDeleteFolder=%USERPROFILE%\LSPCobol\logs
+if exist %TmpDeleteFolder% (
+    rmdir /S /Q %TmpDeleteFolder%
+) else (
+    echo %TmpDeleteFolder% is not exist!
+)
+
 set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
 start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe
 ::start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe --neovim-bin D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
@@ -85,7 +137,7 @@ Neovim 内置 LSP 的 client 端。只需要4步
 1. 安装 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 2. 安装对应 language server
 3. 配置对应语言 ``require('lspconfig').xx.setup{…}``
-4. ``:lua print(vim.inspect(vim.lsp.buf_get_clients()))`` 查看 LSP 连接状态
+4. 运行``:LspInfo`` 查看 LSP 连接状态
 
 ## 其他
 
