@@ -5,7 +5,13 @@
 --https://github.com/hrsh7th/nvim-cmp
 --https://github.com/hrsh7th/cmp-nvim-lsp
 --https://github.com/hrsh7th/cmp-buffer
+--https://github.com/hrsh7th/cmp-path
+--https://github.com/hrsh7th/cmp-cmdline
+--https://github.com/uga-rosa/cmp-dictionary
 --https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+--https://github.com/onsails/lspkind.nvim
+--https://github.com/hrsh7th/cmp-vsnip
+--https://github.com/hrsh7th/vim-vsnip
 --设定参数参考 https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 -- 加载nvim-lspconfig插件
@@ -14,10 +20,21 @@ vim.cmd('packadd nvim-lspconfig')
 vim.cmd('packadd nvim-cmp')
 -- 加载cmp-nvim-lsp插件（自动完成内容-LSP）
 vim.cmd('packadd cmp-nvim-lsp')
--- 加载cmp-nvim-lsp-signature-help插件（自动完成内容-LSP符号帮助）
-vim.cmd('packadd cmp-nvim-lsp-signature-help')
 -- 加载cmp-buffer插件（自动完成内容-Buffer）
 vim.cmd('packadd cmp-buffer')
+-- 加载cmp-path插件（自动完成内容-文件夹名和文件名）
+vim.cmd('packadd cmp-path')
+-- 加载cmp-cmdline插件（自动完成内容-命令模式）
+vim.cmd('packadd cmp-cmdline')
+-- 加载cmp-dictionary插件（自动完成内容-自定义词典）
+vim.cmd('packadd cmp-dictionary')
+-- 加载cmp-nvim-lsp-signature-help插件（自动完成内容-LSP符号帮助）
+vim.cmd('packadd cmp-nvim-lsp-signature-help')
+-- 加载lspkind.nvim插件（在代码提示中，显示分类的小图标支持）
+vim.cmd('packadd lspkind.nvim')
+-- 加载cmp-vsnip插件（代码片段）
+vim.cmd('packadd cmp-vsnip')
+vim.cmd('packadd vim-vsnip')
 
 --给状态栏设置的调用函数（返回LSP状态显示到状态栏）
 --做一个全局dict保存每个lsp的服务状态，存在即为启动中
@@ -318,17 +335,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = args.buf }
-    vim.keymap.set('n', '<Space>lo', vim.diagnostic.setloclist, opts)
+    --vim.keymap.set('n', '<Space>lo', vim.diagnostic.setloclist, opts)
+    vim.keymap.set('n', '<Space>lo', require('telescope.builtin').diagnostics, opts)
     vim.keymap.set('n', '<Space>lc', ':lclose<CR>', { noremap = true })
     vim.keymap.set({ 'n', 'v' }, '<Space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<Space>gd', vim.lsp.buf.definition, opts)
+    --vim.keymap.set('n', '<Space>gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<Space>gd', require('telescope.builtin').lsp_definitions, opts)
     --vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', '<Space>gs', vim.lsp.buf.document_symbol, opts)
-    vim.keymap.set('n', '<Space>gS', vim.lsp.buf.workspace_symbol, opts)
+    --vim.keymap.set('n', '<Space>gs', vim.lsp.buf.document_symbol, opts)
+    vim.keymap.set('n', '<Space>gs', require('telescope.builtin').lsp_document_symbols, opts)
+    --vim.keymap.set('n', '<Space>gS', vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set('n', '<Space>gS', require('telescope.builtin').lsp_workspace_symbols, opts)
     vim.keymap.set('n', '<Space>p', vim.lsp.buf.workspace_symbol, opts)
     vim.keymap.set('n', '<Space>gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<Space>gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<Space>gt', vim.lsp.buf.type_definition, opts)
+    --vim.keymap.set('n', '<Space>gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<Space>gi', require('telescope.builtin').lsp_implementations, opts)
+    --vim.keymap.set('n', '<Space>gt', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<Space>gt', require('telescope.builtin').lsp_type_definitions, opts)
     vim.keymap.set('n', '<Space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<Space>h', vim.lsp.buf.hover, opts)
@@ -339,6 +362,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
     vim.keymap.set('n', '<Space>gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', '<Space>gh', vim.lsp.buf.signature_help, opts)
+    --vim.keymap.set('n', '<Space>ic', vim.lsp.buf.incoming_calls, opts)
+    vim.keymap.set('n', '<Space>ic', require('telescope.builtin').lsp_incoming_calls, opts)
+    --vim.keymap.set('n', '<Space>oc', vim.lsp.buf.outgoing_calls, opts)
+    vim.keymap.set('n', '<Space>oc', require('telescope.builtin').lsp_outgoing_calls, opts)
     --vim.keymap.set('n', '<Space>wa', vim.lsp.buf.add_workspace_folder, opts)
     --vim.keymap.set('n', '<Space>wr', vim.lsp.buf.remove_workspace_folder, opts)
     vim.keymap.set('n', '<Space>wl', function()
@@ -388,19 +415,20 @@ augroup END
 
 --nvim-cmp插件设定
 --cmp-nvim-lsp插件设定
-local cmp = require'cmp'
+local cmp = require('cmp')
+local lspkind = require('lspkind')
 cmp.setup({
+  completion = {
+    keyword_length = 2,
+  },
+  -- 设置代码片段引擎，用于根据代码片段补全
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
+  -- 自动补全和补全说明窗口设定
   window = {
-    -- 自动补全和补全说明窗口设定
     --completion = cmp.config.window.bordered(),
     completion = {
        border = 'rounded',
@@ -448,29 +476,38 @@ cmp.setup({
       end
     end, {'i'}),
   }),
+  -- 补全来源
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
-    -- { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-  }, {
+    { name = 'vsnip' },
     { name = 'buffer' },
     { name = 'path' },
-  })
+    { name = 'dictionary' },
+  }),
+  -- 设置补全显示的格式（lspkind.nvim插件）
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = true,
+      maxwidth = 50,
+      before = function(entry, vim_item)
+        vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
+        return vim_item
+      end
+    }),
+  },
 })
 
--- 特殊文件类型设置
+--根据文件类型来选择补全来源
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
-    { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    { name = 'git' },
   }, {
     { name = 'buffer' },
   })
 })
 
--- /和?的搜索设置
+-- 命令模式下输入 `/` 启用补全
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -478,7 +515,7 @@ cmp.setup.cmdline({ '/', '?' }, {
   }
 })
 
--- 命令模式的设置
+-- 命令模式下输入 `:` 启用补全
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -554,6 +591,12 @@ hi clear CmpItemKindOperator
 hi! link CmpItemKindOperator Operator
 hi clear CmpItemKindSnippet
 hi! link CmpItemKindSnippet Regexp
+hi clear CmpItemKindText
+hi! link CmpItemKindText Debug
+hi clear CmpItemKindFile
+hi! link CmpItemKindFile Variables
+hi clear CmpItemKindFolder
+hi! link CmpItemKindFolder Directory
 hi clear CmpItemMenu
 hi! link CmpItemMenu Comment
 ]]
@@ -596,3 +639,68 @@ vim.diagnostic.config({
     signs = true,
     update_in_insert = false,
 })
+
+-- 词典补全设定
+local dict = require("cmp_dictionary")
+dict.setup({
+  exact = 2,
+  first_case_insensitive = false,
+  document = false,
+  document_command = "wn %s -over",
+  sqlite = false,
+  max_items = -1,
+  capacity = 5,
+  debug = false,
+})
+dict.switcher({
+  filetype = {
+    dosbatch = "~/vimconf/dict/batch.dict",
+    cmake = "~/vimconf/dict/cmake.dict",
+    css = { "~/vimconf/dict/css.dict", "~/vimconf/dict/css3.dict" },
+    haskell = "~/vimconf/dict/haskell.dict",
+    html = { "~/vimconf/dict/html.dict", "~/vimconf/dict/css.dict", "~/vimconf/dict/css3.dict", "~/vimconf/dict/javascript.dict" },
+    lua = "~/vimconf/dict/lua.dict",
+    make = "~/vimconf/dict/make.dict",
+    matlab = "~/vimconf/dict/matlab.dict",
+    perl = "~/vimconf/dict/perl.dict",
+    php = "~/vimconf/dict/php.dict",
+    ruby = "~/vimconf/dict/ruby.dict",
+    scala = "~/vimconf/dict/scala.dict",
+    sh = "~/vimconf/dict/sh.dict",
+    text = "~/vimconf/dict/text.dict",
+    vim = "~/vimconf/dict/vim.dict",
+  },
+  filepath = {
+    --[".*xmake.lua"] = { "/path/to/xmake.dict", "/path/to/lua.dict" },
+    --["%.tmux.*%.conf"] = { "/path/to/js.dict", "/path/to/js2.dict" },
+  },
+  spelllang = {
+    --en = "/path/to/english.dict",
+  },
+})
+
+-- 代码片段设定
+vim.cmd([[
+let g:vsnip_snippet_dir = expand('~/AppData/Roaming/Code/User/snippets')
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
+
+" Expand
+imap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
+smap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+]])
+

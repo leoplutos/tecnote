@@ -58,6 +58,14 @@ else
   --require('webdevicons')
   -- 加载lua/lsp.lua
   require('lsp')
+  -- 加载lua/outline.lua
+  require('outline')
+  -- 加载lua/finder.lua
+  require('finder')
+  -- 加载lua/indent.lua
+  require('indent')
+  -- 加载lua/quickmove.lua
+  require('quickmove')
 
   -- 加载tokyonight.nvim
   --vim.cmd('packadd tokyonight.nvim')
@@ -66,7 +74,7 @@ else
 
   if vim.g.neovide then
     -- GUI前端Neovide的设定
-    vim.o.guifont = "等距更纱黑体_SC,更紗等幅ゴシック_J:h12"
+    vim.o.guifont = "等距更纱黑体_SC_Nerd_Font,Sarasa_Mono_SC_Nerd_Font,等距更纱黑体_SC,Sarasa_Mono_SC,更紗等幅ゴシック_J:h12"
     vim.opt.linespace = 0
     -- vim.g.neovide_scale_factor = 1.0
     -- vim.g.neovide_padding_top = 0

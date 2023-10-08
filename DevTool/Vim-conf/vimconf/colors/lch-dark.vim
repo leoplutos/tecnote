@@ -36,8 +36,8 @@ hi LineNr       term=none cterm=none ctermfg=66 gui=none guifg=#6c8086
 hi CursorLine   term=reverse ctermbg=236 guibg=#292e42
 hi Question     term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
-hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=231 ctermbg=16 gui=bold,reverse guifg=#ffffff guibg=#000000
-hi StatusLineNC term=reverse cterm=reverse ctermfg=249 ctermbg=235 gui=reverse guifg=#b2b2b2 guibg=#252526
+hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=189 ctermbg=16 gui=bold,reverse guifg=#c9d4fd guibg=#000000
+hi StatusLineNC term=reverse cterm=reverse ctermfg=103 ctermbg=16 gui=reverse guifg=#79849d guibg=#000000
 "分割窗口线
 hi VertSplit    term=reverse ctermfg=237 ctermbg=237 guifg=#3e3e3e guibg=#3e3e3e
 hi Title        term=bold cterm=bold ctermfg=214 gui=bold guifg=#f39c12
@@ -151,7 +151,10 @@ hi DebugLine    term=reverse ctermbg=58 guibg=#545835
 hi ToolbarLine  term=underline ctermbg=60 guibg=#46475c
 hi ToolbarButton cterm=bold ctermfg=234 ctermbg=73 gui=bold guifg=#1d202f guibg=#4abcc1
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
-hi FileExplorerNormal term=none cterm=none ctermfg=188 ctermbg=234 gui=none guifg=#cccccc guibg=#252526
+hi FileExplorerNormal term=none cterm=none ctermfg=252 ctermbg=235 gui=none guifg=#cccccc guibg=#252526
+hi FinderNormal term=none cterm=none ctermfg=188 ctermbg=235 gui=none guifg=#d4d4d4 guibg=#252526
+"hi FinderPromptNormal term=none cterm=none ctermfg=188 ctermbg=237 gui=none guifg=#d4d4d4 guibg=#3c3c3c
+hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=235 gui=none guifg=#8d8dbf guibg=#252526
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -243,7 +246,7 @@ if has('nvim')
   hi! link WinBar ToolbarButton
   "hi clear WinBarNC
   "hi! link WinBarNC WinBar
-  hi Substitute term=none cterm=none ctermfg=234 ctermbg=204 gui=none guifg=#1d202f guibg=#f7768e
+  hi Substitute term=none cterm=none ctermfg=231 ctermbg=198 gui=none guifg=#ffffff guibg=#ff007c
 
   "TreeSitter区域
   hi clear @parameter

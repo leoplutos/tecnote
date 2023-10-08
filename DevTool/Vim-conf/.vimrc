@@ -24,13 +24,21 @@ endif
 "               环境变量设置                    "
 "-----------------------------------------------"
 "全局变量g:g_use_lsp（0：不使用lsp，1：使用lsp）
-let g:g_use_lsp = 1
+if !exists('g:g_use_lsp')
+  let g:g_use_lsp = 0
+endif
 "全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim）
-let g:g_lsp_type = 0
+if !exists('g:g_lsp_type')
+  let g:g_lsp_type = 0
+endif
 "全局变量g:g_python_lsp_type（0：pylsp，1：jedi-language-server，2：anakin-language-server）
-let g:g_python_lsp_type = 0
+if !exists('g:g_python_lsp_type')
+  let g:g_python_lsp_type = 0
+endif
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
-let g:g_use_dap = 0
+if !exists('g:g_use_dap')
+  let g:g_use_dap = 0
+endif
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -51,6 +59,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $GOPATH = 'D:\Tools\WorkTool\Go\go_global'
   let $JAVA_HOME = 'D:\Tools\WorkTool\Java\jdk17.0.6'
   let $KOTLIN_HOME = 'D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10'
+  let $PATH .= ';D:\Tools\WorkTool\Search\ripgrep\bin'
   let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM'
@@ -164,7 +173,7 @@ endif
 set shortmess+=c                         " 设置补全静默
 set cpt=.,k,w,b                          " 设定从字典文件以及当前打开的文件里收集补全单词
 set omnifunc=syntaxcomplete#Complete     " 设置全能补全
-set notimeout
+"set notimeout
 set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
 set ttimeoutlen=0                        " 设置<ESC>键响应时间
 set pumheight=15                         " 设定弹出菜单的大小为15
@@ -393,71 +402,6 @@ hi User3        term=none cterm=none ctermfg=226 ctermbg=238 gui=none guifg=#fff
 hi User4        term=none cterm=none ctermfg=231 ctermbg=60 gui=none guifg=#f7f7f0 guibg=#545c7c
 
 "-----------------------------------------------"
-"               netrw设置                       "
-"-----------------------------------------------"
-if (g:g_nvim_flg == 0)
-
-  let g:netrw_banner = 0         " 设置是否显示横幅 0: 关闭横幅,1: 显示横幅1 (缺省)
-  let g:netrw_liststyle = 3      " 设置目录列表样式：树形
-  "let g:netrw_browse_split = 4   " 在之前的窗口编辑文件
-  let g:netrw_browse_split = 3   " 在新tab打开文件 0: 重用同一个窗口 (缺省),1: 水平分割窗口,2: 垂直分割窗口,3: 在新tab打开文件,4: 同 "P" (即打开前次窗口)
-  let g:netrw_sizestyle="H"      " 文件大小用(K,M,G)表示
-  let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
-                                 " 日期格式用 yyyy/mm/dd(星期) hh:mm:ss
-  let g:netrw_alto = 1           " 使用o水平分割时，置位此变量后，分割后的新窗口出现在下方而不是上方
-  let g:netrw_altv = 1           " 使用v水平分割时，置位此变量后，分割后的新窗口出现在右方而不是左方
-  let g:netrw_preview=1          " 使用p预览文件使用垂直分割 0 (缺省)水平分割,垂直分割
-  let g:netrw_winsize = 83       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
-  "let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
-  let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
-  let g:netrw_sort_options = "i"   "忽略排序大小写
-  "let g:netrw_special_syntax = 1  "高亮特定文件名
-
-  " 自动打开netrw
-  "augroup ProjectDrawerGroup
-  "  autocmd!
-  "  autocmd VimEnter * :Vexplore
-  "augroup END
-
-  " 进入netrw的自动命令设置
-  augroup lchtNetrwGroup
-    autocmd!
-    autocmd FileType netrw call <SID>NetrwBufEnter()
-    "autocmd FileType netrw au BufEnter <buffer> call <SID>NetrwBufEnter()
-    "autocmd FileType netrw au BufLeave <buffer> hi clear CursorLine
-  augroup END
-
-else
-
-  "neovim的时候禁用netrw
-  let g:load_netrw = 1
-  let g:loaded_netrwPlugin = 1
-
-endif
-
-"进入netrw时候运行的内容
-"因为使用了vim-startify（启动页导航）插件，所以需要进入每个netrw的时候刷新设置
-function! s:NetrwBufEnter()
-
-  " 使用GetProjectRoot()函数找到跟目录
-  let g:g_s_projectrootpath = GetProjectRoot()
-
-  " 在工程跟路径下递归查找子文件
-  "set path+=**
-  exec 'set path='
-  exec 'set path+=' . g:g_s_projectrootpath . '/**'
-  " 搜索除外内容
-  set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**
-
-  " 设定环境变量
-  let $PYTHONPATH = ''
-  let $PYTHONPATH .= g:g_s_projectrootpath
-  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src'
-  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src\com'
-
-endfunction
-
-"-----------------------------------------------"
 "               颜色设置                        "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
@@ -513,7 +457,10 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/format.vim'
 "               自定义代码段（snippets）设置    "
 "               全部以^开头                     "
 "-----------------------------------------------"
-exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/snippets.vim'
+if (g:g_use_lsp == 0) && (g:g_use_dap == 0) && (g:g_nvim_flg == 0)
+  "不启用lsp/dsp并且不是NeoVim 时才加载
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/snippets.vim'
+endif
 
 "-----------------------------------------------"
 "               文件搜索设置                    "
@@ -589,7 +536,92 @@ let g:is_posix = 1
 let g:cobol_inline_comment = 1
 
 "-----------------------------------------------"
+"               文件树设置                      "
+"-----------------------------------------------"
+if (g:g_nvim_flg == 0)
+  "不是NeoVim
+
+  if (g:g_use_lsp == 0 && g:g_use_dap == 0)
+    "不加载lsp和dap：使用netrw
+
+    let g:netrw_banner = 0         " 设置是否显示横幅 0: 关闭横幅,1: 显示横幅1 (缺省)
+    let g:netrw_liststyle = 3      " 设置目录列表样式：树形
+    "let g:netrw_browse_split = 4   " 在之前的窗口编辑文件
+    let g:netrw_browse_split = 3   " 在新tab打开文件 0: 重用同一个窗口 (缺省),1: 水平分割窗口,2: 垂直分割窗口,3: 在新tab打开文件,4: 同 "P" (即打开前次窗口)
+    let g:netrw_sizestyle="H"      " 文件大小用(K,M,G)表示
+    let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
+                                   " 日期格式用 yyyy/mm/dd(星期) hh:mm:ss
+    let g:netrw_alto = 1           " 使用o水平分割时，置位此变量后，分割后的新窗口出现在下方而不是上方
+    let g:netrw_altv = 1           " 使用v水平分割时，置位此变量后，分割后的新窗口出现在右方而不是左方
+    let g:netrw_preview=1          " 使用p预览文件使用垂直分割 0 (缺省)水平分割,垂直分割
+    let g:netrw_winsize = 83       " 指定 "o"、"v"、:Hexplore 或 :Vexplore 建立的新窗口的初始大小。整数百分比，来设定新窗口的大小。
+    "let g:netrw_list_hide= '^\..*' " 不显示隐藏文件 用 a 键就可以显示所有文件、 隐藏匹配文件或只显示匹配文件
+    let g:netrw_keepdir = 0        " 用tree打开的路径作为当前路径，在这个路径下默认操作
+    let g:netrw_sort_options = "i"   "忽略排序大小写
+    "let g:netrw_special_syntax = 1  "高亮特定文件名
+
+    " 自动打开netrw
+    "augroup ProjectDrawerGroup
+    "  autocmd!
+    "  autocmd VimEnter * :Vexplore
+    "augroup END
+
+    " 进入netrw的自动命令设置
+    augroup lchtNetrwGroup
+      autocmd!
+      autocmd FileType netrw call <SID>NetrwBufEnter()
+      "autocmd FileType netrw au BufEnter <buffer> call <SID>NetrwBufEnter()
+      "autocmd FileType netrw au BufLeave <buffer> hi clear CursorLine
+    augroup END
+
+  else
+    "加载lsp或dap：使用nerdtree（init/tree.vim）
+
+    "禁用netrw
+    let g:load_netrw = 1
+    let g:loaded_netrwPlugin = 1
+
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tree.vim'
+
+  endif
+
+else
+  "NeoVim：在NeoVim设定中定义（lua/tree.lua）
+
+    "禁用netrw
+    let g:load_netrw = 1
+    let g:loaded_netrwPlugin = 1
+
+endif
+
+"进入netrw时候运行的内容
+"因为使用了vim-startify（启动页导航）插件，所以需要进入每个netrw的时候刷新设置
+function! s:NetrwBufEnter()
+
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+
+  " 在工程跟路径下递归查找子文件
+  "set path+=**
+  exec 'set path='
+  exec 'set path+=' . g:g_s_projectrootpath . '/**'
+  " 搜索除外内容
+  set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**
+
+  " 设定环境变量
+  let $PYTHONPATH = ''
+  let $PYTHONPATH .= g:g_s_projectrootpath
+  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src'
+  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src\com'
+
+endfunction
+
+"-----------------------------------------------"
 "               插件设置                        "
+" vim（最小插件依赖）：g:g_use_lsp == 0 && g:g_use_dap == 0"
+" viml（只开启lsp）：g:g_use_lsp == 1 && g:g_use_dap == 0"
+" vimd（只开启dap）：g:g_use_lsp == 0 && g:g_use_dap == 1"
+" vimf（加载所有）：g:g_use_lsp == 1 && g:g_use_dap == 1"
 "-----------------------------------------------"
 if (v:version > 799)
   "版本大于8的通用插件加载（Vim + NeoVim）
@@ -599,6 +631,16 @@ if (v:version > 799)
 
   "加载开始导航页面设置
   exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
+
+  if (g:g_use_dap == 1)
+    "加载DAP设置
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
+  endif
+
+endif
+
+if (v:version > 799) && (g:g_nvim_flg == 0)
+  "版本大于8并且不是NeoVim的插件加载（NeoVim在init.lua下加载）
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
@@ -610,21 +652,6 @@ if (v:version > 799)
   let g:indentLine_enabled = 0
   let g:vim_json_conceal = 0
   let g:markdown_syntax_conceal = 0
-
-  if (g:g_use_dap == 0)
-    "不使用DAP
-  else
-    "使用DAP
-
-    "加载DAP设置
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
-
-  endif
-
-endif
-
-if (v:version > 799) && (g:g_nvim_flg == 0)
-  "版本大于8并且不是NeoVim的插件加载（NeoVim在init.lua下加载）
 
   if (g:g_use_lsp == 0)
     "不使用LSP
@@ -644,6 +671,18 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
     let g:vim_dict_dict = [s:vim_dict_path, '',]
     let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
 
+    "ctrlp（模糊查找）
+    "https://github.com/ctrlpvim/ctrlp.vim
+    packadd ctrlp
+    let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
+
+    "ctrlp-funky（查看outline，因为依赖少所以平替掉tagbar）
+    "https://github.com/tacahiroy/ctrlp-funky
+    packadd ctrlp-funky
+    let g:ctrlp_funky_matchtype = 'path'
+    let g:ctrlp_funky_syntax_highlight = 1
+    noremap <F1> :CtrlPFunky<CR>
+
   else
     "使用LSP
 
@@ -658,115 +697,20 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
     endif
 
-    "vim-auto-popmenu（自动补全）
-    "https://github.com/skywind3000/vim-auto-popmenu
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/apc.vim'
-    " 设定需要生效的文件类型，如果是 "*" 的话，代表所有类型
-    let g:apc_enable_ft = {
-    \    '2html':1, '8th':1, 'a2ps':1, 'a65':1, 'aap':1, 'abap':1, 'abaqus':1, 'abc':1, 'abel':1, 'acedb':1, 'ada':1, 'aflex':1, 'ahdl':1, 'aidl':1, 'alsaconf':1, 'amiga':1,
-    \    'aml':1, 'ampl':1, 'ant':1, 'antlr':1, 'apache':1, 'apachestyle':1, 'aptconf':1, 'arch':1, 'arduino':1, 'art':1, 'asciidoc':1, 'asm':1, 'asm68k':1, 'asmh8300':1, 'asn':1, 'aspperl':1,
-    \    'aspvbs':1, 'asterisk':1, 'asteriskvm':1, 'atlas':1, 'autodoc':1, 'autohotkey':1, 'autoit':1, 'automake':1, 'ave':1, 'avra':1, 'awk':1, 'ayacc':1, 'b':1, 'baan':1, 'bash':1, 'basic':1,
-    \    'bc':1, 'bdf':1, 'bib':1, 'bindzone':1, 'blank':1, 'bsdl':1, 'bst':1, 'btm':1, 'bzl':1, 'bzr':1, 'cabal':1, 'cabalconfig':1, 'cabalproject':1, 'calendar':1, 'catalog':1,
-    \    'cdl':1, 'cdrdaoconf':1, 'cdrtoc':1, 'cf':1, 'cfg':1, 'ch':1, 'chaiscript':1, 'change':1, 'changelog':1, 'chaskell':1, 'cheetah':1, 'chicken':1, 'chill':1, 'chordpro':1, 'cl':1,
-    \    'clean':1, 'clipper':1, 'clojure':1, 'cmake':1, 'cmod':1, 'cmusrc':1, 'coco':1, 'colortest':1, 'conaryrecipe':1, 'conf':1, 'config':1, 'confini':1, 'context':1,
-    \    'crm':1, 'crontab':1, 'csc':1, 'csdl':1, 'csh':1, 'csp':1, 'css':1, 'cterm':1, 'ctrlh':1, 'cucumber':1, 'cupl':1, 'cuplsim':1, 'cvs':1, 'cvsrc':1, 'cweb':1,
-    \    'cynlib':1, 'cynpp':1, 'd':1, 'dart':1, 'datascript':1, 'dcd':1, 'dcl':1, 'debchangelog':1, 'debcontrol':1, 'debcopyright':1, 'debsources':1, 'def':1, 'denyhosts':1, 'dep3patch':1,
-    \    'desc':1, 'desktop':1, 'dictconf':1, 'dictdconf':1, 'diff':1, 'dircolors':1, 'dirpager':1, 'diva':1, 'django':1, 'dns':1, 'dnsmasq':1, 'docbk':1, 'docbksgml':1, 'docbkxml':1, 'dockerfile':1,
-    \    'dosbatch':1, 'dosini':1, 'dot':1, 'doxygen':1, 'dracula':1, 'dsl':1, 'dtd':1, 'dtml':1, 'dtrace':1, 'dts':1, 'dune':1, 'dylan':1, 'dylanintr':1, 'dylanlid':1, 'ecd':1, 'edif':1,
-    \    'eiffel':1, 'elf':1, 'elinks':1, 'elm':1, 'elmfilt':1, 'erlang':1, 'eruby':1, 'esmtprc':1, 'esqlc':1, 'esterel':1, 'eterm':1, 'euphoria3':1, 'euphoria4':1, 'eviews':1, 'exim':1,
-    \    'expect':1, 'exports':1, 'falcon':1, 'fan':1, 'fasm':1, 'fdcc':1, 'fetchmail':1, 'fgl':1, 'flexwiki':1, 'focexec':1, 'form':1, 'forth':1, 'fortran':1, 'foxpro':1, 'fpcmake':1, 'framescript':1,
-    \    'freebasic':1, 'fstab':1, 'fvwm':1, 'fvwm2m4':1, 'gdb':1, 'gdmo':1, 'gedcom':1, 'gemtext':1, 'gift':1, 'git':1, 'gitcommit':1, 'gitconfig':1, 'gitolite':1, 'gitrebase':1, 'gitsendemail':1,
-    \    'gkrellmrc':1, 'gnash':1, 'gnuplot':1, 'godoc':1, 'gp':1, 'gpg':1, 'gprof':1, 'grads':1, 'gretl':1, 'groff':1, 'groovy':1, 'group':1, 'grub':1, 'gsp':1, 'gtkrc':1, 'gvpr':1,
-    \    'haml':1, 'hamster':1, 'haskell':1, 'haste':1, 'hastepreproc':1, 'hb':1, 'help':1, 'help_ru':1, 'hercules':1, 'hex':1, 'hgcommit':1, 'hitest':1, 'hog':1, 'hollywood':1, 'hostconf':1,
-    \    'hostsaccess':1, 'html':1, 'htmlcheetah':1, 'htmldjango':1, 'htmlm4':1, 'htmlos':1, 'i3config':1, 'ia64':1, 'ibasic':1, 'icemenu':1, 'icon':1, 'idl':1, 'idlang':1, 'indent':1, 'inform':1,
-    \    'initex':1, 'initng':1, 'inittab':1, 'ipfilter':1, 'ishd':1, 'iss':1, 'ist':1, 'j':1, 'jal':1, 'jam':1, 'jargon':1, 'javacc':1,
-    \    'jess':1, 'jgraph':1, 'jovial':1, 'jproperties':1, 'json':1, 'jsonc':1, 'jsp':1, 'julia':1, 'kconfig':1, 'kivy':1, 'kix':1, 'krl':1, 'kscript':1, 'kwt':1, 'lace':1, 'latte':1,
-    \    'ld':1, 'ldapconf':1, 'ldif':1, 'less':1, 'lex':1, 'lftp':1, 'lhaskell':1, 'libao':1, 'lifelines':1, 'lilo':1, 'limits':1, 'liquid':1, 'lisp':1, 'lite':1, 'litestep':1, 'loginaccess':1,
-    \    'logindefs':1, 'logtalk':1, 'lotos':1, 'lout':1, 'lpc':1, 'lprolog':1, 'lscript':1, 'lsl':1, 'lss':1, 'lua':1, 'lynx':1, 'm3build':1, 'm3quake':1, 'm4':1, 'mail':1, 'mailaliases':1,
-    \    'mailcap':1, 'make':1, 'mallard':1, 'man':1, 'manconf':1, 'manual':1, 'maple':1, 'markdown':1, 'masm':1, 'mason':1, 'master':1, 'matlab':1, 'maxima':1, 'mel':1, 'meson':1, 'messages':1,
-    \    'mf':1, 'mgl':1, 'mgp':1, 'mib':1, 'mix':1, 'mma':1, 'mmix':1, 'mmp':1, 'modconf':1, 'model':1, 'modsim3':1, 'modula2':1, 'modula3':1, 'monk':1, 'moo':1, 'mp':1, 'mplayerconf':1,
-    \    'mrxvtrc':1, 'msidl':1, 'msmessages':1, 'msql':1, 'mupad':1, 'murphi':1, 'mush':1, 'muttrc':1, 'mysql':1, 'n1ql':1, 'named':1, 'nanorc':1, 'nasm':1, 'nastran':1, 'natural':1, 'ncf':1,
-    \    'neomuttrc':1, 'netrc':1, 'netrw':1, 'nginx':1, 'ninja':1, 'nosyntax':1, 'nqc':1, 'nroff':1, 'nsis':1, 'obj':1, 'ocaml':1, 'occam':1, 'omnimark':1, 'opam':1, 'openroad':1,
-    \    'openscad':1, 'opl':1, 'ora':1, 'pamconf':1, 'pamenv':1, 'papp':1, 'pascal':1, 'passwd':1, 'pbtxt':1, 'pcap':1, 'pccts':1, 'pdf':1, 'perl':1, 'pf':1, 'pfmain':1, 'php':1, 'phtml':1, 'pic':1,
-    \    'pike':1, 'pilrc':1, 'pine':1, 'pinfo':1, 'plaintex':1, 'pli':1, 'plm':1, 'plp':1, 'plsql':1, 'po':1, 'pod':1, 'poke':1, 'postscr':1, 'pov':1, 'povini':1, 'ppd':1, 'ppwiz':1, 'prescribe':1,
-    \    'privoxy':1, 'procmail':1, 'progress':1, 'prolog':1, 'promela':1, 'protocols':1, 'ps1':1, 'ps1xml':1, 'psf':1, 'psl':1, 'ptcap':1, 'purifylog':1, 'pyrex':1, 'qb64':1,
-    \    'qf':1, 'quake':1, 'r':1, 'racc':1, 'radiance':1, 'raku':1, 'raml':1, 'ratpoison':1, 'rc':1, 'rcs':1, 'rcslog':1, 'readline':1, 'README.txt':1, 'rebol':1, 'redif':1, 'registry':1, 'rego':1,
-    \    'remind':1, 'resolv':1, 'reva':1, 'rexx':1, 'rhelp':1, 'rib':1, 'rmd':1, 'rnc':1, 'rng':1, 'rnoweb':1, 'robots':1, 'routeros':1, 'rpcgen':1, 'rpl':1, 'rrst':1, 'rst':1, 'rtf':1, 'ruby':1,
-    \    'samba':1, 'sas':1, 'sass':1, 'sather':1, 'sbt':1, 'scala':1, 'scdoc':1, 'scheme':1, 'scilab':1, 'screen':1, 'scss':1, 'sd':1, 'sdc':1, 'sdl':1, 'sed':1, 'sendpr':1, 'sensors':1,
-    \    'services':1, 'setserial':1, 'sexplib':1, 'sgml':1, 'sgmldecl':1, 'sgmllnx':1, 'sh':1, 'sicad':1, 'sieve':1, 'sil':1, 'simula':1, 'sinda':1, 'sindacmp':1, 'sindaout':1, 'sisu':1,
-    \    'skill':1, 'sl':1, 'slang':1, 'slice':1, 'slpconf':1, 'slpreg':1, 'slpspi':1, 'slrnrc':1, 'slrnsc':1, 'sm':1, 'smarty':1, 'smcl':1, 'smil':1, 'smith':1, 'sml':1, 'snnsnet':1,
-    \    'snnspat':1, 'snnsres':1, 'snobol4':1, 'spec':1, 'specman':1, 'spice':1, 'splint':1, 'spup':1, 'spyce':1, 'sql':1, 'sqlanywhere':1, 'sqlforms':1, 'sqlhana':1, 'sqlinformix':1,
-    \    'sqlj':1, 'sqloracle':1, 'sqr':1, 'squid':1, 'squirrel':1, 'srec':1, 'sshconfig':1, 'sshdconfig':1, 'st':1, 'stata':1, 'stp':1, 'strace':1, 'structurizr':1, 'sudoers':1, 'svg':1,
-    \    'svn':1, 'swift':1, 'swiftgyb':1, 'syncolor':1, 'synload':1, 'syntax':1, 'sysctl':1, 'systemd':1, 'systemverilog':1, 'tads':1, 'tags':1, 'tak':1, 'takcmp':1, 'takout':1, 'tap':1,
-    \    'tar':1, 'taskdata':1, 'taskedit':1, 'tasm':1, 'tcl':1, 'tcsh':1, 'template':1, 'teraterm':1, 'terminfo':1, 'tex':1, 'texinfo':1, 'texmf':1, 'tf':1, 'tidy':1, 'tilde':1, 'tli':1,
-    \    'tmux':1, 'toml':1, 'tpp':1, 'trasys':1, 'treetop':1, 'trustees':1, 'tsalt':1, 'tsscl':1, 'tssgm':1, 'tssop':1, 'tt2':1, 'tt2html':1, 'tt2js':1, 'typescriptcommon':1,
-    \    'uc':1, 'udevconf':1, 'udevperm':1, 'udevrules':1, 'uil':1, 'updatedb':1, 'upstart':1, 'upstreamdat':1, 'upstreaminstalllog':1, 'upstreamlog':1, 'upstreamrpt':1,
-    \    'usserverlog':1, 'usw2kagtlog':1, 'valgrind':1, 'vb':1, 'vera':1, 'verilog':1, 'verilogams':1, 'vgrindefs':1, 'vhdl':1, 'vim':1, 'viminfo':1, 'virata':1, 'vmasm':1, 'voscm':1, 'vrml':1,
-    \    'vroom':1, 'vsejcl':1, 'wast':1, 'wdiff':1, 'web':1, 'webmacro':1, 'wget':1, 'wget2':1, 'whitespace':1, 'winbatch':1, 'wml':1, 'wsh':1, 'wsml':1, 'wvdial':1, 'xbl':1, 'xdefaults':1,
-    \    'xf86conf':1, 'xhtml':1, 'xinetd':1, 'xkb':1, 'xmath':1, 'xml':1, 'xmodmap':1, 'xpm':1, 'xpm2':1, 'xquery':1, 'xs':1, 'xsd':1, 'xslt':1, 'xxd':1, 'yacc':1, 'yaml':1, 'z8a':1, 'zimbu':1, 'zsh':1,
-    "\    'c':1, 'cpp':1, 'objc':1, 'objcpp':1, 'cuda':1, 'proto':1,
-    "\    'python':1,
-    "\    'java':1,
-    "\    'rust':1,
-    "\    'go':1,
-    "\    'vue':1,
-    "\    'cs':1,
-    "\    'cobol':1,
-    "\    'javascript':1, 'javascriptreact':1, 'typescript':1, 'typescriptreact':1,
-    "\    'kotlin':1,
-    \}
-    "let g:apc_enable_tab = 0
-
-    "vim-dict（自动补全词典）
-    "https://github.com/skywind3000/vim-dict
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/vim_dict.vim'
-    " 设定词典路径和匹配方式
-    let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
-    let g:vim_dict_dict = [s:vim_dict_path, '',]
-    let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
+    "最后加载图标
+    "https://github.com/ryanoasis/vim-devicons
+    packadd vim-devicons
+    set updatetime=100
+    let g:webdevicons_enable_nerdtree = 1
+    let g:webdevicons_conceal_nerdtree_brackets = 1
 
   endif
-
-  "ctrlp（模糊查找）
-  "https://github.com/ctrlpvim/ctrlp.vim
-  packadd ctrlp
-  let g:ctrlp_root_markers = ['.git', '.svn', '.project', '.root', '.hg']
-
-  "ctrlp-funky（查看outline，因为依赖少所以平替掉tagbar）
-  "https://github.com/tacahiroy/ctrlp-funky
-  packadd ctrlp-funky
-  let g:ctrlp_funky_matchtype = 'path'
-  let g:ctrlp_funky_syntax_highlight = 1
-  noremap <F1> :CtrlPFunky<CR>
 
   "tagbar（用tags表示代码大纲）
   "https://github.com/preservim/tagbar
   "packadd tagbar
   "按下F1表示
   "noremap <F1> :TagbarToggle<CR>
-
-  "vim-mark（高亮选中单词）
-  "https://github.com/Yggdroot/vim-mark
-
-  "nerdtree（资源管理器）
-  "https://github.com/preservim/nerdtree
-  "packadd nerdtree
-
-  "vim-snipmate（语法片段snippets）
-  "garbas/vim-snipmate是VimL写的，SirVer/ultisnips需要Python
-  "https://github.com/garbas/vim-snipmate
-  "https://github.com/SirVer/ultisnips
-  "片段仓库 https://github.com/honza/vim-snippets
-  "packadd tlib
-  "packadd vim-addon-mw-utils
-  "packadd vim-snipmate
-  "if has("python3")
-    "packadd ultisnips
-    "let g:UltiSnipsExpandTrigger="<tab>"
-    "let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-    "let g:UltiSnipsSnippetsDir=g:g_s_rcfilepath . '/vimconf/snippets'
-  "endif
 
 endif
 

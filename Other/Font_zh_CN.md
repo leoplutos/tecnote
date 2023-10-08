@@ -43,6 +43,12 @@ sarasa-mono-j-regular.ttf（日文开发）
 sarasa-mono-j-light.ttf（日文开发）
 ```
 
+* [**更纱黑体NerdFonts(Sarasa Gothic Nerd Fonts)-github**](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts)  
+下载地址为：  
+[sarasa-mono-sc-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-sc-nerd-font.zip)  
+[sarasa-mono-j-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-j-nerd-font.zip)  
+
+
 * [Inconsolata](https://github.com/googlefonts/Inconsolata/releases)  
 Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。  
 Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。Ligconsolata的下载地址为：  
@@ -51,6 +57,9 @@ Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolat
 [Ligconsolata-Bold.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Bold.ttf)  
 [Ligconsolata-Regular.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Regular.ttf)  
 
+* [**Inconsolata-NerdFont-github**](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Inconsolata)  
+下载地址为：  
+[Inconsolata-NerdFont.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Inconsolata.zip)  
 
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)  
  JetBrains推出的一款专门为了开发人员设计的字体

@@ -88,44 +88,11 @@ Github：https://github.com/neovide/neovide
 
 #### 启动
 下载好执行文件之后，如果 ``nvim.exe`` 在环境变量里直接运行 ``neovide.exe`` 即可  
-如果环境受限无法修改环境变量可以用如下方式启动，新建 ``neovide.cmd`` 内容如下  
-因为 vim 会产生很多 log 文件，下面这个批处理也会顺便删除 log  
+如果环境受限无法修改环境变量可以用如下方式启动，新建 ``neovide.cmd``  
+内容如下（delete_vim_log.cmd为删除log文件的脚本，可不加）
 ```
-::删除_viminfo(~/_viminfo)
-SET TmpDeleteFile=%USERPROFILE%\_viminfo
-if exist %TmpDeleteFile% (
-    del %TmpDeleteFile%
-) else (
-    echo %TmpDeleteFile% is not exist!
-)
-::删除vim-lsp的log(~/vim-lsp.log)
-SET TmpDeleteFile=%USERPROFILE%\vim-lsp.log
-if exist %TmpDeleteFile% (
-    del %TmpDeleteFile%
-) else (
-    echo %TmpDeleteFile% is not exist!
-)
-::删除vim-dap vimspector的log(~/.vimspector.log)
-SET TmpDeleteFile=%USERPROFILE%\.vimspector.log
-if exist %TmpDeleteFile% (
-    del %TmpDeleteFile%
-) else (
-    echo %TmpDeleteFile% is not exist!
-)
-::删除neovim-lsp的log(%LOCALAPPDATA%\nvim-data\lsp.log)
-SET TmpDeleteFile=%LOCALAPPDATA%\nvim-data\lsp.log
-if exist %TmpDeleteFile% (
-    del %TmpDeleteFile%
-) else (
-    echo %TmpDeleteFile% is not exist!
-)
-::删除cobol-lsp的log文件夹(~/LSPCobol/logs)
-SET TmpDeleteFolder=%USERPROFILE%\LSPCobol\logs
-if exist %TmpDeleteFolder% (
-    rmdir /S /Q %TmpDeleteFolder%
-) else (
-    echo %TmpDeleteFolder% is not exist!
-)
+call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
+::pause
 
 set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
 start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe
@@ -138,6 +105,18 @@ Neovim 内置 LSP 的 client 端。只需要4步
 2. 安装对应 language server
 3. 配置对应语言 ``require('lspconfig').xx.setup{…}``
 4. 运行``:LspInfo`` 查看 LSP 连接状态
+
+## VimScript与Lua的互相调用
+在 VimScript 下
+```
+lua require('xxx')
+```
+就能引入 Lua 配置文件模块  
+反之在 Lua 下
+```
+vim.cmd [[source <vimscript文件路径>]]
+```
+就能引入vimscript文件
 
 ## 其他
 

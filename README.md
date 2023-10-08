@@ -64,6 +64,7 @@
 * [Neo-Vim](DevTool/NeoVim_zh_CN.md)
 * [Vim](DevTool/Vim_zh_CN.md)
 * [Gvim](DevTool/Gvim_zh_CN.md)
+* [Vim环境和设置总结](DevTool/Vim-env_zh_CN.md)
 * [Vim-vimrc](DevTool/Vim-vimrc_zh_CN.md)
 * [Vim-netrw](DevTool/Vim-netrw_zh_CN.md)
 * [Vim-ctags](DevTool/Vim-ctags_zh_CN.md)

@@ -20,10 +20,10 @@ source $VIMRUNTIME/menu.vim
 "               GUI设置                         "
 "-----------------------------------------------"
 " 设置字体、字号
-set guifont=等距更纱黑体_SC_light:h12:cANSI:qDRAFT,更紗等幅ゴシック_J_light:h12:cANSI:qDRAFT,Inconsolata:h12:cANSI:qDRAFT,JetBrains_Mono:h12:cANSI:qDRAFT
+set guifont=等距更纱黑体_SC_Nerd_Font_light:h12:cANSI:qDRAFT,更紗等幅ゴシック_J_Nerd_Font_light:h12:cANSI:qDRAFT,等距更纱黑体_SC_light:h12:cANSI:qDRAFT,更紗等幅ゴシック_J_light:h12:cANSI:qDRAFT,Inconsolata:h12:cANSI:qDRAFT,JetBrains_Mono:h12:cANSI:qDRAFT
 "set guifont=ＭＳ_ゴシック:h12:cANSI:qDRAFT,Inconsolata:h12:cANSI:qDRAFT,JetBrains_Mono:h12:cANSI:qDRAFT
 "set guifontwide=ＭＳ_ゴシック:h12:cSHIFTJIS:qDRAFT,MS_Gothic:h12:cSHIFTJIS:qDRAFT,Microsoft_YaHei:h12:cGB2312:qDRAFT,Microsoft_YaHei_UI:h12:cGB2312:qDRAFT,SimSun:h12:cGB2312:qDRAFT,新宋体:h12:cGB2312:qDRAFT
-set guifontwide=等距更纱黑体_SC_light:h12:cGB2312:qDRAFT,更紗等幅ゴシック_J_light:h12:cSHIFTJIS:qDRAFT,Microsoft_YaHei:h12:cGB2312:qDRAFT,Microsoft_YaHei_UI:h12:cGB2312:qDRAFT,SimSun:h12:cGB2312:qDRAFT,新宋体:h12:cGB2312:qDRAFT,ＭＳ_ゴシック:h12:cSHIFTJIS:qDRAFT,MS_Gothic:h12:cSHIFTJIS:qDRAFT
+set guifontwide=等距更纱黑体_SC_Nerd_Font_light:h12:cGB2312:qDRAFT,更紗等幅ゴシック_J_Nerd_Font_light:h12:cSHIFTJIS:qDRAFT,等距更纱黑体_SC_light:h12:cGB2312:qDRAFT,更紗等幅ゴシック_J_light:h12:cSHIFTJIS:qDRAFT,Microsoft_YaHei:h12:cGB2312:qDRAFT,Microsoft_YaHei_UI:h12:cGB2312:qDRAFT,SimSun:h12:cGB2312:qDRAFT,新宋体:h12:cGB2312:qDRAFT,ＭＳ_ゴシック:h12:cSHIFTJIS:qDRAFT,MS_Gothic:h12:cSHIFTJIS:qDRAFT
 set mousehide                             " 当输入的时候隐藏鼠标
 set lines=35 columns=148                  " 窗口大小
 set guitablabel=\[%N\]%t%m                " 设定tab表示内容，例子为：[4]sample.file[+]，N为当前页号，t为文件名，m为修改标记。更多请看[:h statusline]

@@ -2,9 +2,12 @@
 --配置路径为 %LOCALAPPDATA%\nvim\lua
 --nvim-tree.lua插件设置
 --https://github.com/nvim-tree/nvim-tree.lua
+--https://github.com/nvim-tree/nvim-web-devicons
 
 -- 加载nvim-tree插件
 vim.cmd('packadd nvim-tree.lua')
+-- 加载nvim-web-devicons插件
+vim.cmd('packadd nvim-web-devicons')
 
 -- 禁用netrw
 vim.g.loaded_netrw = 1
@@ -27,30 +30,31 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', 'v',    api.node.open.edit,       opts('Open'))
   vim.keymap.set('n', '<C-l>',  api.tree.reload,       opts('Refresh'))
 
-  -- 进入nvim-tree的自动命令设置
-  vim.cmd(
-  [[
-  "因为使用了vim-startify（启动页导航）插件，所以需要进入每个nvim-tree的时候刷新设置
-  " 使用GetProjectRoot()函数找到跟目录
-  let g:g_s_projectrootpath = GetProjectRoot()
-  " 在工程跟路径下递归查找子文件
-  "set path+=**
-  exec 'set path='
-  exec 'set path+=' . g:g_s_projectrootpath . '/**'
-  " 搜索除外内容
-  set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**
-  " 设定环境变量
-  let $PYTHONPATH = ''
-  let $PYTHONPATH .= g:g_s_projectrootpath
-  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src'
-  let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src\com'
-  ]]
-  )
+  -- 添加事件Event.TreeRendered(每次nvim-tree重绘的时候运行的命令)
+  local Event = api.events.Event
+  api.events.subscribe(Event.TreeRendered, function(data)
+    vim.cmd([[
+    "因为使用了vim-startify（启动页导航）插件，所以需要进入每个nvim-tree的时候刷新设置
+    " 使用GetProjectRoot()函数找到跟目录
+    let g:g_s_projectrootpath = GetProjectRoot()
+    " 在工程跟路径下递归查找子文件
+    "set path+=**
+    exec 'set path='
+    exec 'set path+=' . g:g_s_projectrootpath . '/**'
+    " 搜索除外内容
+    set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**
+    " 设定环境变量
+    let $PYTHONPATH = ''
+    let $PYTHONPATH .= g:g_s_projectrootpath
+    let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src'
+    let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src\com'
+    ]])
+  end)
 
 end
 
 -- 加载nvim-tree参数
-require("nvim-tree").setup({
+require('nvim-tree').setup({
   sort = {
     sorter = "case_sensitive",
   },
@@ -61,18 +65,20 @@ require("nvim-tree").setup({
     group_empty = true,
     icons = {
       show = {
-        file = false,
-        folder = false,
+        --file = false,
+        file = true,
+        --folder = false,
+        folder = true,
         folder_arrow = true,
         git = false,
         modified = false,
       },
       glyphs = {
-        bookmark = "=",
-        folder = {
-          arrow_closed = "⏵",
-          arrow_open = "⏷",
-        },
+        --bookmark = "=",
+        --folder = {
+        --  arrow_closed = "⏵",
+        --  arrow_open = "⏷",
+        --},
       },
     },
   },
@@ -87,9 +93,14 @@ require("nvim-tree").setup({
 })
 
 --nvim-tree.lua插件的高亮设定
-vim.cmd(
-[[
+vim.cmd([[
 hi clear NvimTreeNormal
 hi! link NvimTreeNormal FileExplorerNormal
-]]
-)
+hi clear NvimTreeRootFolder
+hi! link NvimTreeRootFolder Statement
+]])
+
+--nvim-tree.lua插件的快捷键绑定
+vim.cmd([[
+nnoremap <Leader>e :NvimTreeToggle<CR>
+]])

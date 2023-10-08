@@ -36,8 +36,8 @@ hi LineNr       term=none cterm=none ctermfg=66 gui=none guifg=#6c8086
 hi CursorLine   term=reverse ctermbg=158 guibg=#afffd7
 hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
-hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=123 ctermbg=17 gui=bold,reverse guifg=#87ffff guibg=#00005f
-hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=17 gui=reverse guifg=#afffff guibg=#00005f
+hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=189 ctermbg=17 gui=bold,reverse guifg=#cfc8f4 guibg=#00005f
+hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=103 gui=reverse guifg=#afffff guibg=#79849d
 "分割窗口线
 hi VertSplit    term=reverse ctermfg=253 ctermbg=253 guifg=#d9d9df guibg=#d9d9df
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
@@ -151,6 +151,10 @@ hi DebugLine    term=reverse ctermbg=229 guibg=#e4efb3
 hi ToolbarLine  term=underline ctermbg=252 guibg=#d3d3d3
 hi ToolbarButton cterm=bold ctermfg=231 ctermbg=241 gui=bold guifg=#ffffff guibg=#666666
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
+hi FileExplorerNormal term=none cterm=none ctermfg=236 ctermbg=255 gui=none guifg=#2c2c2c guibg=#f3f3f9
+hi FinderNormal term=none cterm=none ctermfg=16 ctermbg=255 gui=none guifg=#000000 guibg=#f3f3f9
+"hi FinderPromptNormal term=none cterm=none ctermfg=188 ctermbg=237 gui=none guifg=#d4d4d4 guibg=#3c3c3c
+hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=255 gui=none guifg=#8d8dbf guibg=#f3f3f9
 
 "-----------------------------------------------"
 "               终端高亮                        "

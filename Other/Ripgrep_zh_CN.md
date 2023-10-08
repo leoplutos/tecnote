@@ -16,15 +16,19 @@
 ``releases`` 下有对应各个系统的编译好的可执行文件。下载加进PATH即可
 
 #### 方式2：VSCode自带
-如果你有 ``VS Code``，那么就不用安装了，在 ``VS Code`` 的安装目录搜索 ``rg.exe``即可找到路径  
+如果你有 ``VS Code``，那么就不用安装了，在 ``VS Code`` 的安装目录搜索 ``rg.exe`` 即可找到路径  
 笔者的路径为
 ```
 D:\Tools\WorkTool\Text\VSCode-win32-x64-1.81.1\resources\app\node_modules.asar.unpacked\@vscode\ripgrep\bin
 ```
-添加到 ``PATH``
+将 ``rg.exe`` 复制到
 ```
-set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64-1.81.1
-set PATH=%PATH%;%VSCODE_HOME%\resources\app\node_modules.asar.unpacked\@vscode\ripgrep\bin
+D:\Tools\WorkTool\Search\ripgrep\bin
+```
+然后添加到 ``PATH``
+```
+set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep
+set PATH=%PATH%;%RIPGREP_HOME%\bin
 ```
 确认
 ```
