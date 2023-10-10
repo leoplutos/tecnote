@@ -15,9 +15,12 @@ packadd nerdtree
 let NERDTreeShowHidden = 1
 let NERDTreeNaturalSort = 1
 let NERDTreeChDirMode = 3
-let NERDTreeDirArrowCollapsible = '-'
-"let NERDTreeDirArrowExpandable = '>'
-"let NERDTreeDirArrowCollapsible = 'v'
+if (g:g_use_nerdfont == 0)
+  let NERDTreeDirArrowCollapsible = '-'
+else
+  let NERDTreeDirArrowExpandable = g:treeArrowClosedIcon
+  let NERDTreeDirArrowCollapsible = g:treeArrowOpenIcon
+endif
 "let NERDTreeNodeDelimiter = "\x07"
 "不显示头部的帮助信息
 let NERDTreeMinimalUI = 1

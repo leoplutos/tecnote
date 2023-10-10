@@ -39,6 +39,13 @@ endif
 if !exists('g:g_use_dap')
   let g:g_use_dap = 0
 endif
+"全局变量g:g_use_nerdfont（0：不使用nerdfont，1：使用nerdfont）
+if !exists('g:g_use_nerdfont')
+  let g:g_use_nerdfont = 0
+endif
+if (g:g_use_lsp == 1)
+  let g:g_use_nerdfont = 1
+endif
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -87,8 +94,6 @@ elseif (g:g_i_osflg==3)
 else
   let g:terminal_shell='/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
 endif
-"全局变量g:g_i_colorflg（1：256暗色系，2：256亮色系，3：16色系）
-let g:g_i_colorflg = 1
 "全局变量g:g_s_rcfilepath（当前vimrc所在路径）
 let g_s_rcfilepath = expand("<sfile>:p:h")
 "判断工程跟路径关键字
@@ -103,6 +108,8 @@ if (v:version > 799)
   exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf/after'
 endif
 exec "set runtimepath+=" . g:g_s_rcfilepath . '/vimconf/after'
+"加载NerdFonts图标设定
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/nerdfont.vim'
 "工程根路径
 let g:g_s_projectrootpath = ''
 
@@ -328,17 +335,31 @@ function! Statusline()
   else
     let l:showMode .= 'NORMAL'
   endif
-  let l:lspMsg = 'LSP:'
+  let l:lspMsgLable = 'LSP :'
+  let l:lspMsgContent = ''
   if exists('*GetLspStatus')
-    let l:lspMsg .= GetLspStatus()
+    let l:lspMsgContent = GetLspStatus()
+    if (g:g_use_nerdfont == 0)
+    else
+      if (l:lspMsgContent == 'running')
+        let l:lspMsgContent = g:lspStatusOk
+      else
+        "
+      endif
+    endif
   else
-    let l:lspMsg .= '❌'
+    if (g:g_use_nerdfont == 0)
+      let l:lspMsgContent = '❌'
+    else
+      let l:lspMsgContent = g:lspStatusNg
+    endif
   endif
   let l:resultStr = ''                              " 初始化
   let l:resultStr .= '%1* ' . showMode . ' '        " 显示当前编辑模式，高亮为用户组1
   let l:resultStr .= '%2* %F'                       " 显示当前文件，高亮为用户组2 (%f 相对文件路径, %F 绝对文件路径, %t 文件名)
   let l:resultStr .= '%3* %m%r%h%w %*%='            " 显示当前文件标记(mrhw)，高亮为用户组3，之后用=开始右对齐
-  let l:resultStr .= '%4* ' . lspMsg . ' '          " 显示LSP状态，高亮为用户组4
+  let l:resultStr .= '%4* ' . lspMsgLable . ''      " 显示LSP标签，高亮为用户组4
+  let l:resultStr .= '%5* ' . lspMsgContent . ' '   " 显示LSP状态，高亮为用户组5
   let l:resultStr .= '%* %{&ff} | %{"".(""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"").""} | %Y '        " 显示换行符，编码，文件类型，高亮为默认（ LF | utf-8 | fomart ）
   let l:resultStr .= '%2* [%l:%v] '                 " 显示当前行，列，高亮为用户组2
   let l:resultStr .= '%1* %p%% %LL '                " 显示百分比，总行数，高亮为用户组4
@@ -398,8 +419,10 @@ hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold gui
 hi User2        term=none cterm=none ctermfg=189 ctermbg=236 gui=none guifg=#c3cef7 guibg=#292e41
 "文件编辑状态
 hi User3        term=none cterm=none ctermfg=226 ctermbg=238 gui=none guifg=#ffff00 guibg=#292e41
-"LSP服务器状态
+"LSP服务器标签
 hi User4        term=none cterm=none ctermfg=231 ctermbg=60 gui=none guifg=#f7f7f0 guibg=#545c7c
+"LSP服务器状态
+hi User5        term=none cterm=none ctermfg=226 ctermbg=60 gui=none guifg=#ffff00 guibg=#545c7c
 
 "-----------------------------------------------"
 "               颜色设置                        "
@@ -697,12 +720,16 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
     endif
 
-    "最后加载图标
+    "加载文件模糊查找（LeaderF）
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/finder.vim'
+
+    "需要最后加载图标
     "https://github.com/ryanoasis/vim-devicons
-    packadd vim-devicons
     set updatetime=100
     let g:webdevicons_enable_nerdtree = 1
     let g:webdevicons_conceal_nerdtree_brackets = 1
+    let g:DevIconsEnableFoldersOpenClose = 1
+    packadd vim-devicons
 
   endif
 

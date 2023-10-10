@@ -153,8 +153,11 @@ hi ToolbarButton cterm=bold ctermfg=231 ctermbg=241 gui=bold guifg=#ffffff guibg
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
 hi FileExplorerNormal term=none cterm=none ctermfg=236 ctermbg=255 gui=none guifg=#2c2c2c guibg=#f3f3f9
 hi FinderNormal term=none cterm=none ctermfg=16 ctermbg=255 gui=none guifg=#000000 guibg=#f3f3f9
-"hi FinderPromptNormal term=none cterm=none ctermfg=188 ctermbg=237 gui=none guifg=#d4d4d4 guibg=#3c3c3c
+hi FinderInputText term=none cterm=none ctermfg=230 ctermbg=243 gui=none guifg=#f2ebc7 guibg=#6e7476
 hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=255 gui=none guifg=#8d8dbf guibg=#f3f3f9
+hi FinderFileName term=none cterm=none ctermfg=16 gui=none guifg=#000000
+hi FinderLineNumber term=none cterm=none ctermfg=16 gui=none guifg=#000000
+hi FinderColumnNumbe term=none cterm=none ctermfg=16 gui=none guifg=#000000
 
 "-----------------------------------------------"
 "               终端高亮                        "

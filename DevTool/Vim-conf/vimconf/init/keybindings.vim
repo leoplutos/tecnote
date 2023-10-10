@@ -262,14 +262,14 @@ endfunction
 
 function! s:setFontSarasaGothicJ()
   if has('gui_running')
-    set guifont=更紗等幅ゴシック_J_light:h12:cANSI:qDRAFT
-    set guifontwide=更紗等幅ゴシック_J_light:h12:cSHIFTJIS:qDRAFT
+    set guifont=更紗等幅ゴシック_J_Nerd_Font_light:h12:cANSI:qDRAFT
+    set guifontwide=更紗等幅ゴシック_J_Nerd_Font_light:h12:cSHIFTJIS:qDRAFT
   endif
 endfunction
 
 function! s:setFontSarasaGothicSC()
   if has('gui_running')
-    set guifont=等距更纱黑体_SC_light:h12:cANSI:qDRAFT
-    set guifontwide=等距更纱黑体_SC_light:h12:cGB2312:qDRAFT
+    set guifont=等距更纱黑体_SC_Nerd_Font_light:h12:cANSI:qDRAFT
+    set guifontwide=等距更纱黑体_SC_Nerd_Font_light:h12:cGB2312:qDRAFT
   endif
 endfunction

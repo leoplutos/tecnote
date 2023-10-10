@@ -33,7 +33,7 @@ hi MoreMsg      term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 hi ModeMsg      term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "LineNr     : 行号
 hi LineNr       term=none cterm=none ctermfg=21 gui=none guifg=#0000ff
-hi CursorLine   term=reverse ctermbg=255 guibg=#ecece6
+hi CursorLine   term=reverse ctermbg=254 guibg=#e4e6f0
 hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=189 ctermbg=17 gui=bold,reverse guifg=#cfc8f4 guibg=#00005f
@@ -59,7 +59,7 @@ hi SpellCap     term=reverse cterm=undercurl ctermfg=196 ctermbg=230 gui=undercu
 hi SpellRare    term=reverse cterm=undercurl ctermfg=196 ctermbg=230 gui=undercurl guifg=#ff0000 guibg=#fffbf0 guisp=#ff0000
 hi SpellLocal   term=underline cterm=undercurl ctermfg=196 ctermbg=230 gui=undercurl guifg=#ff0000 guibg=#fffbf0 guisp=#ff0000
 "弹出菜单
-hi Pmenu        ctermfg=233 ctermbg=255 guifg=#121212 guibg=#efefef
+hi Pmenu        ctermfg=16 ctermbg=254 guifg=#000000 guibg=#ede7d5
 hi PmenuSel     ctermfg=255 ctermbg=25 guifg=#eeeeee guibg=#0060c0
 hi PmenuSbar    ctermbg=251 guibg=#c6c6c6
 hi PmenuThumb   ctermbg=234 guibg=#1e1e1e
@@ -153,8 +153,11 @@ hi ToolbarButton cterm=bold ctermfg=231 ctermbg=241 gui=bold guifg=#ffffff guibg
 hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
 hi FileExplorerNormal term=none cterm=none ctermfg=236 ctermbg=255 gui=none guifg=#2c2c2c guibg=#eeeee5
 hi FinderNormal term=none cterm=none ctermfg=16 ctermbg=255 gui=none guifg=#000000 guibg=#eeeee5
-"hi FinderPromptNormal term=none cterm=none ctermfg=188 ctermbg=237 gui=none guifg=#d4d4d4 guibg=#3c3c3c
+hi FinderInputText term=none cterm=none ctermfg=230 ctermbg=243 gui=none guifg=#f2ebc7 guibg=#6e7476
 hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=255 gui=none guifg=#8d8dbf guibg=#eeeee5
+hi FinderFileName term=none cterm=none ctermfg=16 gui=none guifg=#000000
+hi FinderLineNumber term=none cterm=none ctermfg=16 gui=none guifg=#000000
+hi FinderColumnNumbe term=none cterm=none ctermfg=16 gui=none guifg=#000000
 
 "-----------------------------------------------"
 "               终端高亮                        "

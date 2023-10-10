@@ -8,6 +8,22 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 ## 字体测试网站
 * [programmingfonts](https://www.programmingfonts.org/)
 
+## 关于NerdFonts
+``NerdFonts`` 是一款超过 20 个补丁的字体（超过 2,000 变化）和 FontForge 字体补丁 python 脚本用于 Powerline，Font Awesome，Octicons，Devicons，和 Vim Devicons 的集合。包括：Droid Sans, Meslo, Source Code, AnonymousPro, Hack, ProFont, Inconsolata 和更多。  
+因为在 终端 和 Vim/Neovim 下的开发，想显示一些特殊图标必不可少，笔者已经将常用的开发工具已经全部换成了``更纱黑体(Sarasa Mono)`` 的 ``NerdFonts`` 字体
+
+#### NerdFonts字体调查
+打开如下网站：  
+https://www.nerdfonts.com/cheat-sheet  
+然后再搜索框输入 ``空格`` 即可显示所有 ``NerdFonts`` 字体图标
+
+#### 设定NerdFonts字体的开发工具
+- VSCode
+- Windows Terminal
+- NeoVide
+- Gvim
+- nvim-qt
+
 ## 程序员字体
 
 * [**更纱黑体(Sarasa Gothic)-github**](https://github.com/be5invis/Sarasa-Gothic)  

@@ -19,6 +19,16 @@
 | 代码片段  | 自定义                         | vim-vsnip        | vim-vsnip             |
 |  其他   |  无                          |  无               | flash.nvim            |
 
+**注:** 使用了 ``vim-devicons`` 之后，如果 ``NeedTree`` 图标不显示，需要将 ``vim-devicons/nerdtree_plugin`` 这个文件夹复制到  
+```
+~/.vim/nerdtree_plugin/ (*nix)
+~/vimfiles/nerdtree_plugin (windows)
+```
+笔者的路径为  
+```
+~/vimconf/nerdtree_plugin
+```
+
 ## 启动Vim/NeoVim的脚本
 笔者的 ``vimrc`` 有2个重要的全局变量
 - g:g_use_lsp ： 控制是否启用lsp的设定
@@ -141,6 +151,13 @@ if exist %TmpDeleteFile% (
 )
 ::删除cobol-lsp的log文件夹(~/LSPCobol/logs)
 SET TmpDeleteFolder=%USERPROFILE%\LSPCobol\logs
+if exist %TmpDeleteFolder% (
+    rmdir /S /Q %TmpDeleteFolder%
+) else (
+    echo %TmpDeleteFolder% is not exist!
+)
+::删除LeaderF的缓存文件夹(%APPDATA%/LeaderF)
+SET TmpDeleteFolder=%APPDATA%\LeaderF
 if exist %TmpDeleteFolder% (
     rmdir /S /Q %TmpDeleteFolder%
 ) else (

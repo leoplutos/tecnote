@@ -75,7 +75,11 @@ function! GetLspStatus() abort
     let lspStatus = 'running'
   endif
   if lspStatus == ''
-    let lspStatus = '❌'
+    if (g:g_use_nerdfont == 0)
+      let lspStatus = '❌'
+    else
+      let lspStatus = g:lspStatusNg
+    endif
   endif
   return lspStatus
 endfunction
@@ -618,10 +622,17 @@ vim.keymap.set({'n'}, '<C-F2>', ':LspInfo<CR>', { noremap = true })
 --Lsp相关的高亮设定
 --:sign list 查看所有定义
 vim.cmd([[
-sign define DiagnosticSignError text=❌ texthl=DiagnosticSignError linehl= numhl=
-sign define DiagnosticSignWarn text=🆖 texthl=DiagnosticSignWarn linehl= numhl=
-sign define DiagnosticSignInfo text=❗ texthl=DiagnosticSignInfo linehl= numhl=
-sign define DiagnosticSignHint text=🗝 texthl=DiagnosticSignHint linehl= numhl=
+if (g:g_use_nerdfont == 0)
+  sign define DiagnosticSignError text=❌ texthl=DiagnosticSignError linehl= numhl=
+  sign define DiagnosticSignWarn text=🆖 texthl=DiagnosticSignWarn linehl= numhl=
+  sign define DiagnosticSignInfo text=❗ texthl=DiagnosticSignInfo linehl= numhl=
+  sign define DiagnosticSignHint text=🗝 texthl=DiagnosticSignHint linehl= numhl=
+else
+  call sign_define("DiagnosticSignError", {"text" : g:diagnosticsErrorIcon, "texthl" : "DiagnosticSignError"})
+  call sign_define("DiagnosticSignWarn", {"text" : g:diagnosticsWarnIcon, "texthl" : "DiagnosticSignWarn"})
+  call sign_define("DiagnosticSignInfo", {"text" : g:diagnosticsInfoIcon, "texthl" : "DiagnosticSignInfo"})
+  call sign_define("DiagnosticSignHint", {"text" : g:diagnosticsHintrIcon, "texthl" : "DiagnosticSignHint"})
+endif
 ]])
 
 -- diagnostics设定
@@ -633,7 +644,8 @@ vim.diagnostic.config({
     },
     severity_sort = true,
     virtual_text = {
-      prefix = "→",
+      --prefix = "→",
+      prefix = vim.g.virtualTextPrefixIcon,
       spacing = 4,
     },
     signs = true,
@@ -703,4 +715,3 @@ xmap        s   <Plug>(vsnip-select-text)
 nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
 ]])
-

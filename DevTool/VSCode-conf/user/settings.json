@@ -3,9 +3,7 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'等距更纱黑体 SC light', 'Ligconsolata', 'Inconsolata', '更紗等幅ゴシック J', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	//"editor.fontFamily": "'Ligconsolata', 'Inconsolata', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //日文系统用
-	//"editor.fontFamily": "'更紗等幅ゴシック J light', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
+	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
 	"editor.fontSize": 16, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
@@ -613,10 +611,8 @@
 		//这里尽量在每个工程设定
 	},
 	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
-	//"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
-	"terminal.integrated.fontFamily": "'等距更纱黑体 SC', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	//"terminal.integrated.fontFamily": "'更紗等幅ゴシック J', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //日文系统用
-	//"terminal.integrated.fontFamily": "'更紗等幅ゴシック J', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
+	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
+	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
 	"terminal.integrated.fontSize": 16, //设置字体大小
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字

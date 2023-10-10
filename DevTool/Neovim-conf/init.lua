@@ -74,7 +74,9 @@ else
 
   if vim.g.neovide then
     -- GUI前端Neovide的设定
-    vim.o.guifont = "等距更纱黑体_SC_Nerd_Font,Sarasa_Mono_SC_Nerd_Font,等距更纱黑体_SC,Sarasa_Mono_SC,更紗等幅ゴシック_J:h12"
+    -- vim.o.guifont = "等距更纱黑体_SC_Nerd_Font,Sarasa_Mono_SC_Nerd_Font,等距更纱黑体_SC,Sarasa_Mono_SC,更紗等幅ゴシック_J__Nerd_Font,Sarasa_Mono_J_Nerd_Font,更紗等幅ゴシック_J:h12"
+    vim.o.guifont = "等距更纱黑体_SC_Nerd_Font:h12:cANSI,更紗等幅ゴシック_J_Nerd_Font:h12:cANSI,等距更纱黑体_SC:h12:cANSI,更紗等幅ゴシック_J:h12:cANSI,Inconsolata:h12:cANSI,JetBrains_Mono:h12:cANSI"
+    vim.o.guifontwide = "等距更纱黑体_SC_Nerd_Font:h12:cGB2312,更紗等幅ゴシック_J_Nerd_Font:h12:cSHIFTJIS,等距更纱黑体_SC:h12:cGB2312,更紗等幅ゴシック_J:h12:cSHIFTJIS,Microsoft_YaHei:h12:cGB2312,Microsoft_YaHei_UI:h12:cGB2312,SimSun:h12:cGB2312,新宋体:h12:cGB2312,ＭＳ_ゴシック:h12:cSHIFTJIS,MS_Gothic:h12:cSHIFTJIS"
     vim.opt.linespace = 0
     -- vim.g.neovide_scale_factor = 1.0
     -- vim.g.neovide_padding_top = 0

@@ -16,7 +16,8 @@ vim.cmd([[
     autocmd!
     autocmd User TelescopeFindPre set ambiwidth=single
     autocmd FileType TelescopePrompt autocmd BufLeave <buffer> set ambiwidth=double
-    "autocmd User TelescopePreviewerLoaded echo 123
+    "设定Previewer的行号
+    autocmd User TelescopePreviewerLoaded setlocal number
   augroup END
 ]])
 
@@ -28,6 +29,7 @@ function vim.find_files_from_project_root()
   end
   local find_opts = {
     cwd = get_root_dir(),
+    hidden = true,
   }
   require("telescope.builtin").find_files(find_opts)
 end
@@ -78,7 +80,30 @@ require('telescope').setup{
       "--line-number",
       "--column",
       "--smart-case",
-      "--trim"
+      "--hidden",
+      "--trim",
+      -- "--glob=!.git/* --glob=!.svn/* --glob=!.vscode/* --glob=!bin/* --glob=!build/* --glob=!lib/* --glob=!obj/* --glob=!target/*",
+      -- "--glob=!.git\\* --glob=!.svn\\* --glob=!.vscode\\* --glob=!bin\\* --glob=!build\\* --glob=!lib\\* --glob=!obj\\* --glob=!target\\*",
+    },
+    file_ignore_patterns = {
+      "^.git/",
+      "^.svn/",
+      "^.vscode/",
+      "^.cache/",
+      "^bin/",
+      "^build/",
+      "^lib/",
+      "^obj/",
+      "^target/",
+      "^.git\\",
+      "^.svn\\",
+      "^.vscode\\",
+      "^.cache\\",
+      "^bin\\",
+      "^build\\",
+      "^lib\\",
+      "^obj\\",
+      "^target\\",
     }
   },
   pickers = {
@@ -96,8 +121,7 @@ vim.cmd(
 hi clear TelescopeNormal
 hi! link TelescopeNormal FinderNormal
 "hi clear TelescopePromptNormal
-"hi! link TelescopePromptNormal FinderPromptNormal
-"hi! link TelescopePromptNormal FinderNormal
+"hi! link TelescopePromptNormal FinderInputText
 hi clear TelescopeTitle
 hi! link TelescopeTitle Title
 hi clear TelescopeBorder

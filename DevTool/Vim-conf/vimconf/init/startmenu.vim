@@ -9,7 +9,7 @@ let g:startify_lists = [
   "\    { 'type': 'files',     'header': ['   MRU']            },
   "\    { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
   "\    { 'type': 'sessions',  'header': ['   Sessions']       },
-  \    { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+  \    { 'type': 'bookmarks', 'header': ['   ProjectList']      },
   "\    { 'type': 'commands',  'header': ['   Commands']       },
   \]
 "设置工程书签
@@ -23,6 +23,7 @@ let g:startify_bookmarks = [
   \    'D:/WorkSpace/Vue/VueTestProject',
   \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
   \    'D:/WorkSpace/Test/LanguagTest',
+  \    'D:/WorkSpace/Kotlin/KotlinSampleProject',
 \]
 "起始页显示的列表长度
 let g:startify_files_number = 20
