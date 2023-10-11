@@ -4,13 +4,39 @@ scriptencoding utf-8
 "-----------------------------------------------"
 "               vim-lsp设置                     "
 "-----------------------------------------------"
+"https://github.com/prabirshrestha/vim-lsp
+"https://github.com/prabirshrestha/asyncomplete.vim
+"https://github.com/prabirshrestha/asyncomplete-lsp.vim
+"https://github.com/prabirshrestha/asyncomplete-buffer.vim
+"未使用https://github.com/prabirshrestha/asyncomplete-file.vim
+"https://github.com/koturn/asyncomplete-dictionary.vim
+"https://github.com/skywind3000/vim-dict
+"https://github.com/hrsh7th/vim-vsnip
+"https://github.com/hrsh7th/vim-vsnip-integ
+"加载vim-lsp和自动完成asyncomplete.vim
+packadd vim-lsp
+packadd asyncomplete.vim
+packadd asyncomplete-lsp.vim
+packadd asyncomplete-buffer.vim
+"packadd asyncomplete-file.vim
+packadd asyncomplete-dictionary.vim
+"加载vim-vsnip插件（代码片段）
+packadd vim-vsnip
+packadd vim-vsnip-integ
+"加载vim-dict（自动补全词典）给没有LSP的语言使用
+exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/vim_dict.vim'
+" 设定词典路径和匹配方式
+let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
+let g:vim_dict_dict = [s:vim_dict_path, '',]
+let g:vim_dict_config = {'css':'css,css3', 'html':'html,javascript,css,css3', 'markdown':'text'}
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nnoremap <buffer> <Space>lo :LspDocumentDiagnostics<CR><C-w>w
+  nnoremap <buffer> <Space>lo :LspDocumentDiagnostics<CR><C-w>W
   nnoremap <buffer> <Space>lc :lclose<CR>
-  nnoremap <buffer> <Space>q :LspDocumentDiagnostics<CR>:lclose<CR>:LeaderfLocList<CR>
+  nnoremap <buffer> <Space>q :LspDocumentDiagnostics<CR><C-w>W:lclose<CR>:LeaderfLocList<CR>
   nnoremap <buffer> <C-j> :lnext<CR>
   nnoremap <buffer> <C-k> :lprevious<CR>
   nnoremap <buffer> <Space>ca <plug>(lsp-code-action-float)
@@ -126,10 +152,56 @@ function! s:on_lsp_buffer_enabled() abort
 
 endfunction
 
+function! s:register_completion_source() abort
+  " 注册词典插件asyncomplete-dictionary.vim的源(使用LSP的就不使用词典)
+  call asyncomplete#register_source(asyncomplete#sources#dictionary#get_source_options({
+      \ 'name': 'dictionary',
+      \ 'allowlist': ['*'],
+      \ 'blocklist': [
+      \     'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto',
+      \     'python',
+      \     'java',
+      \     'rust',
+      \     'go', 'gomod', 'gohtmltmpl', 'gotexttmpl', 'gowork', 'gotmpl',
+      \     'vue',
+      \     'cs', 'solution',
+      \     'cobol',
+      \     'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact',
+      \     'kotlin',
+      \ ],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#dictionary#completor'),
+      \ }))
+  " 注册Buffer插件asyncomplete-buffer.vim的源(使用LSP的就不使用Bufer)
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'allowlist': ['*'],
+      \ 'blocklist': [
+      \     'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto',
+      \     'python',
+      \     'java',
+      \     'rust',
+      \     'go', 'gomod', 'gohtmltmpl', 'gotexttmpl', 'gowork', 'gotmpl',
+      \     'vue',
+      \     'cs', 'solution',
+      \     'cobol',
+      \     'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact',
+      \     'kotlin',
+      \ ],
+      \ 'priority': 9,
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ 'config': {
+      \    'max_buffer_size': 5000000,
+      \  },
+      \ }))
+endfunction
+
 augroup lsp_install
   autocmd!
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  " 注册自动补全的源
+  autocmd User asyncomplete_setup call s:register_completion_source()
 augroup END
 
 "更多语言的设定参照这里：https://github.com/mattn/vim-lsp-settings
@@ -523,14 +595,6 @@ if executable('kotlin-language-server')
         \ })
 endif
 
-"https://github.com/prabirshrestha/vim-lsp
-"https://github.com/prabirshrestha/asyncomplete.vim
-"https://github.com/prabirshrestha/asyncomplete-lsp.vim
-"加载vim-lsp
-packadd vim-lsp
-packadd asyncomplete.vim
-packadd asyncomplete-lsp.vim
-
 "vim-lsp设定
 "let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_inlay_hints_enabled = 1
@@ -622,3 +686,26 @@ function! GetLspStatus() abort
   endif
   return lspStatus
 endfunction
+
+"代码片段设定
+let g:vsnip_snippet_dir = expand('~/AppData/Roaming/Code/User/snippets')
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
+
+" Expand
+imap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
+smap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)

@@ -40,9 +40,12 @@ set guioptions-=L                         " 不显示左侧滚动条
 "set winaltkeys=no                         " 设置 alt 键不映射到菜单栏
 
 "在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。
-set guicursor=n-v:block-Cursor       "在普通和可视模式里，使用块光标和"Cursor"高亮组的颜色
-set guicursor+=i-c-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150     "在插入,命令行和命令行插入模式里，使用30%的垂直线光标和"iCursor"高亮组的颜色。闪烁也加快一点。
-set guicursor+=r-cr:hor15-iCursor-blinkwait300-blinkon200-blinkoff150       "在替换和命令行替换模式里，使用15%的水平线光标和"iCursor"高亮组的颜色。闪烁也加快一点。
+"在普通和可视模式里，使用块光标和"Cursor"高亮组的颜色
+set guicursor=n-v-sm:block-Cursor/lCursor
+"在插入,命令行和命令行插入模式里，使用30%的垂直线光标和"iCursor"高亮组的颜色
+set guicursor+=i-c-ci-ve:ver30-iCursor/lCursor-blinkwait300-blinkon200-blinkoff150
+"在替换和命令行替换模式里，使用15%的水平线光标和"iCursor"高亮组的颜色。
+set guicursor+=r-cr-o:hor20-iCursor/lCursor-blinkwait300-blinkon200-blinkoff150
 
 " 让 Vim 在启动时最大化窗口
 augroup lchguigroup

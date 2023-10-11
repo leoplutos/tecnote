@@ -692,7 +692,7 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
     " 设定词典路径和匹配方式
     let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
     let g:vim_dict_dict = [s:vim_dict_path, '',]
-    let g:vim_dict_config = {'html':'html,javascript,css', 'markdown':'text'}
+    let g:vim_dict_config = {'css':'css,css3', 'html':'html,javascript,css,css3', 'markdown':'text'}
 
     "ctrlp（模糊查找）
     "https://github.com/ctrlpvim/ctrlp.vim

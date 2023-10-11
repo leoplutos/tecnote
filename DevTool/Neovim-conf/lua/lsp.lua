@@ -322,6 +322,11 @@ lspconfig.kotlin_language_server.setup {
 -- 快捷键绑定
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<Space>q', vim.diagnostic.setloclist)
+-- vim.keymap.set('n', '<Space>q', function()
+--   vim.diagnostic.setloclist()
+--   vim.cmd(':lclose')
+--   require('telescope.builtin').loclist()
+-- end)
 vim.keymap.set('n', '<C-j>', ':lnext<CR>', { noremap = true })
 vim.keymap.set('n', '<C-k>', ':lprevious<CR>', { noremap = true })
 vim.keymap.set('n', '<Space>e', vim.diagnostic.open_float)
@@ -460,6 +465,13 @@ cmp.setup({
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-i>'] = cmp.mapping.complete(),
+    ['<C-s>'] = cmp.mapping.complete({
+        config = {
+          sources = {
+            { name = 'vsnip' }
+          }
+        }
+      }),
     ['<Esc>'] = cmp.mapping.abort(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -482,12 +494,12 @@ cmp.setup({
   }),
   -- 补全来源
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'vsnip' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'dictionary' },
+    { name = 'nvim_lsp', keyword_length=2, group_index = 1, priority=1 },
+    { name = 'nvim_lsp_signature_help', keyword_length=2, group_index = 1, priority=2 },
+    { name = 'vsnip', keyword_length=2, group_index = 1, priority=3 },
+    { name = 'buffer', keyword_length=2, group_index = 2, priority=4 },
+    { name = 'path', keyword_length=2, group_index = 2, priority=5 },
+    { name = 'dictionary', keyword_length=2, group_index = 2, priority=6 },
   }),
   -- 设置补全显示的格式（lspkind.nvim插件）
   formatting = {
@@ -673,6 +685,7 @@ dict.switcher({
     html = { "~/vimconf/dict/html.dict", "~/vimconf/dict/css.dict", "~/vimconf/dict/css3.dict", "~/vimconf/dict/javascript.dict" },
     lua = "~/vimconf/dict/lua.dict",
     make = "~/vimconf/dict/make.dict",
+    markdown = "~/vimconf/dict/text.dict",
     matlab = "~/vimconf/dict/matlab.dict",
     perl = "~/vimconf/dict/perl.dict",
     php = "~/vimconf/dict/php.dict",
