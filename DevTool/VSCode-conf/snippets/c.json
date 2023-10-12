@@ -1,221 +1,188 @@
-{//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
-	// include导入系统头文件<>
-	"include导入系统头文件<>": {
-		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu", "in", "ins"],
+{
+	"include_sys_header": {
+		"prefix": ["in", "inc"],
 		"body": [
-			"#include <${1|stdio.h,stdlib.h,string.h,errno.h|}>"
+			"#include <${1|stdio.h,stdlib.h,string.h,errno.h|}>$0"
 		],
-		"description": "include导入系统头文件<>"
+		"description": "include system header"
 	},
-	// include导入用户头文件""
-	"include导入用户头文件\"\"": {
-		"prefix": ["#", "#i", "#in", "#inc", "#incl", "#inclu", "in", "inu"],
+	"include_user_header": {
+		"prefix": ["inu"],
 		"body": [
-			"#include \"${1:user.h}\""
+			"#include \"${1:user.h}\"$0"
 		],
-		"description": "include导入用户头文件\"\""
+		"description": "include user header"
 	},
-	// 添加define定义
-	"define定义": {
-		"prefix": ["#", "#d", "#de", "#def", "#defi", "#defin", "de", "def"],
+	"define": {
+		"prefix": ["de", "def"],
 		"body": [
-			"#define ${1:NAME} ${2:VALUE}"
+			"#define ${1:/* name */} ${2:/* value */}$0"
 		],
-		"description": "define定义"
+		"description": "define"
 	},
-	// 添加#ifdef定义语句块
-	"添加#ifdef定义语句块": {
-		"prefix": ["#", "#i", "#if", "#ifd", "#ifde", "ifd"],
+	"ifdef": {
+		"prefix": ["id", "ifd"],
 		"body": [
-			"#ifdef ${1:DEBUG}",
-			"\t$2",
-			"#endif"
+			"#ifdef ${1:/* name */}",
+			"\t${2:/* code */}",
+			"#endif$0"
 		],
-		"description": "添加#ifdef定义语句块"
+		"description": "ifdef"
 	},
-	// 添加头文件模板语句块
-	"添加头文件模板语句块": {
-		"prefix": ["he", "hea", "head"],
-		"body": [
-			"#ifndef _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
-			"#define _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
-			"",
-			"$2",
-			"",
-			"#endif // _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
-		],
-		"description": "添加头文件模板语句块"
-	},
-	// if语句块
-	"if语句块": {
+	"if_condition": {
 		"prefix": ["if"],
 		"body": [
-			"if (${1:booltype}) {",
-			"\t$2",
-			"}"
+			"if (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"}$0"
 		],
-		"description": "if语句块"
+		"description": "if condition"
 	},
-	// if-else语句块
-	"if-else语句块": {
-		"prefix": ["if", "ife", "ifel"],
+	"if_else_condition": {
+		"prefix": ["ie", "ife"],
 		"body": [
-			"if (${1:booltype}) {",
-			"\t$2",
+			"if (${1:/* condition */}) {",
+			"\t${2:/* code */}",
 			"} else {",
-			"\t$3",
-			"}",
+			"\t${3:/* code */}",
+			"}$0"
 		],
-		"description": "if-else语句块"
+		"description": "if-else condition"
 	},
-	// if-else-if语句块
-	"if-else-if语句块": {
-		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
+	"if_else_if_condition": {
+		"prefix": ["ii", "iei"],
 		"body": [
-			"if (${1:booltype}) {",
-			"\t$2",
-			"} else if (${3:booltype}) {",
-			"\t$4",
+			"if (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"} else if (${3:/* condition */}) {",
+			"\t${4:/* code */}",
 			"} else {",
-			"\t$5",
-			"}",
+			"\t${5:/* code */}",
+			"}$0"
 		],
-		"description": "if-else-if语句块"
+		"description": "if-else-if condition"
 	},
-	// switch语句块
-	"switch语句块": {
-		"prefix": ["sw", "swi", "swit", "switc", "switch"],
+	"switch_condition": {
+		"prefix": ["sw", "swi"],
 		"body": [
-			"switch (${1:value}) {",
-			"\tcase ${2:item}:",
+			"switch (${1:/* expression */}) {",
+			"\tcase ${2:/* constant-expression */}:",
+			"\t\t${3:/* code */}",
 			"\t\tbreak;",
 			"\tdefault:",
 			"\t\tbreak;",
-			"}"
+			"}$0"
 		],
-		"description": "switch语句块"
+		"description": "switch condition"
 	},
-	// while语句块
-	"while语句块": {
-		"prefix": ["wh", "whi", "whil", "while"],
+	"while_loop": {
+		"prefix": ["wh", "whi"],
 		"body": [
-			"while (${1:booltype}) {",
-			"\t$2",
-			"\t${3:break;}",
-			"}"
+			"while (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"}$0"
 		],
-		"description": "while语句块"
+		"description": "while loop"
 	},
-	// for语句块
-	"for语句块": {
+	"for_loop": {
 		"prefix": ["fo", "for"],
 		"body": [
 			"int i;",
-			"for (i = 0; i <= ${1:size}; i++) {",
-			"\t$2",
-			"}",
+			"for (i = 0; i < ${1:count}; i++) {",
+			"\t${2:/* code */}",
+			"}$0"
 		],
-		"description": "for语句块"
+		"description": "for loop"
 	},
-	// 添加struct结构体
-	"添加struct结构体": {
-		"prefix": ["st", "str", "stru", "struc", "struct"],
+	"struct_block": {
+		"prefix": ["st", "str"],
 		"body": [
-			"struct ${1:name} {",
-			"\t$2",
-			"};",
+			"struct ${1:struct_name} {",
+			"\t${2:/* code */}",
+			"};$0"
 		],
-		"description": "添加struct结构体"
+		"description": "struct block"
 	},
-	// 添加enum枚举
-	"添加enum枚举": {
-		"prefix": ["en", "enu", "enum"],
+	"enum_block": {
+		"prefix": ["en", "enu"],
 		"body": [
-			"enum ${1:name} {",
-			"\t$2",
-			"};"
+			"enum ${1:enum_name} {",
+			"\t${2:/* code */}",
+			"};$0"
 		],
-		"description": "添加enum枚举"
+		"description": "enum block"
 	},
-	// 添加function函数
-	"添加function函数": {
-		"prefix": ["fu", "fun", "func", "funct", "functi"],
+	"function_block": {
+		"prefix": ["fu", "fun"],
 		"body": [
 			"int ${1:function_name}(int ${2:arguments}) {",
-			"\t$3",
+			"\t${3:/* code */}",
 			"\treturn 0;",
-			"}",
+			"}$0"
 		],
-		"description": "添加function函数"
+		"description": "function block"
 	},
-	// 添加main函数
-	"添加main函数": {
-		"prefix": ["ma", "mai", "main"],
+	"main_function_block": {
+		"prefix": ["ma", "mai"],
 		"body": [
-			"#include <stdio.h>",
+			"/* #include <stdio.h> */",
 			"int main (int argc, char *argv[]) {",
-			"\t$1",
+			"\t${1:/* code */}",
 			"\treturn 0;",
-			"}",
+			"}$0"
 		],
-		"description": "添加main函数"
+		"description": "main function block"
 	},
-	// 添加日志定义-logc
-	"添加日志定义-logc": {
-		"prefix": ["logd", "logde", "logdef", "logdefi", "logdefin", "logdefine"],
+	"logc_define": {
+		"prefix": ["logd"],
 		"body": [
-			"#include \"log.h\"",
+			"/* #include \"log.h\" */",
 			"",
 			"log_set_level(0);",
 			"log_set_quiet(0);",
 			"FILE *${1|debug,trace,info,warn,error,fatal|}_log_file;",
 			"$1_log_file = fopen(\"./${TM_FILENAME_BASE}_$1.log\", \"ab\");",
 			"if ($1_log_file == NULL) {",
-			"\treturn FAILED;",
+			"\treturn 6;",
 			"}",
 			"log_add_fp($1_log_file, LOG_${2|DEBUG,TRACE,INFO,WARN,ERROR,FATAL|});",
 			"",
-			"$3",
+			"${3:/* code */}",
 			"",
-			"fclose($1_log_file);",
+			"fclose($1_log_file);$0"
 		],
-		"description": "添加日志定义-logc"
+		"description": "logc define"
 	},
-	// 添加打印日志-logc
-	"添加打印日志-logc": {
-		"prefix": ["lo", "log", "logp", "logpr", "logpri"],
+	"logc_print": {
+		"prefix": ["log", "logp"],
 		"body": [
-			"log_${1|debug,trace,info,warn,error,fatal|}(\"${2:variable}:[%${3|s,d,p,f,ld,lf,c|}]\", ${2:variable});"
+			"log_${1|debug,trace,info,warn,error,fatal|}(\"${2:variable}:[%${3|s,d,p,f,ld,lf,c|}]\", ${2:variable});$0"
 		],
-		"description": "添加打印日志-logc"
+		"description": "logc print"
 	},
-	// 添加print语句
-	"添加print语句": {
-		"prefix": ["pr", "pri", "prin", "print"],
+	"printf": {
+		"prefix": ["pr", "pri"],
 		"body": [
-			"printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [%s at line:%d] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", __func__, __LINE__, ${2:variable});"
+			"printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [%s at line:%d] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", __func__, __LINE__, ${2:variable});$0"
 		],
-		"description": "添加print语句"
+		"description": "printf"
 	},
-	// 添加printf-error语句
-	"添加printf-error语句": {
-		"prefix": ["pre", "prer", "prerr", "printerr"],
+	"fprintf_stderr": {
+		"prefix": ["pe", "pre"],
 		"body": [
-			"fprintf(stderr, \"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] [%s at line:%d] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", __func__, __LINE__, ${2:variable});"
+			"fprintf(stderr, \"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] [%s at line:%d] - ${2:variable}:[%${3|s,d,p,f,ld,lf,c|}] \\n\", __func__, __LINE__, ${2:variable});$0"
 		],
-		"description": "添加printf-error语句"
+		"description": "fprintf stderr"
 	},
-	// 打印sqlca信息（嵌入式SQL）
-	"打印sqlca信息（嵌入式SQL）": {
-		"prefix": ["prs", "prints", "printsql", "printsqlca"],
+	"print_sqlca_ecpg": {
+		"prefix": ["ps", "prs"],
 		"body": [
-			"printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\\n\", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);"
+			"printf(\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [%s at line:%d] - sqlcode:[%ld] sqlstate:[%s] sqlerrm.sqlerrmc:[%s]\\n\", __func__, __LINE__, sqlca.sqlcode, sqlca.sqlstate, sqlca.sqlerrm.sqlerrmc);$0"
 		],
-		"description": "打印sqlca信息（嵌入式SQL）"
+		"description": "print sqlca for ecpg"
 	},
-	// 添加多行注释
-	"添加多行注释": {
-		"prefix": ["co", "com", "comm", "comme", "commen", "comment"],
+	"comment_block": {
+		"prefix": ["co", "com"],
 		"body": [
 			"/**************************************************************",
 			" * System:         $1",
@@ -223,30 +190,29 @@
 			" * GreatDate:      $3",
 			" * Author:         $4",
 			" * UpdateDate:     $5",
-			" **************************************************************/",
+			" **************************************************************/$0"
 		],
-		"description": "添加多行注释"
+		"description": "comment block"
 	},
-	// 添加动态内存分配语句块(malloc)
-	"添加动态内存分配语句块(malloc)": {
-		"prefix": ["ma", "mal", "mall", "mallo", "malloc"],
+	"malloc_block": {
+		"prefix": ["mal", "mall"],
 		"body": [
-			"#include <stdlib.h>",
-			"#include <string.h>",
+			"/* #include <stdlib.h> */",
+			"/* #include <string.h> */",
 			"char *p_ptr;",
-			"p_ptr = malloc(${1:frombufsize} + 1);",
+			"p_ptr = malloc(${1:from_buf_size} + 1);",
 			"if (p_ptr == NULL) {",
 			"\tfprintf(stderr, \"[ERROR] [%s at line:%d] - FATAL:Out of memory!\\n\" , __func__, __LINE__);",
-			"\treturn FAILED;",
+			"\treturn 6;",
 			"}",
-			"memcpy(p_ptr, ${2:frombuf}, ${1:frombufsize});",
-			"p_ptr[${1:frombufsize}] = '\\0';",
+			"memcpy(p_ptr, ${2:from_buf}, ${1:from_buf_size});",
+			"p_ptr[${1:from_buf_size}] = '\\0';",
 			"",
-			"${3://use p_ptr here}",
+			"${3:/* use p_ptr here */}",
 			"",
 			"free(p_ptr);",
-			"p_ptr = NULL;",
+			"p_ptr = NULL;$0"
 		],
-		"description": "添加动态内存分配语句块(malloc)"
-	},
+		"description": "malloc block"
+	}
 }

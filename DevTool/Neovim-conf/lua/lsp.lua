@@ -52,7 +52,11 @@ function! GetLspStatus() abort
   if (&ft=='c') || (&ft=='cpp') || (&ft=='objc') || (&ft=='objcpp') || (&ft=='cuda') || (&ft=='proto')
     let lspServerName = 'clangd'
   elseif (&ft=='python')
-    let lspServerName = 'pylsp'
+    if (g:g_python_lsp_type == 0)
+      let lspServerName = 'pylsp'
+    elseif (g:g_python_lsp_type == 3)
+      let lspServerName = 'pyright'
+    endif
   elseif (&ft=='java')
     let lspServerName = 'jdtls'
   elseif (&ft=='rust')
@@ -108,59 +112,80 @@ lspconfig.clangd.setup {
   },
   root_dir = lspconfig.util.root_pattern('.root', '.clangd', 'build.ninja', '.git');
 }
--- Python(pylsp)设置
-lspconfig.pylsp.setup {
-  settings = {
-    pylsp = {
-      configurationSources = 'pycodestyle',
-      plugins = {
-        autopep8 = {
-          enabled = false,
-        },
-        flake8 = {
-          enabled = false,
-        },
-        pylint = {
-          enabled = false,
-        },
-        pycodestyle = {
-          enabled = true,
-          ignore = {'E401', 'E402', 'E501'},
-          -- maxLineLength = 100,
-        },
-        jedi = {
-          auto_import_modules = 'gi',
-          extra_paths = {'src', 'src/com', 'com'},
-        },
-        jedi_completion = {
-          enabled = true,
-          include_params = true,
-          include_class_objects = false,
-          include_function_objects = false,
-          fuzzy = false,
-          eager = false,
-        },
-        jedi_definition = {
-          follow_imports = true,
-          follow_builtin_imports = true,
-        },
-        jedi_hover = {
-          enabled = true,
-        },
-        jedi_references = {
-          enabled = true,
-        },
-        jedi_signature_help = {
-          enabled = true,
-        },
-        jedi_symbolss = {
-          enabled = true,
-        },
+
+if vim.g.g_python_lsp_type == 0 then
+  --pylsp
+  -- Python(pylsp)设置
+  lspconfig.pylsp.setup {
+    settings = {
+      pylsp = {
+        configurationSources = 'pycodestyle',
+        plugins = {
+          autopep8 = {
+            enabled = false,
+          },
+          flake8 = {
+            enabled = false,
+          },
+          pylint = {
+            enabled = false,
+          },
+          pycodestyle = {
+            enabled = true,
+            ignore = {'E401', 'E402', 'E501'},
+            -- maxLineLength = 100,
+          },
+          jedi = {
+            auto_import_modules = 'gi',
+            extra_paths = {'src', 'src/com', 'com'},
+          },
+          jedi_completion = {
+            enabled = true,
+            include_params = true,
+            include_class_objects = false,
+            include_function_objects = false,
+            fuzzy = false,
+            eager = false,
+          },
+          jedi_definition = {
+            follow_imports = true,
+            follow_builtin_imports = true,
+          },
+          jedi_hover = {
+            enabled = true,
+          },
+          jedi_references = {
+            enabled = true,
+          },
+          jedi_signature_help = {
+            enabled = true,
+          },
+          jedi_symbolss = {
+            enabled = true,
+          },
+        }
       }
-    }
-  },
-  root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', '.git');
-}
+    },
+    root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', '.git');
+  }
+elseif vim.g.g_python_lsp_type == 3 then
+  --pyright-langserver
+  -- Python(pyright)设置
+  lspconfig.pyright.setup {
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = 'openFilesOnly',
+          typeCheckingMode = 'strict',
+          stubPath = 'src/com',
+        },
+      },
+    },
+    root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', '.git');
+  }
+end
 -- Java(eclipse.jdt.ls)设置
 lspconfig.jdtls.setup {
   cmd = {
@@ -424,6 +449,15 @@ augroup END
 
 --nvim-cmp插件设定
 --cmp-nvim-lsp插件设定
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 cmp.setup({
@@ -480,17 +514,21 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif vim.fn["vsnip#available"](1) == 1 then
+        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      elseif has_words_before() then
+        cmp.complete()
       else
-        fallback()
+        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
-    end, {'i'}),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    end, { "i", "s" }),
+    ['<S-Tab>'] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
-      else
-        fallback()
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        feedkey("<Plug>(vsnip-jump-prev)", "")
       end
-    end, {'i'}),
+    end, { "i", "s" })
   }),
   -- 补全来源
   sources = cmp.config.sources({
@@ -613,6 +651,8 @@ hi clear CmpItemKindFile
 hi! link CmpItemKindFile Variables
 hi clear CmpItemKindFolder
 hi! link CmpItemKindFolder Directory
+hi clear CmpItemKindColor
+hi! link CmpItemKindColor Lifetime
 hi clear CmpItemMenu
 hi! link CmpItemMenu Comment
 ]]

@@ -25,6 +25,14 @@ nnoremap <F7> <Plug>VimspectorStepOver
 "F8：运行到光标处
 nnoremap <F8> <Plug>VimspectorRunToCursor
 
+if has('nvim')
+  "NeoVim下，添加显示光标下变量内容的键绑定
+  " for normal mode - the word under the cursor
+  nnoremap <Leader>di <Plug>VimspectorBalloonEval
+  " for visual mode, the visually selected text
+  xnoremap <Leader>di <Plug>VimspectorBalloonEval
+endif
+
 "自定义断点和高亮组
 if (g:g_use_nerdfont == 0)
   "普通模式

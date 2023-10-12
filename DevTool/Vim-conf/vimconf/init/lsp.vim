@@ -235,7 +235,8 @@ endif
 "Windows7：使用anakin-language-server（推荐） 或者 jedi-language-server
 "    安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple anakin-language-server
 "    安装命令：pip install -U jedi-language-server -i https://pypi.tuna.tsinghua.edu.cn/simple
-"Windows10以后：使用python-lsp-server
+"Windows10以后：使用pyright 或者 python-lsp-server
+"    安装命令：npm install -g pyright
 "    安装命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "python-lsp-server[all]"
 if (g:g_python_lsp_type == 0)
   "0：使用pylsp
@@ -367,6 +368,34 @@ if (g:g_python_lsp_type == 2)
           \ })
   endif
 endif
+
+if (g:g_python_lsp_type == 3)
+  "使用pyright-langserver
+
+  if executable('pyright-langserver')
+      "设定参数参照这里
+      "https://microsoft.github.io/pyright
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'pyright-langserver',
+          \ 'cmd': {server_info->['pyright-langserver.cmd', '--stdio']},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+          \ 'whitelist': ['python'],
+          \ 'workspace_config': {
+          \   'python': {
+          \     'analysis': {
+          \       'autoSearchPaths': v:true,
+          \       'useLibraryCodeForTypes': v:true,
+          \       'diagnosticMode': 'openFilesOnly',
+          \       'typeCheckingMode': 'strict',
+          \       'stubPath': 'src/com',
+          \     },
+          \   },
+          \ },
+          \ 'initialization_options': {},
+          \ })
+  endif
+endif
+
 
 "Java(eclipse.jdt.ls)
 "在这里下载 https://download.eclipse.org/jdtls/milestones/
@@ -641,8 +670,8 @@ let g:asyncomplete_matchfuzzy = 1
 "let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 "TAB键选择补全内容，回车键选择
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 "Ctrl+F2显示LSP服务器状态
 nnoremap <C-F2> :LspStatus<CR>
@@ -658,6 +687,8 @@ function! GetLspStatus() abort
       let lspServerName = 'jedi-language-server'
     elseif (g:g_python_lsp_type == 2)
       let lspServerName = 'anakinls'
+    elseif (g:g_python_lsp_type == 3)
+      let lspServerName = 'pyright-langserver'
     endif
   elseif (&ft=='java')
     let lspServerName = 'eclipse.jdt.ls'

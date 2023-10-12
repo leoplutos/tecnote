@@ -31,9 +31,9 @@ endif
 if !exists('g:g_lsp_type')
   let g:g_lsp_type = 0
 endif
-"全局变量g:g_python_lsp_type（0：pylsp，1：jedi-language-server，2：anakin-language-server）
+"全局变量g:g_python_lsp_type（0：pylsp，1：jedi-language-server，2：anakin-language-server, 3:pyright-langserver）
 if !exists('g:g_python_lsp_type')
-  let g:g_python_lsp_type = 0
+  let g:g_python_lsp_type = 3
 endif
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
 if !exists('g:g_use_dap')

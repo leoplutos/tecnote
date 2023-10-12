@@ -1,0 +1,181 @@
+{
+	"package_block": {
+		"prefix": ["pa", "pac"],
+		"body": [
+			"package ${1:/* package */}$0"
+		],
+		"description": "import package"
+	},
+	"import_block": {
+		"prefix": ["im", "imp"],
+		"body": [
+			"import (",
+			"\t\"fmt\"",
+			"\t\"${1:/* import_package */}\"",
+			")$0"
+		],
+		"description": "import package"
+	},
+	"if_condition": {
+		"prefix": ["if"],
+		"body": [
+			"if ${1:/* condition */} {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "if condition"
+	},
+	"if_else_condition": {
+		"prefix": ["ie", "ife"],
+		"body": [
+			"if ${1:/* condition */} {",
+			"\t${2:/* code */}",
+			"} else {",
+			"\t${3:/* code */}",
+			"}$0"
+		],
+		"description": "if-else condition"
+	},
+	"if_else_if_condition": {
+		"prefix": ["ii", "iei"],
+		"body": [
+			"if ${1:/* condition */} {",
+			"\t${2:/* code */}",
+			"} else if ${3:/* condition */} {",
+			"\t${4:/* code */}",
+			"} else {",
+			"\t${5:/* code */}",
+			"}$0"
+		],
+		"description": "if-else-if condition"
+	},
+	"switch_condition": {
+		"prefix": ["sw", "swi"],
+		"body": [
+			"switch ${1:/* expression */} {",
+			"\tcase ${2:/* constant-expression */}:",
+			"\t\t${3:/* code */}",
+			"\tdefault:",
+			"\t\tbreak",
+			"}$0"
+		],
+		"description": "switch condition"
+	},
+	"while_loop": {
+		"prefix": ["wh", "whi"],
+		"body": [
+			"for ${1:/* condition */} {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "while loop"
+	},
+	"loop_loop": {
+		"prefix": ["lo", "loo"],
+		"body": [
+			"for {",
+			"\t${1:/* code */}",
+			"\tbreak",
+			"}$0"
+		],
+		"description": "loop loop"
+	},
+	"for_loop": {
+		"prefix": ["fo", "for"],
+		"body": [
+			"for i := 0; i < ${1:count}; i++ {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "for loop"
+	},
+	"for_each_loop": {
+		"prefix": ["fe", "fore"],
+		"body": [
+			"for i,v:= range ${1:list} {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "for each loop"
+	},
+	"struct_block": {
+		"prefix": ["st"],
+		"body": [
+			"type ${1:struct_name} struct {",
+			"\t${2:field} ${3:type}",
+			"}$0"
+		],
+		"description": "struct block"
+	},
+	"list_block": {
+		"prefix": ["li"],
+		"body": [
+			"// import \"container/list\"",
+			"${1:variable} := list.New()",
+			"${1}.PushBack(123)$0"
+		],
+		"description": "list block"
+	},
+	"map_block": {
+		"prefix": ["mp", "map"],
+		"body": [
+			"${1:variable} := make(map[string]int)",
+			"${1}[\"key1\"] = 123$0"
+		],
+		"description": "map block"
+	},
+	"function_block": {
+		"prefix": ["fu", "fun"],
+		"body": [
+			"func ${1:function_name}(${2:arguments} ${3:args_type}) (${4:return_type}) {",
+			"\t${5:/* code */}",
+			"}$0"
+		],
+		"description": "function block"
+	},
+	"main_function_block": {
+		"prefix": ["ma", "mai"],
+		"body": [
+			"func main() {",
+			"\t${1:/* code */}",
+			"}$0"
+		],
+		"description": "main function block"
+	},
+	"interface_block": {
+		"prefix": ["it"],
+		"body": [
+			"type ${1:interface_name} interface {",
+			"\tAbcMethod() int",
+			"}$0"
+		],
+		"description": "interface block"
+	},
+	"println": {
+		"prefix": ["pr", "pri"],
+		"body": [
+			"fmt.Println(\"${2:variable}:\", ${2:variable})$0"
+		],
+		"description": "println"
+	},
+	"eprintln": {
+		"prefix": ["pe", "pre"],
+		"body": [
+			"fmt.Fprintln(os.Stderr, \"${2:variable}:\", ${2:variable})$0"
+		],
+		"description": "eprintln"
+	},
+	"comment_block": {
+		"prefix": ["co", "com"],
+		"body": [
+			"/**************************************************************",
+			" * System:         $1",
+			" * Description:    $2",
+			" * GreatDate:      $3",
+			" * Author:         $4",
+			" * UpdateDate:     $5",
+			" **************************************************************/$0"
+		],
+		"description": "comment block"
+	}
+}

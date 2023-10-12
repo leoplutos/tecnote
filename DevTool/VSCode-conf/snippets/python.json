@@ -1,185 +1,202 @@
-{//这是一个Snippet代码片段配置文件，请放在User/snippets路径下
-	// 添加Python文件头
-	"添加Python文件头": {
-		"prefix": ["#!", "en", "env", "he", "hea", "head"],
+{
+	"shebang_block": {
+		"prefix": ["he"],
 		"body": [
 			"#!/usr/bin/python3",
-			"# -*- coding: utf-8 -*-",
-			"$1",
+			"# coding=utf-8",
+			"$1"
 		],
-		"description": "添加Python文件头"
+		"description": "shebang block"
 	},
-	// from-import导入包
-	"from-import导入包": {
-		"prefix": ["fr", "fro", "from"],
+	"from-import_module": {
+		"prefix": ["fr", "fro"],
 		"body": [
-			"from ${1:py_file_name(module)} import ${2:function_name}",
+			"from ${1:py_file_name(module)} import ${2:function_name}$0"
 		],
-		"description": "from-import导入包"
+		"description": "from import module"
 	},
-	// import-导入包
-	"import-导入包": {
-		"prefix": ["im", "imp", "impo", "impor", "import"],
+	"import_module": {
+		"prefix": ["im", "imp"],
 		"body": [
-			"import ${1:py_file_name(module)}",
+			"import ${1:py_file_name(module)}$0"
 		],
-		"description": "import-导入包"
+		"description": "import module"
 	},
-	// if语句块
-	"if语句块": {
+	"if_condition": {
 		"prefix": ["if"],
 		"body": [
-			"if ${1:True}:",
-			"    $2",
+			"if ${1:condition}:",
+			"    ${2:#code}",
+			"$0"
 		],
-		"description": "if语句块"
+		"description": "if condition"
 	},
-	// if-else语句块
-	"if-else语句块": {
-		"prefix": ["if", "ife", "ifel"],
+	"if_else_condition": {
+		"prefix": ["ie", "ife"],
 		"body": [
-			"if ${1:True}:",
-			"    $2",
+			"if ${1:condition}:",
+			"    ${2:#code}",
 			"else:",
-			"    $3",
+			"    ${3:#code}",
+			"$0"
 		],
-		"description": "if-else语句块"
+		"description": "if-else condition"
 	},
-	// if-else-if语句块
-	"if-else-if语句块": {
-		"prefix": ["if", "ife", "ifel", "ifeli", "ifelif"],
+	"if_else_if_condition": {
+		"prefix": ["ii", "iei"],
 		"body": [
-			"if ${1:True}:",
-			"    $2",
-			"elif ${3:True}:",
-			"    $4",
+			"if ${1:condition}:",
+			"    ${2:#code}",
+			"elif ${3:condition}:",
+			"    ${4:#code}",
 			"else:",
-			"    $5",
+			"    ${5:#code}",
+			"$0"
 		],
-		"description": "if-else-if语句块"
+		"description": "if-else-if condition"
 	},
-	// while语句块
-	"while语句块": {
-		"prefix": ["wh", "whi", "whil", "while"],
+	"match_condition": {
+		"prefix": ["sw", "swi"],
 		"body": [
-			"while ${1:True}:",
-			"    $2",
-			"    ${3:break}",
+			"match ${1:expression}:",
+			"    case ${2:condition}:",
+			"        ${3:#code}",
+			"    case _:",
+			"        ${4:#code}",
+			"$0"
 		],
-		"description": "while语句块"
+		"description": "match condition requried:3.10"
 	},
-	// for-each语句块
-	"for-each语句块": {
-		"prefix": ["fo", "for", "fore"],
+	"while_loop": {
+		"prefix": ["wh", "whi"],
+		"body": [
+			"while ${1:condition}:",
+			"    ${2:#code}",
+			"$0"
+		],
+		"description": "while loop"
+	},
+	"for_loop": {
+		"prefix": ["fo", "for"],
+		"body": [
+			"for i in range(${1:count}):",
+			"    ${2:#code}",
+			"$0"
+		],
+		"description": "for loop"
+	},
+	"for_each_loop": {
+		"prefix": ["fe", "fore"],
 		"body": [
 			"for ${1:element} in ${2:list}:",
-			"    $3",
+			"    ${3:#code}",
+			"$0"
 		],
-		"description": "for-each语句块"
+		"description": "for each loop"
 	},
-	// for-in-range语句块
-	"for-in-range语句块": {
-		"prefix": ["fo", "for", "fori"],
-		"body": [
-			"for i in range(${1:size}):",
-			"    $2",
-		],
-		"description": "for-in-range语句块"
-	},
-	// try-except语句块
-	"try-except语句块": {
-		"prefix": ["tr", "try", "trye"],
+	"try_except_block": {
+		"prefix": ["tr", "try"],
 		"body": [
 			"try:",
-			"    $1",
+			"    ${1:#code}",
 			"except:",
-			"    ${2:# import traceback}",
+			"    ${2:#import traceback}",
 			"    traceback.print_exc()",
+			"$0"
 		],
-		"description": "try-except语句块"
+		"description": "try except block"
 	},
-	// try-except-finally语句块
-	"try-except-finally语句块": {
-		"prefix": ["tr", "try", "trye", "tryf", "tryef"],
+	"try-except-finally_block": {
+		"prefix": ["tf", "tryf"],
 		"body": [
 			"try:",
-			"    $1",
+			"    ${1:#code}",
 			"except:",
 			"    ${2:# import traceback}",
 			"    traceback.print_exc()",
 			"finally:",
-			"    $3",
+			"    ${3:#code}",
+			"$0"
 		],
-		"description": "try-except-finally语句块"
+		"description": "try except finally block"
 	},
-	// 添加列表List
-	"添加列表List": {
-		"prefix": ["li", "lis", "list"],
+	"list_block": {
+		"prefix": ["li", "lis"],
 		"body": [
-			"${1:mylist} = [${2:1}, ${3:2}, ${4:3}]",
+			"${1:variable} = [${2:1}, ${3:2}, ${4:3}]$0"
 		],
-		"description": "添加列表List"
+		"description": "list block"
 	},
-	// 添加元组Tuple
-	"添加元组Tuple": {
-		"prefix": ["tu", "tup", "tupl", "tuple"],
+	"tuple_block": {
+		"prefix": ["tu", "tup"],
 		"body": [
-			"${1:mytuple} = (${2:'Apple'}, ${3:'Orange'}, ${4:123})",
+			"${1:variable} = (${2:'Apple'}, ${3:'Orange'}, ${4:123})$0"
 		],
-		"description": "添加元组Tuple"
+		"description": "tuple block"
 	},
-	// 添加字典Dictionary
-	"添加字典Dictionary": {
-		"prefix": ["di", "dic", "dict", "dicti", "dictio", "diction", "dictiona", "dictionar", "dictionary"],
+	"dictionary_block": {
+		"prefix": ["di", "dic"],
 		"body": [
-			"${1:mydictionary} = {${2:'key1'}: ${3:'value1'}, ${4:'key2'}: ${5:123}}",
+			"${1:variable} = {${2:'key1'}: ${3:'value1'}, ${4:'key2'}: ${5:123}}$0"
 		],
-		"description": "添加字典Dictionary"
+		"description": "dictionary block"
 	},
-	// 添加集合Set
-	"添加集合Set": {
+	"set_block": {
 		"prefix": ["se", "set"],
 		"body": [
-			"${1:myset} = set((${2:'Apple'}, ${3:'Orange'}, ${4:'Banana'}))",
+			"${1:variable} = set((${2:'Apple'}, ${3:'Orange'}, ${4:'Banana'}))$0"
 		],
-		"description": "添加集合Set"
+		"description": "set block"
 	},
-	// 添加类Class
-	"添加类Class": {
-		"prefix": ["cl", "cla", "clas", "class"],
+	"class_block": {
+		"prefix": ["cl", "cla"],
 		"body": [
-			"class ${TM_FILENAME_BASE}(object):",
-			"    def __init__(self, ${2:field}):",
+			"class ${1:class_name}(object):",
+			"    def __init__(self, ${2:field}: int) -> None:",
 			"        self.__${2:field} = ${2:field}",
 			"",
-			"    def ${3:function_name}(self):",
-			"        $4",
+			"    def ${3:function_name}(self) -> None:",
+			"        ${4:#code}",
+			"$0"
 		],
-		"description": "添加类Class"
+		"description": "class block"
 	},
-	// 添加function函数
-	"添加function函数": {
-		"prefix": ["de", "def", "fu", "fun", "func", "funct", "functi"],
+	"interface_block": {
+		"prefix": ["it", "inter"],
 		"body": [
-			"def ${1:function_name}(${2:arguments=0}):",
-			"    $3",
+			"import abc",
+			"class ${1:interface_name}(metaclass=abc.ABCMeta):",
+			"",
+			"    @abc.abstractmethod",
+			"    def ${2:function_name}(self) -> None:",
+			"        ${3:#code}",
+			"$0"
 		],
-		"description": "添加function函数"
+		"description": "interface block"
 	},
-	// 添加main函数
-	"添加main函数": {
-		"prefix": ["ma", "mai", "main", "ifmain"],
+	"function_block": {
+		"prefix": ["fu", "fun"],
 		"body": [
-			"def main():",
-			"    $1",
+			"def ${1:function_name}(${2:argument: int = 0}) -> None:",
+			"    ${3:#code}",
+			"$0"
+		],
+		"description": "function block"
+	},
+	"main_function_block": {
+		"prefix": ["ma", "mai"],
+		"body": [
+			"def main() -> None:",
+			"    ${1:#code}",
+			"",
 			"if __name__ == \"__main__\":",
 			"    main()",
+			"$0"
 		],
-		"description": "添加main函数"
+		"description": "main function block"
 	},
-	// 添加日志定义
-	"添加日志定义": {
-		"prefix": ["logd", "logde", "logdef", "logdefi", "logdefin", "logdefine"],
+	"log_define": {
+		"prefix": ["logd"],
 		"body": [
 			"import logging",
 			"",
@@ -189,41 +206,38 @@
 			")",
 			"# logging.basicConfig(",
 			"#    handlers=[",
-			"#        logging.FileHandler(filename=\"./${TM_FILENAME_BASE}_${2|debug,info,warn,error,fatal|}.log\", encoding='utf-8', mode='a+')",
+			"#        logging.FileHandler(filename=\"./${2:log_file_name}_${3|debug,info,warn,error,fatal|}.log\", encoding='utf-8', mode='a+')",
 			"#    ],",
 			"#    level=logging.$1,",
 			"#    format='%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s',",
 			"# )",
+			"$0"
 		],
-		"description": "添加日志定义"
+		"description": "log define"
 	},
-	// 添加打印日志
-	"添加打印日志": {
-		"prefix": ["lo", "log", "logp", "logpr", "logpri"],
+	"log_print": {
+		"prefix": ["log", "logp"],
 		"body": [
-			"logging.${1|debug,info,warn,error,fatal|}(f\"${2:variable}:{${2:variable}}\")",
+			"logging.${1|debug,info,warn,error,fatal|}(f\"${2:variable}:{${2:variable}}\")$0"
 		],
-		"description": "添加打印日志"
+		"description": "log print"
 	},
-	// 添加print语句
-	"添加print语句": {
-		"prefix": ["pr", "pri", "prin", "print"],
+	"print": {
+		"prefix": ["pr", "pri"],
 		"body": [
-			"print(f\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [{__name__}] - ${2:variable}:{${2:variable}}\")",
+			"print(f\"[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] [{__name__}] - ${2:variable}:{${2:variable}}\")$0"
 		],
-		"description": "添加print语句"
+		"description": "print"
 	},
-	// 添加printf-error语句
-	"添加printf-error语句": {
-		"prefix": ["pre", "prer", "prerr", "printerr"],
+	"print_stderr": {
+		"prefix": ["pe", "pre"],
 		"body": [
-			"print(f\"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] [{__name__}] - ${2:variable}:{${2:variable}}\", file=sys.stderr)",
+			"print(f\"[${1|ERROR,FATAL,DEBUG,INFO,WARN|}] [{__name__}] - ${2:variable}:{${2:variable}}\", file=sys.stderr)$0"
 		],
-		"description": "添加printf-error语句"
+		"description": "print stderr"
 	},
-	// 添加多行注释
-	"添加多行注释": {
-		"prefix": ["co", "com", "comm", "comme", "commen", "comment"],
+	"comment_block": {
+		"prefix": ["co", "com"],
 		"body": [
 			"\"\"\"",
 			"  System:         $1",
@@ -231,8 +245,8 @@
 			"  GreatDate:      $3",
 			"  Author:         $4",
 			"  UpdateDate:     $5",
-			"\"\"\"",
+			"\"\"\"$0"
 		],
-		"description": "添加多行注释"
-	},
+		"description": "comment block"
+	}
 }
