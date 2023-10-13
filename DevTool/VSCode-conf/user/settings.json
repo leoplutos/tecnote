@@ -76,6 +76,11 @@
 	"workbench.editor.enablePreview": false, // 全局禁用预览模式
 	"workbench.editor.showTabs": true, //每次都新打开
 	"workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
+	"workbench.editorAssociations": { //设定文件使用的默认编辑器
+		"*.hex": "hexEditor.hexedit",
+		"*.exe": "hexEditor.hexedit",
+		"*.svg": "hediet.vscode-drawio-text",
+	},
 	//"workbench.editor.tabSizing": "fixed", //tab宽度自适应
 	//"workbench.list.horizontalScrolling": true, //资源管理器水平滚动
 	"zenMode.centerLayout": false, //禅模式取消居中

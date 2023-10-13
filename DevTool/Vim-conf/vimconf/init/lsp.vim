@@ -535,7 +535,7 @@ if executable('vue-language-server')
         \ 'name': 'volar-language-server',
         \ 'cmd': {server_info->['vue-language-server.cmd', '--stdio']},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-        \ 'allowlist': ['vue'],
+        \ 'allowlist': ['vue', 'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
         \ 'initialization_options': {
         \     'textDocumentSync': 2,
         \     'typescript': {
@@ -600,16 +600,16 @@ endif
 
 "使用JavaScript和TypeScript（typescript-language-server）
 "安装命令：npm install -g typescript typescript-language-server
-if executable('typescript-language-server')
-    "设定参数参照这里
-    "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->['typescript-language-server.cmd', '--stdio']},
-        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-        \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
-        \ })
-endif
+"if executable('typescript-language-server')
+"    "设定参数参照这里
+"    "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'typescript-language-server',
+"        \ 'cmd': {server_info->['typescript-language-server.cmd', '--stdio']},
+"        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+"        \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
+"        \ })
+"endif
 
 "使用Kotlin（kotlin-language-server）
 "在这里下载 https://github.com/fwcd/kotlin-language-server/releases/
@@ -703,7 +703,8 @@ function! GetLspStatus() abort
   elseif (&ft=='cobol')
     let lspServerName = 'che-che4z-lsp-for-cobol'
   elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')
-    let lspServerName = 'typescript-language-server'
+    "let lspServerName = 'typescript-language-server'
+    let lspServerName = 'volar-language-server'
   elseif (&ft=='kotlin')
     let lspServerName = 'kotlin-language-server'
   endif
@@ -728,8 +729,8 @@ let g:vsnip_filetypes.typescriptreact = ['typescript']
 imap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
 smap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
 " Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+imap <expr> <C-w>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-w>'
+smap <expr> <C-w>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-w>'
 " Jump forward or backward
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'

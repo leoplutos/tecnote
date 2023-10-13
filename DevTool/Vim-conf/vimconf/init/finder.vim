@@ -21,13 +21,13 @@ let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 " 设置忽略文件
 let g:Lf_WildIgnore = {
-        \ 'dir': ['.svn','.git','.hg','.cache','.vscode','bin','build','lib','obj','target'],
-        \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.obj','*.dll','*.bin','*.out','*.jar','*.pak''*.class','*.zip','*gz','*.xz','*.bz2','*.7z','*.lha','*.deb','*.rpm','*.pdf','*.png','*.jpg','*.gif','*.bmp','*.doc*','*.xls*','*.ppt*','tags']
+        \ 'dir': ['.svn','.git','.hg','.cache','.vscode','bin','build','lib','obj','target','node_modules'],
+        \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.obj','*.dll','*.bin','*.out','*.jar','*.pak','*.class','*.zip','*gz','*.xz','*.bz2','*.7z','*.lha','*.deb','*.rpm','*.pdf','*.png','*.jpg','*.gif','*.bmp','*.doc*','*.xls*','*.ppt*','tags']
         \}
 
 let g:Lf_MruWildIgnore = {
-        \ 'dir': ['.svn','.git','.hg','.cache','.vscode','bin','build','lib','obj','target'],
-        \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.obj','*.dll','*.bin','*.out','*.jar','*.pak''*.class','*.zip','*gz','*.xz','*.bz2','*.7z','*.lha','*.deb','*.rpm','*.pdf','*.png','*.jpg','*.gif','*.bmp','*.doc*','*.xls*','*.ppt*','tags']
+        \ 'dir': ['.svn','.git','.hg','.cache','.vscode','bin','build','lib','obj','target','node_modules'],
+        \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.obj','*.dll','*.bin','*.out','*.jar','*.pak','*.class','*.zip','*gz','*.xz','*.bz2','*.7z','*.lha','*.deb','*.rpm','*.pdf','*.png','*.jpg','*.gif','*.bmp','*.doc*','*.xls*','*.ppt*','tags']
         \}
 let g:Lf_MruFileExclude = ['*.so']
 let g:Lf_StlColorscheme = 'default'
@@ -48,7 +48,7 @@ let g:Lf_RgConfig = [
     \ "--smart-case",
     \ "--hidden",
     \ "--trim",
-    \ "--glob=!.git/* --glob=!.svn/* --glob=!.vscode/* --glob=!bin/* --glob=!build/* --glob=!lib/* --glob=!obj/* --glob=!target/* --glob=!.cache/*",
+    \ "--glob=!.git/* --glob=!.svn/* --glob=!.vscode/* --glob=!bin/* --glob=!build/* --glob=!lib/* --glob=!obj/* --glob=!target/* --glob=!.cache/* --glob=!node_modules/*",
 \ ]
 
 "添加快捷键绑定

@@ -100,3 +100,25 @@ github下载地址：[v0.8.0.zip](https://github.com/volca/markdown-preview/arch
 ## 音乐下载插件 声海盗
 https://github.com/seekerlee/SoundPirate
 
+## 本地文件跨域错误
+具体错误信息为
+```
+Access to script at 'file:///path/to/App.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted.
+```
+因为本地文件用浏览器打开是 ``file`` 协议，``file:///***.html`` 如果有跨域请求，会在控制台报错  
+
+#### 解决方法1：
+新建 Chrome 快捷方式  
+目标处为：
+```
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+```
+将所有Chrome关闭后，用新的快捷方式重新启动即可
+
+#### 解决方法2：
+新建一个批处理内容如下
+```
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+```
+将所有Chrome关闭后，用新的批处理重新启动即可
+

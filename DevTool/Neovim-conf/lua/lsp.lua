@@ -70,7 +70,8 @@ function! GetLspStatus() abort
   elseif (&ft=='cobol')
     let lspServerName = 'cobol_ls'
   elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')
-    let lspServerName = 'tsserver'
+    "let lspServerName = 'tsserver'
+    let lspServerName = 'volar'
   elseif (&ft=='kotlin')
     let lspServerName = 'kotlin_language_server'
   endif
@@ -301,6 +302,15 @@ lspconfig.gopls.setup {
 }
 -- Vue(volar-language-server)设置
 lspconfig.volar.setup {
+  filetypes = {
+    'vue',
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+  },
   init_options = {
     typescript = {
       tsdk = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib'
@@ -336,9 +346,9 @@ lspconfig.cobol_ls.setup {
   root_dir = lspconfig.util.root_pattern('.root', '.git');
 }
 -- JavaScript和TypeScript（typescript-language-server）设置
-lspconfig.tsserver.setup {
-  root_dir = lspconfig.util.root_pattern('.root', 'package.json', 'jsconfig.json', '.git');
-}
+--lspconfig.tsserver.setup {
+--  root_dir = lspconfig.util.root_pattern('.root', 'package.json', 'jsconfig.json', '.git');
+--}
 -- Kotlin（kotlin-language-server）设置
 lspconfig.kotlin_language_server.setup {
   root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', '.git');
@@ -755,8 +765,8 @@ let g:vsnip_filetypes.typescriptreact = ['typescript']
 imap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
 smap <expr> <C-q>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-q>'
 " Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+imap <expr> <C-w>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-w>'
+smap <expr> <C-w>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-w>'
 " Jump forward or backward
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'

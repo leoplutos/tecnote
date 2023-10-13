@@ -20,9 +20,9 @@ set background=dark
 "-----------------------------------------------"
 hi Normal       term=none cterm=none ctermfg=188 ctermbg=234 gui=none guifg=#d4d4d4 guibg=#1e1e1e
 "SpecialKey    : TAB符
-hi SpecialKey   term=none cterm=none ctermfg=239 gui=none guifg=#505050
+hi SpecialKey   term=none cterm=none ctermfg=237 gui=none guifg=#333843
 "NonText       : 换行符
-hi NonText      term=none cterm=none ctermfg=239 gui=none guifg=#505050
+hi NonText      term=none cterm=none ctermfg=237 gui=none guifg=#333843
 hi Directory    term=none cterm=none ctermfg=87 gui=none guifg=#5fffff
 "提示信息
 hi ErrorMsg     term=bold cterm=bold ctermfg=196 ctermbg=234 gui=bold guifg=#ff0000 guibg=#1e1e1e
@@ -379,4 +379,26 @@ if has('nvim')
   hi! link @lsp.type.operator Special
   hi clear @lsp.type.builtinType
   hi! link @lsp.type.builtinType Statement
+
+  "ident_line区域
+  hi IndentBlankLineBase cterm=nocombine ctermfg=237 gui=nocombine guifg=#333843
+  hi IndentBlankLineUnderlineBase cterm=underline ctermfg=237 gui=underline guifg=#333843
+
+  "设定neovim终端的ANCI颜色
+  let g:terminal_color_0  = '#000000'
+  let g:terminal_color_1  = '#cd3131'
+  let g:terminal_color_2  = '#0dbc79'
+  let g:terminal_color_3  = '#e5e510'
+  let g:terminal_color_4  = '#2472c8'
+  let g:terminal_color_5  = '#bc3fbc'
+  let g:terminal_color_6  = '#11a8cd'
+  let g:terminal_color_7  = '#e5e5e5'
+  let g:terminal_color_8  = '#666666'
+  let g:terminal_color_9  = '#f14c4c'
+  let g:terminal_color_10 = '#23d18b'
+  let g:terminal_color_11 = '#f5f543'
+  let g:terminal_color_12 = '#3b8eea'
+  let g:terminal_color_13 = '#d670d6'
+  let g:terminal_color_14 = '#29b8db'
+  let g:terminal_color_15 = '#e5e5e5'
 endif

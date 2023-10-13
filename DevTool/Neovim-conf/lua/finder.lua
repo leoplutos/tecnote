@@ -12,10 +12,12 @@ vim.cmd('packadd telescope.nvim')
 --进入Telescope之前执行的命令：set ambiwidth=single
 --关闭Telescope执行的命令：set ambiwidth=double
 vim.cmd([[
+  set ambiwidth=single
+
   augroup UserTelescopeGroup
     autocmd!
-    autocmd User TelescopeFindPre set ambiwidth=single
-    autocmd FileType TelescopePrompt autocmd BufLeave <buffer> set ambiwidth=double
+    "autocmd User TelescopeFindPre set ambiwidth=single
+    "autocmd FileType TelescopePrompt autocmd BufLeave <buffer> set ambiwidth=double
     "设定Previewer的行号
     autocmd User TelescopePreviewerLoaded setlocal number
   augroup END
@@ -86,6 +88,7 @@ require('telescope').setup{
       -- "--glob=!.git\\* --glob=!.svn\\* --glob=!.vscode\\* --glob=!bin\\* --glob=!build\\* --glob=!lib\\* --glob=!obj\\* --glob=!target\\*",
     },
     file_ignore_patterns = {
+      --忽略文件夹设定
       "^.git/",
       "^.svn/",
       "^.vscode/",
@@ -95,6 +98,7 @@ require('telescope').setup{
       "^lib/",
       "^obj/",
       "^target/",
+      "^node_modules/",
       "^.git\\",
       "^.svn\\",
       "^.vscode\\",
@@ -104,6 +108,31 @@ require('telescope').setup{
       "^lib\\",
       "^obj\\",
       "^target\\",
+      "^node_modules\\",
+      --忽略文件设定
+      "%.o",
+      "%.so",
+      "%.pyc",
+      "%.pyo",
+      "%.a",
+      "%.obj",
+      "%.dll",
+      "%.bin",
+      "%.out",
+      "%.jar",
+      "%.pak",
+      "%.class",
+      "%.zip",
+      "%.gz",
+      "%.deb",
+      "%.pdf",
+      "%.png",
+      "%.jpg",
+      "%.gif",
+      "%.bmp",
+      "%.doc",
+      "%.xls",
+      "%.ppt",
     }
   },
   pickers = {
@@ -116,8 +145,7 @@ require('telescope').setup{
 }
 
 --telescope.nvim插件的高亮设定
-vim.cmd(
-[[
+vim.cmd([[
 hi clear TelescopeNormal
 hi! link TelescopeNormal FinderNormal
 "hi clear TelescopePromptNormal
@@ -131,5 +159,4 @@ hi! link TelescopePromptCounter ThinTitle
 hi clear TelescopeMatching
 hi! link TelescopeMatching PmenuMatch
 "hi TelescopePromptPrefix   guifg=red
-]]
-)
+]])

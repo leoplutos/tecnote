@@ -13,6 +13,38 @@ Window11系统自带，Windows10有两种安装方式：
 https://github.com/microsoft/terminal/releases  
 下载扩展名为 .msixbundle 的文件双击安装即可
 
+## 笔者使用的配色
+打开设定文件，在 ``schemes`` 的地方加入如下内容。(配色名为``lch-dark``)
+```
+    "schemes": 
+    [
+        {
+            "background": "#1D1F21",
+            "black": "#000000",
+            "blue": "#2472C8",
+            "brightBlack": "#666666",
+            "brightBlue": "#3B8EEA",
+            "brightCyan": "#29B8DB",
+            "brightGreen": "#23D18B",
+            "brightPurple": "#D670D6",
+            "brightRed": "#F14C4C",
+            "brightWhite": "#E5E5E5",
+            "brightYellow": "#F5F543",
+            "cursorColor": "#00FFFF",
+            "cyan": "#11A8CD",
+            "foreground": "#DADADA",
+            "green": "#0DBC79",
+            "name": "lch-dark",
+            "purple": "#BC3FBC",
+            "red": "#CD3131",
+            "selectionBackground": "#224F76",
+            "white": "#E5E5E5",
+            "yellow": "#E5E510"
+        },
+    ],
+```
+
+
 ## Windows Terminal 配置 Git bash 为默认终端
 设置 → 启动 → 默认配置文件  
 (设定文件位置为：C:\Users\User\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json)  

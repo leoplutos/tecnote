@@ -359,7 +359,7 @@ function! Statusline()
   let l:resultStr .= '%2* %F'                       " 显示当前文件，高亮为用户组2 (%f 相对文件路径, %F 绝对文件路径, %t 文件名)
   let l:resultStr .= '%3* %m%r%h%w %*%='            " 显示当前文件标记(mrhw)，高亮为用户组3，之后用=开始右对齐
   let l:resultStr .= '%4* ' . lspMsgLable . ''      " 显示LSP标签，高亮为用户组4
-  let l:resultStr .= '%5* ' . lspMsgContent . ' '   " 显示LSP状态，高亮为用户组5
+  let l:resultStr .= '%5* ' . lspMsgContent . '  '   " 显示LSP状态，高亮为用户组5
   let l:resultStr .= '%* %{&ff} | %{"".(""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"").""} | %Y '        " 显示换行符，编码，文件类型，高亮为默认（ LF | utf-8 | fomart ）
   let l:resultStr .= '%2* [%l:%v] '                 " 显示当前行，列，高亮为用户组2
   let l:resultStr .= '%1* %p%% %LL '                " 显示百分比，总行数，高亮为用户组4
