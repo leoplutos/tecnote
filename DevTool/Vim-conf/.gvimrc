@@ -36,7 +36,7 @@ set guioptions-=T                         " 不显示工具栏
 set guioptions-=L                         " 不显示左侧滚动条
 "set guioptions-=r                         " 不显示右侧滚动条
 "set guioptions-=b                         " 不显示底部滚动条
-"set guioptions-=e                         " 使用默认的tab样式，而不是系统的tab
+set guioptions-=e                         " 使用默认的tab样式，而不是系统的tab
 "set winaltkeys=no                         " 设置 alt 键不映射到菜单栏
 
 "在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。

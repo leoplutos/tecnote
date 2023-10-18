@@ -210,6 +210,7 @@ hi LspHintVirtualText term=reverse ctermfg=29 ctermbg=224 guifg=#118c74 guibg=#f
 "augroup lchSyntaxGroup
 "  autocmd!
 "  autocmd Syntax * match ExtraWhitespace /\s\+$/
+  "autocmd BufWinEnter * if &buftype !='terminal' | match ExtraWhitespace /\s\+$/ | endif
 "augroup END
 
 "tagbar插件高亮

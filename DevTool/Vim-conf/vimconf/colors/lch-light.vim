@@ -210,6 +210,7 @@ hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=217 guifg=#c0c0c0 guibg=#f
 augroup lchSyntaxGroup
   autocmd!
   autocmd Syntax * match ExtraWhitespace /\s\+$/
+  "autocmd BufWinEnter * if &buftype !='terminal' | match ExtraWhitespace /\s\+$/ | endif
 augroup END
 
 "tagbar插件高亮

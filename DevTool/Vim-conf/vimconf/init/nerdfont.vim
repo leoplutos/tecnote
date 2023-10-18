@@ -9,6 +9,10 @@ let g:lspStatusOk = "󱄙"
 "\uf05e
 let g:lspStatusNg = ""
 
+"文件只读
+"\ue0a2
+let g:fileReadOnlyIcon = ""
+
 "错误提示图标
 "Error - \ueab8
 "let g:diagnosticsErrorIcon = ""
@@ -73,3 +77,17 @@ let g:treeArrowClosedIcon = ""
 "打开 - \uf47c
 let g:treeArrowOpenIcon = ""
 
+"状态栏/TAB栏分隔符
+"\ue0b0
+let g:statusTabLineSeparatorLeft = ""
+"\ue0b2
+let g:statusTabLineSeparatorRight = ""
+"\ue0b1
+let g:statusTabLineSubseparatorLeft = ""
+"\ue0b3
+let g:statusTabLineSubseparatorRight = ""
+
+"\ue0b4
+let g:statusTabLineSeparatorBubbleLeft = ""
+"\ue0b6
+let g:statusTabLineSeparatorBubbleRight = ""

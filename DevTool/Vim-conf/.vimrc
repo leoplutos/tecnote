@@ -46,6 +46,10 @@ endif
 if (g:g_use_lsp == 1)
   let g:g_use_nerdfont = 1
 endif
+"全局变量g:g_space_tab_flg（0：使用空格，1：使用TAB）
+if !exists('g:g_space_tab_flg')
+  let g:g_space_tab_flg = 0
+endif
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -91,6 +95,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let g:terminal_shell='cmd.exe /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd'
 elseif (g:g_i_osflg==3)
   let g:terminal_shell='/usr/bin/bash -l -i'
+  "set viminfo='100,n$HOME/.vim/files/info/viminfo
 else
   let g:terminal_shell='/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
 endif
@@ -206,7 +211,13 @@ endif
 "-----------------------------------------------"
 set tabstop=4                            " tab为4个空格
 set shiftwidth=4                         " 每一级缩进是4个空格
-set noexpandtab                          " 不将tab替换为相应数量空格         打开为set expandtab
+if (g:g_space_tab_flg == 0)
+  "使用空格，将tab替换为相应数量空格
+  set expandtab
+else
+  "使用TAB，不将tab替换为相应数量空格
+  set noexpandtab
+endif
 set softtabstop=4                        " 在编辑模式下按退格键的时候退回缩进的长度，配合expandtab时很有用
 set smarttab                             " 在行和段开始处使用制表符
 "set smartindent                          " 智能缩进对齐（和autoindent开启一项即可，看个人喜好）
@@ -309,122 +320,6 @@ set listchars=tab:¦\ ,precedes:<,extends:>
 "augroup END
 
 "-----------------------------------------------"
-"               状态栏设置                      "
-"-----------------------------------------------"
-" 设置仿照lightline
-function! Statusline()
-  let l:show_mode_map={
-      \ 'n'  : 'NORMAL',
-      \ 'i'  : 'INSERT',
-      \ 'r'  : 'CONFIRM',
-      \ 'R'  : 'REPLACE',
-      \ 'v'  : 'VISUAL',
-      \ 'V'  : 'V-LINE',
-      \ "\<C-v>"  : 'V-BLOCK',
-      \ 'c'  : 'COMMAND',
-      \ '!'  : 'COMMAND',
-      \ 's'  : 'SELECT',
-      \ 'S'  : 'S-LINE',
-      \ "\<C-s>"  : 'S-BLOCK',
-      \ 't'  : 'TERMINAL'
-      \}
-  let l:currentMode = mode()
-  let l:showMode = ''
-  if (has_key(show_mode_map, currentMode))
-    let l:showMode .= show_mode_map[currentMode]
-  else
-    let l:showMode .= 'NORMAL'
-  endif
-  let l:lspMsgLable = 'LSP :'
-  let l:lspMsgContent = ''
-  if exists('*GetLspStatus')
-    let l:lspMsgContent = GetLspStatus()
-    if (g:g_use_nerdfont == 0)
-    else
-      if (l:lspMsgContent == 'running')
-        let l:lspMsgContent = g:lspStatusOk
-      else
-        "
-      endif
-    endif
-  else
-    if (g:g_use_nerdfont == 0)
-      let l:lspMsgContent = '❌'
-    else
-      let l:lspMsgContent = g:lspStatusNg
-    endif
-  endif
-  let l:resultStr = ''                              " 初始化
-  let l:resultStr .= '%1* ' . showMode . ' '        " 显示当前编辑模式，高亮为用户组1
-  let l:resultStr .= '%2* %F'                       " 显示当前文件，高亮为用户组2 (%f 相对文件路径, %F 绝对文件路径, %t 文件名)
-  let l:resultStr .= '%3* %m%r%h%w %*%='            " 显示当前文件标记(mrhw)，高亮为用户组3，之后用=开始右对齐
-  let l:resultStr .= '%4* ' . lspMsgLable . ''      " 显示LSP标签，高亮为用户组4
-  let l:resultStr .= '%5* ' . lspMsgContent . '  '   " 显示LSP状态，高亮为用户组5
-  let l:resultStr .= '%* %{&ff} | %{"".(""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"").""} | %Y '        " 显示换行符，编码，文件类型，高亮为默认（ LF | utf-8 | fomart ）
-  let l:resultStr .= '%2* [%l:%v] '                 " 显示当前行，列，高亮为用户组2
-  let l:resultStr .= '%1* %p%% %LL '                " 显示百分比，总行数，高亮为用户组4
-  return resultStr
-endfunction
-set statusline=%!Statusline()
-
-" 模式变换时的函数
-function! RestUserColor(pmode)
-  if a:pmode == 'ModeChanged'
-    let l:currentMode = mode()
-    if (currentMode == 'i')                "插入模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
-    elseif (currentMode == 'n')            "普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
-    elseif (currentMode == 'v' || currentMode == 'V' || currentMode == "\<C-v>" || currentMode == "\<C-vs>")      "可视模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=48 gui=bold guifg=#000010 guibg=#00ff87
-    elseif (currentMode == 'R')            "替换模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=160 gui=bold guifg=#ffffff guibg=#d70000
-    elseif (currentMode == 'c' || currentMode == '!')       "命令模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=201 gui=bold guifg=#ffffff guibg=#ff00ff
-    elseif (currentMode == 's' || currentMode == 'S' || currentMode == "\<C-s>")      "选择模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=178 gui=bold guifg=#000010 guibg=#d7af00
-    elseif (currentMode == 't')            "终端模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#2472c8
-    elseif (currentMode == 'r')            "确认模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=177 gui=bold guifg=#000010 guibg=#d787ff
-    else            "默认普通模式配色
-      hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
-    endif
-  elseif a:pmode == 'InsertEnter'
-    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=226 gui=bold guifg=#000010 guibg=#ffff00
-  elseif a:pmode == 'InsertLeave'
-    hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
-  endif
-endfunction
-
-" 添加模式变换时的自动命令
-augroup lchModeChangedGroup
-  autocmd!
-  if exists("##ModeChanged")
-    "存在ModeChanged自动命令
-    autocmd ModeChanged *:* call RestUserColor('ModeChanged')
-  else
-    "不存在ModeChanged自动命令
-    autocmd InsertEnter * call RestUserColor('InsertEnter')
-    autocmd InsertLeave * call RestUserColor('InsertLeave')
-  endif
-  "插入模式中关闭当前行高亮
-  "autocmd InsertEnter,WinLeave * set nocursorline
-  "autocmd InsertLeave,WinEnter * set cursorline
-augroup END
-
-"当前编辑模式
-hi User1        term=bold,reverse cterm=bold ctermfg=16 ctermbg=111 gui=bold guifg=#000010 guibg=#78a2f3
-"文件名
-hi User2        term=none cterm=none ctermfg=189 ctermbg=236 gui=none guifg=#c3cef7 guibg=#292e41
-"文件编辑状态
-hi User3        term=none cterm=none ctermfg=226 ctermbg=238 gui=none guifg=#ffff00 guibg=#292e41
-"LSP服务器标签
-hi User4        term=none cterm=none ctermfg=231 ctermbg=60 gui=none guifg=#f7f7f0 guibg=#545c7c
-"LSP服务器状态
-hi User5        term=none cterm=none ctermfg=226 ctermbg=60 gui=none guifg=#ffff00 guibg=#545c7c
-
-"-----------------------------------------------"
 "               颜色设置                        "
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
@@ -450,15 +345,21 @@ exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/keybindings.vim'
 
 "-----------------------------------------------"
-"               Tab设置                         "
+"         Statusline和Buffer设置                "
 "-----------------------------------------------"
-exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tab.vim'
+if (g:g_use_lsp == 0) && (g:g_use_dap == 0) && (g:g_nvim_flg == 0)
+  "不启用lsp/dsp并且不是NeoVim 时才加载
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/statusbar_pure.vim'
+endif
 
 "-----------------------------------------------"
 "               终端设置                        "
-"               \+a：打开/关闭终端           "
+"               \+a：打开/关闭终端              "
 "-----------------------------------------------"
-exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/terminal.vim'
+if (g:g_nvim_flg == 0)
+  "只有vim加载terminal.vim，NeoVim使用toggleterm.nvim
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/terminal.vim'
+endif
 
 "-----------------------------------------------"
 "               构筑设置                        "
@@ -670,9 +571,14 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
   packadd indentLine
   let g:indentLine_defaultGroup = 'SpecialKey'
   "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-  let g:indentLine_char_list = ['¦']
-  "let g:indentLine_enabled = 1
-  let g:indentLine_enabled = 0
+  let g:indentLine_char_list = ['|']
+  if (g:g_space_tab_flg == 0)
+    "使用空格
+    let g:indentLine_enabled = 1
+  else
+    "使用TAB
+    let g:indentLine_enabled = 0
+  endif
   let g:vim_json_conceal = 0
   let g:markdown_syntax_conceal = 0
 
@@ -722,6 +628,9 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
 
     "加载文件模糊查找（LeaderF）
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/finder.vim'
+
+    "加载状态栏和Buffer插件（lightline.vim + lightline-bufferline）
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/statusbar_lightline.vim'
 
     "需要最后加载图标
     "https://github.com/ryanoasis/vim-devicons

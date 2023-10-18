@@ -21,6 +21,8 @@ else
   let NERDTreeDirArrowExpandable = g:treeArrowClosedIcon
   let NERDTreeDirArrowCollapsible = g:treeArrowOpenIcon
 endif
+"定制回车键按下的显示内容
+let NERDTreeCustomOpenArgs = {'file': {'reuse': 'all', 'where': 'v',  'keepopen':1, 'stay':0}, 'dir': {}}
 "let NERDTreeNodeDelimiter = "\x07"
 "不显示头部的帮助信息
 let NERDTreeMinimalUI = 1
@@ -42,10 +44,19 @@ function! NerdTreeInitListener(event)
   let $PYTHONPATH .= g:g_s_projectrootpath
   let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src'
   let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'\src\com'
+
+  "快捷键绑定
+  exec 'nnoremap <Leader>e :NERDTree ' . g:g_s_projectrootpath . '<CR><C-w>w'
 endfunction
 
 "快捷键绑定
-nnoremap <Leader>e :NERDTreeToggle<CR>
+"nnoremap <Leader>e :NERDTreeToggle<CR>
+
+"让每一个tab都显示文件数
+augroup NERD
+  autocmd!
+  autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup END
 
 "高亮设定
 hi clear NERDTreeDirSlash

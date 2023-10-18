@@ -41,6 +41,7 @@ else
 
   --加载vim的vimrc配置
   vim.cmd('source ~\\.vimrc')
+  vim.o.ambiwidth='single'
 
   --设置package.path路径以便加载lua文件夹下的内容
   package.path = package.path ..';..\\?.lua';
@@ -83,6 +84,10 @@ else
   require('indent')
   -- 加载lua/quickmove.lua
   require('quickmove')
+  -- 加载lua/statusbar.lua
+  require('statusbar')
+  -- 加载lua/terminal.lua
+  require('terminal')
 
   -- 加载tokyonight.nvim
   --vim.cmd('packadd tokyonight.nvim')

@@ -33,39 +33,74 @@ augroup lchFormatGroup
   autocmd!
 
   "c/cpp
-  autocmd FileType c,cpp setlocal formatprg=clang-format\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
-  autocmd FileType c,cpp setlocal equalprg=clang-format\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+  if (g:g_space_tab_flg == 0)
+    "使用空格
+    autocmd FileType c,cpp setlocal formatprg=clang-format\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ Never,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    autocmd FileType c,cpp setlocal equalprg=clang-format\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ Never,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+  else
+    "使用TAB
+    autocmd FileType c,cpp setlocal formatprg=clang-format\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    autocmd FileType c,cpp setlocal equalprg=clang-format\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+  endif
 
   "java/object-c/proto/c#
-  autocmd FileType java,objc,proto,cs setlocal formatprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
-  autocmd FileType java,objc,proto,cs setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+  if (g:g_space_tab_flg == 0)
+    "使用空格
+    autocmd FileType java,objc,proto,cs setlocal formatprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ Never,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    autocmd FileType java,objc,proto,cs setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ Never,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+  else
+    "使用TAB
+    autocmd FileType java,objc,proto,cs setlocal formatprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    autocmd FileType java,objc,proto,cs setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+  endif
 
   "javascript/json
   "因为clang-format和prettier都支持javascript和json，所以哪个可以运行用哪个
   if (g:g_clang_format_flg == 1)
-    autocmd FileType javascript,json setlocal formatprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
-    autocmd FileType javascript,json setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    if (g:g_space_tab_flg == 0)
+      "使用空格
+      autocmd FileType javascript,json setlocal formatprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ Never,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+      autocmd FileType javascript,json setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ Never,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    else
+      "使用TAB
+      autocmd FileType javascript,json setlocal formatprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+      autocmd FileType javascript,json setlocal equalprg=clang-format\ --assume-filename=%\ --style=\"{\ BasedOnStyle:\ Google,\ UseTab:\ ForIndentation,\ IndentWidth:\ 4,TabWidth:\ 4,\ ColumnLimit:\ 0}\"
+    endif
   elseif (g:g_prettier_flg == 1)
-    autocmd FileType javascript,json setlocal equalprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
-    autocmd FileType javascript,json setlocal formatprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
+    if (g:g_space_tab_flg == 0)
+      "使用空格
+      autocmd FileType javascript,json setlocal equalprg=prettier\ --print-width\ 1000\ --tab-width\ 4\ --stdin-filepath\ %
+      autocmd FileType javascript,json setlocal formatprg=prettier\ --print-width\ 1000\ --tab-width\ 4\ --stdin-filepath\ %
+    else
+      "使用TAB
+      autocmd FileType javascript,json setlocal equalprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
+      autocmd FileType javascript,json setlocal formatprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
+    endif
   endif
 
-  "python
+  "python - pep8推荐使用空格
   autocmd FileType python setlocal formatprg=black\ -q\ 2>nul\ --skip-string-normalization\ --stdin-filename\ %\ -
   autocmd FileType python setlocal equalprg=black\ -q\ 2>nul\ --skip-string-normalization\ --stdin-filename\ %\ -
 
-  "rust
+  "rust - rustfmt推荐使用空格
   autocmd FileType rust setlocal formatprg=rustfmt\ -q\ --edition\ 2021\ --emit\ stdout\ %
   autocmd FileType rust setlocal equalprg=rustfmt\ -q\ --edition\ 2021\ --emit\ stdout\ %
 
-  "go
+  "go - gofmt强制使用TAB
   autocmd FileType go setlocal formatprg=gofmt\ %
   autocmd FileType go setlocal equalprg=gofmt\ %
 
   "html/css/less/scss/jsx/vue/graphQL/markdown/yaml
   if (g:g_prettier_flg == 1)
-    autocmd FileType html,css,less,scss,javascriptreact,vue,graphql,markdown,yaml setlocal equalprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
-    autocmd FileType html,css,less,scss,javascriptreact,vue,graphql,markdown,yaml setlocal formatprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
+    if (g:g_space_tab_flg == 0)
+      "使用空格
+      autocmd FileType html,css,less,scss,javascriptreact,vue,graphql,markdown,yaml setlocal equalprg=prettier\ --print-width\ 1000\ --tab-width\ 4\ --stdin-filepath\ %
+      autocmd FileType html,css,less,scss,javascriptreact,vue,graphql,markdown,yaml setlocal formatprg=prettier\ --print-width\ 1000\ --tab-width\ 4\ --stdin-filepath\ %
+    else
+      "使用TAB
+      autocmd FileType html,css,less,scss,javascriptreact,vue,graphql,markdown,yaml setlocal equalprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
+      autocmd FileType html,css,less,scss,javascriptreact,vue,graphql,markdown,yaml setlocal formatprg=prettier\ --print-width\ 1000\ --use-tabs\ --tab-width\ 4\ --stdin-filepath\ %
+    endif
   endif
 
   "typescript在after/ftplugin/typescript.vim中设定

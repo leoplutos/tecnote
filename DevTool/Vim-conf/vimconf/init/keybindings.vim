@@ -41,25 +41,7 @@ cnoremap < <><left>
 inoremap " ""<left>
 inoremap ' ''<left>
 " TAB/窗口移动快捷键
-nnoremap <TAB>1 1gt|                  " [普通模式]tab+1：移动到tab1
-nnoremap <TAB>2 2gt|                  " [普通模式]tab+2：移动到tab2
-nnoremap <TAB>3 3gt|                  " [普通模式]tab+3：移动到tab3
-nnoremap <TAB>4 4gt|                  " [普通模式]tab+4：移动到tab4
-nnoremap <TAB>5 5gt|                  " [普通模式]tab+5：移动到tab5
-nnoremap <TAB>6 6gt|                  " [普通模式]tab+6：移动到tab6
-nnoremap <TAB>7 7gt|                  " [普通模式]tab+7：移动到tab7
-nnoremap <TAB>8 8gt|                  " [普通模式]tab+8：移动到tab8
-nnoremap <TAB>9 9gt|                  " [普通模式]tab+9：移动到tab9
-nnoremap <Leader>1 1gt|               " [普通模式]\+1：移动到tab1
-nnoremap <Leader>2 2gt|               " [普通模式]\+2：移动到tab2
-nnoremap <Leader>3 3gt|               " [普通模式]\+3：移动到tab3
-nnoremap <Leader>4 4gt|               " [普通模式]\+4：移动到tab4
-nnoremap <Leader>5 5gt|               " [普通模式]\+5：移动到tab5
-nnoremap <Leader>6 6gt|               " [普通模式]\+6：移动到tab6
-nnoremap <Leader>7 7gt|               " [普通模式]\+7：移动到tab7
-nnoremap <Leader>8 8gt|               " [普通模式]\+8：移动到tab8
-nnoremap <Leader>9 9gt|               " [普通模式]\+9：移动到tab9
-nnoremap <TAB>n :tabnew<cr>|          " [普通模式]tab+n：新建一个tab
+nnoremap <leader>tn :tabnew<cr>|          " [普通模式]tab+n：新建一个tab
 nnoremap <TAB>w <C-w>w|               " [普通模式]tab+w：移动窗口
 nnoremap <TAB>h <C-w><left>|          " [普通模式]tab+h：移动到左边窗口
 nnoremap <TAB>l <C-w><right>|         " [普通模式]tab+l：移动到右边窗口
@@ -90,8 +72,7 @@ noremap <Leader><left> :bp<CR>|       " [普通模式/选择模式]\+左：上�
 noremap <Leader><right> :bn<CR>|      " [普通模式/选择模式]\+右：下一个buffer
 " [普通模式][tags]\s：保存,\q：退出
 noremap <Leader>s :w<CR>|             " [普通模式/选择模式]\+s：保存文件
-"noremap <Leader>q :q<CR>|             " [普通模式/选择模式]\+q：退出
-noremap <Leader>q :call CloseTab()<CR>
+noremap <Leader>q :q<CR>|             " [普通模式/选择模式]\+q：退出
 " 通过Leader-y复制到系统剪切板
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
@@ -127,15 +108,35 @@ nnoremap <leader>hi :%!xxd<CR>:set ft=xxd<CR>
 " [普通模式]\ho：退出16进制编辑器
 nnoremap <leader>ho :%!xxd -r<CR>
 " [普通模式]\td：载入暗色系配置
-nnoremap <leader>td :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'<CR>
+nnoremap <leader>td :call <SID>setColorscheme(0)<CR>
 " [普通模式]\tl：载入亮色系配置
-nnoremap <leader>tl :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-light.vim'<CR>
+nnoremap <leader>tl :call <SID>setColorscheme(1)<CR>
 " [普通模式]\tq：载入亮色系配置
-nnoremap <leader>tq :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/qy-light.vim'<CR>
+nnoremap <leader>tq :call <SID>setColorscheme(2)<CR>
 " [普通模式]\t16：载入16色配置
 nnoremap <leader>t16 :exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-16.vim'<CR>
+function! s:setColorscheme(colorFlg)
+  if (a:colorFlg == 0)
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
+  elseif (a:colorFlg == 1)
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-light.vim'
+  elseif (a:colorFlg == 2)
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/qy-light.vim'
+  endif
+  if exists('*LightlineSetColor')
+    "如果存在LightlineSetColor函数则调用（lightline.vim更新颜色）
+    call LightlineSetColor()
+  endif
+  if exists('*lightline#colorscheme')
+    "如果存在lightline#colorscheme函数则调用（lightline.vim更新颜色）
+    call lightline#colorscheme()
+  endif
+endfunction
 " [普通模式]\@：复制命令模式回显消息
-nnoremap <leader>@ :let @* = execute('message')<CR>
+"nnoremap <leader>@ :<C-U><C-R>=printf("redir @* | hi SpecialKey | redir END", "")
+"redir > $HOME/vimoutput.txt
+"command
+"redir END
 
 if (exists(':tnoremap') > 0)
   if (g:g_nvim_flg == 0)

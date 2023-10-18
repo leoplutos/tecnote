@@ -122,3 +122,8 @@ Access to script at 'file:///path/to/App.js' from origin 'null' has been blocked
 ```
 将所有Chrome关闭后，用新的批处理重新启动即可
 
+## 本地文件跨域错误（Edge）
+解决方式和 Chrome 一致，命令为
+```
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir=D:\Download
+```
