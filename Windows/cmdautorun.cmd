@@ -37,6 +37,8 @@ set GO111MODULE=on
 set PATH=%PATH%;%CARGO_HOME%\bin
 set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
 set PATH=%PATH%;%GIT_HOME%
+set LAZYGIT_HOME=D:\Tools\WorkTool\Team\Lazygit
+set PATH=%PATH%;%LAZYGIT_HOME%
 set JAVA_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
 set PATH=%PATH%;%JAVA_HOME%\bin
 set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
@@ -49,8 +51,12 @@ set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep
 set PATH=%PATH%;%RIPGREP_HOME%\bin
 set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
 set PATH=%PATH%;%NINJA_HOME%
+set VIM_HOME=D:\Tools\WorkTool\Team\Git\usr\bin
+set PATH=%PATH%;%VIM_HOME%
 set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
 set PATH=%PATH%;%GVIM_HOME%
+set NVIM_HOME=D:\Tools\WorkTool\Text\nvim-win64\bin
+set PATH=%PATH%;%NVIM_HOME%
 set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
 set PATH=%PATH%;%ANT_HOME%\bin
 set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
@@ -100,6 +106,7 @@ doskey alias=doskey /macros
 doskey cda=cd /d %app%
 doskey cdb=cd /d %bin%
 doskey cdl=cd /d %log%
+doskey lg=lazygit $*
 ::echo 别名载入完成，键入alias查看
 echo Alias Setting Complited
 

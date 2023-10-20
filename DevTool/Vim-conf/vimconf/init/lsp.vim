@@ -396,9 +396,9 @@ if (g:g_python_lsp_type == 3)
   endif
 endif
 
-
 "Java(eclipse.jdt.ls)
 "在这里下载 https://download.eclipse.org/jdtls/milestones/
+"更多设定 https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'eclipse.jdt.ls',
@@ -428,6 +428,24 @@ if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-s
        "\     'D:/WorkSpace/Java',
         \     $HOME.'/.cache/vim-lsp-jdtls',
         \ ]},
+        \ 'initialization_options': {
+        \   'workspaceFolders': $HOME.'/.cache/vim-lsp-jdtls',
+        \   'settings': {
+        \     'java': {
+        \       'configuration': {
+        \         'maven': {
+        \           'userSettings': 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
+        \           'globalSettings': 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
+        \         },
+        \       },
+        \       'import': {
+        \         'maven': {
+        \           'enabled': v:true,
+        \         },
+        \       },
+        \     },
+        \   },
+        \ },
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
         \ 'whitelist': ['java'],
         \ })

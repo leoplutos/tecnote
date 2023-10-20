@@ -210,6 +210,24 @@ lspconfig.jdtls.setup {
     --'D:/WorkSpace/Java',
     lspconfig.util.path.join(vim.loop.os_homedir(), '.cache/nvim-lsp-jdtls')
   },
+  init_options = {
+    workspaceFolders = lspconfig.util.path.join(vim.loop.os_homedir(), '.cache/nvim-lsp-jdtls'),
+    settings = {
+      java = {
+        configuration = {
+          maven = {
+            userSettings = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
+            globalSettings = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
+          },
+        },
+        import = {
+          maven = {
+            enabled = true,
+          },
+        },
+      },
+    },
+  },
   root_dir = lspconfig.util.root_pattern('.root', '.classpath', 'build.xml', 'pom.xml', 'settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', '.git');
 }
 -- Rust(rust-analyzer)设置

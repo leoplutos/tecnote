@@ -9,23 +9,24 @@ Option Explicit
     'shellType=1 : 使用 powershell
     'shellType=2 : 使用 mintty
     'shellType=3 : 使用 git-bash
-    Dim shellType: shellType = 2
+    Dim shellType: shellType = 0
     Dim minttyPath: minttyPath = """D:\Tools\WorkTool\Team\Git\usr\bin\mintty.exe"""
     Dim gitbashPath: gitbashPath = """D:\Tools\WorkTool\Team\Git\git-bash.exe"""
     '是否使用自定义bashrc
-    Dim personalBashrc: personalBashrc = True
+    Dim personalBashrc: personalBashrc = False
     Dim personalBashrcPath: personalBashrcPath = "/lch/workspace/bashrc/.bashrc-personal"
 
     'ssh连接字符串（ssh -t user@hostip -p port）
     Dim sshConnnectStr: sshConnnectStr = "ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oHostKeyAlgorithms=+ssh-dss -t " & userName & "@" & hostName & " -p " & portNo
     '使用自定义bashrc字符串（"/bin/bash --rcfile rcfile"）
     Dim personalBashrcStr: personalBashrcStr = Chr(34) & "/bin/bash --rcfile " & personalBashrcPath & Chr(34)
+    Dim sourchBashrcCmdStr: sourchBashrcCmdStr = "source " & personalBashrcPath
 
     '创建WshShell对象并开始终端外壳
     Dim wshShell
     Set wshShell = WScript.CreateObject ("WScript.Shell")
     '[关闭日语IME输入模式] - 发行2个\，再发行2个Backspace
-    wshShell.SendKeys("\\{BS 2}")
+    'wshShell.SendKeys("\\{BS 2}")
     Dim runCmd
     If shellType = 0 Then
         'cmd外壳
@@ -66,6 +67,9 @@ Option Explicit
     wshShell.run runCmd
     WScript.Sleep 3000
     wshShell.SendKeys(passWord)
+    wshShell.SendKeys("{Enter}")
+    WScript.Sleep 1000
+    wshShell.SendKeys(sourchBashrcCmdStr)
     wshShell.SendKeys("{Enter}")
 
     Set wshShell = Nothing

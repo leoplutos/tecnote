@@ -32,6 +32,111 @@
 ~/vimconf/nerdtree_plugin
 ```
 
+### 一些笔者没有使用但是很优秀的插件
+
+- DAP：因为使用了 ``vimspector`` 所以没有采用  
+  mfussenegger/nvim-dap ：dap支持  
+  rcarriga/nvim-dap-ui ：debug用的ui  
+  theHamsta/nvim-dap-virtual-text ：在变量右侧用虚拟文本显示debug时的变量值  
+
+- Git  
+  lewis6991/gitsigns.nvim ：git支持  
+  sindrets/diffview.nvim ：差分git的历史版本  
+
+## Lazygit
+Lazygit 并不是一个 Vim/NeoVim 插件，而是一个用于 Git 命令行的简单 ``终端UI``，使用 Go 语言编写，用到了 gocui 库，目的是在命令行提供 Git 的图形界面  
+和 Vim/NeoVim 一样，都是 ``TUI``，那么他们搭配在一起使用，也理所当然了。
+
+#### 下载安装
+* [Github地址](https://github.com/jesseduffield/lazygit)
+* [Windows平台v0.40.2稳定免安装版](https://github.com/jesseduffield/lazygit/releases/download/v0.40.2/lazygit_0.40.2_Windows_x86_64.zip)
+
+#### 配置中文文档
+* [中文文档](https://gitcode.gitcode.host/docs-cn/lazygit-docs-cn/Config.html)
+
+#### 安装后确认命令
+```
+lazygit --version
+```
+#### 配置文件的默认路径
+- Linux:
+```
+~/.config/lazygit/config.yml
+```
+- MacOS:
+```
+~/Library/Application Supp或t/lazygit/config.yml
+```
+- Windows：
+```
+%APPDATA%\lazygit\config.yml
+```
+
+#### 笔者的配置文件
+在WindowsTerminal下使用中文有``gocui库的中文显示bug``，所以设定是英文
+```
+gui:
+  language: 'en' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl'
+  timeFormat: '2006/01/02'
+  shortTimeFormat: '15:04:05'
+  theme:
+    lightTheme: false # For terminals with a light background
+    activeBorderColor:
+      - '#f39c12' #54f95e
+      - bold
+    inactiveBorderColor:
+      - '#6f6f6f'
+    searchingActiveBorderColor:
+      - '#ffff00'
+      - bold
+    optionsTextColor:
+      - '#cdcdff'
+    selectedLineBgColor:
+      - '#292e42'
+    selectedRangeBgColor:
+      - '#2e3c64'
+    cherryPickedCommitBgColor:
+      - blue
+    cherryPickedCommitFgColor:
+      - cyan
+    unstagedChangesColor:
+      - '#ff4b4b'
+    defaultFgColor:
+      - default
+  nerdFontsVersion: "3"
+  authorColors:
+    # use color for myself
+    'chunhao.liang': '#9CDCFE'
+    # use color for other authors
+    '*': '#96E072'
+  branchColors:
+    'docs': '#11aaff' # use a light blue for branches beginning with 'docs/'
+notARepository: 'quit' # one of: 'prompt' | 'create' | 'skip' | 'quit'
+keybinding:
+  universal:
+    prevPage: '<c-b>' # go to next page in list
+    nextPage: '<c-f>' # go to previous page in list
+```
+
+#### 一些常用的快捷键
+1. 通用
+    - 数字1-5 ：在区块间切换
+    - tab：区块切换
+    - h/l：在上一个/下一个区块间切换
+    - ?：打开帮助菜
+    - q：退出
+    - ``[]``（中括号）：可以在面板里切换，比如在branche面板里面可以切换``Local branches``，``Remotes``和``Tags``
+    - P（大写）：推送分支（git push）
+    - p（小写）：拉取分支（git pull）
+2. Files面板
+    - 空格：缓存文件/取消缓存文件（git add）
+    - a：缓存所有文件/取消缓存所文件（git add）
+    - 回车：查看缓存文件
+    - c：提交（git commit）
+3. Branches面板
+    - 空格：切换到选择的branch
+    - n：新建branch
+
 ## 启动Vim/NeoVim的脚本
 笔者的 ``vimrc`` 有2个重要的全局变量
 - g:g_use_lsp ： 控制是否启用lsp的设定

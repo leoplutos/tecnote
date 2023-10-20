@@ -63,5 +63,9 @@ https://regexr.com/
 \(.*
 ```
 
+## 特殊符号
+一个查看特殊符号的网站  
+https://cn.piliapp.com/symbol/
+
 ## 其他软件
 * [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌

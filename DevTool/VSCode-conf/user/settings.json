@@ -712,10 +712,10 @@
 	//亮色系颜色C0C0C0
 	//"visibleWhitespace.overlayColor": "#C0C0C0", //指定文本的颜色
 	//暗色系颜色505050
-	"visibleWhitespace.overlayColor": "#505050", //指定文本的颜色
+	"visibleWhitespace.overlayColor": "#434853", //指定文本的颜色
 	"visibleWhitespace.newLine.color": "#8080af", //换行符颜色
 	"visibleWhitespace.htab.enable": true, //TAB符号
-	"visibleWhitespace.htab.text": "┆", //TAB符号内容 默认为：→（备用：^）
+	"visibleWhitespace.htab.text": "▏", //TAB符号内容 默认为：→（备用：^ ┆）
 	"visibleWhitespace.newLine.enable": false, //换行符
 	"visibleWhitespace.newLine.lf": "⇣", //Linux换行符 默认：↓
 	"visibleWhitespace.newLine.crLf": "↵", //Windows换行符 默认：↲

@@ -56,6 +56,7 @@ end
 -- 加载nvim-tree参数
 require('nvim-tree').setup({
   --reload_on_bufenter = true,
+  respect_buf_cwd = true,
   sort = {
     sorter = "case_sensitive",
   },

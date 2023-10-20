@@ -401,7 +401,7 @@ local lch_bufferline_highlights = {
 --启动bufferline
 local bufferline = require('bufferline')
 bufferline.setup{
-  --highlights = lch_bufferline_highlights,
+  highlights = lch_bufferline_highlights,
   options = {
     mode = "buffers",
     style_preset = bufferline.style_preset.no_italic,
@@ -444,7 +444,8 @@ endfunction
 ]])
 vim.keymap.set('n', '<S-Space><C-w>', ':BufferLineCloseOthers<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>tn',     ':enew<CR>',                  { noremap = true })
-vim.keymap.set('n', '<Leader>bd',     ':bd<CR>',                    { noremap = true })
+vim.keymap.set('n', '<Leader>bd',     ':BufferLinePickClose<CR>',   { noremap = true })
+vim.keymap.set('n', '<Leader>bo',     ':BufferLineCloseOthers<CR>', { noremap = true })
 vim.keymap.set('n', '<TAB>1',         ':BufferLineGoToBuffer 1<CR>',{ noremap = true })
 vim.keymap.set('n', '<TAB>2',         ':BufferLineGoToBuffer 2<CR>',{ noremap = true })
 vim.keymap.set('n', '<TAB>3',         ':BufferLineGoToBuffer 3<CR>',{ noremap = true })

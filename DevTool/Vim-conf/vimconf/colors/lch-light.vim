@@ -209,9 +209,21 @@ hi LspHintVirtualText term=reverse ctermfg=29 ctermbg=224 guifg=#118c74 guibg=#f
 hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=217 guifg=#c0c0c0 guibg=#fbaeae
 augroup lchSyntaxGroup
   autocmd!
-  autocmd Syntax * match ExtraWhitespace /\s\+$/
-  "autocmd BufWinEnter * if &buftype !='terminal' | match ExtraWhitespace /\s\+$/ | endif
+  autocmd Syntax * call MatchExtraWhitespace()
 augroup END
+function! MatchExtraWhitespace()
+  "各种插件的buffer列表(TelescopeResults未加入)
+  let l:plugin_buffer_list = [
+  \  'startify', 'netrw', 'ctrlp', 'nerdtree', 'VimspectorPrompt', 'NvimTree', 'TelescopePrompt',
+  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt',
+  \]
+  "各种插件的buffer不高亮行尾空格
+  if index(l:plugin_buffer_list, &filetype) >= 0
+    "echom '['. &filetype . '] do not match ExtraWhitespace'
+  else
+    match ExtraWhitespace /\s\+$/
+  endif
+endfunction
 
 "tagbar插件高亮
 hi link TagbarKind ThinTitle

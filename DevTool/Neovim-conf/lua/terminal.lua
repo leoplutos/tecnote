@@ -38,8 +38,25 @@ require('toggleterm').setup{
 }
 
 --制作TerminalSend()函数，将参数传递给终端
+--local enter = vim.api.nvim_replace_termcodes("<CR>", true, true, true)
 vim.cmd([[
 function! TerminalSend(text)
-  exec 'TermExec cmd="' . a:text. '"'
+  exec "TermExec cmd='" . a:text. "'"
 endfunction
 ]])
+
+--toggleterm.nvim插件的快捷键绑定
+--vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {noremap = true, silent = true}) 
+--vim.api.nvim_set_keymap("t", "<leader>l", "<Cmd> wincmd l<CR>", {noremap = true, silent = true}) 
+--vim.api.nvim_set_keymap("t", "<leader>h", "<Cmd> wincmd h<CR>", {noremap = true, silent = true}) 
+--vim.api.nvim_set_keymap("t", "<leader>j", "<Cmd> wincmd j<CR>", {noremap = true, silent = true}) 
+--vim.api.nvim_set_keymap("t", "<leader>k", "<Cmd> wincmd k<CR>", {noremap = true, silent = true})
+
+--在toggleterm.nvim中集成lazygit
+--https://github.com/jesseduffield/lazygit
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, dir = vim.g.g_s_projectrootpath })
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})

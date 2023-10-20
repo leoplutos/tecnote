@@ -1,0 +1,21 @@
+目录结构
+
+JavaMavenBatProject
+└─src
+    ├─main
+       ├─java
+          ├─my
+             ├─mavenbatsample
+                    App.java
+       ├─resources
+               log4j.xml
+    ├─test
+       ├─java
+          ├─my
+             ├─mavenbatsample
+                    AppTest.java
+       ├─resources
+               log4j.xml
+│  .root
+│  pom.xml
+│  tree.txt
