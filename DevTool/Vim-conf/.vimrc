@@ -87,8 +87,11 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\DotNet\omnisharp-win-x64'
   let $PATH .= ';D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10\bin'
   let $PATH .= ';D:\Tools\WorkTool\Kotlin\lsp\server\bin'
+  let $PATH .= ';D:\Tools\WorkTool\Lua\lsp\lua-language-server-3.7.0-win32-x64\bin'
   let $PATH .= ';D:\Tools\WorkTool\Team\Git\cmd'
+  let $PATH .= ';D:\Tools\WorkTool\Team\gitui-win'
   let $PATH .= ';D:\Tools\WorkTool\Team\Lazygit'
+  let $PATH .= ';D:\Tools\WorkTool\Java\apache-maven-3.9.4\bin'
   if (g:g_nvim_flg == 0)
     let &pythonthreehome = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32'
     let &pythonthreedll = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32\python38.dll'

@@ -7,6 +7,8 @@ nnoremap <Leader>< :30winc > <CR>|    " [普通模式]\<：屏幕分割线左移
 nnoremap <Leader>> :30winc < <CR>|    " [普通模式]\>：屏幕分割线左移30
 " [普通模式]\rl：重新载入.vimrc
 nnoremap <Leader>rl :source $MYVIMRC<cr>
+" [普通模式]\rc：编辑.vimrc
+nnoremap <Leader>rc :e $MYVIMRC<cr>
 noremap J 10j|                        " [普通模式/选择模式]大写J，向下10行
 noremap K 10k|                        " [普通模式/选择模式]大写K，向上10行
 " 插入模式下的光标移动
@@ -59,12 +61,11 @@ noremap  <F4> <C-w><C-w><C-y><C-w><C-w>
 " [普通模式]\=：格式化缩进
 noremap  <Leader>= gg=G
 " [普通模式]\f：模糊查找（在新tab打开find结果）
-nnoremap <Leader>f :tabfind *
+nnoremap <Leader>ff :tabfind *
 " [普通模式]\f：模糊查找（在当前tab打开find结果）
-nnoremap <Leader>F :find *
+nnoremap <Leader>FF :find *
 " [普通模式]\g：grep查找（在新tab打开find结果）
-"nnoremap <Leader>g 1gt:tabnew<CR>:vim //j **/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-nnoremap <Leader>g 1gt:tabnew<CR>:vim // **/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+nnoremap <Leader>fg 1gt:tabnew<CR>:vim // **/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 " [普通模式]\cq：清空QuickFix内容
 nmap <leader>cq :call setqflist([])<CR>
 " 使用方向键切换buffer

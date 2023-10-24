@@ -1,0 +1,228 @@
+platform_plugin: auto
+
+renderer:
+    backend: OpenGL
+    tile_hashtable_slots: 4096
+    tile_cache_count: 4000
+    tile_direct_mapping: true
+word_delimiters: " /\\()\"'-.,:;<>~!@#$%^&*+=[]{}~?|│"
+read_buffer_size: 16384
+pty_buffer_size: 1048576
+default_profile: main
+spawn_new_process: false
+reflow_on_resize: true
+bypass_mouse_protocol_modifier: Shift
+mouse_block_selection_modifier: Control
+on_mouse_select: CopyToSelectionClipboard
+live_config: false
+
+images:
+    sixel_scrolling: true
+    sixel_register_count: 4096
+    max_width: 0
+    max_height: 0
+
+profiles:
+    main:
+        shell: "cmd.exe"
+        arguments: ["/k", "D:/Tools/WorkTool/Cmd/cmdautorun.cmd"]
+        escape_sandbox: true
+        copy_last_mark_range_offset: 0
+        initial_working_directory: "~"
+        show_title_bar: true
+        fullscreen: false
+        maximized: false
+        wm_class: "contour"
+        environment:
+             TERM: contour
+             COLORTERM: truecolor
+        terminal_id: VT525
+        terminal_size:
+            columns: 145
+            lines: 40
+        history:
+            limit: 1000
+            auto_scroll_on_update: true
+            scroll_multiplier: 3
+        scrollbar:
+            position: Right
+            hide_in_alt_screen: true
+        mouse:
+            hide_while_typing: true
+        permissions:
+            change_font: ask
+            capture_buffer: ask
+            display_host_writable_statusline: ask
+
+        highlight_word_and_matches_on_double_click: true
+        font:
+            size: 12
+            dpi_scale: 1.0
+            #locator: native
+            locator: DirectWrite
+            text_shaping:
+                #engine: native
+                engine: DirectWrite
+            builtin_box_drawing: true
+            render_mode: gray
+            strict_spacing: true
+            regular:
+                family: "等距更纱黑体 SC Nerd Font"
+                #weight: regular
+                weight: regular
+                slant: normal
+                features: []
+            emoji: "emoji"
+        draw_bold_text_with_bright_colors: false
+        cursor:
+            shape: "block"
+            blinking: true
+            blinking_interval: 500
+        normal_mode:
+            cursor:
+                shape: block
+                blinking: true
+                blinking_interval: 500
+        visual_mode:
+            cursor:
+                shape: block
+                blinking: true
+                blinking_interval: 500
+        vi_mode_highlight_timeout: 300
+        vi_mode_scrolloff: 8
+        status_line:
+            display: none
+            position: bottom
+            sync_to_window_title: true
+        background:
+            opacity: 1.0
+            blur: false
+        colors: "default"
+        hyperlink_decoration:
+            normal: dotted
+            hover: underline
+color_schemes:
+    default:
+        default:
+            background: '#1D1F21'
+            foreground: '#DADADA'
+        background_image:
+            # path: '/Users/trapni/Pictures/bg.png'
+            opacity: 0.5
+            blur: false
+        cursor:
+            default: '#afffff'
+            text: CellBackground
+        hyperlink_decoration:
+            normal: '#f0f000'
+            hover: '#ff0000'
+        vi_mode_highlight:
+            foreground: CellForeground
+            foreground_alpha: 1.0
+            background: '#ffa500'
+            background_alpha: 0.5
+        vi_mode_cursorline:
+            foreground: '#ffffff'
+            foreground_alpha: 0.2
+            background: '#808080'
+            background_alpha: 0.4
+        selection:
+            foreground: CellForeground
+            foreground_alpha: 1.0
+            background: '#2e3c64'
+            background_alpha: 0.5
+        search_highlight:
+            foreground: '#00005f'
+            background: '#ffff00'
+            foreground_alpha: 1.0
+            background_alpha: 1.0
+        search_highlight_focused:
+            foreground: '#00005f'
+            background: '#00d700'
+            foreground_alpha: 1.0
+            background_alpha: 1.0
+        word_highlight_current:
+            foreground: CellForeground
+            background: '#909090'
+            foreground_alpha: 1.0
+            background_alpha: 0.5
+        word_highlight_other:
+            foreground: CellForeground
+            background: '#909090'
+            foreground_alpha: 1.0
+            background_alpha: 0.5
+        indicator_statusline:
+            # Default: default background
+            foreground: '#808080'
+            # Default: default foreground
+            background: '#000000'
+        indicator_statusline_inactive:
+            # Default: default background
+            foreground: '#808080'
+            # Default: default foreground
+            background: '#000000'
+        input_method_editor:
+            foreground: '#1e1e1e'
+            background: '#ffa500'
+        normal:
+            black:   '#000000'
+            red:     '#CD3131'
+            green:   '#0DBC79'
+            yellow:  '#E5E510'
+            blue:    '#2472C8'
+            magenta: '#BC3FBC'
+            cyan:    '#11A8CD'
+            white:   '#E5E5E5'
+        bright:
+            black:   '#666666'
+            red:     '#F14C4C'
+            green:   '#23D18B'
+            yellow:  '#F5F543'
+            blue:    '#3B8EEA'
+            magenta: '#D670D6'
+            cyan:    '#29B8DB'
+            white:   '#E5E5E5'
+
+# Key Bindings
+input_mapping:
+    - { mods: [Control],        mouse: Left,        action: FollowHyperlink }
+    - { mods: [],               mouse: Middle,      action: PasteSelection }
+    - { mods: [],               mouse: WheelDown,   action: ScrollDown }
+    - { mods: [],               mouse: WheelUp,     action: ScrollUp }
+    - { mods: [Alt],            key: Enter,         action: ToggleFullscreen }
+    - { mods: [Alt],            mouse: WheelDown,   action: DecreaseOpacity }
+    - { mods: [Alt],            mouse: WheelUp,     action: IncreaseOpacity }
+    - { mods: [Control, Alt],   key: S,             action: ScreenshotVT }
+    - { mods: [Control, Shift], key: Plus,          action: IncreaseFontSize }
+    - { mods: [Control],        key: '0',           action: ResetFontSize }
+    - { mods: [Control, Shift], key: Minus,         action: DecreaseFontSize }
+    - { mods: [Control, Shift], key: '_',           action: DecreaseFontSize }
+    - { mods: [Control, Shift], key: N,             action: NewTerminal }
+    - { mods: [Control, Shift], key: V,             action: PasteClipboard, strip: false }
+    - { mods: [Control, Alt],   key: V,             action: PasteClipboard, strip: true }
+    - { mods: [Control],        key: C,             action: CopySelection, mode: 'Select|Insert' }
+    - { mods: [Control],        key: C,             action: CancelSelection, mode: 'Select|Insert' }
+    - { mods: [Control],        key: V,             action: PasteClipboard, strip: false, mode: 'Select|Insert' }
+    - { mods: [Control],        key: V,             action: CancelSelection, mode: 'Select|Insert' }
+    - { mods: [],               key: Escape,        action: CancelSelection, mode: 'Select|Insert' }
+    - { mods: [Control, Shift], key: Space,         action: ViNormalMode, mode: 'Insert' }
+    - { mods: [Control, Shift], key: Comma,         action: OpenConfiguration }
+    - { mods: [Control, Shift], key: Q,             action: Quit }
+    - { mods: [Control],        mouse: WheelDown,   action: DecreaseFontSize }
+    - { mods: [Control],        mouse: WheelUp,     action: IncreaseFontSize }
+    - { mods: [Shift],          key: DownArrow,     action: ScrollOneDown }
+    - { mods: [Shift],          key: End,           action: ScrollToBottom }
+    - { mods: [Shift],          key: Home,          action: ScrollToTop }
+    - { mods: [Shift],          key: PageDown,      action: ScrollPageDown }
+    - { mods: [Shift],          key: PageUp,        action: ScrollPageUp }
+    - { mods: [Shift],          key: UpArrow,       action: ScrollOneUp }
+    - { mods: [Control, Alt],   key: K,             action: ScrollMarkUp,   mode: "~Alt"}
+    - { mods: [Control, Alt],   key: J,             action: ScrollMarkDown, mode: "~Alt"}
+    - { mods: [Shift],          mouse: WheelDown,   action: ScrollPageDown }
+    - { mods: [Shift],          mouse: WheelUp,     action: ScrollPageUp }
+    - { mods: [Control, Alt],   key: O,             action: OpenFileManager }
+    - { mods: [Control, Alt],   key: '.',           action: ToggleStatusLine }
+    - { mods: [Control, Shift], key: 'F',           action: SearchReverse }
+    - { mods: [Control, Shift], key: 'H',           action: NoSearchHighlight }
+    - { mods: [],               key: 'F3',          action: FocusNextSearchMatch }
+    - { mods: [Shift],          key: 'F3',          action: FocusPreviousSearchMatch }

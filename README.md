@@ -3,6 +3,7 @@
 
 ## Linux命令
 * [Linux命令](Linux/Linux_zh_CN.md)
+* [Linux环境设置总结](Linux/Linux-env_zh_CN.md)
 * [Linux用户做成](Linux/Linux-adduser_zh_CN.md)
 * [Linux自定义相关](Linux/Linux-customize_zh_CN.md)
 * [SSH Config](Linux/Ssh-config_zh_CN.md)
@@ -10,6 +11,7 @@
 
 ## Windows命令
 * [Windows](Windows/Windows_zh_CN.md)
+* [WSL](Windows/WSL_zh_CN.md)
 * [Cmd](Windows/Cmd_zh_CN.md)
 * [Powershell](Windows/Powershell_zh_CN.md)
 * [VBScript](Windows/VBScript_zh_CN.md)
@@ -60,6 +62,7 @@
 
 ## 开发工具相关
 * [VS Code](DevTool/VSCode_zh_CN.md)
+* [终端横评](DevTool/Terminal_Compare_zh_CN.md)
 * [Windows Terminal](DevTool/Windows-Terminal_zh_CN.md)
 * [Neo-Vim](DevTool/NeoVim_zh_CN.md)
 * [Vim](DevTool/Vim_zh_CN.md)

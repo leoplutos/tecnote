@@ -61,7 +61,11 @@ function! Statusline()
   else
     let l:showMode .= 'NORMAL'
   endif
-  let l:lspMsgLable = 'LSP :'
+  if (g:g_use_nerdfont == 0)
+    let l:lspMsgLable = 'LSP :'
+  else
+    let l:lspMsgLable = ' ' . g:lspTitleIcon . ' LSP : '
+  endif
   let l:lspMsgContent = ''
   if exists('*GetLspStatus')
     let l:lspMsgContent = GetLspStatus()

@@ -119,7 +119,7 @@ https://github.com/cyrus-and/gdb-dashboard
 wget -P ~ https://git.io/.gdbinit
 ```
 在此md同路径也有，哪里下载都可以
-* [.gdbinit](.gdbinit)
+* [.gdbinit](../Linux/linux_rc/gdbrc/.gdbinit)
 
 #### 2.配置到终端上运行
 因为放到\~/.gdbinit会影响到使用终端的所有人，为了不污染服务器，笔者习惯放到自己的路径下用参数运行。  
@@ -243,7 +243,7 @@ $if gdb
 $endif
 ```
 笔者的inputrc
-* [inputrc](inputrc)
+* [inputrc](../Linux/linux_rc/inputrc/inputrc)
 
 然后在自定义 ``bashrc`` 中加入如下内容
 ```

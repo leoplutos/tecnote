@@ -1,0 +1,105 @@
+# 自动刷新
+live_config_reload: true
+# Tab 缩进
+tabspaces: 4
+
+env:
+  TERM: xterm-256color
+
+shell:
+  program: cmd.exe
+  args:
+    - /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd
+working_directory: ~
+
+window:
+  startup_mode: Windowed
+  title: Alacritty
+  dimensions:
+    columns: 145
+    lines: 40
+  position:
+    x: 100
+    y: 40
+  # 边缘空白
+  padding:
+    x: 10
+    y: 15
+  dynamic_padding: false
+
+font:
+  normal:
+    family: "等距更纱黑体 SC Nerd Font"
+    style: Regular
+  size: 12.0
+
+colors:
+  primary:
+    background: '#1d1f21'
+    foreground: '#DADADA'
+  cursor:
+    text: CellBackground
+    cursor: '#afffff'
+  search:
+    matches:
+      foreground: '#00005f'
+      background: '#ffff00'
+    focused_match:
+      foreground: '#00005f'
+      background: '#00d700'
+  hints:
+    start:
+      foreground: '#1d1f21'
+      background: '#e9ff5e'
+    end:
+      foreground: '#e9ff5e'
+  line_indicator:
+    foreground: None
+    background: None
+  footer_bar:
+    background: '#c5c8c6'
+    foreground: '#1d1f21'
+  selection:
+    text: CellForeground
+    background: '#2e3c64'
+  normal:
+    black:   '#000000'
+    red:     '#CD3131'
+    green:   '#0DBC79'
+    yellow:  '#E5E510'
+    blue:    '#2472C8'
+    magenta: '#BC3FBC'
+    cyan:    '#11A8CD'
+    white:   '#E5E5E5'
+  bright:
+    black:   '#666666'
+    red:     '#F14C4C'
+    green:   '#23D18B'
+    yellow:  '#F5F543'
+    blue:    '#3B8EEA'
+    magenta: '#D670D6'
+    cyan:    '#29B8DB'
+    white:   '#E5E5E5'
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+cursor:
+  style:
+    shape: Block
+    blinking: On
+  vi_mode_style: Beam
+  blink_interval: 750
+  blink_timeout: 5
+  unfocused_hollow: true
+  thickness: 0.15
+
+scrolling:
+  history: 2000
+  multiplier: 20
+  faux_multiplier: 100
+  auto_scroll: true
+
+mouse_bindings:
+  - { mouse: Right, action: Paste }

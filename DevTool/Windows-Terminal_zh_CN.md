@@ -86,6 +86,16 @@ https://github.com/microsoft/terminal/releases
           "command": "toggleFocusMode",
           "icon": "💡",
           "keys": "alt+z"
+        },
+        {
+            "name": "Source personal bashrc",
+            "command": 
+            {
+                "action": "sendInput",
+                "input": "source ~/work/lch/rc/bashrc/.bashrc-personal\r"
+            },
+            "icon": "⛓",
+            "keys": "alt+s"
         }
     ],
 ```

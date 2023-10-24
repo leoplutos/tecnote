@@ -93,8 +93,8 @@ tmux list-key　　列出所有绑定的键，等同于prefix ?
 tmux list-command　　列出所有命令  
 
 ## 设定文件例子
-* [tmux2.7.conf](tmux2.7.conf)
-* [tmux3.2.conf](tmux3.2.conf)
+* [tmux2.7.conf](../Linux/linux_rc/tmuxrc/tmux2.7.conf)
+* [tmux3.2.conf](../Linux/linux_rc/tmuxrc/tmux3.2.conf)
 
 # 更多
 * [TMUX CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/tmux.txt)

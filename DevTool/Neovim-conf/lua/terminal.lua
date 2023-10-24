@@ -52,9 +52,16 @@ endfunction
 --vim.api.nvim_set_keymap("t", "<leader>j", "<Cmd> wincmd j<CR>", {noremap = true, silent = true}) 
 --vim.api.nvim_set_keymap("t", "<leader>k", "<Cmd> wincmd k<CR>", {noremap = true, silent = true})
 
---在toggleterm.nvim中集成lazygit
+--在toggleterm.nvim中集成gitui和lazygit
 --https://github.com/jesseduffield/lazygit
 local Terminal  = require('toggleterm.terminal').Terminal
+--集成gitui
+local gitui = Terminal:new({ cmd = "gitui", hidden = true, dir = vim.g.g_s_projectrootpath })
+function _gitui_toggle()
+  gitui:toggle()
+end
+vim.api.nvim_set_keymap("n", "<leader>gu", "<cmd>lua _gitui_toggle()<CR>", {noremap = true, silent = true})
+--集成lazygit
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, dir = vim.g.g_s_projectrootpath })
 function _lazygit_toggle()
   lazygit:toggle()

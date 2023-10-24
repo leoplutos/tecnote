@@ -43,7 +43,99 @@
   lewis6991/gitsigns.nvim ：git支持  
   sindrets/diffview.nvim ：差分git的历史版本  
 
-## Lazygit
+## Gitui
+Gitui 是一个速度很快的 Git 终端界面，使用 Rust 编写而成
+
+#### 下载安装
+* [Github地址](https://github.com/extrawurst/gitui)
+* [Windows平台v0.24.3稳定免安装版](https://github.com/extrawurst/gitui/releases/download/v0.24.3/gitui-win.tar.gz)
+
+#### 安装后确认命令
+```
+gitui --version
+```
+#### 配置文件的默认路径
+- Linux:
+```
+$HOME/.config/gitui
+```
+- MacOS:
+```
+$HOME/.config/gitui
+```
+- Windows：
+```
+%APPDATA%/gitui
+```
+
+#### 笔者的配置文件
+theme.ron
+```
+(
+    //selected_tab: Some(Rgb(243, 156, 18)),
+    selected_tab: Some(Rgb(255, 255, 0)),
+    command_fg: Some(Rgb(205, 205, 255)),
+    selection_bg: Some(Rgb(41, 46, 66)),
+    selection_fg: Some(Rgb(255, 255, 255)),
+    cmdbar_bg:  Some(Rgb(62, 62, 62)),
+    cmdbar_extra_lines_bg: Some(Rgb(68, 68, 68)),
+    disabled_fg: Some(Rgb(111, 111, 111)),
+    diff_line_add: Some(Rgb(13, 188, 121)),
+    diff_line_delete: Some(Rgb(205, 49, 49)),
+    diff_file_added: Some(Rgb(35, 209, 139)),
+    diff_file_removed: Some(Rgb(241, 76, 76)),
+    diff_file_moved: Some(LightMagenta),
+    diff_file_modified: Some(Rgb(229, 229, 16)),
+    commit_hash: Some(Rgb(188, 63, 188)),
+    commit_time: Some(Rgb(41, 184, 219)),
+    commit_author: Some(Rgb(128, 153, 128)),
+    danger_fg: Some(Rgb(205, 49, 49)),
+    push_gauge_bg: Some(Blue),
+    push_gauge_fg: Some(Reset),
+    tag_fg: Some(LightMagenta),
+    branch_fg: Some(Rgb(245, 245, 67)),
+    line_break: Some("¶"),
+)
+```
+
+key_bindings.ron
+```
+// bit for modifiers
+// bits: 0  None
+// bits: 1  SHIFT
+// bits: 2  CONTROL
+(
+    open_help: Some(( code: Char('?'), modifiers: ( bits: 1,),)),
+    move_left: Some(( code: Char('h'), modifiers: ( bits: 0,),)),
+    move_right: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
+    move_up: Some(( code: Char('k'), modifiers: ( bits: 0,),)),
+    move_down: Some(( code: Char('j'), modifiers: ( bits: 0,),)),
+    //stash_open: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
+    popup_up: Some(( code: Char('p'), modifiers: ( bits: 2,),)),
+    popup_down: Some(( code: Char('n'), modifiers: ( bits: 2,),)),
+    page_up: Some(( code: Char('b'), modifiers: ( bits: 2,),)),
+    page_down: Some(( code: Char('f'), modifiers: ( bits: 2,),)),
+    home: Some(( code: Char('g'), modifiers: ( bits: 0,),)),
+    end: Some(( code: Char('G'), modifiers: ( bits: 1,),)),
+    shift_up: Some(( code: Char('K'), modifiers: ( bits: 1,),)),
+    shift_down: Some(( code: Char('J'), modifiers: ( bits: 1,),)),
+    status_reset_item: Some(( code: Char('U'), modifiers: ( bits: 1,),)),
+    diff_reset_lines: Some(( code: Char('u'), modifiers: ( bits: 0,),)),
+    diff_stage_lines: Some(( code: Char('s'), modifiers: ( bits: 0,),)),
+    //stashing_save: Some(( code: Char('w'), modifiers: ( bits: 0,),)),
+    //stashing_toggle_index: Some(( code: Char('m'), modifiers: ( bits: 0,),)),
+    //stash_open: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
+    //abort_merge: Some(( code: Char('M'), modifiers: ( bits: 1,),)),
+)
+```
+
+#### 一些常用的快捷键
+  - 数字1-5 ：在区块间切换
+  - tab：区块切换
+  - ?：打开帮助菜
+  - q：退出
+
+## Lazygit（和 Gitui 二选一即可）
 Lazygit 并不是一个 Vim/NeoVim 插件，而是一个用于 Git 命令行的简单 ``终端UI``，使用 Go 语言编写，用到了 gocui 库，目的是在命令行提供 Git 的图形界面  
 和 Vim/NeoVim 一样，都是 ``TUI``，那么他们搭配在一起使用，也理所当然了。
 

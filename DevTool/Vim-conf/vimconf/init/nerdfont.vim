@@ -3,6 +3,8 @@ scriptencoding utf-8
 "定义NerdFonts图标
 
 "LSP状态栏图标
+"Title - \uf085
+let g:lspTitleIcon = ""
 "\uf287
 "let g:lspStatusOk = ""
 let g:lspStatusOk = "󱄙"

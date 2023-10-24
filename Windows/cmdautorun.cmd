@@ -37,6 +37,8 @@ set GO111MODULE=on
 set PATH=%PATH%;%CARGO_HOME%\bin
 set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
 set PATH=%PATH%;%GIT_HOME%
+set GITUI_HOME=D:\Tools\WorkTool\Team\gitui-win
+set PATH=%PATH%;%GITUI_HOME%
 set LAZYGIT_HOME=D:\Tools\WorkTool\Team\Lazygit
 set PATH=%PATH%;%LAZYGIT_HOME%
 set JAVA_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
@@ -51,8 +53,8 @@ set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep
 set PATH=%PATH%;%RIPGREP_HOME%\bin
 set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
 set PATH=%PATH%;%NINJA_HOME%
-set VIM_HOME=D:\Tools\WorkTool\Team\Git\usr\bin
-set PATH=%PATH%;%VIM_HOME%
+::set VIM_HOME=D:\Tools\WorkTool\Team\Git\usr\bin
+::set PATH=%PATH%;%VIM_HOME%
 set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
 set PATH=%PATH%;%GVIM_HOME%
 set NVIM_HOME=D:\Tools\WorkTool\Text\nvim-win64\bin
@@ -75,9 +77,8 @@ echo Environment Variable Setting Complited
 cd /d %USERPROFILE%
 
 ::设置常用路径
-set app=D:\WorkSpace\Rust\minigrep
-set bin=D:\WorkSpace\Rust\minigrep\target\debug
-set log=D:\WorkSpace\Rust\minigrep\testdir
+set personal_workspace=D:\WorkSpace
+set personal_log=D:\WorkSpace\log
 
 ::设置别名
 doskey ls=dir /b $*
@@ -103,10 +104,16 @@ doskey clearb=cls
 doskey shell=PowerShell $*
 doskey history=doskey /history
 doskey alias=doskey /macros
-doskey cda=cd /d %app%
-doskey cdb=cd /d %bin%
-doskey cdl=cd /d %log%
+doskey cdw=cd /d %personal_workspace%
+doskey cdl=cd /d %personal_log%
 doskey lg=lazygit $*
+doskey gu=gitui $*
+doskey viml=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
+doskey vimd=gvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
+doskey vimf=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
+doskey nviml=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
+doskey nvimd=nvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
+doskey nvimf=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 ::echo 别名载入完成，键入alias查看
 echo Alias Setting Complited
 

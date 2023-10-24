@@ -11,7 +11,12 @@ vim.cmd('packadd bufferline.nvim')
 
 --自定义Lsp状态显示
 local function LuaLineLspStatus()
-  local lspMsgLable = ' LSP : '
+  local lspMsgLable = ''
+  if vim.g.g_use_nerdfont == 0 then
+    lspMsgLable = '  LSP : '
+  else
+    lspMsgLable = ' ' .. vim.g.lspTitleIcon .. '  LSP : '
+  end
   local lspMsgContent = ''
   if vim.fn.exists('*GetLspStatus') == 1 then
     lspMsgContent = vim.fn.GetLspStatus()

@@ -16,7 +16,7 @@ https://osdn.net/projects/ttssh2/downloads/74780/teraterm-4.106.zip
   自动登录后发行命令设定的脚本
 * [user@192.168.0.3-8122-bashrc.ttl](user@192.168.0.3-8122-bashrc.ttl)  
   自动登录后source自定义bashrc的脚本
-* [.bashrc-personal](../Git/.bashrc-personal)  
+* [.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
   自定义bashrc
 * [TERATERM.INI](TERATERM.INI)  
   teraterm设定文件

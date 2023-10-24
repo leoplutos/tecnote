@@ -128,7 +128,7 @@ export PS1="${PS_GREEN}[D1][${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${
 ```
 * **非全局设置**  
 为了不污染服务器，笔者习惯加到自己的 ``.bashrc-personal`` 中，然后在 ``ttl`` 中 ``source`` 一下  
-[.bashrc-personal](../Git/.bashrc-personal)  
+[.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
 [user@192.168.0.3-8122-bashrc.ttl](../DevTool/user%40192.168.0.3-8122-bashrc.ttl)  
 
 

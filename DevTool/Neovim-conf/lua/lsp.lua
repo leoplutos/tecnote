@@ -74,6 +74,8 @@ function! GetLspStatus() abort
     let lspServerName = 'volar'
   elseif (&ft=='kotlin')
     let lspServerName = 'kotlin_language_server'
+  elseif (&ft=='lua')
+    let lspServerName = 'lua_ls'
   endif
   let lspStatus = ''
   if (has_key(g:nvim_lsp_runflg, lspServerName))
@@ -371,7 +373,18 @@ lspconfig.cobol_ls.setup {
 lspconfig.kotlin_language_server.setup {
   root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', '.git');
 }
-
+-- Lua（lua-language-server）设置
+-- 在这里下载 https://github.com/LuaLS/lua-language-server/releases/tag/3.7.0
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" }
+      }
+    }
+  },
+  root_dir = lspconfig.util.root_pattern('.root', '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git');
+}
 -- 快捷键绑定
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<Space>q', vim.diagnostic.setloclist)

@@ -81,7 +81,11 @@ function! LightlineCustfileStatus()
 endfunction
 "定制LSP标签
 function! LightlineLspLable()
-  let l:lspMsgLable = ' LSP : '
+  if (g:g_use_nerdfont == 0)
+    let l:lspMsgLable = ' LSP : '
+  else
+    let l:lspMsgLable = ' ' . g:lspTitleIcon . ' LSP : '
+  endif
   return l:lspMsgLable
 endfunction
 "定制LSP内容

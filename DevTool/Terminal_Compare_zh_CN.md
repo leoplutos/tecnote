@@ -1,0 +1,77 @@
+## 终端模拟器
+
+编辑器和终端模拟器号称程序员的两个大玩具。现有终端模拟器种类繁多，笔者对终端模拟器的选择主要考虑一下几个方面。  
+ 1. 性能高效。所以开发语言只选择C/C++/Rust开发的，Electron开发的不考虑。
+ 2. Vim/NeoVim支持良好
+ 3. 支持GPU加速
+ 4. 支持连字
+ 5. 支持多TAB，支持分屏
+ 6. 支持自定义脚本
+
+基于上面的考虑，选择了一些终端模拟器做一下横向对比，列表如下  
+
+|            | WezTerm | WindowsTerminal | ConTour | Alacritty | Kitty    | Warp   | WindTerm |
+|------------|---------|-----------------|---------|-----------|----------|--------|----------|
+| Windows    | 支持    | 支持            | 支持    | 支持      | 不支持   | 不支持 | 支持     |
+| MacOS      | 支持    | 不支持          | 支持    | 支持      | 支持     | 支持   | 支持     |
+| Linux      | 支持    | 不支持          | 支持    | 支持      | 支持     | 不支持 | 支持     |
+| 开发语言   | Rust    | C++             | C++     | Rust      | C/Python | Rust   | C        |
+| 配置文件   | lua     | json            | yml     | yml       | conf     | -      | config   |
+| 多TAB      | 支持    | 支持            | 不支持  | 不支持    | 支持     | 支持   | 支持     |
+| 分割窗口   | 支持    | 支持            | 不支持  | 不支持    | 支持     | 支持   | 支持     |
+| GPU加速    | 支持    | 支持            | 支持    | 支持      | 支持     | 不支持 | 不支持   |
+| 连字       | 支持    | 支持            | 支持    | 不支持    | 支持     | 不支持 | 不支持   |
+| 自定义脚本 | 支持    | 支持            | 不支持  | 不支持    | 支持     | 不支持 | 支持     |
+
+#### 总结
+- Windows平台：不喜欢折腾选 ``Windows Terminal``，喜欢折腾选 ``WezTerm``  
+- Linux平台：``WezTerm``  
+- MacOS平台：``WezTerm``  
+WindTerm虽然支持的功能很多，但是如果使用Vim等TUI程序的话显示出现很大问题。只适合运维使用，不适合开发人员。
+
+## WezTerm
+* [官网](https://wezfurlong.org/wezterm/index.html)
+* [Github](https://github.com/wez/wezterm)
+
+#### 配置文件地址
+```
+$HOME/.wezterm.lua
+```
+注：Windows平台下，和``wezterm.exe``同路径下建立配置文件``wezterm.lua``也可以，这种情况文件名没有点
+
+#### 配置文件例子
+[wezterm.lua](./WezTerm_conf/wezterm.lua)
+
+#### 默认快捷键
+- Ctrl + Shift + t : 新建TAB
+- Ctrl + Shift + Alt + % : 垂直分割窗口
+- Ctrl + Shift + Alt + " : 水平分割窗口
+- Ctrl + Shift + 方向键 : 切换窗口焦点
+
+## Windows Terminal
+见 [这里](./Windows-Terminal_zh_CN.md)
+
+## ConTour
+* [官网](http://contour-terminal.org/)
+* [Github](https://github.com/contour-terminal/contour/)
+
+#### 配置文件地址
+```
+%LocalAppData%\contour\contour.yml
+```
+
+#### 配置文件例子
+[contour.yml](./contour_conf/contour.yml)
+
+## Alacritty
+* [官网](https://alacritty.org/)
+* [Github](https://github.com/alacritty/alacritty)  
+速度很快，但是不支持连字
+
+#### 配置文件地址
+```
+%APPDATA%\alacritty\alacritty.yml
+```
+
+#### 配置文件例子
+[alacritty.yml](./alacritty_conf/alacritty.yml)
