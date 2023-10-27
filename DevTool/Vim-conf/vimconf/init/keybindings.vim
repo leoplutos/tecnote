@@ -60,11 +60,11 @@ noremap  <F3> <C-w><C-w><C-e><C-w><C-w>
 noremap  <F4> <C-w><C-w><C-y><C-w><C-w>
 " [普通模式]\=：格式化缩进
 noremap  <Leader>= gg=G
-" [普通模式]\f：模糊查找（在新tab打开find结果）
+" [普通模式]\ff：模糊查找（在新tab打开find结果）
 nnoremap <Leader>ff :tabfind *
-" [普通模式]\f：模糊查找（在当前tab打开find结果）
+" [普通模式]\FF：模糊查找（在当前tab打开find结果）
 nnoremap <Leader>FF :find *
-" [普通模式]\g：grep查找（在新tab打开find结果）
+" [普通模式]\fg：grep查找（在新tab打开find结果）
 nnoremap <Leader>fg 1gt:tabnew<CR>:vim // **/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 " [普通模式]\cq：清空QuickFix内容
 nmap <leader>cq :call setqflist([])<CR>
@@ -88,8 +88,8 @@ vnoremap <C-y> "cy
 " [普通模式]Ctrl+p  从字母寄存器c中粘贴内容
 nnoremap <C-p> "cp
 nnoremap <C-p> "cP
-" [普通模式]\l：重新绘制当前的屏幕，并且取消字符的高亮
-nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+" [普通模式]\ll：重新绘制当前的屏幕，并且取消字符的高亮
+nnoremap <leader>ll :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " [普通模式]\rd：在只读和可写之间切换
 nnoremap <silent> <leader>rd :if &modifiable \| setl nomodifiable \| echo 'Current buffer is set readonly complete ' \| else \| setl modifiable \| echo 'Current buffer is cancel readonly complete ' \| endif<CR>
 " [普通模式]\rp：replease替换

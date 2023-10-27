@@ -112,6 +112,14 @@ require('lualine').setup {
       },
       {
         'fileformat',
+        --color = { fg = '#ff0000' },
+        symbols = {
+          --unix = '', -- e712
+          unix = '', -- ubuntu f31b
+          --unix = '', -- debian e77d
+          dos = '',  -- e70f
+          mac = '',  -- e711
+        },
         padding = { left = 2, right = 2 }
       },
       {

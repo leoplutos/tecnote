@@ -30,6 +30,27 @@ let s:vim_dict_path = g:g_s_rcfilepath . '/vimconf/dict'
 let g:vim_dict_dict = [s:vim_dict_path, '',]
 let g:vim_dict_config = {'css':'css,css3', 'html':'html,javascript,css,css3', 'markdown':'text'}
 
+"根据OS设定LSP服务命令
+if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+  let s:lsp_pyright_langserver_cmd = 'pyright-langserver.cmd'
+  let s:lsp_jdtls_jar_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+  let s:lsp_jdtls_config_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win'
+  let s:java_maven_setting_path = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml'
+  let s:lsp_vue_lsp_cmd = 'vue-language-server.cmd'
+  let s:lsp_typescript_tsdk_path = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib'
+  let s:lsp_cobol_lsp_jar_path = 'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar'
+  let s:lsp_kotlin_lsp_cmd = 'kotlin-language-server.bat'
+else
+  let s:lsp_pyright_langserver_cmd = 'pyright-langserver'
+  let s:lsp_jdtls_jar_path = '/home/lchuser/work/lch/tool/lsp/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+  let s:lsp_jdtls_config_path = '/home/lchuser/work/lch/tool/lsp/jdtls/config_linux'
+  let s:java_maven_setting_path = '/usr/local/maven/apache-maven-3.9.4/conf/settings.xml'
+  let s:lsp_vue_lsp_cmd = 'vue-language-server'
+  let s:lsp_typescript_tsdk_path = '/usr/lib/node_modules/typescript/lib'
+  let s:lsp_cobol_lsp_jar_path = '/home/lchuser/work/lch/tool/lsp/cobol-language-support-1.2.1/extension/server/jar/server.jar'
+  let s:lsp_kotlin_lsp_cmd = 'kotlin-language-server'
+endif
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
@@ -377,7 +398,7 @@ if (g:g_python_lsp_type == 3)
       "https://microsoft.github.io/pyright
       au User lsp_setup call lsp#register_server({
           \ 'name': 'pyright-langserver',
-          \ 'cmd': {server_info->['pyright-langserver.cmd', '--stdio']},
+          \ 'cmd': {server_info->[s:lsp_pyright_langserver_cmd, '--stdio']},
           \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
           \ 'whitelist': ['python'],
           \ 'workspace_config': {
@@ -396,10 +417,11 @@ if (g:g_python_lsp_type == 3)
   endif
 endif
 
+
 "Java(eclipse.jdt.ls)
 "在这里下载 https://download.eclipse.org/jdtls/milestones/
 "更多设定 https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar')
+if executable('java') && filereadable(s:lsp_jdtls_jar_path)
     au User lsp_setup call lsp#register_server({
         \ 'name': 'eclipse.jdt.ls',
         \ 'cmd': {server_info->[
@@ -417,15 +439,10 @@ if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-s
         \     '--add-opens',
         \     'java.base/java.lang=ALL-UNNAMED',
         \     '-jar',
-       "\     expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar'),
-        \     'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
+        \     s:lsp_jdtls_jar_path,
         \     '-configuration',
-       "\     expand('~/lsp/eclipse.jdt.ls/config_win'),
-        \     'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win',
+        \     s:lsp_jdtls_config_path,
         \     '-data',
-       "\     getcwd()
-       "\     g:g_s_projectrootpath.'/.lsp'
-       "\     'D:/WorkSpace/Java',
         \     $HOME.'/.cache/vim-lsp-jdtls',
         \ ]},
         \ 'initialization_options': {
@@ -434,8 +451,8 @@ if executable('java') && filereadable('D:/Tools/WorkTool/Java/lsp/jdt-language-s
         \     'java': {
         \       'configuration': {
         \         'maven': {
-        \           'userSettings': 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
-        \           'globalSettings': 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
+        \           'userSettings': s:java_maven_setting_path,
+        \           'globalSettings': s:java_maven_setting_path,
         \         },
         \       },
         \       'import': {
@@ -546,18 +563,19 @@ endif
 "Vue(volar-language-server)
 "注：@vue/language-server即是Volar，而下面的vls是Vetur
 "安装命令：npm install -g @vue/language-server
+"          npm install -g typescript
 if executable('vue-language-server')
     "设定参数参照这里
     "https://github.com/vuejs/language-tools
     au User lsp_setup call lsp#register_server({
         \ 'name': 'volar-language-server',
-        \ 'cmd': {server_info->['vue-language-server.cmd', '--stdio']},
+        \ 'cmd': {server_info->[s:lsp_vue_lsp_cmd, '--stdio']},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
         \ 'allowlist': ['vue', 'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
         \ 'initialization_options': {
         \     'textDocumentSync': 2,
         \     'typescript': {
-        \         'tsdk': 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib',
+        \         'tsdk': s:lsp_typescript_tsdk_path,
         \     },
         \ },
         \ })
@@ -604,8 +622,7 @@ if executable('java')
         \     'java.base/java.lang=ALL-UNNAMED',
         \     '-Dline.speparator=\r\n',
         \     '-jar',
-        \     'D:\Tools\WorkTool\Cobol\cobol-language-support-1.2.1\extension\server\jar\server.jar',
-        "\     'D:\Tools\WorkTool\Cobol\cobol-language-support-win32-x64-2.0.3-signed\extension\server\jar\server.jar',
+        \     s:lsp_cobol_lsp_jar_path,
         \     'pipeEnabled',
         \     ]},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
@@ -636,7 +653,7 @@ if executable('kotlin-language-server')
     "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
     au User lsp_setup call lsp#register_server({
         \ 'name': 'kotlin-language-server',
-        \ 'cmd': {server_info->['kotlin-language-server.bat']},
+        \ 'cmd': {server_info->[s:lsp_kotlin_lsp_cmd]},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
         \ 'allowlist': ['kotlin'],
         \ })
@@ -654,6 +671,8 @@ let g:lsp_diagnostics_float_delay = 0
 let g:lsp_diagnostics_highlights_delay = 0
 let g:lsp_diagnostics_signs_delay = 0
 let g:lsp_diagnostics_virtual_text_delay = 0
+let g:lsp_diagnostics_virtual_text_align = 'after'
+let g:lsp_diagnostics_virtual_text_wrap = 'truncate'
 let g:lsp_document_code_action_signs_delay = 0
 let g:lsp_inlay_hints_delay = 0
 let g:lsp_document_highlight_delay = 0
@@ -693,6 +712,20 @@ let g:asyncomplete_matchfuzzy = 1
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 "Ctrl+F2显示LSP服务器状态
 nnoremap <C-F2> :LspStatus<CR>
+nnoremap <Leader>ls :LspStatus<CR>
+nnoremap <Space>ih :call ToggleLspInlayHints()<CR>
+"切换是否显示LSP的InlayHints
+function! ToggleLspInlayHints() abort
+  if !exists('g:lsp_inlay_hints_enabled')
+    let g:lsp_inlay_hints_enabled = 1
+  endif
+  if (g:lsp_inlay_hints_enabled == 0)
+    let g:lsp_inlay_hints_enabled = 1
+  else
+    let g:lsp_inlay_hints_enabled = 0
+    e
+  endif
+endfunction
 
 "给状态栏设置的调用函数（返回LSP状态显示到状态栏）
 function! GetLspStatus() abort

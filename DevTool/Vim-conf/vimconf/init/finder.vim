@@ -55,9 +55,9 @@ let g:Lf_RgConfig = [
 let g:Lf_ShortcutF = "<leader>ff"
 let g:Lf_ShortcutB = "<leader>fb"
 nnoremap <leader>f  <Nop>
-nnoremap <silent><unique> <leader>ff :<C-U>LeaderfFile<CR>
+nnoremap <leader>ff :<C-U>LeaderfFile<CR>
 nnoremap <leader>fg :Leaderf rg<CR>
-nnoremap <silent><unique> <leader>fb :<C-U>LeaderfBuffer<CR>
+nnoremap <leader>fb :<C-U>LeaderfBuffer<CR>
 "\fo再次打开搜索结果
 nnoremap <leader>fo :<C-U>Leaderf! rg --recall<CR>
 

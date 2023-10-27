@@ -117,6 +117,9 @@ wsl --shutdown
 /mnt/{Windows盘符}
 ```
 
+### 一个从Windows复制Vim/NeoVim设定文件到WSL的脚本
+- [install_wsl_vim_setting.cmd](./install_wsl_vim_setting.cmd)
+
 ## WSL输入reboot命令报错
 在WSL终端中，无法使用reboot命令来重启，使用重启命令将会显示如下的错误信息：
 ```

@@ -36,6 +36,26 @@ vim.cmd('packadd lspkind.nvim')
 vim.cmd('packadd cmp-vsnip')
 vim.cmd('packadd vim-vsnip')
 
+local lsp_cmd_path = {}
+--根据OS设定LSP服务命令
+if (vim.g.g_i_osflg == 1 or vim.g.g_i_osflg == 2 or vim.g.g_i_osflg == 3) then
+  lsp_cmd_path.jdtls_jar_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+  lsp_cmd_path.jdtls_config_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win'
+  lsp_cmd_path.maven_setting_path = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml'
+  lsp_cmd_path.vue_lsp_cmd = 'vue-language-server.cmd'
+  lsp_cmd_path.typescript_tsdk_path = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib'
+  lsp_cmd_path.cobol_lsp_jar_path = 'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar'
+  lsp_cmd_path.kotlin_lsp_cmd = 'kotlin-language-server.bat'
+else
+  lsp_cmd_path.jdtls_jar_path = '/home/lchuser/work/lch/tool/lsp/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+  lsp_cmd_path.jdtls_config_path = '/home/lchuser/work/lch/tool/lsp/jdtls/config_linux'
+  lsp_cmd_path.maven_setting_path = '/usr/local/maven/apache-maven-3.9.4/conf/settings.xml'
+  lsp_cmd_path.vue_lsp_cmd = 'vue-language-server'
+  lsp_cmd_path.typescript_tsdk_path = '/usr/lib/node_modules/typescript/lib'
+  lsp_cmd_path.cobol_lsp_jar_path = '/home/lchuser/work/lch/tool/lsp/cobol-language-support-1.2.1/extension/server/jar/server.jar'
+  lsp_cmd_path.kotlin_lsp_cmd = 'kotlin-language-server'
+end
+
 --给状态栏设置的调用函数（返回LSP状态显示到状态栏）
 --做一个全局dict保存每个lsp的服务状态，存在即为启动中
 --内容示例 let g:nvim_lsp_runflg = {'clangd': 1, 'pylsp': 2}
@@ -205,11 +225,10 @@ lspconfig.jdtls.setup {
     '--add-opens',
     'java.base/java.lang=ALL-UNNAMED',
     '-jar',
-    'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
+    lsp_cmd_path.jdtls_jar_path,
     '-configuration',
-    'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win',
+    lsp_cmd_path.jdtls_config_path,
     '-data',
-    --'D:/WorkSpace/Java',
     lspconfig.util.path.join(vim.loop.os_homedir(), '.cache/nvim-lsp-jdtls')
   },
   init_options = {
@@ -218,8 +237,8 @@ lspconfig.jdtls.setup {
       java = {
         configuration = {
           maven = {
-            userSettings = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
-            globalSettings = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml',
+            userSettings = lsp_cmd_path.maven_setting_path,
+            globalSettings = lsp_cmd_path.maven_setting_path,
           },
         },
         import = {
@@ -333,7 +352,7 @@ lspconfig.volar.setup {
   },
   init_options = {
     typescript = {
-      tsdk = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib'
+      tsdk = lsp_cmd_path.typescript_tsdk_path
     }
   },
   root_dir = lspconfig.util.root_pattern('.root', 'package.json', '.git');
@@ -341,7 +360,7 @@ lspconfig.volar.setup {
 -- CSharp（OmniSharp）设置
 lspconfig.omnisharp.setup {
   cmd = { 'OmniSharp', '-z', '--languageserver', '--encoding', 'utf-8', 'DotNet:enablePackageRestore=false' },
-  filetypes = { 'cs'},
+  filetypes = { 'cs' },
   enable_editorconfig_support = true,
   enable_ms_build_load_projects_on_demand = false,
   enable_roslyn_analyzers = false,
@@ -359,7 +378,7 @@ lspconfig.cobol_ls.setup {
     'java.base/java.lang=ALL-UNNAMED',
     '-Dline.speparator=\r\n',
     '-jar',
-    'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar',
+    lsp_cmd_path.cobol_lsp_jar_path,
     'pipeEnabled',
   },
   filetypes = { 'cobol'},
@@ -711,6 +730,7 @@ hi! link CmpItemMenu Comment
 
 --Ctrl+F2显示LSP服务器状态
 vim.keymap.set({'n'}, '<C-F2>', ':LspInfo<CR>', { noremap = true })
+vim.keymap.set({'n'}, '<Leader>ls', ':LspInfo<CR>', { noremap = true })
 
 --Lsp相关的高亮设定
 --:sign list 查看所有定义

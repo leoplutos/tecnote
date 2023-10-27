@@ -1,5 +1,5 @@
-::设置utf-8
-::chcp 65001
+::参数说明
+::参数1：是否启用NerdFont图标，如果传递则启用，不传递则不启用。传递值例子：cmdautorun.cmd 1
 
 @echo off
 
@@ -16,11 +16,40 @@ if %WIN_VERSION% geq 10 (
 )
 
 :SetPrompt
-for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do set PS_IP=%%a
+::取得参数1
+set "USE_NERD_FONT_FLG=%~1"
+if defined USE_NERD_FONT_FLG (
+  ::如果参数1存在-使用NerdFont
+  chcp 65001
+  goto :SetPromptNerdFont
+) else (
+  ::如果参数1不存在-不使用NerdFont
+  goto :SetPromptWithOutNerdFont
+)
+
+:SetPromptNerdFont
+::设定WIN_ICON=NerdFont的Windows图标（需要chcp 65001），最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {e70f}{U+00A0}
+for /f "delims=" %%i in ('echo  ') do (set WIN_ICON=%%i)
+for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
+set PS_RED=$E[31m
 set PS_GREEN=$E[32m
 set PS_YELLOW=$E[33m
 set PS_BLUE=$E[34m
 set PS_MAGENTA=$E[35m
+set PS_CYAN=$E[36m
+set PS_CLEAR=$E[0m
+set PROMPT=%PS_RED%%WIN_ICON%%PS_CLEAR%%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
+echo Prompt Setting Complited
+goto GoOn
+
+:SetPromptWithOutNerdFont
+for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
+set PS_RED=$E[31m
+set PS_GREEN=$E[32m
+set PS_YELLOW=$E[33m
+set PS_BLUE=$E[34m
+set PS_MAGENTA=$E[35m
+set PS_CYAN=$E[36m
 set PS_CLEAR=$E[0m
 set PROMPT=%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
 echo Prompt Setting Complited
@@ -70,6 +99,8 @@ set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
 set GOROOT=D:\Tools\WorkTool\Go\go1.21.1.windows-amd64
 set GOPATH=D:\Tools\WorkTool\Go\go_global
 set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
+set WEZTERM_HOME=D:\Tools\WorkTool\Linux\WezTerm
+set PATH=%PATH%;%WEZTERM_HOME%
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 

@@ -1,8 +1,10 @@
 --init.lua for neovim
---配置路径为 %LOCALAPPDATA%\nvim
+--配置路径为
+-- Windows：%LOCALAPPDATA%\nvim
+-- Linux：/home/lchuser/work/lch/rc/nvimrc
 
 --设置语言
-vim.api.nvim_exec('language zh_CN', true)
+--vim.api.nvim_exec('language zh_CN', true)
 --vim.api.nvim_exec('language message zh_CN.UTF-8', true)
 
 if vim.g.vscode then
@@ -40,14 +42,31 @@ if vim.g.vscode then
 else
   --默认neovim设置
 
-  --加载vim的vimrc配置
-  vim.cmd('source ~\\.vimrc')
-  vim.o.ambiwidth='single'
+  --判断运行环境
+  if (vim.fn.has('win32') == 1 or vim.fn.has('win95') == 1 or vim.fn.has('win64') == 1 or vim.fn.has('win16') == 1 or vim.fn.has('win32unix') == 1) then
+    --Windows
+    --加载vim的vimrc配置
+    vim.cmd('source ~\\.vimrc')
+    --设置package.path路径以便加载lua文件夹下的内容
+    package.path = package.path ..';..\\?.lua'
+  elseif (vim.fn.has('macunix') == 1) then
+    --MacOS
+  else
+    --Linux
+    --加载vim的vimrc配置
+    vim.cmd('source ~/work/lch/rc/vimrc/.vimrc')
+    --全局变量g:g_nvimrc_file_path（当前init.lua的所在路径）
+    vim.g.g_nvimrc_file_path = vim.fn.expand("<sfile>:p:h")
+    --设置package.path路径以便加载lua文件夹下的内容
+    package.path = package.path ..';../?.lua'
+    package.path = package.path ..';./lua/?.lua'
+    package.path = package.path .. ';' .. vim.g.g_nvimrc_file_path .. '/?.lua'
+    package.path = package.path .. ';' .. vim.g.g_nvimrc_file_path .. '/lua/?.lua'
+    vim.o.packpath = vim.o.packpath .. ',' .. vim.g.g_nvimrc_file_path
+    vim.o.packpath = vim.o.packpath .. ',' .. vim.g.g_nvimrc_file_path .. '/after'
+  end
 
-  --设置package.path路径以便加载lua文件夹下的内容
-  package.path = package.path ..';..\\?.lua';
-  -- vim.cmd [[set packpath+=" . g:g_s_rcfilepath . '/vimconf]]
-  -- vim.cmd [[set runtimepath+=" . g:g_s_rcfilepath . '/vimconf]]
+  vim.o.ambiwidth='single'
 
   -- 开启gui高亮
   vim.opt.termguicolors = true

@@ -39,6 +39,34 @@ $HOME/.wezterm.lua
 ```
 注：Windows平台下，和``wezterm.exe``同路径下建立配置文件``wezterm.lua``也可以，这种情况文件名没有点
 
+### WezTerm作为SSH客户端的启动方式
+正常使用命令
+```
+wezterm ssh -- user@ipaddress:8122
+```
+即可连接到SSH服务器使用，但是有一个问题是控制台会有2个，而且主控制台关闭之后，SSH客户端也跟着被一起杀死了  
+
+解决方式为新建一个cmd批处理文件
+```
+@echo off
+if "%1" == "h" goto begin
+mshta vbscript:createobject("wscript.shell").run("%~nx0 h",0)(window.close)&&exit
+:begin
+start /b D:\Tools\WorkTool\Linux\WezTerm\wezterm ssh -- lchuser@172.20.115.248:8122
+```
+用这个批处理启动即可
+
+### Lua配置文件调试方式
+可以用如下方式启动
+```
+wezterm-gui.exe 2> D:\Tools\WorkTool\Linux\WezTerm\log_strerr.log
+```
+然后在配置文件里
+```
+wezterm.log_error('hello')
+```
+就可以将log输出在文件里
+
 #### 配置文件例子
 [wezterm.lua](./WezTerm_conf/wezterm.lua)
 

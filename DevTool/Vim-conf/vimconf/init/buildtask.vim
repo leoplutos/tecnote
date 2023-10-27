@@ -65,11 +65,17 @@ function! s:runGccApplication()
   let l:filename_noext = expand('%:r')
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
-  call TerminalSend(s:contactCommand('chcp 65001'))
-  sleep 100m
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    call TerminalSend(s:contactCommand('chcp 65001'))
+    sleep 100m
+  endif
   call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath . '/bin/Debug'))
   sleep 100m
-  call TerminalSend(s:contactCommand(l:filename_noext . '.exe'))
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    call TerminalSend(s:contactCommand(l:filename_noext . '.exe'))
+  else
+    call TerminalSend(s:contactCommand('./' . l:filename_noext . '.exe'))
+  endif
 endfunction
 
 "C/Cpp测试
@@ -90,11 +96,19 @@ function! s:runPythonApplication()
   let l:filepath = expand('%:p:h')
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
-  call TerminalSend(s:contactCommand('set PYTHONPATH=' . g:g_s_projectrootpath . '/src;' . g:g_s_projectrootpath . '/src/com'))
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    call TerminalSend(s:contactCommand('set PYTHONPATH=' . g:g_s_projectrootpath . '/src;' . g:g_s_projectrootpath . '/src/com'))
+  else
+    call TerminalSend(s:contactCommand('export PYTHONPATH=' . g:g_s_projectrootpath . '/src:' . g:g_s_projectrootpath . '/src/com'))
+  endif
   sleep 100m
   call TerminalSend(s:contactCommand('cd ' . l:filepath))
   sleep 100m
-  call TerminalSend(s:contactCommand('python ' . l:filename))
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    call TerminalSend(s:contactCommand('python ' . l:filename))
+  else
+    call TerminalSend(s:contactCommand('python3 ' . l:filename))
+  endif
 endfunction
 
 "Python测试设定
@@ -163,8 +177,10 @@ function! s:runJavaApplication()
     "[maven]判断pom.xml是否存在
     call TerminalSend(s:contactCommand('mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 arg2"'))
   else
-    call TerminalSend(s:contactCommand('chcp 65001'))
-    sleep 100m
+    if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+      call TerminalSend(s:contactCommand('chcp 65001'))
+      sleep 100m
+    endif
     call TerminalSend(s:contactCommand('cd bin'))
     sleep 100m
     call TerminalSend(s:contactCommand('java -classpath .;../lib/* -Dfile.encoding=UTF-8 ' . l:filename_noext))
@@ -197,8 +213,10 @@ endfunction
 function! s:runRustCargoRun()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
-  call TerminalSend(s:contactCommand('chcp 65001'))
-  sleep 100m
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    call TerminalSend(s:contactCommand('chcp 65001'))
+    sleep 100m
+  endif
   call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
   sleep 100m
   call TerminalSend(s:contactCommand('cargo run'))
@@ -208,8 +226,10 @@ endfunction
 function! s:runRustCargoTest()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
-  call TerminalSend(s:contactCommand('chcp 65001'))
-  sleep 100m
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    call TerminalSend(s:contactCommand('chcp 65001'))
+    sleep 100m
+  endif
   call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
   sleep 100m
   call TerminalSend(s:contactCommand('cargo test'))

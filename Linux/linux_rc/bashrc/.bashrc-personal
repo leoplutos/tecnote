@@ -9,24 +9,41 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
-export INPUTRC='~/work/lch/rc/inputrc/inputrc'
 #export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
+#设定UBUNTU_ICON=NerdFont的Ubuntu图标，最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {f31b}{U+00A0}
+UBUNTU_ICON=`echo  `
 PS_IP=$(hostname -I)
 PS_IP=`echo ${PS_IP}`
+PS_RED='\[\033[0;31m\]'
 PS_GREEN='\[\033[0;32m\]'
 PS_YELLOW='\[\033[0;33m\]'
 PS_BLUE='\[\033[0;34m\]'
 PS_MAGENTA='\[\033[0;35m\]'
+PS_CYAN='\[\033[0;36m\]'
 PS_CLEAR='\[\033[0m\]'
-export PS1="${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+export PS1="${PS_RED}${UBUNTU_ICON}${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
+export INPUTRC='~/work/lch/rc/inputrc/inputrc'
 export personal_workspace=~/work/lch/workspace
 export personal_log=~/work/lch/log
-
+export TERM="xterm-256color"
 export COLORTERM=truecolor
 
-alias ll='ls -l --color=auto'
-alias lla='ls -al --color=auto'
-alias llt='ls -ltr --color=auto'
+#环境变量加入pip3下载的内容
+export PATH=$PATH:~/.local/bin
+#环境变量加入go
+export GOROOT=/usr/local/go
+export GOPATH=~/work/lch/tool/go_global
+export GO111MODULE=on
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export KOTLIN_HOME=/usr/local/kotlin/kotlinc
+export PATH=$PATH:$KOTLIN_HOME/bin
+#export PATH=$PATH:'/home/lchuser/work/lch/tool/lsp/kotlin-language-server/bin'
+
+alias ll='ls -hl --full-time --time-style=long-iso --color=auto'
+alias lla='ls -hal --full-time --time-style=long-iso --color=auto'
+alias llt='ls -htl --full-time --time-style=long-iso --color=auto'
 alias cdw='cd $personal_workspace'
 alias cdl='cd $personal_log'
 alias vim='vim -u ~/work/lch/rc/vimrc/.vimrc'
@@ -34,7 +51,12 @@ alias vim='vim -u ~/work/lch/rc/vimrc/.vimrc'
 alias viml='func_viml() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"; }; func_viml'
 alias vimd='func_vimd() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"; }; func_vimd'
 alias vimf='func_vimf() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_vimf'
+alias nvim='env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua'
+alias nviml='func_nviml() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"; }; func_nviml'
+alias nvimd='func_nvimd() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"; }; func_nvimd'
+alias nvimf='func_nvimf() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_nvimf'
 alias lg='lazygit'
+alias gu='gitui'
 alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'
 alias tmuxn='tmux -2u -f ~/work/lch/rc/tmuxrc/tmux3.2.conf new-session -s lch_session -n lch_window'
 alias tmuxa='tmux -2u a -t lch_session'

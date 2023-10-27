@@ -50,7 +50,7 @@ endif
 if !exists('g:g_space_tab_flg')
   let g:g_space_tab_flg = 0
 endif
-"全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：Linux/WSL）
+"全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：MacOS，5：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
     let g:g_i_osflg=1
@@ -59,8 +59,10 @@ if(has('win32') || has('win95') || has('win64') || has('win16'))
   endif
 elseif has('win32unix')
   let g:g_i_osflg=3
-else
+elseif has('macunix')
   let g:g_i_osflg=4
+else
+  let g:g_i_osflg=5
 endif
 if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   "Windows系统下加入GCC,Java,Python,Ctags,clang-format,black等环境变量
@@ -101,11 +103,20 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
 elseif (g:g_i_osflg==3)
   let g:terminal_shell='/usr/bin/bash -l -i'
   "set viminfo='100,n$HOME/.vim/files/info/viminfo
+elseif (g:g_i_osflg==4)
 else
-  let g:terminal_shell='/bin/bash --rcfile /lch/workspace/bashrc/.bashrc-personal'
+  let $PATH .= ':~/.local/bin'
+  let $PATH .= ':/home/lchuser/work/lch/tool/lsp/kotlin-language-server/bin'
+  "设定下划波浪线
+  let &t_Cs = "\e[4:3m"
+  let &t_Ce = "\e[4:0m"
+  "设定支持下划波浪线颜色
+  let &t_AU = "\<esc>[58;5;%dm"
+  let &t_8u = "\<esc>[58;2;%lu;%lu;%lum"
+  let g:terminal_shell='/bin/bash --rcfile ~/work/lch/rc/bashrc/.bashrc-personal'
 endif
 "全局变量g:g_s_rcfilepath（当前vimrc所在路径）
-let g_s_rcfilepath = expand("<sfile>:p:h")
+let g:g_s_rcfilepath = expand("<sfile>:p:h")
 "判断工程跟路径关键字
 let g:g_s_rootmarkers = ['.git', '.svn', '.project', '.root', '.hg']
 "在packpath,runtimepath最后添加个人设定的路径，用以载入插件等
@@ -577,6 +588,11 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
   let g:indentLine_defaultGroup = 'SpecialKey'
   "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
   let g:indentLine_char_list = ['|']
+  "禁用类型
+  let g:indentLine_fileTypeExclude = ['text', 'cobol']
+  "禁用buffer
+  let g:indentLine_bufTypeExclude = ['help', 'terminal']
+  let g:indentLine_bufNameExclude = ['NERD_tree.*']
   if (g:g_space_tab_flg == 0)
     "使用空格
     let g:indentLine_enabled = 1

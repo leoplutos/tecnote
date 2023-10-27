@@ -33,7 +33,7 @@ hi MoreMsg      term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 hi ModeMsg      term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 "LineNr     : 行号
 hi LineNr       term=none cterm=none ctermfg=66 gui=none guifg=#6c8086
-hi CursorLine   term=reverse ctermbg=236 guibg=#292e42
+hi CursorLine   term=reverse cterm=none ctermbg=236 gui=none guibg=#292e42
 hi Question     term=bold cterm=bold ctermfg=143 gui=bold guifg=#b5bd68
 "StatusLine    : 底部状态栏（因为设定了reverse，所以gb和fb要反过来）
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=189 ctermbg=16 gui=bold,reverse guifg=#c9d4fd guibg=#000000
@@ -188,7 +188,7 @@ hi netrwExe     term=standout ctermfg=150 guifg=#98c379
 "               vim-lsp高亮                     "
 "-----------------------------------------------"
 hi lspReference term=reverse ctermbg=237 guibg=#3a3d41
-"hi LspCodeActionText term=reverse ctermfg=16 ctermbg=143 guifg=#000000 guibg=#b5bd68
+hi! clear LspCodeActionText
 hi LspErrorText term=reverse ctermfg=231 ctermbg=196 guifg=#ffffff guibg=#ff0000
 hi LspWarningText term=reverse ctermfg=16 ctermbg=226 guifg=#000000 guibg=#ffff00
 hi LspInformationText term=reverse ctermfg=16 ctermbg=38 guifg=#000000 guibg=#0db9d7
@@ -201,6 +201,8 @@ hi LspErrorVirtualText term=reverse ctermfg=203 ctermbg=236 guifg=#ff4b4b guibg=
 hi LspWarningVirtualText term=reverse ctermfg=178 ctermbg=237 guifg=#e0af30 guibg=#373640
 hi LspInformationVirtualText term=reverse ctermfg=38 ctermbg=237 guifg=#0db9d7 guibg=#22374b
 hi LspHintVirtualText term=reverse ctermfg=36 ctermbg=236 guifg=#1abc9c guibg=#233745
+hi lspInlayHintsType term=reverse ctermfg=231 ctermbg=242 guifg=#ffffff guibg=#626f63
+hi lspInlayHintsParameter term=reverse ctermfg=231 ctermbg=242 guifg=#ffffff guibg=#626f63
 
 "-----------------------------------------------"
 "               其他高亮                        "
