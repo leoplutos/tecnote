@@ -13,8 +13,11 @@ end
 
 -- 基础设定
 config.check_for_updates = false
-config.default_prog = { 'cmd.exe', '/k', 'D:/Tools/WorkTool/Cmd/cmdautorun.cmd' }
-config.default_cwd = "~"
+--不自动加载配置文件
+config.automatically_reload_config = false
+config.default_prog = { 'cmd.exe', '/k', 'D:/Tools/WorkTool/Cmd/cmdautorun.cmd', '1' }
+--config.default_gui_startup_args = { 'ssh', 'lchuser@172.20.115.248:8122' }
+--config.default_cwd = "~"
 config.launch_menu = {}
 config.set_environment_variables = {}
 --config.color_scheme = 'Sakura'
@@ -147,17 +150,22 @@ config.inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 }
 config.keys = {
     { key = 'l', mods = 'ALT', action = act.ShowLauncher },
     { key = 'q', mods = 'ALT', action = 'QuickSelect' },
+    { key = 'c', mods = 'ALT', action = act.ActivateCopyMode },
+    { key = 'f', mods = 'ALT', action = act.Search { CaseInSensitiveString = '' }},
     { key = 'k', mods = 'ALT', action = act.SendString 'clear\r\n' },
-    { key = '1', mods = 'ALT', action = act.Multiple {
+    --ALT+W:进入WSL
+    { key = 'w', mods = 'ALT', action = act.Multiple {
         act.SendString 'wsl -d Ubuntu-22.04\r\n',
         act.SendString 'cd ~\n',
         act.SendString 'source ~/work/lch/rc/bashrc/.bashrc-personal\n',
       },
     },
-    { key = '2', mods = 'ALT', action = act.Multiple {
-        act.SendString 'ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -t lchuser@172.20.122.68 -p 8122\r\n',
+    --ALT+1:SSH连接远程服务器
+    { key = '1', mods = 'ALT', action = act.Multiple {
+        act.SendString 'wezterm ssh -- lchuser@172.20.115.248:8122\r\n',
       },
     },
+    --ALT+s:source个人rc
     { key = 's', mods = 'ALT', action = act.Multiple {
         act.SendString 'source ~/work/lch/rc/bashrc/.bashrc-personal\n',
       },
@@ -202,7 +210,7 @@ local function day_of_week_cn (w_num)
   end
 end
 
--- 在右上角表示年月日和时间
+-- 在右上角表示年月日，时间和电池状态
 wezterm.on('update-status', function(window, pane)
   local wday = os.date('*t').wday
   local wday_cn = string.format('(%s )', day_of_week_cn(wday))
@@ -221,29 +229,31 @@ wezterm.on('update-status', function(window, pane)
   local battery = ''
   local discharging_icons = {}
   local charging_icons = {}
+  local thunder_icon = ''
   if l_use_nerdfont == 0 then
-    discharging_icons = { '🌕', '🌕', '🌖', '🌖', '🌗', '🌗', '🌘', '🌘', '🌑', '🌑' }
-    charging_icons = { '🌕', '🌕', '🌖', '🌖', '🌗', '🌗', '🌘', '🌘', '🌑', '🌑' }
+    discharging_icons = { '🌑', '🌑', '🌒', '🌒', '🌗', '🌓', '🌔', '🌔', '🌕', '🌕' }
+    charging_icons = { '🌑', '🌑', '🌒', '🌒', '🌗', '🌓', '🌔', '🌔', '🌕', '🌕' }
+    --thunder_icon = '⚡'
   else
-    discharging_icons = { '', '', '', '', '', '', '', '', '', '' }
-    charging_icons = { '', '', '', '', '', '', '', '', '', '' }
+    discharging_icons = { '󰂃', '󰁺', '󰁻', '󰁼', '󰁽', '󰁿', '󰂀', '󰂁', '󰂂', '󰁹' }
+    charging_icons = { '󰂃', '󰢜', '󰂆', '󰂇', '󰂈', '󰂉', '󰢞', '󰂊', '󰂋', '󰂅' }
+    --thunder_icon = '󱐋'
   end
 
   local charge = ''
   local icon = ''
-  local battery = ''
-  --for _, b in ipairs(wezterm.battery_info()) do
-  --   local idx = math.clamp(math.round(b.state_of_charge * 10), 1, 10)
-  --   charge = string.format('%.0f%%', b.state_of_charge * 100)
-  --
-  --   if b.state == 'Charging' then
-  --      icon = charging_icons[idx]
-  --   else
-  --      icon = discharging_icons[idx]
-  --   end
-  --end
-  --battery = '[' .. icon .. charge .. ']'
-  battery = icon .. charge
+  for _, b in ipairs(wezterm.battery_info()) do
+     local battery_state_of_charge = math.floor(b.state_of_charge * 100)
+     local battery_icon_idx = math.floor(b.state_of_charge * 10)
+     if b.state == 'Charging' then
+        --icon = thunder_icon .. ' ' .. charging_icons[battery_icon_idx]
+        icon = charging_icons[battery_icon_idx]
+     else
+        icon = discharging_icons[battery_icon_idx]
+     end
+     charge = battery_state_of_charge .. '%'
+  end
+  battery = charge .. icon
   window:set_right_status(wezterm.format {
     { Foreground = { Color = '#e1e1ff' } },
     { Text = date .. '   ' .. battery, },

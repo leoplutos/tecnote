@@ -67,3 +67,9 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+--集成gobang
+local gobang = Terminal:new({ cmd = "gobang", hidden = true, dir = vim.g.g_s_projectrootpath })
+function _gobang_toggle()
+  gobang:toggle()
+end
+vim.api.nvim_set_keymap("n", "<leader>gb", "<cmd>lua _gobang_toggle()<CR>", {noremap = true, silent = true})

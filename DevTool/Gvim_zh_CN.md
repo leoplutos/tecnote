@@ -1,16 +1,20 @@
 # Gvim
+gvim是vim的图形前端。
 
 ## 下载
-gvim是vim的图形前端。  
-下载地址：
+### 稳定版下载地址
 * 安装版  
 https://www.vim.org/download.php
 
 * 绿色版  
 https://ftp.nluug.nl/pub/vim/pc/  
 绿色版需要下载2个zip文件，然后解压缩到一个路径下即可。  
-基础运行时：vim90rt.zip  
-和右边其中任意一个：gvim90.zip or gvim90ole.zip
+基础运行时：``vim90rt.zip``  
+和右边其中任意一个：``gvim90.zip`` or ``gvim90ole.zip``
+
+### 开发版下载地址
+https://github.com/vim/vim-win32-installer/releases  
+32位的话下载 ``gvim_9.0.2081_x86.zip`` 和 ``gvim_9.0.2081_x86_pdb.zip`` ，然后解压缩到一个目录即可
 
 
 ## gvimrc的加载顺序

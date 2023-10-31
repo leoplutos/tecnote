@@ -46,6 +46,7 @@ if (vim.g.g_i_osflg == 1 or vim.g.g_i_osflg == 2 or vim.g.g_i_osflg == 3) then
   lsp_cmd_path.typescript_tsdk_path = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib'
   lsp_cmd_path.cobol_lsp_jar_path = 'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   lsp_cmd_path.kotlin_lsp_cmd = 'kotlin-language-server.bat'
+  lsp_cmd_path.custom_snippet_dir = vim.fn.expand('~/AppData/Roaming/Code/User/snippets')
 else
   lsp_cmd_path.jdtls_jar_path = '/home/lchuser/work/lch/tool/lsp/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
   lsp_cmd_path.jdtls_config_path = '/home/lchuser/work/lch/tool/lsp/jdtls/config_linux'
@@ -54,6 +55,7 @@ else
   lsp_cmd_path.typescript_tsdk_path = '/usr/lib/node_modules/typescript/lib'
   lsp_cmd_path.cobol_lsp_jar_path = '/home/lchuser/work/lch/tool/lsp/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   lsp_cmd_path.kotlin_lsp_cmd = 'kotlin-language-server'
+  lsp_cmd_path.custom_snippet_dir = vim.fn.expand('~/work/lch/rc/snippets')
 end
 
 --给状态栏设置的调用函数（返回LSP状态显示到状态栏）
@@ -112,6 +114,30 @@ function! GetLspStatus() abort
 endfunction
 ]]
 )
+
+--设定浮动窗口样式
+-- none/single/double/rounded/solid/shadow
+local _border = "rounded"
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = _border,
+    --title = "hover"
+  }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = _border,
+  }
+)
+vim.diagnostic.config{
+  float={border=_border}
+}
+require('lspconfig.ui.windows').default_options = {
+  border = _border
+}
+--设定CodeAction
+--因为Lsp无法直接取得，可以按照如下设定
+--https://github.com/neovim/nvim-lspconfig/wiki/Code-Actions
 
 -- nvim-lspconfig插件设定
 -- 语言服务器设定
@@ -246,6 +272,11 @@ lspconfig.jdtls.setup {
             enabled = true,
           },
         },
+        inlayhints = {
+          parameterNames = {
+            enabled = true,
+          },
+        },
       },
     },
   },
@@ -288,6 +319,7 @@ lspconfig.gopls.setup {
   },
   settings = {
     gopls = {
+      allExperiments = true,
       -- gofumpt = true,
       analyses = {
         ST1000 = false,
@@ -302,39 +334,37 @@ lspconfig.gopls.setup {
       },
       staticcheck = true,
       semanticTokens = true,
---[[
-      ui = {
-        codelenses = {
-          generate = true,
-          regenerate_cgo = true,
-          test = true,
-          vendor = true,
-          tidy = true,
-          upgrade_dependency = true,
-          gc_details = true,
-        },
-        diagnostic = {
-          annotations = {
-            bounds = true,
-            inline = true,
-            escape = true,
-            --nil = true,
-          },
-          staticcheck = true,
-        },
-        completion = {
-          usePlaceholders = true,
-          matcher = 'Fuzzy',
-          completionBudget = '500ms',
-        },
-        navigation = {
-          importShortcut = 'Definition',
-          symbolMatcher = 'Fuzzy',
-          symbolStyle = 'Dynamic',
-        },
-        semanticTokens = true,
+      codelenses = {
+        generate = true,
+        regenerate_cgo = true,
+        test = true,
+        vendor = true,
+        tidy = true,
+        upgrade_dependency = true,
+        gc_details = true,
       },
---]]
+      annotations = {
+        bounds = true,
+        inline = true,
+        escape = true,
+        --nil = true,
+      },
+      usePlaceholders = true,
+      matcher = 'Fuzzy',
+      completionBudget = '500ms',
+      importShortcut = 'Definition',
+      symbolMatcher = 'Fuzzy',
+      symbolStyle = 'Dynamic',
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+      directoryFilters = { '-node_modules', '-data' },
     },
   },
   root_dir = lspconfig.util.root_pattern('.root', 'go.mod', 'go.work', '.git');
@@ -353,6 +383,39 @@ lspconfig.volar.setup {
   init_options = {
     typescript = {
       tsdk = lsp_cmd_path.typescript_tsdk_path
+    },
+    languageFeatures = {
+      implementation = true,
+      documentHighlight = true,
+      documentLink = true,
+      documentSymbol = true,
+      documentColor = true,
+      documentFormatting = {
+        defaultPrintWidth = 180,
+      },
+      codeLens = { showReferencesNotification = true},
+      semanticTokens = true,
+      diagnostics = true,
+      schemaRequestService = true,
+      selectionRange = true,
+      foldingRange = true,
+      linkedEditingRange = true,
+      references = true,
+      definition = true,
+      typeDefinition = true,
+      callHierarchy = true,
+      hover = true,
+      rename = true,
+      renameFileRefactoring = true,
+      signatureHelp = true,
+      codeAction = true,
+      workspaceSymbol = true,
+      completion = {
+        defaultTagNameCase = 'both',
+        defaultAttrNameCase = 'kebabCase',
+        getDocumentNameCasesRequest = false,
+        getDocumentSelectionRequest = false,
+      },
     }
   },
   root_dir = lspconfig.util.root_pattern('.root', 'package.json', '.git');
@@ -390,6 +453,13 @@ lspconfig.cobol_ls.setup {
 --}
 -- Kotlin（kotlin-language-server）设置
 lspconfig.kotlin_language_server.setup {
+  init_options = {
+    hints = {
+      typeHints = true,
+      parameterHints = true,
+      chainedHints = true,
+    },
+  },
   root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', '.git');
 }
 -- Lua（lua-language-server）设置
@@ -468,6 +538,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     --取得当前生效的LspClient对象
     local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --开启Inlay Hints
+    if vim.fn.has('nvim-0.10') == 1 then
+      if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint(args.buf, true)
+      end
+    end
     --在全局变量g:nvim_lsp_runflg中设定内容
     local localFlg = vim.g.nvim_lsp_runflg
     localFlg[client.name] = client.id
@@ -535,8 +611,8 @@ cmp.setup({
     --completion = cmp.config.window.bordered(),
     completion = {
        border = 'rounded',
-       --winhighlight = 'Normal:Pmenu,FloatBorder:None,CursorLine:PmenuSel,Search:None',
-       winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSelBg,Search:None',
+       winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:FloatSelBg,Search:None',
+       --winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSelBg,Search:None',
        zindex = 1001,
        scrolloff = 0,
        col_offset = 0,
@@ -546,8 +622,8 @@ cmp.setup({
     --documentation = cmp.config.window.bordered(),
     documentation = {
        border = 'rounded',
-       --winhighlight = 'Normal:Pmenu,FloatBorder:None,CursorLine:PmenuSel,Search:None',
-       winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSelBg,Search:None',
+       winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSelBg,Search:None',
+       --winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSelBg,Search:None',
        zindex = 1002,
        scrolloff = 0,
        col_offset = 0,
@@ -607,7 +683,15 @@ cmp.setup({
       before = function(entry, vim_item)
         vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
         return vim_item
-      end
+      end,
+      menu = {
+        buffer = "[Buffer]",
+        nvim_lsp = "[Lsp]",
+        nvim_lua = "[Lua]",
+        path = "[Path]",
+        luasnip = "[Snip]",
+        vsnip = "[Snip]",
+      },
     }),
   },
 })
@@ -731,6 +815,13 @@ hi! link CmpItemMenu Comment
 --Ctrl+F2显示LSP服务器状态
 vim.keymap.set({'n'}, '<C-F2>', ':LspInfo<CR>', { noremap = true })
 vim.keymap.set({'n'}, '<Leader>ls', ':LspInfo<CR>', { noremap = true })
+--开启/关闭Inlay Hints
+local function ToggleLspInlayHints()
+  --参数1:0代表当前buffer
+  --参数2:true开启，false关闭，nil为toggle
+  vim.lsp.inlay_hint(0)
+end
+vim.keymap.set({'n'}, '<Space>ih', ToggleLspInlayHints, { noremap = true })
 
 --Lsp相关的高亮设定
 --:sign list 查看所有定义
@@ -806,8 +897,8 @@ dict.switcher({
 })
 
 -- 代码片段设定
+vim.g.vsnip_snippet_dir = lsp_cmd_path.custom_snippet_dir
 vim.cmd([[
-let g:vsnip_snippet_dir = expand('~/AppData/Roaming/Code/User/snippets')
 let g:vsnip_filetypes = {}
 let g:vsnip_filetypes.javascriptreact = ['javascript']
 let g:vsnip_filetypes.typescriptreact = ['typescript']

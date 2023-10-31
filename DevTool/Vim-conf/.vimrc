@@ -93,6 +93,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $PATH .= ';D:\Tools\WorkTool\Team\Git\cmd'
   let $PATH .= ';D:\Tools\WorkTool\Team\gitui-win'
   let $PATH .= ';D:\Tools\WorkTool\Team\Lazygit'
+  let $PATH .= ';D:\Tools\WorkTool\DB\Gobang'
   let $PATH .= ';D:\Tools\WorkTool\Java\apache-maven-3.9.4\bin'
   if (g:g_nvim_flg == 0)
     let &pythonthreehome = 'D:\Tools\WorkTool\Python\python-3.8.10-embed-win32'
@@ -569,18 +570,13 @@ if (v:version > 799)
   "加载自带的matchit
   packadd matchit
 
-  "加载开始导航页面设置
-  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
-
-  if (g:g_use_dap == 1)
-    "加载DAP设置
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
-  endif
-
 endif
 
 if (v:version > 799) && (g:g_nvim_flg == 0)
   "版本大于8并且不是NeoVim的插件加载（NeoVim在init.lua下加载）
+
+  "加载开始导航页面设置
+  exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
 
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
@@ -661,6 +657,11 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
     let g:DevIconsEnableFoldersOpenClose = 1
     packadd vim-devicons
 
+  endif
+
+  if (g:g_use_dap == 1)
+    "加载DAP设置
+    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/dap.vim'
   endif
 
   "tagbar（用tags表示代码大纲）

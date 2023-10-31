@@ -108,6 +108,10 @@ else
   require('statusbar')
   -- 加载lua/terminal.lua
   require('terminal')
+  -- 加载lua/startmenu.lua
+  require('startmenu')
+  -- 加载lua/debugger.lua
+  require('debugger')
 
   -- 加载tokyonight.nvim
   --vim.cmd('packadd tokyonight.nvim')

@@ -15,6 +15,7 @@ WSL2 : Ubuntu-22.04 LTS
 │          ├─inputrc
 │          ├─nvimrc
 │          ├─tmuxrc
+│          ├─snippets
 │          └─vimrc
 │      └─workspace
 │          ├─c
@@ -37,6 +38,7 @@ mkdir -p ~/work/lch/rc/gdbrc
 mkdir -p ~/work/lch/rc/inputrc
 mkdir -p ~/work/lch/rc/nvimrc
 mkdir -p ~/work/lch/rc/tmuxrc
+mkdir -p ~/work/lch/rc/snippets
 mkdir -p ~/work/lch/rc/vimrc
 mkdir -p ~/work/lch/workspace/c
 mkdir -p ~/work/lch/workspace/java
@@ -394,7 +396,7 @@ ll ~/work/lch/tool/lsp/cobol-language-support-1.2.1
 
 #### Kotlin
 ```
-sudo rm -rf /usr/local/kotlin
+sudo mkdir -p /usr/local/kotlin
 sudo unzip ~/work/lch/tmp/kotlin-compiler-1.9.10.zip -d /usr/local/kotlin
 ll /usr/local/kotlin
 kotlin -version
@@ -406,6 +408,16 @@ ll ~/work/lch/tool/lsp/kotlin-language-server
 cd ~/work/lch/tool/lsp/kotlin-language-server/bin
 chmod u+r+x kotlin-language-server
 ll
+```
+
+#### Lua-language-server
+```
+sudo mkdir -p /usr/local/lua-language-server
+sudo tar -zxvf ~/work/lch/tmp/lua-language-server-3.7.0-linux-x64.tar.gz -C /usr/local/lua-language-server
+sudo mkdir - p /usr/local/lua-language-server/log
+sudo chmod -R 777 /usr/local/lua-language-server/log
+sudo ln -s /usr/local/lua-language-server/bin/lua-language-server /usr/local/bin/
+lua-language-server --version
 ```
 
 ## 关于WSL下的下划波浪线显示

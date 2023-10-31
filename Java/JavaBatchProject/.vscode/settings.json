@@ -17,6 +17,8 @@
 			"default": true //默认JDK
 		},
 	],
+	"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml",
+	"java.configuration.maven.userSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml",
 	"java.project.sourcePaths": [ //设置源码路径
 		"src"
 	],

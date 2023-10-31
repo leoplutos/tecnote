@@ -59,11 +59,33 @@ let g:startify_custom_header = [
   \ ' ⠀⠀⠀⠉⠲⢤⣀⡀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⢀⣀⡤⠖⠉⠀⠀⠀⠀',
   \ ' ⠀⠀⠀⠀⠀⠀⠈⠉⠉⠐⠒⠒⠒⠒⠒⠒⠒⠒⠒⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀',
 \]
-"let g:startify_custom_footer = [
-"  \ '+------------------------------+',
-"  \ '| Do one thing and do it well. |',
-"  \ '+------------------------------+',
-"\]
+let g:startify_custom_footer = [
+  \ '',
+  \ ' 🚀 Sharp tools make good work.',
+  \ '',
+\]
+
+"高亮设定
+hi clear StartifyHeader
+hi! link StartifyHeader StartMenuHeader
+hi clear StartifySelect
+hi! link StartifySelect StartMenuHeader
+hi clear StartifyFooter
+hi! link StartifyFooter StartMenuFooter
+hi clear StartifySection
+hi! link StartifySection StartMenuProjectTitle
+hi clear StartifyNumber
+hi! link StartifyNumber StartMenuProjectIcon
+hi clear StartifyPath
+hi! link StartifyPath StartMenuFiles
+hi clear StartifyFile
+hi! link StartifyFile StartMenuFiles
+hi clear StartifySlash
+hi! link StartifySlash StartMenuFiles
+"StartifyBracket xxx links to Delimiter
+"StartifySpecial xxx links to Comment
+"StartifyVar    xxx links to StartifyPath
+
 "按下Ctrl+F1表示启动页导航
 noremap <C-F1> :Startify<CR>
 noremap <Leader>me :Startify<CR>

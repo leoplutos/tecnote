@@ -3,10 +3,12 @@
 --telescope.nvim插件设置
 --https://github.com/nvim-telescope/telescope.nvim
 --https://github.com/nvim-lua/plenary.nvim
+--https://github.com/nvim-telescope/telescope-ui-select.nvim
 
 -- 加载telescope.nvim插件
 vim.cmd('packadd plenary.nvim')
 vim.cmd('packadd telescope.nvim')
+vim.cmd('packadd telescope-ui-select.nvim')
 
 --使用telescope.nvim需要修改ambiwidth
 --进入Telescope之前执行的命令：set ambiwidth=single
@@ -141,8 +143,25 @@ require('telescope').setup{
     --},
   },
   extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        layout_strategy = "vertical",
+        layout_config = {
+          prompt_position = "bottom",
+          vertical = {
+            width = 0.6,
+            height = 100,
+          },
+        },
+      },
+      specific_opts = {
+        codeactions = false,
+      }
+    }
   }
 }
+--载入telescope-ui-select.nvim
+require('telescope').load_extension('ui-select')
 
 --telescope.nvim插件的高亮设定
 vim.cmd([[

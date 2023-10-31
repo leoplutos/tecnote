@@ -19,6 +19,9 @@
 ::需要打开复制插件Flg
 ::  %LOCALAPPDATA%\nvim\pack               ->  %WSL_NVIM_RC%\pack
 ::---------------------------------------------------
+::Snippet复制内容
+::  %USERPROFILE%\AppData\Roaming\Code\User\snippets  ->  %WSL_SNIPPET_RC%
+::---------------------------------------------------
 
 @echo off
 
@@ -27,6 +30,7 @@ set COPY_PLUGIN_FOLDER=0
 ::设置WSL的设定文件路径
 set WSL_VIM_RC=\\wsl.localhost\Ubuntu-22.04\home\lchuser\work\lch\rc\vimrc
 set WSL_NVIM_RC=\\wsl.localhost\Ubuntu-22.04\home\lchuser\work\lch\rc\nvimrc
+set WSL_SNIPPET_RC=\\wsl.localhost\Ubuntu-22.04\home\lchuser\work\lch\rc\snippets
 
 echo ======Copy Vim/NeoVim Setting File to WSL======
 echo ======Copy Vim Setting Start======
@@ -52,6 +56,9 @@ xcopy /e /s /i /r /h /y %LOCALAPPDATA%\nvim\lua %WSL_NVIM_RC%\lua
 if %COPY_PLUGIN_FOLDER%==1 (
   xcopy /e /s /i /r /h /y %LOCALAPPDATA%\nvim\pack %WSL_NVIM_RC%\pack
 )
+
+::复制Snippet
+xcopy /e /s /i /r /h /y %USERPROFILE%\AppData\Roaming\Code\User\snippets %WSL_SNIPPET_RC%
 
 echo ======Copy NeoVim Setting End======
 

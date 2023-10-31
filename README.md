@@ -4,6 +4,7 @@
 ## Linux命令
 * [Linux命令](Linux/Linux_zh_CN.md)
 * [Linux环境设置总结](Linux/Linux-env_zh_CN.md)
+* [Linux Mint安装记录](Linux/InstallLinuxMint_zh_CN.md)
 * [Linux用户做成](Linux/Linux-adduser_zh_CN.md)
 * [Linux自定义相关](Linux/Linux-customize_zh_CN.md)
 * [SSH Config](Linux/Ssh-config_zh_CN.md)
@@ -20,6 +21,7 @@
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
 * [Git命令](Git/Git_zh_CN.md)
 * [Git-bash-for-windows](Git/Git-bash_zh_CN.md)
+* [构建私有Git服务器](Git/ConstructGitServer_zh_CN.md)
 * [Git-bash安装pacman](Git/Git-pacman_zh_CN.md)
 * [Git使用WinMerge作为difftool](Git/Git-difftool_zh_CN.md)
 
@@ -82,6 +84,8 @@
 
 ## DB
 * [Postgresql](DB/Postgresql_zh_CN.md)
+* [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
+* [Sqlite3](DB/Sqlite3_zh_CN.md)
 
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)
@@ -94,4 +98,5 @@
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [ripgrep-文本搜索工具](Other/Ripgrep_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
+* [USB启动](Other/Usbboot_zh_CN.md)
 * [开发者书籍 - Open Developer Books](https://odb.lcjuves.com/)

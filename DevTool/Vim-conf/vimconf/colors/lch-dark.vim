@@ -143,6 +143,7 @@ hi Regexp       term=none cterm=none ctermfg=60 gui=none guifg=#646695
 hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#569cd6
 hi Lifetime     term=none cterm=none ctermfg=189 gui=none guifg=#cdcdff
 hi BreakPoint   term=none cterm=none ctermfg=160 gui=none guifg=#e51400
+hi BreakLogPoint   term=none cterm=none ctermfg=75 gui=none guifg=#61afef
 hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
 hi ProgramCounter   term=reverse ctermbg=17 guibg=#292e52
 hi DebugLine    term=reverse ctermbg=58 guibg=#545835
@@ -158,6 +159,15 @@ hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=235 gui=none guifg=#8d8
 hi FinderFileName term=none cterm=none ctermfg=188 gui=none guifg=#d4d4d4
 hi FinderLineNumber term=none cterm=none ctermfg=188 gui=none guifg=#d4d4d4
 hi FinderColumnNumbe term=none cterm=none ctermfg=188 gui=none guifg=#d4d4d4
+hi StartMenuHeader term=none cterm=none ctermfg=111 gui=none guifg=#7aa2f7
+hi StartMenuFooter term=none cterm=none ctermfg=179 gui=none guifg=#e0af68
+hi StartMenuProjectTitle term=none cterm=none ctermfg=33 gui=none guifg=#0095f7
+hi StartMenuProjectTitleIcon term=none cterm=none ctermfg=37 gui=none guifg=#00a5a8
+hi StartMenuProjectIcon term=none cterm=none ctermfg=222 gui=none guifg=#f0c66f
+hi StartMenuMruTitle term=none cterm=none ctermfg=33 gui=none guifg=#0095f7
+hi StartMenuMruIcon term=none cterm=none ctermfg=37 gui=none guifg=#00a5a8
+hi StartMenuFiles term=none cterm=none ctermfg=103 gui=none guifg=#7c81a2
+hi StartMenuShortCut term=none cterm=none ctermfg=65 gui=none guifg=#71926c
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -201,8 +211,8 @@ hi LspErrorVirtualText term=reverse ctermfg=203 ctermbg=236 guifg=#ff4b4b guibg=
 hi LspWarningVirtualText term=reverse ctermfg=178 ctermbg=237 guifg=#e0af30 guibg=#373640
 hi LspInformationVirtualText term=reverse ctermfg=38 ctermbg=237 guifg=#0db9d7 guibg=#22374b
 hi LspHintVirtualText term=reverse ctermfg=36 ctermbg=236 guifg=#1abc9c guibg=#233745
-hi lspInlayHintsType term=reverse ctermfg=231 ctermbg=242 guifg=#ffffff guibg=#626f63
-hi lspInlayHintsParameter term=reverse ctermfg=231 ctermbg=242 guifg=#ffffff guibg=#626f63
+hi lspInlayHintsType term=reverse cterm=none ctermfg=252 ctermbg=237 gui=none guifg=#cccccc guibg=#3b3c3d
+hi lspInlayHintsParameter term=reverse cterm=none ctermfg=252 ctermbg=237 gui=none guifg=#cccccc guibg=#3b3c3d
 
 "-----------------------------------------------"
 "               其他高亮                        "
@@ -216,12 +226,13 @@ augroup END
 function! MatchExtraWhitespace()
   "各种插件的buffer列表(TelescopeResults未加入)
   let l:plugin_buffer_list = [
+  \  'lspinfo' , 'packer', 'checkhealth', 'help', 'man', 'gitcommit',
   \  'startify', 'netrw', 'ctrlp', 'nerdtree', 'VimspectorPrompt', 'NvimTree', 'TelescopePrompt',
-  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt',
+  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt', 'dashboard', 'mason',
   \]
   "各种插件的buffer不高亮行尾空格
   if index(l:plugin_buffer_list, &filetype) >= 0
-    "echom '['. &filetype . '] do not match ExtraWhitespace'
+    match none
   else
     match ExtraWhitespace /\s\+$/
   endif
@@ -241,11 +252,13 @@ if has('nvim')
   "TermCursorNC
   hi MsgArea term=none cterm=none ctermfg=189 gui=none guifg=#c0caf5
   hi MsgSeparator term=none cterm=none ctermfg=146 ctermbg=235 gui=none guifg=#a9b1d6 guibg=#1f2335
-  hi clear NormalFloat
-  hi! link NormalFloat Pmenu
-  hi FloatBorder term=none cterm=none ctermfg=51 ctermbg=51 gui=none guifg=#00ffff guibg=#00ffff
+  hi NormalFloat term=none cterm=none ctermfg=188 ctermbg=235 gui=none guifg=#d4d4d4 guibg=#252526
+  hi FloatBorder term=none cterm=none ctermfg=60 ctermbg=235 gui=none guifg=#535972 guibg=#252526
+  hi FloatSelBg  term=none cterm=none ctermbg=24 gui=none guibg=#00395c
   hi clear FloatTitle
-  hi! link FloatTitle Title
+  hi! link FloatTitle StartMenuHeader
+  hi clear FloatFooter
+  hi! link FloatFooter StartMenuFooter
   "hi clear NormalNC
   "hi! link NormalNC Normal
   hi clear WinSeparator
@@ -285,6 +298,8 @@ if has('nvim')
   hi! link LspReferenceRead lspReference
   hi clear LspReferenceWrite
   hi! link LspReferenceWrite lspReference
+  hi clear LspInlayHint
+  hi! link LspInlayHint lspInlayHintsParameter
   hi clear DiagnosticError
   hi! DiagnosticError ctermfg=203 guifg=#ff4b4b
   hi clear DiagnosticWarn

@@ -38,7 +38,7 @@ if (g:g_use_nerdfont == 0)
   "普通模式
   sign define vimspectorBP            text=● texthl=BreakPoint
   sign define vimspectorBPCond        text=◆ texthl=BreakPoint
-  sign define vimspectorBPLog         text=◆ texthl=SpellRare
+  sign define vimspectorBPLog         text=◆ texthl=BreakLogPoint
   sign define vimspectorBPDisabled    text=● texthl=BreakPointDisabled
   sign define vimspectorPC            text=▶ texthl=ProgramCounter linehl=DebugLine
   sign define vimspectorPCBP          text=▷  texthl=ProgramCounter linehl=DebugLine
@@ -49,7 +49,7 @@ else
   "使用NerdFont
   call sign_define("vimspectorBP", {"text" : g:debugBreakPointIcon, "texthl" : "BreakPoint"})
   call sign_define("vimspectorBPCond", {"text" : g:debugBreakPointCondIcon, "texthl" : "BreakPoint"})
-  call sign_define("vimspectorBPLog", {"text" : g:debugBreakPointLogIcon, "texthl" : "SpellRare"})
+  call sign_define("vimspectorBPLog", {"text" : g:debugBreakPointLogIcon, "texthl" : "BreakLogPoint"})
   call sign_define("vimspectorBPDisabled", {"text" : g:debugBreakPointDisabledIcon, "texthl" : "BreakPointDisabled"})
   call sign_define("vimspectorPC", {"text" : g:debugProgramCounterIcon, "texthl" : "ProgramCounter", "linehl" : "DebugLine"})
   call sign_define("vimspectorPCBP", {"text" : g:debugProgramCounterBPIcon, "texthl" : "ProgramCounter", "linehl" : "DebugLine"})

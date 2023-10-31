@@ -104,14 +104,16 @@ bear make all
 2. 在 ``Vim`` 中安装 ``vim-lsp``, ``asyncomplete``, ``asyncomplete-lsp`` 这3个插件
 3. 参照笔者的配置
 - [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
-4. Vim配置  
-第一次启动后会在工程跟路径下生成一个.lsp的文件夹，这个文件夹中的  ``src_xxxxxxxx`` 是设置路径，基本和 ``eclipse`` 一致，修改其中的 ``.classpath`` 即可导入第三方jar  
-
-**注**：如果打开的工程为 ``maven`` 工程的话，用 ``eclipe`` 打开一下这个 ``maven`` 工程后，即可成功载入
 
 ## Python语言LSP配置
 
-1. 安装 ``pylsp``  
+### 使用pyright
+```
+npm install -g pyright
+```
+
+### 使用pylsp
+1. 安装 ``pylsp``
 ```
 pip install "python-lsp-server[all]"
 ```
@@ -163,7 +165,9 @@ ignore = E401,E402,E501
 rustup component add rust-analyzer
 ```
 或者参照官方帮助文档安装：[帮助文档](https://rust-analyzer.github.io/manual.html#installation)  
+
 2. 在 ``Vim`` 中安装 ``vim-lsp``, ``asyncomplete``, ``asyncomplete-lsp`` 这3个插件
+
 3. 参照笔者的配置
 - [Vim-conf](Vim-conf) 中的 ``init/lsp.vim``
 
@@ -178,7 +182,8 @@ go install golang.org/x/tools/gopls@latest
 ## Vue的LSP配置
 安装 ``vls``
 ```
-npm install vls -g
+npm install -g @vue/language-server
+npm install -g typescript
 ```
 其他配置同上
 

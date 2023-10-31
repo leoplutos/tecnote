@@ -90,6 +90,7 @@ Java所需插件比较多。有2种安装方式：
 
 ## 主题插件
 * [主题流行趋势](https://vscodethemes.com/)
+* [一款不错的C/C++主题](https://marketplace.visualstudio.com/items?itemName=Xen.ccpp-theme)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[github](https://github.com/xenkuo/ccpp_theme)
 * [Tomorrow and Tomorrow Night Theme Kit（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
 * [Winter is Coming Theme（亮色系）](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
 * [Brackets Light Pro（亮色系）](https://marketplace.visualstudio.com/items?itemName=fehey.brackets-light-pro)

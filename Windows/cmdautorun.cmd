@@ -101,6 +101,10 @@ set GOPATH=D:\Tools\WorkTool\Go\go_global
 set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
 set WEZTERM_HOME=D:\Tools\WorkTool\Linux\WezTerm
 set PATH=%PATH%;%WEZTERM_HOME%
+set SQLITE3_HOME=D:\Tools\WorkTool\DB\Sqlite3
+set PATH=%PATH%;%SQLITE3_HOME%
+set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
+set PATH=%PATH%;%GOBANG_HOME%
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 

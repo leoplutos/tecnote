@@ -40,6 +40,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
   let s:lsp_typescript_tsdk_path = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/typescript/lib'
   let s:lsp_cobol_lsp_jar_path = 'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   let s:lsp_kotlin_lsp_cmd = 'kotlin-language-server.bat'
+  let s:custom_snippet_dir = expand('~/AppData/Roaming/Code/User/snippets')
 else
   let s:lsp_pyright_langserver_cmd = 'pyright-langserver'
   let s:lsp_jdtls_jar_path = '/home/lchuser/work/lch/tool/lsp/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
@@ -49,6 +50,7 @@ else
   let s:lsp_typescript_tsdk_path = '/usr/lib/node_modules/typescript/lib'
   let s:lsp_cobol_lsp_jar_path = '/home/lchuser/work/lch/tool/lsp/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   let s:lsp_kotlin_lsp_cmd = 'kotlin-language-server'
+  let s:custom_snippet_dir = expand('~/work/lch/rc/snippets')
 endif
 
 function! s:on_lsp_buffer_enabled() abort
@@ -460,6 +462,11 @@ if executable('java') && filereadable(s:lsp_jdtls_jar_path)
         \           'enabled': v:true,
         \         },
         \       },
+        \       'inlayhints': {
+        \         'parameterNames': {
+        \           'enabled': v:true,
+        \         },
+        \       },
         \     },
         \   },
         \ },
@@ -514,6 +521,7 @@ if executable('gopls')
         \ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl', 'gowork', 'gotmpl'],
         \ 'workspace_config': {},
         \ 'initialization_options': {
+        \     'allExperiments': v:true,
         "\     'formatting.gofumpt': v:true,
         \     'analyses': {
         \         'ST1000': v:false,
@@ -549,6 +557,15 @@ if executable('gopls')
         \     'ui.navigation.symbolStyle': 'Dynamic',
         \     'ui.completion.completionBudget': '500ms',
         \     'ui.semanticTokens': v:true,
+        \     'ui.hints': {
+        \         'assignVariableTypes': v:true,
+        \         'compositeLiteralFields': v:true,
+        \         'compositeLiteralTypes': v:true,
+        \         'constantValues': v:true,
+        \         'functionTypeParameters': v:true,
+        \         'parameterNames': v:true,
+        \         'rangeVariableTypes': v:true,
+        \     },
         \     'build.directoryFilters': [
         \         '-node_modules',
         \         '-data'
@@ -629,6 +646,11 @@ if executable('java')
         \ 'allowlist': ['cobol'],
         \ 'languageId': {server_info->'cbl'},
         \ 'initialization_options': {
+        \   'hints': {
+        \       'typeHints': v:true,
+        \       'parameterHints': v:true,
+        \       'chainedHints': v:true,
+        \   },
         \ },
         \ })
 endif
@@ -656,6 +678,9 @@ if executable('kotlin-language-server')
         \ 'cmd': {server_info->[s:lsp_kotlin_lsp_cmd]},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
         \ 'allowlist': ['kotlin'],
+        \ 'initialization_options': {
+        \ 
+        \ },
         \ })
 endif
 
@@ -771,7 +796,7 @@ function! GetLspStatus() abort
 endfunction
 
 "代码片段设定
-let g:vsnip_snippet_dir = expand('~/AppData/Roaming/Code/User/snippets')
+let g:vsnip_snippet_dir = s:custom_snippet_dir
 let g:vsnip_filetypes = {}
 let g:vsnip_filetypes.javascriptreact = ['javascript']
 let g:vsnip_filetypes.typescriptreact = ['typescript']

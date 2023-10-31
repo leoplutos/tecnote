@@ -11,9 +11,10 @@ Neovim支持LSP，支持Tree-sitter，支持Lua
 
 ## 下载安装
 
-#### 地址
+### 下载地址
 * [Github地址](https://github.com/neovim/neovim)
-* [Windows平台v0.9.1稳定免安装版](https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-win64.zip)
+* [Windows平台v0.9.4稳定免安装版](https://github.com/neovim/neovim/releases/download/v0.9.4/nvim-win64.zip)
+* [Windows平台开发版下载地址](https://github.com/neovim/neovim/releases/download/nightly/nvim-win64.zip)
 
 #### 安装
 下载 ``nvim-win64.zip`` 之后，解压缩  
@@ -119,6 +120,9 @@ vim.cmd [[source <vimscript文件路径>]]
 就能引入vimscript文件
 
 ## 其他
+
+#### 一款不错的主题
+[edge](https://github.com/sainnhe/edge)
 
 #### 查看高亮组信息
 Neovim 的内部命令 ``:Inspect`` 可以查看当前光标下的高亮组信息
