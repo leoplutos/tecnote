@@ -17,15 +17,17 @@ WSL2 : Ubuntu-22.04 LTS
 │          ├─tmuxrc
 │          ├─snippets
 │          └─vimrc
-│      └─workspace
+│      ├─workspace
 │          ├─c
 │          ├─java
 │          ├─python
-│          └─rust
+│          ├─rust
 │          └─go
-│      └─tool
+│      ├─tool
+│          ├─coc_extension_data
+│          ├─go_global
 │          └─lsp
-│      └─tmp
+│      ├─tmp
 └      └─log
 ```
 - rc文件夹：放各个软件的配置文件，例子见这里 [rc](./linux_rc/)
@@ -45,6 +47,8 @@ mkdir -p ~/work/lch/workspace/java
 mkdir -p ~/work/lch/workspace/python
 mkdir -p ~/work/lch/workspace/rust
 mkdir -p ~/work/lch/workspace/go
+mkdir -p ~/work/lch/tool/coc_extension_data
+mkdir -p ~/work/lch/tool/go_global
 mkdir -p ~/work/lch/tool/lsp
 mkdir -p ~/work/lch/tmp
 mkdir -p ~/work/lch/log

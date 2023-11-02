@@ -51,10 +51,12 @@ alias vim='vim -u ~/work/lch/rc/vimrc/.vimrc'
 alias viml='func_viml() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"; }; func_viml'
 alias vimd='func_vimd() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"; }; func_vimd'
 alias vimf='func_vimf() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_vimf'
+alias vimc='func_vimc() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"; }; func_vimc'
 alias nvim='env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua'
 alias nviml='func_nviml() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"; }; func_nviml'
 alias nvimd='func_nvimd() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"; }; func_nvimd'
 alias nvimf='func_nvimf() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_nvimf'
+alias nvimc='func_nvimc() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"; }; func_nvimc'
 alias lg='lazygit'
 alias gu='gitui'
 alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'
@@ -62,3 +64,4 @@ alias tmuxn='tmux -2u -f ~/work/lch/rc/tmuxrc/tmux3.2.conf new-session -s lch_se
 alias tmuxa='tmux -2u a -t lch_session'
 
 alias clearb='echo -e "\ec\e[3J"'
+

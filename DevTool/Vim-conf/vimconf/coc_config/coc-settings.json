@@ -1,0 +1,86 @@
+{
+	"workspace.rootPatterns": [
+		".git",
+		".svn",
+		".project",
+		".root",
+		".projections.json"
+	],
+	"colors.enable": false,
+	"diagnostic.virtualText": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
+	"diagnostic.virtualTextPrefix": "  󰑃 ",
+	"diagnostic.errorSign": "",
+	"diagnostic.warningSign": "",
+	"diagnostic.infoSign": "",
+	"diagnostic.hintSign": "",
+	"floatFactory.floatConfig": {
+		"border": true,
+		"rounded": true,
+		"highlight": "CocFloating",
+		"borderhighlight": "CocFloatingBorder",
+		"close": false
+	},
+	"hover.target": "float",
+	"hover.floatConfig": {
+		"title": "Hover"
+	},
+	"diagnostic.floatConfig": {
+		"title": "Diagnostic"
+	},
+	"signature.target": "float",
+	"signature.floatConfig": {
+		"title": "Signature"
+	},
+	"list.floatPreview": true,
+	"list.indicator": " 󰑃 ",
+	"list.smartCase": true,
+	"semanticTokens.enable": true,
+	"snippet.highlight": true,
+	"suggest.enableFloat": true,
+	"suggest.virtualText": true,
+	"suggest.floatConfig": {
+		"title": "Suggest",
+		"border": true,
+		"rounded": true,
+		"highlight": "CocFloating",
+		"borderhighlight": "CocFloatingBorder",
+		"close": false
+	},
+	"suggest.pumFloatConfig": {
+		"title": "Suggest",
+		"border": true,
+		"rounded": true,
+		"highlight": "CocFloating",
+		"borderhighlight": "CocFloatingBorder",
+		"close": false
+	},
+	"suggest.completionItemKindLabels": {
+		"text": " Text",
+		"method": " Method",
+		"function": "󰊕 Function",
+		"constructor": "󱃘 Constructor",
+		"field": " Field",
+		"variable": " Variable",
+		"class": " Class",
+		"interface": " Interface",
+		"module": "󰏓 Module",
+		"property": " Property",
+		"unit": "󰚯 Unit",
+		"value": " Value",
+		"enum": " Enum",
+		"keyword": " Keyword",
+		"snippet": " Snippet",
+		"color": " Color",
+		"file": " File",
+		"reference": " Reference",
+		"folder": "󰉋 Folder",
+		"enumMember": " EnumMember",
+		"constant": " Constant",
+		"struct": " Struct",
+		"event": " Event",
+		"operator": " Operator",
+		"typeParameter": " TypeParameter",
+		"default": ""
+	},
+}

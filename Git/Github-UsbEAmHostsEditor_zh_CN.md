@@ -67,6 +67,7 @@ python D:\WorkSpace\Python\PythonSampleProject\src\updateGithubHosts.py
 
 
 ## github下载加速
-https://gh.api.99988866.xyz/
+https://moeyy.cn/gh-proxy  
+https://gh.api.99988866.xyz/  
 
 

@@ -187,6 +187,103 @@ npm install -g typescript
 ```
 其他配置同上
 
+## Coc.nvim
+和其他LSP插件相比Coc是另一套解决方案  
+需要有Node环境，插件体积更小，安装更方便一些。  
+
+#### Coc的下载与安装
+在 [官方Github](https://github.com/neoclide/coc.nvim) 下载好代码以后，像其他插件一样放到 ``/pack/vendor/opt`` 下  
+然后运行命令
+```
+cd %USERPROFILE%\vimconf\pack\vendor\opt\coc.nvim
+npm ci
+```
+进入Vim/NeoVim之后可以用命令
+```
+:CocInfo
+:checkhealth
+```
+来查看信息，笔者的信息如下
+```
+## versions
+
+vim version: VIM - Vi IMproved 9.0 9002081
+node version: v18.17.1
+coc.nvim version: 0.0.82-master
+coc.nvim directory: C:\Users\admin\vimconf\pack\vendor\opt\coc.nvim
+term: undefined
+platform: win32
+
+## Log of coc.nvim
+
+2023-11-02T11:18:37.654 INFO (pid:7268) [configurations] - Add folder configuration from cwd: C:\Users\admin\vimconf\pack\vendor\opt\coc.nvim\.vim\coc-settings.json
+2023-11-02T11:18:37.786 INFO (pid:7268) [plugin] - coc.nvim initialized with node: v18.17.1 after 215
+```
+
+#### Coc路径自定义
+这些全局变量可以自定义 coc 的路径
+ - g:coc_node_path ： node可执行文件的定义
+ - g:coc_config_home ： 设定文件(coc-settings.json)路径的定义
+ - g:coc_data_home ： coc下载插件的路径定义  
+
+一个例子
+```
+let g:coc_node_path = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node.exe'
+let g:coc_config_home = expand('~/vimconf/coc_config')
+let g:coc_data_home = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/coc_extension_data'
+```
+
+#### Coc使用npm的源自定义
+修改 ``~/.npmrc`` 文件，在最下面加上如下内容
+```
+coc.nvim:registry=https://npmreg.proxy.ustclug.org/
+```
+
+
+#### Coc安装语言服务
+使用命令为
+```
+:CocInstall {Coc插件名字}
+```
+比如
+```
+:CocInstall coc-pyright
+```
+可自定义路径，默认安装路径在 ``%LOCALAPPDATA%\coc\extensions\node_modules`` 下
+
+笔者主要使用的有
+ - coc-clangd
+ - coc-pyright
+ - coc-java
+ - coc-rust-analyzer
+ - coc-go
+ - coc-volar
+ - coc-omnisharp
+ - coc-lua
+ - coc-snippets
+
+暂时没有发现 ``Cobol`` 和 ``Kotlin`` 的LSP  
+更多看这里 [Coc插件列表](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
+
+#### Coc的设定文件coc-settings.json
+Coc的设定文件分 ``全局`` 和 ``工程``
+
+**1. 全局设定文件**  
+使用如下命令，即可查看
+```
+:CocConfig
+```
+可自定义路径，默认的路径为 ``%USERPROFILE%\vimfiles``  
+
+**2. 工程设定文件**  
+使用如下命令，即可查看
+```
+:CocLocalConfig
+```
+工程的设定文件和VSCode类似，在工程根路径下的 ``.vim`` 路径内。工程设定会**覆盖**全局设定
+
+其他的地方可看笔者的配置文件 ``coc.vim`` 和 ``coc-settings.json``  
+
 ## 其他
 
 #### 颜文字的使用

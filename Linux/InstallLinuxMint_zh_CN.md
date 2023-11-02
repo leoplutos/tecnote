@@ -35,7 +35,7 @@ Linux Mint 是基于 ``Ubuntu`` 改进的开源免费桌面 Linux 系统，运�
 
 3. 安装之后会提示需要重启，选择 ``现在重启``
 
-4. 重启后会提示你拔出U盘后，按回车。操作即可
+4. 重启后会提示你 ``拔出U盘后，按回车`` ，操作即可
 
 5. 重启完成后，就可以用先前设置好的用户名和密码登录到 Linux Mint 21 桌面了
 
@@ -46,20 +46,148 @@ Linux Mint 是基于 ``Ubuntu`` 改进的开源免费桌面 Linux 系统，运�
 ## 安装后的设置
 
 因为Mint安装好后没有 ``Vim``，只有 ``nano``。在这里记录一下nano的快捷键  
-- CTRL+o 回车 保存
-- CTRL+x 退出
-- SHIFT+方向 选择
-- ALT+6 复制
-- CTRL+u 粘贴
+- CTRL+o 然后回车 → 保存
+- CTRL+x → 退出
+- SHIFT+方向 → 选择
+- ALT+6 → 复制
+- CTRL+u → 粘贴
 
 ### 更新源
-会收到提示先选择本地软件源，没注意到提示的可以自行点 ``系统设置-软件源``  
+第一次启动系统会收到提示先选择本地软件源，没注意到提示的可以自行点 ``系统设置 → 软件源``  
 笔者选择的是 ``TUNA`` 清华大学源  
-根据 [Linux环境设置总结](./Linux-env_zh_CN.md) 里面的 ``更换国内源`` 部分直接修改文件即可（使用nano直接修改）
+修改之后还需要修改一下源文件  
+``Linux Mint`` 的镜像源配置文件和 ``Debian``/``Ubuntu`` 稍稍有些不同，是在 ``/etc/apt/sources.list.d`` 目录下，而不是 ``/etc/apt/sources.list`` 文件
+
+```
+ll /etc/apt/sources.list.d/
+cat /etc/apt/sources.list.d/official-package-repositories.list
+sudo cp -afp /etc/apt/sources.list.d/official-package-repositories.list /etc/apt/sources.list.d/official-package-repositories.list_bak20231101
+sudo nano /etc/apt/sources.list.d/official-package-repositories.list
+```
+修改为如下内容
+```
+deb https://mirrors.tuna.tsinghua.edu.cn/linuxmint victoria main upstream import backport
+
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu jammy main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu jammy-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu jammy-backports main restricted universe multiverse
+
+#deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu jammy-security main restricted universe multiverse
+```
+更多看 [清华大学Linux Mint 软件仓库帮助](https://mirror.tuna.tsinghua.edu.cn/help/linuxmint/)
+
+修改为国内源后，**连接网络**，运行一次升级
+```
+#更新缓存
+sudo apt update
+#更新软件
+sudo apt upgrade
+#发行版本更新
+sudo apt dist-upgrade
+#自动移除不再使用的依赖程序包
+sudo apt autoremove --purge
+#删除已下载的旧包文件
+sudo apt autoclean
+```
 
 ### 语言与输入法
 
+#### 安装语言包
+```
+sudo apt install language-pack-zh-hans language-pack-gnome-zh-hans language-pack-zh-hans-base language-pack-gnome-zh-hans-base
+```
+#### 解决字体发虚
+```
+sudo apt install language-selector-*
+```
+
+#### 安装拼音输入法引擎fcitx5
+
+开始菜单 → 语言支持 → 点击``安装`` → 点击``应用到整个系统``  
+点击``地区格式``标题栏 → 点击``应用到整个系统``  
+然后终端运行命令
+```
+sudo apt install fcitx5*
+```
+
+（选装）如果想用谷歌拼音
+```
+sudo apt install fcitx-googlepinyin
+```
+
+接下来重启系统  
+重启后就可以使用拼音输入法了
+
 ### 字体设置
+
+#### 创建临时文件夹
+```
+mkdir -p ~/work/lch/tmp/cust_fonts
+sudo mkdir -p /usr/share/fonts/cust_fonts
+```
+
+#### 复制 Windows字体
+路径为
+```
+%windir%\fonts
+```
+直接复制出来即可，注意字体文件后缀是 ``ttf`` 格式  
+复制到 ``~/work/lch/tmp/cust_fonts``
+
+#### 复制 更纱黑体NerdFonts(Sarasa Gothic Nerd Fonts)
+- sarasa-mono-sc-regular.ttf（中文开发）
+- sarasa-mono-sc-light.ttf（中文开发）
+- sarasa-mono-j-regular.ttf（日文开发）
+- sarasa-mono-j-light.ttf（日文开发）
+
+复制到 ``~/work/lch/tmp/cust_fonts``  
+
+#### 拷贝字体到安装路径下
+```
+sudo cp ~/work/lch/tmp/cust_fonts/* /usr/share/fonts/cust_fonts
+```
+
+#### 修改权限
+```
+sudo chmod 644 /usr/share/fonts/cust_fonts/*
+sudo chown root:root /usr/share/fonts/cust_fonts/*
+ls -al /usr/share/fonts/cust_fonts
+```
+
+#### 生成字体的索引信息
+```
+#sudo apt install ttf-mscorefonts-installer
+#sudo apt install fontconfig
+cd /usr/share/fonts/cust_fonts
+sudo mkfontscale
+sudo mkfontdir
+```
+
+#### 更新字体缓存
+```
+sudo fc-cache -fv
+```
+
+#### 确认
+```
+fc-list
+```
+
+### 安装Chromium浏览器
+```
+sudo apt install chromium-browser chromium-browser-l10n
+```
+
+### 安装VSCode
+访问VSCode官网，直接下载deb安装即可
+
+### 安装Wezterm
+```
+cd ~/work/lch/tmp
+curl -LO https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+sudo apt install -y ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+```
 
 ### 开发环境构建
 看 [Linux环境设置总结](./Linux-env_zh_CN.md) 即可

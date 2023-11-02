@@ -13,12 +13,12 @@
 | 模糊查询        | ctrlp.vim                   | LeaderF              | telescope.nvim        |
 | 代码大纲        | ctrlp-funky                 | :LeaderfFunction     | symbols-outline.nvim  |
 | LSP         | 无                           | vim-lsp              | nvim-lspconfig        |
-| DAP         | 无                           | vimspector           | vimspector            |
+| DAP         | 无                           | vimspector           | nvim-dap            |
 | 缩进参考线       | indentLine                  | indentLine           | indent-blankline.nvim |
 | 状态栏         | 自定义                         | lightline.vim        | lualine.nvim          |
 | Tab/Buffer栏 | 自定义                         | lightline-bufferline | bufferline.nvim       |
 | 终端          | vim-terminal-help           | vim-terminal-help    | toggleterm.nvim       |
-| 欢迎页面        | vim-startify                | vim-startify         | vim-startify          |
+| 欢迎页面        | vim-startify                | vim-startify         | dashboard-nvim          |
 | 代码片段        | 自定义                         | vim-vsnip            | vim-vsnip             |
 | 其他          | 无                           | 无                    | flash.nvim            |
 
@@ -33,11 +33,6 @@
 ```
 
 ### 一些笔者没有使用但是很优秀的插件
-
-- DAP：因为使用了 ``vimspector`` 所以没有采用  
-  mfussenegger/nvim-dap ：dap支持  
-  rcarriga/nvim-dap-ui ：debug用的ui  
-  theHamsta/nvim-dap-virtual-text ：在变量右侧用虚拟文本显示debug时的变量值  
 
 - Git  
   lewis6991/gitsigns.nvim ：git支持  

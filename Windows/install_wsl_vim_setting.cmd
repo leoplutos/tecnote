@@ -4,6 +4,7 @@
 ::Vim复制内容
 ::  %USERPROFILE%\.vimrc                   ->  %WSL_VIM_RC%\.vimrc
 ::  %USERPROFILE%\vimconf\after            ->  %WSL_VIM_RC%\vimconf\after
+::  %USERPROFILE%\vimconf\coc_config       ->  %WSL_VIM_RC%\vimconf\coc_config
 ::  %USERPROFILE%\vimconf\colors           ->  %WSL_VIM_RC%\vimconf\colors
 ::  %USERPROFILE%\vimconf\dict             ->  %WSL_VIM_RC%\vimconf\dict
 ::  %USERPROFILE%\vimconf\ftdetect         ->  %WSL_VIM_RC%\vimconf\ftdetect
@@ -38,6 +39,7 @@ echo ======Copy Vim Setting Start======
 ::复制Vim设定
 copy /y %USERPROFILE%\.vimrc %WSL_VIM_RC%\.vimrc
 xcopy /e /s /i /r /h /y %USERPROFILE%\vimconf\after %WSL_VIM_RC%\vimconf\after
+xcopy /e /s /i /r /h /y %USERPROFILE%\vimconf\coc_config %WSL_VIM_RC%\vimconf\coc_config
 xcopy /e /s /i /r /h /y %USERPROFILE%\vimconf\colors %WSL_VIM_RC%\vimconf\colors
 xcopy /e /s /i /r /h /y %USERPROFILE%\vimconf\dict %WSL_VIM_RC%\vimconf\dict
 xcopy /e /s /i /r /h /y %USERPROFILE%\vimconf\ftdetect %WSL_VIM_RC%\vimconf\ftdetect

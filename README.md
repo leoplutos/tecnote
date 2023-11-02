@@ -45,6 +45,7 @@
 ## C相关
 * [C相关](C/C_zh_CN.md)
 * [gdb相关](C/Gdb_zh_CN.md)
+* [MinGW64](C/MinGW_zh_CN.md)
 * [libui](C/C-libui_zh_CN.md)
 
 ## Go相关
@@ -67,6 +68,7 @@
 * [终端横评](DevTool/Terminal_Compare_zh_CN.md)
 * [Windows Terminal](DevTool/Windows-Terminal_zh_CN.md)
 * [Neo-Vim](DevTool/NeoVim_zh_CN.md)
+* [Neo中使用Lua](DevTool/NeoVim-lua-guide_zh_CN.md)
 * [Vim](DevTool/Vim_zh_CN.md)
 * [Gvim](DevTool/Gvim_zh_CN.md)
 * [Vim环境和设置总结](DevTool/Vim-env_zh_CN.md)
@@ -84,6 +86,7 @@
 
 ## DB
 * [Postgresql](DB/Postgresql_zh_CN.md)
+* [DBeaver](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
 * [Sqlite3](DB/Sqlite3_zh_CN.md)
 

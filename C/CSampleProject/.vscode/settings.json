@@ -1,5 +1,5 @@
 {
-	"mingw.home": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW",
+	"mingw.home": "D:\\Tools\\WorkTool\\C\\MinGW64",
 	"ninja.home": "D:\\Tools\\WorkTool\\C\\ninja-win",
 	"C_Cpp.default.compilerPath": "${config:mingw.home}\\bin\\gcc.exe", //设定C语言默认编译器
 	"C_Cpp.default.cStandard": "c99", //设定C99标准
@@ -36,6 +36,5 @@
 	},
 	"files.associations": {
 		"*.pc": "c",
-		"common.h": "c"
 	},
 }

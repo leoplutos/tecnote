@@ -27,7 +27,7 @@ endif
 if !exists('g:g_use_lsp')
   let g:g_use_lsp = 0
 endif
-"全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim）
+"全局变量g:g_lsp_type（0：vim-lsp，1：vim-lsc，2：LanguageClient-neovim，3：coc.nvim）
 if !exists('g:g_lsp_type')
   let g:g_lsp_type = 0
 endif
@@ -73,7 +73,7 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
   let $JAVA_HOME = 'D:\Tools\WorkTool\Java\jdk17.0.6'
   let $KOTLIN_HOME = 'D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10'
   let $PATH .= ';D:\Tools\WorkTool\Search\ripgrep\bin'
-  let $PATH .= ';D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin'
+  let $PATH .= ';D:\Tools\WorkTool\C\MinGW64\bin'
   let $PATH .= ';D:\Tools\WorkTool\C\ctags_6.0_x64'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM'
   let $PATH .= ';D:\Tools\WorkTool\C\LLVM\clangd_16.0.2\bin'
@@ -641,6 +641,9 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
     elseif (g:g_lsp_type == 2)
       "加载LSP设置（LanguageClient-neovim）
       exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
+    elseif (g:g_lsp_type == 3)
+      "使用coc.nvim
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/coc.vim'
     endif
 
     "加载文件模糊查找（LeaderF）

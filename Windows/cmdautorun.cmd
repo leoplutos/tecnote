@@ -57,7 +57,7 @@ goto GoOn
 
 :GoOn
 ::设置环境变量
-set MINGW_HOME=D:\Tools\WorkTool\C\codeblocks-20.03mingw-nosetup\MinGW\bin
+set MINGW_HOME=D:\Tools\WorkTool\C\MinGW64\bin
 set PATH=%PATH%;%MINGW_HOME%
 set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
 set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
@@ -143,12 +143,18 @@ doskey cdw=cd /d %personal_workspace%
 doskey cdl=cd /d %personal_log%
 doskey lg=lazygit $*
 doskey gu=gitui $*
-doskey viml=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
-doskey vimd=gvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
-doskey vimf=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
+doskey viml=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
+doskey vimd=vim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
+doskey vimf=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
+doskey vimc=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
+doskey gviml=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
+doskey gvimd=gvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
+doskey gvimf=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
+doskey gvimc=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 doskey nviml=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
 doskey nvimd=nvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
 doskey nvimf=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
+doskey nvimc=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 ::echo 别名载入完成，键入alias查看
 echo Alias Setting Complited
 

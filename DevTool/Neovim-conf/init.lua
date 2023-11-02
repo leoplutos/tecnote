@@ -94,8 +94,15 @@ else
   require('tree')
   -- 加载lua/webdevicons.lua
   --require('webdevicons')
-  -- 加载lua/lsp.lua
-  require('lsp')
+  if (vim.g.g_lsp_type == 3) then
+    -- 加载lua/coc.lua - 使用coc.nvim
+    require('coc')
+  else
+    -- 加载lua/lsp.lua - 使用内置LSP
+    require('lsp')
+  end
+  -- 加载lua/treesitter.lua
+  require('treesitter')
   -- 加载lua/outline.lua
   require('outline')
   -- 加载lua/finder.lua

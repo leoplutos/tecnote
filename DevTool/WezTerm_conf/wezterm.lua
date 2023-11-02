@@ -15,7 +15,17 @@ end
 config.check_for_updates = false
 --不自动加载配置文件
 config.automatically_reload_config = false
-config.default_prog = { 'cmd.exe', '/k', 'D:/Tools/WorkTool/Cmd/cmdautorun.cmd', '1' }
+--根据OS设定内容
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  --Windows
+  config.default_prog = { 'cmd.exe', '/k', 'D:/Tools/WorkTool/Cmd/cmdautorun.cmd', '1' }
+elseif wezterm.target_triple == 'x86_64-apple-darwin' then
+  --MacOS
+  config.default_prog = { '/bin/bash', '-l' }
+else
+  --Linux
+  config.default_prog = { '/bin/bash', '-l' }
+end
 --config.default_gui_startup_args = { 'ssh', 'lchuser@172.20.115.248:8122' }
 --config.default_cwd = "~"
 config.launch_menu = {}

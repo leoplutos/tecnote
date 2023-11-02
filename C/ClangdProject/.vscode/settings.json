@@ -1,5 +1,5 @@
 {
-	"mingw.home": "D:\\Tools\\WorkTool\\C\\codeblocks-20.03mingw-nosetup\\MinGW",
+	"mingw.home": "D:\\Tools\\WorkTool\\C\\MinGW64",
 	"ninja.home": "D:\\Tools\\WorkTool\\C\\ninja-win",
 	"clangd.path": "D:\\Tools\\WorkTool\\C\\LLVM\\clangd_16.0.2\\bin\\clangd.exe",
 	"clangd.checkUpdates": false,
@@ -35,6 +35,5 @@
 	},
 	"files.associations": {
 		"*.pc": "c",
-		"common.h": "c"
 	},
 }

@@ -147,6 +147,7 @@ hi BreakLogPoint   term=none cterm=none ctermfg=75 gui=none guifg=#61afef
 hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
 hi ProgramCounter   term=reverse ctermbg=153 guibg=#cee1f2
 hi DebugLine    term=reverse ctermbg=229 guibg=#e4efb3
+hi DapVirtualText term=none cterm=none ctermfg=243 ctermbg=230 gui=none guifg=#7f7865 guibg=#fff1cb
 "hi ToolbarLine  term=underline ctermbg=252 guibg=#d3d3d3
 "hi ToolbarButton cterm=bold ctermfg=231 ctermbg=241 gui=bold guifg=#ffffff guibg=#666666
 hi ToolbarLine  term=underline ctermbg=252 guibg=#d3d3d3
@@ -274,7 +275,6 @@ if has('nvim')
   "hi clear Whitespace
   "hi! link Whitespace NonText
   hi clear WinBar
-  hi! link WinBar ToolbarButton
   "hi clear WinBarNC
   "hi! link WinBarNC WinBar
   hi Substitute term=none cterm=none ctermfg=255 ctermbg=197 gui=none guifg=#e9e9ed guibg=#f52a65
@@ -287,7 +287,7 @@ if has('nvim')
   hi clear @property
   hi! link @property Property
   hi clear @variable
-  hi! link @variable Variables
+  hi! link @variable @lsp
   hi clear @namespace
   hi! link @namespace Property
 
