@@ -6,7 +6,9 @@
 		".root",
 		".projections.json"
 	],
-	"colors.enable": false,
+	//"workspace.bottomUpFiletypes": ["*"],
+	"colors.enable": true,
+	"semanticTokens.enable": true,
 	"diagnostic.virtualText": true,
 	"diagnostic.virtualTextCurrentLineOnly": false,
 	"diagnostic.virtualTextPrefix": "  󰑃 ",
@@ -35,8 +37,6 @@
 	"list.floatPreview": true,
 	"list.indicator": " 󰑃 ",
 	"list.smartCase": true,
-	"semanticTokens.enable": true,
-	"snippet.highlight": true,
 	"suggest.enableFloat": true,
 	"suggest.virtualText": true,
 	"suggest.floatConfig": {
@@ -56,31 +56,127 @@
 		"close": false
 	},
 	"suggest.completionItemKindLabels": {
-		"text": " Text",
-		"method": " Method",
+		"text": " Text",
+		"method": "󰡱 Method",
 		"function": "󰊕 Function",
-		"constructor": "󱃘 Constructor",
+		"constructor": " Constructor",
 		"field": " Field",
 		"variable": " Variable",
 		"class": " Class",
 		"interface": " Interface",
-		"module": "󰏓 Module",
-		"property": " Property",
-		"unit": "󰚯 Unit",
-		"value": " Value",
+		"module": " Module",
+		"property": " Property",
+		"unit": " Unit",
+		"value": "󰉻 Value",
 		"enum": " Enum",
-		"keyword": " Keyword",
+		"keyword": " Keyword",
 		"snippet": " Snippet",
-		"color": " Color",
+		"color": " Color",
 		"file": " File",
-		"reference": " Reference",
+		"reference": " Reference",
 		"folder": "󰉋 Folder",
-		"enumMember": " EnumMember",
-		"constant": " Constant",
-		"struct": " Struct",
+		"enumMember": " EnumMember",
+		"constant": "󰏿 Constant",
+		"struct": "󰙅 Struct",
 		"event": " Event",
 		"operator": " Operator",
 		"typeParameter": " TypeParameter",
 		"default": ""
 	},
+	"snippets.extends": {
+		"cpp": [
+			"c"
+		],
+		"javascriptreact": [
+			"javascript"
+		],
+		"typescript": [
+			"javascript"
+		]
+	},
+	"snippets.loadVSCodeProjectSnippets": true,
+	"snippets.textmateSnippetsRoots": [
+		"C:/Users/admin/AppData/Roaming/Code/User/snippets",
+		"~/work/lch/rc/snippets"
+	],
+	"snippets.ultisnips.enable": false,
+	"snippets.snipmate.enable": false,
+	"snippet.highlight": true,
+	"explorer.icon.enableNerdfont": true,
+	"explorer.file.showHiddenFiles": true,
+	"explorer.keyMappings.global": {
+		"<cr>": [
+			"wait",
+			"expandable?",
+			"expand",
+			"open"
+		],
+	},
+	"languageserver": {
+		"csharp-ls": {
+			"command": "csharp-ls",
+			"filetypes": [
+				"cs"
+			],
+			"rootPatterns": [
+				".root",
+				"*.csproj",
+				".vim/",
+				".git/",
+				".svn/",
+				".hg/"
+			],
+			//"cwd": "./src",
+			"initializationOptions": {
+				"AutomaticWorkspaceInit": true,
+			},
+			"settings": {}
+		},
+		"che-che4z-lsp-for-cobol": {
+			"command": "java",
+			"args": [
+				"--add-opens",
+				"java.base/java.lang=ALL-UNNAMED",
+				"-Dline.speparator=\r\n",
+				"-jar",
+				"D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar",
+				"pipeEnabled"
+			],
+			"filetypes": [
+				"cobol"
+			],
+			"rootPatterns": [
+				".root",
+				".vim/",
+				".git/",
+				".svn/",
+				".hg/"
+			],
+			//"cwd": "./src",
+			"initializationOptions": {
+				"hints": {
+					"typeHints": true,
+					"parameterHints": true,
+					"chainedHints": true,
+				},
+			},
+			"settings": {}
+		},
+		"kotlin-language-server": {
+			"command": "kotlin-language-server.bat",
+			"filetypes": [
+				"kotlin"
+			],
+			"rootPatterns": [
+				".root",
+				".vim/",
+				".git/",
+				".svn/",
+				".hg/"
+			],
+			//"cwd": "./src",
+			"initializationOptions": {},
+			"settings": {}
+		},
+	}
 }

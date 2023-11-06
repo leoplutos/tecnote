@@ -171,6 +171,46 @@ C:\Users\Leo-G5000\vimconf\pack\vendor\opt\vimspector\gadgets\windows\.gadgets.j
 }
 ```
 
+## Java工程配置例子
+需要使用 ``coc.nvim``，然后安装
+```
+CocInstall coc-java
+CocInstall coc-java-debug
+```
+然后打开控制台启动DebugServer
+```
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y -jar JavaBatchProject-20231019.jar
+```
+然后在工程根路径设定 ``.vimspector.json`` 文件，内容如下
+```
+{
+	"adapters": {
+		"java-debug-server": {
+			"name": "vscode-java",
+			"port": "${AdapterPort}"
+		}
+	},
+	"configurations": {
+		"Java Attach": {
+			"default": true,
+			"adapter": "java-debug-server",
+			"configuration": {
+				"request": "attach",
+				"host": "127.0.0.1",
+				"port": "5005"
+			},
+			"breakpoints": {
+				"exception": {
+					"caught": "N",
+					"uncaught": "N"
+				}
+			}
+		}
+	}
+}
+```
+然后按F5启动调试即可（详见笔者coc.vim设定文件）
+
 ## Python工程配置例子
 使用
 ```

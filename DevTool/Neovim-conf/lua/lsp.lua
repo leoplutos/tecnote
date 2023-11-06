@@ -88,7 +88,8 @@ function! GetLspStatus() abort
   elseif (&ft=='vue')
     let lspServerName = 'volar'
   elseif (&ft=='cs') || (&ft=='solution')
-    let lspServerName = 'omnisharp'
+    "let lspServerName = 'omnisharp'
+    let lspServerName = 'csharp_ls'
   elseif (&ft=='cobol')
     let lspServerName = 'cobol_ls'
   elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')
@@ -420,19 +421,24 @@ lspconfig.volar.setup {
   },
   root_dir = lspconfig.util.root_pattern('.root', 'package.json', '.git');
 }
--- CSharp（OmniSharp）设置
-lspconfig.omnisharp.setup {
-  cmd = { 'OmniSharp', '-z', '--languageserver', '--encoding', 'utf-8', 'DotNet:enablePackageRestore=false' },
-  filetypes = { 'cs' },
-  enable_editorconfig_support = true,
-  enable_ms_build_load_projects_on_demand = false,
-  enable_roslyn_analyzers = false,
-  organize_imports_on_format = false,
-  enable_import_completion = false,
-  sdk_include_prereleases = true,
-  analyze_open_documents_only = false,
-  root_dir = lspconfig.util.root_pattern('.root', '.sln', '.csproj', '.git');
+-- CSharp（csharp-ls）设置
+-- dotnet tool install --global csharp-ls
+lspconfig.csharp_ls.setup {
+  root_dir = lspconfig.util.root_pattern('.root', '.sln', '*.csproj', '.git');
 }
+-- CSharp（OmniSharp）设置
+--lspconfig.omnisharp.setup {
+--  cmd = { 'OmniSharp', '-z', '--languageserver', '--encoding', 'utf-8', 'DotNet:enablePackageRestore=false' },
+--  filetypes = { 'cs' },
+--  enable_editorconfig_support = true,
+--  enable_ms_build_load_projects_on_demand = false,
+--  enable_roslyn_analyzers = false,
+--  organize_imports_on_format = false,
+--  enable_import_completion = false,
+--  sdk_include_prereleases = true,
+--  analyze_open_documents_only = false,
+--  root_dir = lspconfig.util.root_pattern('.root', '.sln', '*.csproj', '.git');
+--}
 -- Cobol（che-che4z-lsp-for-cobol）设置
 lspconfig.cobol_ls.setup {
   cmd = {

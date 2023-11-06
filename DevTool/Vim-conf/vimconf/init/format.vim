@@ -17,6 +17,9 @@ scriptencoding utf-8
 "sql-formatter
 "    需要NodeJs安装
 "    npm install -g sql-formatter
+"toml-fmt
+"    需要rust安装
+"    cargo install toml-fmt
 
 "clang-format和prettier的判断
 let g:g_clang_format_flg = 0
@@ -112,9 +115,16 @@ augroup lchFormatGroup
     autocmd FileType sql setlocal formatprg=sql-formatter
   endif
 
+  "toml
+  if executable('toml-fmt')
+    autocmd FileType toml setlocal equalprg=toml-fmt
+    autocmd FileType toml setlocal formatprg=toml-fmt
+  endif
+
 augroup END
 
 " [普通模式]F9：格式化当前函数
 "在各个after/ftplugin中设置
 " [普通模式]F12：格式化当前文件
 nnoremap <F12> gggqG
+

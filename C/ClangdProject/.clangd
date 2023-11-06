@@ -10,17 +10,22 @@ CompileFlags:
 
 Diagnostics:
   ClangTidy:
-    Add:
-    [
-        performance-*,
-        bugprone-*,
-        modernize-*,
-        clang-analyzer-*,
-        readability-identifier*,
-        readability-magic-number*,
-    ]
-    CheckOptions:
-      readability-identifier-naming.VariableCase: camelCase
+    Add: ["*"]
+    Remove:
+      [
+        abseil*,
+        fuchsia*,
+        llvmlib*,
+        zircon*,
+        altera*,
+        google-readability-todo,
+        readability-braces-around-statements,
+        hicpp-braces-around-statements,
+        modernize-use-trailing-return-type,
+      ]
+
+Index:
+  Background: Build
 
 InlayHints:
   Designators: Yes

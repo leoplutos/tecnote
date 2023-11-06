@@ -608,7 +608,19 @@ endif
 "endif
 
 
-
+"使用CSharp（csharp-ls）
+"安装命令 dotnet tool install --global csharp-ls
+"if executable('csharp-ls')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'csharp-ls',
+"        \ 'cmd': {server_info->['csharp-ls']},
+"        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+"        \ 'allowlist': ['cs', 'solution'],
+"        \ 'initialization_options': {
+"        \   'AutomaticWorkspaceInit': v:true,
+"        \ },
+"        \ })
+"endif
 "使用CSharp（OmniSharp）
 "在这里下载 https://github.com/OmniSharp/omnisharp-roslyn/releases
 "遇到出错，删除bin和obj文件夹下所有内容即可
@@ -776,6 +788,7 @@ function! GetLspStatus() abort
     let lspServerName = 'volar-language-server'
   elseif (&ft=='cs') || (&ft=='solution')
     let lspServerName = 'OmniSharp'
+    "let lspServerName = 'csharp-ls'
   elseif (&ft=='cobol')
     let lspServerName = 'che-che4z-lsp-for-cobol'
   elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')

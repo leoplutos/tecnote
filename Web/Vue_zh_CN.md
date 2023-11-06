@@ -24,3 +24,20 @@ npm run dev
 - [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  
 - [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)  
 
+## 使用Coc.nvim开发
+使用 ``coc.nvim`` 开发使用下面的命令安装插件
+```
+:CocInstall @yaegassy/coc-volar
+#第2个为可选安装项
+:CocInstall @yaegassy/coc-typescript-vue-plugin
+```
+然后在工程根路径下新建 ``/.vim/coc-settings.json`` 文件内容如下
+```
+{
+	"volar.takeOverMode.enabled": true,
+	"tsserver.enable": false,
+	"vue.inlayHints.missingProps": true,
+	"vue.inlayHints.inlineHandlerLeading": true,
+	"vue.inlayHints.optionsWrapper": true,
+}
+```

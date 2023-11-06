@@ -42,6 +42,7 @@ hi StatusLineNC term=reverse cterm=reverse ctermfg=103 ctermbg=16 gui=reverse gu
 hi VertSplit    term=reverse ctermfg=237 ctermbg=237 guifg=#3e3e3e guibg=#3e3e3e
 hi Title        term=bold cterm=bold ctermfg=214 gui=bold guifg=#f39c12
 hi Visual       term=reverse ctermbg=60 guibg=#2e3c64
+hi VisualNOS    term=bold cterm=bold gui=bold
 hi WarningMsg   term=bold cterm=bold ctermfg=226 ctermbg=234 gui=bold guifg=#ffff00 guibg=#1e1e1e
 hi WildMenu     term=standout ctermfg=188 ctermbg=24 guifg=#d4d4d4 guibg=#264f78
 hi Folded       term=standout cterm=none ctermfg=73 ctermbg=236 gui=none guifg=#56b6c2 guibg=#202d39
@@ -157,6 +158,7 @@ hi FileExplorerNormal term=none cterm=none ctermfg=252 ctermbg=235 gui=none guif
 hi FinderNormal term=none cterm=none ctermfg=188 ctermbg=235 gui=none guifg=#d4d4d4 guibg=#252526
 hi FinderInputText term=none cterm=none ctermfg=188 ctermbg=237 gui=none guifg=#d4d4d4 guibg=#3c3c3c
 hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=235 gui=none guifg=#8d8dbf guibg=#252526
+hi FinderDividingLine term=none cterm=none ctermfg=60 ctermbg=235 gui=none guifg=#535972 guibg=#252526
 hi FinderFileName term=none cterm=none ctermfg=188 gui=none guifg=#d4d4d4
 hi FinderLineNumber term=none cterm=none ctermfg=188 gui=none guifg=#d4d4d4
 hi FinderColumnNumbe term=none cterm=none ctermfg=188 gui=none guifg=#d4d4d4
@@ -212,8 +214,12 @@ hi LspErrorVirtualText term=reverse ctermfg=203 ctermbg=236 guifg=#ff4b4b guibg=
 hi LspWarningVirtualText term=reverse ctermfg=178 ctermbg=237 guifg=#e0af30 guibg=#373640
 hi LspInformationVirtualText term=reverse ctermfg=38 ctermbg=237 guifg=#0db9d7 guibg=#22374b
 hi LspHintVirtualText term=reverse ctermfg=36 ctermbg=236 guifg=#1abc9c guibg=#233745
-hi lspInlayHintsType term=reverse cterm=none ctermfg=252 ctermbg=237 gui=none guifg=#cccccc guibg=#3b3c3d
-hi lspInlayHintsParameter term=reverse cterm=none ctermfg=252 ctermbg=237 gui=none guifg=#cccccc guibg=#3b3c3d
+hi lspInlayHintsType term=reverse cterm=none ctermfg=38 ctermbg=236 gui=none guifg=#15aabf guibg=#2e2e2e
+hi lspInlayHintsParameter term=reverse cterm=none ctermfg=38 ctermbg=236 gui=none guifg=#15aabf guibg=#2e2e2e
+hi LspErrorFloatText term=reverse ctermfg=203 guifg=#ff4b4b
+hi LspWarningFloatText term=reverse ctermfg=178 guifg=#e0af30
+hi LspInformationFloatText term=reverse ctermfg=38 guifg=#0db9d7
+hi LspHintFloatText term=reverse ctermfg=36 guifg=#1abc9c
 
 "-----------------------------------------------"
 "               其他高亮                        "

@@ -17,6 +17,20 @@ LSP 协议就是一套解偶合的标准，比如 C/C++ 补全，以前是 NoteP
 
 在官网 [https://langserver.org/](https://langserver.org/) 可以查到所有LSP的服务/客户端
 
+## Vim/NeoVim中使用LSP的客户端对比
+| 语言服务器    | vim-lsp | nvim-内置-lsp                | coc.nvim        |
+|---------------|---------|------------------------------|-----------------|
+| clangd        | ○       | ○                            | ○               |
+| pyright       | ○       | ○                            | ○(功能更多)     |
+| jdtls         | ○       | ○(也支持Debug，笔者没有配置) | ○(支持Debug)    |
+| rust-analyzer | ○       | ○                            | ○               |
+| gopls         | ○       | ○                            | ○               |
+| volar         | ○       | ○                            | ○(功能更多)     |
+| csharp-ls     | ×       | ○                            | △(补全有些问题) |
+| Cobol         | ○       | ○                            | ○               |
+| Kotlin        | ○       | ○                            | ○               |
+| Lua           | -       | ○                            | ×               |
+
 ## 在 Vim 中使用 LSP
 
 笔者主要使用 **vim-lsp**，下面是以下 lsp客户端的对比
@@ -187,6 +201,18 @@ npm install -g typescript
 ```
 其他配置同上
 
+## CSharp语言LSP配置
+CSharp有2个语言服务器 ``OmniSharp`` 和 ``CSharp-ls``，推荐使用后者  
+Github地址为：  
+ - [OmniSharp](https://github.com/OmniSharp/omnisharp-roslyn)
+ - [CSharp-ls](https://github.com/razzmatazz/csharp-language-server)
+
+``OmniSharp`` 直接下载二进制使用即可  
+``CSharp-ls`` 使用如下命令安装  
+```
+dotnet tool install --global csharp-ls
+```
+
 ## Coc.nvim
 和其他LSP插件相比Coc是另一套解决方案  
 需要有Node环境，插件体积更小，安装更方便一些。  
@@ -239,7 +265,6 @@ let g:coc_data_home = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/coc_extens
 coc.nvim:registry=https://npmreg.proxy.ustclug.org/
 ```
 
-
 #### Coc安装语言服务
 使用命令为
 ```
@@ -252,17 +277,18 @@ coc.nvim:registry=https://npmreg.proxy.ustclug.org/
 可自定义路径，默认安装路径在 ``%LOCALAPPDATA%\coc\extensions\node_modules`` 下
 
 笔者主要使用的有
+ - coc-explorer
+ - coc-snippets
  - coc-clangd
  - coc-pyright
- - coc-java
+ - coc-java (使用命令 ``:CocInstall coc-java-debug`` 后可以 Debug)
  - coc-rust-analyzer
  - coc-go
- - coc-volar
- - coc-omnisharp
+ - coc-volar (安装命令为 ``:CocInstall @yaegassy/coc-volar``  &nbsp;&nbsp;&nbsp;&nbsp;  可选``:CocInstall @yaegassy/coc-typescript-vue-plugin`` )
+ - coc-omnisharp (作者已经推荐使用 ``csharp-ls`` 了)
  - coc-lua
- - coc-snippets
 
-暂时没有发现 ``Cobol`` 和 ``Kotlin`` 的LSP  
+暂时没有发现 ``Cobol`` 和 ``Kotlin`` 的LSP，所以需要在配置文件中自定义  
 更多看这里 [Coc插件列表](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
 
 #### Coc的设定文件coc-settings.json
@@ -283,6 +309,25 @@ Coc的设定文件分 ``全局`` 和 ``工程``
 工程的设定文件和VSCode类似，在工程根路径下的 ``.vim`` 路径内。工程设定会**覆盖**全局设定
 
 其他的地方可看笔者的配置文件 ``coc.vim`` 和 ``coc-settings.json``  
+
+#### 一些常用命令
+查看已安装插件
+```
+:CocList extensions
+```
+查看当前工作目录
+```
+:CocCommand workspace.workspaceFolders
+```
+查看当前Buffer的LSP支持特性
+```
+:CocCommand document.checkBuffer
+```
+查看插件信息coc-pyright信息
+```
+:CocCommand workspace.showOutput Pyright
+:CocCommand workspace.showOutput snippets
+```
 
 ## 其他
 

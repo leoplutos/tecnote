@@ -26,6 +26,9 @@ export PS1="${PS_RED}${UBUNTU_ICON}${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
 export INPUTRC='~/work/lch/rc/inputrc/inputrc'
 export personal_workspace=~/work/lch/workspace
+export personal_rc=~/work/lch/rc
+export personal_tmp=~/work/lch/tmp
+export personal_tool=~/work/lch/tool
 export personal_log=~/work/lch/log
 export TERM="xterm-256color"
 export COLORTERM=truecolor
@@ -45,6 +48,9 @@ alias ll='ls -hl --full-time --time-style=long-iso --color=auto'
 alias lla='ls -hal --full-time --time-style=long-iso --color=auto'
 alias llt='ls -htl --full-time --time-style=long-iso --color=auto'
 alias cdw='cd $personal_workspace'
+alias cdr='cd $personal_rc'
+alias cdt='cd $personal_tmp'
+alias cdto='cd $personal_tool'
 alias cdl='cd $personal_log'
 alias vim='vim -u ~/work/lch/rc/vimrc/.vimrc'
 #因为alias无法传递参数，所以用定义函数，然后调用函数的方式，导入参数
@@ -64,4 +70,3 @@ alias tmuxn='tmux -2u -f ~/work/lch/rc/tmuxrc/tmux3.2.conf new-session -s lch_se
 alias tmuxa='tmux -2u a -t lch_session'
 
 alias clearb='echo -e "\ec\e[3J"'
-

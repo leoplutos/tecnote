@@ -95,8 +95,9 @@ else
   -- 加载lua/webdevicons.lua
   --require('webdevicons')
   if (vim.g.g_lsp_type == 3) then
-    -- 加载lua/coc.lua - 使用coc.nvim
-    require('coc')
+    -- 加载coc.vim - 使用coc.nvim
+    local cocvim_path = vim.g.g_s_rcfilepath .. '/vimconf/init/coc.vim'
+    vim.cmd('source ' .. cocvim_path)
   else
     -- 加载lua/lsp.lua - 使用内置LSP
     require('lsp')

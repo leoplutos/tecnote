@@ -1,0 +1,66 @@
+{
+	"go.goroot": "D:\\Tools\\WorkTool\\Go\\go1.21.1.windows-amd64",
+	"go.gopath": "D:\\Tools\\WorkTool\\Go\\go_global",
+	"gopls": {
+		"analyses": {
+			"ST1000": false,
+			"ST1003": false,
+			"SA5001": false,
+			"nilness": true,
+			"unusedwrite": true,
+			"unusedparams": true,
+			"fieldalignment": false,
+			"shadow": false,
+			"composites": false,
+		},
+		"ui.codelenses": {
+			"generate": true,
+			"regenerate_cgo": true,
+			"test": true,
+			"vendor": true,
+			"tidy": true,
+			"upgrade_dependency": true,
+			"gc_details": true
+		},
+		"ui.diagnostic.annotations": {
+			"bounds": true,
+			"inline": true,
+			"escape": false,
+			"nil": false
+		},
+		"ui.diagnostic.staticcheck": true,
+		"ui.completion.usePlaceholders": true,
+		"ui.navigation.importShortcut": "Definition",
+		"ui.completion.matcher": "Fuzzy",
+		"ui.navigation.symbolMatcher": "Fuzzy",
+		"ui.navigation.symbolStyle": "Dynamic",
+		"ui.completion.completionBudget": "500ms",
+		"ui.semanticTokens": true,
+		"build.directoryFilters": [
+			"-node_modules",
+			"-data"
+		]
+	},
+	"go.formatTool": "gofmt",
+	"go.lintTool": "golangci-lint",
+	"go.lintFlags": [
+		"--fast"
+	],
+	"go.enableCodeLens": {
+		"runtest": true
+	},
+	"go.inlayHints.assignVariableTypes": true,
+	"go.inlayHints.compositeLiteralFields": true,
+	"go.inlayHints.compositeLiteralTypes": true,
+	"go.inlayHints.constantValues": true,
+	"go.inlayHints.functionTypeParameters": true,
+	"go.inlayHints.parameterNames": true,
+	"go.inlayHints.rangeVariableTypes": true,
+	"[go]": {
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": false,
+			"source.organizeImports": false
+		}
+	},
+}

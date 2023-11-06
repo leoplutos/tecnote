@@ -145,6 +145,8 @@ filetype plugin off                      " 关闭加载对应文件类型的插�
 "-----------------------------------------------"
 "               基础设置                        "
 "-----------------------------------------------"
+let $LANG = 'en'
+set langmenu=en
 let &t_ut=''                             " 调整终端和vim颜色
 set modelines=0                          " 禁用模式行（安全措施）
 syntax enable                            " 开启语法高亮
@@ -251,8 +253,14 @@ set previewheight=100                    " 设置preview窗口高度
 "-----------------------------------------------"
 "在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I" 的样子），然后在替换模式中使用下划线形状的光标。
 "t_SI：插入模式开始，t_EI：插入或者替换模式结束，t_SR：替换模式开始
-if (g:g_i_osflg == 1 || g:g_i_osflg == 2)
+if (g:g_i_osflg == 1)
   " Gvim 环境：在[.gvimrc]中设定
+elseif(g:g_i_osflg==2)
+  "let &t_SI = "\e[6 q"
+  "let &t_EI = "\e[2 q"
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[1 q"
+  let &t_SR = "\e[3 q"
 elseif(g:g_i_osflg==3)
   " (mintty)Windows 环境的msys2, Cygwin（包含git-bash，不包含WSL）
   let &t_SI = "\e[5 q"
@@ -516,13 +524,11 @@ if (g:g_nvim_flg == 0)
     augroup END
 
   else
-    "加载lsp或dap：使用nerdtree（init/tree.vim）
+    "加载lsp或dap：因为使用其他的文件数，所以禁用netrw
 
     "禁用netrw
     let g:load_netrw = 1
     let g:loaded_netrwPlugin = 1
-
-    exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tree.vim'
 
   endif
 
@@ -585,7 +591,7 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
   "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
   let g:indentLine_char_list = ['|']
   "禁用类型
-  let g:indentLine_fileTypeExclude = ['text', 'cobol']
+  let g:indentLine_fileTypeExclude = ['text', 'cobol', 'coc-explorer']
   "禁用buffer
   let g:indentLine_bufTypeExclude = ['help', 'terminal']
   let g:indentLine_bufNameExclude = ['NERD_tree.*']
@@ -632,25 +638,32 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
   else
     "使用LSP
 
-    if (g:g_lsp_type == 0)
-      "加载LSP设置（vim-lsp）
-      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
-    elseif (g:g_lsp_type == 1)
-      "加载LSP设置（vim-lsc）
-      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsc.vim'
-    elseif (g:g_lsp_type == 2)
-      "加载LSP设置（LanguageClient-neovim）
-      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
-    elseif (g:g_lsp_type == 3)
-      "使用coc.nvim
-      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/coc.vim'
-    endif
-
     "加载文件模糊查找（LeaderF）
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/finder.vim'
 
     "加载状态栏和Buffer插件（lightline.vim + lightline-bufferline）
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/statusbar_lightline.vim'
+
+    if (g:g_lsp_type == 0)
+      "文件数使用nerdtree（init/tree.vim）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tree.vim'
+      "加载LSP设置（vim-lsp）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsp.vim'
+    elseif (g:g_lsp_type == 1)
+      "文件数使用nerdtree（init/tree.vim）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tree.vim'
+      "加载LSP设置（vim-lsc）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/lsc.vim'
+    elseif (g:g_lsp_type == 2)
+      "文件数使用nerdtree（init/tree.vim）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/tree.vim'
+      "加载LSP设置（LanguageClient-neovim）
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/languageclient.vim'
+    elseif (g:g_lsp_type == 3)
+      "文件数使用coc-explorer
+      "使用coc.nvim
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/coc.vim'
+    endif
 
     "需要最后加载图标
     "https://github.com/ryanoasis/vim-devicons

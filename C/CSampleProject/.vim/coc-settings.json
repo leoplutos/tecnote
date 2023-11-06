@@ -1,0 +1,19 @@
+{
+	"clangd.enabled": true,
+	"clangd.arguments": [
+		"--background-index",
+		"--clang-tidy",
+		"-j=12",
+		"--all-scopes-completion",
+		"--completion-style=detailed",
+		"--header-insertion=iwyu",
+		"--pch-storage=memory",
+		"--fallback-style=Google",
+		"--function-arg-placeholders",
+		"--enable-config",
+		"--query-driver=gcc"
+	],
+	"clangd.disableSnippetCompletion": true,
+	"clangd.fallbackFlags": [],
+	//"clangd.path":""
+}

@@ -42,6 +42,7 @@ hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=103 gui=reverse g
 hi VertSplit    term=reverse ctermfg=49 ctermbg=49 guifg=#00ffaf guibg=#00ffaf
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
+hi VisualNOS    term=bold cterm=bold gui=bold
 hi WarningMsg   term=bold cterm=bold ctermfg=94 ctermbg=230 gui=bold guifg=#8c6c3e guibg=#fffbf0
 hi WildMenu     term=standout ctermfg=236 ctermbg=157 guifg=#333333 guibg=#c1f5b0
 hi Folded       term=standout cterm=none ctermfg=37 ctermbg=231 gui=none guifg=#25b0bc guibg=#fcfcfc
@@ -157,6 +158,7 @@ hi FileExplorerNormal term=none cterm=none ctermfg=236 ctermbg=255 gui=none guif
 hi FinderNormal term=none cterm=none ctermfg=16 ctermbg=255 gui=none guifg=#000000 guibg=#eeeee5
 hi FinderInputText term=none cterm=none ctermfg=230 ctermbg=243 gui=none guifg=#f2ebc7 guibg=#6e7476
 hi FinderBorder term=none cterm=none ctermfg=103 ctermbg=255 gui=none guifg=#8d8dbf guibg=#eeeee5
+hi FinderDividingLine term=none cterm=none ctermfg=60 ctermbg=255 gui=none guifg=#535972 guibg=#eeeee5
 hi FinderFileName term=none cterm=none ctermfg=16 gui=none guifg=#000000
 hi FinderLineNumber term=none cterm=none ctermfg=16 gui=none guifg=#000000
 hi FinderColumnNumbe term=none cterm=none ctermfg=16 gui=none guifg=#000000
@@ -214,6 +216,10 @@ hi LspInformationVirtualText term=reverse ctermfg=33 ctermbg=224 guifg=#1a85ff g
 hi LspHintVirtualText term=reverse ctermfg=29 ctermbg=224 guifg=#118c74 guibg=#fce6dc
 hi lspInlayHintsType term=reverse cterm=none ctermfg=237 ctermbg=254 gui=none guifg=#3b3b3b guibg=#e2e3e4
 hi lspInlayHintsParameter term=reverse cterm=none ctermfg=237 ctermbg=254 gui=none guifg=#3b3b3b guibg=#e2e3e4
+hi LspErrorFloatText term=reverse ctermfg=196 guifg=#ff0000
+hi LspWarningFloatText term=reverse ctermfg=136 guifg=#bf8803
+hi LspInformationFloatText term=reverse ctermfg=33 guifg=#1a85ff
+hi LspHintFloatText term=reverse ctermfg=29 guifg=#118c74
 
 "-----------------------------------------------"
 "               其他高亮                        "
