@@ -97,8 +97,13 @@ wezterm.log_error('hello')
 速度很快，但是不支持连字
 
 #### 配置文件地址
+Windows
 ```
 %APPDATA%\alacritty\alacritty.yml
+```
+Linux
+```
+$HOME/.config/alacritty/alacritty.yml
 ```
 
 #### 配置文件例子

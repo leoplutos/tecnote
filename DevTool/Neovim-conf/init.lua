@@ -39,6 +39,17 @@ if vim.g.vscode then
   vim.keymap.set({"n", "v"}, "<leader>ca", "ggVG\"+y", { noremap = true })
   vim.keymap.set({"n", "v"}, "<leader>a", "<Cmd>call VSCodeNotify('workbench.action.terminal.toggleTerminal')<CR>", { noremap = true })
 
+  --设定使用im-select自动切换输入法
+  vim.cmd([[
+  augroup VSCodeImSelectGroup
+    autocmd!
+    autocmd VimEnter * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 1033
+    autocmd InsertEnter * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 2052
+    autocmd InsertLeave * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 1033
+    autocmd VimLeave * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 2052
+  augroup END
+  ]])
+
 else
   --默认neovim设置
 
@@ -120,6 +131,8 @@ else
   require('startmenu')
   -- 加载lua/debugger.lua
   require('debugger')
+  -- 加载lua/imselect.lua
+  require('imselect')
 
   -- 加载tokyonight.nvim
   --vim.cmd('packadd tokyonight.nvim')

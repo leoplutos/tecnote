@@ -38,6 +38,17 @@ git config --global --unset https.proxy
 git config --global core.autoCRLF false
 ```
 
+### 设置合并策略（执行git pull不带参数时的默认策略）
+以下3选1即可，推荐缺省策略
+```
+# 合并（缺省策略）
+git config --global pull.rebase false
+# 变基：执行 git pull 等于执行 git pull --rebase
+git config --global pull.rebase true
+# 仅快进合并
+git config --global pull.ff only
+```
+
 ## 二.代码管理命令
 
 ### 6.Clone仓库  

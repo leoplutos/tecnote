@@ -151,3 +151,38 @@ sudo -u git vim /home/git/gogs/custom/conf/app.ini
 还可以配置 Nginx 作为 SSL 代理服务器 和 邮件通知等内容  
 因为笔者暂时不需要就没有设定  
 更多可以看这里：[如何在 Ubuntu 18.04 上安装和配置 Gogs](https://cloud.tencent.com/developer/article/1626705)
+
+## 创建仓库
+
+### 创建空仓库
+在主页上即可看到 ``创建新的仓库`` 按钮，点击后即可按照页面向导创建仓库
+
+### 初始化仓库
+发行命令
+```
+git clone http://172.20.1.1:3000/testuser/TestGit.git D:\WorkSpace\Git\TestGit
+cd D:\WorkSpace\Git\TestGit
+touch README.md
+git init
+git add README.md
+git commit -m "仓库初始化"
+#git remote add origin http://172.20.1.1:3000/testuser/TestGit.git
+git push -u origin master
+```
+仓库创建好之后，需要添加其他的 ``协作者``  
+依次点击 ``仓库设置`` → ``管理协作者`` → 在搜索框搜索其他用户 → 点击 ``添加新的协作者``
+
+
+### 使用协作者在其它地方克隆仓库
+```
+git config --global user.name "user2"
+git config --global user.email "user2@email.com"
+git config --global gui.encoding utf-8
+git config --global color.ui true
+cat ~/.gitconfig
+```
+```
+git clone http://172.20.1.1:3000/testuser/TestGit.git ~/work/lch/workspace/git/TestGit
+cd ~/work/lch/workspace/git/TestGit
+nvim .
+```

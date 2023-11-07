@@ -584,6 +584,29 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
   "加载开始导航页面设置
   exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/startmenu.vim'
 
+  "加载vim-im-select(自动切换输入法)
+  "https://github.com/brglng/vim-im-select
+  "根据OS设定命令
+  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+    let s:s_im_select_command = 'D:/Tools/WorkTool/Text/im-select/x64/im-select.exe'
+    let s:s_im_select_default = '1033'
+  elseif (g:g_i_osflg == 4)
+    let s:s_im_select_command = '/usr/local/bin/im-select'
+    let s:s_im_select_default = 'com.apple.keylayout.ABC'
+  else
+    let s:s_im_select_command = 'fcitx5-remote'
+    let s:s_im_select_default = 'keyboard-us'
+  endif
+  "设置 im-select 的路径
+  let g:im_select_command = s:s_im_select_command
+  "normal 模型下采用英文输入法
+  let g:im_select_default = s:s_im_select_default
+  "如果您的桌面已经开启“在不同的窗口/应用程序之间切换输入法”的功能，可能需要将此选项设置为 0
+  let g:im_select_enable_focus_events = 0
+  "开启GVim/MacVim
+  let g:im_select_enable_for_gvim = 1
+  packadd vim-im-select
+
   "indentLine（缩进参考线）
   "https://github.com/Yggdroot/indentLine
   packadd indentLine

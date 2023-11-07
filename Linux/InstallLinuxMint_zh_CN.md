@@ -119,6 +119,16 @@ sudo apt install fcitx-googlepinyin
 接下来重启系统  
 重启后就可以使用拼音输入法了
 
+### 安装iptux(信使)
+iptux是一个国人开发的开源Linux版飞鸽传书，其中文名为：信使。基于GTK+2，兼容“飞鸽传书”协议的LAN通信、文档传递软件
+```
+sudo apt install iptux
+#sudo apt install libcanberra-gtk-module
+sudo ln -s /usr/bin/iptux ~/桌面/iptux.ln
+#iptux
+```
+双击桌面的链接启动即可
+
 ### 字体设置
 
 #### 创建临时文件夹
@@ -176,17 +186,39 @@ fc-list
 
 ### 安装Chromium浏览器
 ```
-sudo apt install chromium-browser chromium-browser-l10n
+#sudo apt install chromium-browser chromium-browser-l10n
+sudo apt install chromium-browser
+sudo ln -s /usr/bin/chromium ~/桌面/chromium.ln
+#chromium
 ```
 
 ### 安装VSCode
-访问VSCode官网，直接下载deb安装即可
+访问VSCode官网，直接下载deb，下载后将deb文件放到 ``~/work/lch/tmp``  
+然后运行命令
+```
+cd ~/work/lch/tmp
+sudo apt install -y ./code_1.84.1-1699275408_amd64.deb
+```
 
 ### 安装Wezterm
+笔者安装这个非常慢，感觉是显卡驱动的问题，所以用的 ``Alacritty``
 ```
 cd ~/work/lch/tmp
 curl -LO https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
 sudo apt install -y ./wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb
+```
+
+### 安装Alacritty
+```
+sudo add-apt-repository ppa:aslatter/ppa
+cd /etc/apt/sources.list.d
+ls
+sudo vim aslatter-ppa-jammy.list
+```
+将文件中 https://ppa.launchpadcontent.net 替换为 https://launchpad.proxy.ustclug.org
+```
+sudo apt update
+sudo apt install alacritty
 ```
 
 ### 开发环境构建
