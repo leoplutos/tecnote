@@ -105,6 +105,10 @@ set SQLITE3_HOME=D:\Tools\WorkTool\DB\Sqlite3
 set PATH=%PATH%;%SQLITE3_HOME%
 set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
 set PATH=%PATH%;%GOBANG_HOME%
+set PROTOC_HOME=D:\Tools\WorkTool\Go\protoc-25.0-win64
+set PATH=%PATH%;%PROTOC_HOME%\bin
+set REDIS_HOME=D:\Tools\WorkTool\DB\Redis\Redis-x64-5.0.14.1
+set PATH=%PATH%;%REDIS_HOME%
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 

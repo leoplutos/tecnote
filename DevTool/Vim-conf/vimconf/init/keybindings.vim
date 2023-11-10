@@ -138,6 +138,16 @@ endfunction
 "redir > $HOME/vimoutput.txt
 "command
 "redir END
+" [普通模式]:按照百分比快速移动
+noremap <Space>1 10%
+noremap <Space>2 20%
+noremap <Space>3 30%
+noremap <Space>4 40%
+noremap <Space>5 50%
+noremap <Space>6 60%
+noremap <Space>7 70%
+noremap <Space>8 80%
+noremap <Space>9 90%
 
 if (exists(':tnoremap') > 0)
   if (g:g_nvim_flg == 0)

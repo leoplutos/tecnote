@@ -174,15 +174,19 @@ git push -u origin master
 
 
 ### 使用协作者在其它地方克隆仓库
+先确认全局设定
 ```
-git config --global user.name "user2"
-git config --global user.email "user2@email.com"
-git config --global gui.encoding utf-8
-git config --global color.ui true
 cat ~/.gitconfig
 ```
 ```
 git clone http://172.20.1.1:3000/testuser/TestGit.git ~/work/lch/workspace/git/TestGit
 cd ~/work/lch/workspace/git/TestGit
-nvim .
+```
+修改本地级(工程级)git设定
+```
+cat .git/config
+git config --local user.name "user2"
+git config --local user.email "user2@email.com"
+git config --local gui.encoding utf-8
+git config --local color.ui true
 ```

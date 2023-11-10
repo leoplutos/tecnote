@@ -1,0 +1,32 @@
+Grpc
+│   ProductInfo.proto
+├───go
+│   │   .root
+│   │   go.mod
+│   │   go.sum
+│   └───product
+│       ├───client
+│       │       main.go
+│       └───server
+│               main.go
+├───java
+│   │   .root
+│   │   pom.xml
+│   └───src
+│       └───main
+│           └───java
+│               └───javagrpc
+│                       ClientMain.java
+│                       ServerMain.java
+├───python
+│       .root
+│       client.py
+│       server.py
+└───rust
+    │   .root
+    │   build.rs
+    │   Cargo.toml
+    └───src
+            client.rs
+            main.rs
+            server.rs

@@ -369,6 +369,8 @@ if has('nvim')
   "hi clear ALEErrorSign
   "hi clear ALEWarningSign
   "hi clear DapStoppedLine
+  hi clear @type
+  hi! link @type Struct
   hi clear @lsp.type.class
   hi! link @lsp.type.class Struct
   hi clear @lsp.type.decorator

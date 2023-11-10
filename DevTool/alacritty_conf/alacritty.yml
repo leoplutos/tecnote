@@ -9,12 +9,13 @@ env:
 shell:
   program: cmd.exe
   args:
-    - /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd
+    - /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd 1
 working_directory: ~
 
 window:
   startup_mode: Windowed
   title: Alacritty
+  dynamic_title: false
   dimensions:
     columns: 145
     lines: 40
@@ -26,12 +27,37 @@ window:
     x: 10
     y: 15
   dynamic_padding: false
+  decorations: full
+  decorations_theme_variant: Dark
+
+scrolling:
+  history: 2000
+  multiplier: 20
+  faux_multiplier: 100
+  auto_scroll: true
 
 font:
+  size: 12.0
   normal:
     family: "等距更纱黑体 SC Nerd Font"
     style: Regular
-  size: 12.0
+  bold:
+    family: "等距更纱黑体 SC Nerd Font"
+    style: Regular
+  italic:
+    family: "等距更纱黑体 SC Nerd Font"
+    style: Regular
+  bold_italic:
+    family: "等距更纱黑体 SC Nerd Font"
+    style: Regular
+  #offset:
+  #  x: 0
+  #  y: 0
+  #glyph_offset:
+  #  x: 0
+  #  y: 0
+
+#draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
@@ -40,6 +66,9 @@ colors:
   cursor:
     text: CellBackground
     cursor: '#afffff'
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: '#ffff00'
   search:
     matches:
       foreground: '#00005f'
@@ -57,8 +86,8 @@ colors:
     foreground: None
     background: None
   footer_bar:
-    background: '#c5c8c6'
-    foreground: '#1d1f21'
+    background: '#2c2c2c'
+    foreground: '#80d6ff'
   selection:
     text: CellForeground
     background: '#2e3c64'
@@ -95,11 +124,14 @@ cursor:
   unfocused_hollow: true
   thickness: 0.15
 
-scrolling:
-  history: 2000
-  multiplier: 20
-  faux_multiplier: 100
-  auto_scroll: true
+mouse:
+  hide_when_typing: true
 
 mouse_bindings:
   - { mouse: Right, action: Paste }
+
+key_bindings:
+  - { key: V,    mods: Alt,           action: ToggleViMode }
+  - { key: K,    mods: Alt,           chars: "clear\r" }
+  - { key: F1,   mods: Alt,           chars: "ssh -t lchuser@172.24.96.25 -p 8122\r" }
+  - { key: S,    mods: Alt,           chars: "source ~/work/lch/rc/bashrc/.bashrc-personal\n" }

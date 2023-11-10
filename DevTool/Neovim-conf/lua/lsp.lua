@@ -12,6 +12,7 @@
 --https://github.com/onsails/lspkind.nvim
 --https://github.com/hrsh7th/cmp-vsnip
 --https://github.com/hrsh7th/vim-vsnip
+--https://github.com/windwp/nvim-autopairs
 --设定参数参考 https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 -- 加载nvim-lspconfig插件
@@ -35,6 +36,8 @@ vim.cmd('packadd lspkind.nvim')
 -- 加载cmp-vsnip插件（代码片段）
 vim.cmd('packadd cmp-vsnip')
 vim.cmd('packadd vim-vsnip')
+-- 加载nvim-autopairs插件（给补全添加括号）
+vim.cmd('packadd nvim-autopairs')
 
 local lsp_cmd_path = {}
 --根据OS设定LSP服务命令
@@ -140,6 +143,9 @@ require('lspconfig.ui.windows').default_options = {
 --因为Lsp无法直接取得，可以按照如下设定
 --https://github.com/neovim/nvim-lspconfig/wiki/Code-Actions
 
+-- 设定自动补全的全功能（不设定这个选中函数没有后面的括号）
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 -- nvim-lspconfig插件设定
 -- 语言服务器设定
 local lspconfig = require('lspconfig')
@@ -160,6 +166,7 @@ lspconfig.clangd.setup {
     '--enable-config',
     '--query-driver=gcc',
   },
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', '.clangd', 'build.ninja', '.git');
 }
 
@@ -216,6 +223,7 @@ if vim.g.g_python_lsp_type == 0 then
         }
       }
     },
+    capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', '.git');
   }
 elseif vim.g.g_python_lsp_type == 3 then
@@ -228,11 +236,12 @@ elseif vim.g.g_python_lsp_type == 3 then
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           diagnosticMode = 'openFilesOnly',
-          typeCheckingMode = 'strict',
+          typeCheckingMode = 'basic',
           stubPath = 'src/com',
         },
       },
     },
+    capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', '.git');
   }
 end
@@ -281,6 +290,7 @@ lspconfig.jdtls.setup {
       },
     },
   },
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', '.classpath', 'build.xml', 'pom.xml', 'settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', '.git');
 }
 -- Rust(rust-analyzer)设置
@@ -310,6 +320,7 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', 'Cargo.toml', '.git');
 }
 -- Go(gopls)设置
@@ -317,6 +328,9 @@ lspconfig.gopls.setup {
   cmd = {
     'gopls',
     '-remote=auto',
+  },
+  init_options = {
+    usePlaceholders = true,
   },
   settings = {
     gopls = {
@@ -368,6 +382,8 @@ lspconfig.gopls.setup {
       directoryFilters = { '-node_modules', '-data' },
     },
   },
+  single_file_support = true,
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', 'go.mod', 'go.work', '.git');
 }
 -- Vue(volar-language-server)设置
@@ -419,11 +435,13 @@ lspconfig.volar.setup {
       },
     }
   },
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', 'package.json', '.git');
 }
 -- CSharp（csharp-ls）设置
 -- dotnet tool install --global csharp-ls
 lspconfig.csharp_ls.setup {
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', '.sln', '*.csproj', '.git');
 }
 -- CSharp（OmniSharp）设置
@@ -437,6 +455,7 @@ lspconfig.csharp_ls.setup {
 --  enable_import_completion = false,
 --  sdk_include_prereleases = true,
 --  analyze_open_documents_only = false,
+--  capabilities = capabilities,
 --  root_dir = lspconfig.util.root_pattern('.root', '.sln', '*.csproj', '.git');
 --}
 -- Cobol（che-che4z-lsp-for-cobol）设置
@@ -451,10 +470,12 @@ lspconfig.cobol_ls.setup {
     'pipeEnabled',
   },
   filetypes = { 'cobol'},
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', '.git');
 }
 -- JavaScript和TypeScript（typescript-language-server）设置
 --lspconfig.tsserver.setup {
+--  capabilities = capabilities,
 --  root_dir = lspconfig.util.root_pattern('.root', 'package.json', 'jsconfig.json', '.git');
 --}
 -- Kotlin（kotlin-language-server）设置
@@ -466,6 +487,7 @@ lspconfig.kotlin_language_server.setup {
       chainedHints = true,
     },
   },
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', '.git');
 }
 -- Lua（lua-language-server）设置
@@ -478,6 +500,7 @@ lspconfig.lua_ls.setup {
       }
     }
   },
+  capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git');
 }
 -- 快捷键绑定
@@ -808,15 +831,15 @@ hi! link CmpItemMenu Comment
 ]]
 )
 
--- Snippets设定
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
---     capabilities = capabilities,
---   }
--- end
+-- 设定自动补全的全功能（不设定这个选中函数没有后面的括号）
+--local capabilities = require('cmp_nvim_lsp').default_capabilities()
+--local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+--for _, lsp in ipairs(servers) do
+--  lspconfig[lsp].setup {
+-- -- on_attach = my_custom_on_attach,
+--    capabilities = capabilities,
+--  }
+--end
 
 --Ctrl+F2显示LSP服务器状态
 vim.keymap.set({'n'}, '<C-F2>', ':LspInfo<CR>', { noremap = true })
@@ -926,3 +949,63 @@ xmap        s   <Plug>(vsnip-select-text)
 nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
 ]])
+
+-- 补全添加括号设定（因为有些Lsp不支持）
+require('nvim-autopairs').setup({
+  disable_filetype = {
+    'lspinfo',
+    'packer',
+    'checkhealth',
+    'help',
+    'man',
+    'gitcommit',
+    'TelescopePrompt',
+    'TelescopeResults',
+    'startify',
+    'netrw',
+    'ctrlp',
+    'nerdtree',
+    'VimspectorPrompt',
+    'NvimTree',
+    'cmp_menu',
+    'cmp_docs',
+    'Outline',
+    'toggleterm',
+    'flash_prompt',
+    'dashboard',
+    'mason',
+    'vim',
+    'rust',
+  },
+  disable_in_visualblock = true,
+})
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local handlers = require('nvim-autopairs.completion.handlers')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done({
+    filetypes = {
+      -- "*" is a alias to all filetypes
+      --["*"] = {
+      --  ["("] = {
+      --    kind = {
+      --      cmp.lsp.CompletionItemKind.Function,
+      --      cmp.lsp.CompletionItemKind.Method,
+      --    },
+      --    handler = handlers["*"]
+      --  }
+      --},
+      python = {
+        ["("] = {
+          kind = {
+            cmp.lsp.CompletionItemKind.Function,
+            cmp.lsp.CompletionItemKind.Method,
+          },
+          handler = handlers["*"]
+        }
+      },
+      -- Disable for tex
+      tex = false
+    }
+  })
+)

@@ -409,7 +409,7 @@ if (g:g_python_lsp_type == 3)
           \       'autoSearchPaths': v:true,
           \       'useLibraryCodeForTypes': v:true,
           \       'diagnosticMode': 'openFilesOnly',
-          \       'typeCheckingMode': 'strict',
+          \       'typeCheckingMode': 'basic',
           \       'stubPath': 'src/com',
           \     },
           \   },

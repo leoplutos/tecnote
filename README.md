@@ -32,6 +32,7 @@
 * [CMake笔记](BuildTool/CMake_zh_CN.md)
 
 ## Rust相关
+* [Rust语言相关](Rust/Rust_zh_CN.md)
 * [Rust环境构建-在线安装（推荐）](Rust/Rust-DevEnv_zh_CN.md)
 * [Rust环境构建-离线安装](Rust/Rust-DevEnv-OffLine_zh_CN.md)
 * [Rust-Cargo](Rust/Rust-Cargo_zh_CN.md)
@@ -48,8 +49,9 @@
 * [MinGW64](C/MinGW_zh_CN.md)
 * [libui](C/C-libui_zh_CN.md)
 
-## Go相关
-* [Go相关](Go/Go_zh_CN.md)
+## Google/Golang相关
+* [Golang相关](Go/Go_zh_CN.md)
+* [gRPC](Go/Grpc_zh_CN.md)
 
 ## Java相关
 * [Java相关](Java/Java_zh_CN.md)
@@ -89,6 +91,7 @@
 
 ## DB
 * [Postgresql](DB/Postgresql_zh_CN.md)
+* [Redis](DB/Redis_zh_CN.md)
 * [DBeaver](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
 * [Sqlite3](DB/Sqlite3_zh_CN.md)

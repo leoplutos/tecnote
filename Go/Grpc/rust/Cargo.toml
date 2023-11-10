@@ -1,0 +1,22 @@
+[package]
+name = "rust"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]] # 用来运行 gRPC 服务器的可执行文件
+name = "rustserver"
+path = "src/server.rs"
+
+[[bin]] # 用来运行 gRPC 客户端的可执行文件
+name = "rustclient"
+path = "src/client.rs"
+
+[dependencies]
+tonic = "0.10.2"
+prost = "0.12.1"
+tokio = { version = "1.33.0", features = ["macros", "rt-multi-thread"] }
+uuid = { version = "1.5.0", features = ["v4", "fast-rng", "macro-diagnostics"] }
+lazy_static = "1.4.0"
+
+[build-dependencies]
+tonic-build = "0.10.2"
