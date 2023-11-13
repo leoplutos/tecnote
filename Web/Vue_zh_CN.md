@@ -1,10 +1,70 @@
 # Vue相关
 
+## Vue简介
+
+Vue 是一款用于构建用户界面的渐进式 JavaScript 框架。最大的作用是可以将前端的元素 **组件化**。  
+学习了 Vue 之后，**拆组件** 将会是最常遇到的需求。
+
 ## Vue官方中文教程：  
 https://cn.vuejs.org/guide/introduction.html  
 
-## 创建 vue工程
-``Vue`` 需要 ``Node.js``，安装好 ``Node.js``后运行如下命令创建 ``Vue`` 工程
+## 关于 Vue 的 单页应用 和 单文件组件
+
+#### 单页应用（Single-Page application：SPA）
+在普通的 html 中，载入 CDN 服务提供的 JavaScript 脚本 即为单页应用用法  
+例子：
+```html
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>CDN方式</title>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="app">{{ message }}</div>
+        <script>
+          const { createApp } = Vue
+          createApp({
+            data() {
+              return {
+                message: 'Hello Vue! 这是一个通过CDN方式使用Vue的例子！'
+              }
+            }
+          }).mount('#app')
+        </script>
+    </body>
+</html>
+```
+
+#### 单文件组件（Single-File Component：SFC）
+将HTML、CSS 和 JavaScript，封装在 ``.vue`` 这种扩展名的文件中的用法。  
+例子：
+```html
+<script>
+export default {
+  data() {
+    return {
+      greeting: 'Hello World!'
+    }
+  }
+}
+</script>
+
+<template>
+  <p class="greeting">{{ greeting }}</p>
+</template>
+
+<style>
+.greeting {
+  color: red;
+  font-weight: bold;
+}
+</style>
+```
+
+## 使用脚手架创建 Vue 工程(单文件组织)
+需要 ``Node.js``，安装好 ``Node.js``后运行如下命令创建 ``Vue`` 工程
 ```
 cd D:\WorkSpace\Vue
 npm create vue@latest
@@ -40,4 +100,33 @@ npm run dev
 	"vue.inlayHints.inlineHandlerLeading": true,
 	"vue.inlayHints.optionsWrapper": true,
 }
+```
+
+## 笔者做的2个示例工程
+
+### 学习清单 - 单页应用版
+ - [VueSinglePage](./VueSinglePage)
+
+运行方式  
+直接浏览器运行 ``main.html`` 即可  
+NOTE：
+如果浏览器报错无法跨域运行javascript错误，按照如下命令启动浏览器  
+Chrome
+```
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+```
+EDGE
+```
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir=D:\Download\EdgeTmp
+```
+
+### 学习清单 - 单文件组织版
+需要 ``Node`` 环境
+ - [VueFileComponent](./VueFileComponent)
+
+运行方式
+```
+cd D:\WorkSpace\Vue\VueFileComponent
+npm --registry https://npmreg.proxy.ustclug.org/ install
+npm run dev
 ```

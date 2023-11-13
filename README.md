@@ -64,6 +64,7 @@
 ## 前端开发相关
 * [NodeJs相关](Web/NodeJs_zh_CN.md)
 * [Vue相关](Web/Vue_zh_CN.md)
+* [AngularJS相关](Web/AngularJS_zh_CN.md)
 
 ## 开发工具相关
 * [VS Code](DevTool/VSCode_zh_CN.md)

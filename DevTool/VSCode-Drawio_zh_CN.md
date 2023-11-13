@@ -2,6 +2,7 @@
 
 ## 需要工具
  - VSCode
+ - [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) 插件
  - [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) 插件
 
 ## 嵌入图片方法
@@ -72,8 +73,198 @@ file=open('2.jpg','wb')
 file.write(imgdata)
 file.close()
 ```
+## 嵌入甘特图的方法（使用Mermaid）
 
-## 嵌入流程图的方法
+### Mermaid简介
+Mermaid是一个基于Javascript的绘图工具, 可以使用文本生成流程图、饼状图、甘特图等图表的描述语言，它可以帮助用户以简单、直观的方式创建各种类型的图表，包括流程图、时序图、甘特图等
+
+- [Github地址](https://github.com/mermaid-js/mermaid)
+
+### 各大服务支持
+无论是在线服务：Github、Gitee  
+还是搭建的私人服务器：Gogs、Gitea、GitLab  
+都已经实现对 ``Mermaid`` 的内建支持
+
+### 图表类型支持
+ - **甘特图(Gantt Diagram)**
+ - 饼形图(Pie Chart)
+ - 流程图(Flow Chart)
+ - 时序图(Sequence Diagram)
+ - 状态图(State Diagram)
+ - 类图(class Diagram)
+ - 用户旅程图(Journey)
+
+除此之外，Mermaid 还支持其他类型的图表，例如任务图（Task）和网路拓扑图（Network Topology），以及自定义的图表类型。Mermaid 的语法简单而灵活，可以让用户轻松地创建各种类型的图表
+
+### 在VSCode的使用方法
+在 VSCode 中打开一个 Markdown 文件，下载 ``Markdown Preview Mermaid Support`` 插件后，使用如下格式即可（前面不必有空格）
+```
+    ```mermaid
+    stateDiagram
+    [*] --> Active
+    state Active {
+        [*] --> NumLockOff
+        NumLockOff --> NumLockOn : EvNumLockPressed
+        NumLockOn --> NumLockOff : EvNumLockPressed
+    }
+    ```
+```
+
+### 用法示例
+
+#### 甘特图(Gantt Diagram)
+[官方帮助文档](http://mermaid.js.org/syntax/gantt.html)
+
+```
+    ```mermaid
+gantt
+%输入数据的时间格式
+dateFormat YYYY-MM-DD
+%坐标轴的时间格式
+axisFormat %m-%d
+%排除的时间
+excludes weekends,2023-11-02
+%坐标轴刻度，高版本支持
+tickInterval 1day
+%是否显示当天的标记，默认on
+todayMarker on
+
+title 甘特图示例
+section 项目A
+任务1           :done, a1, 2023-11-01, 5d
+任务2           :active, a2, after a1, 15d
+里程碑          :milestone, a3, 2023-11-30, 1d
+section 项目B
+任务3           :b1, 2023-11-15  , 12d
+任务4           :crit, b2, 2023-11-20, 10d
+    ```
+```
+```mermaid
+gantt
+%输入数据的时间格式
+dateFormat YYYY-MM-DD
+%坐标轴的时间格式
+axisFormat %m-%d
+%排除的时间
+excludes weekends,2023-11-02
+%坐标轴刻度，高版本支持
+tickInterval 1day
+%是否显示当天的标记，默认on
+todayMarker on
+
+title 甘特图示例
+section 项目A
+任务1           :done, a1, 2023-11-01, 5d
+任务2           :active, a2, after a1, 15d
+里程碑          :milestone, a3, 2023-11-30, 1d
+section 项目B
+任务3           :b1, 2023-11-15  , 12d
+任务4           :crit, b2, 2023-11-20, 10d
+```
+
+#### 饼形图(Pie Chart)
+```
+    ```mermaid
+pie
+title 开发语言
+"Java" : 30
+"Python" : 30
+"Rust" : 40
+    ```
+```
+```mermaid
+pie
+title 开发语言
+"Java" : 30
+"Python" : 30
+"Rust" : 40
+```
+
+#### 流程图(Flow Chart)
+```
+    ```mermaid
+graph LR
+    A[开始] --> B{条件判断1};
+    B -- Yes --> C[OK];
+    C --> D[重新取得];
+    D --> B;
+    B -- No ----> E[结束];
+    ```
+```
+```mermaid
+graph LR
+    A[开始] --> B{条件判断1};
+    B -- Yes --> C[OK];
+    C --> D[重新取得];
+    D --> B;
+    B -- No ----> E[结束];
+```
+
+#### 时序图(Sequence Diagram)
+```
+    ```mermaid
+sequenceDiagram
+% -->> 发送异步消息 ->>发送同步消息
+用户->>认证: 认证请求
+loop 认证处理
+    认证->>认证: 等待其他处理结束
+end
+Note right of 认证: 一直循环取得!
+认证-->>用户: 认证成功
+认证->>仓库: 存储Token
+仓库-->>认证: 存储成功
+    ```
+```
+```mermaid
+sequenceDiagram
+% -->> 发送异步消息 ->>发送同步消息
+用户->>认证: 认证请求
+loop 认证处理
+    认证->>认证: 等待其他处理结束
+end
+Note right of 认证: 一直循环取得!
+认证-->>用户: 认证成功
+认证->>仓库: 存储Token
+仓库-->>认证: 存储成功
+```
+
+#### 连线样式
+ - 右箭头：A --> B
+ - 左箭头：A <-- B
+ - 双向箭头：A <--> B
+ - 右箭头带空心三角形：A --▷ B
+ - 左箭头带实心三角形：A ◁-- B
+ - 双向箭头带空心菱形：A --o B
+ - 自我引用带圆形箭头：A ==> A
+ - 粗体箭头：==>
+ - 虚线箭头：-.->
+ - 无箭头：---
+ - A o--o B
+ - B <--> C
+ - C x--x D
+
+### 命令行工具(mermaid-cli)
+ - [Github地址](https://github.com/mermaid-js/mermaid-cli)
+
+#### 安装
+需要 ``Node`` 环境
+```
+npm install -g @mermaid-js/mermaid-cli
+```
+
+#### 用法
+转换Mermaid mmd 文件到 SVG
+```
+mmdc -i input.mmd -o output.svg
+```
+
+#### 替换Markdown中的mermaid内容
+```
+mmdc -i readme.template.md -o readme.md
+```
+
+
+## 嵌入流程图的方法（使用SVG文件）
 
 ### SVG 简介
 SVG，即可缩放矢量图形(Scalable Vector Graphics)，是一种 XML 应用，可以以一种简洁、可移植的形式表示图形信息。目前，人们对 SVG 越来越感兴趣。大多数现代浏览器都能显示 SVG 图形，并且大多数矢量绘图软件都能导出 SVG 图形。

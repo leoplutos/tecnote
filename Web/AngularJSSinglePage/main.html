@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>学习清单</title>
+        <link rel="stylesheet" href="./style.css" />
+        <script src="https://unpkg.com/angular@1.8.3/angular.min.js"></script>
+    </head>
+
+    <body>
+        <div>这里是最外面，下面是AngularJS内容</div>
+        <div ng-app="app">
+            <h1>学习清单</h1>
+            <section ng-controller="notStudySection">
+                <h2>{{titleName}}</h2>
+                <ul>
+                    <!--使用ng-hide判断是否表示当前li-->
+                    <li ng-repeat="element in studyList" ng-hide="element.studied == true">
+                        <!--使用ng-model双向绑定数据-->
+                        <img ng-src="{{element.image}}" /><span>{{element.name}}</span><input type="checkbox" ng-model="element.studied" />
+                    </li>
+                </ul>
+                <!-- {{incompleteCount()}} -->
+            </section>
+            <section ng-controller="studySection">
+                <h2>{{titleName}}</h2>
+                <ul>
+                    <!--使用ng-hide判断是否表示当前li-->
+                    <li ng-repeat="element in studyList" ng-hide="element.studied == false">
+                        <!--使用ng-model双向绑定数据-->
+                        <img ng-src="{{element.image}}" /><span>{{element.name}}</span><input type="checkbox" ng-model="element.studied" />
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <div>这里是最外面，上面是AngularJS内容</div>
+    </body>
+    <script>
+        // 注册一个应用程序主模块
+        var app = angular.module("app", []);
+        app.controller("notStudySection", function ($scope, dataShareService) {
+            // 在控制器中注入该服务
+            $scope.titleName = "未学习";
+            $scope.studyList = dataShareService.getSharedData();
+            //$scope.incompleteCount = function () {
+            //	var count = 0; angular.forEach($scope.studyList, function (element) {
+            //		if (element.studied) {
+            //			count++;
+            //		}
+            //	});
+            //	return count;
+            //}
+        });
+        app.controller("studySection", function ($scope, dataShareService) {
+            // 在控制器中注入该服务
+            $scope.titleName = "已学习";
+            $scope.studyList = dataShareService.getSharedData();
+            //$scope.setData = function (value) {
+            //	myService.setSharedData(value);
+            //};
+        });
+        //自定义service，在多个controller之间共享数据
+        app.service("dataShareService", function () {
+            // 创建清单内容
+            var sharedData = [
+                {
+                    id: 1,
+                    name: "Vue",
+                    image: "./img/vue.png",
+                    studied: false,
+                },
+                {
+                    id: 2,
+                    name: "数据库",
+                    image: "./img/database.png",
+                    studied: false,
+                },
+                {
+                    id: 3,
+                    name: "Python",
+                    image: "./img/python.png",
+                    studied: false,
+                },
+                {
+                    id: 4,
+                    name: "Golang",
+                    image: "./img/go.png",
+                    studied: false,
+                },
+            ];
+            this.getSharedData = function () {
+                return sharedData;
+            };
+            this.setSharedData = function (value) {
+                sharedData = value;
+            };
+        });
+    </script>
+</html>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>学习清单</title>
+        <link rel="stylesheet" href="./style.css" />
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body>
+        <div>这里是最外面，下面是Vue组件</div>
+        <div id="app"></div>
+        <div>这里是最外面，上面是Vue组件</div>
+        <script type="module">
+            import App from "./components/App.js";
+            Vue.createApp(App).mount("#app");
+        </script>
+    </body>
+</html>
