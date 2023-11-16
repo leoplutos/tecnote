@@ -18,18 +18,20 @@ LSP 协议就是一套解偶合的标准，比如 C/C++ 补全，以前是 NoteP
 在官网 [https://langserver.org/](https://langserver.org/) 可以查到所有LSP的服务/客户端
 
 ## Vim/NeoVim中使用LSP的客户端对比
-| 语言服务器    | vim-lsp | nvim-内置-lsp                | coc.nvim        |
-|---------------|---------|------------------------------|-----------------|
-| clangd        | ○       | ○                            | ○               |
-| pyright       | ○       | ○                            | ○(功能更多)     |
-| jdtls         | ○       | ○(也支持Debug，笔者没有配置) | ○(支持Debug)    |
-| rust-analyzer | ○       | ○                            | ○               |
-| gopls         | ○       | ○                            | ○               |
-| volar         | ○       | ○                            | ○(功能更多)     |
-| csharp-ls     | ×       | ○                            | △(补全有些问题) |
-| Cobol         | ○       | ○                            | ○               |
-| Kotlin        | ○       | ○                            | ○               |
-| Lua           | -       | ○                            | ×               |
+| 语言服务器        | vim-lsp | nvim-内置-lsp                 | coc.nvim         |
+|-------------------|---------|-------------------------------|------------------|
+| clangd            | ○      | ○                            | ○               |
+| pyright           | ○      | ○                            | ○(功能更多)     |
+| jdtls             | ○      | ○(也支持Debug，笔者没有配置) | ○(支持Debug)    |
+| rust-analyzer     | ○      | ○                            | ○               |
+| gopls             | ○      | ○                            | ○               |
+| csharp-ls         | ×       | ○                            | △(补全有些问题) |
+| Cobol             | ○      | ○                            | ○               |
+| Kotlin            | ○      | ○                            | ○               |
+| Lua               | -       | ○                            | ×                |
+| volar(vue)        | ○      | ○                            | ○(功能更多)     |
+| tsserver(react)   | ○      | ○                            | 未测试           |
+| ngserver(angular) | ×       | ×                             | ○               |
 
 ## 在 Vim 中使用 LSP
 
@@ -194,7 +196,7 @@ go install golang.org/x/tools/gopls@latest
 其他配置同上
 
 ## Vue的LSP配置
-安装 ``vls``
+安装 ``volar``
 ```
 npm install -g @vue/language-server
 npm install -g typescript
@@ -285,6 +287,7 @@ coc.nvim:registry=https://npmreg.proxy.ustclug.org/
  - coc-rust-analyzer
  - coc-go
  - coc-volar (安装命令为 ``:CocInstall @yaegassy/coc-volar``  &nbsp;&nbsp;&nbsp;&nbsp;  可选``:CocInstall @yaegassy/coc-typescript-vue-plugin`` )
+ - coc-angular
  - coc-omnisharp (作者已经推荐使用 ``csharp-ls`` 了)
  - coc-lua
 

@@ -62,9 +62,12 @@
 * [Dotnet相关](Dotnet/Dotnet_zh_CN.md)
 
 ## 前端开发相关
+* [TypeScript相关](Web/TypeScript_zh_CN.md)
 * [NodeJs相关](Web/NodeJs_zh_CN.md)
 * [Vue相关](Web/Vue_zh_CN.md)
-* [AngularJS相关](Web/AngularJS_zh_CN.md)
+* [AngularJS相关](Web/AngularJS_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本1.x
+* [Angular相关](Web/Angular_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本2.x以后
+* [React相关](Web/React_zh_CN.md)
 
 ## 开发工具相关
 * [VS Code](DevTool/VSCode_zh_CN.md)

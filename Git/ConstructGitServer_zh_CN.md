@@ -190,3 +190,43 @@ git config --local user.email "user2@email.com"
 git config --local gui.encoding utf-8
 git config --local color.ui true
 ```
+
+## 工单管理(issues)
+不知为何会把 ``issues`` 翻译成 ``工单``  
+在 Gogs 内置了 issues 管理，使用流程为
+
+1. 创建 ``标签(labels)`` 和 ``里程碑(milestones)``  
+  标签可以为
+    - Bug（报告问题）
+    - Enhancement（请求新特性）
+    - Duplicate（重复问题）
+    - Invalid（无效问题）
+2. 创建 ``工单(issues)``，填写标题与内容，并在画面右侧选择 ``标签`` 和 ``里程碑``
+3. 在画面右侧选择 ``指派成员``，将 issues 指派给特定人员
+4. 对应后可以关闭 issues
+
+## 常见问题
+
+### Markdown表格无法渲染
+
+在 Gogs 的 ``Markdown`` 下使用表格必须让表格代码的上下都有一个空行，不然会渲染失败  
+一个可以正常渲染的例子（表格的上部和下部都需有一个空行）
+```
+foo
+
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
+bar
+```
+
+### 私有服务器的IP改变
+因为笔者的私有服务器建立在自己的WSL2中，所以每次重启后IP地址都会变化，导致已经下载的工程无法推送  
+解决方式是打开工程根路径下的 ``.git/config`` 文件，修改如下内容中的IP即可
+```
+[remote "origin"]
+	url = http://111.112.113.114:3000/foo/bar.git
+```
+

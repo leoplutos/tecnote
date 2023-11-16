@@ -84,6 +84,13 @@ npm run dev
 - [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  
 - [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)  
 
+## 使用Vim/NeoVim开发
+直接使用 LSP 即可，具体请看笔者的 Vim配置文件  
+LSP 安装
+```
+npm install -g @vue/language-server
+```
+
 ## 使用Coc.nvim开发
 使用 ``coc.nvim`` 开发使用下面的命令安装插件
 ```
@@ -102,7 +109,7 @@ npm run dev
 }
 ```
 
-## 笔者做的2个示例工程
+## 笔者做的几个示例工程
 
 ### 学习清单 - 单页应用版
  - [VueSinglePage](./VueSinglePage)
@@ -127,6 +134,17 @@ EDGE
 运行方式
 ```
 cd D:\WorkSpace\Vue\VueFileComponent
+npm --registry https://npmreg.proxy.ustclug.org/ install
+npm run dev
+```
+
+### 学习清单 - 单文件组织+TypeScript版
+需要 ``Node`` 环境
+ - [VueTS](./VueTS)
+
+运行方式
+```
+cd D:\WorkSpace\Vue\VueTS
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```

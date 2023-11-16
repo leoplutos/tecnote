@@ -1,0 +1,51 @@
+html,
+body {
+	height: 100%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	background-color: #f8f8ff;
+	color: #000000;
+}
+
+body {
+	display: grid;
+	place-items: center;
+}
+
+h1 {
+	color: #0000ff;
+}
+
+h2 {
+	margin: 0;
+}
+
+section {
+	margin-top: 10px;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	list-style: none;
+	background-color: #fffbf0;
+	color: #2e2e2e;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 5px;
+}
+
+ul li img {
+	height: 20px;
+	border: 1px solid rgb(255, 255, 255);
+}
+
+ul li span {
+	padding-left: 5px;
+	padding-right: 5px;
+}

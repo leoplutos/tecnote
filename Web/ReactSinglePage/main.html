@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>学习清单</title>
+	<link rel="stylesheet" href="./style.css" />
+	<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+	<!-- 生产环境中不建议使用，在浏览器中使用 Babel 来编译 JSX 效率是非常低的-->
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+	<div>这里是最外面，下面是React内容</div>
+	<div id="app"></div>
+	<div>这里是最外面，上面是React内容</div>
+</body>
+<script type="text/babel">
+	const initList = [
+		{
+			id: 1,
+			name: "Vue",
+			image: "./img/vue.png",
+			studied: false,
+		},
+		{
+			id: 2,
+			name: "数据库",
+			image: "./img/database.png",
+			studied: false,
+		},
+		{
+			id: 3,
+			name: "Python",
+			image: "./img/python.png",
+			studied: false,
+		},
+		{
+			id: 4,
+			name: "Golang",
+			image: "./img/go.png",
+			studied: false,
+		},
+	];
+	//根节点
+	function App(props) {
+		//定义初始数据，并且“状态”化，为了双向数据绑定
+		const [studyList, setStudyList] = React.useState(initList);
+		//过滤未学习列表
+		const notStudyList = studyList.filter((element) => element.studied === false)
+		//过滤已学习列表
+		const studiedList = studyList.filter((element) => element.studied === true)
+		// updateList 函数用于更新初始数据内容
+		const updateList = (updateId) => {
+			setStudyList(studyList.map(t => {
+				if (t.id === updateId) {
+					// 如果 id 等于 参数就让studied取反
+					t.studied = !t.studied
+				}
+				return t
+			}));
+			//console.log(studyList)
+		}
+		return (
+			<div>
+				<h1>学习清单</h1>
+				<StudySection titleName="未学习" list={notStudyList} updateEvent={updateList} />
+				<StudySection titleName="已学习" list={studiedList} updateEvent={updateList} />
+			</div>
+		);
+	}
+	function StudySection(props) {
+		const studyList = props.list.map((element) => (
+			<StudySectionList
+				image={element.image}
+				name={element.name}
+				studied={element.studied}
+				studyId={element.id}
+				key={element.id}
+				updateEvent={props.updateEvent}
+			/>
+		));
+		return (
+			<div>
+				<h2>{props.titleName}</h2>
+				<ul>
+					{studyList}
+				</ul>
+			</div>
+		);
+	}
+	function StudySectionList(props) {
+		const changeHandler = () => {
+			//按下checkbox时的监听函数，会调用根组件[App]的updateList函数，这样写是为了传参
+			props.updateEvent(props.studyId)
+		}
+		React.useEffect(() => {
+			//使用系统函数useEffect hook来模拟componentDidMount生命周期方法
+			//console.log('StudySectionList Component has mounted');
+		}, []);
+		return (
+			<li>
+				<img src={props.image} /><span>{props.name}</span><input type="checkbox" defaultChecked={props.studied} onChange={changeHandler} />
+			</li>
+		);
+	}
+
+	//定义根节点并且通过React渲染
+	const mainElement = <App />;
+	ReactDOM.render(
+		mainElement,
+		document.getElementById('app')
+	);
+</script>
+
+</html>

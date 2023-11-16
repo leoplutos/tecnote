@@ -1,0 +1,14 @@
+html,
+body {
+	height: 100%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	background-color: #f8f8ff;
+	color: #000000;
+}
+
+body {
+	display: grid;
+	place-items: center;
+}

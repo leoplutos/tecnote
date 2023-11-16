@@ -50,6 +50,7 @@ if (vim.g.g_i_osflg == 1 or vim.g.g_i_osflg == 2 or vim.g.g_i_osflg == 3) then
   lsp_cmd_path.cobol_lsp_jar_path = 'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   lsp_cmd_path.kotlin_lsp_cmd = 'kotlin-language-server.bat'
   lsp_cmd_path.custom_snippet_dir = vim.fn.expand('~/AppData/Roaming/Code/User/snippets')
+  lsp_cmd_path.angularls_ngProbeLocations = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/@angular/language-server/bin'
 else
   lsp_cmd_path.jdtls_jar_path = '/home/lchuser/work/lch/tool/lsp/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
   lsp_cmd_path.jdtls_config_path = '/home/lchuser/work/lch/tool/lsp/jdtls/config_linux'
@@ -59,6 +60,7 @@ else
   lsp_cmd_path.cobol_lsp_jar_path = '/home/lchuser/work/lch/tool/lsp/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   lsp_cmd_path.kotlin_lsp_cmd = 'kotlin-language-server'
   lsp_cmd_path.custom_snippet_dir = vim.fn.expand('~/work/lch/rc/snippets')
+  lsp_cmd_path.angularls_ngProbeLocations = '/usr/lib/node_modules/@angular/language-server/bin'
 end
 
 --给状态栏设置的调用函数（返回LSP状态显示到状态栏）
@@ -88,16 +90,33 @@ function! GetLspStatus() abort
     let lspServerName = 'rust_analyzer'
   elseif (&ft=='go') || (&ft=='gomod') || (&ft=='gohtmltmpl') || (&ft=='gotexttmpl')
     let lspServerName = 'gopls'
-  elseif (&ft=='vue')
-    let lspServerName = 'volar'
   elseif (&ft=='cs') || (&ft=='solution')
     "let lspServerName = 'omnisharp'
     let lspServerName = 'csharp_ls'
   elseif (&ft=='cobol')
     let lspServerName = 'cobol_ls'
-  elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')
-    "let lspServerName = 'tsserver'
-    let lspServerName = 'volar'
+  elseif (&ft=='javascript') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescriptreact')
+    if (g:g_front_dev_type == 0) || (g:g_front_dev_type == 3)
+      let lspServerName = 'tsserver'
+    elseif (g:g_front_dev_type == 1)
+      let lspServerName = 'volar'
+    elseif (g:g_front_dev_type == 2)
+      let lspServerName = 'angularls'
+    endif
+  elseif (&ft=='javascript.jsx') || (&ft=='typescript.tsx')
+    if (g:g_front_dev_type == 0) || (g:g_front_dev_type == 3)
+      let lspServerName = 'tsserver'
+    elseif (g:g_front_dev_type == 2)
+      let lspServerName = 'angularls'
+    endif
+  elseif (&ft=='vue') || (&ft=='json')
+    if (g:g_front_dev_type == 1)
+      let lspServerName = 'volar'
+    endif
+  elseif (&ft=='html')
+    if (g:g_front_dev_type == 2)
+      let lspServerName = 'angularls'
+    endif
   elseif (&ft=='kotlin')
     let lspServerName = 'kotlin_language_server'
   elseif (&ft=='lua')
@@ -386,58 +405,96 @@ lspconfig.gopls.setup {
   capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', 'go.mod', 'go.work', '.git');
 }
--- Vue(volar-language-server)设置
-lspconfig.volar.setup {
-  filetypes = {
-    'vue',
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
-  },
-  init_options = {
-    typescript = {
-      tsdk = lsp_cmd_path.typescript_tsdk_path
+
+--前端LSP判断
+if vim.g.g_front_dev_type == 0 or vim.g.g_front_dev_type == 3 then
+  --无前端框架 或者 使用React框架 -> 使用tsserver
+  -- JavaScript和TypeScript（typescript-language-server）设置
+  lspconfig.tsserver.setup {
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'javascript.jsx',
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx',
     },
-    languageFeatures = {
-      implementation = true,
-      documentHighlight = true,
-      documentLink = true,
-      documentSymbol = true,
-      documentColor = true,
-      documentFormatting = {
-        defaultPrintWidth = 180,
+    capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern('.root', 'package.json', 'jsconfig.json', '.git');
+  }
+elseif vim.g.g_front_dev_type == 1 then
+  --使用Vue框架 -> 使用volar
+  -- Vue(volar-language-server)设置
+  lspconfig.volar.setup {
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'vue',
+      'json'
+    },
+    init_options = {
+      typescript = {
+        tsdk = lsp_cmd_path.typescript_tsdk_path
       },
-      codeLens = { showReferencesNotification = true},
-      semanticTokens = true,
-      diagnostics = true,
-      schemaRequestService = true,
-      selectionRange = true,
-      foldingRange = true,
-      linkedEditingRange = true,
-      references = true,
-      definition = true,
-      typeDefinition = true,
-      callHierarchy = true,
-      hover = true,
-      rename = true,
-      renameFileRefactoring = true,
-      signatureHelp = true,
-      codeAction = true,
-      workspaceSymbol = true,
-      completion = {
-        defaultTagNameCase = 'both',
-        defaultAttrNameCase = 'kebabCase',
-        getDocumentNameCasesRequest = false,
-        getDocumentSelectionRequest = false,
-      },
-    }
-  },
-  capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern('.root', 'package.json', '.git');
-}
+      languageFeatures = {
+        implementation = true,
+        documentHighlight = true,
+        documentLink = true,
+        documentSymbol = true,
+        documentColor = true,
+        documentFormatting = {
+          defaultPrintWidth = 180,
+        },
+        codeLens = { showReferencesNotification = true},
+        semanticTokens = true,
+        diagnostics = true,
+        schemaRequestService = true,
+        selectionRange = true,
+        foldingRange = true,
+        linkedEditingRange = true,
+        references = true,
+        definition = true,
+        typeDefinition = true,
+        callHierarchy = true,
+        hover = true,
+        rename = true,
+        renameFileRefactoring = true,
+        signatureHelp = true,
+        codeAction = true,
+        workspaceSymbol = true,
+        completion = {
+          defaultTagNameCase = 'both',
+          defaultAttrNameCase = 'kebabCase',
+          getDocumentNameCasesRequest = false,
+          getDocumentSelectionRequest = false,
+        },
+      }
+    },
+    capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern('.root', 'package.json', '.git');
+  }
+elseif vim.g.g_front_dev_type == 2 then
+  --使用Angular框架 -> 使用ngserver(angularls)
+  -- Angular(ngserver)设置
+  local cmd = {"ngserver", "--stdio", "--tsProbeLocations", lsp_cmd_path.typescript_tsdk_path , "--ngProbeLocations", lsp_cmd_path.angularls_ngProbeLocations}
+  lspconfig.angularls.setup {
+    filetypes = {
+      'html',
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx'
+    },
+    capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern('.root', 'angular.json', 'package.json', '.git');
+    cmd = cmd,
+    on_new_config = function(new_config, new_root_dir)
+      new_config.cmd = cmd
+    end,
+  }
+end
+
 -- CSharp（csharp-ls）设置
 -- dotnet tool install --global csharp-ls
 lspconfig.csharp_ls.setup {
@@ -473,11 +530,7 @@ lspconfig.cobol_ls.setup {
   capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', '.git');
 }
--- JavaScript和TypeScript（typescript-language-server）设置
---lspconfig.tsserver.setup {
---  capabilities = capabilities,
---  root_dir = lspconfig.util.root_pattern('.root', 'package.json', 'jsconfig.json', '.git');
---}
+
 -- Kotlin（kotlin-language-server）设置
 lspconfig.kotlin_language_server.setup {
   init_options = {

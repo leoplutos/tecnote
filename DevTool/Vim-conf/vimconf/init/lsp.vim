@@ -41,6 +41,8 @@ if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
   let s:lsp_cobol_lsp_jar_path = 'D:/Tools/WorkTool/Cobol/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   let s:lsp_kotlin_lsp_cmd = 'kotlin-language-server.bat'
   let s:custom_snippet_dir = expand('~/AppData/Roaming/Code/User/snippets')
+  let s:lsp_angularls_cmd = 'ngserver.cmd'
+  let s:lsp_angularls_ngProbeLocations = 'D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global/node_modules/@angular/language-server/bin'
 else
   let s:lsp_pyright_langserver_cmd = 'pyright-langserver'
   let s:lsp_jdtls_jar_path = '/home/lchuser/work/lch/tool/lsp/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
@@ -51,6 +53,8 @@ else
   let s:lsp_cobol_lsp_jar_path = '/home/lchuser/work/lch/tool/lsp/cobol-language-support-1.2.1/extension/server/jar/server.jar'
   let s:lsp_kotlin_lsp_cmd = 'kotlin-language-server'
   let s:custom_snippet_dir = expand('~/work/lch/rc/snippets')
+  let s:lsp_angularls_cmd = 'ngserver'
+  let s:lsp_angularls_ngProbeLocations = '/usr/lib/node_modules/@angular/language-server/bin'
 endif
 
 function! s:on_lsp_buffer_enabled() abort
@@ -577,36 +581,67 @@ if executable('gopls')
     "    \ call execute('LspCodeActionSync source.organizeImports')
 endif
 
-"Vue(volar-language-server)
-"注：@vue/language-server即是Volar，而下面的vls是Vetur
-"安装命令：npm install -g @vue/language-server
-"          npm install -g typescript
-if executable('vue-language-server')
-    "设定参数参照这里
-    "https://github.com/vuejs/language-tools
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'volar-language-server',
-        \ 'cmd': {server_info->[s:lsp_vue_lsp_cmd, '--stdio']},
-        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-        \ 'allowlist': ['vue', 'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
-        \ 'initialization_options': {
-        \     'textDocumentSync': 2,
-        \     'typescript': {
-        \         'tsdk': s:lsp_typescript_tsdk_path,
-        \     },
-        \ },
-        \ })
-endif
-"[废弃]安装命令：npm install vls -g
-"if executable('vls')
-"    au User lsp_setup call lsp#register_server({
-"        \ 'name': 'vls',
-"        \ 'cmd': {server_info->['vls.cmd', '--stdio']},
-"        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-"        \ 'allowlist': ['vue'],
-"        \ })
-"endif
+"前端LSP判断
+if (g:g_front_dev_type == 0 || g:g_front_dev_type == 3)
+  "无前端框架 或者 使用React框架 -> 使用tsserver
+  "JavaScript和TypeScript（typescript-language-server）设置
 
+  "使用JavaScript和TypeScript（typescript-language-server）
+  "安装命令：npm install -g typescript typescript-language-server
+  if executable('typescript-language-server')
+      "设定参数参照这里
+      "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'typescript-language-server',
+          \ 'cmd': {server_info->['typescript-language-server.cmd', '--stdio']},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+          \ 'allowlist': ['javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'],
+          \ })
+  endif
+
+elseif (g:g_front_dev_type == 1)
+  "使用Vue框架 -> 使用volar
+  "Vue(volar-language-server)设置
+
+  "Vue(volar-language-server)
+  "注：@vue/language-server即是Volar，而下面的vls是Vetur
+  "安装命令：npm install -g @vue/language-server
+  "          npm install -g typescript
+  if executable('vue-language-server')
+      "设定参数参照这里
+      "https://github.com/vuejs/language-tools
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'volar-language-server',
+          \ 'cmd': {server_info->[s:lsp_vue_lsp_cmd, '--stdio']},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+          \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'json'],
+          \ 'initialization_options': {
+          \     'textDocumentSync': 2,
+          \     'typescript': {
+          \         'tsdk': s:lsp_typescript_tsdk_path,
+          \     },
+          \ },
+          \ })
+  endif
+
+elseif (g:g_front_dev_type == 2)
+  "使用Angular框架 -> 使用ngserver(angularls)
+  "Angular(ngserver)设置
+
+  "Angular(angular-language-server)
+  "安装命令：npm install -g @angular/language-server
+  if executable('ngserver')
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'angular-language-server',
+          \ 'cmd': {server_info->[s:lsp_angularls_cmd, '--stdio', '--tsProbeLocations', s:lsp_typescript_tsdk_path , '--ngProbeLocations', s:lsp_angularls_ngProbeLocations]},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
+          \ 'allowlist': ['html', 'typescript', 'typescriptreact', 'typescript.tsx'],
+          \ 'initialization_options': {
+          \ },
+          \ })
+  endif
+
+endif
 
 "使用CSharp（csharp-ls）
 "安装命令 dotnet tool install --global csharp-ls
@@ -667,31 +702,17 @@ if executable('java')
         \ })
 endif
 
-"使用JavaScript和TypeScript（typescript-language-server）
-"安装命令：npm install -g typescript typescript-language-server
-"if executable('typescript-language-server')
-"    "设定参数参照这里
-"    "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
-"    au User lsp_setup call lsp#register_server({
-"        \ 'name': 'typescript-language-server',
-"        \ 'cmd': {server_info->['typescript-language-server.cmd', '--stdio']},
-"        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
-"        \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.tsx', 'typescriptreact'],
-"        \ })
-"endif
-
 "使用Kotlin（kotlin-language-server）
 "在这里下载 https://github.com/fwcd/kotlin-language-server/releases/
 if executable('kotlin-language-server')
     "设定参数参照这里
-    "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-JavaScript
+    "https://github.com/prabirshrestha/vim-lsp/wiki/Servers-Kotlin
     au User lsp_setup call lsp#register_server({
         \ 'name': 'kotlin-language-server',
         \ 'cmd': {server_info->[s:lsp_kotlin_lsp_cmd]},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
         \ 'allowlist': ['kotlin'],
         \ 'initialization_options': {
-        \ 
         \ },
         \ })
 endif
@@ -784,16 +805,33 @@ function! GetLspStatus() abort
     let lspServerName = 'rust-analyzer'
   elseif (&ft=='go') || (&ft=='gomod') || (&ft=='gohtmltmpl') || (&ft=='gotexttmpl')
     let lspServerName = 'gopls'
-  elseif (&ft=='vue')
-    let lspServerName = 'volar-language-server'
   elseif (&ft=='cs') || (&ft=='solution')
     let lspServerName = 'OmniSharp'
     "let lspServerName = 'csharp-ls'
   elseif (&ft=='cobol')
     let lspServerName = 'che-che4z-lsp-for-cobol'
-  elseif (&ft=='javascript') || (&ft=='javascript.jsx') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescript.tsx') || (&ft=='typescriptreact')
-    "let lspServerName = 'typescript-language-server'
-    let lspServerName = 'volar-language-server'
+  elseif (&ft=='javascript') || (&ft=='javascriptreact') || (&ft=='typescript') || (&ft=='typescriptreact')
+    if (g:g_front_dev_type == 0) || (g:g_front_dev_type == 3)
+      let lspServerName = 'typescript-language-server'
+    elseif (g:g_front_dev_type == 1)
+      let lspServerName = 'volar-language-server'
+    elseif (g:g_front_dev_type == 2)
+      let lspServerName = 'angular-language-server'
+    endif
+  elseif (&ft=='javascript.jsx') || (&ft=='typescript.tsx')
+    if (g:g_front_dev_type == 0) || (g:g_front_dev_type == 3)
+      let lspServerName = 'typescript-language-server'
+    elseif (g:g_front_dev_type == 2)
+      let lspServerName = 'angular-language-server'
+    endif
+  elseif (&ft=='vue') || (&ft=='json')
+    if (g:g_front_dev_type == 1)
+      let lspServerName = 'volar-language-server'
+    endif
+  elseif (&ft=='html')
+    if (g:g_front_dev_type == 2)
+      let lspServerName = 'angular-language-server'
+    endif
   elseif (&ft=='kotlin')
     let lspServerName = 'kotlin-language-server'
   endif

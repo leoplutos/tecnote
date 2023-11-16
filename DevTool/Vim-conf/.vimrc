@@ -35,6 +35,10 @@ endif
 if !exists('g:g_python_lsp_type')
   let g:g_python_lsp_type = 3
 endif
+"全局变量g:g_front_dev_type（0：无框架，1：Vue，2：Angular, 3:React）
+if !exists('g:g_front_dev_type')
+  let g:g_front_dev_type = 0
+endif
 "全局变量g:g_use_dap（0：不使用dap，1：使用dap）
 if !exists('g:g_use_dap')
   let g:g_use_dap = 0

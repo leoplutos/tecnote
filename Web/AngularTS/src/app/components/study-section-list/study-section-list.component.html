@@ -1,0 +1,6 @@
+<li *ngFor="let element of showList">
+	<div *ngIf="element.studied==studyFlg">
+		<img src="{{element.image}}" /><span>{{element.name}}</span><input type="checkbox"
+			[(ngModel)]="element.studied" />
+	</div>
+</li>

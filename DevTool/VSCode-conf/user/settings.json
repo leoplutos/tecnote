@@ -73,6 +73,7 @@
 	"search.mode": "newEditor", // 在新的编辑器中搜索
 	"search.showLineNumbers": true, // 显示搜索结果所在行号
 	"search.smartCase": true, // 若搜索词全为小写，则不区分大小写进行搜索，否则区分大小写进行搜索。
+	"workbench.startupEditor": "none", //启动的时候不显示欢迎菜单
 	"workbench.editor.enablePreview": false, // 全局禁用预览模式
 	"workbench.editor.showTabs": true, //每次都新打开
 	"workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
@@ -658,6 +659,20 @@
 	"git.terminalGitEditor": true, // 控制是否使 VS Code 成为集成终端中产生的 Git 进程的 Git 编辑器。请注意: 需要重启终端才能选择此设置中的更改。
 	"git.ignoreMissingGitWarning": true, //忽略“缺失 Git”的警告
 	"git.openRepositoryInParentFolders": "always", //是否打开父文件夹的git仓库
+	//-----------------------------------------------"
+	//               emmet设定                       "
+	//-----------------------------------------------"
+	"emmet.showSuggestionsAsSnippets": true, //显式弹出语法展开提示
+	"emmet.triggerExpansionOnTab": true, //在按 Tab 时会展开 Emmet 缩写
+	"editor.snippetSuggestions": "top", //将语法展开提示在提示列表中置顶
+	"emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly", //emmet只显示标记语言和样式表的展开提示
+	"emmet.includeLanguages": {
+		//emmet能识别缩写语法的场景
+		"javascript": "javascriptreact",
+		"typescript": "typescriptreact",
+		"vue-html": "html",
+		"plaintext": "jade"
+	},
 	//-----------------------------------------------"
 	//               其他设定                        "
 	//-----------------------------------------------"
