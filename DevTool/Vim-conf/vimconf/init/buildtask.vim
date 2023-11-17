@@ -78,19 +78,19 @@ function! s:runGccApplication()
   endif
 endfunction
 
-"C/Cpp测试
+"C/Cpp开始测试
 function! s:runCTest()
 endfunction
 
 "-----------------------------------------------
 
-"Python编译设定
+"Python设定编译器
 function! s:setPythonCompiler()
   "compiler pylint
   setlocal makeprg=pylint\ %
 endfunction
 
-"Python运行设定
+"Python开始运行
 function! s:runPythonApplication()
   let l:filename = expand('%')
   let l:filepath = expand('%:p:h')
@@ -111,7 +111,7 @@ function! s:runPythonApplication()
   endif
 endfunction
 
-"Python测试设定
+"Python开始测试
 function! s:runPythonTest()
 endfunction
 
@@ -159,7 +159,7 @@ function! s:runJavaBuild()
   endif
 endfunction
 
-"Java运行设定
+"Java开始运行
 function! s:runJavaApplication()
   let l:filename_noext = expand('%:r')
   " 使用GetProjectRoot()函数找到跟目录
@@ -187,7 +187,7 @@ function! s:runJavaApplication()
   endif
 endfunction
 
-"Java测试设定
+"Java开始测试
 function! s:runJavaTest()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
@@ -204,12 +204,12 @@ endfunction
 
 "-----------------------------------------------
 
-"Rust编译设定
+"Rust设定编译器
 function! s:setRustCompiler()
   compiler cargo
 endfunction
 
-"Rust运行设定
+"Rust开始运行
 function! s:runRustCargoRun()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
@@ -222,7 +222,7 @@ function! s:runRustCargoRun()
   call TerminalSend(s:contactCommand('cargo run'))
 endfunction
 
-"Rust测试设定
+"Rust开始测试
 function! s:runRustCargoTest()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
@@ -302,12 +302,12 @@ augroup END
 
 "-----------------------------------------------
 
-"Go编译设定
+"Go设定编译器
 function! s:setGoCompiler()
   compiler go
   setlocal makeprg=go\ build\ -o\ ./bin/main.exe\ ./src
 endfunction
-"Go编译设定
+"Go开始编译
 function! s:runGoBuild()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
@@ -315,7 +315,7 @@ function! s:runGoBuild()
   make
 endfunction
 
-"Go运行设定
+"Go开始运行
 function! s:runGoRun()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
@@ -324,13 +324,40 @@ function! s:runGoRun()
   call TerminalSend(s:contactCommand('go run ./src/main.go'))
 endfunction
 
-"Go测试设定
+"Go开始测试
 function! s:runGoTest()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
   sleep 100m
   call TerminalSend(s:contactCommand('go test ./src/sub'))
+endfunction
+
+"-----------------------------------------------
+
+"TypeScript设定编译器
+function! s:setTsCompiler()
+  compiler tsc
+endfunction
+"TypeScript开始编译
+function! s:runTsBuild()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+  sleep 100m
+  call TerminalSend(s:contactCommand('tsc -p tsconfig.json'))
+endfunction
+"TypeScript开始运行
+function! s:runTsRun()
+  " 使用GetProjectRoot()函数找到跟目录
+  let g:g_s_projectrootpath = GetProjectRoot()
+  call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+  sleep 100m
+  "start在package.json的scripts处定义
+  call TerminalSend(s:contactCommand('npm run start'))
+endfunction
+"TypeScript开始测试
+function! s:runTsTest()
 endfunction
 
 "-----------------------------------------------
@@ -410,6 +437,8 @@ function! s:runBuild()
     make b
   elseif (&ft=='go')
     call s:runGoBuild()
+  elseif (&ft=='typescript' || &ft=='typescript.tsx' || &ft=='typescriptreact')
+    call s:runTsBuild()
   endif
 endfunction
 
@@ -427,6 +456,8 @@ function! s:runTask()
     call s:runRustCargoRun()
   elseif (&ft=='go')
     call s:runGoRun()
+  elseif (&ft=='typescript' || &ft=='typescript.tsx' || &ft=='typescriptreact')
+    call s:runTsRun()
   endif
 endfunction
 
@@ -444,6 +475,8 @@ function! s:runTest()
     call s:runRustCargoTest()
   elseif (&ft=='go')
     call s:runGoTest()
+  elseif (&ft=='typescript' || &ft=='typescript.tsx' || &ft=='typescriptreact')
+    call s:runTsTest()
   endif
 endfunction
 
@@ -457,6 +490,7 @@ augroup lchBuildGroup
   autocmd filetype java call s:setJavaCompiler()
   autocmd filetype rust call s:setRustCompiler()
   autocmd filetype go call s:setGoCompiler()
+  autocmd filetype typescript,typescript.tsx,typescriptreact call s:setTsCompiler()
 augroup END
 
 "-----------------------------------------------"

@@ -44,9 +44,11 @@ if vim.g.vscode then
   augroup VSCodeImSelectGroup
     autocmd!
     autocmd VimEnter * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 1033
-    autocmd InsertEnter * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 2052
+    "autocmd InsertEnter * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 2052
+    autocmd InsertEnter * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 1033
     autocmd InsertLeave * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 1033
-    autocmd VimLeave * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 2052
+    "autocmd VimLeave * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 2052
+    autocmd VimLeave * :silent :!D:\\Tools\\WorkTool\\Text\\im-select\\x64\\im-select.exe 1033
   augroup END
   ]])
 

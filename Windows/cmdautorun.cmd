@@ -40,6 +40,8 @@ set PS_CYAN=$E[36m
 set PS_CLEAR=$E[0m
 set PROMPT=%PS_RED%%WIN_ICON%%PS_CLEAR%%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
 echo Prompt Setting Complited
+::进入用户文件夹
+cd /d %USERPROFILE%
 goto GoOn
 
 :SetPromptWithOutNerdFont
@@ -107,13 +109,12 @@ set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
 set PATH=%PATH%;%GOBANG_HOME%
 set PROTOC_HOME=D:\Tools\WorkTool\Go\protoc-25.0-win64
 set PATH=%PATH%;%PROTOC_HOME%\bin
+set PROTOC_JAVASCRIPT_HOME=D:\Tools\WorkTool\Go\protobuf-javascript-3.21.2-win64
+set PATH=%PATH%;%PROTOC_JAVASCRIPT_HOME%\bin
 set REDIS_HOME=D:\Tools\WorkTool\DB\Redis\Redis-x64-5.0.14.1
 set PATH=%PATH%;%REDIS_HOME%
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
-
-::进入用户文件夹
-cd /d %USERPROFILE%
 
 ::设置常用路径
 set personal_workspace=D:\WorkSpace

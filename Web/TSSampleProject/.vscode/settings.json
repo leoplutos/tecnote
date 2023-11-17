@@ -1,0 +1,24 @@
+{
+	"files.exclude": {
+		"**/*.js": {
+			"when": "$(basename).ts"
+		},
+		"**/**.js": {
+			"when": "$(basename).tsx"
+		},
+		"dist/**/*.map": true,
+		"dist/**/*.js": true
+	},
+	"terminal.integrated.automationProfile.windows": {
+		//自动化相关终端的设定(如Codelens上面的[Run]，[Debug]和其他的任务)（设定后需要重启）
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+		"PATH": "${env:path};D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64;D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64/node_global"
+	},
+}

@@ -1,0 +1,186 @@
+{
+	"import_package": {
+		"prefix": ["im", "imp"],
+		"body": [
+			"import ${1:/* package */} from \"${2:/* path */}\";$0"
+		],
+		"description": "import package"
+	},
+	"if_condition": {
+		"prefix": ["if"],
+		"body": [
+			"if (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "if condition"
+	},
+	"if_else_condition": {
+		"prefix": ["ie", "ife"],
+		"body": [
+			"if (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"} else {",
+			"\t${3:/* code */}",
+			"}$0"
+		],
+		"description": "if-else condition"
+	},
+	"if_else_if_condition": {
+		"prefix": ["ii", "iei"],
+		"body": [
+			"if (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"} else if (${3:/* condition */}) {",
+			"\t${4:/* code */}",
+			"} else {",
+			"\t${5:/* code */}",
+			"}$0"
+		],
+		"description": "if-else-if condition"
+	},
+	"switch_condition": {
+		"prefix": ["sw", "swi"],
+		"body": [
+			"switch (${1:/* expression */}) {",
+			"\tcase ${2:/* constant-expression */}:",
+			"\t\t${3:/* code */}",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\tbreak;",
+			"}$0"
+		],
+		"description": "switch condition"
+	},
+	"while_loop": {
+		"prefix": ["wh", "whi"],
+		"body": [
+			"while (${1:/* condition */}) {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "while loop"
+	},
+	"for_loop": {
+		"prefix": ["fo", "for"],
+		"body": [
+			"for (let i = 0; i < ${1:count}; i++) {",
+			"\t${2:/* code */}",
+			"}$0"
+		],
+		"description": "for loop"
+	},
+	"for_each_loop": {
+		"prefix": ["fe", "fore"],
+		"body": [
+			"for (let ${1:element} of ${2:list}) {",
+			"\t${3:/* code */}",
+			"}$0"
+		],
+		"description": "for each loop"
+	},
+	"try_catch_block": {
+		"prefix": ["tr", "try"],
+		"body": [
+			"try {",
+			"\t${1:/* code */}",
+			"} catch (e) {",
+			"\t${2:console.error(e);}",
+			"}$0"
+		],
+		"description": "try catch block"
+	},
+	"try_catch_finally_block": {
+		"prefix": ["tf", "tryf"],
+		"body": [
+			"try {",
+			"\t${1:/* code */}",
+			"} catch (e) {",
+			"\t${2:console.error(e);}",
+			"} finally {",
+			"\t${3:/* code */}",
+			"}$0"
+		],
+		"description": "try catch finally block"
+	},
+	"list_block": {
+		"prefix": ["li", "lis"],
+		"body": [
+			"let ${1:variable} = ['${2:Apple}', '${3:Banana}', '${4:Orange}'];$0"
+		],
+		"description": "list block"
+	},
+	"map_block": {
+		"prefix": ["mp", "map"],
+		"body": [
+			"let ${1:variable}: Map<string, string> = new Map([['${2:key1}', '${3:value1}'], ['${4:key2}', '${5:value2}']]);$0"
+		],
+		"description": "map block"
+	},
+	"class_block": {
+		"prefix": ["cl", "cla"],
+		"body": [
+			"class ${1:class_name} {",
+			"\t${2:property_name}: string;",
+			"\tconstructor(${2:property_name}: string) {",
+			"\t\tthis.${2:property_name} = ${2:property_name};",
+			"\t}",
+			"}$0"
+		],
+		"description": "class block"
+	},
+	"interface_block": {
+		"prefix": ["it", "inter"],
+		"body": [
+			"interface ${1:interface_name} {",
+			"\t${2:property_name}: ${3:string};",
+			"}$0"
+		],
+		"description": "interface block"
+	},
+	"function_block": {
+		"prefix": ["fu", "fun"],
+		"body": [
+			"function ${1:function_name}(${2:args}: ${3:string}): ${4:void} {",
+			"\t${5:/* code */}",
+			"}$0"
+		],
+		"description": "function block"
+	},
+	"arrow_function_block": {
+		"prefix": ["af", "ar"],
+		"body": [
+			"let ${1:function_name} = (${2:args}: ${3:string}): ${4:void} => {",
+			"\t${5:/* code */}",
+			"};$0"
+		],
+		"description": "function block"
+	},
+	"printf": {
+		"prefix": ["pr", "pri"],
+		"body": [
+			"console.log(`[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] - ${2:variable}: \\${${2:variable}}`);$0"
+		],
+		"description": "printf"
+	},
+	"printf_stderr": {
+		"prefix": ["pe", "pre"],
+		"body": [
+			"console.error(`[${1|DEBUG,INFO,WARN,ERROR,FATAL|}] - ${2:variable}: \\${${2:variable}}`);$0"
+		],
+		"description": "printf stderr"
+	},
+	"comment_block": {
+		"prefix": ["co", "com"],
+		"body": [
+			"/**************************************************************",
+			" * System:         $1",
+			" * Description:    $2",
+			" * GreatDate:      $3",
+			" * Author:         $4",
+			" * UpdateDate:     $5",
+			" **************************************************************/$0"
+		],
+		"description": "comment block"
+	}
+}

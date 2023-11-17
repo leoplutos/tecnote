@@ -1,0 +1,14 @@
+目录结构
+
+TSSampleProject
+├─.vscode
+├─dist
+├─src
+│   └─components
+│        SubComp1.ts
+│        SubComp2.ts
+│    index.ts
+├─.root
+├─package.json
+└─tsconfig.json
+

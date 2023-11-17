@@ -20,7 +20,7 @@ npm install -g typescript
 tsc -v
 ```
 
-### 编译
+### 编译单个文件
 编译 TypeScript 到 JavaScript
 ```
 cd /path/to/yourworkspace
@@ -32,3 +32,40 @@ tsc test.ts
 ```
 node test.js
 ```
+
+## 在VSCode下进行TypeScript开发
+
+#### 新建工程
+```
+cd D:\WorkSpace\TypeScript
+mkdir TSSampleProject
+cd TSSampleProject
+mkdir src
+mkdir dist
+# 生成package.json
+npm init -y
+# 生成 tsconfig.json
+tsc --init
+```
+
+#### 修改 tsconfig.json 配置
+```
+"outDir": "dist",
+"rootDir": "src",
+```
+src路径放ts代码，dist放编译好的js代码
+
+#### 编译工程
+```
+cd D:\WorkSpace\TypeScript\TSSampleProject
+tsc -p tsconfig.json
+```
+
+## 笔者做的示例工程
+
+需要 ``Node`` 环境
+ - [TSSampleProject](./TSSampleProject)
+
+运行方式  
+使用 ``VSCode`` 导入工程，按下 ``F5`` 即可开始调试  
+运行的话不打断点直接按 ``F5`` 即可

@@ -13,6 +13,9 @@ node --version
 npm --version
 ```
 
+## 官方教程
+https://dev.nodejs.cn/learn/
+
 ## 配置命令
 
 查看默认配置
@@ -60,6 +63,15 @@ npm instal <packagename> -g
 npm uninstall -g <package>
 ```
 
+## 前端工程开发
+
+#### 使用NodeJs内置库
+新建一个工程后，默认并不附带NodeJS中的对象库（比如 http），要使用这些对象的API，需要安装到本地
+```
+npm i --save-dev @types/node
+```
+``--save-dev`` 选项为 添加条目到 package.json 文件中的开发依赖
+
 ## 几个实用的第三方包
 
 #### prettier格式化
@@ -81,4 +93,3 @@ npm install -g sql-formatter
 ```
 sql-formatter.cmd --version
 ```
-
