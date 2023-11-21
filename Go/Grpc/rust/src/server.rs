@@ -77,7 +77,8 @@ impl ProductInfo for MyProductInfo {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let port = 50051;
-    let addr_str = format!("{}{}", String::from("[::1]:"), port);
+    //let addr_str = format!("{}{}", String::from("[::1]:"), port);
+    let addr_str = format!("{}{}", String::from("0.0.0.0:"), port);
     let addr = addr_str.parse()?;
     let server = MyProductInfo::default();
 

@@ -55,6 +55,7 @@
 	"files.autoSave": "off", //取消自动保存
 	"files.eol": "auto", //自动设定换行符，也可以设定 "\n"
 	"files.autoGuessEncoding": true, //自动识别文字编码
+	"files.insertFinalNewline": true, // 保存文件时在文件末尾插入一个空行
 	//"files.trimTrailingWhitespace": true, // 自动删除文件行尾空格
 	"files.exclude": { // 编辑器窗口忽略文件夹
 		//"somefolder/": true,
@@ -707,15 +708,20 @@
 	"[json]": {
 		"editor.defaultFormatter": "vscode.json-language-features",
 	},
-	"[css]": {
+	"[css][less][scss]": {
 		"editor.defaultFormatter": "vscode.css-language-features",
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "vscode.markdown-language-features",
 	},
-	"[typescript]": {
+	"[javascript][javascriptreact]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
+	"[typescript][typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features",
+	},
+	"javascript.format.semicolons": "insert", // JavaScript-在语句末尾插入分号
+	"typescript.format.semicolons": "insert", // TypeScript-在语句末尾插入分号
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
 	//-----------------------------------------------"

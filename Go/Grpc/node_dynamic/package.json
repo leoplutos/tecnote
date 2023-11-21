@@ -1,0 +1,23 @@
+{
+	"name": "node_dynamic",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"tsc": "tsc -p tsconfig.json",
+		"server": "node dist/node-server.js",
+		"client": "node dist/node-client.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@grpc/grpc-js": "^1.9.11",
+		"@grpc/proto-loader": "^0.7.10",
+		"@types/node": "^20.9.3",
+		"@types/node-uuid": "^0.0.32",
+		"@types/uuid": "^9.0.7",
+		"uuid": "^9.0.1"
+	}
+}

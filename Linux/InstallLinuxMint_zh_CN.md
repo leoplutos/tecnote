@@ -184,6 +184,11 @@ sudo fc-cache -fv
 fc-list
 ```
 
+### 安装neofetch显示系统信息
+```
+sudo apt install neofetch
+```
+
 ### 安装Chromium浏览器
 ```
 #sudo apt install chromium-browser chromium-browser-l10n

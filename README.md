@@ -1,7 +1,7 @@
 # tecnote
 这是一个个人技术笔记和例子的仓库
 
-## Linux命令
+## Linux
 * [Linux命令](Linux/Linux_zh_CN.md)
 * [Linux环境设置总结](Linux/Linux-env_zh_CN.md)
 * [Linux Mint安装记录](Linux/InstallLinuxMint_zh_CN.md)
@@ -10,14 +10,14 @@
 * [SSH Config](Linux/Ssh-config_zh_CN.md)
 * [终端颜色](Linux/Terminal-color_zh_CN.md)
 
-## Windows命令
+## Windows
 * [Windows](Windows/Windows_zh_CN.md)
 * [WSL](Windows/WSL_zh_CN.md)
 * [Cmd](Windows/Cmd_zh_CN.md)
 * [Powershell](Windows/Powershell_zh_CN.md)
 * [VBScript](Windows/VBScript_zh_CN.md)
 
-## Git命令
+## Git
 * [Github无法访问解决办法](Git/Github-UsbEAmHostsEditor_zh_CN.md)
 * [Git命令](Git/Git_zh_CN.md)
 * [Git-bash-for-windows](Git/Git-bash_zh_CN.md)
@@ -53,7 +53,7 @@
 * [Golang相关](Go/Go_zh_CN.md)
 * [gRPC](Go/Grpc_zh_CN.md)
 
-## Java相关
+## Java/Kotlin相关
 * [Java相关](Java/Java_zh_CN.md)
 * [Java-Maven相关](Java/Java-Maven_zh_CN.md)
 * [Kotlin相关](Java/Kotlin_zh_CN.md)
@@ -64,6 +64,7 @@
 ## 前端开发相关
 * [TypeScript相关](Web/TypeScript_zh_CN.md)
 * [NodeJs相关](Web/NodeJs_zh_CN.md)
+* [WebAssembly相关](Web/WebAssembly_zh_CN.md)
 * [Vue相关](Web/Vue_zh_CN.md)
 * [AngularJS相关](Web/AngularJS_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本1.x
 * [Angular相关](Web/Angular_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本2.x以后

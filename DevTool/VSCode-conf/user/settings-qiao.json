@@ -3,9 +3,7 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'等距更纱黑体 SC light', 'Ligconsolata', 'Inconsolata', '更紗等幅ゴシック J', 'Microsoft YaHei UI', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	//"editor.fontFamily": "'Ligconsolata', 'Inconsolata', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //日文系统用
-	//"editor.fontFamily": "'更紗等幅ゴシック J light', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
+	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
 	"editor.fontSize": 14, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
@@ -57,6 +55,7 @@
 	"files.autoSave": "off", //取消自动保存
 	"files.eol": "auto", //自动设定换行符，也可以设定 "\n"
 	"files.autoGuessEncoding": true, //自动识别文字编码
+	"files.insertFinalNewline": true, // 保存文件时在文件末尾插入一个空行
 	//"files.trimTrailingWhitespace": true, // 自动删除文件行尾空格
 	"files.exclude": { // 编辑器窗口忽略文件夹
 		//"somefolder/": true,
@@ -75,9 +74,15 @@
 	"search.mode": "newEditor", // 在新的编辑器中搜索
 	"search.showLineNumbers": true, // 显示搜索结果所在行号
 	"search.smartCase": true, // 若搜索词全为小写，则不区分大小写进行搜索，否则区分大小写进行搜索。
+	"workbench.startupEditor": "none", //启动的时候不显示欢迎菜单
 	"workbench.editor.enablePreview": false, // 全局禁用预览模式
 	"workbench.editor.showTabs": true, //每次都新打开
 	"workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
+	"workbench.editorAssociations": { //设定文件使用的默认编辑器
+		"*.hex": "hexEditor.hexedit",
+		"*.exe": "hexEditor.hexedit",
+		"*.svg": "hediet.vscode-drawio-text",
+	},
 	//"workbench.editor.tabSizing": "fixed", //tab宽度自适应
 	//"workbench.list.horizontalScrolling": true, //资源管理器水平滚动
 	"zenMode.centerLayout": false, //禅模式取消居中
@@ -291,10 +296,8 @@
 		//这里尽量在每个工程设定
 	},
 	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
-	//"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
-	"terminal.integrated.fontFamily": "'等距更纱黑体 SC', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	//"terminal.integrated.fontFamily": "'更紗等幅ゴシック J', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //日文系统用
-	//"terminal.integrated.fontFamily": "'更紗等幅ゴシック J', 'Terminal', 'ＭＳ ゴシック', 'MS Gothic', 'Microsoft YaHei UI', 'JetBrains Mono', 'Cascadia Code', 'Ligconsolata', 'Inconsolata', 'Consolas', 'Courier New', monospace", //Win10低分辨率日文系统
+	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
+	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
 	"terminal.integrated.fontSize": 13, //设置字体大小
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
@@ -336,6 +339,20 @@
 	"git.ignoreMissingGitWarning": true, //忽略“缺失 Git”的警告
 	"git.openRepositoryInParentFolders": "always", //是否打开父文件夹的git仓库
 	//-----------------------------------------------"
+	//               emmet设定                       "
+	//-----------------------------------------------"
+	"emmet.showSuggestionsAsSnippets": true, //显式弹出语法展开提示
+	"emmet.triggerExpansionOnTab": true, //在按 Tab 时会展开 Emmet 缩写
+	"editor.snippetSuggestions": "top", //将语法展开提示在提示列表中置顶
+	"emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly", //emmet只显示标记语言和样式表的展开提示
+	"emmet.includeLanguages": {
+		//emmet能识别缩写语法的场景
+		"javascript": "javascriptreact",
+		"typescript": "typescriptreact",
+		"vue-html": "html",
+		"plaintext": "jade"
+	},
+	//-----------------------------------------------"
 	//               其他设定                        "
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
@@ -369,15 +386,20 @@
 	"[json]": {
 		"editor.defaultFormatter": "vscode.json-language-features",
 	},
-	"[css]": {
+	"[css][less][scss]": {
 		"editor.defaultFormatter": "vscode.css-language-features",
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "vscode.markdown-language-features",
 	},
-	"[typescript]": {
+	"[javascript][javascriptreact]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
+	"[typescript][typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features",
+	},
+	"javascript.format.semicolons": "insert", // JavaScript-在语句末尾插入分号
+	"typescript.format.semicolons": "insert", // TypeScript-在语句末尾插入分号
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
 	//-----------------------------------------------"

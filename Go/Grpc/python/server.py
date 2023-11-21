@@ -4,7 +4,8 @@ from concurrent import futures
 import ProductInfo_pb2
 import ProductInfo_pb2_grpc
 
-server_address = "[::]:50051"
+#server_address = "[::]:50051"
+server_address = "localhost:50051"
 productDict = {}
 
 

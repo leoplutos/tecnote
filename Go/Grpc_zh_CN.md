@@ -150,7 +150,7 @@ cd D:\WorkSpace\Grpc\go
 go get -u github.com/gofrs/uuid
 go get -u google.golang.org/grpc
 ```
-运行程序
+运行程序（方式1：直接实时运行）
 ```
 cd D:\WorkSpace\Grpc\go
 #运行服务端
@@ -158,6 +158,12 @@ go run ./product/server/main.go
 cd D:\WorkSpace\Grpc\go
 #运行客户端
 go run ./product/client/main.go
+```
+运行程序（方式2：编译后运行）
+```
+cd D:\WorkSpace\Grpc\go
+go build -o ./bin/server.exe ./product/server/main.go
+go build -o ./bin/client.exe ./product/client/main.go
 ```
 
 ### Python语言设置
@@ -274,6 +280,86 @@ cd D:\WorkSpace\Grpc\rust
 #运行客户端
 cargo run --bin rustclient
 ```
+### TypScript语言+Node.js设置
+
+在 Node.js 中有两个版本的 grpc
+- grpc-tools + @grpc/grpc-js  
+  静态编译版本，纯 js 实现，使用工具来生成存根
+
+- @grpc/proto-loader + @grpc/grpc-js  
+  动态加载版本，在 Node.js 启动时动态加载并处理 proto 定义，然后使用一些抽象封装来实现
+
+笔者觉得动态加载版本比较简单一些，推荐使用
+
+#### 静态编译版本
+安装所需构筑工具和第三方库
+```
+cd D:\WorkSpace\Grpc\node
+#npm install --save-dev grpc-tools grpc_tools_node_protoc_ts @grpc/grpc-js @types/node @types/node-uuid @types/uuid uuid
+npm install
+```
+编译proto文件，得到存根（stub）文件
+```
+cd D:\WorkSpace\Grpc
+set PATH=%PATH%;D:\WorkSpace\Grpc\node\node_modules\.bin
+#grpc_tools_node_protoc --plugin=protoc-gen-ts=D:/WorkSpace/Grpc/node/node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:./node/src --grpc_out=grpc_js:./node/src --ts_out=service=grpc-node,mode=grpc-js:./node/src ProductInfo.proto
+#生成到src
+grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./node/src --grpc_out=grpc_js:./node/src --ts_out=service=grpc-node,mode=grpc-js:./node/src ProductInfo.proto
+#生成到dist
+grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./node/dist --grpc_out=grpc_js:./node/dist --ts_out=service=grpc-node,mode=grpc-js:./node/dist ProductInfo.proto
+```
+
+运行程序
+```
+cd D:\WorkSpace\Grpc\node
+tsc -p tsconfig.json
+#运行服务端
+npm run server
+
+cd D:\WorkSpace\Grpc\node
+#运行客户端
+npm run client
+```
+
+#### 动态加载版本
+安装所需第三方库
+```
+cd D:\WorkSpace\Grpc\node_dynamic
+#npm install --save-dev @grpc/proto-loader @grpc/grpc-js @types/node @types/node-uuid @types/uuid uuid
+npm install
+```
+NOTE：动态版本不需要编译proto文件
+
+运行程序
+```
+cd D:\WorkSpace\Grpc\node_dynamic
+tsc -p tsconfig.json
+#运行服务端
+npm run server
+
+cd D:\WorkSpace\Grpc\node_dynamic
+#运行客户端
+npm run client
+```
+
+### 关于Web方面
+gRPC原本设想是在纯后端使用的，由于浏览器的限制，不能直接从浏览器发送gRPC请求到后端。如果真的有这种需求的话，有两种对应方法
+
+#### 方式1
+```mermaid
+graph LR
+    浏览器 -- HTTP --> 服务器A;
+    服务器A -- gRPC --> 服务器B;
+```
+使用 [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) 可以自动生成上图 ``服务器A`` 的部分（笔者没有测试）
+
+#### 方式2
+```mermaid
+graph LR
+    浏览器 -- XHR --> 代理服务器proxy;
+    代理服务器proxy -- gRPC --> 服务器;
+```
+使用 [grpc-web](https://github.com/grpc/grpc-web) 可以实现，因为还需要设置代理，笔者也没有测试。 在 [这里](https://grpc.io/docs/platforms/web/basics/) 有官方教程。[这里](https://qiita.com/hedrall/items/9f4c03c3a6518504473a) 的``WEBブラウザから呼び出す``部分有一个例子
 
 ## 通信模式
 gRPC 包含四种基础的通信模式：

@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"PATH": "${env:path};D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64"
+		}
+	},
+	"tasks": [
+		{
+			"label": "typescript_build",
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "npm",
+			"script": "server",
+			"problemMatcher": [],
+			"label": "npm: server",
+			"detail": "node dist/node-server.js"
+		},
+		{
+			"type": "npm",
+			"script": "client",
+			"problemMatcher": [],
+			"label": "npm: client",
+			"detail": "node dist/node-client.js"
+		},
+		{
+			"type": "npm",
+			"script": "tsc",
+			"problemMatcher": [],
+			"label": "npm: tsc",
+			"detail": "tsc -p tsconfig.json"
+		}
+	]
+}
