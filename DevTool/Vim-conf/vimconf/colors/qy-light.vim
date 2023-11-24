@@ -224,27 +224,11 @@ hi LspHintFloatText term=reverse ctermfg=29 guifg=#118c74
 "-----------------------------------------------"
 "               其他高亮                        "
 "-----------------------------------------------"
-"高亮行尾空格(包括tab)
-"hi ExtraWhitespace  term=standout ctermfg=250 ctermbg=217 guifg=#c0c0c0 guibg=#fbaeae
-"augroup lchSyntaxGroup
-"  autocmd!
-"  autocmd Syntax * call MatchExtraWhitespace()
-"augroup END
-"function! MatchExtraWhitespace()
-"  "各种插件的buffer列表(TelescopeResults未加入)
-"  let l:plugin_buffer_list = [
-"  \  'lspinfo' , 'packer', 'checkhealth', 'help', 'man', 'gitcommit',
-"  \  'startify', 'netrw', 'ctrlp', 'nerdtree', 'VimspectorPrompt', 'NvimTree', 'TelescopePrompt',
-"  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt', 'dashboard', 'mason',
-"  \]
-"  "各种插件的buffer不高亮行尾空格
-"  if index(l:plugin_buffer_list, &filetype) >= 0
-"    match none
-"  else
-"    match ExtraWhitespace /\s\+$/
-"  endif
-"endfunction
-
+"日语全角空格
+"hi JapaneseWhitespace term=standout ctermfg=253 ctermbg=253 guifg=#d9d9df guibg=#d9d9df
+"hi JapaneseWhitespace term=standout ctermfg=250 ctermbg=217 guifg=#c0c0c0 guibg=#fbaeae
+"行尾空格(包括tab)
+"hi ExtraWhitespace    term=standout ctermfg=250 ctermbg=217 guifg=#c0c0c0 guibg=#fbaeae
 "tagbar插件高亮
 hi link TagbarKind ThinTitle
 hi link TagbarScope ThinTitle

@@ -65,9 +65,11 @@ python D:\WorkSpace\Python\PythonSampleProject\src\updateGithubHosts.py
 ```
 然后用 ``管理员`` 运行这个 ``cmd`` 即可
 
+## github镜像站
+https://hub.njuu.cf/  
+https://hub.yzuu.cf/  
+https://hub.nuaa.cf/  
 
 ## github下载加速
 https://moeyy.cn/gh-proxy  
 https://gh.api.99988866.xyz/  
-
-

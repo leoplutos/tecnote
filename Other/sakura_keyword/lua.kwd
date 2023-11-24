@@ -1,25 +1,35 @@
+■lua.kwd
 // lua  キーワード定義ファイル
 
 and
+assert
 break
+collectgarbage
+coroutine
+debug
 do
 else
 elseif
 end
+error
 false
 for
 function
 goto
 if
 in
+io
 local
 nil
 not
 or
+print
 repeat
+require
 return
+setmetatable
 then
 true
 until
-while
 vim
+while

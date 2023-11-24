@@ -76,7 +76,7 @@
 	"search.smartCase": true, // 若搜索词全为小写，则不区分大小写进行搜索，否则区分大小写进行搜索。
 	"workbench.startupEditor": "none", //启动的时候不显示欢迎菜单
 	"workbench.editor.enablePreview": false, // 全局禁用预览模式
-	"workbench.editor.showTabs": true, //每次都新打开
+	"workbench.editor.showTabs": "multiple", //每次都新打开
 	"workbench.editor.enablePreviewFromQuickOpen": false, //每次都新打开
 	"workbench.editorAssociations": { //设定文件使用的默认编辑器
 		"*.hex": "hexEditor.hexedit",
@@ -94,7 +94,7 @@
 	"workbench.preferredLightColorTheme": "Default Light+", // 浅色主题首选项
 	"workbench.preferredHighContrastColorTheme": "Default Dark+", // 深色高对比度主题首选项
 	"workbench.preferredHighContrastLightColorTheme": "Default Light+", // 浅色高对比度主题首选项
-	"workbench.colorTheme": "Default Dark+", //设定主题（Default Dark Modern）（Default Light Modern）
+	"workbench.colorTheme": "Default Dark+",
 	"workbench.colorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
 			"editor.background": "#1E1E1E", //设定编辑器背景
@@ -112,8 +112,8 @@
 			"editor.wordHighlightTextBackground": "#57575750", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选中变量的前景边框
 			"editorWhitespace.foreground": "#e3e4e2af", //选中的tab和空格的颜色，因为设定为selection
-			"editorIndentGuide.background": "#333844", //缩进参考线的颜色
-			"editorIndentGuide.activeBackground": "#585C66", //当前缩进参考线的颜色
+			"editorIndentGuide.background1": "#333844", //缩进参考线的颜色
+			"editorIndentGuide.activeBackground1": "#585C66", //当前缩进参考线的颜色
 			"editorRuler.foreground": "#4F4355", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
@@ -128,6 +128,9 @@
 			"editorInlayHint.parameterForeground": "#15aabf", //参数内联提示的前景色
 			"editorInlayHint.typeBackground": "#2e2e2e", //类型内联提示的背景色
 			"editorInlayHint.typeForeground": "#15aabf", //类型内联提示的前景色
+			//"textPreformat.foreground": "#ff0000",
+			//"textPreformat.background": "#ff0000",
+			//"statusBarItem.errorHoverBackground":"#0000ff",
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
@@ -164,8 +167,8 @@
 			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
 			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
-			"editorIndentGuide.background": "#d3d3d3", //缩进参考线的颜色
-			"editorIndentGuide.activeBackground": "#939393", //当前缩进参考线的颜色
+			"editorIndentGuide.background1": "#d3d3d3", //缩进参考线的颜色
+			"editorIndentGuide.activeBackground1": "#939393", //当前缩进参考线的颜色
 			"editorRuler.foreground": "#d3d3d3", //标尺的颜色
 			"editorCursor.background": "#F8F8F0", //光标背景色
 			"editorCursor.foreground": "#1d1f21", //光标前景色
@@ -251,8 +254,8 @@
 			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
 			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
-			"editorIndentGuide.background": "#d3d3d3", //缩进参考线的颜色
-			"editorIndentGuide.activeBackground": "#939393", //当前缩进参考线的颜色
+			"editorIndentGuide.background1": "#d3d3d3", //缩进参考线的颜色
+			"editorIndentGuide.activeBackground1": "#939393", //当前缩进参考线的颜色
 			"editorRuler.foreground": "#d3d3d3", //标尺的颜色
 			"editorCursor.background": "#F8F8F0", //光标背景色
 			"editorCursor.foreground": "#1d1f21", //光标前景色
@@ -623,6 +626,8 @@
 	"terminal.integrated.fontSize": 16, //设置字体大小
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
+	"terminal.integrated.cursorStyle": "block", // 光标样式
+	"terminal.integrated.cursorStyleInactive": "outline", //失去焦点光标样式
 	"terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
 	"terminal.integrated.rightClickBehavior": "paste", // 鼠标右键-粘贴
 	"terminal.integrated.sendKeybindingsToShell": false, // 将大多数快捷键绑定到终端（会导致ctrl+f查找失效，已经绑定到Shift+空格->F）
@@ -681,6 +686,11 @@
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
 	"diffEditor.ignoreTrimWhitespace": false, //差异编辑器-是否忽略空格或尾随空格
 	"diffEditor.diffAlgorithm": "advanced", // 差异编辑器-新差异算法
+	"diffEditor.experimental.showMoves": true, // 检测代码移动
+	"diffEditor.hideUnchangedRegions.enabled": true, //隐藏未更改的区域
+	"diffEditor.useInlineViewWhenSpaceIsLimited": false, //不开启内联视图
+	"accessibility.dimUnfocused.enabled": true, // 将未聚焦的编辑器和终端变暗
+	"accessibility.dimUnfocused.opacity": 0.8, // 未聚焦的编辑器和终端变暗透明度
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新
 	"extensions.ignoreRecommendations": true, //忽略插件建议
@@ -712,8 +722,18 @@
 		"editor.defaultFormatter": "vscode.css-language-features",
 	},
 	"[markdown]": {
+		"editor.insertSpaces": true, //按下tab时替换为空格
+		"editor.guides.indentation": true, //启用缩进参考线
+		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
 		"editor.defaultFormatter": "vscode.markdown-language-features",
+		"editor.quickSuggestions": {
+			"other": "on",
+			"comments": "on",
+			"strings": "on"
+		},
 	},
+	"markdown.validate.enabled": true, //启用 Markdown 文件中的所有错误报告
+	//"markdown.styles": ["Style.css"], //Markdown 预览使用的 CSS 样式表
 	"[javascript][javascriptreact]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
@@ -721,11 +741,16 @@
 		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
 	"javascript.format.semicolons": "insert", // JavaScript-在语句末尾插入分号
+	"javascript.inlayHints.parameterNames.enabled": "all", //参数名称叠加提示
 	"typescript.format.semicolons": "insert", // TypeScript-在语句末尾插入分号
+	"typescript.inlayHints.parameterNames.enabled": "all", //参数名称叠加提示
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
 	//-----------------------------------------------"
 	"remote.SSH.localServerDownload": "always", //扩展将首先在客户端上安装 VS Code 服务器，然后通过 SCP 将其复制到服务器
+	"remote.SSH.remotePlatform": {
+		"WSL-SSH": "linux"
+	},
 	//-----------------------------------------------"
 	//           visible-whitespace插件设定          "
 	//-----------------------------------------------"
@@ -769,6 +794,12 @@
 	//               ErrorLens插件设定               "
 	//-----------------------------------------------"
 	"errorLens.messageBackgroundMode": "message",
+	"errorLens.enabledDiagnosticLevels": [
+		"error",
+		"warning",
+		"info",
+		"hint"
+	],
 	//-----------------------------------------------"
 	//              Highlight插件设定                "
 	//-----------------------------------------------"
@@ -884,4 +915,5 @@
 		{ "before": ["j", "j"], "after": ["<Esc>"] }, //回到普通模式
 		{ "before": [";", ";"], "commands": ["editor.action.triggerSuggest"] } //打开建议
 	],
+	"hediet.vscode-drawio.resizeImages": null,
 }

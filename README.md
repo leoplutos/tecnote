@@ -72,8 +72,9 @@
 
 ## 开发工具相关
 * [VS Code](DevTool/VSCode_zh_CN.md)
-* [VSCode 通过SSH进行远程开发](DevTool/VSCode-ssh_zh_CN.md)
-* [使用VSCode制作Markdown并且嵌入图片和流程图](DevTool/VSCode-Drawio_zh_CN.md)
+* [VS Code-通过SSH进行远程开发](DevTool/VSCode-ssh_zh_CN.md)
+* [VS Code-制作Markdown并且嵌入图片和流程图](DevTool/VSCode-Drawio_zh_CN.md)
+* [VS Code-自定义语法高亮](DevTool/VSCode-custom-highlight_zh_CN.md)
 * [终端横评](DevTool/Terminal_Compare_zh_CN.md)
 * [Windows Terminal](DevTool/Windows-Terminal_zh_CN.md)
 * [Neo-Vim](DevTool/NeoVim_zh_CN.md)

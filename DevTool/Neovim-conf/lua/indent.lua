@@ -11,13 +11,19 @@ vim.cmd('set nolist')
 -- 如果使用实线字符（aligned solid）的话，需要设定ambiwidth=single
 vim.cmd('set ambiwidth=single')
 
+vim.o.list = true
+vim.o.listchars = 'tab:│ ,nbsp:+,trail:·,space:·,extends:→,precedes:←'
 
 require('ibl').setup({
+  enabled = true,
+  debounce = 200,
   --设定缩进显示为实线，tab显示为虚线
   indent = {
     --char = "|",  --虚线字符，可以ambiwidth=double
-    char = "▏",  --实线字符，必须ambiwidth=single
-    tab_char = {'¦'},
+    --char = "▏",  --实线字符，必须ambiwidth=single
+    char = "│", --居中实线
+    --tab_char = {'¦'},
+    tab_char = {'│'}, --居中实线
     highlight = { "SpecialKey"},
     smart_indent_cap = true,
     priority = 9,

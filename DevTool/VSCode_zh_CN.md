@@ -466,6 +466,9 @@ C:\Users\user\AppData\Roaming\Code\User\snippets
 ```
 设置好以后，输入ma即可弹出建议，选择“添加main函数”即可。
 
+#### 在线配置snippets的网站
+- [snippet-generator.app](https://snippet-generator.app/?mode=vscode)
+
 ## 其他
 
 ### 使用VSCode集成终端配置Git-bash时，编码不是utf8的问题

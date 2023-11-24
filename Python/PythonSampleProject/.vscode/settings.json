@@ -2,27 +2,25 @@
 	"python.home": "D:\\Tools\\WorkTool\\Python\\Python38-32",
 	"python.defaultInterpreterPath": "${config:python.home}",
 	"python.envFile": "${workspaceFolder}/.env",
-	"python.analysis.typeCheckingMode": "strict",
+	"python.analysis.typeCheckingMode": "basic",
 	"python.analysis.completeFunctionParens": true, // 添加括号以完成函数
 	"python.analysis.inlayHints.variableTypes": true, //变量类型的嵌入提示
 	"python.analysis.inlayHints.functionReturnTypes": true, //函数返回类型的嵌入提示
-	"python.analysis.inlayHints.callArgumentNames": true, //调用参数名称的嵌入提示
+	"python.analysis.inlayHints.callArgumentNames": "all", //调用参数名称的嵌入提示
 	"python.analysis.inlayHints.pytestParameters": true, //pytest 函数参数的嵌入提示
 	"python.analysis.autoFormatStrings": true,
 	"python.analysis.autoImportCompletions": true,
-	"python.linting.enabled": true, //开启代码检查
 	//"python.linting.pylintEnabled": true, //开启pylint
 	//"python.linting.flake8Enabled": true,
-	"python.formatting.provider": "black",
-	"python.formatting.blackPath": "D:\\Tools\\WorkTool\\Python\\Python38-32\\Scripts\\black.exe",
-	"python.formatting.blackArgs": [
-		"--skip-string-normalization"
-	],
 	"[python]": {
 		"editor.formatOnType": true,
 		"editor.tabSize": 4,
-		"editor.defaultFormatter": "ms-python.python",
+		"editor.defaultFormatter": "ms-python.black-formatter",
 	},
+	"black-formatter.args": [
+		"--skip-string-normalization"
+	],
+	"black-formatter.showNotification": "always",
 	// 默认Python语言服务器使用：Pylance
 	"python.languageServer": "Pylance",
 	"python.autoComplete.extraPaths": [

@@ -1,0 +1,143 @@
+{
+	"image": {
+		"prefix": "im",
+		"body": [
+			"![${1:avatar}][${2:base64str_sample}]",
+			"",
+			"[${2}]:data:image/png;base64,iVBORw0......"
+		],
+		"description": "image"
+	},
+	"link": {
+		"prefix": "li",
+		"body": [
+			"[${1:text}](${2:https://})"
+		],
+		"description": "link"
+	},
+	"code": {
+		"prefix": "co",
+		"body": [
+			"```",
+			"$1",
+			"```"
+		],
+		"description": "code"
+	},
+	"table": {
+		"prefix": "tb",
+		"body": [
+			"| Syntax      | Description |",
+			"| ----------- | ----------- |",
+			"| Header      | Title       |",
+			"| Paragraph   | Text        |",
+			"$1"
+		],
+		"description": "table"
+	},
+	"strikethrough": {
+		"prefix": "st",
+		"body": [
+			"~~${1:text}~~"
+		],
+		"description": "strikethrough"
+	},
+	"tasklists": {
+		"prefix": "tl",
+		"body": [
+			"- [x] ${1:task1}",
+			"- [ ] ${2:task2}",
+			"- [ ] ${3:task3}"
+		],
+		"description": "tasklists"
+	},
+	"mermaid_gantt": {
+		"prefix": "mg",
+		"body": [
+			"```mermaid",
+			"gantt",
+			"dateFormat YYYY-MM-DD",
+			"axisFormat %m-%d",
+			"excludes weekends,2023-11-02",
+			"tickInterval 1day",
+			"todayMarker on",
+			"",
+			"title 甘特图示例",
+			"section 项目A",
+			"任务1           :done, a1, 2023-11-01, 5d",
+			"任务2           :active, a2, after a1, 15d",
+			"里程碑          :milestone, a3, 2023-11-30, 1d",
+			"section 项目B",
+			"任务3           :b1, 2023-11-15  , 12d",
+			"任务4           :crit, b2, 2023-11-20, 10d",
+			"```"
+		],
+		"description": "mermaid_gantt"
+	},
+	"mermaid_pie": {
+		"prefix": "mp",
+		"body": [
+			"```mermaid",
+			"pie",
+			"title 开发语言",
+			"\"Java\" : 30",
+			"\"Python\" : 30",
+			"\"Rust\" : 40",
+			"```"
+		],
+		"description": "mermaid_pie"
+	},
+	"mermaid_flow": {
+		"prefix": "mf",
+		"body": [
+			"```mermaid",
+			"graph LR",
+			"    A[开始] --> B{条件判断1};",
+			"    B -- Yes --> C[OK];",
+			"    C --> D[重新取得];",
+			"    D --> B;",
+			"    B -- No ----> E[结束];",
+			"```"
+		],
+		"description": "mermaid_flow"
+	},
+	"mermaid_flow_subgraphs": {
+		"prefix": "mfs",
+		"body": [
+			"```mermaid",
+			"flowchart LR",
+			"  subgraph TOP",
+			"    direction TB",
+			"    subgraph B1",
+			"        direction RL",
+			"        i1 -->f1",
+			"    end",
+			"    subgraph B2",
+			"        direction BT",
+			"        i2 -->f2",
+			"    end",
+			"  end",
+			"  A --> TOP --> B",
+			"  B1 --> B2",
+			"```"
+		],
+		"description": "mermaid_flow_subgraphs"
+	},
+	"mermaid_sequence": {
+		"prefix": "ms",
+		"body": [
+			"```mermaid",
+			"sequenceDiagram",
+			"用户->>认证: 认证请求",
+			"loop 认证处理",
+			"    认证->>认证: 等待其他处理结束",
+			"end",
+			"Note right of 认证: 一直循环取得!",
+			"认证-->>用户: 认证成功",
+			"认证->>仓库: 存储Token",
+			"仓库-->>认证: 存储成功",
+			"```"
+		],
+		"description": "mermaid_sequence"
+	}
+}

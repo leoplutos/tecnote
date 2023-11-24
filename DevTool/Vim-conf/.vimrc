@@ -295,7 +295,7 @@ endif
 function! GetProjectRoot()
   let name = expand('%:p')
   return s:find_root(name, g:g_s_rootmarkers, 0)
-endfunc
+endfunction
 function! s:find_root(name, markers, strict)
   let name = fnamemodify((a:name != '')? a:name : bufname('%'), ':p')
   let finding = ''
@@ -326,7 +326,7 @@ function! s:find_root(name, markers, strict)
     let path = fnamemodify(path, ':h')
   endif
   return path
-endfunc
+endfunction
 
 "-----------------------------------------------"
 "               特殊符号设置                    "
@@ -353,6 +353,33 @@ set listchars=tab:¦\ ,precedes:<,extends:>
 "-----------------------------------------------"
 exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-dark.vim'
 "exec 'source ' . g:g_s_rcfilepath . '/vimconf/colors/lch-light.vim'
+"-----------------------------------------------"
+"               特殊高亮设置                    "
+"-----------------------------------------------"
+"匹配空格显示
+augroup lchSyntaxGroup
+  autocmd!
+  autocmd Syntax * call MatchExtraWhitespace()
+augroup END
+function! MatchExtraWhitespace()
+  "各种插件的buffer列表(TelescopeResults未加入)
+  let l:plugin_buffer_list = [
+  \  'lspinfo' , 'packer', 'checkhealth', 'help', 'man', 'gitcommit',
+  \  'startify', 'netrw', 'ctrlp', 'nerdtree', 'VimspectorPrompt', 'NvimTree', 'TelescopePrompt',
+  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt', 'dashboard', 'mason',
+  \]
+  if index(l:plugin_buffer_list, &filetype) >= 0
+    "各种插件的buffer不匹配
+    match none
+    2match none
+  else
+    "匹配日语空格(u3000)
+    match JapaneseWhitespace /\(\%u3000\)/
+    "匹配行尾空格-所有25个空格包括tab
+    "2match ExtraWhitespace /\s\+$/
+    2match ExtraWhitespace /\(\%u0009\|\%u000A\|\%u000B\|\%u000C\|\%u000D\|\%u0020\|\%u0085\|\%u00A0\|\%u1680\|\%u2000\|\%u2001\|\%u2002\|\%u2003\|\%u2004\|\%u2005\|\%u2006\|\%u2007\|\%u2008\|\%u2009\|\%u200A\|\%u2028\|\%u2029\|\%u202F\|\%u205F\|\%u3000\)\+$/
+  endif
+endfunction
 
 "-----------------------------------------------"
 "               快捷键绑定                      "
@@ -487,6 +514,9 @@ let g:is_posix = 1
 
 "Cobol高亮设定
 let g:cobol_inline_comment = 1
+
+"dosbatch高亮设定
+let g:dosbatch_colons_comment = 1
 
 "-----------------------------------------------"
 "               文件树设置                      "

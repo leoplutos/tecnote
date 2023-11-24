@@ -42,6 +42,9 @@ cnoremap { {}<left>
 cnoremap < <><left>
 inoremap " ""<left>
 inoremap ' ''<left>
+" 命令模式移动
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 " TAB/窗口移动快捷键
 nnoremap <leader>tn :tabnew<cr>|          " [普通模式]tab+n：新建一个tab
 nnoremap <TAB>w <C-w>w|               " [普通模式]tab+w：移动窗口
@@ -97,7 +100,13 @@ nnoremap <leader>rp :%s///gc<LEFT><LEFT><LEFT><LEFT>
 " [普通模式]\oe：在OS打开当前文件的路径，快捷键 空格+e+空格
 nnoremap <leader>oe :!start .<CR>
 " [普通模式]\ds：删除行尾空格
-nnoremap <silent><nowait> <leader>ds :%s/ *$//g<cr>:noh<cr><c-o>
+"nnoremap <silent><nowait> <leader>ds :%s/ *$//g<cr>:noh<cr><c-o>
+nnoremap <silent><nowait> <leader>ds <Cmd>call RemovveTrailingWhitespace()<CR>
+function! RemovveTrailingWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\(\%u0009\|\%u000A\|\%u000B\|\%u000C\|\%u000D\|\%u0020\|\%u0085\|\%u00A0\|\%u1680\|\%u2000\|\%u2001\|\%u2002\|\%u2003\|\%u2004\|\%u2005\|\%u2006\|\%u2007\|\%u2008\|\%u2009\|\%u200A\|\%u2028\|\%u2029\|\%u202F\|\%u205F\|\%u3000\)\+$//e
+    call winrestview(l:save)
+endfunction
 " [普通模式]\df：差分另一个文件
 nnoremap <leader>df :vert diffsplit |
 " [普通模式]\dt：差分左右2个文件
