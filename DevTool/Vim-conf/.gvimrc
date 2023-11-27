@@ -4,15 +4,16 @@ scriptencoding utf-8
 "-----------------------------------------------"
 "               语言设置                        "
 "-----------------------------------------------"
-let $LANG = 'zh_CN.utf8'                  " 消息语言中文
+"let $LANG = 'zh_CN.utf8'                  " 消息语言中文
+let $LANG = 'en'                           " 消息语言英文
 set langmenu=zh_CN.UTF-8                  " 菜单语言中文
 "let $LANG = 'en_US.utf8'                  " 消息语言英文
 "set langmenu=en_US.UTF-8                  " 菜单语言英文
 "let $LANG = 'ja_JP.utf8'                  " 消息语言日文
 "set langmenu=ja_JP.UTF-8                  " 菜单语言日文
-language zh_CN
-language message zh_CN.UTF-8
-set helplang=cn                           " 设置帮助文档语言
+"language zh_CN
+"language message zh_CN.UTF-8
+"set helplang=cn                           " 设置帮助文档语言
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 

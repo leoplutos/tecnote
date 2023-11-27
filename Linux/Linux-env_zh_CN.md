@@ -467,3 +467,7 @@ env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua
 infocmp | grep Smulx
 infocmp -1 -x vte | grep Smulx
 ```
+
+### Linux下自动安装Vim/NeoVim设定
+笔者的脚本：
+ - [install_linux_vim_setting.sh](./install_linux_vim_setting.sh)

@@ -101,6 +101,7 @@
 * [DBeaver](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
 * [Sqlite3](DB/Sqlite3_zh_CN.md)
+* [OpenSearch](DB/OpenSearch_zh_CN.md)
 
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)

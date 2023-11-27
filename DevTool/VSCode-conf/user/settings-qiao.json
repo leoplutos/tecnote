@@ -48,10 +48,12 @@
 	"editor.semanticHighlighting.enabled": false, //开启基于LSP语义的高亮
 	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
+	"window.confirmBeforeClose": "always", //控制是否在关闭窗口或退出应用程序之前显示确认对话框
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
 	//"window.zoomLevel": 0.4, //缩放比例
 	"window.newWindowDimensions": "maximized", //总是最大化打开窗口
 	"explorer.compactFolders": false, // 资源管理器不采用紧凑模式
+	"files.hotExit": "off", // 禁用热退出
 	"files.autoSave": "off", //取消自动保存
 	"files.eol": "auto", //自动设定换行符，也可以设定 "\n"
 	"files.autoGuessEncoding": true, //自动识别文字编码
@@ -484,7 +486,7 @@
 		"warning",
 		"info",
 		"hint"
-	],	
+	],
 	//-----------------------------------------------"
 	//              Whitespace++插件设定             "
 	//-----------------------------------------------"

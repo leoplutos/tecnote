@@ -72,6 +72,8 @@ let g:debugDebugStepOutIcon = ""
 let g:debugDebugRestartIcon = ""
 "退出调试 - \uf00d
 let g:debugDebugExitIcon = ""
+"\uf188
+let g:debugRejectedIcon = ""
 
 "文件数
 "关闭 - \uf460
@@ -93,3 +95,4 @@ let g:statusTabLineSubseparatorRight = ""
 let g:statusTabLineSeparatorBubbleLeft = ""
 "\ue0b6
 let g:statusTabLineSeparatorBubbleRight = ""
+

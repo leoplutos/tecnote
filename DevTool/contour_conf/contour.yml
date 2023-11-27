@@ -25,7 +25,7 @@ images:
 profiles:
     main:
         shell: "cmd.exe"
-        arguments: ["/k", "D:/Tools/WorkTool/Cmd/cmdautorun.cmd"]
+        arguments: ["/k", "D:/Tools/WorkTool/Cmd/cmdautorun.cmd", "1"]
         escape_sandbox: true
         copy_last_mark_range_offset: 0
         initial_working_directory: "~"
@@ -64,7 +64,7 @@ profiles:
                 #engine: native
                 engine: DirectWrite
             builtin_box_drawing: true
-            render_mode: gray
+            render_mode: lcd
             strict_spacing: true
             regular:
                 family: "等距更纱黑体 SC Nerd Font"

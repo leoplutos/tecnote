@@ -32,6 +32,15 @@
 ~/vimconf/nerdtree_plugin
 ```
 
+## Windows下自动安装Vim/NeoVim设定
+笔者的脚本：
+ - [install_windows_vim_setting.cmd](../Windows/install_windows_vim_setting.cmd)
+
+## Linux下自动安装Vim/NeoVim设定
+笔者的脚本：
+ - [install_linux_vim_setting.sh](../Linux/install_linux_vim_setting.sh)
+
+
 ### 一些笔者没有使用但是很优秀的插件
 
 - Git  
