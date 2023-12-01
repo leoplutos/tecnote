@@ -1,6 +1,6 @@
 ## 终端模拟器
 
-编辑器和终端模拟器号称程序员的两个大玩具。现有终端模拟器种类繁多，笔者对终端模拟器的选择主要考虑一下几个方面。  
+编辑器和终端模拟器号称程序员的两个大玩具。现有终端模拟器种类繁多，笔者对终端模拟器的选择主要考虑以下几个方面。  
  1. 性能高效。所以开发语言只选择C/C++/Rust开发的，Electron开发的不考虑。
  2. Vim/NeoVim支持良好
  3. 支持GPU加速
@@ -27,7 +27,9 @@
 - Windows平台：不喜欢折腾选 ``Windows Terminal``，喜欢折腾选 ``WezTerm``  
 - Linux平台：``WezTerm``  
 - MacOS平台：``WezTerm``  
-WindTerm虽然支持的功能很多，但是如果使用Vim等TUI程序的话显示出现很大问题。只适合运维使用，不适合开发人员。
+
+WindTerm虽然支持的功能很多，但是如果使用Vim等TUI程序的话显示出现很大问题。只适合运维使用，不适合开发人员。  
+个别一些老爷机使用 ``WezTerm`` 会有卡顿现象，这种情况可以考虑一下 ``Alacritty``  或者 ``ConTour``
 
 ## WezTerm
 * [官网](https://wezfurlong.org/wezterm/index.html)

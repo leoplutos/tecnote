@@ -315,6 +315,8 @@
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
 		//这里尽量在每个工程设定
 	},
+	"terminal.integrated.env.osx": {},
+	"terminal.integrated.env.linux": {},
 	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
 	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
 	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
@@ -322,6 +324,7 @@
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
 	"terminal.integrated.cursorStyle": "block", // 光标样式
+	"terminal.integrated.allowChords": false, // 禁用终端中的组合键绑定
 	"terminal.integrated.cursorStyleInactive": "outline", //失去焦点光标样式
 	"terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
 	"terminal.integrated.rightClickBehavior": "paste", // 鼠标右键-粘贴
@@ -458,11 +461,11 @@
 	"visibleWhitespace.htab.enable": true, //TAB符号
 	"visibleWhitespace.htab.text": "^", //TAB符号内容 默认为：→
 	"visibleWhitespace.newLine.enable": true, //换行符
-	"visibleWhitespace.newLine.lf": "⇣", //Linux换行符 默认：↓
-	"visibleWhitespace.newLine.crLf": "↵", //Windows换行符 默认：↲
+	"visibleWhitespace.newLine.lf": "ᛎ", //Linux换行符 默认：↓
+	"visibleWhitespace.newLine.crLf": "⤶", //Windows换行符 默认：↲
 	"visibleWhitespace.space.enable": false, //半角空格
 	"visibleWhitespace.space.render": "all", //渲染所有
-	"visibleWhitespace.space.text": "␣", //半角空格内容
+	"visibleWhitespace.space.text": "·", //半角空格内容（备用：␣┆）
 	"visibleWhitespace.nbsp.enable": true, //不间断空格
 	"visibleWhitespace.nbsp.text": "⌷", //不间断空格内容
 	"visibleWhitespace.widespace.enable": true, //全角空格
@@ -477,6 +480,8 @@
 	//-----------------------------------------------"
 	"trailing-spaces.deleteModifiedLinesOnly": true, //只删除修改的行
 	"trailing-spaces.trimOnSave": false, //保存时不自动删除行尾空格（只对修改的行生效）
+	// 匹配所有特殊空格
+	"trailing-spaces.regexp": "[\u0009\u000C\u0020\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000]+",
 	//-----------------------------------------------"
 	//               ErrorLens插件设定               "
 	//-----------------------------------------------"

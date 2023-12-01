@@ -1,6 +1,5 @@
 # Eclipse
 
-
 ## Eclipse的Vim插件
 需要安装 ``vrapper`` 插件
 #### 手动安装（推荐）
@@ -14,9 +13,30 @@ http://vrapper.sourceforge.net/update-site/stable
 https://vrapper.sourceforge.net/home/  
 https://github.com/vrapper/vrapper  
 
+## Eclipse的常用设定
+
+### 显示空格和TAB
+Window → Preferences  
+General → Editors → Text Editors  
+找到 ``Show whitespace characters`` checkbox 并选中  
+点击右侧的 ``configure visibility`` link，按照需求设定  
+NOTE：最下面的0到255的数字为透明度  
+
+### 按下TAB自动转换空格
+Window → Preferences  
+General → Editors → Text Editors  
+找到 ``Insert spaces for tabs`` checkbox 并选中  
+
+### 代码格式化时自动TAB转换空格
+Window → Preferences  
+Java → Code Style → Formatter → 按 ``New`` 按钮 → 命名为 ``Space_only``  
+在 ``Indentation`` 选项卡下设定
+ - Tab policy：``Spaces only``
+ - Indentation size：``4``
+ - Tab size：``4``
 
 ## Eclipse下开发C/C++
-直接使用 ``Eclipse IDE for C/C++ Developers`` 即可  
+使用 ``Eclipse IDE for C/C++ Developers`` 即可  
 下载地址：  
 https://www.eclipse.org/downloads/packages/release/2023-09/r/eclipse-ide-cc-developers  
 
@@ -74,6 +94,12 @@ Window → Preferences → Pydev → Interpreters → Python Interpreters → Ne
 ```
 New → Other → Pydev → Pydev Project
 ```
+
+## Eclipse下开发前端
+使用 ``Eclipse - Wild Web Developer`` 即可  
+支持 JavaScript, TypeScript, Angular, React, Vue, ESLint  
+下载地址：  
+https://download.eclipse.org/wildwebdeveloper/releases/latest/IDEs/  
 
 #### 参考
 https://marketplace.eclipse.org/content/pydev-python-ide-eclipse  

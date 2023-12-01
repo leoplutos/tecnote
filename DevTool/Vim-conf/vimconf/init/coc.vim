@@ -341,6 +341,7 @@ hi clear CocSemImport
 hi clear CocSemIn
 hi clear CocSemIs
 hi clear CocSemLambda
+hi clear CocSemMacro
 hi clear CocSemMatch
 hi clear CocSemNone
 hi clear CocSemNonlocal
@@ -396,7 +397,7 @@ hi! link CocSemArrow Special
 hi! link CocSemBacktick Special
 hi! link CocSemAnd Statement
 hi! link CocSemAs Statement
-hi! link CocSemAssert Statement
+"hi! link CocSemAssert Statement
 hi! link CocSemAsync Statement
 hi! link CocSemAwait Statement
 hi! link CocSemBreak Statement
@@ -420,6 +421,7 @@ hi! link CocSemIn Statement
 hi! link CocSemIs Statement
 hi! link CocSemLambda Statement
 hi! link CocSemMatch Statement
+hi! link CocSemMacro None
 hi! link CocSemNone Special
 hi! link CocSemNonlocal Statement
 hi! link CocSemNot Statement

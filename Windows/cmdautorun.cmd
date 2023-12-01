@@ -28,7 +28,7 @@ if defined USE_NERD_FONT_FLG (
 )
 
 :SetPromptNerdFont
-::设定WIN_ICON=NerdFont的Windows图标（需要chcp 65001），最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {e70f}{U+00A0}
+::设定WIN_ICON=NerdFont的Windows图标（需要chcp 65001），最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {e70f}{00A0}
 for /f "delims=" %%i in ('echo  ') do (set WIN_ICON=%%i)
 for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
 set PS_RED=$E[31m
@@ -65,7 +65,14 @@ set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
 set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
 set RUST_SRC_PATH=D:\Tools\WorkTool\Rust\Rust_gnu_1.70\toolchains\stable-x86_64-pc-windows-gnu\lib\rustlib\src\rust\src
 set GO111MODULE=on
+set DOCKER_HOST=tcp://localhost:3101
 set PATH=%PATH%;%CARGO_HOME%\bin
+set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep\bin
+set PATH=%PATH%;%RIPGREP_HOME%
+set FZF_HOME=D:\Tools\WorkTool\Search\fzf\bin
+set PATH=%PATH%;%FZF_HOME%
+set BAT_HOME=D:\Tools\WorkTool\Search\bat\bin
+set PATH=%PATH%;%BAT_HOME%
 set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
 set PATH=%PATH%;%GIT_HOME%
 set GITUI_HOME=D:\Tools\WorkTool\Team\gitui-win
@@ -78,10 +85,8 @@ set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
 set PATH=%PATH%;%KOTLIN_HOME%\bin
 set PYTHON_HOME=D:\Tools\WorkTool\Python\Python38-32
 set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
-set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64-1.81.1
+set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64
 set PATH=%PATH%;%VSCODE_HOME%
-set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep
-set PATH=%PATH%;%RIPGREP_HOME%\bin
 set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
 set PATH=%PATH%;%NINJA_HOME%
 ::set VIM_HOME=D:\Tools\WorkTool\Team\Git\usr\bin
@@ -115,6 +120,8 @@ set REDIS_HOME=D:\Tools\WorkTool\DB\Redis\Redis-x64-5.0.14.1
 set PATH=%PATH%;%REDIS_HOME%
 set ZIP7_HOME=C:\Program Files\7-Zip
 set PATH=%PATH%;%ZIP7_HOME%
+set DOCKER_HOME=D:\Tools\WorkTool\Container\docker
+set PATH=%PATH%;%DOCKER_HOME%
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 
@@ -150,24 +157,15 @@ doskey cdw=cd /d %personal_workspace%
 doskey cdl=cd /d %personal_log%
 doskey lg=lazygit $*
 doskey gu=gitui $*
-doskey viml=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
-doskey vimd=vim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
 doskey vimf=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 doskey vimc=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 doskey vimv=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
-doskey vima=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 2"
-doskey gviml=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
-doskey gvimd=gvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
 doskey gvimf=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 doskey gvimc=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 doskey gvimv=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
-doskey gvima=gvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 2"
-doskey nviml=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
-doskey nvimd=nvim $* --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
 doskey nvimf=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 doskey nvimc=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 doskey nvimv=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
-doskey nvima=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 2"
 ::echo 别名载入完成，键入alias查看
 echo Alias Setting Complited
 

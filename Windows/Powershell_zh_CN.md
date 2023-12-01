@@ -41,7 +41,21 @@ Set-ExecutionPolicy RemoteSigned -Scope Process -Force
 
 #### 解决办法3：全局修改，需要管理员权限（不推荐）  
 1. ``Win + X`` 键，使用管理员身份运行power shell  
-2. 输入命令 ``set-ExecutionPolicy RemoteSigned`` ，选 ``y`` 即可
+2. 修改当前用户
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+确认
+```
+Get-ExecutionPolicy -List
+```
+删除当前用户
+```
+Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser
+```
+
+## 提示 无法加载文件 xxx.ps1，未对文件 xxx.ps1 进行数字签名。无法在当前系统上运行该脚本
+右键需要运行的 ps1脚本文件 → 属性 → 选择 ``解除锁定`` 后即可
 
 ## 关于转义字符
 以下转义字符为 PowerShell 6.0 中新加的，旧版不可用

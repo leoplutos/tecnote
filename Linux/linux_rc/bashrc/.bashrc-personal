@@ -32,6 +32,7 @@ export personal_tool=~/work/lch/tool
 export personal_log=~/work/lch/log
 export TERM="xterm-256color"
 export COLORTERM=truecolor
+export DOCKER_HOST="tcp://localhost:3102"
 
 #环境变量加入pip3下载的内容
 export PATH=$PATH:~/.local/bin
@@ -54,19 +55,13 @@ alias cdto='cd $personal_tool'
 alias cdl='cd $personal_log'
 alias vim='vim -u ~/work/lch/rc/vimrc/.vimrc'
 #因为alias无法传递参数，所以用定义函数，然后调用函数的方式，导入参数
-alias viml='func_viml() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"; }; func_viml'
-alias vimd='func_vimd() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"; }; func_vimd'
 alias vimf='func_vimf() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_vimf'
 alias vimc='func_vimc() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"; }; func_vimc'
 alias vimv='func_vimv() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"; }; func_vimv'
-alias vima='func_vima() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 2"; }; func_vima'
 alias nvim='env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua'
-alias nviml='func_nviml() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"; }; func_nviml'
-alias nvimd='func_nvimd() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"; }; func_nvimd'
 alias nvimf='func_nvimf() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_nvimf'
 alias nvimc='func_nvimc() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"; }; func_nvimc'
 alias nvimv='func_nvimv() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"; }; func_nvimv'
-alias nvima='func_nvima() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 2"; }; func_nvima'
 alias lg='lazygit'
 alias gu='gitui'
 alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'

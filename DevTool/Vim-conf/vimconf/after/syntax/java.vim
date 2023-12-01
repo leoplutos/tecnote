@@ -94,7 +94,7 @@ hi def link javaMacro           Macro
 hi def link javaPreCondit       PreCondit
 hi def link javaType            Type
 hi def link javaStorageClass    StorageClass
-hi def link javaStructure       Structure
+hi def link javaStructure       Statement
 hi def link javaTypedef         Typedef
 hi def link javaSpecial         Special
 hi def link javaSpecialChar     SpecialChar

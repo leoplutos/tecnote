@@ -238,86 +238,77 @@ keybinding:
 - g:g_use_lsp ： 控制是否启用lsp的设定
 - g:g_use_dap ： 控制是否启用dap的设定
 
-利用这2个环境变量来判断启动vim加载的内容
-- vim（最小插件依赖）：只加载纯vimscript的插件  
-```
-g:g_use_lsp == 0 && g:g_use_dap == 0
-```
-- viml（只开启lsp）
-```
-g:g_use_lsp == 1 && g:g_use_dap == 0
-```
-- vimd（只开启dap）
-```
-g:g_use_lsp == 0 && g:g_use_dap == 1
-```
-- vimf（开启lsp和dap）：加载所有
-```
-g:g_use_lsp == 1 && g:g_use_dap == 1
-```
+利用这2个环境变量来判断启动vim加载的内容  
 
-分别建立各自的启动 ``cmd`` 文件，主要就是利用 vim 的 ``--cmd`` 参数  
+#### 其他一些全局变量
+- g:g_lsp_type ： lsp的类型（0：vim-lsp，3：coc.nvim）
+- g:g_front_dev_type ： 前端框架（0：无框架，1：Vue，2：Angular, 3：React）
+- g:g_space_tab_flg ： 代码空格（0：使用空格，1：使用TAB）
+
+#### 全局变量的用法
+在vim启动时，利用 ``--cmd`` 参数，在加载 vimrc 之前运行设定  
+比如 vimf.cmd（开启lsp和dap）
+```
+--cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
+```
+``--cmd`` 参数说明  
 ```
 --cmd {command}
-                在处理任何 vimrc 文件之前执行命令 {command}。除此以外，和 -c
-                {command} 类似。你可以使用不超过 10 个本命令，不占用 "-c" 命令
-                的数目限制。
+    在处理任何 vimrc 文件之前执行命令 {command}。除此以外，和 -c
+    {command} 类似。你可以使用不超过 10 个本命令，不占用 "-c" 命令
+    的数目限制。
 ```
 
-### Gvim用
-``gvim.cmd``  
-```
-call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-start /b D:\Tools\WorkTool\Text\vim90\gvim.exe --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 0"
-```
-
-``gviml.cmd``  
-```
-call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-start /b D:\Tools\WorkTool\Text\vim90\gvim.exe --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
-```
-
-``gvimd.cmd``  
-```
-call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-start /b D:\Tools\WorkTool\Text\vim90\gvim.exe --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
-```
-
-``gvimf.cmd``  
+### Windows - Gvim用
+``gvimf.cmd``（开启lsp和dap）  
 ```
 call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
 start /b D:\Tools\WorkTool\Text\vim90\gvim.exe --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 ```
 
-### NeoVim用
-``nvim.cmd``  
+``gvimc.cmd``（使用coc.nvim而不是vim-lsp）  
 ```
 call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
-start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 0"
+start /b D:\Tools\WorkTool\Text\vim90\gvim.exe --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 ```
 
-``nviml.cmd``  
+``gvimv.cmd``（Vue开发用）  
 ```
 call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
-start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 0"
+start /b D:\Tools\WorkTool\Text\vim90\gvim.exe --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
 ```
 
-``nvimd.cmd``  
-```
-call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
-start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 0 | let g:g_use_dap = 1"
-```
+**NOTE**：Angular开发使用gvimc.cmd，React开发使用gvimf.cmd
 
-``nvimf.cmd``  
+### Windows - NeoVim用
+``nvimf.cmd``（开启lsp和dap）  
 ```
 call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
 set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
 start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 ```
 
+``nvimc.cmd``（使用coc.nvim而不是vim-lsp）  
+```
+call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
+set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
+start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
+```
+
+``nvimv.cmd``（Vue开发用）  
+```
+call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
+set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
+start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
+```
+
+**NOTE**：Angular开发使用nvimc.cmd，React开发使用nvimf.cmd
+
+### Windows - 命令行用
+看 [cmdautorun.cmd](../Windows/cmdautorun.cmd)
+
+### Linux- 命令行用
+看 [.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)
 
 ## 删除Vim的Log文件的脚本
 因为 vim 会产生很多 log 文件，下面这个批处理也会删除 log  

@@ -14,6 +14,7 @@ https://code.visualstudio.com/#alt-downloads
 * [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
 * [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
 * [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
+* [**FindItFaster**](https://marketplace.visualstudio.com/items?itemName=TomRijndorp.find-it-faster)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``
 * ~~[VSCodeVim(不推荐)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)~~
 * [Sync-Rsync(可选)](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
 * [Diff Folders(可选)](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
@@ -23,7 +24,7 @@ https://code.visualstudio.com/#alt-downloads
 * [**Error Lens**](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
 * [**Draw.io Integration**](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode中画图的插件
 * [**Markdown Preview Mermaid Support**](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode的Markdown中显示Mermaid
-* ~~[Whitespace++(不推荐)](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用[Visible Whitespace]~~
+* ~~[Whitespace++(不推荐)](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：有渲染时间bug，尽量用Visible Whitespace~~
 * [显示换行符(可选)](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：和上面的 Visible Whitespace 选择一个即可
 * [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
 
@@ -33,9 +34,9 @@ https://code.visualstudio.com/#alt-downloads
   - 方案2：[clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd) + [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)  
 
 * [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
-* [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件，是个实验插件，将来会合并进 ``Python``
+* [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件
 * [**rust-analyzer**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust开发必备
-* [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust Debug
+* [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：C/C++/Rust Debug
 * [**Go**](https://marketplace.visualstudio.com/items?itemName=golang.go) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Go开发必备
 
 * **Java**  
@@ -45,11 +46,11 @@ Java所需插件比较多。有2种安装方式：
   包括6个插件（Language Support for Java，Debugger for Java，Test Runner for Java，Maven for Java，Project Manager for Java，Visual Studio IntelliCode）  
 
   方式2：**按需下载（推荐）**
-  - [**Language Support for Java**](https://marketplace.visualstudio.com/items?itemName=redhat.java)&nbsp;&nbsp;提供基础支持，代码格式化，代码重构、代码片段、语法高亮、代码自动补全等等核心功能，**需要JDK17或更高**。可在[这里](https://jdk.java.net/archive/)下载
-  - [**Debugger for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)&nbsp;&nbsp;调试
+  - [**Language Support for Java**](https://marketplace.visualstudio.com/items?itemName=redhat.java)&nbsp;&nbsp;提供基础支持，代码格式化，代码重构、代码片段、语法高亮、代码自动补全等等核心功能，**需要JDK17或更高**。JDK可在[这里](https://jdk.java.net/archive/)下载
+  - [**Debugger for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)&nbsp;&nbsp;调试支持
   - [**Project Manager for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency)&nbsp;&nbsp;管理Java项目、包括引用的库、资源文件、包、类和类成员
+  - [**Maven for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven)&nbsp;&nbsp;Maven支持，管理 Maven 依赖
   - [Test Runner for Java(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test)&nbsp;&nbsp;运行和调试 JUnit/TestNG 测试用例
-  - [Maven for Java(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven)&nbsp;&nbsp;Maven支持，管理 Maven 依赖
   - [Visual Studio IntelliCode(可选)](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)&nbsp;&nbsp;智能代码，AI辅助开发，AI自动补全。支持Java和Python
   - [Checkstyle for Java(可选)](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)&nbsp;&nbsp;检查错误
   - [Spring3合1插件包](https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack)  包括3个插件（Spring Boot，Spring Initializr Java，Spring Boot Dashboard）也可按需下载  
@@ -59,21 +60,20 @@ Java所需插件比较多。有2种安装方式：
 * [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：使用正则表达式，来高亮代码中所有用户想要的文本
 * [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行多种语言的代码片段或代码文件，省掉保存的环节，直接可以运行
 * [Blockman](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：突出显示代码块来提高代码可读性
-* [Hex Editor(可选)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
+* [Hex Editor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
+* [Compare Folders](https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹对比差分
+* [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 * [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
 * [Debug Visualizer(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.debug-visualizer)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：调试过程可视化
 * [Regex Previewer(可选)](https://marketplace.visualstudio.com/items?itemName=chrmarti.regex)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：实时测试正则表达式的实用工具
-* [Draw.io(可选)](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：绘图工具
 * [Polacode(可选)](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：代码截图
 * [vscode-json(可选)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json美化
-* [Rainbow CSV(可选)](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
 * [Log File Highlighter(可选)](https://marketplace.visualstudio.com/items?itemName=emilast.LogFileHighlighter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：高亮log文件
 * [Peacock(可选)](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个工程设置不同的主题
 * [indent-rainbow(可选)](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：为每个缩进显示不同的颜色（Python开发很有用）
 * [SonarLint(可选)](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：静态代码分析工具
 * [Paste JSON as Code(可选)](https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：json转换成代码，主流语言都支持
-* [Compare Folders(可选)](https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹对比差分
 
 
 ## Web插件
@@ -162,7 +162,7 @@ https://vscode.cdn.azure.cn/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/VSCo
 - Ctrl + Shift + V ： 预览markdown文件
 - Ctrl + \ ： 左右分割表示当前文件
 - Ctrl + Shift + F ： grep查找（重新映射成 shift+space -> g）
-- 将函数大纲（outline）拖动到右侧，在右侧[辅助侧边栏]显示
+- 将函数大纲（outline）拖动到右侧，在右侧“辅助侧边栏”显示
 - Shift + Alt + R ： 在os打开当前文件夹
 - Ctrl + ` ： 打开终端
 - Ctrl + Shift + ` ： 打开新的终端
@@ -177,6 +177,36 @@ https://vscode.cdn.azure.cn/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/VSCo
 - Ctrl + x ： 删除当前行
 - Ctrl + g ： 跳转到特定行
 - Ctrl + Alt ： 查看内嵌提示
+
+## 插件无法下载的解决办法
+笔者在使用 ``CodeLLDB`` 插件的时候，遇到了无法更新的问题，解决方式如下  
+```
+curl --create-dirs -o D:\Download\codelldb-x86_64-windows.vsix https://download.njuu.cf/vadimcn/codelldb/releases/download/v1.10.0/codelldb-x86_64-windows.vsix
+```
+打开VSCode → 扩展 → 右上角的 ``...`` → 从VSIX安装...
+
+## 搜索神器插件-FindItFaster
+笔者一直很喜欢 NeoVim下的 ``telescope``，逛github的时候无意间发现了这款插件``FindItFaster``，虽然中文支持有一些问题，但是已经做的很不错了
+- [Github地址](https://github.com/tomrijndorp/vscode-finditfaster)
+
+使用前准备：  
+1. 将VSCode的默认内置终端设定为 ``PowerShell``  
+2. 将4个工具添加到PATH（或者配置到``terminal.integrated.env.windows``）：[fzf](https://github.com/junegunn/fzf) ， [rg](https://github.com/BurntSushi/ripgrep) ， [bat](https://github.com/sharkdp/bat) ，  ``sed``  
+NOTE：安装Windows下的git后就有``sed``
+3. 设定 ``PowerShell安全策略``
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+4. 删除VSCode默认的 ``Ctrl+j`` 快捷键绑定
+```
+workbench.action.togglePanel(查看面板可见性)
+```
+
+使用方式：  
+- Ctrl + Shift + j ： 查找文件
+- Ctrl + Shift + u ： 模糊查找内容
+- 查找时 Ctrl + j ： 下一个
+- 查找时 Ctrl + k ： 上一个
 
 
 ## 常用命令
@@ -204,7 +234,7 @@ https://vscode.cdn.azure.cn/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/VSCo
 ## 工作区的使用（不推荐使用）
 #### 新建一个工作区
 文件 → 将工作区另存为...   → 选择保存路径  
-保存的文件为[.code-workspace]扩展名，即工作区文件  
+保存的文件为 ``.code-workspace`` 扩展名，即工作区文件  
 建立工作区后有些文件夹设定会失效，笔者更喜欢无工作区设置。
 
 ## 无工作区设置下的管理项目（推荐使用）
@@ -403,10 +433,10 @@ tasks用于在launch前执行任务，launch用于读取执行文件。
  * launch.json
 
 配置好之后，打开一个 .c 文件，点击右上角的“播放按钮”，弹出调试配置列表  
-在列表中选中 launch.json 中 name 定义的 [GCC 编译和运行] 即可
+在列表中选中 launch.json 中 name 定义的 ``GCC 编译和运行`` 即可
 
 另外，在调试窗口，char数组变量是按照数组来表示内容的。
-如果想类似字符串一样表示全部内容可以在watch区域加上 &变量名[0] 来实现
+如果想类似字符串一样表示全部内容可以在watch区域加上 &变量名 ``0`` 来实现
 
 ## 使用VSCode编译和调试（Python工程）
 无需特别设定tasks.json和launch.json，直接打开一个 .py 文件，点击右上角的“播放按钮”即可
@@ -516,7 +546,7 @@ Visible Whitespace这个插件可以渲染 TAB符，全角空格，回车，文�
 ```
 
 4. 使用插件 [Whitespace++](https://marketplace.visualstudio.com/items?itemName=chihiro718.whitespacepp)  
-基本同方案2的[Visible Whitespace]但是，这个插件有一些渲染时间的Bug，不太推荐使用
+基本同方案2的 ``Visible Whitespace`` 但是，这个插件有一些渲染时间的Bug，不太推荐使用
 
 
 ### 查看VSCode当前颜色设置

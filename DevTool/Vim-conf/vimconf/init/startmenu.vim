@@ -16,27 +16,31 @@ let g:startify_lists = [
 if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
   let g:startify_bookmarks = [
     \    'D:/WorkSpace/C/CSampleProject',
-    \    'D:/WorkSpace/Java/JavaBatchProject',
     \    'D:/WorkSpace/Java/JavaMavenBatProject',
     \    'D:/WorkSpace/Python/PythonSampleProject',
     \    'D:/WorkSpace/Rust/minigrep',
     \    'D:/WorkSpace/Go/GoSampleProject',
-    \    'D:/WorkSpace/Vue/VueTestProject',
     \    'D:/WorkSpace/Dotnet/DotnetSampleProject',
-    \    'D:/WorkSpace/Test/LanguagTest',
     \    'D:/WorkSpace/Kotlin/KotlinSampleProject',
+    \    'D:/WorkSpace/Vue/VueTS',
+    \    'D:/WorkSpace/Angular/AngularTS',
+    \    'D:/WorkSpace/React/ReactTS',
+    \    'D:/WorkSpace/TypeScript/TSSampleProject',
+    \    'D:/WorkSpace/Test/LanguagTest',
   \]
 else
   let g:startify_bookmarks = [
     \    '~/work/lch/workspace/c/CSampleProject',
-    \    '~/work/lch/workspace/java/JavaBatchProject',
     \    '~/work/lch/workspace/java/JavaMavenBatProject',
     \    '~/work/lch/workspace/python/PythonSampleProject',
     \    '~/work/lch/workspace/rust/minigrep',
     \    '~/work/lch/workspace/go/GoSampleProject',
-    \    '~/work/lch/workspace/vue/VueTestProject',
-    \    '~/work/lch/workspace/test/LanguagTest',
     \    '~/work/lch/workspace/kotlin/KotlinSampleProject',
+    \    '~/work/lch/workspace/vue/VueTS',
+    \    '~/work/lch/workspace/angular/AngularTS',
+    \    '~/work/lch/workspace/react/ReactTS',
+    \    '~/work/lch/workspace/typescript/TSSampleProject',
+    \    '~/work/lch/workspace/test/LanguagTest',
   \]
 endif
 "起始页显示的列表长度

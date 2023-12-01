@@ -1,9 +1,9 @@
 // 将键绑定放在此文件中以覆盖默认值
 [
 	//{ //ctrl+r:查找与替换
-		//"key": "ctrl+r",
-		//"command": "editor.action.startFindReplaceAction",
-		//"when": "editorFocus || editorIsOpen"
+	//"key": "ctrl+r",
+	//"command": "editor.action.startFindReplaceAction",
+	//"when": "editorFocus || editorIsOpen"
 	//},
 	{ //ctrl+shift+r:快速打开（转到文件）
 		"key": "ctrl+shift+r",
@@ -58,12 +58,12 @@
 	{ //ctrl+j:选择下一个建议
 		"key": "ctrl+j",
 		"command": "selectNextSuggestion",
-		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus && !terminalFocus"
 	},
 	{ //ctrl+k:选择上一个建议
 		"key": "ctrl+k",
 		"command": "selectPrevSuggestion",
-		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus && !terminalFocus"
 	},
 	{ //shift+space -> o:打开/关闭辅助侧边栏
 		"key": "shift+space o",
@@ -235,5 +235,19 @@
 		"command": "vscode-neovim.send",
 		"args": "<C-o>b",
 		"when": "neovim.mode == insert && editorTextFocus",
+	},
+	{ //删除默认的ctrl+j快捷键绑定
+		"key": "ctrl+j",
+		"command": "-workbench.action.togglePanel"
+	},
+	{ //[Trailing Spaces插件]alt+shift+t:删除行尾空格
+		"key": "alt+shift+t",
+		"command": "trailing-spaces.deleteTrailingSpaces",
+		"when": "editorTextFocus"
+	},
+	{ //[Trailing Spaces插件]alt+shift+m:只删除修改行的行尾空格
+		"key": "alt+shift+m",
+		"command": "trailing-spaces.deleteTrailingSpacesModifiedLinesOnly",
+		"when": "editorTextFocus"
 	},
 ]
