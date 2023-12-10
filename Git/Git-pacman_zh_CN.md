@@ -4,7 +4,7 @@
 git的windows版本默认是不带pacman包管理器的，这里记录下安装方法。
 
 ## 1.下载git-sdk-64
-git-sdk是开发版本，可以在官网下载，也可以在github下载。这里记录github的下载方法。
+git-sdk是开发版本，可以在官网下载，也可以在github下载。
 
 * 方法1：去github的web页面下载  
 https://github.com/git-for-windows/git-sdk-64
@@ -13,26 +13,38 @@ https://github.com/git-for-windows/git-sdk-64
 git clone --depth=1 https://github.com/git-for-windows/git-sdk-64.git /d/Tools/WorkTool/Team/git-sdk-64
 ```
 * 方法3：下载笔者整理好的zip(42.5M，整理于2023-05-29)  
-[git-bash-pacman.zip](git-bash-pacman.zip)
+[git-bash-pacman.zip](git-bash-pacman.zip)  
+下载地址
+```
+https://raw.githubusercontent.com/leoplutos/tecnote/master/Git/git-bash-pacman.zip
+https://raw.njuu.cf/leoplutos/tecnote/master/Git/git-bash-pacman.zip
+```
 
 ## 2.复制所需文件
-启动 git bash，运行以下命令复制并确认
-```bash
-cp /d/Tools/WorkTool/Team/git-sdk-64/usr/bin/pacman* /usr/bin/
+cmd运行
+```
+SET DOWNLOAD_REPO_PATH=D:\WorkSpace\Git\tecnote
+7z x %DOWNLOAD_REPO_PATH%\Git\git-bash-pacman.zip -o%DOWNLOAD_REPO_PATH%\Git\git-bash-pacman
+```
+
+git-bash中运行
+```
+export DOWNLOAD_REPO_PATH="/d/WorkSpace/Git/tecnote/Git/git-bash-pacman"
+cp $DOWNLOAD_REPO_PATH/usr/bin/pacman* /usr/bin/
 ll /usr/bin/ | grep pacman
-cp -a /d/Tools/WorkTool/Team/git-sdk-64/etc/pacman.* /etc/
+cp -a $DOWNLOAD_REPO_PATH/etc/pacman.* /etc/
 ll /etc/ | grep pacman
 mkdir -p /var/lib/
-cp -a /d/Tools/WorkTool/Team/git-sdk-64/var/lib/pacman /var/lib/
+cp -a $DOWNLOAD_REPO_PATH/var/lib/pacman /var/lib/
 ll /var/lib/pacman
 mkdir -p /usr/share/makepkg/
-cp -a /d/Tools/WorkTool/Team/git-sdk-64/usr/share/makepkg/util* /usr/share/makepkg/
+cp -a $DOWNLOAD_REPO_PATH/usr/share/makepkg/util* /usr/share/makepkg/
 ll /usr/share/makepkg/
 ```
 
 ## 3.运作pacman确认
 ```bash
-pacman -Sy
+pacman --version
 ```
 
 ## 4.添加清华源和中科大源
@@ -43,21 +55,21 @@ git_home/etc/pacman.d 目录下有三个文件（修改前记得备份）
 
 首先是 **mirrorlist.msys**，将以下2行加到Primary的最上面（第1行和第2行）
 ```
-Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/msys/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/msys/$arch/
 Server = https://mirrors.ustc.edu.cn/msys2/msys/$arch/
 Server = https://mirror.msys2.org/msys/$arch/
 ```
 
 **mirrorlist.mingw64**，将以下2行加到Primary的最上面（第1行和第2行）
 ```
-Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/x86_64
+Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/x86_64/
 Server = https://mirrors.ustc.edu.cn/msys2/mingw/x86_64/
 Server = https://mirror.msys2.org/mingw/x86_64/
 ```
 
 **mirrorlist.mingw32**，将以下2行加到Primary的最上面（第1行和第2行）
 ```
-Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/i686
+Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/i686/
 Server = https://mirrors.ustc.edu.cn/msys2/mingw/i686/
 Server = https://mirror.msys2.org/mingw/i686/
 ```
@@ -79,10 +91,32 @@ pacman -Sy
  clang64 is up to date
  msys is up to date
 ```
+**覆盖安装\/更新vim**
+```
+pacman -S --overwrite="*" vim
+vim --version
+```
 **安装tmux**
 ```bash
 pacman -S tmux
 ```
+**安装Fish shell**
+```bash
+pacman -S fish
+pacman -S pcre2
+pacman -S libpcre2_16
+#pacman -S mingw-w64-x86_64-pcre2
+# 同步安装所有工具，慎用
+# pacman -Syu
+pacman -S gcc
+fish
+```
+**查看Fish shell设定**
+```bash
+cat ~/.config/fish/config.fish
+```
+**笔者的设定例子**  
+[config.fish](../Linux/linux_rc/fishrc/config.fish)
 
 ## 5.pacman命令
 

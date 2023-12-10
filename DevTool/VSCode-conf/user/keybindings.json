@@ -250,4 +250,12 @@
 		"command": "trailing-spaces.deleteTrailingSpacesModifiedLinesOnly",
 		"when": "editorTextFocus"
 	},
+	{
+		"key": "pageup",
+		"command": "extension.getPreviousPage"
+	},
+	{
+		"key": "pagedown",
+		"command": "extension.getNextPage"
+	},
 ]

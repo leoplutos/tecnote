@@ -12,16 +12,26 @@ fi
 #export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
 #设定UBUNTU_ICON=NerdFont的Ubuntu图标，最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {f31b}{U+00A0}
 UBUNTU_ICON=`echo  `
-PS_IP=$(hostname -I)
+PS_IP=$(hostname -I | awk '{print$1}')
 PS_IP=`echo ${PS_IP}`
-PS_RED='\[\033[0;31m\]'
-PS_GREEN='\[\033[0;32m\]'
-PS_YELLOW='\[\033[0;33m\]'
-PS_BLUE='\[\033[0;34m\]'
-PS_MAGENTA='\[\033[0;35m\]'
-PS_CYAN='\[\033[0;36m\]'
-PS_CLEAR='\[\033[0m\]'
-export PS1="${PS_RED}${UBUNTU_ICON}${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+#PS_RED='\[\033[0;31m\]'
+#PS_LIGHT_RED='\[\033[1;31m\]'
+#PS_GREEN='\[\033[0;32m\]'
+#PS_YELLOW='\[\033[0;33m\]'
+#PS_BLUE='\[\033[0;34m\]'
+#PS_MAGENTA='\[\033[0;35m\]'
+#PS_CYAN='\[\033[0;36m\]'
+#PS_CLEAR='\[\033[0m\]'
+#export PS1="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+PS_RED="\e[0;31m"
+PS_LIGHT_RED="\e[1;31m"
+PS_GREEN="\e[0;32m"
+PS_YELLOW="\e[0;33m"
+PS_BLUE="\e[0;34m"
+PS_MAGENTA="\e[0;35m"
+PS_CYAN="\e[0;36m"
+PS_CLEAR="\e[0m"
+export PS1='`exitStatus=$?;echo -n "\['${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}'\]""\u@\h""\['${PS_CLEAR}:${PS_YELLOW}'\]""\w""\['${PS_CLEAR}'\]""\n";if [ $exitStatus -ne 0 ];then echo -n "\['${PS_RED}'\]""[""\['${PS_LIGHT_RED}'\]""${exitStatus}""\['${PS_RED}'\]""]";fi;echo -n "\['${PS_CLEAR}${PS_BLUE}'\]""\$""\['${PS_CLEAR}'\]"` '
 
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
 export INPUTRC='~/work/lch/rc/inputrc/inputrc'

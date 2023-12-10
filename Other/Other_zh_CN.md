@@ -49,6 +49,97 @@
 [vim-horizon主题](https://github.com/ntk148v/vim-horizon)  
 [onedark.vim主题](https://github.com/joshdick/onedark.vim)  
 
+## 邮箱客户端
+
+### markdown-here-revival
+fork 自 markdown-here
+ - [gitlab](https://gitlab.com/jfx2006/markdown-here-revival)
+ - [Thunderbird插件地址](https://addons.thunderbird.net/en-US/thunderbird/addon/markdown-here-revival/)
+
+### markdown-here（已经停止更新）
+支持在主流浏览器和Thunderbird中使用 MarkDown 写邮件
+ - [github](https://github.com/adam-p/markdown-here)
+ - [官网](https://markdown-here.com/)
+
+**设定**  
+ - 基本渲染CSS ： 可以参考 [md.css](./markdown/md.css) 设定
+ - 语法高亮CSS ： Vs（亮色系），Vs2015/Hybird（暗色系）
+
+#### 自定义颜色（版本 102）
+帮助 → 排障信息 → 找到 ``配置文件夹`` 点击右侧的 ``打开文件夹``  
+在配置文件夹下新建目录 ``chrome``  
+然后在 新建目录 ``chrome`` 下新建文件 ``userChrome.css``  
+内容如下
+```
+#threadTree treechildren::-moz-tree-row(odd) {
+    background-color: #f5f7fa;
+}
+```
+重启Thunderbird
+
+#### 自定义颜色（版本 115）
+设置 → 常规 → 最下方的 ``配置编辑器``  
+搜索 ``toolkit.legacyUserProfileCustomizations.stylesheets``，修改为 ``true``  
+帮助 → 排障信息 → 找到 ``配置文件夹`` 点击右侧的 ``打开文件夹``  
+在配置文件夹下新建目录 ``chrome``  
+然后在 新建目录 ``chrome`` 下新建文件 ``userChrome.css``  
+内容如下
+```
+menubar,
+toolbar,
+nav-bar,
+#TabsToolbar > * {
+    background-color: #b7cfda !important;
+}
+
+/*
+table[is="tree-view-table"] {
+    background: #f8f8ff !important;
+}
+*/
+table[is="tree-view-table"] td {
+    border-bottom: solid 1px #dddddd !important;
+}
+
+#threadPane > tree-view {
+    -moz-context-properties: fill;
+    fill: currentColor;
+    background-color: #f3f3f3 !important;
+    color: var(--tree-view-color);
+}
+
+#folderPane {
+    background-color: #f3f3f3 !important;
+}
+
+#titlebar > #toolbar-menubar:-moz-window-inactive,
+#titlebar > #tabs-toolbar:-moz-window-inactive {
+    background-color: #f8f8ff !important;
+}
+
+#unifiedToolbar {
+    background: #b7cfda !important;
+}
+
+scrollbox,
+.scrollbox-clip {
+    background: #e8e8e8 !important;
+}
+
+/* miscellaneous  menubar on top ; compact header box ; quickfilter background :- if req */
+/*
+#toolbar-menubar {order: -1 !important;}
+.message-header-container {padding-top: 0px !important; padding-bottom: 0px !important;}
+.message-header-container, .message-header-extra-container {row-gap: 0px !important;}
+#quickFilterBarContainer {background: #b7cfda !important;}
+*/
+
+#threadTree tr:nth-of-type(odd) {
+    background-color: #f5f7fa;
+}
+```
+重启Thunderbird
+
 ## 正则表达式
 
 #### 1.正则表达式测试网站
@@ -161,3 +252,5 @@ https://cn.piliapp.com/symbol/
 
 ## 其他软件
 * [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌
+* [tvbox](https://github.com/liu673cn/box)
+

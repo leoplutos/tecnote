@@ -132,6 +132,8 @@
 			"editorInlayHint.typeForeground": "#15aabf", //类型内联提示的前景色
 			//"textPreformat.foreground": "#ff0000",
 			//"textPreformat.background": "#ff0000",
+			"statusBar.foreground": "#cecece",
+			"statusBar.background": "#252629",
 			//"statusBarItem.errorHoverBackground":"#0000ff",
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
@@ -152,6 +154,10 @@
 			"errorLens.infoMessageBackground": "#22374b",
 			"errorLens.hintForeground": "#1abc9c",
 			"errorLens.hintMessageBackground": "#233745",
+		},
+		"[Visual Studio Dark]": { //护眼状态栏
+			"statusBar.foreground": "#cecece",
+			"statusBar.background": "#2e2e2e",
 		},
 		"[Default Light+]": { //Default Light+主题的自定义(淡蓝背景)
 			"editor.background": "#f8f8ff", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
@@ -804,6 +810,7 @@
 	//-----------------------------------------------"
 	//               ErrorLens插件设定               "
 	//-----------------------------------------------"
+	//"errorLens.statusBarIconsEnabled": true,
 	"errorLens.messageBackgroundMode": "message",
 	"errorLens.enabledDiagnosticLevels": [
 		"error",

@@ -39,7 +39,7 @@ https://code.visualstudio.com/#alt-downloads
 * [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：C/C++/Rust Debug
 * [**Go**](https://marketplace.visualstudio.com/items?itemName=golang.go) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Go开发必备
 
-* **Java**  
++ **Java**  
 Java所需插件比较多。有2种安装方式：  
 方式1：直接下载插件包（不推荐）  
   - [Java6合1插件包](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)  
@@ -105,6 +105,11 @@ Java所需插件比较多。有2种安装方式：
 * [小霸王](https://marketplace.visualstudio.com/items?itemName=gamedilong.anes)
 * [知乎](https://marketplace.visualstudio.com/items?itemName=niudai.vscode-zhihu)
 * [epub reader](https://marketplace.visualstudio.com/items?itemName=renkun.reader)
+* [韭菜盒子(看股票)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
+* [RSS](https://marketplace.visualstudio.com/items?itemName=luyuhuang.rss)
+* [LeetCode](https://marketplace.visualstudio.com/items?itemName=LeetCode.vscode-leetcode)
+* [虎扑摸鱼助手](https://marketplace.visualstudio.com/items?itemName=chenyaoyi888168.hupumoyu-assistant)
+* [NGA摸鱼助手](https://marketplace.visualstudio.com/items?itemName=nga-neko-group-richard.nga-neko-fishes)
 
 ## VSCode下载太慢的解决办法
 首先在官网找到需要下载的文件，点击下载。  
@@ -580,6 +585,36 @@ Developer: Show Running Extensions
 Developer: Startup Performance
 ```
 
+### Thief-Book的使用
+下载好插件以后，在 ``settings.json`` 中设定如下
+```
+{
+	"thiefBook.filePath": "D:\\path\\to\\book.txt",
+	"thiefBook.isEnglish": false,
+	//"thiefBook.currPageNumber": 200,
+	"workbench.colorCustomizations": {
+		"[Visual Studio Dark]": { //护眼状态栏
+			"statusBar.foreground": "#cecece",
+			"statusBar.background": "#2e2e2e",
+		},
+	},
+}
+```
+其中 ``thiefBook.currPageNumber`` 这个设定如果是在 ``文件夹设定下`` 只有快速跳转的时候打开注释，其他时候一定要注释掉，不然会导致跳转问题
+
+在 ``keybindings.json`` 中设定如下
+```
+[
+	{
+		"key": "down",
+		"command": "extension.getNextPage"
+	},
+	{
+		"key": "up",
+		"command": "extension.getPreviousPage"
+	}
+]
+```
 
 # 更多
 * [VSCode官方文档](https://code.visualstudio.com/docs)

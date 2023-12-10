@@ -135,17 +135,24 @@ http://YOUR_DOMAIN_IR_IP:3000
 **第一个生成的用户被自动添加到 Admin 用户组**
 
 ## 修改配置
-安装完毕之后配置需要修改的时候可以如下操作
-确认
-```
-sudo -u git cat /home/git/gogs/custom/conf/app.ini
-```
-如果IP发生变化的时候直接修改即可
+因为默认时间显示是 ``RFC1123``，需要改成 ``RFC3339``  
+用如下命令修改
 ```
 sudo -u git cp -afp /home/git/gogs/custom/conf/app.ini /home/git/gogs/custom/conf/app.ini_bak20231030
 sudo -u git ls -al /home/git/gogs/custom/conf
 sudo -u git vim /home/git/gogs/custom/conf/app.ini
 ```
+在最下面添加
+```
+[time]
+FORMAT = RFC3339
+```
+如果IP发生变化等情况，也可以按此方法修改  
+修改后确认
+```
+sudo -u git cat /home/git/gogs/custom/conf/app.ini
+```
+确认无误后重启服务即可
 
 ## 其他
 还可以配置 Nginx 作为 SSL 代理服务器 和 邮件通知等内容  
@@ -204,6 +211,102 @@ git config --local color.ui true
 2. 创建 ``工单(issues)``，填写标题与内容，并在画面右侧选择 ``标签`` 和 ``里程碑``
 3. 在画面右侧选择 ``指派成员``，将 issues 指派给特定人员
 4. 对应后可以关闭 issues
+
+## 版本发布(releases)
+在 Gogs 内置了 版本 管理，使用流程为
+
+1. 在仓库的 `` 版本发布`` 中点击 ``发布新版`` 按钮
+    - 标签名称： 填入一个 ``tag``，tag存在则使用存在的tag，不存在则会在当前commit下新建tag
+    - 标题： 一般填写和``标签名称``一致
+    - 内容： 记录版本概要
+    - 附件： 可选，如果想除了代码之外发布编译好的内容则可以在此上传
+    - 预发行标识： 通知用户发行版尚未准备投入生产，并且可能不稳定的话选择此项
+2. 点击 ``发布版本`` 按钮
+
+## 组织
+
+在 gogs 中 ``组织`` 相当于公司，``团队`` 相当于公司内部的部门，比如php组，java组，而属于php组的项目，java组没有管理权限。  
+默认加入组织的人员对任何项目没有权限，需要创建团队，将人员加入团队中  
+所以要使用组织来管理项目的话需要：  
+1. 新建 ``组织``
+2. 在组织下面新建 ``团队``，并且给与 ``写入权限``
+3. 将项目添加到 ``团队仓库``
+4. 将人员添加到 ``团队``
+
+NOTE：个人创建的项目，转移到组织，个人将保留管理权限。
+
+## 自定义模板
+更多看 [这里](https://gogs.io/docs/features/custom_template)
+
+### 注入自定义 CSS 文件
+
+新建 ``head.tmpl``
+
+```
+sudo -u git mkdir -p /home/git/gogs/custom/templates/inject
+sudo -u git touch /home/git/gogs/custom/templates/inject/head.tmpl
+sudo -u git ls -al /home/git/gogs/custom/templates/inject
+sudo -u git vim /home/git/gogs/custom/templates/inject/head.tmpl
+```
+内容如下
+```
+<link rel="stylesheet" href="/css/custom.css">
+```
+
+新建 ``custom.css``
+```
+sudo -u git mkdir -p /home/git/gogs/custom/public/css/
+sudo -u git touch /home/git/gogs/custom/public/css/custom.css
+sudo -u git ls -al /home/git/gogs/custom/public/css/
+sudo -u git vim /home/git/gogs/custom/public/css/custom.css
+```
+
+内容如下
+```
+.markdown:not(code) table {
+    padding: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em;
+    border: 0;
+    margin: 1.2em 0;
+}
+.markdown:not(code) tbody {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.markdown:not(code) table th {
+    background-color: rgba(55, 48, 73, 0.2) !important;
+}
+.markdown:not(code) table tr {
+    border: 0;
+    border-top: 1px solid #777;
+    margin: 0;
+    padding: 0;
+}
+.markdown:not(code) table tr:nth-child(2n) {
+    background-color: rgba(210, 210, 210, 0.3);
+}
+.markdown:not(code) table tr th,
+.markdown:not(code) table tr td {
+    font-size: 1em;
+    border: 1px solid #777;
+    margin: 0;
+    padding: 0.5em 1em;
+}
+.markdown:not(code) table tr th {
+    font-weight: bold;
+}
+```
+
+重启 Gogs
+```
+ps -ef | grep gogs
+sudo kill -9 {pid}
+sudo -u git bash -c 'cd /home/git/gogs/;nohup ./gogs web &'
+ps -ef | grep gogs
+```
 
 ## 常见问题
 

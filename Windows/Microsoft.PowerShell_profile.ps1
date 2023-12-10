@@ -8,8 +8,8 @@ function prompt {
 	$win_icon=[char]59151
 	#取得字符码[convert]::ToInt32("00A0",16)  -->  160
 	$no_break_space=[char]160
-	#Windows图标-红色
-	Write-Host "$win_icon$no_break_space" -NoNewLine -ForegroundColor Red
+	#Windows图标-黄色
+	Write-Host "$win_icon$no_break_space[PowerShell]" -NoNewLine -ForegroundColor Yellow
 	$localIpAddresses =(Get-NetIPAddress | Where-Object {$_.AddressFamily -eq 'IPv4'} | Where-Object {$_.PrefixOrigin -eq 'Dhcp'}).IPAddress
 	#ip地址-绿色
 	Write-Host "[$localIpAddresses]" -NoNewLine -ForegroundColor Green

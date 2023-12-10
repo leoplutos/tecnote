@@ -424,6 +424,17 @@ sudo ln -s /usr/local/lua-language-server/bin/lua-language-server /usr/local/bin
 lua-language-server --version
 ```
 
+#### FishShell
+```
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update
+sudo apt install fish
+```
+**查看Fish shell设定**
+```bash
+cat ~/.config/fish/config.fish
+```
+
 ## 关于WSL下的下划波浪线显示
 测试当前终端是否会显示
 ```

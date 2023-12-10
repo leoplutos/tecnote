@@ -113,6 +113,53 @@ git restore .
 由于git checkout这个命令还可以用于切换分支，容易引起混淆。
 Git最新版本中将git checkout命令的两项功能分别赋予两个新的命令，一个是git restore，另一个是git switch。
 
+### 发布版本(git tag)
+通常在软件发布的时候会打一个tag，用于标注这次发布的相关信息, 这样做的好处是，将来如果这个版本出现了问题，可以通过tag迅速定位到当前版本，进行错误修复。
+
+#### 在当前commit上新建tag
+```
+git tag -a v0.0.7 -m "publish v0.0.7 version"
+```
+
+#### 列出已有的tag
+```
+git tag
+```
+
+#### 同步tag到远程服务器
+```
+git push origin v0.0.7
+```
+和提交代码一样，tag默认创建是在本地的，需要进行推送才能到达远程服务器，如果要推送本地所有tag,可以使用
+```
+git push origin --tags
+```
+
+#### 为历史版本添加tag
+```
+git tag v0.0.3 03f98856b1a422b5604fc1337500b756513e785c
+```
+
+#### 删除tag
+```
+git tag -d v1.6
+git push origin :refs/tags/v1.6
+```
+
+#### 利用tag功能切换并修改某个历史版本
+以修改v1.3版本举例  
+新建分支 feature-bugfix-v1.3  
+语法为 ``git checkout -b [branchName] [tagName]``
+```
+git checkout -b feature-bugfix-v1.3 v1.3
+```
+修改问题并且commit，然后切回 master分支 并 合并bugfix 分支
+```
+git switch master
+git merge feature-bugfix-v1.3
+```
+修改之后推送 master 即可
+
 ## 三.查看配置文件  
 
 Git中有三层config文件：系统、全局、本地
@@ -144,6 +191,9 @@ git config --local --list
 ## 四.凭证存储模式
 使用Git 向远程仓库（例如：GitHub，gitee）提交代码 ，需要输入账号和密码。可能会遇到这样的情况密码输错一次，想修改，但是不知道去哪里修改。一直报错fatal: Authentication failed for 又不弹出用户名和密码输入框 。
 你需要了解Git是如何保存账号密码的，也就是凭据管理。
+
+**如果你习惯了以前``Windows凭据``的管理方式直接选择 ``wincred`` 即可**
+
 ### Git凭据管理的三种方式
 Git的凭据存储有cache、store、manager三种方式  
 Git 中有三种级别system 、global 、local ，可以针对不同的级别设置不同的凭据存储方式

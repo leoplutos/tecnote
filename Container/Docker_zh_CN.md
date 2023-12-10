@@ -469,10 +469,16 @@ docker run -p 3300:3300 -it my-test-app:test
 http://localhost:3300/  
 确认服务正常启动
 
-NOTE：容器运行后是无法使用 ``Ctrl+c`` 停止的，可以使用下面的命令
+NOTE：容器运行如果不是后台运行的话是无法使用 ``Ctrl+c`` 停止的，可以使用下面的命令
 ```
 docker ps
 docker stop ${CONTAINER ID}
+```
+
+**后台运行容器**  
+通过 ``-d`` 参数指定容器后台运行
+```
+docker run -d -p 3300:3300 -it my-test-app:test
 ```
 
 ### 搭建私有仓库
