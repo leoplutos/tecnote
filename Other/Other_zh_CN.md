@@ -250,6 +250,11 @@ U+3000: CJK全角空格(Ideographic Space)
 #### 一个查看特殊符号的网站
 https://cn.piliapp.com/symbol/
 
+## 前端框架速度测试
+web-frameworks
+ - [github](https://github.com/the-benchmarker/web-frameworks)
+ - [官网](https://web-frameworks-benchmark.netlify.app/result)
+
 ## 其他软件
 * [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌
 * [tvbox](https://github.com/liu673cn/box)

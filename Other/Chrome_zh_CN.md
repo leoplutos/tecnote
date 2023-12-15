@@ -84,6 +84,35 @@ v       进入选择模式
 V       进入行选择模式
 ```
 
+## 阅读模式插件 - reader-view
+屏蔽广告等掉多余的内容，像看书一样看网页。  
+因为github上没有提供下载，所以笔者使用crx4chrome下载使用
+
+谷歌插件商店地址：[reader-view](https://chrome.google.com/webstore/detail/reader-view/ecabifbgmdmgdllomnfinbmaellmclnh)  
+github项目地址：[reader-view](https://github.com/rNeomy/reader-view)  
+官网：[官网](https://webextension.org/listing/chrome-reader-view.html)  
+crx4chrome地址：[crx4chrome](https://www.crx4chrome.com/extensions/ecabifbgmdmgdllomnfinbmaellmclnh/)  
+
+#### 推荐设置
+1. 打开 ``Show "Open in Reader View" context-menu item``
+2. 在 ``Custom styling (reader view)``处，修改如下设定
+```
+pre code {
+    background-color: #f6f8fa;
+    color: #1f2328;
+    font-family: monospace;
+    display: block;
+    padding: 5px 10px;
+}
+```
+```
+/* CSS for "sepia" theme */
+body[data-mode=sepia] {
+    color: #34363a;
+    background-color: #dcf8df;
+}
+```
+
 ## 预览MarkDown插件
 
 可以使用浏览器渲染 ``markdown`` 文件，以便在浏览器里直接打印生成 ``pdf``  

@@ -1,0 +1,166 @@
+# 自定义主题
+
+"ui.background"                   = { fg    = "foreground",      bg = "background"                          }
+#"ui.background.separator"
+"ui.cursor"                       = { fg    = "background",      bg = "foreground",     modifiers = ["dim"] }
+"ui.cursor.normal"                = { fg    = "background",      bg = "foreground",     modifiers = ["dim"] }
+"ui.cursor.insert"                = { fg    = "background",      bg = "pure_yellow",    modifiers = ["dim"] }
+"ui.cursor.select"                = { fg    = "background",      bg = "foreground",     modifiers = ["dim"] }
+"ui.cursor.match"                 = { fg    = "foreground",      bg = "#51504f"                             }
+"ui.cursor.primary"               = { fg    = "background",      bg = "foreground"                          }
+"ui.cursor.primary.normal"        = { fg    = "background",      bg = "foreground"                          }
+"ui.cursor.primary.insert"        = { fg    = "background",      bg = "pure_yellow"                         }
+"ui.cursor.primary.select"        = { fg    = "background",      bg = "foreground"                          }
+"ui.debug.breakpoint"             = { fg    = "#e51400"                                                     }
+"ui.debug.active"                 = { fg    = "#292e52"                                                     }
+#ui.gutter
+#ui.gutter.selected
+"ui.highlight.frameline"          = { bg    = "#545835"                                                     }
+"ui.linenr"                       = { fg    = "#6c8086"                                                     }
+"ui.linenr.selected"              = { fg    = "#ffff00"                                                     }
+"ui.statusline"                   = { fg    = "#dfffe3",         bg = "#444444"                             }
+"ui.statusline.inactive"          = { fg    = "#5c6370",         bg = "#282c34"                             }
+"ui.statusline.normal"            = { fg    = "#000010",         bg = "#78a2f3",        modifiers = ["bold"]}
+"ui.statusline.insert"            = { fg    = "#000010",         bg = "#ffff00",        modifiers = ["bold"]}
+"ui.statusline.select"            = { fg    = "#000010",         bg = "#00ff87",        modifiers = ["bold"]}
+#"ui.statusline.separator"
+"ui.popup"                        = { fg    = "floatwindow_border",   bg = "floatwindow_bg"                 }
+"ui.popup.info"                   = { fg    = "floatwindow_border"                                          }
+"ui.window"                       = { fg    = "#3e3e3e"                                                     }
+"ui.help"                         = { fg    = "#c0caf5",         bg = "floatwindow_bg"                      }
+"ui.text"                         = { fg    = "foreground"                                                  }
+"ui.text.focus"                   = {                            bg = "#292e42"                             }
+"ui.text.inactive"                = { fg    = "#747474"                                                     }
+"ui.text.info"                    = { fg    = "#c0caf5"                                                     }
+"ui.virtual.ruler"                = { bg    = "#2e2e2e"                                                     }
+"ui.virtual.whitespace"           = { fg    = "#333843"                                                     }
+"ui.virtual.indent-guide"         = { fg    = "#333843"                                                     }
+"ui.virtual.inlay-hint"           = { fg    = "#15aabf",         bg = "#2e2e2e"                             }
+"ui.virtual.inlay-hint.parameter" = { fg    = "#15aabf",         bg = "#2e2e2e"                             }
+"ui.virtual.inlay-hint.type"      = { fg    = "#15aabf",         bg = "#2e2e2e"                             }
+"ui.virtual.wrap"                 = { fg    = "pure_yellow"                                                 }
+"ui.menu"                         = { fg    = "pmenu_fg",        bg = "floatwindow_bg"                      }
+"ui.menu.selected"                = { fg    = "pmenu_selected_fg",    bg = "pmenu_selected_bg"              }
+"ui.menu.scroll"                  = { fg    = "pmenu_scroll_fg",      bg = "pmenu_scroll_bg"                }
+"ui.selection"                    = {                            bg = "#3b4048"                             }
+"ui.selection.primary"            = {                            bg = "#3e4452"                             }
+"ui.highlight"                    = {                            bg = "#292e42"                             }
+"ui.cursorline.primary"           = {                            bg = "#292e42"                             }
+"ui.cursorline.secondary"         = {                            bg = "#292e42"                             }
+"ui.cursorcolumn.primary"         = {                            bg = "#121212"                             }
+"ui.cursorcolumn.secondary"       = {                            bg = "#121212"                             }
+"warning"                         = { fg    = "#000000",         bg = "#ffff00"                             }
+"error"                           = { fg    = "#ffffff",         bg = "#ff0000"                             }
+"info"                            = { fg    = "#000000",         bg = "#0db9d7"                             }
+"hint"                            = { fg    = "#000000",         bg = "#1abc9c"                             }
+"diagnostic"                      = { underline = { color = "#f39c12", style = "curl" }                     }
+"diagnostic.hint"                 = { underline = { color = "#1abc9c", style = "curl" }                     }
+"diagnostic.info"                 = { underline = { color = "#0db9d7", style = "curl" }                     }
+"diagnostic.warning"              = { underline = { color = "#ffff00", style = "curl" }                     }
+"diagnostic.error"                = { underline = { color = "#ff0000", style = "curl" }                     }
+
+"attribute"                       = { fg = "special"                                                        }
+"type"                            = { fg = "struct"                                                         }
+"type.builtin"                    = { fg = "statement"                                                      }
+"type.enum.variant"               = { fg = "foreground"                                                     }
+"constructor"                     = { fg = "struct"                                                         }
+"constant"                        = { fg = "constant"                                                       }
+"constant.builtin"                = { fg = "constant"                                                       }
+"constant.builtin.boolean"        = { fg = "constant"                                                       }
+"constant.character"              = { fg = "string"                                                         }
+"constant.character.escape"       = { fg = "string"                                                         }
+"constant.numeric"                = { fg = "number"                                                         }
+"constant.macro"                  = { fg = "macro"                                                          }
+"constant.other.placeholder"      = { fg = "special"                                                        }
+"string"                          = { fg = "string"                                                         }
+"string.regexp"                   = { fg = "regexp"                                                         }
+"string.special"                  = { fg = "string"                                                         }
+"string.symbol"                   = { fg = "string"                                                         }
+"comment"                         = { fg = "comment"                                                        }
+"comment.line"                    = { fg = "comment"                                                        }
+"comment.block"                   = { fg = "comment"                                                        }
+"comment.block.documentation"     = { fg = "comment"                                                        }
+"variable"                        = { fg = "foreground"                                                     }
+"variable.builtin"                = { fg = "statement"                                                      }
+"variable.parameter"              = { fg = "parameter"                                                      }
+"variable.other"                  = { fg = "foreground"                                                     }
+"variable.other.member"           = { fg = "property"                                                       }
+#"label"                           = { fg = "cyan"                                                          }
+"punctuation"                     = { fg = "foreground"                                                     }
+"punctuation.delimiter"           = { fg = "foreground"                                                     }
+"punctuation.bracket"             = { fg = "foreground"                                                     }
+"punctuation.special"             = { fg = "statement"                                                      }
+"keyword"                         = { fg = "statement"                                                      }
+"keyword.control.conditional"     = { fg = "statement"                                                      }
+"keyword.control.repeat"          = { fg = "statement"                                                      }
+"keyword.control.import"          = { fg = "statement"                                                      }
+"keyword.control.return"          = { fg = "statement"                                                      }
+"keyword.control.exception"       = { fg = "statement"                                                      }
+"keyword.operator"                = { fg = "statement"                                                      }
+"keyword.directive"               = { fg = "statement"                                                      }
+"keyword.function"                = { fg = "statement"                                                      }
+"keyword.storage"                 = { fg = "statement"                                                      }
+"keyword.storage.type"            = { fg = "statement"                                                      }
+"keyword.storage.modifier"        = { fg = "statement"                                                      }
+"operator"                        = { fg = "special"                                                        }
+"function"                        = { fg = "function"                                                       }
+"function.builtin"                = { fg = "function"                                                       }
+"function.method"                 = { fg = "function"                                                       }
+"function.macro"                  = { fg = "function"                                                       }
+"function.special"                = { fg = "function"                                                       }
+"function.call"                   = { fg = "function"                                                       }
+"tag"                             = { fg = "statement"                                                      }
+#"tag.attribute"                   = { fg = "purple"                                                         }
+#"tag.delimiter"                   = { fg = "foreground"                                                     }
+"tag.builtin"                     = { fg = "special"                                                        }
+"namespace"                       = { fg = "property"                                                       }
+"special"                         = { fg = "special"                                                        }
+"markup.heading"                  = { fg    = "constant"                                                    }
+"markup.list"                     = { fg    = "special"                                                     }
+"markup.bold"                     = { fg    = "constant",          modifiers = ["bold"]                     }
+"markup.italic"                   = {                              modifiers = ["italic"]                   }
+"markup.strikethrough"            = { fg    = "comment",           modifiers = ["crossed_out"]              }
+"markup.link.url"                 = {                              underline = { style = "line"}            }
+"markup.link.text"                = { fg    = "string"                                                      }
+"markup.quote"                    = { fg    = "#6a9955"                                                     }
+"markup.raw"                      = { fg    = "foreground"                                                  }
+"markup.raw.inline"               = { fg    = "#d6b781"                                                     }
+"markup.raw.block"                = { fg    = "#d4d4b0"                                                     }
+"diff.plus"                       = {                            bg = "#4b5920"                             }
+"diff.plus.gutter"                = { fg    = "#50fa7b"                                                     }
+"diff.minus"                      = { fg    = "#444444",         bg = "#1c1c1c"                             }
+"diff.minus.gutter"               = { fg    = "#ff5555"                                                     }
+"diff.delta"                      = {                            bg = "#2b5b77"                             }
+"diff.delta.moved"                = {                            bg = "#2b5b77"                             }
+"diff.delta.gutter"               = { fg    = "#2b5b77"                                                     }
+"annotation"                      = { fg = "annotation"                                                     }
+"definition"                      = { underline = { color = "#8be9fd"                                        } }
+
+[palette]
+foreground        = "#d4d4d4"
+background        = "#1e1e1e"
+pure_yellow       = "#ffff00"
+floatwindow_border = "#8d8dbf"
+floatwindow_bg    = "#252526"
+pmenu_fg          = "#d4d4d4"
+pmenu_bg          = "#3d3d45"
+pmenu_selected_fg = "#d4d4d4"
+pmenu_selected_bg = "#073655"
+pmenu_scroll_fg   = "#bbbbbb"
+pmenu_scroll_bg   = "#3d3d40"
+
+comment           = "#5f6167"
+statement         = "#64afef"
+constant          = "#569cd6"
+special           = "#9cdcfe"
+struct            = "#ee5d43"
+function          = "#96e072"
+string            = "#809980"
+number            = "#00e8ef"
+regexp            = "#646695"
+macro             = "#569cd6"
+parameter         = "#4d8a94"
+property          = "#4ec9b0"
+member            = "#4fc1ff"
+annotation        = "#00af00"
+

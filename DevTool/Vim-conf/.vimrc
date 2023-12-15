@@ -54,6 +54,10 @@ endif
 if !exists('g:g_space_tab_flg')
   let g:g_space_tab_flg = 0
 endif
+"全局变量g:g_use_which_key_flg（0：不使用，1：使用）
+if !exists('g:g_use_which_key_flg')
+  let g:g_use_which_key_flg = 0
+endif
 "全局变量g:g_i_osflg（1：Windows-Gvim，2：Windows-控制台，3：Windows-MSys2/Cygwin/Mingw，4：MacOS，5：Linux/WSL）
 if(has('win32') || has('win95') || has('win64') || has('win16'))
   if has('gui_running')
@@ -123,7 +127,7 @@ endif
 "全局变量g:g_s_rcfilepath（当前vimrc所在路径）
 let g:g_s_rcfilepath = expand("<sfile>:p:h")
 "判断工程跟路径关键字
-let g:g_s_rootmarkers = ['.git', '.svn', '.project', '.root', '.hg']
+let g:g_s_rootmarkers = ['.git', '.svn', '.root', 'package.json', '.hg']
 "在packpath,runtimepath最后添加个人设定的路径，用以载入插件等
 if (v:version > 799)
   exec "set packpath+=" . g:g_s_rcfilepath . '/vimconf'
@@ -209,6 +213,7 @@ set shortmess+=c                         " 设置补全静默
 set cpt=.,k,w,b                          " 设定从字典文件以及当前打开的文件里收集补全单词
 set omnifunc=syntaxcomplete#Complete     " 设置全能补全
 "set notimeout
+set timeoutlen=500
 set ttimeout                             " 让按 Esc 的生效更快速。通常 Vim 要等待一秒来看看 Esc 是否是转义序列的开始。如果你使用很慢的远程连接，增加此数值
 set ttimeoutlen=0                        " 设置<ESC>键响应时间
 set pumheight=15                         " 设定弹出菜单的大小为15
@@ -366,7 +371,7 @@ function! MatchExtraWhitespace()
   let l:plugin_buffer_list = [
   \  'lspinfo' , 'packer', 'checkhealth', 'help', 'man', 'gitcommit',
   \  'startify', 'netrw', 'ctrlp', 'nerdtree', 'VimspectorPrompt', 'NvimTree', 'TelescopePrompt',
-  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt', 'dashboard', 'mason',
+  \  'cmp_menu', 'cmp_docs', 'Outline', 'toggleterm', 'flash_prompt', 'dashboard', 'mason', 'which_key'
   \]
   if index(l:plugin_buffer_list, &filetype) >= 0
     "各种插件的buffer不匹配
@@ -700,6 +705,11 @@ if (v:version > 799) && (g:g_nvim_flg == 0)
 
     "加载状态栏和Buffer插件（lightline.vim + lightline-bufferline）
     exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/statusbar_lightline.vim'
+
+    "加载vim-which-key
+    if (g:g_use_which_key_flg == 1)
+      exec 'source ' . g:g_s_rcfilepath . '/vimconf/init/whichkey.vim'
+    endif
 
     if (g:g_lsp_type == 0)
       "文件数使用nerdtree（init/tree.vim）

@@ -35,8 +35,8 @@
 
 @echo off
 ::设定镜像
-SET GITHUB_URL=https://hub.njuu.cf
-SET DOWNLOAD_URL=https://archive.njuu.cf
+SET GITHUB_URL=https://hub.nuaa.cf
+SET DOWNLOAD_URL=https://archive.nuaa.cf
 ::设置是否需要Clone主仓库
 SET CLONE_MAIN_REPO_FLG=1
 SET DOWNLOAD_REPO_PATH=D:\WorkSpace\Git\tecnote
@@ -177,6 +177,11 @@ rmdir /S /Q %DOWNLOAD_VIM_PLUGIN_PATH%\vim-vsnip\.github
 echo -----vim-vsnip-integ
 git clone --depth=1 -b master %GITHUB_URL%/hrsh7th/vim-vsnip-integ.git %DOWNLOAD_VIM_PLUGIN_PATH%\vim-vsnip-integ
 rmdir /S /Q %DOWNLOAD_VIM_PLUGIN_PATH%\vim-vsnip-integ\.git
+
+echo -----vim-which-key
+git clone --depth=1 -b master %GITHUB_URL%/liuchengxu/vim-which-key.git %DOWNLOAD_VIM_PLUGIN_PATH%\vim-which-key
+rmdir /S /Q %DOWNLOAD_VIM_PLUGIN_PATH%\vim-which-key\.git
+rmdir /S /Q %DOWNLOAD_VIM_PLUGIN_PATH%\vim-which-key\.github
 
 echo -----copy-vim-devicons-nerdtree_plugin
 xcopy /e /s /i /r /h /y %DOWNLOAD_VIM_PLUGIN_PATH%\vim-devicons\nerdtree_plugin %USERPROFILE%\vimconf\nerdtree_plugin

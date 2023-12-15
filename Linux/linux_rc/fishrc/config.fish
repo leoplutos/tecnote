@@ -56,6 +56,50 @@ if status is-interactive
 				(set_color normal)
 	end
 
+	#键进入vi模式
+	function enter_vim_mode
+		fish_vi_key_bindings --no-erase insert
+	end
+	#回到普通模式
+	function enter_default_mode
+		fish_default_key_bindings
+	end
+	#设定vi模式的指示器
+	#function fish_mode_prompt
+	#	switch $fish_bind_mode
+	#		case default
+	#			echo -en "\e[2 q"
+	#			set_color --background 78a2f3
+	#			set_color 000010
+	#			echo '[NORMAL]'
+	#		case insert
+	#			echo -en "\e[6 q"
+	#			set_color --background ffff00
+	#			set_color 000010
+	#			echo '[INSERT]'
+	#		case replace_one
+	#			echo -en "\e[4 q"
+	#			set_color --background d70000
+	#			set_color ffffff
+	#			echo '[REPLACE]'
+	#		case replace
+	#			echo -en "\e[4 q"
+	#			set_color --background d70000
+	#			set_color ffffff
+	#			echo '[REPLACE]'
+	#		case visual
+	#			echo -en "\e[2 q"
+	#			set_color --background 00ff87
+	#			set_color 000010
+	#			echo '[VISUAL]'
+	#		case '*'
+	#			echo -en "\e[2 q"
+	#			set_color --bold red
+	#			echo '[?]'
+	#	end
+	#	set_color normal
+	#end
+
 	if test "$OS_TYPE" -eq 0
 		#Linux设定
 		set personal_workspace ~/work/lch/workspace
@@ -131,4 +175,33 @@ if status is-interactive
 			nvim $argv --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
 		end
 	end
+
+	#颜色自定义
+	#命令颜色，比如echo
+	set fish_color_command 64afef
+	#关键字颜色，比如if
+	set fish_color_keyword 569cd6
+	#字符串颜色，比如"abc"
+	set fish_color_quote 809980
+	#重定向颜色，比如>/dev/null
+	set fish_color_redirection ff9e64
+	#分隔符，比如;&
+	set fish_color_end cdcdff
+	#错误
+	set fish_color_error ff2d13
+	#普通命令参数
+	set fish_color_param 9cdcfe
+	#文件名参数
+	set fish_color_valid_path d4d4b0 --underline
+	#以“-”开头的选项，直到第一个“--”参数
+	set fish_color_option 96e072
+	#注释
+	set fish_color_comment 5f6167
+	#vi模式下的选择内容
+	set fish_color_selection --background 2e3c64
+	#参数扩展运算符，比如*和~
+	set fish_color_operator f39c12
+	#转移字符串，，比如\n和\x70
+	set fish_color_escape f39c12
+
 end

@@ -1,0 +1,14 @@
+[[language]]
+name = "c"
+indent = { tab-width = 4, unit = "    " }
+auto-format = false
+
+[[language]]
+name = "java"
+indent = { tab-width = 4, unit = "    " }
+auto-format = false
+
+[[language]]
+name = "python"
+indent = { tab-width = 4, unit = "    " }
+auto-format = false

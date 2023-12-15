@@ -30,7 +30,8 @@ if defined USE_NERD_FONT_FLG (
 :SetPromptNerdFont
 ::设定WIN_ICON=NerdFont的Windows图标（需要chcp 65001），最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {e70f}{00A0}
 for /f "delims=" %%i in ('echo  ') do (set WIN_ICON=%%i)
-for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
+::for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
+for /f "tokens=3" %%a in ('"netsh interface ip show address "以太网" | findstr "IP Address""') do (set PS_IP=%%a)
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
 set PS_YELLOW=$E[33m
@@ -95,10 +96,14 @@ set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
 set PATH=%PATH%;%GVIM_HOME%
 set NVIM_HOME=D:\Tools\WorkTool\Text\nvim-win64\bin
 set PATH=%PATH%;%NVIM_HOME%
+set HELIX_HOME=D:\Tools\WorkTool\Text\helix
+set PATH=%PATH%;%HELIX_HOME%
 set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
 set PATH=%PATH%;%ANT_HOME%\bin
 set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
 set PATH=%PATH%;%MAVEN_HOME%\bin
+set GRADLE_HOME=D:\Tools\WorkTool\Java\gradle-8.5
+set PATH=%PATH%;%GRADLE_HOME%\bin
 set NODEJS_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64
 set PATH=%PATH%;%NODEJS_HOME%
 set NODEJS_GLOBAL_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global

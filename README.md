@@ -55,7 +55,9 @@
 
 ## Java/Kotlin相关
 * [Java相关](Java/Java_zh_CN.md)
+* [Java-Spring相关](Java/Java-Spring_zh_CN.md)
 * [Java-Maven相关](Java/Java-Maven_zh_CN.md)
+* [Java-Gradle相关](Java/Java-Gradle_zh_CN.md)
 * [Kotlin相关](Java/Kotlin_zh_CN.md)
 
 ## Dotnet相关
@@ -92,6 +94,7 @@
 * [Vim调试：termdebug](DevTool/Vim_termdebug_zh_CN.md)
 * [Vim-lsp](DevTool/Vim-lsp_zh_CN.md)
 * [Vim-dap](DevTool/Vim-dap_zh_CN.md)
+* [Helix](DevTool/Helix_zh_CN.md)
 * [Eclipse](DevTool/Eclipse_zh_CN.md)
 * [Tmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)

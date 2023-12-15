@@ -133,6 +133,11 @@ else
   require('startmenu')
   -- 加载lua/debugger.lua
   require('debugger')
+  if (vim.g.g_use_which_key_flg == 1) then
+    -- 加载whichkey.vim
+    local cocvim_path = vim.g.g_s_rcfilepath .. '/vimconf/init/whichkey.vim'
+    vim.cmd('source ' .. cocvim_path)
+  end
   -- 加载lua/imselect.lua
   require('imselect')
 

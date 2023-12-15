@@ -56,6 +56,7 @@ require('ibl').setup({
         'flash_prompt',
         'dashboard',
         'mason',
+        'which_key',
         '',
       },
   },

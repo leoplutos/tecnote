@@ -50,7 +50,7 @@ function! NerdTreeInitListener(event)
 endfunction
 
 "快捷键绑定
-"nnoremap <Leader>e :NERDTreeToggle<CR>
+nnoremap <Leader>e :NERDTreeToggle<CR>
 
 "让每一个tab都显示文件数
 augroup NERD

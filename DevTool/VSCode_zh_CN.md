@@ -50,6 +50,7 @@ Java所需插件比较多。有2种安装方式：
   - [**Debugger for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)&nbsp;&nbsp;调试支持
   - [**Project Manager for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency)&nbsp;&nbsp;管理Java项目、包括引用的库、资源文件、包、类和类成员
   - [**Maven for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven)&nbsp;&nbsp;Maven支持，管理 Maven 依赖
+  - [**Gradle for Java**](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle)&nbsp;&nbsp;Gradle支持，管理 Gradle 依赖
   - [Test Runner for Java(可选)](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test)&nbsp;&nbsp;运行和调试 JUnit/TestNG 测试用例
   - [Visual Studio IntelliCode(可选)](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)&nbsp;&nbsp;智能代码，AI辅助开发，AI自动补全。支持Java和Python
   - [Checkstyle for Java(可选)](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)&nbsp;&nbsp;检查错误
@@ -125,6 +126,11 @@ https://az764295.vo.msecnd.net/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/V
 替换为
 ```
 https://vscode.cdn.azure.cn/stable/6c3e3dba23e8fadc360aed75ce363ba185c49794/VSCode-win32-x64-1.81.1.zip
+```
+
+``vscode.cdn.azure.cn``不提供1.85.0版本，估计以后也不会提供了。可以使用这个地址
+```
+https://vscode.download.prss.microsoft.com/dbazure/download/stable/af28b32d7e553898b2a91af498b1fb666fdebe0c/VSCode-win32-x64-1.85.0.zip
 ```
 
 ## 插件的管理
@@ -592,12 +598,6 @@ Developer: Startup Performance
 	"thiefBook.filePath": "D:\\path\\to\\book.txt",
 	"thiefBook.isEnglish": false,
 	//"thiefBook.currPageNumber": 200,
-	"workbench.colorCustomizations": {
-		"[Visual Studio Dark]": { //护眼状态栏
-			"statusBar.foreground": "#cecece",
-			"statusBar.background": "#2e2e2e",
-		},
-	},
 }
 ```
 其中 ``thiefBook.currPageNumber`` 这个设定如果是在 ``文件夹设定下`` 只有快速跳转的时候打开注释，其他时候一定要注释掉，不然会导致跳转问题
@@ -606,13 +606,13 @@ Developer: Startup Performance
 ```
 [
 	{
-		"key": "down",
-		"command": "extension.getNextPage"
+		"key": "pageup",
+		"command": "extension.getPreviousPage"
 	},
 	{
-		"key": "up",
-		"command": "extension.getPreviousPage"
-	}
+		"key": "pagedown",
+		"command": "extension.getNextPage"
+	},
 ]
 ```
 

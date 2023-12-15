@@ -39,7 +39,7 @@ hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=189 ctermbg=17 gui=bold,reverse guifg=#cfc8f4 guibg=#00005f
 hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=103 gui=reverse guifg=#afffff guibg=#79849d
 "分割窗口线
-hi VertSplit    term=reverse ctermfg=49 ctermbg=49 guifg=#00ffaf guibg=#00ffaf
+hi VertSplit    term=none cterm=none ctermfg=49 ctermbg=49 gui=none guifg=#00ffaf guibg=#00ffaf
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
 hi VisualNOS    term=bold cterm=bold gui=bold
@@ -171,6 +171,9 @@ hi StartMenuMruTitle term=none cterm=none ctermfg=33 gui=none guifg=#0095f7
 hi StartMenuMruIcon term=none cterm=none ctermfg=37 gui=none guifg=#00a5a8
 hi StartMenuFiles term=none cterm=none ctermfg=239 gui=none guifg=#4b505a
 hi StartMenuShortCut term=none cterm=none ctermfg=65 gui=none guifg=#71926c
+hi WhichKeyShowKey       term=none cterm=none ctermfg=99 gui=none guifg=#8650ff
+hi WhichKeyShowSeperator term=none cterm=none ctermfg=28 gui=none guifg=#008000
+hi WhichKeyShowGroup     term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000af
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -241,6 +244,8 @@ if has('nvim')
   hi clear TermCursor
   hi! link TermCursor Cursor
   "TermCursorNC
+  "NeoVim特别设定
+  hi VertSplit    term=none cterm=none ctermfg=31 ctermbg=230 gui=none guifg=#2997cc guibg=#fffbf0
   hi MsgArea term=none cterm=none ctermfg=232 gui=none guifg=#080808
   hi MsgSeparator term=none cterm=none ctermfg=146 ctermbg=235 gui=none guifg=#a9b1d6 guibg=#1f2335
   hi NormalFloat term=none cterm=none ctermfg=16 ctermbg=254 gui=none guifg=#000000 guibg=#ede7d5

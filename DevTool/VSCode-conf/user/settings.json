@@ -23,7 +23,7 @@
 	"editor.renderControlCharacters": true, //设定显示控制字符
 	"editor.renderLineHighlight": "all", //突出显示导航线和当前行
 	"editor.selectionHighlight": true, // 控制编辑器是否应突出显示与所选内容类似的匹配项。
-	"editor.occurrencesHighlight": true, // 控制编辑器是否突出显示语义符号的匹配项。
+	"editor.occurrencesHighlight": "singleFile", // 控制编辑器是否突出显示语义符号的匹配项。
 	"editor.insertSpaces": false, //按下tab时不替换为空格
 	"editor.autoClosingBrackets": "beforeWhitespace", //括号和引号自动补全，光标在空白前面的时候自动补全
 	"editor.autoClosingQuotes": "beforeWhitespace",
@@ -85,6 +85,7 @@
 		"*.exe": "hexEditor.hexedit",
 		"*.svg": "hediet.vscode-drawio-text",
 	},
+	"workbench.tree.enableStickyScroll": true, //文件树中启用粘性滚动
 	//"workbench.editor.tabSizing": "fixed", //tab宽度自适应
 	//"workbench.list.horizontalScrolling": true, //资源管理器水平滚动
 	"zenMode.centerLayout": false, //禅模式取消居中
@@ -641,6 +642,7 @@
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
 	"terminal.integrated.cursorStyle": "block", // 光标样式
+	"terminal.integrated.stickyScroll.enabled": true, //在终端顶部显示当前命令
 	"terminal.integrated.allowChords": false, // 禁用终端中的组合键绑定
 	"terminal.integrated.cursorStyleInactive": "outline", //失去焦点光标样式
 	"terminal.integrated.copyOnSelection": true, // 选择的内容自动复制
@@ -704,6 +706,7 @@
 	"diffEditor.experimental.showMoves": true, // 检测代码移动
 	"diffEditor.hideUnchangedRegions.enabled": true, //隐藏未更改的区域
 	"diffEditor.useInlineViewWhenSpaceIsLimited": false, //不开启内联视图
+	"multiDiffEditor.experimental.enabled": true, //启用多重差异编辑器
 	"accessibility.dimUnfocused.enabled": true, // 将未聚焦的编辑器和终端变暗
 	"accessibility.dimUnfocused.opacity": 0.8, // 未聚焦的编辑器和终端变暗透明度
 	"telemetry.telemetryLevel": "off", //禁用错误报告

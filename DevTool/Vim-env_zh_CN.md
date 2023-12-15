@@ -6,23 +6,24 @@
 
 ## 使用插件总结
 笔者主要使用的插件如下表
-|             | Vim（最小插件依赖）                 | Vim（有插件）             | NeoVim（有插件）           |
-|-------------|-----------------------------|----------------------|-----------------------|
-| 文件树         | netrw                       | nerdtree             | nvim-tree.lua         |
-| 自动完成        | vim-auto-popmenu + vim-dict | asyncomplete.vim     | nvim-cmp              |
-| 模糊查询        | ctrlp.vim                   | LeaderF              | telescope.nvim        |
-| 代码大纲        | ctrlp-funky                 | :LeaderfFunction     | symbols-outline.nvim  |
-| LSP         | 无                           | vim-lsp              | nvim-lspconfig        |
-| DAP         | 无                           | vimspector           | nvim-dap            |
-| 缩进参考线       | indentLine                  | indentLine           | indent-blankline.nvim |
-| 状态栏         | 自定义                         | lightline.vim        | lualine.nvim          |
-| Tab/Buffer栏 | 自定义                         | lightline-bufferline | bufferline.nvim       |
-| 终端          | vim-terminal-help           | vim-terminal-help    | toggleterm.nvim       |
-| 欢迎页面        | vim-startify                | vim-startify         | dashboard-nvim          |
-| 代码片段        | 自定义                         | vim-vsnip            | vim-vsnip             |
-| 其他          | 无                           | 无                    | flash.nvim            |
+|             | Vim（最小插件依赖）                 | Vim（有插件）             | NeoVim（有插件）            |
+|-------------|-----------------------------|----------------------|------------------------|
+| 文件树         | netrw                       | nerdtree             | nvim-tree.lua          |
+| 自动完成        | vim-auto-popmenu + vim-dict | asyncomplete.vim     | nvim-cmp               |
+| 模糊查询        | ctrlp.vim                   | LeaderF              | telescope.nvim         |
+| 代码大纲        | ctrlp-funky                 | :LeaderfFunction     | symbols-outline.nvim   |
+| LSP         | 无                           | vim-lsp              | nvim-lspconfig         |
+| DAP         | 无                           | vimspector           | nvim-dap               |
+| 缩进参考线       | indentLine                  | indentLine           | indent-blankline.nvim  |
+| 状态栏         | 自定义                         | lightline.vim        | lualine.nvim           |
+| Tab/Buffer栏 | 自定义                         | lightline-bufferline | bufferline.nvim        |
+| 终端          | vim-terminal-help           | vim-terminal-help    | toggleterm.nvim        |
+| 欢迎页面        | vim-startify                | vim-startify         | dashboard-nvim         |
+| 代码片段        | 自定义                         | vim-vsnip            | vim-vsnip              |
+| 键绑定帮助       | 无                           | vim-which-key        | vim-which-key          |
+| 其他          | 无                           | 无                    | flash.nvim             |
 
-**注:** 使用了 ``vim-devicons`` 之后，如果 ``NeedTree`` 图标不显示，需要将 ``vim-devicons/nerdtree_plugin`` 这个文件夹复制到  
+**注1:** 使用了 ``vim-devicons`` 之后，如果 ``NeedTree`` 图标不显示，需要将 ``vim-devicons/nerdtree_plugin`` 这个文件夹复制到  
 ```
 ~/.vim/nerdtree_plugin/ (*nix)
 ~/vimfiles/nerdtree_plugin (windows)
@@ -31,6 +32,8 @@
 ```
 ~/vimconf/nerdtree_plugin
 ```
+
+**注2:** vim-which-key默认关闭，需要在vimrc开启开关  
 
 ## Windows下自动安装Vim/NeoVim设定
 笔者的脚本：

@@ -28,7 +28,10 @@ local function my_on_attach(bufnr)
   --vim.keymap.set('n', '<CR>', api.node.open.tab,        opts('Open: New Tab'))
   vim.keymap.set('n', 't',    api.node.open.tab,        opts('Open: New Tab'))
   vim.keymap.set('n', 'v',    api.node.open.edit,       opts('Open'))
-  vim.keymap.set('n', '<C-l>',  api.tree.reload,       opts('Refresh'))
+  vim.keymap.set('n', '<C-l>',  api.tree.reload,        opts('Refresh'))
+  vim.keymap.set('n', 'p',    api.node.open.preview,    opts('Open Preview'))
+  --删除默认的TAB键绑定
+  vim.keymap.del('n', '<Tab>', { buffer = bufnr })
 
   -- 添加事件Event.TreeRendered(每次nvim-tree重绘的时候运行的命令)
   local Event = api.events.Event

@@ -39,7 +39,7 @@ hi Question     term=bold cterm=bold ctermfg=53 gui=bold guifg=#5f005f
 hi StatusLine   term=bold,reverse cterm=bold,reverse ctermfg=189 ctermbg=17 gui=bold,reverse guifg=#cfc8f4 guibg=#00005f
 hi StatusLineNC term=reverse cterm=reverse ctermfg=159 ctermbg=103 gui=reverse guifg=#afffff guibg=#79849d
 "分割窗口线
-hi VertSplit    term=reverse ctermfg=253 ctermbg=253 guifg=#d9d9df guibg=#d9d9df
+hi VertSplit    term=none cterm=none ctermfg=253 ctermbg=253 gui=none guifg=#d9d9df guibg=#d9d9df
 hi Title        term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000a0
 hi Visual       term=reverse ctermbg=153 guibg=#abd6fe
 hi VisualNOS    term=bold cterm=bold gui=bold
@@ -52,7 +52,7 @@ hi DiffChange   term=bold ctermbg=189 guibg=#c9cbfe
 hi DiffDelete   term=standout cterm=none ctermfg=253 ctermbg=231 gui=none guifg=#dadada guibg=#f8f8ff
 hi DiffText     term=reverse cterm=bold ctermfg=252 ctermbg=67 gui=bold guifg=#d0d0d0 guibg=#567fa8
 "左侧导航线（和TabLineFill相同即可）
-hi SignColumn   term=standout ctermfg=26 ctermbg=255 guifg=#005fd7 guibg=#f1f1f6
+hi SignColumn   term=standout ctermfg=26 ctermbg=231 guifg=#005fd7 guibg=#f8f8ff
 hi clear Conceal
 hi! link Conceal SpecialKey
 hi SpellBad     term=reverse cterm=undercurl ctermfg=196 ctermbg=231 gui=undercurl guifg=#ff0000 guibg=#f8f8ff guisp=#ff0000
@@ -171,6 +171,9 @@ hi StartMenuMruTitle term=none cterm=none ctermfg=33 gui=none guifg=#0095f7
 hi StartMenuMruIcon term=none cterm=none ctermfg=37 gui=none guifg=#00a5a8
 hi StartMenuFiles term=none cterm=none ctermfg=239 gui=none guifg=#4b505a
 hi StartMenuShortCut term=none cterm=none ctermfg=65 gui=none guifg=#71926c
+hi WhichKeyShowKey       term=none cterm=none ctermfg=99 gui=none guifg=#8650ff
+hi WhichKeyShowSeperator term=none cterm=none ctermfg=28 gui=none guifg=#008000
+hi WhichKeyShowGroup     term=bold cterm=bold ctermfg=19 gui=bold guifg=#0000af
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -240,6 +243,9 @@ if has('nvim')
   "基础区域
   hi clear TermCursor
   hi! link TermCursor Cursor
+  "TermCursorNC
+  "NeoVim特别设定
+  hi VertSplit    term=none cterm=none ctermfg=31 ctermbg=231 gui=none guifg=#2997cc guibg=#f8f8ff
   "TermCursorNC
   hi MsgArea term=none cterm=none ctermfg=232 gui=none guifg=#080808
   hi MsgSeparator term=none cterm=none ctermfg=146 ctermbg=235 gui=none guifg=#a9b1d6 guibg=#1f2335

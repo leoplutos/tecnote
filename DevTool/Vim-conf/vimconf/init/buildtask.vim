@@ -122,13 +122,17 @@ function! s:setJavaCompiler()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在
+    "[ant]判断build.xml文件是否存在
     compiler ant
     "setlocal makeencoding=sjis
     "setlocal makeencoding=euc-cn
     setlocal makeencoding=gbk
+  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
+    "[springboot]判断application.properties文件是否存在
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在
+    "[maven]判断pom.xml文件是否存在
+  elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
+    "[gradle]判断.gradle目录是否存在
   else
     "javac编译
     compiler javac
@@ -146,14 +150,24 @@ function! s:runJavaBuild()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在
+    "[ant]判断build.xml文件是否存在
     exe 'lcd '.g:g_s_projectrootpath
     make
+  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
+    "[springboot]判断application.properties文件是否存在
+    call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+    sleep 100m
+    call TerminalSend(s:contactCommand('mvnw clean package'))
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在
+    "[maven]判断pom.xml文件是否存在
     call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
     sleep 100m
     call TerminalSend(s:contactCommand('mvn compile'))
+  elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
+    "[gradle]判断.gradle目录是否存在
+    call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+    sleep 100m
+    call TerminalSend(s:contactCommand('gradlew build'))
   else
     make
   endif
@@ -169,13 +183,19 @@ function! s:runJavaApplication()
   call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
   sleep 100m
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在
+    "[ant]判断build.xml文件是否存在
     "call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath . '/build_result'))
     "sleep 100m
     call TerminalSend(s:contactCommand('java -jar ' . l:jar_file_name))
+  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
+    "[springboot]判断application.properties文件是否存在
+    call TerminalSend(s:contactCommand('mvnw spring-boot:run'))
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在
+    "[maven]判断pom.xml文件是否存在
     call TerminalSend(s:contactCommand('mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 arg2"'))
+  elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
+    "[gradle]判断.gradle目录是否存在
+    call TerminalSend(s:contactCommand('gradlew run'))
   else
     if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
       call TerminalSend(s:contactCommand('chcp 65001'))
@@ -194,10 +214,15 @@ function! s:runJavaTest()
   call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
   sleep 100m
   if filereadable(g:g_s_projectrootpath.'/build.xml')
-    "[ant]判断build.xml是否存在
+    "[ant]判断build.xml文件是否存在
+  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
+    "[springboot]判断application.properties文件是否存在
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml是否存在
+    "[maven]判断pom.xml文件是否存在
     call TerminalSend(s:contactCommand('mvn test'))
+  elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
+    "[gradle]判断.gradle目录是否存在
+    call TerminalSend(s:contactCommand('gradlew test'))
   else
   endif
 endfunction
