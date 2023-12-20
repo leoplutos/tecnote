@@ -1,0 +1,8 @@
+{
+	"kotlin.java.home": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
+	"kotlin.compiler.jvm.target": "17",
+	"kotlin.languageServer.enabled": true,
+	"kotlin.languageServer.path": "D:\\Tools\\WorkTool\\Kotlin\\lsp\\server\\bin\\kotlin-language-server.bat",
+	"kotlin.debugAdapter.enabled": true,
+	"kotlin.debugAdapter.path": "D:\\Tools\\WorkTool\\Kotlin\\dap\\adapter\\bin\\kotlin-debug-adapter.bat",
+}

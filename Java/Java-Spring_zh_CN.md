@@ -28,6 +28,11 @@ curl https://start.spring.io/starter.zip -d language=java -d type=maven-project 
 del SpringBootJava.zip
 ```
 
+### 查看所有参数
+```
+curl -H 'Accept: application/json' https://start.spring.io
+```
+
 ### 修改 Maven Wrapper 国内源
 在 ``工程根路径`` 下打开 ``.mvn\wrapper\maven-wrapper.properties``  
 修改内容
@@ -203,6 +208,11 @@ curl https://start.spring.io/starter.zip -d language=kotlin -d type=gradle-proje
 del SpringBootKotlin.zip
 ```
 
+### 查看所有参数
+```
+curl -H 'Accept: application/json' https://start.spring.io
+```
+
 ### 修改 Gradle Wrapper 国内源
 在 ``工程根路径`` 下打开 ``gradle\wrapper\gradle-wrapper.properties``  
 修改内容
@@ -257,17 +267,17 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class HelloController {
 
-  @GetMapping("/hello")
-  fun hello(@RequestParam(name="message", required=false, defaultValue="World") message: String, model: Model): String {
-    model["title"] = "在HelloController设定的title"
-    model["message"] = message
-    return "hello"
-  }
+    @GetMapping("/hello")
+    fun hello(@RequestParam(name = "message", required = false, defaultValue = "World") message: String, model: Model): String {
+        model["title"] = "在HelloController设定的title"
+        model["message"] = message
+        return "hello"
+    }
 }
 ```
 
@@ -275,6 +285,12 @@ class HelloController {
 
 #### 分别新建5个文件
 此处和 ``Java-Maven工程`` 的5个文件一致，省略
+
+### 修改工程名
+修改工程根路径下的 ``settings.gradle.kts``
+```
+rootProject.name = "SpringBootKotlin"
+```
 
 ### 启动工程
 ```
@@ -285,3 +301,30 @@ gradlew bootRun
 使用浏览器访问  
 http://localhost:8080/hello  
 http://localhost:8080/hello?message=mytest  
+
+### VSCode配置
+工程配置文件参考 [SpringBootKotlin](./SpringBootKotlin/)  
+
+### 其他
+#### 编译jar文件
+```
+cd D:\WorkSpace\Java\SpringBootKotlin
+gradlew bootJar
+```
+#### 编译war文件
+修改工程根路径下的 ``build.gradle.kts`` ，在 ``plugins`` 结点下新增 ``war``
+```
+plugins {
+	war
+	id("org.springframework.boot") version "3.2.0"
+	id("io.spring.dependency-management") version "1.1.4"
+	kotlin("jvm") version "1.9.20"
+	kotlin("plugin.spring") version "1.9.20"
+	kotlin("plugin.jpa") version "1.9.20"
+}
+```
+然后运行命令
+```
+cd D:\WorkSpace\Java\SpringBootKotlin
+gradlew war
+```
