@@ -4,11 +4,11 @@
 
 Spring Boot 默认支持的模板引擎有4种，分别是：FreeMarker、Groovy、Thymeleaf、Mustache，此文所有内容基于 ``Mustache`` 模板
 
-参考官网的 [使用Kotlin构建Spring Boot](https://spring.io/guides/tutorials/spring-boot-kotlin/) 和 [quickstart](https://spring.io/quickstart/) 还有 [这里](https://spring.io/guides/gs/spring-boot/)
+参考官网的 [使用Kotlin构建Spring Boot](https://spring.io/guides/tutorials/spring-boot-kotlin/) ， [快速开始](https://spring.io/quickstart/) ， [使用Spring Boot创建应用](https://spring.io/guides/gs/spring-boot/) ， [创建Batch服务](https://spring.io/guides/gs/batch-processing/)
 
 操作环境是在 ``Windows10``，可以运行 ``curl`` 和 ``7-zip``
 
-## 创建Java-Maven工程
+## 创建Java-Maven-Web工程
 
 ### 使用命令行获得工程脚手架
 curl命令的参数的含义为
@@ -188,7 +188,7 @@ mvnw clean package
 #### 编译war文件
 看 [这里](https://springdoc.cn/spring-boot-war-packaged/)
 
-## 创建Kotlin-Gradle工程
+## 创建Kotlin-Gradle-Web工程
 
 ### 使用命令行获得工程脚手架
 curl命令的参数的含义为
@@ -327,4 +327,361 @@ plugins {
 ```
 cd D:\WorkSpace\Java\SpringBootKotlin
 gradlew war
+```
+
+## 创建Java-Maven-Batch工程
+
+### Spring Batch 简介
+Spring Batch 是一个轻量级、全面的批处理框架，旨在支持开发对企业系统的日常运营至关重要的健壮批处理应用程序。Spring Batch 建立在人们所期望的 Spring Framework 的特性（生产力、基于 POJO 的开发方法和一般易用性）之上，同时使开发人员可以在必要时轻松访问和利用更先进的企业服务。
+
+### 关于Job
+BatchCore中会包含基本的Job，用来处理数据的核心。一个Job由多个Step组成，比如：做菜这个Job由洗菜，切菜，炒菜这三个Step组成，我们再业务中也会存在这种复杂多步骤的业务处理流程。  
+一个基本的job一般由至少一个Step组成。  
+一个Step一般由三部分组成
+ 1. ItemReader：读取数据
+ 2. ItemProcessor：处理数据
+ 3. ItemWriter：写数据
+
+### 关于ItemReader
+ - ListItemReader：读取List类型数据，只能读一次
+ - ItemReaderAdapter：ItemReader适配器，可以服用现有的读操作
+ - FlatFileItemReader：读Flat类型文件
+ - StaxEventItemReader：读XML类型文件
+ - JdbcCursorItemReader：基于Jdbc游标方式读取数据库
+ - HibernateCursorItemReader：基于Hibernate游标方式读取数据库
+ - StoredProcedureItemReader：基于存储过程读取数据库
+ - IbatisPagingItemReader：基于Ibaties分页读取数据库
+ - JpaPagingItemReader：基于Jpa分页读取数据库
+ - JdbcPagingItemReader：基于Jdbc分页读取数据库
+ - HibernatePagingItemReader：基于Hibernate分页读取数据库
+ - JmsItemReader：读取JMS队列
+ - IteratorItemReader：迭代方式读组件
+ - MultiResourceItemReader：多文件读组件
+ - MongoItemReader：基于分布式文件存储的数据库MongoDB读组件
+ - Neo4jItemReader：面向网络的数据库Neo4j的读组件
+ - ResourcesItemReader：基于批量资源的读组件，每次读取返回资源对象
+ - AmqpItemReader：读取AMQP队列组件
+ - Repository：基于spring Data的读组件
+
+### 使用命令行获得工程脚手架
+curl命令的参数的含义为
+ - 使用Java语言
+ - 使用maven构建工具
+ - 依赖库：batch,h2
+ - java包名：com.example.batch
+ - 工程名：SpringBootBatch
+ - 输出文件：SpringBootBatch.zip
+```
+cd D:\WorkSpace\Java
+mkdir SpringBootBatch
+
+curl https://start.spring.io/starter.zip -d language=java -d type=maven-project -d dependencies=batch,h2 -d packageName=com.example.batch -d name=SpringBootBatch -o SpringBootBatch.zip
+
+7z x SpringBootBatch.zip -oD:\WorkSpace\Java\SpringBootBatch
+del SpringBootBatch.zip
+```
+
+### 查看所有参数
+```
+curl -H 'Accept: application/json' https://start.spring.io
+```
+
+### 修改 Maven Wrapper 国内源
+在 ``工程根路径`` 下打开 ``.mvn\wrapper\maven-wrapper.properties``  
+修改内容
+```
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.5/apache-maven-3.9.5-bin.zip
+wrapperUrl=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar
+```
+为
+```
+distributionUrl=https://mirrors.cloud.tencent.com/apache/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.zip
+wrapperUrl=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar
+```
+
+### 修改工程 pom.xml 为国内源
+因为使用的是 Maven Wrapper，所以要修改指定国内源
+在 ``工程根路径`` 下打开 ``pom.xml``  
+修改内容
+```
+<project>
+	<artifactId>SpringBootBatch</artifactId>
+	<description>SpringBootBatch project for Spring Boot</description>
+
+    <dependencies>
+      <!-- 依赖 -->
+    </dependencies>
+
+    <!-- 在此配置国内源 -->
+    <repositories>
+        <repository>
+            <id>tencent</id>
+            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>tencent</id>
+            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
+```
+
+### 修改Spring设定文件
+``src/main/resources/application.properties``
+```
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:test_db;DATABASE_TO_UPPER=false;MODE=PostgreSQL
+#Spring Boot 2.5.6以后
+spring.sql.init.platform=h2
+spring.sql.init.mode=embedded
+spring.sql.init.schema-locations=classpath:db/schema.sql
+#spring.sql.init.data-locations=classpath:db/data.sql
+spring.sql.init.encoding=UTF-8
+spring.h2.console.enabled=true
+```
+
+### 新建一个简单的入口文件
+``src/main/resources/sample-data.csv``
+```
+1,张三,学生
+2,李四,快递员
+3,王二,程序猿
+4,赵一,工程狮
+5,钱五,卖炊饼的
+```
+
+### 新建h2内存表
+``src/main/resources/db/schema.sql``
+```
+CREATE TABLE IF NOT EXISTS people(
+    person_id INT NOT NULL PRIMARY KEY,
+    person_name VARCHAR(20),
+    person_career VARCHAR(20)
+);
+```
+
+### 新建实体类
+保证字段属性要和数据库中的数据类型对应  
+``src/main/java/com/example/batch/Person.java``
+```
+package com.example.batch;
+
+public record Person(int personId, String personName, String personCareer) {
+}
+```
+
+### 新建ItemProcessor的实现用来处理数据
+``src/main/java/com/example/batch/PersonItemProcessor.java``
+```
+package com.example.batch;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.lang.Nullable;
+
+// ItemProcessor，即数据的处理逻辑
+public class PersonItemProcessor implements ItemProcessor<Person, Person> {
+
+	private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);
+
+	@Override
+	public Person process(@Nullable Person person) {
+		if (person != null) {
+			final int personId = person.personId() + 10;
+			final String personName = person.personName() + "-以处理";
+			final String personCareer = person.personCareer() + "-以处理";
+			final Person transformedPerson = new Person(personId, personName, personCareer);
+			log.info("转换 (" + person + ") 为 (" + transformedPerson + ")");
+			return transformedPerson;
+		} else {
+			return person;
+		}
+	}
+}
+```
+
+### 创建SpringBatch的配置类
+用来配置Job  
+``src/main/java/com/example/batch/BatchConfiguration.java``
+```
+package com.example.batch;
+
+import javax.sql.DataSource;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
+import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
+import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
+@Configuration
+public class BatchConfiguration {
+
+	// 配置一个ItemReader，即数据的读取逻辑，这里读取sample-data.csv映射到Person.class
+	@Bean
+	public FlatFileItemReader<Person> reader() {
+		return new FlatFileItemReaderBuilder<Person>()
+				.name("personItemReader")
+				.resource(new ClassPathResource("sample-data.csv"))
+				.encoding("UTF-8")
+				.delimited()
+				.names("personId", "personName", "personCareer")
+				.targetType(Person.class)
+				.build();
+	}
+
+	// 配置ItemProcessor，即数据的处理逻辑
+	@Bean
+	public PersonItemProcessor processor() {
+		return new PersonItemProcessor();
+	}
+
+	// 配置ItemWriter，即数据的写出逻辑，这里写出到h2数据库
+	@Bean
+	public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(
+				"INSERT INTO people (person_id, person_name, person_career) VALUES (:personId, :personName, :personCareer)");
+		return new JdbcBatchItemWriterBuilder<Person>()
+				.sql(sql.toString())
+				.dataSource(dataSource)
+				.beanMapped()
+				.build();
+	}
+
+	// 配置一个Job
+	@Bean
+	public Job importUserJob(JobRepository jobRepository, Step step1, JobCompletionNotificationListener listener) {
+		return new JobBuilder("importUserJob", jobRepository)
+				.listener(listener)
+				// 配置该Job的Step
+				.start(step1)
+				.build();
+	}
+
+	// 配置一个Step
+	@Bean
+	public Step step1(JobRepository jobRepository, DataSourceTransactionManager transactionManager,
+			FlatFileItemReader<Person> reader, PersonItemProcessor processor, JdbcBatchItemWriter<Person> writer) {
+		return new StepBuilder("step1", jobRepository)
+				// chunk(3)，表示每读取到3条数据就执行1次write操作
+				.<Person, Person>chunk(3, transactionManager)
+				// 配置reader
+				.reader(reader)
+				// 配置processor
+				.processor(processor)
+				// 配置writer
+				.writer(writer)
+				.build();
+	}
+}
+```
+
+### 新建监听器
+自定义监听器。在批处理作业在执行前后会调用监听器的方法；执行额外的统一逻辑
+``src/main/java/com/example/batch/JobCompletionNotificationListener.java``
+```
+package com.example.batch;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.BatchStatus;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
+import org.springframework.jdbc.core.DataClassRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class JobCompletionNotificationListener implements JobExecutionListener {
+
+	private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
+
+	private final JdbcTemplate jdbcTemplate;
+
+	private long startTime;
+
+	public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	/**
+	 * 该方法会在job开始前执行
+	 */
+	@Override
+	public void beforeJob(JobExecution jobExecution) {
+		startTime = System.currentTimeMillis();
+		log.info("JOB 开始前  运行参数：" + jobExecution.getJobParameters());
+	}
+
+	/**
+	 * 该方法会在job结束后执行
+	 */
+	@Override
+	public void afterJob(JobExecution jobExecution) {
+		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
+			log.info("JOB 运行成功，验证运行结果");
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT person_id, person_name, person_career FROM people");
+			jdbcTemplate.query(sql.toString(), new DataClassRowMapper<>(Person.class))
+					.forEach(person -> log.info("在内存数据库H2中找到 <{{}}> ", person));
+		} else if (jobExecution.getStatus() == BatchStatus.FAILED) {
+			log.info("JOB 运行失败");
+		}
+		log.info("JOB 运行时间： {}/ms", (System.currentTimeMillis() - startTime));
+	}
+}
+```
+
+### 修改启动文件
+``src/main/java/com/example/batch/SpringBootBatchApplication.java``
+```
+package com.example.batch;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootBatchApplication {
+
+	public static void main(String[] args) {
+		System.exit(SpringApplication.exit(SpringApplication.run(SpringBootBatchApplication.class, args)));
+	}
+}
+```
+
+### 运行工程
+```
+chcp 936
+cd D:\WorkSpace\Java\SpringBootBatch
+
+# maven
+mvnw spring-boot:run
+
+# gradlew
+gradlew bootRun
+```
+
+### 编译并运行jar文件
+```
+cd D:\WorkSpace\Java\SpringBootBatch
+
+# maven
+mvnw clean package
+java -jar target/SpringBootBatch-0.0.1-SNAPSHOT.jar
+
+# gradlew
+gradlew build
+java -jar build/libs/SpringBootBatch-0.0.1-SNAPSHOT.jar
 ```

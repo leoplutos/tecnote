@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "poetrytest"
+version = "0.1.0"
+description = ""
+authors = ["chunhao.liang <chunhao.liang@yidatec.com>"]
+readme = "README.md"
+packages = [
+  {include = "poetrytest", from = "src"},
+  {include = "sub_module", from = "src/poetrytest" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+faker = "^21.0.0"
+pytest = "^7.4.3"
+
+[[tool.poetry.source]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+#name = "tsinghua"
+#url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+priority = "default"
+
+[tool.poetry.scripts]
+pyrun="poetrytest.app:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

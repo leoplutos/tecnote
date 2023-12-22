@@ -465,6 +465,9 @@ if executable('java') && filereadable(s:lsp_jdtls_jar_path)
         \         'maven': {
         \           'enabled': v:true,
         \         },
+        \         'gradle': {
+        \           'enabled': v:true,
+        \         },
         \       },
         \       'inlayhints': {
         \         'parameterNames': {
@@ -693,11 +696,6 @@ if executable('java')
         \ 'allowlist': ['cobol'],
         \ 'languageId': {server_info->'cbl'},
         \ 'initialization_options': {
-        \   'hints': {
-        \       'typeHints': v:true,
-        \       'parameterHints': v:true,
-        \       'chainedHints': v:true,
-        \   },
         \ },
         \ })
 endif
@@ -712,7 +710,19 @@ if executable('kotlin-language-server')
         \ 'cmd': {server_info->[s:lsp_kotlin_lsp_cmd]},
         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.root'))},
         \ 'allowlist': ['kotlin'],
-        \ 'initialization_options': {
+        \ 'workspace_config': {
+        \   'kotlin': {
+        \     'compiler': {
+        \         'jvm': {
+        \           'target': '17',
+        \         },
+        \     },
+        \     'hints': {
+        \         'typeHints': v:true,
+        \         'parameterHints': v:true,
+        \         'chainedHints': v:true,
+        \     },
+        \   },
         \ },
         \ })
 endif

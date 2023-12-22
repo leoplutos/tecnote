@@ -48,7 +48,7 @@ endfunction
 --toggleterm.nvim插件的快捷键绑定
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  --vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-c>', '<Cmd>bd<CR>', opts)
 end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

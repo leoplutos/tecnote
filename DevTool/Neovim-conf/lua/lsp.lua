@@ -300,6 +300,9 @@ lspconfig.jdtls.setup {
           maven = {
             enabled = true,
           },
+          gradle = {
+            enabled = true,
+          },
         },
         inlayhints = {
           parameterNames = {
@@ -532,13 +535,23 @@ lspconfig.cobol_ls.setup {
 }
 
 -- Kotlin（kotlin-language-server）设置
+-- https://github.com/fwcd/kotlin-language-server/blob/main/server/src/main/kotlin/org/javacs/kt/Configuration.kt
 lspconfig.kotlin_language_server.setup {
+  settings = {
+    kotlin = {
+      compiler = {
+        jvm = {
+          target = "17"
+        }
+      },
+      hints = {
+        typeHints = true,
+        parameterHints = true,
+        chainedHints = true,
+      },
+    }
+  },
   init_options = {
-    hints = {
-      typeHints = true,
-      parameterHints = true,
-      chainedHints = true,
-    },
   },
   capabilities = capabilities,
   root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', '.git');

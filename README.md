@@ -43,6 +43,8 @@
 
 ## Python相关
 * [Python相关](Python/Python_zh_CN.md)
+* [Python-Poetry相关](Python/Python-Poetry_zh_CN.md) ※推荐
+* [Python-PyBuilder相关](Python/Python-PyBuilder_zh_CN.md)
 * [制作Python绿色版](Python/Python-portable_zh_CN.md)
 * [pdb相关](Python/Pdb_zh_CN.md)
 

@@ -1,7 +1,5 @@
 # Python相关
 
-在此md文件同路径下，有.py文件。
-
 ## 学习Python
 * [Python - 100天从新手到大师](https://github.com/jackfrued/Python-100-Days)  
 * [Redis教程](https://github.com/jackfrued/Python-100-Days/blob/master/Day36-40/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%A5%E9%97%A8.md)  
@@ -10,13 +8,13 @@
 
 ## pip使用清华源
 
-#### 临时使用
+### 临时使用
 ```
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 ```
 注意，simple 不能少, 是 https 而不是 http
 
-#### 设为默认
+### 设为默认
 升级 pip 到最新的版本 (>=10.0.0) 后进行配置：
 ```
 python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
@@ -24,6 +22,22 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 更多：  
 https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+
+## 关于Python的父目录子目录
+
+### 引用子目录下的内容
+需要在子目录下新建 ``__init__.py`` ，将子目录升级为 ``模块``，``__init__.py`` 内容可以为空  
+引入方式为
+```
+from {子目录名} import {子目录下的py文件名}
+```
+
+### 引用父目录下的内容
+需要将该父目录添加到当前文件的 ``sys.path`` 中
+```
+import sys
+sys.path.append("..") #相对路径或绝对路径
+```
 
 ## Python自带的编辑器 ``IDLE``
 安装 ``Python`` 之后，在如下路径可以找到 ``idle.bat``
