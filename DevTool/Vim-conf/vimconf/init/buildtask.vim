@@ -86,33 +86,121 @@ endfunction
 
 "Python设定编译器
 function! s:setPythonCompiler()
-  "compiler pylint
-  setlocal makeprg=pylint\ %
+  if filereadable(g:g_s_projectrootpath.'/pyproject.toml')
+    "读取pyproject.toml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pyproject.toml'), "\n")
+    "检查是否存在tool.poetry，不存在index为-1
+    let index = stridx(xml, 'tool.poetry')
+    if (index >= 0)
+      "Poetry工程
+    else
+      "普通工程
+      setlocal makeprg=pylint\ %
+    end
+  else
+    "普通工程
+    setlocal makeprg=pylint\ %
+  end
+endfunction
+
+"Python开始编译
+function! s:runPythonBuild()
+  if filereadable(g:g_s_projectrootpath.'/pyproject.toml')
+    "读取pyproject.toml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pyproject.toml'), "\n")
+    "检查是否存在tool.poetry，不存在index为-1
+    let index = stridx(xml, 'tool.poetry')
+    if (index >= 0)
+      "Poetry工程
+      call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+      sleep 100m
+      call TerminalSend(s:contactCommand('poetry build'))
+    else
+      "普通工程
+      make
+    end
+  else
+    "普通工程
+    make
+  end
 endfunction
 
 "Python开始运行
 function! s:runPythonApplication()
   let l:filename = expand('%')
   let l:filepath = expand('%:p:h')
-  " 使用GetProjectRoot()函数找到跟目录
-  let g:g_s_projectrootpath = GetProjectRoot()
-  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
-    call TerminalSend(s:contactCommand('set PYTHONPATH=' . g:g_s_projectrootpath . '/src;' . g:g_s_projectrootpath . '/src/com'))
+  if filereadable(g:g_s_projectrootpath.'/pyproject.toml')
+    "读取pyproject.toml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pyproject.toml'), "\n")
+    "检查是否存在tool.poetry，不存在index为-1
+    let index = stridx(xml, 'tool.poetry')
+    if (index >= 0)
+      "Poetry工程
+      call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+      sleep 100m
+      call TerminalSend(s:contactCommand('poetry run pyrun'))
+    else
+      "普通工程
+      " 使用GetProjectRoot()函数找到跟目录
+      let g:g_s_projectrootpath = GetProjectRoot()
+      if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+        call TerminalSend(s:contactCommand('set PYTHONPATH=' . g:g_s_projectrootpath . '/src;' . g:g_s_projectrootpath . '/src/com'))
+      else
+        call TerminalSend(s:contactCommand('export PYTHONPATH=' . g:g_s_projectrootpath . '/src:' . g:g_s_projectrootpath . '/src/com'))
+      endif
+      sleep 100m
+      call TerminalSend(s:contactCommand('cd ' . l:filepath))
+      sleep 100m
+      if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+        call TerminalSend(s:contactCommand('python ' . l:filename))
+      else
+        call TerminalSend(s:contactCommand('python3 ' . l:filename))
+      endif
+    end
   else
-    call TerminalSend(s:contactCommand('export PYTHONPATH=' . g:g_s_projectrootpath . '/src:' . g:g_s_projectrootpath . '/src/com'))
-  endif
-  sleep 100m
-  call TerminalSend(s:contactCommand('cd ' . l:filepath))
-  sleep 100m
-  if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
-    call TerminalSend(s:contactCommand('python ' . l:filename))
-  else
-    call TerminalSend(s:contactCommand('python3 ' . l:filename))
-  endif
+    "普通工程
+    " 使用GetProjectRoot()函数找到跟目录
+    let g:g_s_projectrootpath = GetProjectRoot()
+    if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+      call TerminalSend(s:contactCommand('set PYTHONPATH=' . g:g_s_projectrootpath . '/src;' . g:g_s_projectrootpath . '/src/com'))
+    else
+      call TerminalSend(s:contactCommand('export PYTHONPATH=' . g:g_s_projectrootpath . '/src:' . g:g_s_projectrootpath . '/src/com'))
+    endif
+    sleep 100m
+    call TerminalSend(s:contactCommand('cd ' . l:filepath))
+    sleep 100m
+    if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
+      call TerminalSend(s:contactCommand('python ' . l:filename))
+    else
+      call TerminalSend(s:contactCommand('python3 ' . l:filename))
+    endif
+  end
 endfunction
 
 "Python开始测试
 function! s:runPythonTest()
+  if filereadable(g:g_s_projectrootpath.'/pyproject.toml')
+    "读取pyproject.toml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pyproject.toml'), "\n")
+    "检查是否存在tool.poetry，不存在index为-1
+    let index = stridx(xml, 'tool.poetry')
+    if (index >= 0)
+      "Poetry工程
+      call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+      sleep 100m
+      call TerminalSend(s:contactCommand('poetry run pytest -s --log-level=INFO --log-cli-level=INFO'))
+    else
+      "普通工程
+      call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+      sleep 100m
+      call TerminalSend(s:contactCommand('pytest'))
+    end
+  else
+    "普通工程
+    call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
+    sleep 100m
+    call TerminalSend(s:contactCommand('pytest'))
+  end
 endfunction
 
 "-----------------------------------------------
@@ -127,8 +215,6 @@ function! s:setJavaCompiler()
     "setlocal makeencoding=sjis
     "setlocal makeencoding=euc-cn
     setlocal makeencoding=gbk
-  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
-    "[springboot]判断application.properties文件是否存在
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
     "[maven]判断pom.xml文件是否存在
   elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
@@ -149,25 +235,44 @@ endfunction
 function! s:runJavaBuild()
   " 使用GetProjectRoot()函数找到跟目录
   let g:g_s_projectrootpath = GetProjectRoot()
+
   if filereadable(g:g_s_projectrootpath.'/build.xml')
     "[ant]判断build.xml文件是否存在
     exe 'lcd '.g:g_s_projectrootpath
     make
-  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
-    "[springboot]判断application.properties文件是否存在
-    call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
-    sleep 100m
-    call TerminalSend(s:contactCommand('mvnw clean package'))
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
-    "[maven]判断pom.xml文件是否存在
     call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
     sleep 100m
-    call TerminalSend(s:contactCommand('mvn compile'))
+    "[maven]判断pom.xml文件是否存在
+    "读取pom.xml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pom.xml'), "\n")
+    "检查是否存在spring-boot-，不存在index为-1
+    let index = stridx(xml, 'spring-boot-')
+    if (index >= 0)
+      "spring工程
+      call TerminalSend(s:contactCommand('mvnw clean package'))
+    else
+      "普通maven工程
+      call TerminalSend(s:contactCommand('mvn compile'))
+    end
   elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
     "[gradle]判断.gradle目录是否存在
     call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath))
     sleep 100m
-    call TerminalSend(s:contactCommand('gradlew build'))
+    "读取build.gradle.kts内容
+    let index = -1
+    if filereadable(g:g_s_projectrootpath.'/build.gradle.kts')
+      let kts = join(readfile(g:g_s_projectrootpath.'/build.gradle.kts'), "\n")
+      "检查是否存在spring-boot-，不存在index为-1
+      let index = stridx(kts, 'spring-boot-')
+    end
+    if (index >= 0)
+      "spring工程
+      call TerminalSend(s:contactCommand('gradlew clean bootJar'))
+    else
+      "普通gradle工程
+      call TerminalSend(s:contactCommand('gradlew build'))
+    end
   else
     make
   endif
@@ -187,15 +292,35 @@ function! s:runJavaApplication()
     "call TerminalSend(s:contactCommand('cd ' . g:g_s_projectrootpath . '/build_result'))
     "sleep 100m
     call TerminalSend(s:contactCommand('java -jar ' . l:jar_file_name))
-  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
-    "[springboot]判断application.properties文件是否存在
-    call TerminalSend(s:contactCommand('mvnw spring-boot:run'))
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
     "[maven]判断pom.xml文件是否存在
-    call TerminalSend(s:contactCommand('mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 arg2"'))
+    "读取pom.xml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pom.xml'), "\n")
+    "检查是否存在spring-boot-，不存在index为-1
+    let index = stridx(xml, 'spring-boot-')
+    if (index >= 0)
+      "spring工程
+      call TerminalSend(s:contactCommand('mvnw spring-boot:run'))
+    else
+      "普通maven工程
+      call TerminalSend(s:contactCommand('mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 arg2"'))
+    end
   elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
     "[gradle]判断.gradle目录是否存在
-    call TerminalSend(s:contactCommand('gradlew run'))
+    "读取build.gradle.kts内容
+    let index = -1
+    if filereadable(g:g_s_projectrootpath.'/build.gradle.kts')
+      let kts = join(readfile(g:g_s_projectrootpath.'/build.gradle.kts'), "\n")
+      "检查是否存在spring-boot-，不存在index为-1
+      let index = stridx(kts, 'spring-boot-')
+    end
+    if (index >= 0)
+      "spring工程
+      call TerminalSend(s:contactCommand('gradlew bootRun'))
+    else
+      "普通gradle工程
+      call TerminalSend(s:contactCommand('gradlew run'))
+    end
   else
     if (g:g_i_osflg == 1 || g:g_i_osflg == 2 || g:g_i_osflg == 3)
       call TerminalSend(s:contactCommand('chcp 65001'))
@@ -215,14 +340,35 @@ function! s:runJavaTest()
   sleep 100m
   if filereadable(g:g_s_projectrootpath.'/build.xml')
     "[ant]判断build.xml文件是否存在
-  elseif filereadable(g:g_s_projectrootpath.'/src/main/resources/application.properties')
-    "[springboot]判断application.properties文件是否存在
   elseif filereadable(g:g_s_projectrootpath.'/pom.xml')
     "[maven]判断pom.xml文件是否存在
-    call TerminalSend(s:contactCommand('mvn test'))
+    "读取pom.xml内容
+    let xml = join(readfile(g:g_s_projectrootpath.'/pom.xml'), "\n")
+    "检查是否存在spring-boot-，不存在index为-1
+    let index = stridx(xml, 'spring-boot-')
+    if (index >= 0)
+      "spring工程
+      call TerminalSend(s:contactCommand('mvnw test'))
+    else
+      "普通maven工程
+      call TerminalSend(s:contactCommand('mvn test'))
+    end
   elseif isdirectory(g:g_s_projectrootpath.'/.gradle')
     "[gradle]判断.gradle目录是否存在
-    call TerminalSend(s:contactCommand('gradlew test'))
+    "读取build.gradle.kts内容
+    let index = -1
+    if filereadable(g:g_s_projectrootpath.'/build.gradle.kts')
+      let kts = join(readfile(g:g_s_projectrootpath.'/build.gradle.kts'), "\n")
+      "检查是否存在spring-boot-，不存在index为-1
+      let index = stridx(kts, 'spring-boot-')
+    end
+    if (index >= 0)
+      "spring工程
+      call TerminalSend(s:contactCommand('gradlew test'))
+    else
+      "普通maven工程
+      call TerminalSend(s:contactCommand('gradlew test'))
+    end
   else
   endif
 endfunction
@@ -447,12 +593,11 @@ endfunction
 "-----------------------------------------------"
 function! s:runBuild()
   if (&ft=='c')
-    "make
     call s:runCCppBuild()
   elseif (&ft=='python')
-    make
-  elseif (&ft=='java')
     "make
+    call s:runPythonBuild()
+  elseif (&ft=='java')
     call s:runJavaBuild()
   elseif (&ft=='rust')
     "call s:runRustCargoBuild()

@@ -42,7 +42,7 @@ vim.cmd('packadd nvim-autopairs')
 local lsp_cmd_path = {}
 --根据OS设定LSP服务命令
 if (vim.g.g_i_osflg == 1 or vim.g.g_i_osflg == 2 or vim.g.g_i_osflg == 3) then
-  lsp_cmd_path.jdtls_jar_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+  lsp_cmd_path.jdtls_jar_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/plugins/org.eclipse.equinox.launcher_1.6.600.v20231106-1826.jar'
   lsp_cmd_path.jdtls_config_path = 'D:/Tools/WorkTool/Java/lsp/jdt-language-server-1.26.0-202307271613/config_win'
   lsp_cmd_path.maven_setting_path = 'D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml'
   lsp_cmd_path.vue_lsp_cmd = 'vue-language-server.cmd'
@@ -247,7 +247,7 @@ if vim.g.g_python_lsp_type == 0 then
   }
 elseif vim.g.g_python_lsp_type == 3 then
   --pyright-langserver
-  -- Python(pyright)设置
+  -- Python(pyright)设置  https://github.com/microsoft/pyright/blob/main/docs/configuration.md
   lspconfig.pyright.setup {
     settings = {
       python = {
@@ -256,15 +256,38 @@ elseif vim.g.g_python_lsp_type == 3 then
           useLibraryCodeForTypes = true,
           diagnosticMode = 'openFilesOnly',
           typeCheckingMode = 'basic',
-          stubPath = 'src/com',
+          --stubPath = 'src/com',
         },
       },
     },
     capabilities = capabilities,
-    root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', '.git');
+    root_dir = lspconfig.util.root_pattern('.root', '.env', 'setup.cfg', 'pyrightconfig.json', 'pyproject.toml', '.git');
   }
 end
 -- Java(eclipse.jdt.ls)设置
+local java_bundles = {}
+--这里设置java-debug内容
+--vim.list_extend(java_bundles, vim.split(vim.fn.glob("D:/Tools/WorkTool/Java/com.microsoft.java.debug.plugin-*.jar"), "\n"))
+--这里这是java-lsp扩展内容。classFileContentsSupport 为支持jar和class文件，文件为jdt://协议，在lsp_java.lua中实现
+local extendedClientCapabilities = {
+  classFileContentsSupport = true,
+  generateToStringPromptSupport = true,
+  hashCodeEqualsPromptSupport = true,
+  advancedExtractRefactoringSupport = true,
+  advancedOrganizeImportsSupport = true,
+  generateConstructorsPromptSupport = true,
+  generateDelegateMethodsPromptSupport = true,
+  moveRefactoringSupport = true,
+  overrideMethodsPromptSupport = true,
+  executeClientCommandSupport = true,
+  resolveAdditionalTextEditsSupport = true,
+  inferSelectionSupport = {
+    "extractMethod",
+    "extractVariable",
+    "extractConstant",
+    "extractVariableAllOccurrence"
+  },
+}
 lspconfig.jdtls.setup {
   cmd = {
     'java',
@@ -287,14 +310,43 @@ lspconfig.jdtls.setup {
     lspconfig.util.path.join(vim.loop.os_homedir(), '.cache/nvim-lsp-jdtls')
   },
   init_options = {
+    bundles = java_bundles,
     workspaceFolders = lspconfig.util.path.join(vim.loop.os_homedir(), '.cache/nvim-lsp-jdtls'),
+    extendedClientCapabilities = extendedClientCapabilities,
     settings = {
       java = {
         configuration = {
+          updateBuildConfiguration = "interactive",
+          --runtimes = {
+          --  {
+          --    name = 'JavaSE-17',
+          --    path = vim.fn.expand('D:/Tools/WorkTool/Java/jdk17.0.6'),
+          --  },
+          --},
           maven = {
             userSettings = lsp_cmd_path.maven_setting_path,
             globalSettings = lsp_cmd_path.maven_setting_path,
           },
+        },
+        eclipse = {
+          downloadSources = true,
+        },
+        maven = {
+          downloadSources = true,
+          updateSnapshots = true,
+        },
+        implementationsCodeLens = {
+          enabled = false,
+        },
+        referencesCodeLens = {
+          enabled = false,
+        },
+        references = {
+          includeAccessors = true,
+          includeDecompiledSources = true,
+        },
+        contentProvider = {
+          preferred = 'fernflower',
         },
         import = {
           maven = {
@@ -309,11 +361,29 @@ lspconfig.jdtls.setup {
             enabled = true,
           },
         },
+        sources = {
+          organizeImports = {
+            starThreshold = 9999,
+            staticStarThreshold = 9999,
+          },
+        },
+        showBuildStatusOnStart = {
+          enabled = true,
+        },
+        signatureHelp = {
+          enabled = true,
+        },
+        codeGeneration = {
+          toString = {
+            template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
+          },
+          useBlocks = true,
+        },
       },
     },
   },
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern('.root', '.classpath', 'build.xml', 'pom.xml', 'settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', '.git');
+  root_dir = lspconfig.util.root_pattern('.root', '.classpath', 'build.xml', 'pom.xml', 'mvnw', 'gradlew', 'settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', '.git');
 }
 -- Rust(rust-analyzer)设置
 lspconfig.rust_analyzer.setup {
@@ -536,6 +606,7 @@ lspconfig.cobol_ls.setup {
 
 -- Kotlin（kotlin-language-server）设置
 -- https://github.com/fwcd/kotlin-language-server/blob/main/server/src/main/kotlin/org/javacs/kt/Configuration.kt
+-- 版本1.3.3可用，1.3.4至1.3.7报错
 lspconfig.kotlin_language_server.setup {
   settings = {
     kotlin = {
@@ -554,7 +625,7 @@ lspconfig.kotlin_language_server.setup {
   init_options = {
   },
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', '.git');
+  root_dir = lspconfig.util.root_pattern('.root', 'settings.gradle', 'settings.gradle.kts', '.git');
 }
 -- Lua（lua-language-server）设置
 -- 在这里下载 https://github.com/LuaLS/lua-language-server/releases/tag/3.7.0

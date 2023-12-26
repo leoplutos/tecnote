@@ -44,6 +44,7 @@
 			"type": "shell",
 			"command": "gradlew",
 			"args": [
+				"clean",
 				"bootJar",
 			],
 			"options": {
@@ -66,7 +67,8 @@
 			"type": "shell",
 			"command": "gradlew",
 			"args": [
-				"war",
+				"clean",
+				"bootWar",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

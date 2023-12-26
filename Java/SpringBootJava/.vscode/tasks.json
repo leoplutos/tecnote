@@ -62,5 +62,30 @@
 				"isDefault": false
 			},
 		},
+		{
+			"label": "build_war",
+			"type": "shell",
+			"command": "mvnw",
+			"args": [
+				"-f",
+				"pom_war.xml",
+				"clean",
+				"package",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
 	]
 }

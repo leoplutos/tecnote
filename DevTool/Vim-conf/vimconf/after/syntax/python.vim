@@ -518,3 +518,14 @@ hi link pythonDottedName Annotation
 "hi def link pyCustomFunc  Function
 "hi def link pyCustomMethod Function
 "hi def link pyCustomAttribute Statement
+
+if has('nvim')
+  hi clear @constructor.python
+  hi! link @constructor.python Structure
+  hi clear @type.python
+  hi! link @type.python Structure
+  hi clear @type.builtin.python
+  hi! link @type.builtin.python Statement
+  hi clear @field.python
+  hi! link @field.python Property
+end

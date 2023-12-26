@@ -136,7 +136,7 @@ poetry new --src PoetryTest
 name = "poetrytest"
 version = "0.1.0"
 description = ""
-authors = ["chunhao.liang <chunhao.liang@yidatec.com>"]
+authors = ["yourname <yourname@example.com>"]
 readme = "README.md"
 packages = [
   {include = "poetrytest", from = "src"},
@@ -161,7 +161,12 @@ pyrun="poetrytest.app:main"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
 ```
+``tool.pyright`` 为 lsp 的设定内容
 
 ``src/poetrytest/app.py``
 ```
@@ -261,3 +266,13 @@ poetry run pytest -s --log-level=INFO --log-cli-level=INFO
 
 ### 示例源码
  - [PoetryTest](./PoetryTest)
+
+## 开发工具支持
+ - VSCode：VSCode默认支持Poetry，不需要更多设置
+ - Vim-pyright：参考示例源码的 [pyproject.toml](./PoetryTest/pyproject.toml) 设定内容为
+```
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+```
+设定参考 [这里](https://github.com/microsoft/pyright/blob/main/docs/import-resolution.md#configuring-your-python-environment) 和 [这里](https://github.com/Microsoft/pyright/issues/30)

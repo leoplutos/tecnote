@@ -240,8 +240,8 @@
 		"key": "ctrl+j",
 		"command": "-workbench.action.togglePanel"
 	},
-	{ //[Trailing Spaces插件]alt+shift+t:删除行尾空格
-		"key": "alt+shift+t",
+	{ //[Trailing Spaces插件]alt+shift+s:删除行尾空格
+		"key": "alt+shift+s",
 		"command": "trailing-spaces.deleteTrailingSpaces",
 		"when": "editorTextFocus"
 	},
@@ -249,6 +249,30 @@
 		"key": "alt+shift+m",
 		"command": "trailing-spaces.deleteTrailingSpacesModifiedLinesOnly",
 		"when": "editorTextFocus"
+	},
+	{ //alt+shift+t:打开cmd终端
+		"key": "alt+shift+t",
+		"command": "workbench.action.terminal.newWithProfile",
+		"args": {
+			"profileName": "Win-Cmd"
+		}
+	},
+	{ //alt+shift+w:打开浮动终端
+		"key": "alt+shift+w",
+		"command": "runCommands",
+		"args": {
+			"commands": [
+				{
+					"command": "workbench.action.createTerminalEditor",
+					"args": {
+						"profileName": "Win-Cmd"
+					}
+				},
+				{
+					"command": "workbench.action.moveEditorToNewWindow",
+				},
+			]
+		}
 	},
 	{
 		"key": "pageup",

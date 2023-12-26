@@ -85,7 +85,7 @@ NeoVim 自带的 GUI 前端是基于 qt 的，笔者不太喜欢，用起来延�
 官网：https://neovide.dev/  
 Github：https://github.com/neovide/neovide  
 下载：https://github.com/neovide/neovide/releases  
-最新版：https://github.com/neovide/neovide/releases/download/0.11.2/neovide.exe.zip  
+最新版：https://github.com/neovide/neovide/releases/download/0.12.0/neovide.exe.zip  
 
 #### 启动
 下载好执行文件之后，如果 ``nvim.exe`` 在环境变量里直接运行 ``neovide.exe`` 即可  
@@ -93,11 +93,8 @@ Github：https://github.com/neovide/neovide
 内容如下（delete_vim_log.cmd为删除log文件的脚本，可不加）
 ```
 call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
-::pause
-
-set NEOVIM_BIN=D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
-start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe
-::start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe --neovim-bin D:\Tools\WorkTool\Text\nvim-win64\bin\nvim.exe
+set NEOVIM_BIN=D:/Tools/WorkTool/Text/nvim-win64/bin/nvim.exe
+start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 ```
 
 ## LSP
@@ -126,6 +123,18 @@ vim.cmd [[source <vimscript文件路径>]]
 
 #### 查看高亮组信息
 Neovim 的内部命令 ``:Inspect`` 可以查看当前光标下的高亮组信息
+
+#### 设定lsp的log级别
+```
+:lua vim.lsp.set_log_level(0)
+```
+
+#### 打印内容，并且可以使用 :messages 查看
+```
+:lua vim.notify(vim.inspect(vim.lsp.buf_get_clients()))
+:lua vim.notify(vim.inspect(vim.lsp.get_clients()))
+:lua vim.notify(vim.inspect(vim.lsp.get_active_clients()))
+```
 
 #### 发生错误 E576
 ```

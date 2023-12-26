@@ -3,3 +3,7 @@ scriptencoding utf-8
 
 hi clear ktStructure
 hi link ktStructure Statement
+hi clear ktInclude
+hi link ktInclude Statement
+hi clear ktAnnotation
+hi link ktAnnotation Annotation

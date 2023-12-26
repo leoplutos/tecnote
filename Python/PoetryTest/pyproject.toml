@@ -2,7 +2,7 @@
 name = "poetrytest"
 version = "0.1.0"
 description = ""
-authors = ["chunhao.liang <chunhao.liang@yidatec.com>"]
+authors = ["yourname <yourname@example.com>"]
 readme = "README.md"
 packages = [
   {include = "poetrytest", from = "src"},
@@ -27,3 +27,7 @@ pyrun="poetrytest.app:main"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"

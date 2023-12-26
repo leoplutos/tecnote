@@ -255,6 +255,11 @@ web-frameworks
  - [github](https://github.com/the-benchmarker/web-frameworks)
  - [官网](https://web-frameworks-benchmark.netlify.app/result)
 
+## ChatGPT
+ - [免费的 ChatGPT 镜像网站列表](https://github.com/LiLittleCat/awesome-free-chatgpt)
+ - https://tw.chatgpt-free.ai/
+ - https://www.askchat.ai/?r=317161
+
 ## 其他软件
 * [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌
 * [tvbox](https://github.com/liu673cn/box)

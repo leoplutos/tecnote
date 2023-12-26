@@ -55,23 +55,23 @@ wrapperUrl=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-w
 	<artifactId>SpringBootJava</artifactId>
 	<description>SpringBootJava project for Spring Boot</description>
 
-    <dependencies>
-      <!-- 依赖 -->
-    </dependencies>
+	<dependencies>
+		<!-- 依赖 -->
+	</dependencies>
 
-    <!-- 在此配置国内源 -->
-    <repositories>
-        <repository>
-            <id>tencent</id>
-            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>tencent</id>
-            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
-        </pluginRepository>
-    </pluginRepositories>
+	<!-- 在此配置国内源 -->
+	<repositories>
+		<repository>
+			<id>tencent</id>
+			<url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>tencent</id>
+			<url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
 ```
 
@@ -181,12 +181,70 @@ Mustache的高亮插件 [mustache](https://marketplace.visualstudio.com/items?it
 
 ### 其他
 #### 编译jar文件
+
 ```
 cd D:\WorkSpace\Java\SpringBootJava
 mvnw clean package
 ```
-#### 编译war文件
-看 [这里](https://springdoc.cn/spring-boot-war-packaged/)
+
+#### 编译war文件并且发布到Tomcat
+有时候我们做的工程需要发布到Tomcat，WildFly等容器内，这时候需要打包成传统的war文件，制作方式如下  
+
+所需文件参考 [SpringBootJava](./SpringBootJava/)  
+
+1. 新建文件 ``src/main/java/com/example/spring/ServletInitializer.java``
+```
+package com.example.spring;
+
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+public class ServletInitializer extends SpringBootServletInitializer {
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(SpringBootJavaApplication.class);
+	}
+}
+```
+
+2. 新建 ``pom_war.xml``  
+
+- 修改打包方式为war  
+```
+<packaging>war</packaging>
+```
+
+- 修改 内置Tomcat Servlet 容器的 scope
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-tomcat</artifactId>
+	<scope>provided</scope>
+</dependency>
+```
+因为使用外部的 Tomcat，所以需要主动把嵌入式容器 spring-boot-starter-tomcat 依赖的 scope 声明为 ``provided``，表示该依赖只用于编译、测试
+
+- 在 build 节点下添加 finalName 节点来设置打包后的 war 文件的名称
+```
+<build>
+	<finalName>SpringBootJava</finalName>
+</build>
+```
+
+修改完成，我们做了2个pom.xml文件
+ - pom.xml：运行内嵌tomcat，启动工程，用来本地开发
+ - pom_war.xml：编译war文件用来部署
+
+编译war文件命令  
+```
+cd D:\WorkSpace\Java\SpringBootJava
+mvnw -f pom_war.xml clean package
+```
+可在 ``target`` 路径下找到war文件  
+将 war 文件复制到外部 Tomcat 的 webapps 目录下即可，服务器启动会自动解压。 war 文件的名称就是应用的 contentPath  
+启用外部 tomcat 后使用浏览器访问（NOTE：笔者外部tomcat端口为8081）  
+http://localhost:8081/SpringBootJava/hello  
+http://localhost:8081/SpringBootJava/hello?message=mytest  
 
 ## 创建Kotlin-Gradle-Web工程
 
@@ -229,19 +287,19 @@ distributionUrl=https\://mirrors.cloud.tencent.com/gradle/gradle-8.5-bin.zip
 内容如下
 ```
 allprojects {
-    repositories {
-        mavenLocal()
-        maven { name 'aligradle' ; url 'https://maven.aliyun.com/repository/public/' }
-        maven { name 'alicentral' ; url 'https://maven.aliyun.com/repository/central' }
-        mavenCentral()
-    }
-    buildscript {
-        repositories {
-            maven { name 'aligradle' ; url 'https://maven.aliyun.com/repository/public/' }
-            maven { name 'alicentral' ; url 'https://maven.aliyun.com/repository/central' }
-            maven { name 'M2' ; url 'https://plugins.gradle.org/m2/' }
-        }
-    }
+	repositories {
+		mavenLocal()
+		maven { name 'aligradle' ; url 'https://maven.aliyun.com/repository/public/' }
+		maven { name 'alicentral' ; url 'https://maven.aliyun.com/repository/central' }
+		mavenCentral()
+	}
+	buildscript {
+		repositories {
+			maven { name 'aligradle' ; url 'https://maven.aliyun.com/repository/public/' }
+			maven { name 'alicentral' ; url 'https://maven.aliyun.com/repository/central' }
+			maven { name 'M2' ; url 'https://plugins.gradle.org/m2/' }
+		}
+	}
 }
 ```
 
@@ -272,12 +330,12 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 class HelloController {
 
-    @GetMapping("/hello")
-    fun hello(@RequestParam(name = "message", required = false, defaultValue = "World") message: String, model: Model): String {
-        model["title"] = "在HelloController设定的title"
-        model["message"] = message
-        return "hello"
-    }
+	@GetMapping("/hello")
+	fun hello(@RequestParam(name = "message", required = false, defaultValue = "World") message: String, model: Model): String {
+		model["title"] = "在HelloController设定的title"
+		model["message"] = message
+		return "hello"
+	}
 }
 ```
 
@@ -306,28 +364,59 @@ http://localhost:8080/hello?message=mytest
 工程配置文件参考 [SpringBootKotlin](./SpringBootKotlin/)  
 
 ### 其他
+
 #### 编译jar文件
 ```
 cd D:\WorkSpace\Java\SpringBootKotlin
-gradlew bootJar
+gradlew clean bootJar
 ```
-#### 编译war文件
-修改工程根路径下的 ``build.gradle.kts`` ，在 ``plugins`` 结点下新增 ``war``
+
+#### 编译war文件并且发布到Tomcat
+有时候我们做的工程需要发布到Tomcat，WildFly等容器内，这时候需要打包成传统的war文件，制作方式如下  
+
+所需文件参考 [SpringBootKotlin](./SpringBootKotlin/)  
+
+1. 新建文件 ``src/main/kotlin/com/example/spring/ServletInitializer.kt``
+```
+package com.example.spring
+
+import org.springframework.boot.builder.SpringApplicationBuilder
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
+
+open class ServletInitializer : SpringBootServletInitializer() {
+	override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
+		return application.sources(SpringBootKotlinApplication::class.java)
+	}
+}
+```
+
+2. 修改 ``build.gradle.kts``  
+
+- 修改打包方式为war  
 ```
 plugins {
 	war
-	id("org.springframework.boot") version "3.2.0"
-	id("io.spring.dependency-management") version "1.1.4"
-	kotlin("jvm") version "1.9.20"
-	kotlin("plugin.spring") version "1.9.20"
-	kotlin("plugin.jpa") version "1.9.20"
 }
 ```
-然后运行命令
+
+- 修改 内置Tomcat Servlet 容器的 scope
+```
+dependencies {
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+}
+```
+因为使用外部的 Tomcat，所以需要主动把嵌入式容器 spring-boot-starter-tomcat 依赖的 scope 声明为 ``provided``，表示该依赖只用于编译、测试
+
+编译war文件命令  
 ```
 cd D:\WorkSpace\Java\SpringBootKotlin
-gradlew war
+gradlew clean bootWar
 ```
+可在 ``build/libs`` 路径下找到war文件  
+将 war 文件复制到外部 Tomcat 的 webapps 目录下即可，服务器启动会自动解压。 war 文件的名称就是应用的 contentPath  
+启用外部 tomcat 后使用浏览器访问（NOTE：笔者外部tomcat端口为8081）  
+http://localhost:8081/SpringBootKotlin/hello  
+http://localhost:8081/SpringBootKotlin/hello?message=mytest  
 
 ## 创建Java-Maven-Batch工程
 
@@ -408,23 +497,23 @@ wrapperUrl=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-w
 	<artifactId>SpringBootBatch</artifactId>
 	<description>SpringBootBatch project for Spring Boot</description>
 
-    <dependencies>
-      <!-- 依赖 -->
-    </dependencies>
+	<dependencies>
+	  <!-- 依赖 -->
+	</dependencies>
 
-    <!-- 在此配置国内源 -->
-    <repositories>
-        <repository>
-            <id>tencent</id>
-            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>tencent</id>
-            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
-        </pluginRepository>
-    </pluginRepositories>
+	<!-- 在此配置国内源 -->
+	<repositories>
+		<repository>
+			<id>tencent</id>
+			<url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>tencent</id>
+			<url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
 ```
 
@@ -456,9 +545,9 @@ spring.h2.console.enabled=true
 ``src/main/resources/db/schema.sql``
 ```
 CREATE TABLE IF NOT EXISTS people(
-    person_id INT NOT NULL PRIMARY KEY,
-    person_name VARCHAR(20),
-    person_career VARCHAR(20)
+	person_id INT NOT NULL PRIMARY KEY,
+	person_name VARCHAR(20),
+	person_career VARCHAR(20)
 );
 ```
 

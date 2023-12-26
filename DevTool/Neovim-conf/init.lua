@@ -114,6 +114,8 @@ else
   else
     -- 加载lua/lsp.lua - 使用内置LSP
     require('lsp')
+    -- 加载lua/lsp_java.lua - Java特殊设定
+    require('lsp_java')
   end
   -- 加载lua/treesitter.lua
   require('treesitter')
@@ -200,6 +202,18 @@ else
     -- 添加快捷键绑定
     -- Shift+Insert：粘贴
     vim.keymap.set({"c", "i"}, "<S-Insert>", "<C-R>+", { noremap = true })
+
+    --设定自动切换输入法
+    vim.cmd([[
+    augroup ime_input
+      autocmd!
+      autocmd InsertLeave * execute "let g:neovide_input_ime=v:false"
+      autocmd InsertEnter * execute "let g:neovide_input_ime=v:true"
+      autocmd CmdlineEnter [/\?] execute "let g:neovide_input_ime=v:false"
+      autocmd CmdlineLeave [/\?] execute "let g:neovide_input_ime=v:true"
+    augroup END
+    ]])
+
   end
 
 end
