@@ -39,6 +39,16 @@ import sys
 sys.path.append("..") #相对路径或绝对路径
 ```
 
+### 引用同级目录下的内容
+直接 import 即可
+```
+import b
+```
+或者
+```
+from b import *
+```
+
 ## Python自带的编辑器 ``IDLE``
 安装 ``Python`` 之后，在如下路径可以找到 ``idle.bat``
 ```

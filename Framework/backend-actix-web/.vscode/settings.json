@@ -1,0 +1,49 @@
+{
+	"cargo.home": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70",
+	"rust-analyzer.server.extraEnv": {
+		"RUSTUP_TOOLCHAIN": "stable",
+		"RA_LOG": "lsp_server=warn",
+		"RUST_SRC_PATH": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src",
+		"CARGO": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\bin\\cargo.exe",
+		"RUSTC": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\bin\\rustc.exe",
+		"RUSTFMT": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\bin\\rustfmt.exe",
+	},
+	//"rust-analyzer.linkedProjects": [
+		//"path/to/Cargo.toml",
+		//"Cargo.toml",
+	//],
+	"rust-analyzer.lens.enable": false, // 代码中显示Run|Debug
+	"rust-analyzer.check.command": "clippy", // 使用 clippy 作为静态代码分析工具
+	"rust-analyzer.check.extraArgs": [
+		"--",
+		"-A",
+		"clippy::needless_return"
+	],
+	"rust-analyzer.debug.openDebugPane": true, //调试时打开调试面板
+	"rust-analyzer.inlayHints.bindingModeHints.enable": true,
+	"rust-analyzer.inlayHints.closureCaptureHints.enable": true,
+	"rust-analyzer.inlayHints.closureReturnTypeHints.enable": "always",
+	"rust-analyzer.inlayHints.discriminantHints.enable": "always",
+	"rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "always",
+	"rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
+	"rust-analyzer.inlayHints.typeHints.hideClosureInitialization": true,
+	"rust-analyzer.diagnostics.enable": true,
+	"rust-analyzer.diagnostics.experimental.enable": true,
+	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
+	"terminal.integrated.automationProfile.windows": {
+		//自动化相关终端的设定(如Codelens上面的[Run]，[Debug]和其他的任务)（设定后需要重启）
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [
+			"/k",
+			"chcp",
+			"65001",
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+	},
+	"rust-analyzer.showUnlinkedFileNotification": false,
+}

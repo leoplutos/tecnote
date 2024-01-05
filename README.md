@@ -32,19 +32,24 @@
 * [CMake笔记](BuildTool/CMake_zh_CN.md)
 
 ## 架构(Framework)
-* [前后端分离](Framework/Frontend_Backend_Separation_zh_CN.md)
+* [前后端分离-前端Vue-后端Spring](Framework/Frontend_Backend_Separation_zh_CN.md)
+* [前后端分离-后端Sanic](Framework/Backend_Python_Sanic_zh_CN.md)
+* [前后端分离-后端Gin](Framework/Backend_Golang_Gin_zh_CN.md)
+* [前后端分离-后端Actix-Web](Framework/Backend_Rust_ActixWeb_zh_CN.md)
 
 ## Rust相关
 * [Rust语言相关](Rust/Rust_zh_CN.md)
 * [Rust环境构建-在线安装（推荐）](Rust/Rust-DevEnv_zh_CN.md)
 * [Rust环境构建-离线安装](Rust/Rust-DevEnv-OffLine_zh_CN.md)
-* [Rust-Cargo](Rust/Rust-Cargo_zh_CN.md)
+* [Rust-构建工具-Cargo](Rust/Rust-Cargo_zh_CN.md)
+* [Rust-Web框架-Actix-Web](Rust/Rust-Actix-Web_zh_CN.md)
 * [Rust语言圣经](Rust/Rust-Course_zh_CN.md)
 
 ## Python相关
 * [Python相关](Python/Python_zh_CN.md)
-* [Python-Poetry相关](Python/Python-Poetry_zh_CN.md) ※推荐
-* [Python-PyBuilder相关](Python/Python-PyBuilder_zh_CN.md)
+* [Python-构建工具-Poetry](Python/Python-Poetry_zh_CN.md) ※推荐
+* [Python-构建工具-PyBuilder](Python/Python-PyBuilder_zh_CN.md)
+* [Python-Web框架-Sanic](Python/Python-Sanic_zh_CN.md)
 * [制作Python绿色版](Python/Python-portable_zh_CN.md)
 * [pdb相关](Python/Pdb_zh_CN.md)
 
@@ -57,12 +62,13 @@
 ## Google/Golang相关
 * [Golang相关](Go/Go_zh_CN.md)
 * [gRPC](Go/Grpc_zh_CN.md)
+* [Golang-Web框架-Gin](Go/Go-Gin_zh_CN.md)
 
 ## Java/Kotlin相关
 * [Java相关](Java/Java_zh_CN.md)
 * [Java-Spring相关](Java/Java-Spring_zh_CN.md)
-* [Java-Maven相关](Java/Java-Maven_zh_CN.md)
-* [Java-Gradle相关](Java/Java-Gradle_zh_CN.md)
+* [Java-构建工具-Maven](Java/Java-Maven_zh_CN.md)
+* [Java-构建工具-Gradle](Java/Java-Gradle_zh_CN.md)
 * [Kotlin相关](Java/Kotlin_zh_CN.md)
 
 ## Dotnet相关

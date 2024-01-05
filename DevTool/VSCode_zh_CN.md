@@ -36,6 +36,7 @@ https://code.visualstudio.com/#alt-downloads
 * [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
 * [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python的格式化插件
 * [**rust-analyzer**](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Rust开发必备
+* [Even Better TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Toml高亮
 * [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：C/C++/Rust Debug
 * [**Go**](https://marketplace.visualstudio.com/items?itemName=golang.go) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Go开发必备
 

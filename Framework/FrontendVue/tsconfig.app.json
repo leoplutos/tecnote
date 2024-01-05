@@ -11,6 +11,7 @@
 	],
 	"compilerOptions": {
 		"composite": true,
+		"noEmit": true,
 		"baseUrl": ".",
 		"types": [
 			"element-plus/global"

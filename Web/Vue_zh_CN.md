@@ -79,6 +79,14 @@ npm install
 npm run dev
 ```
 
+## 生产环境部署
+```
+npm run build
+或者
+npm run preview
+```
+``preview`` 命令会在本地启动一个静态 Web 服务器，将 dist 文件夹运行在 http://localhost:4173。这样在本地环境下查看该构建产物是否正常可用就方便多了
+
 ## VSCode开发
 使用2个插件:  
 - [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  

@@ -95,7 +95,29 @@ start /b code
 ``Ctrl+F5`` ： 运行  
 ``F5`` ： 调试  
 第一次运行的时候会提示需要 ``dlv``，安装即可。  
-或者可以按 F1，然后 输入 ``Go: Install/Update Tools``，然后选择 ``dlv`` 
+或者可以按 F1，然后 输入 ``Go: Install/Update Tools``，然后选择 ``dlv``
+
+## 交叉编译
+什么是交叉编译？所谓的交叉编译，是指在一个平台上就能生成可以在另一个平台运行的代码，例如，我们可以 32 位的 Windows 操作系统开发环境上，生成可以在 64 位 Linux 操作系统上运行的二进制程序。  
+在其他编程语言中进行交叉编译可能要借助第三方工具，但在 Go 语言进行交叉编译非常简单，最简单只需要设置 GOOS 和 GOARCH 这两个环境变量就可以了。  
+
+#### GOOS与GOARCH
+ - GOOS的默认值是我们当前的操作系统， 如果windows，linux,注意mac os操作的上的值是darwin
+ - GOARCH则表示CPU架构，如386，amd64，arm等
+
+#### 获取GOOS和GOARCH的值
+我们可以使用 ``go env`` 命令获取当前 GOOS 和 GOARCH 的值
+
+### 交叉编译示例
+比如在 Windows 下编译 Linux 平台的可执行文件
+```
+::1 目标平台的体系架构（386、amd64、arm）
+set GOARCH=amd64
+::2 目标平台的操作系统（darwin、freebsd、linux、windows）
+set GOOS=linux
+::3 编译 使用-o指定你要生成的文件名称，勿需指定可以去掉（参考：go build main.go）
+go build -o app main.go
+```
 
 ## 安装 lint
 ```
