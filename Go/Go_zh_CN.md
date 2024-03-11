@@ -1,6 +1,10 @@
 # Go语言相关
 
 ## Go语言教程
+The Way to Go中文译本：  
+https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/preface.md  
+中文社区的Go语言教程：  
+https://github.com/Go-zh/tour  
 微软出品的Go语言教程：  
 https://learn.microsoft.com/zh-cn/training/paths/go-first-steps/  
 
@@ -11,6 +15,10 @@ https://golang.org/dl/
 https://golang.google.cn/dl/  
 下载。  
 找到 ``Stable versions`` , 下载 ``go1.21.0.windows-amd64.zip`` 即可
+
+## 官方文档
+国内可用的官方文档  
+http://docs.studygolang.com/doc/  
 
 #### 确认版本
 

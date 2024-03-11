@@ -143,8 +143,10 @@ scrollbox,
 ## 正则表达式
 
 #### 1.正则表达式测试网站
-https://regexr.com/  
-这个网站的特点是可以将自己的文章段落贴到网站上，然后实时地修改正则表达式，在网站上看到相应的匹配。同时该网站还是一个正则表达式库，可以在里面查找Cheatsheet，还可以点击任何正则表达，查看其对应类型。
+- https://regexr.com/  
+    这个网站的特点是可以将自己的文章段落贴到网站上，然后实时地修改正则表达式，在网站上看到相应的匹配。同时该网站还是一个正则表达式库，可以在里面查找Cheatsheet，还可以点击任何正则表达，查看其对应类型。
+
+- https://regex-vis.com/  
 
 #### 2.正则表达式30分钟入门教程
 * [正则表达式30分钟入门](https://deerchao.cn/tutorials/regex/regex.htm)
@@ -250,6 +252,21 @@ U+3000: CJK全角空格(Ideographic Space)
 #### 一个查看特殊符号的网站
 https://cn.piliapp.com/symbol/
 
+## Windows10添加双拼
+
+添加小鹤的方法有两种
+
+1. 微软拼音设置里面 ``添加双拼方案``，手工输入布局
+2. 用写字板新建立一个 ``小鹤双拼-Win10.reg`` 文件，内容如下
+
+```
+Windows Registry Editor Version 5.00
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputMethod\Settings\CHS]
+"Enable Double Pinyin"=dword:00000001
+"DoublePinyinScheme"=dword:0000000a
+"UserDefinedDoublePinyinScheme0"="小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt"
+```
+
 ## 前端框架速度测试
 web-frameworks
  - [github](https://github.com/the-benchmarker/web-frameworks)
@@ -260,7 +277,15 @@ web-frameworks
  - https://tw.chatgpt-free.ai/
  - https://www.askchat.ai/?r=317161
 
-## 其他软件
-* [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌
-* [tvbox](https://github.com/liu673cn/box)
+## StackOverFlow的搜索
+https://yandex.com/
 
+## 其他软件
+- [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌
+
+- TVBox
+    - [github](https://github.com/liu673cn/box)
+    - [github-page](https://raw.liucn.cc/box/)&nbsp;&nbsp;&nbsp;&nbsp;这里也有一些源
+- TVBox源
+    - https://raw.liucn.cc/box/m.json
+    - https://raw.liucn.cc/box/dc.txt

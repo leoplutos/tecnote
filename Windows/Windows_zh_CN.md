@@ -30,3 +30,9 @@ C:\Users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 ```
 将快捷方式粘贴到这里即可
 
+## 使用 CURL 命令下载
+
+支持断点续传的下载
+```
+curl -L -O https://download.url/a.zip  -C -
+```

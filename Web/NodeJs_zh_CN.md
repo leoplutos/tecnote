@@ -93,3 +93,54 @@ npm install -g sql-formatter
 ```
 sql-formatter.cmd --version
 ```
+
+## 在生产环境中运行 nodejs 应用
+
+对于生产环境稳定运行 nodejs 项目，通常使用的是 ``pm2`` 命令行工具
+
+### pm2
+pm2，是一款用于守护进程的管理命令行工具，它能够帮你管理你的应用，让它全年无休不挂掉
+
+#### 安装
+```
+npm install pm2 -g
+```
+
+#### 启动应用
+```
+pm2 start main.js
+```
+项目会被启动，并默认后台运行。启动后 pm2 提供的应用名为被启动的文件名  
+可以用选项 ``--name <app_name>`` 来指定名字。
+
+#### 查看应用列表
+```
+pm2 ls
+```
+
+#### 停止应用
+```
+pm2 stop <app_name | id | 'all'>
+```
+
+#### 删除应用
+```
+pm2 delete <app_name>
+```
+和 stop 不同，一旦删除，就无法恢复
+
+#### 重启应用
+```
+pm2 restart <app_name>
+```
+
+#### 重载应用
+```
+pm2 reload <app_name>
+```
+
+#### restart 和 reload 的区别
+
+- restart 会同时杀死和重启所有相关进程，在短暂时间内服务是不可用的。
+
+- reload 的话则是一个个销毁和重启进程，保证至少一个进程可用，做到 零停机部署（Zero downtime deployments）
