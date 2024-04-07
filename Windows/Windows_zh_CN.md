@@ -36,3 +36,30 @@ C:\Users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 ```
 curl -L -O https://download.url/a.zip  -C -
 ```
+
+## 系统优化工具 - Optimizer
+[github - optimizer](https://github.com/hellzerg/optimizer)
+
+## 精简版Windows - AtlasOS
+[github - Atlas](https://github.com/Atlas-OS/Atlas)
+
+## Windows10添加双拼
+
+添加小鹤的方法有两种
+
+1. 微软拼音设置里面 ``添加双拼方案``，手工输入布局
+2. 用写字板新建立一个 ``小鹤双拼-Win10.reg`` 文件，内容如下
+
+```
+Windows Registry Editor Version 5.00
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputMethod\Settings\CHS]
+"Enable Double Pinyin"=dword:00000001
+"DoublePinyinScheme"=dword:0000000a
+"UserDefinedDoublePinyinScheme0"="小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt"
+```
+
+## Windows10终端软件
+[cmder](https://cmder.app/)  
+Windows下的终端软件，VSCode支持内嵌
+
+

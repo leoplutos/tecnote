@@ -252,21 +252,6 @@ U+3000: CJK全角空格(Ideographic Space)
 #### 一个查看特殊符号的网站
 https://cn.piliapp.com/symbol/
 
-## Windows10添加双拼
-
-添加小鹤的方法有两种
-
-1. 微软拼音设置里面 ``添加双拼方案``，手工输入布局
-2. 用写字板新建立一个 ``小鹤双拼-Win10.reg`` 文件，内容如下
-
-```
-Windows Registry Editor Version 5.00
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputMethod\Settings\CHS]
-"Enable Double Pinyin"=dword:00000001
-"DoublePinyinScheme"=dword:0000000a
-"UserDefinedDoublePinyinScheme0"="小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt"
-```
-
 ## 前端框架速度测试
 web-frameworks
  - [github](https://github.com/the-benchmarker/web-frameworks)
@@ -281,11 +266,12 @@ web-frameworks
 https://yandex.com/
 
 ## 其他软件
-- [cmder](https://cmder.app/)&nbsp;&nbsp;&nbsp;&nbsp;Windows下的终端软件，VSCode支持内嵌
 
 - TVBox
     - [github](https://github.com/liu673cn/box)
     - [github-page](https://raw.liucn.cc/box/)&nbsp;&nbsp;&nbsp;&nbsp;这里也有一些源
+    - [俊版 github](https://github.com/roacn/TVBoxOSC)
+    - [影视仓 聚玩盒子](https://www.juwanhezi.com/item/246)
 - TVBox源
     - https://raw.liucn.cc/box/m.json
     - https://raw.liucn.cc/box/dc.txt

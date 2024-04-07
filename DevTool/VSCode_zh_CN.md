@@ -622,3 +622,4 @@ Developer: Startup Performance
 * [VSCode官方API](https://code.visualstudio.com/api)
 * [VSCode提示和技巧](https://github.com/Microsoft/vscode-tips-and-tricks)
 * [awesome vscode](https://github.com/viatsko/awesome-vscode)
+* [打造舒适的VSCode开发环境](https://mp.weixin.qq.com/s/MVR5rV2LkH8_GHCtP6SHug)

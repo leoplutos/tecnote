@@ -13,9 +13,7 @@ Public Function StartsWith(ByVal target_str As String, ByVal search_str As Strin
         StartsWith = True
     End If
 End Function
-```
 
-```vba
 Public Function EndsWith(ByVal target_str As String, ByVal search_str As String) As Boolean
 '####################################################################
 'target_str文字列がsearch_str文字列で終わっているか確認する

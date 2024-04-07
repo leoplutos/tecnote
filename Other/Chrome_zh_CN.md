@@ -1,5 +1,12 @@
 # Chrome相关
 
+## 官方网站
+#### Google网页开发课程
+https://web.developers.google.cn/
+
+#### Chrome开发者帮助
+https://developer.chrome.google.cn/
+
 ## 颜色吸管工具
 按下 ``F12`` 进入开发者模式，在 ``Elements`` 标签中找一个 ``HEX`` 颜色码的项目，比如
 ```

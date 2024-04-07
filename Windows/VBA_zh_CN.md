@@ -70,6 +70,26 @@ Application.CalculateFull
 #### 2.删除数据的优化
 不要使用 ``Delete`` 函数删除行，使用 ``ClearContents`` 函数删除行后 ``Sort`` 排序
 
+```vba
+'设定过滤范围
+Dim myRange As Range
+Set myRange = Range("A1:X" & lastWorkRow)
+'过滤为OTH的内容，并删除
+myRange.AutoFilter Field:=3, Criteria1:="OTH"
+If Cells(Rows.Count, "A").End(xlUp).Row > 1 Then
+    'myRange.Offset(1, 0).SpecialCells(xlCellTypeVisible).EntireRow.Delete
+    myRange.Offset(1, 0).SpecialCells(xlCellTypeVisible).EntireRow.ClearContents
+Else
+    '无数据
+End If
+'解除过滤器
+ActiveSheet.AutoFilterMode = False
+'Sort排序
+Range("A2:" & lastWorkRow).Sort key1:=Range("A1"), order1:=xlAscending, Header:=xlNo
+'重新计算最后行
+lastWorkRow = Sheets("Work").UsedRange.Rows.Count
+```
+
 ## Excel-vba 开发使用手册
 https://github.com/bluetata/concise-excel-vba
 

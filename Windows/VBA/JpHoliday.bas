@@ -6,10 +6,10 @@ Sub getPublicHolidayList()
     Const SHEET_PUBLIC_HOLIDAY As String = "祝日一覧"
     '取得したい表を持つURL(今年の祝日一覧)
     Const TARGET_URL As String = "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
-    
+
     Dim sheet As Worksheet
     Dim sheetPublicHoliday As Worksheet
-    
+
     '------------------------------------------------
     '既にシート「祝日一覧」が存在する場合は削除
     '------------------------------------------------
@@ -23,13 +23,13 @@ Sub getPublicHolidayList()
             Application.DisplayAlerts = True
         End If
     Next
-    
+
     '------------------------------------------------
     'シート「祝日一覧」を新規作成
     '------------------------------------------------
     Set sheetPublicHoliday = Worksheets.Add(After:=Worksheets(Worksheets.Count))
     sheetPublicHoliday.Name = SHEET_PUBLIC_HOLIDAY
-    
+
     '------------------------------------------------
     'シート「祝日一覧」にWebサイト上の表(今年の祝日一覧)を読み込んで表を作成
     '------------------------------------------------
@@ -48,7 +48,7 @@ Sub getPublicHolidayList()
         '作成される「クエリと接続」を削除
         .Delete
     End With
-    
+
     '------------------------------------------------
     '表をテーブル化
     '------------------------------------------------
@@ -62,3 +62,19 @@ Sub getPublicHolidayList()
     End With
 
 End Sub
+
+'####################################
+'日付が土日祝日かどうか判別する
+'------------------------------------
+'引数:day 土日祝日か確認したい日付
+'    :dic 祝日が格納されたDictionaryオブジェクト
+'####################################
+Public Function IsHoliday(ByVal day As Date, ByVal dic As Object) As Boolean
+    Dim strDay As String
+    strDay = Format(day, "yyyy/m/d")
+    If dic.Exists(strDay) = True Or Weekday(day) = 1 Or Weekday(day) = 7 Then
+        IsHoliday = True
+    Else
+        IsHoliday = False
+    End If
+End Function

@@ -24,21 +24,21 @@ Sub Start_Click
     Dim i As Long
     For i = 2 To lastRow
         'A列
-        Set myRange = Range("A" & & i)
+        Set myRange = Range("A" & i)
         myRange.Formula = "=LEN(E" & i & ")"
         'B列
-        Set myRange = Range("B" & & i)
+        Set myRange = Range("B" & i)
         myRange.Formula = "=RIGHT(E" & i & ",1)"
         'C列
-        Set myRange = Range("C" & & i)
+        Set myRange = Range("C" & i)
         myRange.Formula = "=RIGHT(E" & i & ",3)"
         'D列
-        Set myRange = Range("D" & & i)
+        Set myRange = Range("D" & i)
         myRange.Formula = "=LEFT(E" & i & ",3)"
     Next
 
     '设定字体和文字大小
-    With WorkSheet("Work").Range("A2:D" & lastRow)
+    With Worksheets("Work").Range("A2:D" & lastRow)
         .Font.Name = "Arial"
         .Font.Size = 10
         .Font.Color = RGB(0, 0, 204)
@@ -55,7 +55,7 @@ Sub Start_Click
     Set myRange = Range("A1:DB" & lastRow)
 
     'A列：选择6或者10
-    myRange.AutoFilter Field:=1, Criteria1:="=6", Operator:=xlOr, Cirteria2:="=10"
+    myRange.AutoFilter Field:=1, Criteria1:="=6", Operator:=xlOr, Criteria2:="=10"
 
     'B列：数字以外
     Dim dict
@@ -71,8 +71,8 @@ Sub Start_Click
     '从Sheet[Master]取得除外内容
     '内容为数字
     For i = 2 To 11
-        If dict.Exists(WorkSheet("Master").Range("A" & i).Value) = True Then
-            dict.Remove (WorkSheet("Master").Range("A" & i).Value)
+        If dict.Exists(Worksheets("Master").Range("A" & i).Value) = True Then
+            dict.Remove (Worksheets("Master").Range("A" & i).Value)
         End If
     Next
     Dim newArr
@@ -115,11 +115,11 @@ Sub Start_Click
     dtToday = Format(Date, "yyyymmdd")
     'Debug.Print dtToday
     '保存文件对话框
-    Application.GetSaveAsFilename InitialFilename:=dtToday & ".xls", FileFilter:="Excel97-2003,*.xls,Excel,*.xlsx,ExcelMacro,*.xlsm", FilterIndex=1
+    Application.GetSaveAsFileName InitialFileName:=dtToday & ".xls", FileFilter:="Excel97-2003,*.xls,Excel,*.xlsx,ExcelMacro,*.xlsm", FilterIndex:=1
 
     '打开网页
     Dim sURL As String
-    sURL = Worksheet("master").Range("F2").Value
+    sURL = Worksheets("master").Range("F2").Value
     CreateObject("WScript.Shell").Run "msedge.exe -url " & sURL
 
     '打开Oulook，编辑邮件发信
@@ -128,6 +128,7 @@ Sub Start_Click
     Set objOutlook = New Outlook.Application
     Set objMail = objOutlook.CreateItem(olMailItem)
     '表示发信画面
+    objMail.Display
     With objMail
         .Subject = Worksheets("master").Range("B2").Value
         .To = Worksheets("master").Range("C2").Value
