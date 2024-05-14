@@ -135,3 +135,23 @@ go install -v github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 ```
 golangci-lint version
 ```
+
+## ORM框架
+GORM 是用于Golang的出色ORM（对象关系映射）库，它以开发人员友好而闻名
+ - [官网](https://gorm.io/)
+ - [Github](https://github.com/go-gorm/gorm)
+ - [公众号示例](https://mp.weixin.qq.com/s/YtJSWOH-35QAPjtHBSmFng)
+
+## 轻量级全文检索引擎
+ZincSearch
+ - [Github](https://github.com/zincsearch/zincsearch)
+ - [公众号示例](https://mp.weixin.qq.com/s/pzQgv0ofHyQoo8ChnpBQ0g)
+
+## 命令行视频下载工具
+lux
+ - [Github](https://github.com/iawia002/lux)
+
+## 修改可执行文件的图标
+ - [Github](https://github.com/akavel/rsrc)
+ - [公众号示例](https://mp.weixin.qq.com/s/SM2_YGTOKqrPELjJ3xfckg)
+

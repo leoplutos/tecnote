@@ -300,6 +300,11 @@ w
 ```
 使用Ctrl+d结束发送信息
 
+### 记录脚本执行时间
+```bash
+time sleep 0.7
+```
+
 ### 运行程序并且取得pid
 ```
 应用程序 & top -p $! -b > top_result.txt

@@ -27,6 +27,13 @@ dotnet new sln
 安装VSCode插件（需要.net 7.0或者更高）  
 使用插件为  [**C# Dev Kit**](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 
+## VSCode开发旧版.NET Framework
+ - [stackoverflow](https://stackoverflow.com/questions/47707095/)
+
+## 命令行新建旧版.NET Framework工程
+```
+donet new console --language C# --output MyProject --target-framework-override net48
+```
 
 ## Vim配置
 使用LSP（需要.net 7.0或者更高）  

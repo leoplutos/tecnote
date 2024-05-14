@@ -265,6 +265,9 @@ web-frameworks
 ## StackOverFlow的搜索
 https://yandex.com/
 
+## 开源网络"瑞士军刀"
+https://github.com/gchq/CyberChef
+
 ## 其他软件
 
 - TVBox
@@ -275,3 +278,6 @@ https://yandex.com/
 - TVBox源
     - https://raw.liucn.cc/box/m.json
     - https://raw.liucn.cc/box/dc.txt
+
+- 下载软件
+    - [Gopeed](https://gopeed.com/zh-CN)

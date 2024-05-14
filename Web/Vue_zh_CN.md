@@ -87,6 +87,9 @@ npm run preview
 ```
 ``preview`` 命令会在本地启动一个静态 Web 服务器，将 dist 文件夹运行在 http://localhost:4173。这样在本地环境下查看该构建产物是否正常可用就方便多了
 
+## 基于Vue的可视化拖拽库
+https://github.com/Alfred-Skyblue/vue-draggable-plus
+
 ## VSCode开发
 使用2个插件:  
 - [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  
@@ -156,3 +159,9 @@ cd D:\WorkSpace\Vue\VueTS
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```
+
+## 其他
+
+- [如何优雅的调试 Vue 项目](https://mp.weixin.qq.com/s/zmjdy8wM76xRf9SfMiRx8A)
+
+

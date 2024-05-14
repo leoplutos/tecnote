@@ -342,6 +342,14 @@ cd D:\WorkSpace\Grpc\node_dynamic
 npm run client
 ```
 
+### C#
+
+目前，在.NET上有两种官方实现
+- [Grpc.Core](https://github.com/grpc/grpc/tree/v1.46.x/src/csharp/) ：这个是原来的gRPC C#库，它基于原生gPRC（C-Core）核心库实现，已经进入到了维护模式
+- [grpc-dotnet](https://github.com/grpc/grpc-dotnet) ：这是新的库，完全使用C#编写实现，没有原生依赖，基于.NET Core 3.0
+
+如果是新项目，推荐用后者；如果是老项目（比如还在用.netframework的老项目），可以考虑用前者。在 Grpc.Examples 文件夹下可以找到示例
+
 ### 关于Web方面
 gRPC原本设想是在纯后端使用的，由于浏览器的限制，不能直接从浏览器发送gRPC请求到后端。如果真的有这种需求的话，有两种对应方法
 

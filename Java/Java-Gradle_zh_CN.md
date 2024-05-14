@@ -161,6 +161,12 @@ tasks.compileTestJava {
 }
 ```
 
+#### 编译时乱码解决
+```
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+gradlew build
+```
+
 ## 使用VSCode开发
 使用插件为： [Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle)  
 VSCode的设定文件看 [JavaGradleProject](./JavaGradleProject/)  

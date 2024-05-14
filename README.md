@@ -76,6 +76,7 @@
 * [Dotnet相关](Dotnet/Dotnet_zh_CN.md)
 
 ## 前端开发相关
+* [Web相关](Web/Web_zh_CN.md)
 * [TypeScript相关](Web/TypeScript_zh_CN.md)
 * [NodeJs相关](Web/NodeJs_zh_CN.md)
 * [WebAssembly相关](Web/WebAssembly_zh_CN.md)
@@ -114,6 +115,7 @@
 * [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
 
 ## DB
+* [数据库相关](DB/DB_zh_CN.md)
 * [Postgresql](DB/Postgresql_zh_CN.md)
 * [Redis](DB/Redis_zh_CN.md)
 * [DBeaver](DB/DBeaver_zh_CN.md)

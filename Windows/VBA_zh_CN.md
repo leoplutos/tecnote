@@ -108,3 +108,193 @@ https://github.com/bluetata/concise-excel-vba
 访问内閣府网站取得
 
  - [JpHoliday.bas](./VBA/JpHoliday.bas)
+
+#### 一个使用日本休日的例子
+
+取得本月最后一天，向前数两天营业日(如果是假日不算在这两天)
+
+```vba
+'制作[祝日一覧]Sheet
+getPublicHolidayList
+Sheets("祝日一覧").Columns("C:C").NumberFormatLocal = "yyyy/mm/dd;@"
+'[祝日一覧]Sheet计算最后一行(因为上面是空行所以+1)
+Dim lastJHRow = Sheets("祝日一覧").UsedRange.Rows.Count + 1
+'定义祝日词典
+Dim holidayDict
+Dim i As Long
+Dim arr
+Set holidayDict = CreateObject("Scripting.Dictionary")
+arr = Application.Transpose(Sheets("祝日一覧").Range("C3:C" & lastJHDRow).Value)
+For i = LBound(arr) To UBound(arr)
+    If arr(i) <> "" Then
+        holidayDict(arr(i)) = ""
+    End If
+Next
+'For i = 0 To holidayDict.Count - 1
+'    Debug.Print holidayDict.Keys()(i), holidayDict.Items()(i)
+'Next
+
+'今天
+Dim dtToday As String
+dtTody = Format(Date, "yyyy.mm")
+
+Dim minusDay as Integer
+minusDay = 0
+Dim dtDate As Date
+'本月的最后一天
+dtDate = DateSerial(Year(Date), Month(Date) + 1, 0)
+Do While True
+    If minusDay = 2 Then
+        Exit Do
+    End If
+    If isHoliDay(dtDate, holidyDict) = True Then
+        '向前移动一天
+        dtDate = DateAdd("d", -1, dtDate)
+    Else
+        '向前移动一天，并且给minusDay加一
+        dtDate = DateAdd("d", -1, dtDate)
+        minusDay = minusDay + 1
+    End If
+Loop
+```
+
+## 打开一个Excel文件，编辑后另存
+
+```vba
+'当前路径
+Dim workPath As String
+workPath = ThisWorkBook.Path
+'打开当前路径下的[abc.xlsx]
+Dim tExcel As Object
+Dim tObj As Object
+Set tExcel = CreateObject("Excel.Application")
+Set tObj = tExcel.Application.Workbooks.Open(Filename:=workPath & "\abc.xlsx")
+'设定显示Excel
+'tExcel.Visible = True
+
+'编辑打开的文件后另存为[def.xlsx]
+Dim saveNm As String
+saveNm = workPath & "\def.xlsx"
+'覆盖保存
+tExcel.Application.DisplayAlerts = False
+tObj.SaveAs Filename:=saveNm
+tObj.Close
+Set tObj = Nothing
+tExcel.Visible = False
+Set tExcel = Nothing
+```
+
+## 为了提升性能，使用数组循环表格
+
+```vba
+'最终行
+Dim lastMstRow As Long
+lastMstRow = Sheets("test").UsedRange.Row.Count
+Dim lastMstCol As Long
+lastMstCol = Sheets("test").UsedRange.Row.Count
+
+'从表格转存到数组
+Dim i As Long
+Dim mstArray As Variant
+mstArray = Range(Cells(2, 1), Cells(lastMstRow, lastMstCol))
+'循环
+'For i = LBound(mstArray) To UBound(mstArray)
+'    Debug.Print mstArray(i, 1), mstArray(i, 2), mstArray(i, 3), mstArray(i, 4)
+'Next i
+
+'从数组转存到表格
+Range(Cells(2, 1), Cells(lastMstRow, lastMstCol)) = mstArray
+```
+
+#### 打开其他Excel，取得数据的例子
+
+```vba
+Dim workPath As String
+workPath = ThisWorkBook.Path
+
+Dim tExcel As Object
+Dim tObj As Object
+Dim tWorkSheet As Object
+Set tExcel = CreateObject("Excel.Application")
+Set tObj = tExcel.Application.WorkBooks.Open(Filename:=workPath & "\name.xlsx")
+Set tWorkSheet = tObj.Sheets("mysheet")
+
+'最终行
+Dim lastMstRow As Long
+lastMstRow = tWorkSheet.UsedRange.Row.Count
+
+'[mysheet]里面B列的内容取出
+Dim i As Long
+Dim mstArray As Variant
+'Cells的参数为行，列，所以下面是从2行2列 到 最大数据行2列
+mstArray = tWorkSheet.Range(tWorkSheet.Cells(2, 2), tWorkSheet.Cells(lastMstRow, 2))
+'循环打印
+For i = LBound(mstArray) To UBound(mstArray)
+    Debug.Print mstArray(i, 1)
+Next i
+```
+
+## 测速
+```vba
+Dim timerObj As Single
+timerObj = Timer
+MsgBox ("使用时间" & Round(Timer - timerObj, 1) & "秒")
+```
+
+## UTF8文件写入
+```vba
+Option Explicit
+
+'---- LineSeparatorEnum ---
+Public Const adCR = 13
+Public Const adCRLF = -1
+Public Const adLF = 10
+'---- StreamTypeEnum ----
+Public Const adTypeBinary = 1
+Public Const adTypeText = 2
+'---- SaveOptionEnum ----
+Public Const adSaveCreateNotExit = 1
+Public Const adSaveCreateOverWrite = 2
+'---- StreamWriteEnum ----
+Public Const adWriteChar = 0
+Public Const adWriteLine = 1
+
+Sub Start_Click()
+    MsgBox "Job Start!!!"
+
+    '当前文件夹
+    Dim workPath As String
+    workPath = ThisWorkBook.Path
+
+    '定义写入流
+    Dim fwStm As Object
+    Set fwStm = CreateObject("ADODB.Stream")
+    fwStm.Charset = "UTF-8"
+    fwStm.LineSeparator = adLF
+    fwStm.Open
+
+    '写入内容
+    fwStm.WriteText "utf8中文日本語", adWriteLine
+    fwStm.WritrText "ここは２行目です", adWriteLine
+
+    '去掉BOM
+    fwStm.Position = 0
+    fwStm.Type = adTypeBinary
+    fwStm.Position = 3
+    '临时用
+    Dim byteData() As Byte
+    byteData = fwStm.Read
+    fwStm.flush
+    fwStm.Close
+    fwStm.Open
+    fwStm.Write byteData
+    fwStm.SaveToFile workPath & "\test.txt", adSaveCreateOverWrite
+
+    fwStm.flush
+    fwStm.Close
+    Set fwStm = Nothing
+
+    MsgBox "Job End Success!!!"
+End Sub
+```
+
