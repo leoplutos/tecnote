@@ -32,7 +32,7 @@ dotnet new sln
 
 ## 命令行新建旧版.NET Framework工程
 ```
-donet new console --language C# --output MyProject --target-framework-override net48
+dotnet new console --language C# --output MyProject --target-framework-override net48
 ```
 
 ## Vim配置

@@ -118,7 +118,8 @@ https://github.com/bluetata/concise-excel-vba
 getPublicHolidayList
 Sheets("祝日一覧").Columns("C:C").NumberFormatLocal = "yyyy/mm/dd;@"
 '[祝日一覧]Sheet计算最后一行(因为上面是空行所以+1)
-Dim lastJHRow = Sheets("祝日一覧").UsedRange.Rows.Count + 1
+Dim lastJHDRow As Long
+lastJHDRow = Sheets("祝日一覧").UsedRange.Rows.Count + 1
 '定义祝日词典
 Dim holidayDict
 Dim i As Long
@@ -136,9 +137,9 @@ Next
 
 '今天
 Dim dtToday As String
-dtTody = Format(Date, "yyyy.mm")
+dtToday = Format(Date, "yyyy.mm")
 
-Dim minusDay as Integer
+Dim minusDay As Integer
 minusDay = 0
 Dim dtDate As Date
 '本月的最后一天
@@ -147,7 +148,7 @@ Do While True
     If minusDay = 2 Then
         Exit Do
     End If
-    If isHoliDay(dtDate, holidyDict) = True Then
+    If IsHoliday(dtDate, holidyDict) = True Then
         '向前移动一天
         dtDate = DateAdd("d", -1, dtDate)
     Else
@@ -163,7 +164,7 @@ Loop
 ```vba
 '当前路径
 Dim workPath As String
-workPath = ThisWorkBook.Path
+workPath = ThisWorkbook.Path
 '打开当前路径下的[abc.xlsx]
 Dim tExcel As Object
 Dim tObj As Object
@@ -189,9 +190,9 @@ Set tExcel = Nothing
 ```vba
 '最终行
 Dim lastMstRow As Long
-lastMstRow = Sheets("test").UsedRange.Row.Count
+lastMstRow = Sheets("test").UsedRange.Rows.Count
 Dim lastMstCol As Long
-lastMstCol = Sheets("test").UsedRange.Row.Count
+lastMstCol = Sheets("test").UsedRange.Columns.Count
 
 '从表格转存到数组
 Dim i As Long
@@ -210,18 +211,18 @@ Range(Cells(2, 1), Cells(lastMstRow, lastMstCol)) = mstArray
 
 ```vba
 Dim workPath As String
-workPath = ThisWorkBook.Path
+workPath = ThisWorkbook.Path
 
 Dim tExcel As Object
 Dim tObj As Object
 Dim tWorkSheet As Object
 Set tExcel = CreateObject("Excel.Application")
-Set tObj = tExcel.Application.WorkBooks.Open(Filename:=workPath & "\name.xlsx")
+Set tObj = tExcel.Application.Workbooks.Open(Filename:=workPath & "\name.xlsx")
 Set tWorkSheet = tObj.Sheets("mysheet")
 
 '最终行
 Dim lastMstRow As Long
-lastMstRow = tWorkSheet.UsedRange.Row.Count
+lastMstRow = tWorkSheet.UsedRange.Rows.Count
 
 '[mysheet]里面B列的内容取出
 Dim i As Long
@@ -252,8 +253,8 @@ Public Const adLF = 10
 '---- StreamTypeEnum ----
 Public Const adTypeBinary = 1
 Public Const adTypeText = 2
-'---- SaveOptionEnum ----
-Public Const adSaveCreateNotExit = 1
+'---- SaveOptionsEnum ----
+Public Const adSaveCreateNotExist = 1
 Public Const adSaveCreateOverWrite = 2
 '---- StreamWriteEnum ----
 Public Const adWriteChar = 0
@@ -264,7 +265,7 @@ Sub Start_Click()
 
     '当前文件夹
     Dim workPath As String
-    workPath = ThisWorkBook.Path
+    workPath = ThisWorkbook.Path
 
     '定义写入流
     Dim fwStm As Object
@@ -275,7 +276,7 @@ Sub Start_Click()
 
     '写入内容
     fwStm.WriteText "utf8中文日本語", adWriteLine
-    fwStm.WritrText "ここは２行目です", adWriteLine
+    fwStm.WriteText "ここは２行目です", adWriteLine
 
     '去掉BOM
     fwStm.Position = 0
