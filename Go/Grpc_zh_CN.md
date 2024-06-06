@@ -38,7 +38,7 @@ RPC，全称 Remote Procedure Call，中文译为远程过程调用。通俗地�
 
 为了演示 gRPC 的 ``跨语言的`` 优势，这个示例会用同一个接口文档(IDL)，每种语言都会实现服务端和客户端，端口都使用 ``50051`` ，实际项目中需要自行修改一下  
 
-示例的语言：Java / Python / Rust / Golang  
+示例的语言：Java / Python / Rust / Golang / NodeJs / C#  
 C语言弄环境有些麻烦，笔者偷懒没有写例子，可以了解一下这两个仓库 [Juniper-grpc-c](https://github.com/Juniper/grpc-c) 和 [lixiangyun-grpc-c](https://github.com/lixiangyun/grpc-c)
 
 **代码**在 [这里](./Grpc)  
@@ -122,6 +122,9 @@ protoc --version
 所有语言使用同一个定义文件，在工程根路径下，文件名： ``ProductInfo.proto``
 
 ### Go语言设置
+
+官方 [Github](https://github.com/grpc/grpc-go) 仓库
+
 安装Go语言所需工具
 ```
 #go get -u google.golang.org/protobuf/cmd/protoc-gen-go
@@ -167,6 +170,9 @@ go build -o ./bin/client.exe ./product/client/main.go
 ```
 
 ### Python语言设置
+
+官方 [Github](https://github.com/grpc/grpc/tree/master/src/python/grpcio) 仓库
+
 安装Python语言所需工具
 ```
 #Python的gRPC源码包
@@ -193,6 +199,8 @@ python client.py
 ```
 
 ### Java语言设置
+
+官方 [Github](https://github.com/grpc/grpc-java) 仓库
 
 #### 获取protoc-gen-grpc-java插件 - 方式1：命令行
 在这个仓库 [protoc-gen-grpc-java](https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-java/) 找到二进制，笔者使用的为 ``1.59.0/protoc-gen-grpc-java-1.59.0-windows-x86_64.exe``  
@@ -282,6 +290,8 @@ cargo run --bin rustclient
 ```
 ### TypScript语言+Node.js设置
 
+官方 [Github](https://github.com/grpc/grpc-node) 仓库
+
 在 Node.js 中有两个版本的 grpc
 - grpc-tools + @grpc/grpc-js  
   静态编译版本，纯 js 实现，使用工具来生成存根
@@ -349,6 +359,23 @@ npm run client
 - [grpc-dotnet](https://github.com/grpc/grpc-dotnet) ：这是新的库，完全使用C#编写实现，没有原生依赖，基于.NET Core 3.0
 
 如果是新项目，推荐用后者；如果是老项目（比如还在用.netframework的老项目），可以考虑用前者。在 Grpc.Examples 文件夹下可以找到示例
+
+#### 旧版 .net Framework 示例
+1. 参考 [这里](../Dotnet/Dotnet_zh_CN.md) 安装 ``Visual Studio Express 2017``
+2. 使用 VS 打开 [netframework](./Grpc/netframework/) 工程
+3. 鼠标右键 -> ``管理 NuGet 程序包`` -> 将 [Grpc](https://www.nuget.org/packages/Grpc/) 添加为依赖项
+4. 将 [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 添加为依赖项，此包提供将proto文件编译为存根（stub）文件
+5. 将 [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/) 添加为依赖项
+6. 将工程的C#版本修改为 ``7.1`` 以上(参照[这里](https://blog.csdn.net/f_957995490/article/details/117735764))
+7. 参照 [这里](https://github.com/grpc/grpc/blob/v1.46.x/src/csharp/BUILD-INTEGRATION.md)，将 ``.proto`` 文件放到2个子工程的根路径，单击 ``显示所有文件`` 按钮 -> ``包括在项目中``，然后在 ``属性`` 窗口下拉列表中将 ``.proto 文件`` 的 ``Build Action`` 更改为 ``Protobuf``
+
+**Note**：导入工程后如果发生 ``Google.Protobuf.Tools proto compilation is only supported by default in a C# project`` 这个错误，删除 ``.vs`` 文件夹后重启 Visual Studio 即可
+
+#### 新版 .net Core 示例
+微软官方的示例写的很好，直接看 [这里](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio) 即可
+
+这里也有例子  
+https://github.com/grpc/grpc-dotnet/tree/master/examples
 
 ### 关于Web方面
 gRPC原本设想是在纯后端使用的，由于浏览器的限制，不能直接从浏览器发送gRPC请求到后端。如果真的有这种需求的话，有两种对应方法

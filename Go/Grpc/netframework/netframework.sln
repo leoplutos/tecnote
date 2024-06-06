@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 15 for Windows Desktop
+VisualStudioVersion = 15.0.34829.251
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netframeworkClient", "netframeworkClient\netframeworkClient.csproj", "{87A6BA96-7511-4716-9368-2914574B9DAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netframeworkServer", "netframeworkServer\netframeworkServer.csproj", "{AD27EAA3-A056-41C4-A11A-3372E1B62B69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87A6BA96-7511-4716-9368-2914574B9DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A6BA96-7511-4716-9368-2914574B9DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A6BA96-7511-4716-9368-2914574B9DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A6BA96-7511-4716-9368-2914574B9DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD27EAA3-A056-41C4-A11A-3372E1B62B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD27EAA3-A056-41C4-A11A-3372E1B62B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD27EAA3-A056-41C4-A11A-3372E1B62B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD27EAA3-A056-41C4-A11A-3372E1B62B69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7355FAF-217A-4777-9CAF-9FE583A3853F}
+	EndGlobalSection
+EndGlobal

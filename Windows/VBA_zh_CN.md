@@ -148,7 +148,7 @@ Do While True
     If minusDay = 2 Then
         Exit Do
     End If
-    If IsHoliday(dtDate, holidyDict) = True Then
+    If IsHoliday(dtDate, holidayDict) = True Then
         '向前移动一天
         dtDate = DateAdd("d", -1, dtDate)
     Else

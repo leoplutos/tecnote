@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CSharpDebug",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "PJBuild",
+            "program": "${workspaceFolder}/netframeworkClient/bin/Debug/netframeworkClient.exe",
+            "args": [],
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+    ]
+}

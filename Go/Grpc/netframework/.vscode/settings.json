@@ -1,0 +1,8 @@
+{
+    "omnisharp.useModernNet": false,
+    "dotnet.server.useOmnisharp": true,
+    "dotnet.unitTestDebuggingOptions": {
+        "type": "clr"
+    },
+    "dotnet.unitTests.runSettingsPath": "D:\\WorkSapce\\DotNet\\netframework\\UseX64Worker.runsettings"
+}
