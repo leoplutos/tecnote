@@ -1,0 +1,44 @@
+{
+	"java.jdt.ls.java.home": "D:\\Tools\\jdk-21",
+	"java.jdt.ls.vmargs": "-Dfile.encoding=UTF-8",
+	"java.configuration.runtimes": [
+		{
+			"name": "JavaSE-21",
+			"path": "D:\\Tools\\jdk-21",
+			"default": true
+		},
+	],
+	"java.configuration.maven.userSettings": "C:/Users/Administrator/.m2/settings.xml",
+	"java.configuration.maven.globalSettings": "D:/Tools/apache-maven-3.9.7/conf/settings.xml",
+	//"editor.codeLens": false, //不在编辑器中显示codeLens，不表示main函数上方的[Run | Debug]
+	"java.format.settings.profile": "GoogleStyle", //使用gogole样式格式化代码
+	"java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8", //添加Java运行调试的参数
+	"java.referencesCodeLens.enabled": false, //启用/禁用引用的代码镜头。
+	"java.implementationsCodeLens.enabled": true, //启用/禁用实现代码镜头
+	"java.typeHierarchy.lazyLoad": true, //延迟加载类型层次结构中的内容
+	"java.inlayHints.parameterNames.enabled": "all", //参数名称的嵌入提示
+	"java.debug.settings.debugSupportOnDecompiledSource": "on", //[实验]:启用对反编译源代码的调试支持
+	"java.debug.settings.enableRunDebugCodeLens": true, //在main函数上方禁用[Run | Debug]标记
+	"java.dependency.packagePresentation": "hierarchical", //分层显示jar包结构
+	//"java.autobuild.enabled": false, //禁止自动编译
+	//"java.settings.url":".settings/org.eclipse.jdt.core.prefs", //设定Java设置文件地址
+	"terminal.integrated.automationProfile.windows": {
+		//自动化相关终端的设定(如Codelens上面的[Run]，[Debug]和其他的任务)（设定后需要重启）
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [
+			"/k",
+			"chcp",
+			"65001",
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+		//"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6"
+	},
+	"java.compile.nullAnalysis.mode": "automatic",
+	"java.configuration.updateBuildConfiguration": "disabled",
+	//"java.errors.incompleteClasspath.severity": "error",
+}

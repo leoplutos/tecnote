@@ -12,11 +12,23 @@ namespace netframeworkServer
     class ServerMain
     {
         private const string host = "0.0.0.0";
-        private const int port = 50051;
 
         // 程序主入口
         public static async Task Main(string[] args)
         {
+            int port = 50051;
+            if (args.Length > 0)
+            {
+                try
+                {
+                    port = int.Parse(args[0]);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
             // 启动gRPC服务
             Server server = new Server
             {
@@ -25,9 +37,10 @@ namespace netframeworkServer
             };
             server.Start();
 
-
-            Console.WriteLine("[.net Framework(C#)][Server] gRPC 服务端已开启，端口为:{0}:{1}", host, port);
-            Console.WriteLine("[.net Framework(C#)][Server] 按任意键结束gRPC 服务端...");
+            DateTime dtNow = DateTime.Now;
+            string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+            Console.WriteLine("[{0}][.net Framework(C#)][Server] gRPC 服务端已开启，端口为:{1}:{2}", dtStr, host, port);
+            Console.WriteLine("[{0}][.net Framework(C#)][Server] 按任意键结束gRPC 服务端...", dtStr);
             Console.ReadKey();
 
             await server.ShutdownAsync();
@@ -45,7 +58,9 @@ namespace netframeworkServer
         {
             request.Id = Guid.NewGuid().ToString();
             productDict.Add(request.Id, request);
-            Console.WriteLine("[.net Framework(C#)][Server] AddProduct success. id = {0}", request.Id);
+            DateTime dtNow = DateTime.Now;
+            string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+            Console.WriteLine("[{0}][.net Framework(C#)][Server] AddProduct success. id = {1}, name: {2}, description: {3}", dtStr, request.Id, request.Name, request.Description);
             Console.WriteLine(request);
             return Task.FromResult(new ProductId { Value = request.Id });
         }
@@ -53,8 +68,18 @@ namespace netframeworkServer
         // 取得Product
         public override Task<Product> getProduct(ProductId request, ServerCallContext context)
         {
-            Product info = productDict[request.Value];
-            Console.WriteLine("[.net Framework(C#)][Server] GetProduct success. id = {0}", request.Value);
+            Product info = null;
+            if (productDict.ContainsKey(request.Value))
+            {
+                info = productDict[request.Value];
+            }
+            else
+            {
+                info = new Product() { Id = "None ID", Name = "None Name", Description = ".net Framework(C#) gRPC Server" };
+            }
+            DateTime dtNow = DateTime.Now;
+            string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+            Console.WriteLine("[{0}][.net Framework(C#)][Server] GetProduct success. id = {0}", dtStr, request.Value);
             Console.WriteLine(info);
             return Task.FromResult(info);
         }

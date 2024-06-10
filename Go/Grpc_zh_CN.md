@@ -198,50 +198,40 @@ cd D:\WorkSpace\Grpc\python
 python client.py
 ```
 
-### Java语言设置
+### Java语言设置（已实现客户端负载均衡）
 
 官方 [Github](https://github.com/grpc/grpc-java) 仓库
 
-#### 获取protoc-gen-grpc-java插件 - 方式1：命令行
+#### 方式1：在Maven项目中集成proto和gprc的自动编译
+参考 [java](./Grpc/java) 工程下的 ``pom.xml`` 即可  
+用这种方式时，proto文件放在 ``src/main/proto`` 和 ``src/test/proto``  
+更多可以看 [这里](https://www.xolstice.org/protobuf-maven-plugin/usage.html)
+
+运行程序
+```
+set JAVA_TOOL_OPTIONS=-Duser.language=en
+
+cd D:\WorkSpace\Grpc\java
+mvn compile
+#运行服务端
+mvn exec:java -Dexec.mainClass="javagrpc.ServerMain"
+
+cd D:\WorkSpace\Grpc\java
+#运行客户端
+mvn exec:java -Dexec.mainClass="javagrpc.ClientMain"
+```
+
+#### 方式2：直接使用命令行编译
 在这个仓库 [protoc-gen-grpc-java](https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-java/) 找到二进制，笔者使用的为 ``1.59.0/protoc-gen-grpc-java-1.59.0-windows-x86_64.exe``  
 下载后和 ``protoc.exe`` 放在同路径下
 ```
 D:\Tools\WorkTool\Go\protoc-25.0-win64\bin
 ```
 
-#### 获取protoc-gen-grpc-java插件 - 方式2：使用IDE插件
-参照 [这里](https://grpc.io/docs/languages/java/generated-code/#codegen) 的 ``Codegen`` 处设定
-
-
-在Maven的pom.xml中加入定义
-```
-<dependency>
-    <groupId>io.grpc</groupId>
-    <artifactId>grpc-netty-shaded</artifactId>
-    <version>1.59.0</version>
-    <scope>runtime</scope>
-</dependency>
-<dependency>
-    <groupId>io.grpc</groupId>
-    <artifactId>grpc-protobuf</artifactId>
-    <version>1.59.0</version>
-</dependency>
-<dependency>
-    <groupId>io.grpc</groupId>
-    <artifactId>grpc-stub</artifactId>
-    <version>1.59.0</version>
-</dependency>
-<dependency>
-    <!-- necessary for Java 9+ -->
-    <groupId>org.apache.tomcat</groupId>
-    <artifactId>annotations-api</artifactId>
-    <version>6.0.53</version>
-    <scope>provided</scope>
-</dependency>
-```
-
 编译proto文件，得到存根（stub）文件
 ```
+set JAVA_TOOL_OPTIONS=-Duser.language=en
+
 cd D:\WorkSpace\Grpc
 protoc --java_out=./java/src/main/java ProductInfo.proto
 
@@ -260,6 +250,9 @@ cd D:\WorkSpace\Grpc\java
 #运行客户端
 mvn exec:java -Dexec.mainClass="javagrpc.ClientMain"
 ```
+
+###### 下面这个仓库有很多示例
+https://github.com/saturnism/grpc-by-example-java
 
 #### Java中和SpringBoot集成
 可以参考 [这里](https://zhuanlan.zhihu.com/p/464658805) 的 ``方式二``
@@ -360,7 +353,7 @@ npm run client
 
 如果是新项目，推荐用后者；如果是老项目（比如还在用.netframework的老项目），可以考虑用前者。在 Grpc.Examples 文件夹下可以找到示例
 
-#### 旧版 .net Framework 示例
+#### 旧版 .net Framework 示例（已实现客户端负载均衡）
 1. 参考 [这里](../Dotnet/Dotnet_zh_CN.md) 安装 ``Visual Studio Express 2017``
 2. 使用 VS 打开 [netframework](./Grpc/netframework/) 工程
 3. 鼠标右键 -> ``管理 NuGet 程序包`` -> 将 [Grpc](https://www.nuget.org/packages/Grpc/) 添加为依赖项
@@ -370,6 +363,9 @@ npm run client
 7. 参照 [这里](https://github.com/grpc/grpc/blob/v1.46.x/src/csharp/BUILD-INTEGRATION.md)，将 ``.proto`` 文件放到2个子工程的根路径，单击 ``显示所有文件`` 按钮 -> ``包括在项目中``，然后在 ``属性`` 窗口下拉列表中将 ``.proto 文件`` 的 ``Build Action`` 更改为 ``Protobuf``
 
 **Note**：导入工程后如果发生 ``Google.Protobuf.Tools proto compilation is only supported by default in a C# project`` 这个错误，删除 ``.vs`` 文件夹后重启 Visual Studio 即可
+
+###### 下面这个仓库有很多示例
+https://github.com/wicharypawel/net-core-grpc-load-balance
 
 #### 新版 .net Core 示例
 微软官方的示例写的很好，直接看 [这里](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio) 即可
@@ -396,12 +392,64 @@ graph LR
 ```
 使用 [grpc-web](https://github.com/grpc/grpc-web) 可以实现，因为还需要设置代理，笔者也没有测试。 在 [这里](https://grpc.io/docs/platforms/web/basics/) 有官方教程。[这里](https://qiita.com/hedrall/items/9f4c03c3a6518504473a) 的``WEBブラウザから呼び出す``部分有一个例子
 
+## 官方文档
+https://grpc.io/docs/guides/
+
+## 配置通道凭据
+
+通道必须知道是否使用传输安全性发送了 gRPC 调用。 http 和 https 不再是地址的一部分，方案现在指定一个解析程序，使得在使用负载均衡时必须对通道选项配置 Credentials。
+
+ - ``ChannelCredentials.SecureSsl`` - gRPC 调用使用 ``ChannelCredentials.SecureSsl`` 进行保护。 等同于 ``https`` 地址。
+
+ - ``ChannelCredentials.Insecure`` - gRPC 调用不使用传输安全性。 等同于 ``http`` 地址。
+
+## gRPC 客户端负载均衡
+
+#### 微软提供的教程
+https://learn.microsoft.com/zh-cn/aspnet/core/grpc/loadbalancing
+
+#### 例子
+1. 我们分别启动4个服务端
+ - Java服务端：50051，50052
+ - Python服务端：50053，50054
+
+启动命令：
+```
+mvn exec:java -Dexec.mainClass="javagrpc.ServerMain"
+mvn exec:java -Dexec.mainClass="javagrpc.ServerMain" -Dexec.args="50052"
+python server.py --port 50053
+python server.py --port 50054
+```
+2. 启动C#客户端来进行验证
+```
+./netframeworkClient.exe
+```
+
 ## 通信模式
 gRPC 包含四种基础的通信模式：
- - 一元模式（Unary RPC）
- - 服务器端流 RPC（Server Sreaming RPC）
+ - 一元模式（Unary RPC）  
+    客户端向服务器发送单个请求并获得 单次响应，就像普通的函数调用一样
+    ```
+    rpc SayHello(HelloRequest) returns (HelloResponse);
+    ```
+
+ - 服务器端流 RPC（Server Sreaming RPC）  
+    服务器流式处理 RPC，服务器在收到客户端的请求后，可能会发送多个响应的序列
+    ```
+    rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+    ```
+
  - 客户端流 RPC（Client Streaming RPC）
+    客户端流式处理 RPC，客户端会发送多个请求给服务端，服务端会发送一条响应到客户端
+    ```
+    rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
+    ```
+
  - 双向流 RPC（Bidirectional Streaming RPC）
+    双向流式处理 RPC，客户端和服务端流 RPC 的组合，客户端以消息流的方式发送数据，服务端也已消息流的方式响应数据
+    ```
+    rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+    ```
 
 笔者写的示例为 ``一元模式``  
 更多可以看 [这里](https://zhuanlan.zhihu.com/p/360355222)

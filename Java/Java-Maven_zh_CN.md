@@ -5,17 +5,37 @@
 https://maven.apache.org/download.cgi
 解压缩后即可使用
 
+## Maven的配置文件
+Maven的配置文件分为 ``全局`` 和 ``用户``
+- 全局配置文件 ``Maven安装路径/conf/settings.xml``
+- 用户配置文件
+    - Windows：``%USERPROFILE%\.m2\settings.xml``
+    - Linux：``~/.m2/settings.xml``
+
+### 配置优先级
+**用户配置优先于全局配置**
+
+配置优先级从高到低：``pom.xml`` -> ``用户配置`` > ``全局配置``
+
 ## Maven环境构建
-创建本地仓库存放路径
+
+1. 下载好之后配置到Path
+```
+set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
+set PATH=%PATH%;%MAVEN_HOME%\bin
+```
+
+2. 命令确认
+```
+mvn --version
+```
+
+3. (可选)创建本地仓库存放路径
 ```
 D:\Tools\WorkTool\Java\m2\repo
 ```
-#### 修改设定使用阿里云
-在 ``maven`` 的安装路径下的conf路径下可以找到 ``settings.xml``
-```
-D:\Tools\WorkTool\Java\apache-maven-3.9.4\conf\settings.xml
-```
-文件内容为
+
+4. 创建用户配置文件 ``settings.xml``，文件内容如下
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 
