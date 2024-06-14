@@ -1,8 +1,10 @@
 
 package javagrpc;
 
+import io.grpc.Grpc;
+import io.grpc.InsecureServerCredentials;
 import io.grpc.Server;
-import io.grpc.ServerBuilder;
+import io.grpc.protobuf.services.HealthStatusManager;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -19,17 +21,25 @@ import javagrpc.ProductInfoPb.ProductId;
 // 主类
 public class ServerMain {
 
+    // gRPC服务
     private Server server;
+    // HealthCheckService
+    private HealthStatusManager health;
 
     // 储存Product的词典
     public static Map<String, Product> productMap;
 
+    // 启动gRPC服务
     private void start(int port) throws IOException {
+
         productMap = new LinkedHashMap<String, Product>();
-        server = ServerBuilder.forPort(port)
-                .addService(new ProductServiceImpl()) // 这里可以添加多个模块
+        health = new HealthStatusManager();
+        server = Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create())
+                .addService(new ProductServiceImpl())// 添加业务服务
+                .addService(health.getHealthService())// 添加HealthCheck服务
                 .build()
                 .start();
+
         Calendar cl = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String dtStr = sdf.format(cl.getTime());
@@ -37,6 +47,8 @@ public class ServerMain {
                 "[{0}][Java][Server] Server started, listening on : {1}");
         String[] params = { dtStr, port + "" };
         System.err.println(mFormat.format(params));
+
+        // JVM停止时运行的钩子
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {

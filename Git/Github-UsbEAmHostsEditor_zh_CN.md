@@ -24,7 +24,7 @@ https://www.dogfight360.com/blog/475/
 
 ### 使用方法
 * 打开软件，点击软件左下角，选择准备修改 hosts 的网站
-* 选择[developer - 开发者相关] → github.com
+* 选择``developer - 开发者相关`` → github.com
 * 检测延迟 → 选择延迟最低的IP地址 → 应用选中
 
 然后再去访问 Github.com 就会快很多
@@ -69,6 +69,8 @@ python D:\WorkSpace\Python\PythonSampleProject\src\updateGithubHosts.py
 https://hub.njuu.cf/  
 https://hub.yzuu.cf/  
 https://hub.nuaa.cf/  
+https://bgithub.xyz/  
+https://ggithub.xyz/  
 
 ## github下载加速
 https://moeyy.cn/gh-proxy  

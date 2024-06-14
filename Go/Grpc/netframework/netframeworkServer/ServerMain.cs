@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
+using Grpc.HealthCheck;
 using GrpcDemo;
+using static Grpc.Health.V1.HealthCheckResponse.Types;
 
 namespace netframeworkServer
 {
@@ -30,11 +32,20 @@ namespace netframeworkServer
             }
 
             // 启动gRPC服务
-            Server server = new Server
+            Server server = new Server(new[] { new ChannelOption(ChannelOptions.SoReuseport, 0) })
             {
-                Services = { ProductInfo.BindService(new ProductServiceImpl()) },
+                Services = { },
                 Ports = { { host, port, ServerCredentials.Insecure } }
             };
+            // 添加业务服务
+            server.Services.Add(ProductInfo.BindService(new ProductServiceImpl()));
+            // 添加HealthCheck服务
+            var serviceImpl = new HealthServiceImpl();
+            // HealthCheck检查的服务名为空,返回内容为SERVING
+            serviceImpl.SetStatus("", ServingStatus.Serving);
+            server.Services.Add(Grpc.Health.V1.Health.BindService(serviceImpl));
+
+            // 启动gRPC
             server.Start();
 
             DateTime dtNow = DateTime.Now;
@@ -68,7 +79,7 @@ namespace netframeworkServer
         // 取得Product
         public override Task<Product> getProduct(ProductId request, ServerCallContext context)
         {
-            Product info = null;
+            Product info;
             if (productDict.ContainsKey(request.Value))
             {
                 info = productDict[request.Value];

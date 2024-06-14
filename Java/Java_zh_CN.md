@@ -1,5 +1,15 @@
 # Java相关
 
+## JDK相关
+OpenJDK 各种版本的介绍  
+https://mp.weixin.qq.com/s/ke6ZSZt-CMoVg2t3YY_rIQ
+
+推荐使用 ``AdoptOpenJDK / Eclipse Temurin`` 或者   ``Microsoft Build of OpenJDK™``  
+官网：  
+https://adoptium.net  
+https://www.microsoft.com/openjdk
+
+
 ## Eclipse和VSCode用的忽略问题设定文件（老旧工程用）
 
 - [org.eclipse.jdt.core.prefs](.settings/org.eclipse.jdt.core.prefs)

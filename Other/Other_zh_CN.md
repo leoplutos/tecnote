@@ -268,6 +268,10 @@ https://yandex.com/
 ## 开源网络"瑞士军刀"
 https://github.com/gchq/CyberChef
 
+## Google日本語入力
+ - [64bit版](https://dl.google.com/japanese-ime/2.25.3700.0/googlejapaneseinput64.msi)
+ - [32bit版](https://dl.google.com/japanese-ime/2.25.3700.0/googlejapaneseinput32.msi)
+
 ## 其他软件
 
 - TVBox
@@ -280,4 +284,11 @@ https://github.com/gchq/CyberChef
     - https://raw.liucn.cc/box/dc.txt
 
 - 下载软件
+    - [cobalt](https://github.com/imputnet/cobalt)
     - [Gopeed](https://gopeed.com/zh-CN)
+
+## 开源的Google Play商店客户端，无需谷歌框架，可以使用匿名账户登录并下载应用程序
+https://mp.weixin.qq.com/s/2QHDHYBUuT-6VBGz1KywRQ
+
+
+

@@ -155,3 +155,19 @@ lux
  - [Github](https://github.com/akavel/rsrc)
  - [公众号示例](https://mp.weixin.qq.com/s/SM2_YGTOKqrPELjJ3xfckg)
 
+## Go 如何优雅实现业务并发？
+https://mp.weixin.qq.com/s/0JS7XWcpRauj14xWGWopFw
+
+## 如何使用Go语言优雅地实现接口限流
+https://mp.weixin.qq.com/s/bS65ip_l9SSAhdYBjxPPSg
+
+## Golang实现异步队列
+https://mp.weixin.qq.com/s/j21kENP0RUYlS2kchH8d2w
+
+## aconfig：Go语言中简洁高效的配置加载库
+https://mp.weixin.qq.com/s/5-RvGSkD_4logC0BQ7VVZQ
+
+
+
+
+

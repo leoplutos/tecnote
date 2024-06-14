@@ -39,6 +39,7 @@ https://code.visualstudio.com/#alt-downloads
 * [Even Better TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Toml高亮
 * [**CodeLLDB**](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：C/C++/Rust Debug
 * [**Go**](https://marketplace.visualstudio.com/items?itemName=golang.go) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Go开发必备
+* [Protobuf3 高亮](https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3)
 
 + **Java**  
 Java所需插件比较多。有2种安装方式：  
@@ -64,6 +65,7 @@ Java所需插件比较多。有2种安装方式：
 * [Blockman](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：突出显示代码块来提高代码可读性
 * [Hex Editor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
 * [Compare Folders](https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹对比差分
+* [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml)
 * [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 * [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
@@ -623,3 +625,7 @@ Developer: Startup Performance
 * [VSCode提示和技巧](https://github.com/Microsoft/vscode-tips-and-tricks)
 * [awesome vscode](https://github.com/viatsko/awesome-vscode)
 * [打造舒适的VSCode开发环境](https://mp.weixin.qq.com/s/MVR5rV2LkH8_GHCtP6SHug)
+
+## 1秒实现VS Code浏览GitHub代码
+https://mp.weixin.qq.com/s/7gmIInmz5021VX5lEvEUAg
+

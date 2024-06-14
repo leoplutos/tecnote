@@ -299,3 +299,16 @@ Sub Start_Click()
 End Sub
 ```
 
+## 基于Excel和VBA的表结果自动生成
+
+- [TableDefinition.xlsx](./VBA/TableDefinition.xlsx) &nbsp;&nbsp;&nbsp;&nbsp;表定义文件
+
+- [TableDefinition_DDLScript.xlsm](./VBA/TableDefinition_DDLScript.xlsm) &nbsp;&nbsp;&nbsp;&nbsp;生成表结构的VBA脚本
+
+#### 使用方法
+ 1. 将这2个文件放到同一目录内
+ 2. 在同目录内新建文件夹 ``.\DDL\Postgre``
+ 3. 打开 ``TableDefinition_DDLScript.xlsm``，点击 ``生成`` 按钮
+
+
+

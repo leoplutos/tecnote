@@ -198,6 +198,9 @@ cd D:\WorkSpace\Grpc\python
 python client.py
 ```
 
+一个Python的负载均衡实现  
+https://github.com/flagman/grpc-load-balancer
+
 ### Java语言设置（已实现客户端负载均衡）
 
 官方 [Github](https://github.com/grpc/grpc-java) 仓库
@@ -361,6 +364,10 @@ npm run client
 5. 将 [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/) 添加为依赖项
 6. 将工程的C#版本修改为 ``7.1`` 以上(参照[这里](https://blog.csdn.net/f_957995490/article/details/117735764))
 7. 参照 [这里](https://github.com/grpc/grpc/blob/v1.46.x/src/csharp/BUILD-INTEGRATION.md)，将 ``.proto`` 文件放到2个子工程的根路径，单击 ``显示所有文件`` 按钮 -> ``包括在项目中``，然后在 ``属性`` 窗口下拉列表中将 ``.proto 文件`` 的 ``Build Action`` 更改为 ``Protobuf``
+8. （可选）如果需要 ``Grpc.HealthCheck``的话，选择项目，菜单栏的 ``工具`` -> ``NuGet 包管理器`` -> ``包管理器控制台``，输入下面的命令安装，从 2.47.0 开始此包将作为 grpc-dotnet 版本的一部分发布
+    ```
+    Install-Package Grpc.HealthCheck -Version 2.46.6
+    ```
 
 **Note**：导入工程后如果发生 ``Google.Protobuf.Tools proto compilation is only supported by default in a C# project`` 这个错误，删除 ``.vs`` 文件夹后重启 Visual Studio 即可
 
@@ -411,18 +418,18 @@ https://learn.microsoft.com/zh-cn/aspnet/core/grpc/loadbalancing
 #### 例子
 1. 我们分别启动4个服务端
  - Java服务端：50051，50052
- - Python服务端：50053，50054
+ - netframework服务端：50053，50054
 
 启动命令：
 ```
 mvn exec:java -Dexec.mainClass="javagrpc.ServerMain"
 mvn exec:java -Dexec.mainClass="javagrpc.ServerMain" -Dexec.args="50052"
-python server.py --port 50053
-python server.py --port 50054
+.\netframeworkServer.exe 50053
+.\netframeworkServer.exe 50054
 ```
 2. 启动C#客户端来进行验证
 ```
-./netframeworkClient.exe
+.\netframeworkClient.exe
 ```
 
 ## 通信模式
@@ -459,3 +466,6 @@ gRPC 包含四种基础的通信模式：
 
 ## 多路复用、元数据、负载均衡
 关于这部分内容可以看 [这里](https://zhuanlan.zhihu.com/p/364325400)
+
+## awesome-grpc
+https://github.com/grpc-ecosystem/awesome-grpc

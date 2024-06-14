@@ -1,9 +1,19 @@
 # Java-Maven相关
 
 ## 下载
-去 apache 主页下载  
-https://maven.apache.org/download.cgi
-解压缩后即可使用
+1. 去 apache 主页下载  
+https://maven.apache.org/download.cgi  
+
+2. 下载之后解压缩配置到Path
+```
+set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
+set PATH=%PATH%;%MAVEN_HOME%\bin
+```
+
+3. 命令确认
+```
+mvn --version
+```
 
 ## Maven的配置文件
 Maven的配置文件分为 ``全局`` 和 ``用户``
@@ -17,25 +27,14 @@ Maven的配置文件分为 ``全局`` 和 ``用户``
 
 配置优先级从高到低：``pom.xml`` -> ``用户配置`` > ``全局配置``
 
-## Maven环境构建
+## Maven配置
 
-1. 下载好之后配置到Path
-```
-set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
-set PATH=%PATH%;%MAVEN_HOME%\bin
-```
-
-2. 命令确认
-```
-mvn --version
-```
-
-3. (可选)创建本地仓库存放路径
+1. (可选)创建本地仓库存放路径
 ```
 D:\Tools\WorkTool\Java\m2\repo
 ```
 
-4. 创建用户配置文件 ``settings.xml``，文件内容如下
+2. 创建用户配置文件 ``settings.xml``，文件内容如下
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -136,3 +135,22 @@ mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 ar
 ```
 mvn test
 ```
+
+## 其他
+
+#### Google Cloud Storage 的镜像
+```
+<settings>
+    <mirrors>
+        <mirror>
+            <id>google-maven-central</id>
+            <name>GCS Maven Central mirror</name>
+            <url>https://maven-central.storage-download.googleapis.com/maven2/</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+</settings>
+```
+
+出处  
+http://storage-download.googleapis.com/maven-central/index.html
