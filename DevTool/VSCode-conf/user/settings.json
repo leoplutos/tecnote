@@ -10,7 +10,7 @@
 	//"editor.fontVariations": "'Ligconsolata' 0.5",
 	"editor.formatOnSave": false, //在保存时格式化文件
 	//"editor.letterSpacing": 0.1, //字母间距
-	"editor.lineHeight": 22, //行高
+	"editor.lineHeight": 20, //行高
 	"editor.minimap.enabled": true, //控制是否显示缩略图(右侧的minimap)
 	"editor.minimap.autohide": true, //控制是否自动隐藏缩略图(右侧的minimap)
 	"editor.tabSize": 4, //设定tab长度
@@ -47,6 +47,7 @@
 	"editor.cursorSurroundingLinesStyle": "all", // 始终强制执行
 	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
 	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
+	"editor.stickyScroll.enabled": false,
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.confirmBeforeClose": "always", //控制是否在关闭窗口或退出应用程序之前显示确认对话框
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
@@ -170,7 +171,7 @@
 			"editor.lineHighlightBackground": "#1073cf2d", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
 			"editor.selectionBackground": "#add6ff", //选择内容的背景
 			"editor.selectionHighlightBackground": "#add6ff80", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。（备用：#4F435580）
-			"editor.inactiveSelectionBackground": "#e5ebf1", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
+			"editor.inactiveSelectionBackground": "#e5ebf1fe", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
 			"editor.wordHighlightBackground": "#57575740", // 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果。
 			"editor.wordHighlightStrongBackground": "#0e639c40", // 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
 			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
@@ -257,7 +258,7 @@
 			"editor.lineHighlightBackground": "#1073cf2d", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
 			"editor.selectionBackground": "#add6ff", //选择内容的背景
 			"editor.selectionHighlightBackground": "#add6ff80", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。（备用：#4F435580）
-			"editor.inactiveSelectionBackground": "#e5ebf1", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
+			"editor.inactiveSelectionBackground": "#e5ebf1fe", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
 			"editor.wordHighlightBackground": "#57575740", // 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果。
 			"editor.wordHighlightStrongBackground": "#0e639c40", // 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
 			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
@@ -350,9 +351,9 @@
 			"numbers": "#00e8ef", //设定数字颜色(备用#e5c07b)
 			"strings": "#809980", //设定字符串颜色(备用#669199)(备用#007f7f)(备用#809980)(备用#CE9178)(备用#01a252)
 			"variables": "#c5c8c6", //设定变量颜色
-			"types": "#ee5d43", //设定类型颜色(备用#df6b74)(备用#f92672)
+			"types": "#4FC1FF", //设定类型颜色(#ee5d43)(#df6b74)(#f92672)
 			"keywords": { //设定关键字颜色（可加入"fontStyle": "bold"）(备用#64afef)
-				"foreground": "#64afef",
+				"foreground": "#C586C0",
 				"fontStyle": ""
 			},
 			"functions": "#96E072", //设定函数颜色(备用#98c379)(备用#61ce3c)(备用#90a959)
@@ -393,9 +394,25 @@
 					}
 				},
 				{
+					"scope": [ //Java的标注
+						"meta.declaration.annotation.java",
+					],
+					"settings": {
+						"foreground": "#00af00",
+					}
+				},
+				{
 					"scope": [ //Toml自定义
 						"support.type.property-name.table.toml",
 						"support.type.property-name.array.toml",
+					],
+					"settings": {
+						"foreground": "#f39c12",
+					}
+				},
+				{
+					"scope": [
+						"support.title",
 					],
 					"settings": {
 						"foreground": "#f39c12",
@@ -487,7 +504,7 @@
 					"foreground": "#dd50dd"
 				},
 				"class": {
-					"foreground": "#ee5d43"
+					"foreground": "#9CDCFE" //#ee5d43 #4fc1ff
 				},
 				"macro": {
 					"foreground": "#569cd6"
@@ -511,10 +528,10 @@
 					"foreground": "#ee5d43"
 				},
 				"function": {
-					"foreground": "#96E072"
+					"foreground": "#96E072" //#DCDCAA
 				},
 				"keyword": {
-					"foreground": "#64afef"
+					"foreground": "#569CD6" //#64afef
 				},
 				//"label": {
 				//},
@@ -643,8 +660,8 @@
 	},
 	"terminal.integrated.env.osx": {},
 	"terminal.integrated.env.linux": {},
-	//"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端-cmd
-	"terminal.integrated.defaultProfile.windows": "Win-PowerShell", //设定默认终端-PowerShell
+	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端-cmd
+	//"terminal.integrated.defaultProfile.windows": "Win-PowerShell", //设定默认终端-PowerShell
 	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
 	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
 	"terminal.integrated.fontSize": 16, //设置字体大小
@@ -665,9 +682,9 @@
 	"terminal.integrated.tabs.enabled": true, //控制终端选项卡是否以列表的形式显示在终端的一侧
 	"terminal.integrated.tabs.title": "${process}${separator}${local}${separator}${sequence}",
 	"terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
+	"terminal.integrated.enableVisualBell": true,
 	"terminal.integrated.tabs.showActions": "always", // 始终显示“新建终端”按钮旁的“终端拆分”和“终止”按钮
-	"terminal.integrated.tabs.showActiveTerminal": "always", // 始终显示活动终端
-	"terminal.integrated.enableBell": true, // 集成终端启用视觉化铃声
+	"terminal.integrated.tabs.showActiveTerminal": "always", // 集成终端启用视觉化铃声
 	"terminal.integrated.gpuAcceleration": "on", // 集成终端使用GPU加速
 	"terminal.integrated.confirmOnExit": "hasChildProcesses", // 关闭VSCode时，如果终端有子进程运行则确认
 	"terminal.integrated.showExitAlert": false, // 退出时代码为非零时是否显示“终端进程已终止且显示退出代码”警报
@@ -718,6 +735,9 @@
 	"multiDiffEditor.experimental.enabled": true, //启用多重差异编辑器
 	"accessibility.dimUnfocused.enabled": true, // 将未聚焦的编辑器和终端变暗
 	"accessibility.dimUnfocused.opacity": 0.8, // 未聚焦的编辑器和终端变暗透明度
+	"accessibility.signals.terminalBell": {
+		"sound": "on"
+	},
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新
 	"extensions.ignoreRecommendations": true, //忽略插件建议
@@ -726,6 +746,9 @@
 	//-----------------------------------------------"
 	//               特别语言设定                    "
 	//-----------------------------------------------"
+	"[java][java-properties]": {
+		"editor.guides.indentation": true, //启用缩进参考线
+	},
 	"[python]": {
 		"editor.detectIndentation": true, //自动检测tabsize
 		"editor.insertSpaces": true, //按下tab时替换为空格
@@ -760,6 +783,9 @@
 			"comments": "on",
 			"strings": "on"
 		},
+	},
+	"[xml]": {
+		"editor.guides.indentation": true, //启用缩进参考线
 	},
 	"markdown.validate.enabled": true, //启用 Markdown 文件中的所有错误报告
 	//"markdown.styles": ["Style.css"], //Markdown 预览使用的 CSS 样式表

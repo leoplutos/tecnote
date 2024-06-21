@@ -80,6 +80,9 @@ D:\Tools\WorkTool\Java\m2\repo
 </settings>
 ```
 
+##### 详细的设定例子
+ - [java工程](../Go/Grpc/java)
+
 #### Maven工程的 ``pom.xml`` 文件例子
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -135,6 +138,44 @@ mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 ar
 ```
 mvn test
 ```
+
+## Maven 打包时自定义变量的使用
+Maven打包时，如果有一些变量在多个地方使用，可以使用 ``-D`` 的方式或者 ``properties`` 的方式
+
+#### Properties属性
+
+使用命令行设置Properties属性 ``-D``的正确方法是
+```
+mvn -DpropertyName=propertyValue clean package
+```
+- 如果 ``propertyName`` 不存在 ``pom.xml`` 中，它将被设置
+- 如果 ``propertyName`` 已经存在 ``pom.xml`` 中，其值将被作为参数传递的-D值覆盖
+
+如果你的 ``pom.xml`` 如下
+```
+<properties>
+    <theme>myDefaultTheme</theme>
+</properties>
+```
+那么执行 ``mvn -Dtheme=halloween clean package`` 会覆盖 theme 的值，具有如下效果
+```
+<properties>
+    <theme>halloween</theme>
+</properties>
+```
+
+#### Profiles配置文件
+在 ``pom.xml`` 中， ``<profiles>`` 指定的 ``<id>`` 可以通过 ``-P``进行传递或者赋值
+如果你的 ``pom.xml`` 如下
+```
+<profiles>
+    <profile>
+        <id>test</id>
+        ...
+    </profile>
+</profiles>
+```
+那么执行 ``mvn package -P test`` 会触发配置文件
 
 ## 其他
 

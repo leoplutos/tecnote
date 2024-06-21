@@ -205,6 +205,27 @@ https://github.com/flagman/grpc-load-balancer
 
 官方 [Github](https://github.com/grpc/grpc-java) 仓库
 
+### Java实现的存根(Stub)
+在 Java 的实现中 gRPC 默认提供了三种 ``stub``，``stub`` 有点类似 http 的 client，grpc 默认提供了几种 stub 实现
+
+ - xxxBlockingStub：同步阻塞式
+ - xxxFutureStub：批量式（可同步可异步，基于 Future-Listener 机制）
+ - xxxStub：异步（基于 Reactive 的响应式编程模式）
+
+##### 不同 stub 支持的模式
+| name            | 描述      | 1v1 | 1vN | Nv1 | NvN |
+|-----------------|-----------|-----|-----|-----|-----|
+| xxxBlockingStub | 同步/阻塞 | ✔   | ✔   | ❌   | ❌   |
+| xxxFutureStub   | 批量      | ✔   | ❌   | ❌   | ❌   |
+| xxxStub         | 异步      | ✔   | ✔   | ✔   | ✔   |
+
+#### 主类说明
+ - ServerMain - 服务端
+ - ClientMain - 客户端（xxxBlockingStub：阻塞式，实现了客户端负载均衡）
+ - ClientAsyncMain - 客户端（xxxStub：异步方式，实现了客户端负载均衡）
+ - ServerStopMain - 向服务器发送停止服务的客户端（xxxFutureStub：异步方式）
+
+
 #### 方式1：在Maven项目中集成proto和gprc的自动编译
 参考 [java](./Grpc/java) 工程下的 ``pom.xml`` 即可  
 用这种方式时，proto文件放在 ``src/main/proto`` 和 ``src/test/proto``  
@@ -212,16 +233,20 @@ https://github.com/flagman/grpc-load-balancer
 
 运行程序
 ```
-set JAVA_TOOL_OPTIONS=-Duser.language=en
-
 cd D:\WorkSpace\Grpc\java
 mvn compile
-#运行服务端
-mvn exec:java -Dexec.mainClass="javagrpc.ServerMain"
 
-cd D:\WorkSpace\Grpc\java
-#运行客户端
-mvn exec:java -Dexec.mainClass="javagrpc.ClientMain"
+#运行服务端
+mvn exec:java -Dexec.mainClass="javagrpc.main.ServerMain" -Dprotoc.skip=true
+
+#运行客户端（同步式）
+mvn exec:java -Dexec.mainClass="javagrpc.main.ClientMain" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true
+
+#运行客户端（异步式）
+mvn exec:java -Dexec.mainClass="javagrpc.main.ClientAsyncMain" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true
+
+#发送停止服务端请求
+mvn exec:java -Dexec.mainClass="javagrpc.main.ServerStopMain" -Dexec.args="127.0.0.1 50051" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true
 ```
 
 #### 方式2：直接使用命令行编译
@@ -240,18 +265,6 @@ protoc --java_out=./java/src/main/java ProductInfo.proto
 
 #protoc --plugin=protoc-gen-grpc-java=protoc-gen-grpc-java-1.59.0-windows-x86_64.exe --grpc-java_out=./java/src/main/java ProductInfo.proto
 protoc --plugin=protoc-gen-grpc-java=D:/Tools/WorkTool/Go/protoc-25.0-win64/bin/protoc-gen-grpc-java-1.59.0-windows-x86_64.exe --grpc-java_out=./java/src/main/java ProductInfo.proto
-```
-
-运行程序
-```
-cd D:\WorkSpace\Grpc\java
-mvn compile
-#运行服务端
-mvn exec:java -Dexec.mainClass="javagrpc.ServerMain"
-
-cd D:\WorkSpace\Grpc\java
-#运行客户端
-mvn exec:java -Dexec.mainClass="javagrpc.ClientMain"
 ```
 
 ###### 下面这个仓库有很多示例
@@ -357,19 +370,36 @@ npm run client
 如果是新项目，推荐用后者；如果是老项目（比如还在用.netframework的老项目），可以考虑用前者。在 Grpc.Examples 文件夹下可以找到示例
 
 #### 旧版 .net Framework 示例（已实现客户端负载均衡）
+
+##### 项目说明
+- netframework - 主工程（.NET Framework 4.8）
+    - netframeworkServer - 服务端（Grpc.Core实现）
+    - netframeworkClient - 客户端（Grpc.Core实现，阻塞式，有客户端负载均衡）
+    - netframeworkClientAsync - 客户端（Grpc.Core实现，异步式，有客户端负载均衡）
+
+##### 工程创建方式（Grpc.Core实现）
 1. 参考 [这里](../Dotnet/Dotnet_zh_CN.md) 安装 ``Visual Studio Express 2017``
 2. 使用 VS 打开 [netframework](./Grpc/netframework/) 工程
 3. 鼠标右键 -> ``管理 NuGet 程序包`` -> 将 [Grpc](https://www.nuget.org/packages/Grpc/) 添加为依赖项
 4. 将 [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 添加为依赖项，此包提供将proto文件编译为存根（stub）文件
 5. 将 [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/) 添加为依赖项
-6. 将工程的C#版本修改为 ``7.1`` 以上(参照[这里](https://blog.csdn.net/f_957995490/article/details/117735764))
+6. 将工程的C#版本修改为 ``7.1`` 以上，笔者使用的为 ``7.3``（``右键工程`` -> ``属性`` -> ``生成`` -> 最下面的``高级`` -> ``语言版本``）
 7. 参照 [这里](https://github.com/grpc/grpc/blob/v1.46.x/src/csharp/BUILD-INTEGRATION.md)，将 ``.proto`` 文件放到2个子工程的根路径，单击 ``显示所有文件`` 按钮 -> ``包括在项目中``，然后在 ``属性`` 窗口下拉列表中将 ``.proto 文件`` 的 ``Build Action`` 更改为 ``Protobuf``
 8. （可选）如果需要 ``Grpc.HealthCheck``的话，选择项目，菜单栏的 ``工具`` -> ``NuGet 包管理器`` -> ``包管理器控制台``，输入下面的命令安装，从 2.47.0 开始此包将作为 grpc-dotnet 版本的一部分发布
     ```
     Install-Package Grpc.HealthCheck -Version 2.46.6
     ```
 
-**Note**：导入工程后如果发生 ``Google.Protobuf.Tools proto compilation is only supported by default in a C# project`` 这个错误，删除 ``.vs`` 文件夹后重启 Visual Studio 即可
+**Note1**：导入工程后如果发生 ``Google.Protobuf.Tools proto compilation is only supported by default in a C# project`` 这个错误，删除 ``.vs`` 文件夹后重启 Visual Studio 即可  
+**Note2**：可以在 ``解决方案资源管理器`` 中右键 -> ``还原 NuGet 包`` 以随时还原包
+
+
+##### 关于.Net Framework工程中使用grpc-dotnet实现
+在 [微软官方网站](https://learn.microsoft.com/zh-cn/aspnet/core/grpc/netstandard?view=aspnetcore-8.0#net-framework) 有前提说明
+因为需要 ``Wndows 11 +``，所以笔者测试报错了，结论就是老老实实用 ``Grpc.Core`` 实现吧
+```
+System.InvalidOperationException: The channel configuration isn't valid on this operating system. The channel is configured to use WinHttpHandler and the current version of Windows doesn't support HTTP/2 features required by gRPC. Windows Server 2022 or Windows 11 or later is required. For more information, see https://aka.ms/aspnet/grpc/netframework.
+```
 
 ###### 下面这个仓库有很多示例
 https://github.com/wicharypawel/net-core-grpc-load-balance
@@ -422,14 +452,14 @@ https://learn.microsoft.com/zh-cn/aspnet/core/grpc/loadbalancing
 
 启动命令：
 ```
-mvn exec:java -Dexec.mainClass="javagrpc.ServerMain"
-mvn exec:java -Dexec.mainClass="javagrpc.ServerMain" -Dexec.args="50052"
+mvn exec:java -Dexec.mainClass="javagrpc.main.ServerMain"
+mvn exec:java -Dexec.mainClass="javagrpc.main.ServerMain" -Dexec.args="50052"
 .\netframeworkServer.exe 50053
 .\netframeworkServer.exe 50054
 ```
 2. 启动C#客户端来进行验证
 ```
-.\netframeworkClient.exe
+.\netframeworkClientAsync.exe
 ```
 
 ## 通信模式
@@ -466,6 +496,22 @@ gRPC 包含四种基础的通信模式：
 
 ## 多路复用、元数据、负载均衡
 关于这部分内容可以看 [这里](https://zhuanlan.zhihu.com/p/364325400)
+
+## gRPC服务监测
+gRPC [提供 OpenTelemetry](https://grpc.io/docs/guides/opentelemetry-metrics/) 的监测，不过gRPC自己的各个语言实现还没有全部完成
+
+OpenTelemetry 也提供了SDK为各个框架提供支持，[这里](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/supported-libraries.md) 有列表
+
+笔者在 java 的示例中，使用 [grpc-1.6](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/grpc-1.6/library) 来提供一个例子，也可以看 [官方例子](https://github.com/open-telemetry/opentelemetry-java-examples/tree/main/grpc)
+
+**笔者示例的启动方式** 
+1. 运行 ``StartGRPCServerWithOtel.cmd``
+2. 访问 [这里](https://www.jaegertracing.io/download/) 下载Windows下的 ``Jaeger`` 二进制，然后解压缩
+3. 运行 ``jaeger-all-in-one.exe``
+4. 访问 Jaeger UI   ``http://localhost:16686/`` 即可看到数据
+
+原理就是我们自己写的程序会向 ``jaeger`` 进程 ``http://localhost:4318/`` 访问，发布监控数据
+
 
 ## awesome-grpc
 https://github.com/grpc-ecosystem/awesome-grpc

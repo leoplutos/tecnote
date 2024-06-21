@@ -7,7 +7,7 @@ package grpc_demo;
 option go_package = "go/product";
 //Java代码类的包名
 //option java_package = "src.main.java.javagrpc";
-option java_package = "javagrpc.grpc.stub";
+option java_package = "javagrpc";
 //Java代码类的文件名，否则默认生成的类名为proto文件名的驼峰命名
 option java_outer_classname = "ProductInfoPb";
 // 定义的所有消息、枚举和服务生成对应的多个类文件，而不是以内部类的形式出现

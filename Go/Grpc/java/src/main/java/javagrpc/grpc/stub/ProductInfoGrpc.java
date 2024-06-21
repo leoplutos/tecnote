@@ -1,4 +1,4 @@
-package javagrpc;
+package javagrpc.grpc.stub;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
@@ -15,29 +15,29 @@ public final class ProductInfoGrpc {
   public static final java.lang.String SERVICE_NAME = "grpc_demo.ProductInfo";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<javagrpc.ProductInfoPb.Product,
-      javagrpc.ProductInfoPb.ProductId> getAddProductMethod;
+  private static volatile io.grpc.MethodDescriptor<javagrpc.grpc.stub.ProductInfoPb.Product,
+      javagrpc.grpc.stub.ProductInfoPb.ProductId> getAddProductMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "addProduct",
-      requestType = javagrpc.ProductInfoPb.Product.class,
-      responseType = javagrpc.ProductInfoPb.ProductId.class,
+      requestType = javagrpc.grpc.stub.ProductInfoPb.Product.class,
+      responseType = javagrpc.grpc.stub.ProductInfoPb.ProductId.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<javagrpc.ProductInfoPb.Product,
-      javagrpc.ProductInfoPb.ProductId> getAddProductMethod() {
-    io.grpc.MethodDescriptor<javagrpc.ProductInfoPb.Product, javagrpc.ProductInfoPb.ProductId> getAddProductMethod;
+  public static io.grpc.MethodDescriptor<javagrpc.grpc.stub.ProductInfoPb.Product,
+      javagrpc.grpc.stub.ProductInfoPb.ProductId> getAddProductMethod() {
+    io.grpc.MethodDescriptor<javagrpc.grpc.stub.ProductInfoPb.Product, javagrpc.grpc.stub.ProductInfoPb.ProductId> getAddProductMethod;
     if ((getAddProductMethod = ProductInfoGrpc.getAddProductMethod) == null) {
       synchronized (ProductInfoGrpc.class) {
         if ((getAddProductMethod = ProductInfoGrpc.getAddProductMethod) == null) {
           ProductInfoGrpc.getAddProductMethod = getAddProductMethod =
-              io.grpc.MethodDescriptor.<javagrpc.ProductInfoPb.Product, javagrpc.ProductInfoPb.ProductId>newBuilder()
+              io.grpc.MethodDescriptor.<javagrpc.grpc.stub.ProductInfoPb.Product, javagrpc.grpc.stub.ProductInfoPb.ProductId>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "addProduct"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  javagrpc.ProductInfoPb.Product.getDefaultInstance()))
+                  javagrpc.grpc.stub.ProductInfoPb.Product.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  javagrpc.ProductInfoPb.ProductId.getDefaultInstance()))
+                  javagrpc.grpc.stub.ProductInfoPb.ProductId.getDefaultInstance()))
               .setSchemaDescriptor(new ProductInfoMethodDescriptorSupplier("addProduct"))
               .build();
         }
@@ -46,29 +46,29 @@ public final class ProductInfoGrpc {
     return getAddProductMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<javagrpc.ProductInfoPb.ProductId,
-      javagrpc.ProductInfoPb.Product> getGetProductMethod;
+  private static volatile io.grpc.MethodDescriptor<javagrpc.grpc.stub.ProductInfoPb.ProductId,
+      javagrpc.grpc.stub.ProductInfoPb.Product> getGetProductMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getProduct",
-      requestType = javagrpc.ProductInfoPb.ProductId.class,
-      responseType = javagrpc.ProductInfoPb.Product.class,
+      requestType = javagrpc.grpc.stub.ProductInfoPb.ProductId.class,
+      responseType = javagrpc.grpc.stub.ProductInfoPb.Product.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<javagrpc.ProductInfoPb.ProductId,
-      javagrpc.ProductInfoPb.Product> getGetProductMethod() {
-    io.grpc.MethodDescriptor<javagrpc.ProductInfoPb.ProductId, javagrpc.ProductInfoPb.Product> getGetProductMethod;
+  public static io.grpc.MethodDescriptor<javagrpc.grpc.stub.ProductInfoPb.ProductId,
+      javagrpc.grpc.stub.ProductInfoPb.Product> getGetProductMethod() {
+    io.grpc.MethodDescriptor<javagrpc.grpc.stub.ProductInfoPb.ProductId, javagrpc.grpc.stub.ProductInfoPb.Product> getGetProductMethod;
     if ((getGetProductMethod = ProductInfoGrpc.getGetProductMethod) == null) {
       synchronized (ProductInfoGrpc.class) {
         if ((getGetProductMethod = ProductInfoGrpc.getGetProductMethod) == null) {
           ProductInfoGrpc.getGetProductMethod = getGetProductMethod =
-              io.grpc.MethodDescriptor.<javagrpc.ProductInfoPb.ProductId, javagrpc.ProductInfoPb.Product>newBuilder()
+              io.grpc.MethodDescriptor.<javagrpc.grpc.stub.ProductInfoPb.ProductId, javagrpc.grpc.stub.ProductInfoPb.Product>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getProduct"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  javagrpc.ProductInfoPb.ProductId.getDefaultInstance()))
+                  javagrpc.grpc.stub.ProductInfoPb.ProductId.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  javagrpc.ProductInfoPb.Product.getDefaultInstance()))
+                  javagrpc.grpc.stub.ProductInfoPb.Product.getDefaultInstance()))
               .setSchemaDescriptor(new ProductInfoMethodDescriptorSupplier("getProduct"))
               .build();
         }
@@ -130,8 +130,8 @@ public final class ProductInfoGrpc {
      * 添加商品
      * </pre>
      */
-    default void addProduct(javagrpc.ProductInfoPb.Product request,
-        io.grpc.stub.StreamObserver<javagrpc.ProductInfoPb.ProductId> responseObserver) {
+    default void addProduct(javagrpc.grpc.stub.ProductInfoPb.Product request,
+        io.grpc.stub.StreamObserver<javagrpc.grpc.stub.ProductInfoPb.ProductId> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddProductMethod(), responseObserver);
     }
 
@@ -140,8 +140,8 @@ public final class ProductInfoGrpc {
      * 获取商品
      * </pre>
      */
-    default void getProduct(javagrpc.ProductInfoPb.ProductId request,
-        io.grpc.stub.StreamObserver<javagrpc.ProductInfoPb.Product> responseObserver) {
+    default void getProduct(javagrpc.grpc.stub.ProductInfoPb.ProductId request,
+        io.grpc.stub.StreamObserver<javagrpc.grpc.stub.ProductInfoPb.Product> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetProductMethod(), responseObserver);
     }
   }
@@ -178,8 +178,8 @@ public final class ProductInfoGrpc {
      * 添加商品
      * </pre>
      */
-    public void addProduct(javagrpc.ProductInfoPb.Product request,
-        io.grpc.stub.StreamObserver<javagrpc.ProductInfoPb.ProductId> responseObserver) {
+    public void addProduct(javagrpc.grpc.stub.ProductInfoPb.Product request,
+        io.grpc.stub.StreamObserver<javagrpc.grpc.stub.ProductInfoPb.ProductId> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAddProductMethod(), getCallOptions()), request, responseObserver);
     }
@@ -189,8 +189,8 @@ public final class ProductInfoGrpc {
      * 获取商品
      * </pre>
      */
-    public void getProduct(javagrpc.ProductInfoPb.ProductId request,
-        io.grpc.stub.StreamObserver<javagrpc.ProductInfoPb.Product> responseObserver) {
+    public void getProduct(javagrpc.grpc.stub.ProductInfoPb.ProductId request,
+        io.grpc.stub.StreamObserver<javagrpc.grpc.stub.ProductInfoPb.Product> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetProductMethod(), getCallOptions()), request, responseObserver);
     }
@@ -217,7 +217,7 @@ public final class ProductInfoGrpc {
      * 添加商品
      * </pre>
      */
-    public javagrpc.ProductInfoPb.ProductId addProduct(javagrpc.ProductInfoPb.Product request) {
+    public javagrpc.grpc.stub.ProductInfoPb.ProductId addProduct(javagrpc.grpc.stub.ProductInfoPb.Product request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAddProductMethod(), getCallOptions(), request);
     }
@@ -227,7 +227,7 @@ public final class ProductInfoGrpc {
      * 获取商品
      * </pre>
      */
-    public javagrpc.ProductInfoPb.Product getProduct(javagrpc.ProductInfoPb.ProductId request) {
+    public javagrpc.grpc.stub.ProductInfoPb.Product getProduct(javagrpc.grpc.stub.ProductInfoPb.ProductId request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetProductMethod(), getCallOptions(), request);
     }
@@ -254,8 +254,8 @@ public final class ProductInfoGrpc {
      * 添加商品
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<javagrpc.ProductInfoPb.ProductId> addProduct(
-        javagrpc.ProductInfoPb.Product request) {
+    public com.google.common.util.concurrent.ListenableFuture<javagrpc.grpc.stub.ProductInfoPb.ProductId> addProduct(
+        javagrpc.grpc.stub.ProductInfoPb.Product request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAddProductMethod(), getCallOptions()), request);
     }
@@ -265,8 +265,8 @@ public final class ProductInfoGrpc {
      * 获取商品
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<javagrpc.ProductInfoPb.Product> getProduct(
-        javagrpc.ProductInfoPb.ProductId request) {
+    public com.google.common.util.concurrent.ListenableFuture<javagrpc.grpc.stub.ProductInfoPb.Product> getProduct(
+        javagrpc.grpc.stub.ProductInfoPb.ProductId request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetProductMethod(), getCallOptions()), request);
     }
@@ -293,12 +293,12 @@ public final class ProductInfoGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_ADD_PRODUCT:
-          serviceImpl.addProduct((javagrpc.ProductInfoPb.Product) request,
-              (io.grpc.stub.StreamObserver<javagrpc.ProductInfoPb.ProductId>) responseObserver);
+          serviceImpl.addProduct((javagrpc.grpc.stub.ProductInfoPb.Product) request,
+              (io.grpc.stub.StreamObserver<javagrpc.grpc.stub.ProductInfoPb.ProductId>) responseObserver);
           break;
         case METHODID_GET_PRODUCT:
-          serviceImpl.getProduct((javagrpc.ProductInfoPb.ProductId) request,
-              (io.grpc.stub.StreamObserver<javagrpc.ProductInfoPb.Product>) responseObserver);
+          serviceImpl.getProduct((javagrpc.grpc.stub.ProductInfoPb.ProductId) request,
+              (io.grpc.stub.StreamObserver<javagrpc.grpc.stub.ProductInfoPb.Product>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -322,15 +322,15 @@ public final class ProductInfoGrpc {
           getAddProductMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              javagrpc.ProductInfoPb.Product,
-              javagrpc.ProductInfoPb.ProductId>(
+              javagrpc.grpc.stub.ProductInfoPb.Product,
+              javagrpc.grpc.stub.ProductInfoPb.ProductId>(
                 service, METHODID_ADD_PRODUCT)))
         .addMethod(
           getGetProductMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              javagrpc.ProductInfoPb.ProductId,
-              javagrpc.ProductInfoPb.Product>(
+              javagrpc.grpc.stub.ProductInfoPb.ProductId,
+              javagrpc.grpc.stub.ProductInfoPb.Product>(
                 service, METHODID_GET_PRODUCT)))
         .build();
   }
@@ -341,7 +341,7 @@ public final class ProductInfoGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return javagrpc.ProductInfoPb.getDescriptor();
+      return javagrpc.grpc.stub.ProductInfoPb.getDescriptor();
     }
 
     @java.lang.Override

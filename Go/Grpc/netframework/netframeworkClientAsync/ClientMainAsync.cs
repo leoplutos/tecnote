@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +10,9 @@ using GrpcDemo;
 using static Grpc.Health.V1.Health;
 using static Grpc.Health.V1.HealthCheckResponse.Types;
 
-namespace netframeworkClient
+namespace netframeworkClientAsync
 {
-	// 主类
-	class ClientMain
+	class ClientMainAsync
 	{
 		// 程序主入口
 		public static async Task Main(string[] args)
@@ -44,22 +43,22 @@ namespace netframeworkClient
 			for (int i = 0; i < 5; i++)
 			{
 				// 添加商品
-				ProductId pid = AddProduct(client);
+				AddProductAsync(client);
 
 				// 取得商品
-				GetProduct(client, pid);
+				GetProductAsync(client, "123");
 			}
 
 			// 检查服务状态
-			HealthCheck(healthClient);
-
+			HealthCheckAsync(healthClient);
 
 			// 关闭频道
 			await channel.ShutdownAsync();
 		}
 
-		// 添加商品（阻塞同步方式）
-		public static ProductId AddProduct(ProductInfo.ProductInfoClient client)
+
+		// 添加商品（非阻塞异步方式）
+		public static void AddProductAsync(ProductInfo.ProductInfoClient client)
 		{
 			// 参数可以传递给一个一个调用，也可以组合。使用流畅的语法转换为 CallOptions。
 			var callOptions = new CallOptions()
@@ -68,15 +67,21 @@ namespace netframeworkClient
 				//.WithHeaders(Metadata.Empty)
 				.WithWaitForReady(true);
 
-			ProductId result = client.addProduct(new Product { Name = "Mac Book Air 2020", Description = "Add by .net Framework(C#)" }, callOptions);
-			DateTime dtNow = DateTime.Now;
-			string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
-			Console.WriteLine("[{0}][.net Framework(C#)][Client] Add product success. id = {1}", dtStr, result.Value);
-			return result;
+			// 异步服务调用
+			AsyncUnaryCall<ProductId> call = client.addProductAsync(new Product { Name = "Mac Book Air 2020", Description = "Add by .net Framework(C#)" }, callOptions);
+			// 设定回调函数
+			var awaiter = call.GetAwaiter();
+			awaiter.OnCompleted(() =>
+			{
+				ProductId result = call.ResponseAsync.Result;
+				DateTime dtNow = DateTime.Now;
+				string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+				Console.WriteLine("[{0}][.net Framework(C#)][Client] Add product success. id = {1}", dtStr, result.Value);
+			});
 		}
 
-		// 取得商品（阻塞同步方式）
-		public static void GetProduct(ProductInfo.ProductInfoClient client, ProductId pid)
+		// 取得商品（非阻塞异步方式）
+		public static void GetProductAsync(ProductInfo.ProductInfoClient client, String pidStr)
 		{
 			// 参数可以传递给一个一个调用，也可以组合。使用流畅的语法转换为 CallOptions。
 			var callOptions = new CallOptions()
@@ -85,22 +90,35 @@ namespace netframeworkClient
 				//.WithHeaders(Metadata.Empty)
 				.WithWaitForReady(true);
 
-			Product result = client.getProduct(pid, callOptions);
-			DateTime dtNow = DateTime.Now;
-			string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
-			Console.WriteLine("[{0}][.net Framework(C#)][Client] GetProduct success", dtStr);
-			Console.WriteLine(result);
+			ProductId pid = new ProductId { Value = pidStr };
+			// 异步服务调用
+			AsyncUnaryCall<Product> call = client.getProductAsync(pid, callOptions);
+			// 设定回调函数
+			var awaiter = call.GetAwaiter();
+			awaiter.OnCompleted(() =>
+			{
+				Product result = call.ResponseAsync.Result;
+				DateTime dtNow = DateTime.Now;
+				string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+				Console.WriteLine("[{0}][.net Framework(C#)][Client] GetProduct success", dtStr);
+				Console.WriteLine(result);
+			});
 		}
 
-		//健康检查（阻塞同步方式）
-		public static ServingStatus HealthCheck(HealthClient client)
+		//健康检查（非阻塞异步方式）
+		public static void HealthCheckAsync(HealthClient client)
 		{
 			// HealthCheck检查的服务名为空
-			HealthCheckResponse response = client.Check(new HealthCheckRequest { Service = "" });
-			DateTime dtNow = DateTime.Now;
-			string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
-			Console.WriteLine("[{0}][.net Framework(C#)][Client] Health Checking... gRPC Server status: [{1}]", dtStr, response.Status);
-			return response.Status;
+			AsyncUnaryCall<HealthCheckResponse> call = client.CheckAsync(new HealthCheckRequest { Service = "" });
+			// 设定回调函数
+			var awaiter = call.GetAwaiter();
+			awaiter.OnCompleted(() =>
+			{
+				HealthCheckResponse result = call.ResponseAsync.Result;
+				DateTime dtNow = DateTime.Now;
+				string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+				Console.WriteLine("[{0}][.net Framework(C#)][Client] Health Checking... gRPC Server status: [{1}]", dtStr, result.Status);
+			});
 		}
 	}
 }

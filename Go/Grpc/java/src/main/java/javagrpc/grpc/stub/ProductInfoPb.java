@@ -2,7 +2,7 @@
 // source: ProductInfo.proto
 
 // Protobuf Java Version: 3.25.1
-package javagrpc;
+package javagrpc.grpc.stub;
 
 public final class ProductInfoPb {
   private ProductInfoPb() {}
@@ -82,15 +82,15 @@ public final class ProductInfoPb {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return javagrpc.ProductInfoPb.internal_static_grpc_demo_Product_descriptor;
+      return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_Product_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return javagrpc.ProductInfoPb.internal_static_grpc_demo_Product_fieldAccessorTable
+      return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_Product_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              javagrpc.ProductInfoPb.Product.class, javagrpc.ProductInfoPb.Product.Builder.class);
+              javagrpc.grpc.stub.ProductInfoPb.Product.class, javagrpc.grpc.stub.ProductInfoPb.Product.Builder.class);
     }
 
     public static final int ID_FIELD_NUMBER = 1;
@@ -261,10 +261,10 @@ public final class ProductInfoPb {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof javagrpc.ProductInfoPb.Product)) {
+      if (!(obj instanceof javagrpc.grpc.stub.ProductInfoPb.Product)) {
         return super.equals(obj);
       }
-      javagrpc.ProductInfoPb.Product other = (javagrpc.ProductInfoPb.Product) obj;
+      javagrpc.grpc.stub.ProductInfoPb.Product other = (javagrpc.grpc.stub.ProductInfoPb.Product) obj;
 
       if (!getId()
           .equals(other.getId())) return false;
@@ -294,44 +294,44 @@ public final class ProductInfoPb {
       return hash;
     }
 
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(byte[] data)
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(java.io.InputStream input)
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -339,26 +339,26 @@ public final class ProductInfoPb {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static javagrpc.ProductInfoPb.Product parseDelimitedFrom(java.io.InputStream input)
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static javagrpc.ProductInfoPb.Product parseDelimitedFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static javagrpc.ProductInfoPb.Product parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.Product parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -371,7 +371,7 @@ public final class ProductInfoPb {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(javagrpc.ProductInfoPb.Product prototype) {
+    public static Builder newBuilder(javagrpc.grpc.stub.ProductInfoPb.Product prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -392,21 +392,21 @@ public final class ProductInfoPb {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:grpc_demo.Product)
-        javagrpc.ProductInfoPb.ProductOrBuilder {
+        javagrpc.grpc.stub.ProductInfoPb.ProductOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return javagrpc.ProductInfoPb.internal_static_grpc_demo_Product_descriptor;
+        return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_Product_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return javagrpc.ProductInfoPb.internal_static_grpc_demo_Product_fieldAccessorTable
+        return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_Product_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                javagrpc.ProductInfoPb.Product.class, javagrpc.ProductInfoPb.Product.Builder.class);
+                javagrpc.grpc.stub.ProductInfoPb.Product.class, javagrpc.grpc.stub.ProductInfoPb.Product.Builder.class);
       }
 
-      // Construct using javagrpc.ProductInfoPb.Product.newBuilder()
+      // Construct using javagrpc.grpc.stub.ProductInfoPb.Product.newBuilder()
       private Builder() {
 
       }
@@ -429,17 +429,17 @@ public final class ProductInfoPb {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return javagrpc.ProductInfoPb.internal_static_grpc_demo_Product_descriptor;
+        return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_Product_descriptor;
       }
 
       @java.lang.Override
-      public javagrpc.ProductInfoPb.Product getDefaultInstanceForType() {
-        return javagrpc.ProductInfoPb.Product.getDefaultInstance();
+      public javagrpc.grpc.stub.ProductInfoPb.Product getDefaultInstanceForType() {
+        return javagrpc.grpc.stub.ProductInfoPb.Product.getDefaultInstance();
       }
 
       @java.lang.Override
-      public javagrpc.ProductInfoPb.Product build() {
-        javagrpc.ProductInfoPb.Product result = buildPartial();
+      public javagrpc.grpc.stub.ProductInfoPb.Product build() {
+        javagrpc.grpc.stub.ProductInfoPb.Product result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -447,14 +447,14 @@ public final class ProductInfoPb {
       }
 
       @java.lang.Override
-      public javagrpc.ProductInfoPb.Product buildPartial() {
-        javagrpc.ProductInfoPb.Product result = new javagrpc.ProductInfoPb.Product(this);
+      public javagrpc.grpc.stub.ProductInfoPb.Product buildPartial() {
+        javagrpc.grpc.stub.ProductInfoPb.Product result = new javagrpc.grpc.stub.ProductInfoPb.Product(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(javagrpc.ProductInfoPb.Product result) {
+      private void buildPartial0(javagrpc.grpc.stub.ProductInfoPb.Product result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.id_ = id_;
@@ -501,16 +501,16 @@ public final class ProductInfoPb {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof javagrpc.ProductInfoPb.Product) {
-          return mergeFrom((javagrpc.ProductInfoPb.Product)other);
+        if (other instanceof javagrpc.grpc.stub.ProductInfoPb.Product) {
+          return mergeFrom((javagrpc.grpc.stub.ProductInfoPb.Product)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(javagrpc.ProductInfoPb.Product other) {
-        if (other == javagrpc.ProductInfoPb.Product.getDefaultInstance()) return this;
+      public Builder mergeFrom(javagrpc.grpc.stub.ProductInfoPb.Product other) {
+        if (other == javagrpc.grpc.stub.ProductInfoPb.Product.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
           bitField0_ |= 0x00000001;
@@ -816,12 +816,12 @@ public final class ProductInfoPb {
     }
 
     // @@protoc_insertion_point(class_scope:grpc_demo.Product)
-    private static final javagrpc.ProductInfoPb.Product DEFAULT_INSTANCE;
+    private static final javagrpc.grpc.stub.ProductInfoPb.Product DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new javagrpc.ProductInfoPb.Product();
+      DEFAULT_INSTANCE = new javagrpc.grpc.stub.ProductInfoPb.Product();
     }
 
-    public static javagrpc.ProductInfoPb.Product getDefaultInstance() {
+    public static javagrpc.grpc.stub.ProductInfoPb.Product getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -857,7 +857,7 @@ public final class ProductInfoPb {
     }
 
     @java.lang.Override
-    public javagrpc.ProductInfoPb.Product getDefaultInstanceForType() {
+    public javagrpc.grpc.stub.ProductInfoPb.Product getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -904,15 +904,15 @@ public final class ProductInfoPb {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return javagrpc.ProductInfoPb.internal_static_grpc_demo_ProductId_descriptor;
+      return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_ProductId_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return javagrpc.ProductInfoPb.internal_static_grpc_demo_ProductId_fieldAccessorTable
+      return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_ProductId_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              javagrpc.ProductInfoPb.ProductId.class, javagrpc.ProductInfoPb.ProductId.Builder.class);
+              javagrpc.grpc.stub.ProductInfoPb.ProductId.class, javagrpc.grpc.stub.ProductInfoPb.ProductId.Builder.class);
     }
 
     public static final int VALUE_FIELD_NUMBER = 1;
@@ -993,10 +993,10 @@ public final class ProductInfoPb {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof javagrpc.ProductInfoPb.ProductId)) {
+      if (!(obj instanceof javagrpc.grpc.stub.ProductInfoPb.ProductId)) {
         return super.equals(obj);
       }
-      javagrpc.ProductInfoPb.ProductId other = (javagrpc.ProductInfoPb.ProductId) obj;
+      javagrpc.grpc.stub.ProductInfoPb.ProductId other = (javagrpc.grpc.stub.ProductInfoPb.ProductId) obj;
 
       if (!getValue()
           .equals(other.getValue())) return false;
@@ -1018,44 +1018,44 @@ public final class ProductInfoPb {
       return hash;
     }
 
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(byte[] data)
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(java.io.InputStream input)
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1063,26 +1063,26 @@ public final class ProductInfoPb {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static javagrpc.ProductInfoPb.ProductId parseDelimitedFrom(java.io.InputStream input)
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static javagrpc.ProductInfoPb.ProductId parseDelimitedFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static javagrpc.ProductInfoPb.ProductId parseFrom(
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1095,7 +1095,7 @@ public final class ProductInfoPb {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(javagrpc.ProductInfoPb.ProductId prototype) {
+    public static Builder newBuilder(javagrpc.grpc.stub.ProductInfoPb.ProductId prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1116,21 +1116,21 @@ public final class ProductInfoPb {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:grpc_demo.ProductId)
-        javagrpc.ProductInfoPb.ProductIdOrBuilder {
+        javagrpc.grpc.stub.ProductInfoPb.ProductIdOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return javagrpc.ProductInfoPb.internal_static_grpc_demo_ProductId_descriptor;
+        return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_ProductId_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return javagrpc.ProductInfoPb.internal_static_grpc_demo_ProductId_fieldAccessorTable
+        return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_ProductId_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                javagrpc.ProductInfoPb.ProductId.class, javagrpc.ProductInfoPb.ProductId.Builder.class);
+                javagrpc.grpc.stub.ProductInfoPb.ProductId.class, javagrpc.grpc.stub.ProductInfoPb.ProductId.Builder.class);
       }
 
-      // Construct using javagrpc.ProductInfoPb.ProductId.newBuilder()
+      // Construct using javagrpc.grpc.stub.ProductInfoPb.ProductId.newBuilder()
       private Builder() {
 
       }
@@ -1151,17 +1151,17 @@ public final class ProductInfoPb {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return javagrpc.ProductInfoPb.internal_static_grpc_demo_ProductId_descriptor;
+        return javagrpc.grpc.stub.ProductInfoPb.internal_static_grpc_demo_ProductId_descriptor;
       }
 
       @java.lang.Override
-      public javagrpc.ProductInfoPb.ProductId getDefaultInstanceForType() {
-        return javagrpc.ProductInfoPb.ProductId.getDefaultInstance();
+      public javagrpc.grpc.stub.ProductInfoPb.ProductId getDefaultInstanceForType() {
+        return javagrpc.grpc.stub.ProductInfoPb.ProductId.getDefaultInstance();
       }
 
       @java.lang.Override
-      public javagrpc.ProductInfoPb.ProductId build() {
-        javagrpc.ProductInfoPb.ProductId result = buildPartial();
+      public javagrpc.grpc.stub.ProductInfoPb.ProductId build() {
+        javagrpc.grpc.stub.ProductInfoPb.ProductId result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1169,14 +1169,14 @@ public final class ProductInfoPb {
       }
 
       @java.lang.Override
-      public javagrpc.ProductInfoPb.ProductId buildPartial() {
-        javagrpc.ProductInfoPb.ProductId result = new javagrpc.ProductInfoPb.ProductId(this);
+      public javagrpc.grpc.stub.ProductInfoPb.ProductId buildPartial() {
+        javagrpc.grpc.stub.ProductInfoPb.ProductId result = new javagrpc.grpc.stub.ProductInfoPb.ProductId(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(javagrpc.ProductInfoPb.ProductId result) {
+      private void buildPartial0(javagrpc.grpc.stub.ProductInfoPb.ProductId result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.value_ = value_;
@@ -1217,16 +1217,16 @@ public final class ProductInfoPb {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof javagrpc.ProductInfoPb.ProductId) {
-          return mergeFrom((javagrpc.ProductInfoPb.ProductId)other);
+        if (other instanceof javagrpc.grpc.stub.ProductInfoPb.ProductId) {
+          return mergeFrom((javagrpc.grpc.stub.ProductInfoPb.ProductId)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(javagrpc.ProductInfoPb.ProductId other) {
-        if (other == javagrpc.ProductInfoPb.ProductId.getDefaultInstance()) return this;
+      public Builder mergeFrom(javagrpc.grpc.stub.ProductInfoPb.ProductId other) {
+        if (other == javagrpc.grpc.stub.ProductInfoPb.ProductId.getDefaultInstance()) return this;
         if (!other.getValue().isEmpty()) {
           value_ = other.value_;
           bitField0_ |= 0x00000001;
@@ -1368,12 +1368,12 @@ public final class ProductInfoPb {
     }
 
     // @@protoc_insertion_point(class_scope:grpc_demo.ProductId)
-    private static final javagrpc.ProductInfoPb.ProductId DEFAULT_INSTANCE;
+    private static final javagrpc.grpc.stub.ProductInfoPb.ProductId DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new javagrpc.ProductInfoPb.ProductId();
+      DEFAULT_INSTANCE = new javagrpc.grpc.stub.ProductInfoPb.ProductId();
     }
 
-    public static javagrpc.ProductInfoPb.ProductId getDefaultInstance() {
+    public static javagrpc.grpc.stub.ProductInfoPb.ProductId getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1409,7 +1409,7 @@ public final class ProductInfoPb {
     }
 
     @java.lang.Override
-    public javagrpc.ProductInfoPb.ProductId getDefaultInstanceForType() {
+    public javagrpc.grpc.stub.ProductInfoPb.ProductId getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1440,8 +1440,8 @@ public final class ProductInfoPb {
       "ProductInfo\0226\n\naddProduct\022\022.grpc_demo.Pr" +
       "oduct\032\024.grpc_demo.ProductId\0226\n\ngetProduc" +
       "t\022\024.grpc_demo.ProductId\032\022.grpc_demo.Prod" +
-      "uctB\'\n\010javagrpcB\rProductInfoPbP\000Z\ngo/pro" +
-      "ductb\006proto3"
+      "uctB1\n\022javagrpc.grpc.stubB\rProductInfoPb" +
+      "P\000Z\ngo/productb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

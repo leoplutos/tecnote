@@ -1,4 +1,5 @@
 {
+    "editor.codeLens": false,
     "omnisharp.useModernNet": false,
     "dotnet.server.useOmnisharp": true,
     "dotnet.unitTestDebuggingOptions": {

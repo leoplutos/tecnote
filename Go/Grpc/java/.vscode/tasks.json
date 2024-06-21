@@ -1,89 +1,166 @@
 {
-    "version": "2.0.0",
-    "options": { //tasks.json定义的所有内容都使用cmd运行
-        "shell": {
-            "executable": "cmd.exe",
-            "args": [
-                "/d",
-                "/c"
-            ]
-        },
-        "env": { //自定义环境变量
-            "JAVA_TOOL_OPTIONS": "-Duser.language=en",
-            "JAVA_HOME": "D:\\Tools\\jdk-21",
-            "MAVEN_HOME": "D:\\Tools\\apache-maven-3.9.7",
-            "PATH": "${env:path};${env:JAVA_HOME}\\bin;D:\\Tools\\apache-maven-3.9.7\\bin;",
-        }
-    },
-    "tasks": [
-        {
-            "label": "mvn_build",
-            "type": "shell",
-            "command": "mvn",
-            "args": [
-                //"clean",
-                "compile",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-        },
-        {
-            "label": "mvn_runServer",
-            "type": "shell",
-            "command": "mvn",
-            "args": [
-                "exec:java",
-                "-Dexec.mainClass=\"javagrpc.ServerMain\"",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            },
-        },
-        {
-            "label": "mvn_runClient",
-            "type": "shell",
-            "command": "mvn",
-            "args": [
-                "exec:java",
-                "-Dexec.mainClass=\"javagrpc.ClientMain\"",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            },
-        },
-    ]
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"JAVA_TOOL_OPTIONS": "-Duser.language=en",
+			"JAVA_HOME": "D:\\Tools\\jdk-21",
+			"MAVEN_HOME": "D:\\Tools\\apache-maven-3.9.7",
+			"PATH": "${env:path};${env:JAVA_HOME}\\bin;D:\\Tools\\apache-maven-3.9.7\\bin;",
+		}
+	},
+	"tasks": [
+		{
+			"label": "mvn_build",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"clean",
+				"compile",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{
+			"label": "mvn_package",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"clean",
+				"package",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+		{
+			"label": "mvn_runServer",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"exec:java",
+				"-Dexec.mainClass=\"javagrpc.main.ServerMain\"",
+				"-Dprotoc.skip=true",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+		{
+			"label": "mvn_runClient",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"exec:java",
+				"-Dexec.mainClass=\"javagrpc.main.ClientMain\"",
+				"-Dexec.cleanupDaemonThreads=false",
+				"-Dprotoc.skip=true",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+		{
+			"label": "mvn_runClientAsync",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"exec:java",
+				"-Dexec.mainClass=\"javagrpc.main.ClientAsyncMain\"",
+				"-Dexec.cleanupDaemonThreads=false",
+				"-Dprotoc.skip=true",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+		{
+			"label": "mvn_runStopService",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"exec:java",
+				"-Dexec.mainClass=\"javagrpc.main.ServerStopMain\"",
+				"-Dexec.args=\"127.0.0.1 50051\"",
+				"-Dexec.cleanupDaemonThreads=false",
+				"-Dprotoc.skip=true",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+	]
 }
