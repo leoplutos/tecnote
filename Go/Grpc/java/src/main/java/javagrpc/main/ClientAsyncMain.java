@@ -140,7 +140,7 @@ public class ClientAsyncMain {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		log.info("ClientMainAsync Start");
+		log.info("ClientMainAsync 开始");
 
 		ClientAsyncMain clientAsync = new ClientAsyncMain();
 
@@ -160,7 +160,7 @@ public class ClientAsyncMain {
 		CompletableFuture<HealthCheckResponse> healthTask = clientAsync.checkHealthAsync();
 		taskList.add(healthTask);
 
-		log.info("ClientMainAsync End");
+		log.info("ClientMainAsync 结束");
 
 		// 有多个task时使用allOf(completableFutures).join()来等待所有子线程结束
 		CompletableFuture.allOf(taskList.toArray(CompletableFuture[]::new))

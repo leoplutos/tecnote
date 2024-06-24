@@ -46,7 +46,7 @@ public class ServerStopMain {
 		// 业务请求客户端
 		stopFutureStub = StopServiceGrpc.newFutureStub(channel);
 
-		log.info("[Java][Client] Access server success. host: {}  port: {}", host, port);
+		log.info("[Java][Client] 访问服务端成功. host: {}  port: {}", host, port);
 	}
 
 	public void shutdown() throws InterruptedException {

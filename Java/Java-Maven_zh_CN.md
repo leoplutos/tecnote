@@ -177,6 +177,33 @@ mvn -DpropertyName=propertyValue clean package
 ```
 那么执行 ``mvn package -P test`` 会触发配置文件
 
+## mvnw
+``mvnw`` 是 [Maven Wrapper](https://maven.apache.org/wrapper/) 的缩写。因为我们安装Maven时，默认情况下，系统所有项目都会使用全局安装的这个Maven版本。但是，对于某些项目来说，它可能必须使用某个特定的Maven版本，这个时候，就可以使用Maven Wrapper，它可以负责给这个特定的项目安装指定版本的Maven，而其他项目不受影响。
+
+#### 使用Maven Wrapper
+安装Maven Wrapper最简单的方式是在项目的根目录（即 ``pom.xml`` 所在的目录）下运行安装命令：
+```
+mvn -N wrapper:wrapper
+```
+也可以指定 Maven 版本
+```
+mvn -N wrapper:wrapper -Dmaven=3.9.5
+```
+
+安装后发现多了 ``mvnw`` 、 ``mvnw.cmd`` 和 ``.mvn目录``，我们只需要把 mvn 命令改成 ``mvnw`` 就可以使用跟项目关联的 Maven。例如：
+```
+./mvnw clean package
+```
+
+#### 配置Maven Wrapper
+
+``.mvn/wrapper/maven-wrapper.properties`` 是配置文件，可以配置 Maven 版本
+
+下面是一个使用腾讯云的例子
+```
+distributionUrl=https://mirrors.cloud.tencent.com/apache/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.zip
+```
+
 ## 其他
 
 #### Google Cloud Storage 的镜像

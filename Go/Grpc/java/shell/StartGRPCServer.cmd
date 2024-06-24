@@ -1,5 +1,6 @@
-
 @echo off
+
+chcp 65001
 
 set JAVA_HOME=D:\Tools\jdk-21
 set BATCH_HOME=D:\GRPCBatch

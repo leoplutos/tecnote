@@ -195,6 +195,9 @@ javap -v com/spring/net/a.class
 ## Java 的异步例子
  - [AsyncExample.java](./AsyncExample.java)
 
+## Java 工厂模式的例子
+ - [FactoryMode.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/FactoryMode.java)
+
 ## 其他
 
 ### Java SSH服务端的例子

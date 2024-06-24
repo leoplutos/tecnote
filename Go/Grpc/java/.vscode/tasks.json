@@ -65,12 +65,8 @@
 		{
 			"label": "mvn_runServer",
 			"type": "shell",
-			"command": "mvn",
-			"args": [
-				"exec:java",
-				"-Dexec.mainClass=\"javagrpc.main.ServerMain\"",
-				"-Dprotoc.skip=true",
-			],
+			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -89,13 +85,8 @@
 		{
 			"label": "mvn_runClient",
 			"type": "shell",
-			"command": "mvn",
-			"args": [
-				"exec:java",
-				"-Dexec.mainClass=\"javagrpc.main.ClientMain\"",
-				"-Dexec.cleanupDaemonThreads=false",
-				"-Dprotoc.skip=true",
-			],
+			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -114,13 +105,8 @@
 		{
 			"label": "mvn_runClientAsync",
 			"type": "shell",
-			"command": "mvn",
-			"args": [
-				"exec:java",
-				"-Dexec.mainClass=\"javagrpc.main.ClientAsyncMain\"",
-				"-Dexec.cleanupDaemonThreads=false",
-				"-Dprotoc.skip=true",
-			],
+			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientAsyncMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -139,14 +125,8 @@
 		{
 			"label": "mvn_runStopService",
 			"type": "shell",
-			"command": "mvn",
-			"args": [
-				"exec:java",
-				"-Dexec.mainClass=\"javagrpc.main.ServerStopMain\"",
-				"-Dexec.args=\"127.0.0.1 50051\"",
-				"-Dexec.cleanupDaemonThreads=false",
-				"-Dprotoc.skip=true",
-			],
+			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerStopMain\" -Dexec.args=\"127.0.0.1 50051\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},

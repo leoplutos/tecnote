@@ -1,0 +1,83 @@
+{
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"JAVA_TOOL_OPTIONS": "-Duser.language=en",
+			"JAVA_HOME": "D:\\Tools\\jdk-21",
+			"MAVEN_HOME": "D:\\Tools\\apache-maven-3.9.7",
+			"PATH": "${env:path};${env:JAVA_HOME}\\bin;D:\\Tools\\apache-maven-3.9.7\\bin;",
+		}
+	},
+	"tasks": [
+		{
+			"label": "mvn_build",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"clean",
+				"compile",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{
+			"label": "mvn_runApp",
+			"type": "shell",
+			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"my.mavenbatsample.App\" -Dexec.cleanupDaemonThreads=false",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+		{
+			"label": "mvn_runFactoryMode",
+			"type": "shell",
+			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"my.mavenbatsample.FactoryMode\" -Dexec.cleanupDaemonThreads=false",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+		},
+	]
+}

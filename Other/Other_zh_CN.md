@@ -258,6 +258,8 @@ web-frameworks
  - [官网](https://web-frameworks-benchmark.netlify.app/result)
 
 ## ChatGPT
+ - https://chatgpt.com/
+ - https://chat.openai-use.com/  &nbsp;&nbsp;推荐
  - [免费的 ChatGPT 镜像网站列表](https://github.com/LiLittleCat/awesome-free-chatgpt)
  - https://tw.chatgpt-free.ai/
  - https://www.askchat.ai/?r=317161

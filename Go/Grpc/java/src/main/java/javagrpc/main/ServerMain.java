@@ -68,7 +68,7 @@ public class ServerMain {
 		// String[] params = { dtStr, port + "" };
 		// System.out.println(mFormat.format(params));
 
-		log.info("[Java][Server] Server started, listening on : {}", port);
+		log.info("[Java][Server] gRPC 服务端已开启，端口为 : {}", port);
 
 		// JVM停止时运行的钩子
 		Runtime.getRuntime().addShutdownHook(new Thread() {

@@ -81,10 +81,10 @@ Java所需插件比较多。有2种安装方式：
 
 
 ## Web插件
-* [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：这个比较全面，还支持SOAP（美中不足是POST内容需要SoupUI解析）
-* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：REST API 测试工具
-
-* [Postcode(可选)](https://marketplace.visualstudio.com/items?itemName=rohinivsenthil.postcode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：于创建和测试简HTTP请求，以及查看响应
+* [**httpYac**](https://marketplace.visualstudio.com/items?itemName=anweber.vscode-httpyac)&nbsp;&nbsp;&nbsp;&nbsp;推荐，使用例子可以看[官网](https://httpyac.github.io/guide/request.html)&nbsp;&nbsp;&nbsp;&nbsp;笔者的一个例子文件 [httpYac.http](./httpYac.http)
+* [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+* [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
+* [Postcode(可选)](https://marketplace.visualstudio.com/items?itemName=rohinivsenthil.postcode)
 
 ## DB插件
 * [Sql Tools(可选)](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)

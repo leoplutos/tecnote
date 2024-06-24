@@ -1,13 +1,16 @@
 package my.mavenbatsample;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Hello world!
  *
  */
 public class App {
-	protected static final Logger log = Logger.getLogger(App.class);
+
+	// log4j2日志
+	protected static final Logger log = LogManager.getLogger();
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!");

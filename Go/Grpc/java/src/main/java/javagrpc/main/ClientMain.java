@@ -109,7 +109,7 @@ public class ClientMain {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		log.info("ClientMain Start");
+		log.info("ClientMain 开始");
 
 		ClientMain client = new ClientMain();
 
@@ -127,7 +127,7 @@ public class ClientMain {
 		// 检查服务状态
 		client.checkHealth();
 
-		log.info("ClientMain End");
+		log.info("ClientMain 结束");
 
 		// 关闭连接
 		client.shutdown();
