@@ -13,7 +13,7 @@ public class App {
 	protected static final Logger log = LogManager.getLogger();
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		System.out.println("Hello World - 日本語!");
 		String str1 = "Hello!こんにちは!你好!안녕하세요!";
 		String str2 = "日本語テストです";
 		String str3 = "这是1段中文";

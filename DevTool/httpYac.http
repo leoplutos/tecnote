@@ -37,3 +37,75 @@ GRPC 127.0.0.1:50051/ProductInfo/getProduct
 
 ###
 
+# 发送到 Soap/XML - Ping
+# http://localhost:8081/eAdaptorSoapWebService.svc?wsdl
+# @noRejectUnauthorized
+POST https://localhost/eAdaptorSoapWebService.svc HTTP/1.1
+Content-Type: text/xml;charset=UTF-8
+SOAPAction: "http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/Ping"
+
+<soapenv:Envelope xmlns:ns="http://CargoWise.com/eHub/2010/06"
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Header>
+		<wsse:Security soapenv:mustUnderstand="1"
+			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+			xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<wsse:UsernameToken wsu:Id="UsernameToken-B13C6AE1A37D2625C717193200477081">
+				<wsse:Username>a</wsse:Username>
+				<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">b</wsse:Password>
+				<wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">O14gYliESniDSKfN+CzvkQ==</wsse:Nonce>
+				<wsu:Created>2024-06-25T12:54:07.707Z</wsu:Created>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</soapenv:Header>
+	<soapenv:Body>
+		<ns:Ping/>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+###
+
+# 发送到 Soap/XML- SendStream
+# http://localhost:8081/eAdaptorSoapWebService.svc?wsdl
+# @noRejectUnauthorized
+POST https://localhost/eAdaptorSoapWebService.svc HTTP/1.1
+Content-Type: text/xml;charset=UTF-8
+SOAPAction: "http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/SendStream"
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:ns="http://CargoWise.com/eHub/2010/06"
+	xmlns:car="http://schemas.datacontract.org/2004/07/CargoWise.eHub.Common"
+	xmlns:sys="http://schemas.datacontract.org/2004/07/System">
+	<soapenv:Header>
+		<wsse:Security soapenv:mustUnderstand="1"
+			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+			xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<wsse:UsernameToken wsu:Id="UsernameToken-B13C6AE1A37D2625C717193200477081">
+				<wsse:Username>sendUserA</wsse:Username>
+				<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">pass123</wsse:Password>
+				<wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">O14gYliESniDSKfN+CzvkQ==</wsse:Nonce>
+				<wsu:Created>2024-06-25T12:54:07.707Z</wsu:Created>
+			</wsse:UsernameToken>
+		</wsse:Security>
+		<ns:SendStreamRequestTrackingID>483560eb-dc8a-4661-4661-111111111111</ns:SendStreamRequestTrackingID>
+	</soapenv:Header>
+	<soapenv:Body>
+		<ns:SendStreamRequest>
+			<Payload>
+				<Message 
+					ApplicationCode="UDM"
+					ClientID="WTGCWISYD"
+					TrackingID="5c2643ed-6ae7-4cbe-bf35-8db3c875aea2"
+					SchemaName="http://www.cargowise.com/Schemas/Universal/2011/11#UniversalInterchange "
+					SchemaType="Xml"
+					EmailSubject="sampleEmailSubject123"
+					FileName="sampleFileName456">H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/Iv7Hv/cffPzVsrjM6yYrTy/zZZu+W5TL5rOP5m27enT37tXV1Xia1RfVVdHk42m1uPt6Os8XWXPXvnZ3b2d39+7u7kcp/i6q5Wcf7Y53Pzr6jZM0fcww+Vf642nWZifVss3fmY/0wzfUQ96eVGWZT1uCYL8Nvvc+pc/fXK/yo2dVfZXVs2J58XperBbU1+O7/EXQ9PfKr49e79CzS/9/fBd/eh3cjfTgfxigZRuc0jDqVU1UOXt69N03nz++G3xi273OayILffL693n6+K79y35/Ui1W2TJA6KSa5Ucn3z17fJd/cziFbQVHR0/9lCn+pljkRzQvn27v0P8evtnde3Rv79Hu3nh/jxC1LYJXQLbjN9823xsq6t/0+2M35+aj/wf7vUSQQAIAAA==</Message>
+			</Payload>
+		</ns:SendStreamRequest>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+
+###
+
+

@@ -3,26 +3,25 @@
 ## 概述
 
 Dotnet 平台主要分为三个部分
- - .net Framework
- - .net Core
+ - .NET Framework
+ - .NET Core
  - xamarin
 
-### .net Framework
+### .NET Framework
 2002年发布，仅支持Windows平台，可以开发
 - window桌面程序：winform、UWP、wpf等
 - web应用程序：Asp.Net webform、Asp.Net MVC
 
-发布方式为直接发布
-
-### .net Core
+### .NET Core
 2016年6月27号发布，是微软最新退出开源的、跨平台的平台，可以用来创建运行在Windows、Mac、Linux上的应用程序
-
-发布方式为使用 ``nuget`` 发布
 
 ### xamarin
 主要用来构建手机APP，主要使用的语言是C#语言（但是因为使用人数不多，所以可参考的案例较少）
 
-## 新版 .net Core
+### .NET Framework 和 .NET Core 的区别
+可以看 [官方网站](https://learn.microsoft.com/zh-cn/dotnet/standard/choosing-core-framework-server) 的比较说明
+
+## 新版 .NET Core
 
 ### 下载
 
@@ -47,12 +46,12 @@ dotnet new console --framework net7.0
 dotnet new sln
 ```
 
-### 新版 .net Core 的 VSCode 配置
+### 新版 .NET Core 的 VSCode 配置
 安装VSCode插件（需要.net 7.0或者更高）  
 使用插件为  [**C# Dev Kit**](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 
 
-### 新版 .net Core 的 Vim 配置
+### 新版 .NET Core 的 Vim 配置
 使用LSP（需要.net 7.0或者更高）  
 CSharp有2个语言服务器 ``OmniSharp`` 和 ``CSharp-ls``，推荐使用后者  
 Github地址为：  
@@ -70,12 +69,12 @@ dotnet tool install --global csharp-ls
 csharp-ls --version
 ```
 
-### 在 .net Core 下使用命令行新建旧版 .NET Framework 工程
+### 在 .NET Core 下使用命令行新建旧版 .NET Framework 工程
 ```
 dotnet new console --language C# --output MyProject --target-framework-override net48
 ```
 
-### 关于 .net Core 的包管理
+### 关于 .NET Core 的包管理
 
 比如安装包 ``csharp-ls`` 的命令为  
 ```
@@ -92,7 +91,7 @@ dotnet tool install --global csharp-ls
 csharp-ls --version
 ```
 
-## 旧版 .net Framework
+## 旧版 .NET Framework
 
 ### 环境构建
 
@@ -185,7 +184,7 @@ Web开发的话最新只能用2013（2015找不到下载了），Windows桌面�
 [Visual Studio 2017 workload and component IDs](https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/visual-studio-2017/install/workload-and-component-ids?view=vs-2017)
 
 
-### 旧版 .net Framework 的 VSCode 配置
+### 旧版 .NET Framework 的 VSCode 配置
 
 #### 插件以及事前准备
 
@@ -229,7 +228,7 @@ Web开发的话最新只能用2013（2015找不到下载了），Windows桌面�
 #### 项目配置
 示例设定 [文件夹在这里](../Go/Grpc/netframework/.vscode/)
 
-### 旧版 .net Framework 打包单个exe
+### 旧版 .NET Framework 打包单个exe
 
 ``Costura.Fody`` 是一个 ``Fody`` 框架下的插件，可通过Nuget安装到VS工程中。安装之后，就可以将项目所依赖的DLL（甚至PDB）文件全部打包到EXE文件里。
 
@@ -263,11 +262,25 @@ Fody: No configuration entry found for the installed weaver Costura. This weaver
 </Weavers>
 ```
 
-### C# 的异步例子
+## C# 的异步例子
  - [AsyncExample.cs](./AsyncExample.cs)
 
-### 其他
+## 其他
 
-#### 一个可以在线运行C#的网站
+### Visual Studio Express 2013 无法访问 NuGet
+
+**解决办法**
+
+1. 访问  https://www.nuget.org/packages/  ，手动下载需要的包（扩展名为nupkg）
+
+2. 本地新建目录，将下载的包放进去，比如： ``D:\Tools\vs2013_pkg``
+
+3. 打开 Express 2013，``Tools`` → ``Nuget Package Manager`` → ``Package Manager Setting`` → ``Package Sources``
+
+4. 新建一个源，名字任意（比如：``local``），地址为：``D:\Tools\vs2013_pkg``，并且让这个本地源有效
+
+5. 打开 ``NuGet程序包管理`` 即可看到熟悉的内容
+
+### 一个可以在线运行C#的网站
 https://www.programiz.com/csharp-programming/online-compiler/
 

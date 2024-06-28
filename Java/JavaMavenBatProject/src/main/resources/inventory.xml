@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+<!DOCTYPE inventory SYSTEM "inventory.dtd">
+-->
+<!--inventory.dtd文件直接写在xml中的写法-->
+<!DOCTYPE inventory [
+    <!ELEMENT inventory (book+)>
+    <!ELEMENT book (title,author,dynasty,price)>
+    <!ATTLIST book year CDATA #REQUIRED>
+    <!ELEMENT title (#PCDATA)>
+    <!ELEMENT author (#PCDATA)>
+    <!ELEMENT dynasty (#PCDATA)>
+    <!ELEMENT price (#PCDATA)>
+]>
+
+<inventory>
+    <book year="2012">
+        <title>菜根谭</title>
+        <author>洪应明</author>
+        <dynasty>明朝</dynasty>
+        <price>38</price>
+    </book>
+    <book year="2013">
+        <title>曾国藩家书</title>
+        <author>曾国藩</author>
+        <dynasty>清朝</dynasty>
+        <price>70</price>
+    </book>
+    <book year="2014">
+        <title>高等代数</title>
+        <author>丘维声</author>
+        <dynasty>中华人民共和国</dynasty>
+        <price>86</price>
+    </book>
+</inventory>

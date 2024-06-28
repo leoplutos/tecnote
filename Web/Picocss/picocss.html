@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light dark" />
+	<!--可以下载css使用-->
+	<!--<link rel="stylesheet" href="css/pico.min.css">-->
+	<!--也可以使用CDN-->
+	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2.0.6/css/pico.min.css" />
+	<style>
+		:root {
+			--pico-line-height: 1.5;
+			/*
+			--pico-border-radius: 1rem;
+			--pico-typography-spacing-vertical: 1.5rem;
+			--pico-form-element-spacing-vertical: 1rem;
+			--pico-form-element-spacing-horizontal: 1.25rem;
+			*/
+		}
+
+		/*#为 ID 选择器，id名为login_div的生效*/
+		#login_div {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+		}
+
+		#login_fieldset {
+			--pico-font-weight: 700;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		/*
+		h1 {
+			--pico-font-family: Pacifico, cursive;
+			--pico-font-weight: 400;
+			--pico-typography-spacing-vertical: 0.5rem;
+		}
+
+		button {
+			--pico-font-weight: 700;
+		}
+		*/
+	</style>
+	<title>Hello world!</title>
+</head>
+
+<body>
+	<main class="container">
+		<div id="login_div">
+			<h1>登录</h1>
+			<form>
+				<fieldset>
+					<label>
+						用户名
+						<input name="login" placeholder="Login" aria-label="Login" autoComplete="username" required />
+						<small id="login_helper"> 请输入你的ID </small>
+					</label>
+					<label>
+						密码
+						<input type="password" name="password" placeholder="Password" aria-label="Password"
+							autoComplete="current-password" required />
+						<small id="first_name_helper"> 请输入你的密码 </small>
+					</label>
+				</fieldset>
+				<fieldset>
+					<label htmlFor="remember">
+						<input type="checkbox" role="switch" id="remember" name="remember" /> 记住我
+					</label>
+				</fieldset>
+				<!--<button type="submit"> Login </button>-->
+				<fieldset id="login_fieldset">
+					<button>Login</button>
+				</fieldset>
+			</form>
+		</div>
+		<hr />
+		<h1>Heading 1</h1>
+		<h2>Heading 2</h2>
+		<h3>Heading 3</h3>
+		<h4>Heading 4</h4>
+		<h5>Heading 5</h5>
+		<h6>Heading 6</h6>
+		<hr />
+		<input type="text" name="text" placeholder="Text" aria-label="Text" />
+		<input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" />
+		<input type="number" name="number" placeholder="Number" aria-label="Number" />
+		<input type="password" name="password" placeholder="Password" aria-label="Password" />
+		<input type="tel" name="tel" placeholder="Tel" aria-label="Tel" autocomplete="tel" />
+		<input type="url" name="url" placeholder="Url" aria-label="Url" />
+		<input type="date" name="date" aria-label="Date" />
+		<input type="datetime-local" name="datetime-local" aria-label="Datetime local" />
+		<input type="month" name="month" aria-label="Month" />
+		<input type="time" name="time" aria-label="Time" />
+		<form role="search">
+			<input name="search" type="search" placeholder="Search" />
+			<input type="submit" value="Search" />
+		</form>
+		<input type="color" value="#ff9500" aria-label="Color picker" />
+		<input type="file" />
+		<input type="text" name="text" placeholder="Disabled" aria-label="Disabled input" disabled />
+		<input type="text" name="text" value="Read-only" aria-label="Read-only input" readonly />
+		<input type="text" name="valid" value="Valid" aria-invalid="false" aria-describedby="valid-helper" />
+		<small id="valid-helper">Looks good!</small>
+		<input type="text" name="invalid" value="Invalid" aria-invalid="true" aria-describedby="invalid-helper" />
+		<small id="invalid-helper"> Please provide a valid value! </small>
+		<textarea name="bio" placeholder="Write a professional short bio..."
+			aria-label="Professional short bio"></textarea>
+		<textarea name="disabled" disabled>Disabled</textarea>
+		<textarea name="read-only" readonly>Read-only</textarea>
+		<select name="favorite-cuisine" aria-label="Select your favorite cuisine..." required>
+			<option selected disabled value="">
+				Select your favorite cuisine...
+			</option>
+			<option>Italian</option>
+			<option>Japanese</option>
+			<option>Indian</option>
+			<option>Thai</option>
+			<option>French</option>
+		</select>
+		<fieldset>
+			<legend>Language preferences:</legend>
+			<label>
+				<input type="checkbox" name="english" checked />
+				English
+			</label>
+			<label>
+				<input type="checkbox" name="french" checked />
+				French
+			</label>
+			<label>
+				<input type="checkbox" name="mandarin" />
+				Mandarin
+			</label>
+			<label>
+				<input type="checkbox" name="thai" />
+				Thai
+			</label>
+			<label aria-disabled="true">
+				<input type="checkbox" name="dothraki" disabled />
+				Dothraki
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>Language preferences:</legend>
+			<input type="checkbox" id="hindi" name="hindi" checked />
+			<label htmlFor="hindi">Hindi</label>
+			<input type="checkbox" id="swahili" name="swahili" />
+			<label htmlFor="swahili">Swahili</label>
+			<input type="checkbox" id="navi" name="navi" disabled />
+			<label htmlFor="navi" aria-disabled="true">Na'vi</label>
+		</fieldset>
+		<fieldset>
+			<legend>Language preference:</legend>
+			<label>
+				<input type="radio" name="language" checked />
+				English
+			</label>
+			<label>
+				<input type="radio" name="language" />
+				French
+			</label>
+			<label>
+				<input type="radio" name="language" />
+				Mandarin
+			</label>
+			<label>
+				<input type="radio" name="language" />
+				Thai
+			</label>
+			<label aria-disabled="true">
+				<input type="radio" name="language" disabled />
+				Dothraki
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>Second language:</legend>
+			<input type="radio" id="hindi" name="second-language" checked />
+			<label htmlFor="hindi">Hindi</label>
+			<input type="radio" id="swahili" name="second-language" />
+			<label htmlFor="swahili">Swahili</label>
+			<input type="radio" id="navi" name="second-language" disabled />
+			<label htmlFor="navi" aria-disabled="true">Na'vi</label>
+		</fieldset>
+		<fieldset>
+			<label>
+				<input name="terms" type="checkbox" role="switch" />
+				I agree to the Terms
+			</label>
+			<label>
+				<input name="opt-in" type="checkbox" role="switch" checked />
+				Receive news and offers
+			</label>
+		</fieldset>
+		<label>
+			Brightness
+			<input type="range" />
+		</label>
+		<label>
+			Contrast
+			<input type="range" value="40" />
+		</label>
+		<input type="submit" />
+		<input type="reset" />
+		<button>Button</button>
+		<button disabled>Disabled</button>
+		<hr />
+		<table>
+			<thead data-theme="dark">
+				<tr>
+					<th scope="col">Planet</th>
+					<th scope="col">Diameter (km)</th>
+					<th scope="col">Distance to Sun (AU)</th>
+					<th scope="col">Orbit (days)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Mercury</th>
+					<td>4,880</td>
+					<td>0.39</td>
+					<td>88</td>
+				</tr>
+				<tr>
+					<th scope="row">Venus</th>
+					<td>12,104</td>
+					<td>0.72</td>
+					<td>225</td>
+				</tr>
+				<tr>
+					<th scope="row">Earth</th>
+					<td>12,742</td>
+					<td>1.00</td>
+					<td>365</td>
+				</tr>
+				<tr>
+					<th scope="row">Mars</th>
+					<td>6,779</td>
+					<td>1.52</td>
+					<td>687</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th scope="row">Average</th>
+					<td>9,126</td>
+					<td>0.91</td>
+					<td>341</td>
+				</tr>
+			</tfoot>
+		</table>
+		<hr />
+		<article aria-busy="true">区域</article>
+		<span aria-busy="true">Generating your link...</span>
+		<hr />
+		<button aria-busy="true" aria-label="Please wait…">Please wait…</button>
+		<button aria-busy="true" aria-label="Please wait…" class="secondary">Please wait…</button>
+		<button aria-busy="true" aria-label="Please wait…" class="contrast">Please wait…</button>
+		<button aria-busy="true" class="outline">Please wait…</button>
+		<button aria-busy="true" class="outline secondary">Please wait…</button>
+		<button aria-busy="true" class="outline contrast">Please wait…</button>
+		<hr />
+	</main>
+</body>
+
+</html>

@@ -198,6 +198,9 @@ javap -v com/spring/net/a.class
 ## Java 工厂模式的例子
  - [FactoryMode.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/FactoryMode.java)
 
+## JDK 自带的 Document + XPath 解析 XML
+ - [ParseXmlUtil.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/ParseXmlUtil.java)
+
 ## 其他
 
 ### Java SSH服务端的例子

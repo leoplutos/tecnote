@@ -260,6 +260,7 @@ web-frameworks
 ## ChatGPT
  - https://chatgpt.com/
  - https://chat.openai-use.com/  &nbsp;&nbsp;推荐
+ - https://chat.askchat.ai/  &nbsp;&nbsp;推荐
  - [免费的 ChatGPT 镜像网站列表](https://github.com/LiLittleCat/awesome-free-chatgpt)
  - https://tw.chatgpt-free.ai/
  - https://www.askchat.ai/?r=317161
@@ -269,6 +270,9 @@ https://yandex.com/
 
 ## 开源网络"瑞士军刀"
 https://github.com/gchq/CyberChef
+
+## 自我托管的软件列表
+https://github.com/awesome-selfhosted/awesome-selfhosted
 
 ## Google日本語入力
  - [64bit版](https://dl.google.com/japanese-ime/2.25.3700.0/googlejapaneseinput64.msi)

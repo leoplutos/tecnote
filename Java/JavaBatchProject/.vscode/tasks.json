@@ -9,6 +9,7 @@
 			]
 		},
 		"env": { //在这里自定义环境变量
+			"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8",
 			"JAVA_HOME": "${config:java17.home}",
 			"CATALINA_HOME": "${config:tomcat.home}",
 			"PATH": "${env:path};${config:java17.home}\\bin;${config:ant.home};${config:tomcat.home}\\bin",
