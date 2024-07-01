@@ -111,15 +111,26 @@ public class ServerMain {
 
 		// 读取config.properties内容(会在classpath内寻找)
 		Configuration config = ConfigLoader.getInstance("config.properties");
-		int port = config.getInt("grpc.server.default.port");
-		log.info("[Java][Server] server default port: {}", port);
+		int defaultPort = config.getInt("grpc.server.default.port");
+		log.info("[Java][Server] server default port: {}", defaultPort);
+		// 读取[-Dgrpc.port]的设定值
+		String portStr = System.getProperty("grpc.port", String.valueOf(defaultPort));
+		log.info("[Java][Server] server used port: {}", portStr);
 		// 服务端口，如果参数传入则使用，默认为设定文件定义
-		if (args.length > 0) {
-			try {
-				port = Integer.parseInt(args[0]);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		// if (args.length > 0) {
+		// try {
+		// port = Integer.parseInt(args[0]);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
+		int port = defaultPort;
+		try {
+			port = Integer.parseInt(portStr);
+		} catch (NumberFormatException e) {
+			// 如果未设定则使用默认端口
+			// e.printStackTrace();
+			System.setProperty("grpc.port", String.valueOf(port));
 		}
 
 		final ServerMain server = new ServerMain();

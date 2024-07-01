@@ -36,7 +36,7 @@
 		"overrideName": true
 	},
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
-		//"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6"
+		"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8",
 	},
 	"java.compile.nullAnalysis.mode": "automatic",
 	"java.configuration.updateBuildConfiguration": "disabled",

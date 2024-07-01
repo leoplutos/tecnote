@@ -265,6 +265,22 @@ Fody: No configuration entry found for the installed weaver Costura. This weaver
 ## C# 的异步例子
  - [AsyncExample.cs](./AsyncExample.cs)
 
+## WCF 相关
+
+WCF 即 ``Windows Communication Foundation`` (Windows通信基础)的简称，是微软分布式应用程序开发的集大成者，是对现有 Windows 平台下所有分布式通信技术的整合，例如 .NET Remoting 、MSSQ 。以通信范围而论，它可以跨进程、跨机器、跨子网、企业网乃至于 Internet。WCF可以运行在 ASP.NET ， EXE ， WPF ， Windows Forms ， NT Service ， COM+ 上面。WCF支持的协议包括TCP，HTTP。
+
+#### 一些教程
+
+创建一个简单的WCF服务程序  
+https://www.cnblogs.com/dotnet261010/p/6184032.html
+
+WCF 同一个代理共享全局变量  
+https://www.cnblogs.com/Gyoung/archive/2012/10/19/2731519.html
+
+WCF服务对象实例化的三种方式  
+https://blog.csdn.net/weixin_36536176/article/details/105050876
+
+
 ## 其他
 
 ### Visual Studio Express 2013 无法访问 NuGet

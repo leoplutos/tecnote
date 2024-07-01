@@ -2,13 +2,23 @@
 
 chcp 65001
 
-set JAVA_HOME=D:\Tools\jdk-21
+::取得参数1
+set "USE_PORT=%~1"
+if defined USE_PORT (
+  ::如果参数1存在
+  echo 端口：%USE_PORT%
+) else (
+  ::如果参数1不存在
+  set USE_PORT=50051
+)
+
+set JAVA_HOME=D:\Tools\WorkTool\Java\jdk-21.0.3+9
 set BATCH_HOME=D:\GRPCBatch
 set JAVACMD=%JAVA_HOME%\bin\java.exe
 
 :: OpenTelemetry设定
-set JAVA_TOOL_OPTIONS=-javaagent:%BATCH_HOME%\lib\opentelemetry-javaagent-2.5.0.jar
-#set OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+set JAVA_TOOL_OPTIONS=-javaagent:%BATCH_HOME%\lib\opentelemetry-javaagent-2.5.0.jar -Duser.language=en -Dfile.encoding=UTF-8 -Dgrpc.port=%USE_PORT%
+::set OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 set OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 set OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://localhost:14269/v1/metrics
 set OTEL_SERVICE_NAME="java_gRPC_Server"

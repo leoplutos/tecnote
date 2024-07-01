@@ -2,9 +2,21 @@
 
 chcp 65001
 
-set JAVA_HOME=D:\Tools\jdk-21
+::取得参数1
+set "USE_PORT=%~1"
+if defined USE_PORT (
+  ::如果参数1存在
+  echo 端口：%USE_PORT%
+) else (
+  ::如果参数1不存在
+  set USE_PORT=50051
+)
+
+set JAVA_HOME=D:\Tools\WorkTool\Java\jdk-21.0.3+9
 set BATCH_HOME=D:\GRPCBatch
 set JAVACMD=%JAVA_HOME%\bin\java.exe
+
+set JAVA_TOOL_OPTIONS=-Duser.language=en -Dfile.encoding=UTF-8 -Dgrpc.port=%USE_PORT%
 
 :: 启用变量延迟
 SetLocal EnableDelayedExpansion
