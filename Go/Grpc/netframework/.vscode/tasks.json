@@ -1,76 +1,102 @@
 {
-    "version": "2.0.0",
-    "options": { //tasks.json定义的所有内容都使用cmd运行
-        "shell": {
-            "executable": "cmd.exe",
-            "args": [
-                "/d",
-                "/c"
-            ]
-        },
-        "env": { //自定义环境变量
-            "PATH": "${env:path};C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-        }
-    },
-    "tasks": [
-        {
-            "label": "PJBuild",
-            "command": "MSBuild.exe",
-            "type": "shell",
-            "args": [
-                "netframework.sln",
-                "/t:Rebuild",
-                "/p:Configuration=Debug",
-                "/p:Platform=\"Any CPU\""
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$msCompile"
-            ],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-        },
-        {
-            "label": "PJRunServer",
-            "type": "shell",
-            //"dependsOn": "PJBuild",
-            "command": "${workspaceFolder}/netframeworkServer/bin/Debug/netframeworkServer.exe",
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            }
-        },
-        {
-            "label": "PJRunClient",
-            "type": "shell",
-            //"dependsOn": "PJBuild",
-            "command": "${workspaceFolder}/netframeworkClient/bin/Debug/netframeworkClient.exe",
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            }
-        },
-    ]
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"PATH": "${env:path};C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+		}
+	},
+	"tasks": [
+		{
+			"label": "PJBuild",
+			"command": "MSBuild.exe",
+			"type": "shell",
+			"args": [
+				"netframework.sln",
+				"/t:Rebuild",
+				"/p:Configuration=Debug",
+				"/p:Platform=\"Any CPU\""
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{
+			"label": "PJRunServer",
+			"type": "shell",
+			//"dependsOn": "PJBuild",
+			"command": "${workspaceFolder}/netframeworkServer/bin/Debug/netframeworkServer.exe",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "PJRunClient",
+			"type": "shell",
+			//"dependsOn": "PJBuild",
+			"command": "${workspaceFolder}/netframeworkClient/bin/Debug/netframeworkClient.exe",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "IIS_Publish",
+			"type": "shell",
+			"dependsOn": "MSBuild_Release", //任务依赖，因为要发布必须先构建
+			"windows": {
+				"command": ".\\shell\\IISPublish.cmd"
+			},
+			"linux": {
+				"command": "echo NotSupport"
+			},
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
+			"group": {
+				"kind": "none",
+				"isDefault": false
+			},
+		},
+	]
 }

@@ -120,12 +120,29 @@ body[data-mode=sepia] {
 }
 ```
 
-## 预览MarkDown插件
+## 预览MarkDown插件（推荐）
 
 可以使用浏览器渲染 ``markdown`` 文件，以便在浏览器里直接打印生成 ``pdf``  
 谷歌插件商店地址：[Markdown Preview Plus](https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl)  
 github项目地址：[Markdown Preview Plus](https://github.com/volca/markdown-preview)  
 github下载地址：[v0.8.0.zip](https://github.com/volca/markdown-preview/archive/refs/tags/v0.8.0.zip)  
+
+#### 权限设置
+需要打开 ``允许访问文件网址`` 权限（默认就是打开的）
+
+#### 插件设置
+1. 开启 ``Mermaid & KaTeX support inline``
+2. ``Themes`` 可以选择主题，[lch_Chrome.css](./markdown/lch_Chrome.css) 是一个笔者使用的主题
+
+## EDGE版的预览MarkDown插件（推荐）
+EDGE插件商店地址：[Markdown Preview Plus](https://microsoftedge.microsoft.com/addons/detail/markdown-preview-plus/dhinnjfkfmhehkbhcblbocdcpmlnkhbh)  
+
+#### 权限设置
+需要打开 ``允许访问文件 URL`` 权限（默认没有打开）
+
+#### 插件设置
+1. 开启 ``Mermaid & KaTeX support inline``
+2. ``Themes`` 可以选择主题，[lch_EDGE.css](./markdown/lch_EDGE.css) 是一个笔者使用的主题
 
 ## 浏览器请求状态管理 Header Editor
 
