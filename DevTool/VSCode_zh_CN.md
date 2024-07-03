@@ -14,6 +14,7 @@ https://code.visualstudio.com/#alt-downloads
 * [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
 * [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
 * [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
+* [**Git Graph**](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
 * [**FindItFaster**](https://marketplace.visualstudio.com/items?itemName=TomRijndorp.find-it-faster)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``
 * ~~[VSCodeVim(不推荐)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)~~
 * [Sync-Rsync(可选)](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）

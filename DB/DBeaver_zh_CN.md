@@ -15,3 +15,10 @@ DBeaver 是一个基于 Java 开发，免费开源的通用数据库管理和开
 安装完成后，我们打开DBeaver，默认情况下，DBeaver会帮我们创建一个 SQLite 示例数据库，可以在这里面熟悉用法。
 
 初次创建某种数据库的连接时，会提示下载相应的 JDBC 驱动。笔者测试发现是去Maven的官方仓库下载驱动。
+
+# A5M2
+A5:SQL Mk-2 是一个日系的数据库客户端，支持 Oracle, SQL Server, DB2, PostgreSQL, MySQL, SQLite等数据库
+
+## 下载
+* [官方网站](https://a5m2.mmatsubara.com/)  
+* [vector下载](https://www.vector.co.jp/soft/dl/winnt/business/se422726.html)  

@@ -144,6 +144,14 @@ EDGE插件商店地址：[Markdown Preview Plus](https://microsoftedge.microsoft
 1. 开启 ``Mermaid & KaTeX support inline``
 2. ``Themes`` 可以选择主题，[lch_EDGE.css](./markdown/lch_EDGE.css) 是一个笔者使用的主题
 
+## 翻译插件 - Immersive Translate（推荐）
+Immersive Translate（沉浸式翻译），支持沉浸式双语网页翻译扩展 , 支持输入框翻译， 鼠标悬停翻译， PDF, Epub, 字幕文件, TXT 文件翻译
+
+- [Github仓库](https://github.com/immersive-translate/immersive-translate)
+- [Chrome插件商店](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh?utm_source=zip)
+- [Chrome插件本地安装指南](https://immersivetranslate.com/manual-chrome-extension/)
+- [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%BF%BB%E8%AF%91-%E7%BD%91%E9%A1%B5%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6-pdf%E7%BF%BB%E8%AF%91-/amkbmndfnliijdhojkpoglbnaaahippg?hl=zh-CN)
+
 ## 浏览器请求状态管理 Header Editor
 
 在国内访问 https://stackoverflow.com/ 的时候，会遇到 ``Human verification`` 验证无法通过这个插件就是解决这个问题的  

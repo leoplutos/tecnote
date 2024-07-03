@@ -6,37 +6,46 @@ https://learngitbranching.js.org/?locale=zh_CN
 
 ## 一.基础设置
 
-### 1.设定用户名和邮箱
+#### 设定用户名和邮箱
 ```git
 git config --global user.name "yourname"
 git config --global user.email "your@email.com"
 ```
 
-### 2.设定用编码UTF-8
+#### 设定用编码UTF-8
 ```git
 git config --global gui.encoding utf-8
 ```
 
-### 3.打开所有终端颜色
+#### 打开所有终端颜色
 ```git
 git config --global color.ui true
 ```
 
-### 4.设置取消git中的sslverify
+#### 设置取消git中的sslverify（任意）
 ```git
 git config --system http.sslverify false
 ```
 
-### 5.设置取消HTTP代理
+#### 设置取消HTTP代理（任意）
 ```git
 git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
-### 设置取消换行符自动转换
+#### 设置取消换行符自动转换
 ```git
 git config --global core.autoCRLF false
 ```
+
+#### 设置使用Windows 凭证管理器（Windows Credential Manager）管理账号密码
+```git
+git config --global credential.helper manager
+git config --global credential.credentialStore wincredman
+```
+
+如果想删除凭证的话，如下操作  
+打开 ``设置`` → 搜索 ``Windows 凭据`` → 选择 ``管理 Windows 凭据`` → 在普通凭据下面会看到，删除即可
 
 ### 设置合并策略（执行git pull不带参数时的默认策略）
 以下3选1即可，推荐缺省策略

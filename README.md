@@ -120,7 +120,7 @@
 * [数据库相关](DB/DB_zh_CN.md)
 * [Postgresql](DB/Postgresql_zh_CN.md)
 * [Redis](DB/Redis_zh_CN.md)
-* [DBeaver](DB/DBeaver_zh_CN.md)
+* [DBeaver和A5M2](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
 * [Sqlite3](DB/Sqlite3_zh_CN.md)
 * [OpenSearch](DB/OpenSearch_zh_CN.md)
