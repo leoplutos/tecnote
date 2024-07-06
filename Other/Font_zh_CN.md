@@ -26,9 +26,16 @@ https://www.nerdfonts.com/cheat-sheet
 
 ## 程序员字体
 
-* [**更纱黑体(Sarasa Gothic)-github**](https://github.com/be5invis/Sarasa-Gothic)  
-* [**更纱黑体-清华源**](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/) 
-* [**更纱黑体-码云**](https://gitee.com/mirrors/Sarasa-Gothic)  
+#### 更纱黑体
+
+* [**更纱黑体NerdFonts(Sarasa Gothic Nerd Fonts)-github**](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts)  
+    下载地址为：  
+    [sarasa-mono-sc-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-sc-nerd-font.zip)  
+    [sarasa-mono-j-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-j-nerd-font.zip)  
+
+* [**更纱黑体(Sarasa Gothic)原版-github**](https://github.com/be5invis/Sarasa-Gothic)  
+* [**更纱黑体原版-清华源**](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/) 
+* [**更纱黑体原版-码云**](https://gitee.com/mirrors/Sarasa-Gothic)  
 
 更纱黑体的命名由6部分组成，分别是
 1. 字体家族名称：sarasa。每个文件名都由它开头，代表这是更纱黑体家族的字体。
@@ -59,23 +66,27 @@ sarasa-mono-j-regular.ttf（日文开发）
 sarasa-mono-j-light.ttf（日文开发）
 ```
 
-* [**更纱黑体NerdFonts(Sarasa Gothic Nerd Fonts)-github**](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts)  
-下载地址为：  
-[sarasa-mono-sc-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-sc-nerd-font.zip)  
-[sarasa-mono-j-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-j-nerd-font.zip)  
+#### Inconsolata
 
-
-* [Inconsolata](https://github.com/googlefonts/Inconsolata/releases)  
-Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。  
-Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。Ligconsolata的下载地址为：  
-[Ligconsolata-Bold.otf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/otf/Ligconsolata-Bold.otf)  
-[Ligconsolata-Regular.otf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/otf/Ligconsolata-Regular.otf)  
-[Ligconsolata-Bold.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Bold.ttf)  
-[Ligconsolata-Regular.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Regular.ttf)  
+Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。
 
 * [**Inconsolata-NerdFont-github**](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Inconsolata)  
-下载地址为：  
-[Inconsolata-NerdFont.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Inconsolata.zip)  
+    下载地址为：  
+    [Inconsolata-NerdFont.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Inconsolata.zip)  
+
+* [Inconsolata-原版](https://github.com/googlefonts/Inconsolata/releases)
+
+    Ligconsolata的下载地址为：  
+    [Ligconsolata-Bold.otf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/otf/Ligconsolata-Bold.otf)  
+    [Ligconsolata-Regular.otf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/otf/Ligconsolata-Regular.otf)  
+    [Ligconsolata-Bold.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Bold.ttf)  
+    [Ligconsolata-Regular.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Regular.ttf)  
+
+#### Consolas
+
+* [**Consolas连字版本-github**](https://github.com/somq/consolas-ligaturized)  
+
+#### 其他
 
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)  
  JetBrains推出的一款专门为了开发人员设计的字体

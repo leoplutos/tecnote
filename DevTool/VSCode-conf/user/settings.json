@@ -7,9 +7,11 @@
 	"editor.fontSize": 16, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
+	//"editor.codeLensFontFamily": "",
+	"editor.codeLensFontSize": 16,
 	//"editor.fontVariations": "'Ligconsolata' 0.5",
 	"editor.formatOnSave": false, //在保存时格式化文件
-	//"editor.letterSpacing": 0.1, //字母间距
+	// "editor.letterSpacing": 0.1, //字母间距
 	"editor.lineHeight": 20, //行高
 	"editor.minimap.enabled": true, //控制是否显示缩略图(右侧的minimap)
 	"editor.minimap.autohide": true, //控制是否自动隐藏缩略图(右侧的minimap)
@@ -18,6 +20,7 @@
 		100,
 		200
 	], // 垂直标尺
+	"editor.lightbulb.enabled": "off", // 关闭Code Actions
 	"editor.detectIndentation": false, //不要通过打开文件来计算制表符大小
 	"editor.renderWhitespace": "selection", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
 	"editor.renderControlCharacters": true, //设定显示控制字符
@@ -148,6 +151,7 @@
 			"editorWarning.foreground": "#ffff00",
 			"editorInfo.foreground": "#0db9d7",
 			"editorHint.foreground": "#1abc9c",
+			"diffEditor.removedTextBorder": "default", // 设置default将其回到原始值
 			"errorLens.errorForeground": "#ff4b4b",
 			"errorLens.errorMessageBackground": "#362c3d",
 			"errorLens.warningForeground": "#e0af30",
@@ -708,6 +712,7 @@
 	"git.terminalGitEditor": true, // 控制是否使 VS Code 成为集成终端中产生的 Git 进程的 Git 编辑器。请注意: 需要重启终端才能选择此设置中的更改。
 	"git.ignoreMissingGitWarning": true, //忽略“缺失 Git”的警告
 	"git.openRepositoryInParentFolders": "always", //是否打开父文件夹的git仓库
+	"scm.experimental.showHistoryGraph": true, //打开可视化视图
 	//-----------------------------------------------"
 	//               emmet设定                       "
 	//-----------------------------------------------"

@@ -2,15 +2,18 @@
 	//-----------------------------------------------"
 	//               基本设定                        "
 	//-----------------------------------------------"
-	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
-	"editor.fontSize": 14, //设置字体大小
+	//"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
+	"editor.fontFamily": "'Consolas', 'Consolas ligaturized v3', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック'",
+	//"editor.fontFamily": "'Consolas', 'Consolas ligaturized v3', 'MS Gothic', 'ＭＳ ゴシック', 'NSimSun', '新宋体'",
+	"editor.fontSize": 13, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
+	//"editor.codeLensFontFamily": "",
+	"editor.codeLensFontSize": 13,
 	//"editor.fontVariations": "'Ligconsolata' 0.5",
 	"editor.formatOnSave": false, //在保存时格式化文件
-	"editor.letterSpacing": 0.1, //字母间距
-	"editor.lineHeight": 14, //行高
+	// "editor.letterSpacing": 0.1, //字母间距
+	"editor.lineHeight": 16, //行高
 	"editor.minimap.enabled": false, //控制是否显示缩略图(右侧的minimap)
 	"editor.minimap.autohide": true, //控制是否自动隐藏缩略图(右侧的minimap)
 	"editor.tabSize": 4, //设定tab长度
@@ -18,6 +21,7 @@
 		100,
 		200
 	], // 垂直标尺
+	"editor.lightbulb.enabled": "off", // 关闭Code Actions
 	"editor.detectIndentation": false, //不要通过打开文件来计算制表符大小
 	"editor.renderWhitespace": "none", //设定显示tab和空格，selection为仅选中内容显示。未选中的内容使用[Whitespace++]插件显示
 	"editor.renderControlCharacters": true, //设定显示控制字符
@@ -30,7 +34,7 @@
 	"editor.autoSurround": "languageDefined",
 	"editor.quickSuggestions": {
 		// 自动补全设定
-		"other": "off",
+		"other": "on",
 		"comments": "off",
 		"strings": "off"
 	},
@@ -45,8 +49,9 @@
 	"editor.multiCursorModifier": "alt", //多光标选择模式（Ctrl 或者 Alt）
 	"editor.cursorSurroundingLines": 4, // 控制光标周围可见行
 	"editor.cursorSurroundingLinesStyle": "all", // 始终强制执行
-	"editor.semanticHighlighting.enabled": false, //开启基于LSP语义的高亮
+	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
 	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
+	"editor.stickyScroll.enabled": false,
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.confirmBeforeClose": "always", //控制是否在关闭窗口或退出应用程序之前显示确认对话框
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
@@ -97,6 +102,7 @@
 	"workbench.preferredLightColorTheme": "Default Light+", // 浅色主题首选项
 	"workbench.preferredHighContrastColorTheme": "Default Dark+", // 深色高对比度主题首选项
 	"workbench.preferredHighContrastLightColorTheme": "Default Light+", // 浅色高对比度主题首选项
+	// Default Light+ 为Sakura配色
 	"workbench.colorTheme": "Default Light+",
 	"workbench.colorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
@@ -147,6 +153,7 @@
 			"editorWarning.foreground": "#ffff00",
 			"editorInfo.foreground": "#0db9d7",
 			"editorHint.foreground": "#1abc9c",
+			"diffEditor.removedTextBorder": "default", // 设置default将其回到原始值
 			"errorLens.errorForeground": "#ff4b4b",
 			"errorLens.errorMessageBackground": "#362c3d",
 			"errorLens.warningForeground": "#e0af30",
@@ -171,8 +178,8 @@
 			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
 			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
 			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
-			"editorIndentGuide.background": "#d3d3d3", //缩进参考线的颜色
-			"editorIndentGuide.activeBackground": "#939393", //当前缩进参考线的颜色
+			"editorIndentGuide.background1": "#d3d3d3", //缩进参考线的颜色
+			"editorIndentGuide.activeBackground1": "#939393", //当前缩进参考线的颜色
 			"editorRuler.foreground": "#d3d3d3", //标尺的颜色
 			"editorCursor.background": "#ebebe365", //光标背景色
 			"editorCursor.foreground": "#1d1f21", //光标前景色
@@ -223,6 +230,52 @@
 			"statusBarItem.errorBackground": "#495155",
 			"statusBarItem.warningBackground": "#495155"
 		},
+		"[Default Light Modern]": {},
+		"[Eclipse Classic Light]": {
+			"editor.lineHighlightBackground": "#e8f2fe", //当前行背景颜色
+			"editorLineNumber.foreground": "#787878", //设定行号颜色
+			"editorLineNumber.activeForeground": "#787878", //设定当前行的行号颜色
+			"editor.selectionBackground": "#7f94da65", //选择内容的背景
+			"editor.selectionHighlightBackground": "#7f94da65", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。
+			"editor.findMatchBackground": "#bbbb00", //当前查找内容颜色
+			"editor.findMatchHighlightBackground": "#ffff0077", //所有查找内容颜色
+			"editorCodeLens.foreground": "#859900", //代码镜头的颜色-main函数上方的[Run | Debug]
+			//终端设置
+			"terminal.background": "#e1e7d1", //终端背景色
+			"terminal.foreground": "#000000", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			"terminalCursor.background": "#000000", //终端光标背景色
+			"terminalCursor.foreground": "#949696", //终端光标前景色
+			//状态栏设置
+			"statusBar.background": "#718c9b",
+			"statusBarItem.activeBackground": "#262a2c",
+			"statusBarItem.errorBackground": "#495155",
+			"statusBarItem.warningBackground": "#495155",
+			//tab设置
+			"tab.activeBackground": "#ffffff",
+			"tab.activeForeground": "#000000",
+			//问题列表设置
+			"list.activeSelectionBackground": "#e8e8e8",
+			"list.activeSelectionForeground": "#000000",
+			"list.activeSelectionIconForeground": "#000000",
+			"list.focusAndSelectionOutline": "#005fb8",
+			"list.hoverBackground": "#f2f2f2",
+		},
+		"terminal.ansiBlack": "#000000",
+		"terminal.ansiBlue": "#1010ff", //备用：#2472c8
+		"terminal.ansiBrightBlack": "#555753",
+		"terminal.ansiBrightBlue": "#729fff",
+		"terminal.ansiBrightCyan": "#34e2e2",
+		"terminal.ansiBrightGreen": "#8ae234",
+		"terminal.ansiBrightMagenta": "#ad7fa8",
+		"terminal.ansiBrightRed": "#ef2929",
+		"terminal.ansiBrightWhite": "#eeeeec",
+		"terminal.ansiBrightYellow": "#fce94f",
+		"terminal.ansiCyan": "#06989a",
+		"terminal.ansiGreen": "#4e9a06", //备用：#0dbc79
+		"terminal.ansiMagenta": "#75507b",
+		"terminal.ansiRed": "#cc0000", //备用：#cd3131
+		"terminal.ansiWhite": "#f3f7cf",
+		"terminal.ansiYellow": "#c4ff00",
 	},
 	"editor.tokenColorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
@@ -258,8 +311,8 @@
 			],
 		},
 		"[Default Light+]": { //Default Light+主题的自定义
-			"comments": "#0a881b", //设定注释颜色liang
-			//"comments": "#008000", //设定注释颜色qiao
+			//"comments": "#0a881b", //设定注释颜色liang
+			"comments": "#008000", //设定注释颜色qiao
 			"numbers": "#be0000", //设定数字颜色
 			"strings": "#991313", //设定字符串颜色
 			"variables": "#000000", //设定变量颜色
@@ -278,6 +331,196 @@
 					}
 				}
 			],
+		},
+		"[Default Light Modern]": {},
+		"[Eclipse Classic Light]": {
+			// "comments": "#93a1a1",
+			"textMateRules": [ //作用域所对应的颜色
+				{
+					"name": "CSharp Keyword",
+					"scope": [
+						"keyword.cs",
+						"keyword.control.cs",
+					],
+					"settings": {
+						"foreground": "#0000ff",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "Classes",
+					"scope": [
+						"meta.return-type",
+						"support.class",
+						"support.type",
+						"entity.name.type",
+						"entity.name.namespace",
+						"entity.other.attribute",
+						"entity.name.scope-resolution",
+						"entity.name.class"
+					],
+					"settings": {
+						"foreground": "#000000",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "Classes (Java)",
+					"scope": [
+						"storage.modifier.import.java",
+						"punctuation.definition.parameters.begin.bracket.round.java",
+						"punctuation.definition.parameters.end.bracket.round.java",
+						"keyword.operator.increment-decrement.java",
+						"keyword.operator.assignment.java",
+						"keyword.operator.comparison.java",
+					],
+					"settings": {
+						"foreground": "#000000",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "Parameters",
+					"scope": [
+						"variable.parameter",
+						"entity.name.variable.parameter"
+					],
+					"settings": {
+						"foreground": "#000000",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "Function declarations",
+					"scope": [
+						"meta.function",
+						"entity.name.function"
+					],
+					"settings": {
+						"foreground": "#000000",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "Annotations",
+					"scope": [
+						"storage.type.annotation",
+						"meta.declaration.annotation",
+						"meta.function.decorator"
+					],
+					"settings": {
+						"foreground": "#646464",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "Tag content", //XML Tag
+					"scope": [
+						"entity.name.tag",
+						"entity.name.tag.localname",
+					],
+					"settings": {
+						// "foreground": "#268bd2"
+						"foreground": "#3f7f7f",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "XML property", //XML property
+					"scope": [
+						"entity.other.attribute-name.localname.xml",
+					],
+					"settings": {
+						"foreground": "#7f007f",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "XML String", //XML String
+					"scope": [
+						"string.quoted.double.xml",
+					],
+					"settings": {
+						"foreground": "#0000ff",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "XML comment", //XML comment
+					"scope": [
+						"comment.block.xml",
+					],
+					"settings": {
+						"foreground": "#3f5fbf",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "java-properties", //java-properties
+					"scope": [
+						"support.constant.java-properties",
+						"meta.key-value.java-properties",
+						"source.java-properties",
+					],
+					"settings": {
+						"foreground": "#000000",
+						"fontStyle": ""
+					}
+				},
+				{
+					"name": "java-properties-value", //java-properties
+					"scope": [
+						"string.unquoted.java-properties",
+					],
+					"settings": {
+						//"foreground": "#0550ae",
+						"foreground": "#0000ff",
+						"fontStyle": ""
+					}
+				},
+			],
+		},
+	},
+	"editor.semanticTokenColorCustomizations": {
+		//基于语义的颜色自定义
+		"[Eclipse Classic Light]": {
+			"enabled": true,
+			"rules": {
+				"comment:csharp": {
+					"foreground": "#008000"
+				},
+				"string:csharp": {
+					"foreground": "#A31515"
+				},
+				"class:csharp": {
+					"foreground": "#2B91AF"
+				},
+				"struct:csharp": {
+					"foreground": "#2B91AF"
+				},
+				"property:csharp": {
+					"foreground": "#000000"
+				},
+				"variable:csharp": {
+					"foreground": "#000000"
+				},
+				"variable:java": {
+					"foreground": "#6A3E3E"
+				},
+				"property.static:java": {
+					"italic": true
+				},
+				"property.static.readonly:java": {
+					"bold": true,
+					// "italic": true
+				},
+				"method.static:java": {
+					"italic": true
+				},
+				"*.deprecated": {
+					"strikethrough": true
+				},
+			}
 		},
 	},
 	//-----------------------------------------------"
@@ -341,9 +584,9 @@
 	"terminal.integrated.tabs.enabled": true, //控制终端选项卡是否以列表的形式显示在终端的一侧
 	"terminal.integrated.tabs.title": "${process}${separator}${local}${separator}${sequence}",
 	"terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
+	"terminal.integrated.enableVisualBell": true,
 	"terminal.integrated.tabs.showActions": "always", // 始终显示“新建终端”按钮旁的“终端拆分”和“终止”按钮
-	"terminal.integrated.tabs.showActiveTerminal": "always", // 始终显示活动终端
-	"terminal.integrated.enableBell": true, // 集成终端启用视觉化铃声
+	"terminal.integrated.tabs.showActiveTerminal": "always", // 集成终端启用视觉化铃声
 	"terminal.integrated.gpuAcceleration": "on", // 集成终端使用GPU加速
 	"terminal.integrated.confirmOnExit": "hasChildProcesses", // 关闭VSCode时，如果终端有子进程运行则确认
 	"terminal.integrated.showExitAlert": false, // 退出时代码为非零时是否显示“终端进程已终止且显示退出代码”警报
@@ -367,6 +610,7 @@
 	"git.terminalGitEditor": true, // 控制是否使 VS Code 成为集成终端中产生的 Git 进程的 Git 编辑器。请注意: 需要重启终端才能选择此设置中的更改。
 	"git.ignoreMissingGitWarning": true, //忽略“缺失 Git”的警告
 	"git.openRepositoryInParentFolders": "always", //是否打开父文件夹的git仓库
+	"scm.experimental.showHistoryGraph": true, //打开可视化视图
 	//-----------------------------------------------"
 	//               emmet设定                       "
 	//-----------------------------------------------"
@@ -394,6 +638,9 @@
 	"multiDiffEditor.experimental.enabled": true, //启用多重差异编辑器
 	"accessibility.dimUnfocused.enabled": true, // 将未聚焦的编辑器和终端变暗
 	"accessibility.dimUnfocused.opacity": 0.8, // 未聚焦的编辑器和终端变暗透明度
+	"accessibility.signals.terminalBell": {
+		"sound": "on"
+	},
 	"telemetry.telemetryLevel": "off", //禁用错误报告
 	"extensions.autoUpdate": false, //禁用扩展自动更新
 	"extensions.ignoreRecommendations": true, //忽略插件建议
@@ -402,6 +649,9 @@
 	//-----------------------------------------------"
 	//               特别语言设定                    "
 	//-----------------------------------------------"
+	"[java][java-properties]": {
+		"editor.guides.indentation": false, //启用缩进参考线
+	},
 	"[python]": {
 		"editor.detectIndentation": true, //自动检测tabsize
 		"editor.insertSpaces": true, //按下tab时替换为空格
@@ -436,6 +686,9 @@
 			"comments": "on",
 			"strings": "on"
 		},
+	},
+	"[xml]": {
+		"editor.guides.indentation": false, //启用缩进参考线
 	},
 	"markdown.validate.enabled": true, //启用 Markdown 文件中的所有错误报告
 	//"markdown.styles": ["Style.css"], //Markdown 预览使用的 CSS 样式表

@@ -73,10 +73,23 @@ namespace netframeworkClientAsync
 			var awaiter = call.GetAwaiter();
 			awaiter.OnCompleted(() =>
 			{
-				ProductId result = call.ResponseAsync.Result;
-				DateTime dtNow = DateTime.Now;
-				string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
-				Console.WriteLine("[{0}][.net Framework(C#)][Client] Add product success. id = {1}", dtStr, result.Value);
+				try
+				{
+					ProductId result = call.ResponseAsync.Result;
+					DateTime dtNow = DateTime.Now;
+					string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+					Console.WriteLine("[{0}][.net Framework(C#)][Client] Add product success. id = {1}", dtStr, result.Value);
+				}
+				catch (AggregateException ae)
+				{
+					Console.WriteLine("gRPC Response Failed... {0}", ae.InnerException.Message);
+					// 处理AggregateException中的异常
+					// foreach (var ex in ae.InnerExceptions)
+					// {
+					// 	log.ErrorFormat("gRPC Response Failed... {0}", ex.Message);
+					// }
+					throw new Exception(ae.InnerException.Message);
+				}
 			});
 		}
 
@@ -97,11 +110,24 @@ namespace netframeworkClientAsync
 			var awaiter = call.GetAwaiter();
 			awaiter.OnCompleted(() =>
 			{
-				Product result = call.ResponseAsync.Result;
-				DateTime dtNow = DateTime.Now;
-				string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
-				Console.WriteLine("[{0}][.net Framework(C#)][Client] GetProduct success", dtStr);
-				Console.WriteLine(result);
+				try
+				{
+					Product result = call.ResponseAsync.Result;
+					DateTime dtNow = DateTime.Now;
+					string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+					Console.WriteLine("[{0}][.net Framework(C#)][Client] GetProduct success", dtStr);
+					Console.WriteLine(result);
+				}
+				catch (AggregateException ae)
+				{
+					Console.WriteLine("gRPC Response Failed... {0}", ae.InnerException.Message);
+					// 处理AggregateException中的异常
+					// foreach (var ex in ae.InnerExceptions)
+					// {
+					// 	log.ErrorFormat("gRPC Response Failed... {0}", ex.Message);
+					// }
+					throw new Exception(ae.InnerException.Message);
+				}
 			});
 		}
 
@@ -114,10 +140,23 @@ namespace netframeworkClientAsync
 			var awaiter = call.GetAwaiter();
 			awaiter.OnCompleted(() =>
 			{
-				HealthCheckResponse result = call.ResponseAsync.Result;
-				DateTime dtNow = DateTime.Now;
-				string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
-				Console.WriteLine("[{0}][.net Framework(C#)][Client] Health Checking... gRPC Server status: [{1}]", dtStr, result.Status);
+				try
+				{
+					HealthCheckResponse result = call.ResponseAsync.Result;
+					DateTime dtNow = DateTime.Now;
+					string dtStr = dtNow.ToString("yyyy/MM/dd HH:mm:ss");
+					Console.WriteLine("[{0}][.net Framework(C#)][Client] Health Checking... gRPC Server status: [{1}]", dtStr, result.Status);
+				}
+				catch (AggregateException ae)
+				{
+					Console.WriteLine("gRPC Response Failed... {0}", ae.InnerException.Message);
+					// 处理AggregateException中的异常
+					// foreach (var ex in ae.InnerExceptions)
+					// {
+					// 	log.ErrorFormat("gRPC Response Failed... {0}", ex.Message);
+					// }
+					throw new Exception(ae.InnerException.Message);
+				}
 			});
 		}
 	}
