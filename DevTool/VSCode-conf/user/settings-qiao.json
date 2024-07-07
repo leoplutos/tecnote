@@ -52,6 +52,7 @@
 	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
 	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
 	"editor.stickyScroll.enabled": false,
+	"workbench.tree.stickyScrollMaxItemCount": 1,
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.confirmBeforeClose": "always", //控制是否在关闭窗口或退出应用程序之前显示确认对话框
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名

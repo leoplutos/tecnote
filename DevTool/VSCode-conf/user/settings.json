@@ -3,7 +3,7 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
+	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'Consolas', 'Consolas ligaturized v3', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Cascadia Code', 'Courier New', monospace",
 	"editor.fontSize": 16, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
@@ -51,6 +51,7 @@
 	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
 	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
 	"editor.stickyScroll.enabled": false,
+	"workbench.tree.stickyScrollMaxItemCount": 1,
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.confirmBeforeClose": "always", //控制是否在关闭窗口或退出应用程序之前显示确认对话框
 	"window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}", //让标题能够显示完整的文件路径名
@@ -104,7 +105,7 @@
 	"workbench.colorTheme": "Default Dark+",
 	"workbench.colorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
-			"editor.background": "#1E1E1E", //设定编辑器背景
+			"editor.background": "#1e1e1e", //设定编辑器背景
 			"editor.foreground": "#D4D4D4", //设定编辑器前景
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
 			"editorLineNumber.activeForeground": "#ffff00", //设定当前行的行号颜色
@@ -121,7 +122,7 @@
 			"editorWhitespace.foreground": "#e3e4e2af", //选中的tab和空格的颜色，因为设定为selection
 			"editorIndentGuide.background1": "#333844", //缩进参考线的颜色
 			"editorIndentGuide.activeBackground1": "#585C66", //当前缩进参考线的颜色
-			"editorRuler.foreground": "#4F4355", //标尺的颜色
+			"editorRuler.foreground": "default", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
 			"editor.findMatchBackground": "#9e7a03fa", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
@@ -165,84 +166,57 @@
 			"statusBar.foreground": "#cecece",
 			"statusBar.background": "#2e2e2e",
 		},
-		"[Default Light+]": { //Default Light+主题的自定义(淡蓝背景)
-			"editor.background": "#f8f8ff", //设定编辑器背景（SakuraEditor：#fffbf0）（浅灰：#F8F6F4）（浅白：#fafafa）（浅灰：#f9f9f9）
-			"editor.foreground": "#000000", //设定编辑器前景
-			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
+		"[Default Light+]": { //Default Light+主题的自定义(Eclipse风格)
+			"editor.background": "#ffffff",
+			"editor.foreground": "#000000",
+			"activityBar.background": "#dddddd",
+			"activityBar.inactiveForeground": "#383838",
+			"activityBar.foreground": "#000000",
+			"activityBarBadge.background": "#007acc",
+			"editor.inactiveSelectionBackground": "#e5ebf155",
+			"editorIndentGuide.activeBackground1": "#939393",
+			"editorIndentGuide.background1": "#d3d3d3",
+			"editorSuggestWidget.background": "#f3f3f3",
+			"input.placeholderForeground": "#767676",
+			"notebook.cellBorderColor": "#e8e8e8",
+			"notebook.selectedCellBackground": "#c8ddf150",
+			"ports.iconRunningProcessForeground": "#369432",
+			"searchEditor.textInputBorder": "#cecece",
+			"settings.numberInputBorder": "#cecece",
+			"settings.textInputBorder": "#cecece",
+			"sideBarSectionHeader.background": "#00000000",
+			"sideBarSectionHeader.border": "#61616130",
+			"sideBarTitle.foreground": "#6f6f6f",
+			"statusBarItem.remoteBackground": "#16825d",
+			"statusBarItem.remoteForeground": "#ffffff",
+			"tab.lastPinnedBorder": "#61616130",
+			"editor.lineHighlightBackground": "#e8f2fe", //当前行背景颜色
+			"editorLineNumber.foreground": "#787878", //设定行号颜色
 			"editorLineNumber.activeForeground": "#0000ff", //设定当前行的行号颜色
-			//"editorGutter.background": "#f5f5f5", // 编辑器导航线的背景色.导航线包括边缘符号和行号
-			//"editor.lineHighlightBorder": "#9fced11f", //当前边框背景颜色
-			"editor.lineHighlightBackground": "#1073cf2d", //当前行背景颜色，想更浅一些用这个[#e9ebfe]
-			"editor.selectionBackground": "#add6ff", //选择内容的背景
-			"editor.selectionHighlightBackground": "#add6ff80", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。（备用：#4F435580）
-			"editor.inactiveSelectionBackground": "#e5ebf1fe", //非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果。
-			"editor.wordHighlightBackground": "#57575740", // 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果。
-			"editor.wordHighlightStrongBackground": "#0e639c40", // 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
-			"editor.wordHighlightTextBackground": "#57575740", // 符号在文本中出现时的背景色。颜色必须透明，以免隐藏下层的修饰。
-			//"editor.selectionHighlightBorder": "#00e1ff", //选择内容的前景边框
-			"editorWhitespace.foreground": "#ffffff", //选中的tab和空格的颜色，因为设定为selection
-			"editorIndentGuide.background1": "#d3d3d3", //缩进参考线的颜色
-			"editorIndentGuide.activeBackground1": "#939393", //当前缩进参考线的颜色
-			"editorRuler.foreground": "#d3d3d3", //标尺的颜色
-			"editorCursor.background": "#F8F8F0", //光标背景色
-			"editorCursor.foreground": "#1d1f21", //光标前景色
-			"editor.findMatchBackground": "#00d700", //当前查找内容颜色
+			"editor.selectionBackground": "#7f94da65", //选择内容的背景
+			"editor.selectionHighlightBackground": "#7f94da65", //选中变量的背景颜色必须透明，以免隐藏下面的修饰效果。
+			"editor.findMatchBackground": "#bbbb00", //当前查找内容颜色
 			"editor.findMatchHighlightBackground": "#ffff0077", //所有查找内容颜色
-			"editorGroupHeader.border": "#36353562", //面包屑设置-边框
-			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
-			"editorCodeLens.foreground": "#5f5fff", //代码镜头的颜色-main函数上方的[Run | Debug]（备用：#146eb4）
-			"editorInlayHint.background": "#8b949e3b", //内联提示的背景色
-			"editorInlayHint.foreground": "#3b3b3b", //内联提示的前景色
-			"editorInlayHint.parameterBackground": "#8b949e4b", //参数内联提示的背景色
-			"editorInlayHint.parameterForeground": "#3b3b3b", //参数内联提示的前景色
-			"editorInlayHint.typeBackground": "#8b949e4b", //类型内联提示的背景色
-			"editorInlayHint.typeForeground": "#3b3b3b", //类型内联提示的前景色
-			//panel设置
-			//"panel.background": "#f3f3f9",
-			"panel.border": "#36353562",
-			"panelTitle.activeForeground": "#2c2c2c",
-			"panelTitle.inactiveForeground": "#2c2c2c",
-			"panelTitle.activeBorder": "#2c2c2c",
+			"editorCodeLens.foreground": "#859900", //代码镜头的颜色-main函数上方的[Run | Debug]
 			//终端设置
 			"terminal.background": "#1d1f21", //终端背景色
 			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
 			"terminalCursor.foreground": "#00ffff", //终端光标前景色
-			//tab标题设置
-			"editorGroupHeader.tabsBackground": "#f3f3f9",
-			"tab.activeBackground": "#f8f8ff",
-			"tab.activeForeground": "#2c2c2c",
-			"tab.inactiveBackground": "#efeff9",
-			//智能提示（建议小部件）设置
-			"editorSuggestWidget.background": "#efeff6",
-			"editorSuggestWidget.border": "#2c2c2c",
-			//资源管理器设置
-			"sideBar.background": "#f3f3f9", //左部侧边栏背景色
-			"sideBar.foreground": "#2c2c2c", //左部侧边栏前景色
-			"sideBar.border": "#36353562", //侧边栏分割线颜色
-			"sideBarTitle.foreground": "#2c2c2c", //侧边栏标题前景色
-			"sideBarSectionHeader.background": "#dcdcec", //侧边栏里面小Title背景色(比如时间线)
-			"sideBarSectionHeader.foreground": "#2c2c2c", //侧边栏里面小Title前景色(比如时间线)
-			"sideBarSectionHeader.border": "#66666641", //侧边栏里面小Title边界线颜色(比如时间线)
-			//任务栏设置
-			//"activityBar.background": "#93b0cc",
-			//"activityBar.activeBorder": "#27313b",
-			//"activityBar.inactiveForeground": "#000000",
-			//"activityBar.activeBackground": "#8d98a1",
-			//"activityBar.activeFocusBorder": "#ff0000",
-			//"activityBar.foreground": "#ebebeb",
-			//标题栏设置
-			"titleBar.activeBackground": "#93b8cc",
-			"titleBar.activeForeground": "#000000",
 			//状态栏设置
-			"statusBar.background": "#007bd1",
-			//"statusBarItem.activeBackground": "#262a2c",
-			//"statusBarItem.errorBackground": "#495155",
-			//"statusBarItem.warningBackground": "#495155"
-			"editorError.foreground": "#ff0000",
-			"editorWarning.foreground": "#bf8803",
-			"editorInfo.foreground": "#1a85ff",
-			"editorHint.foreground": "#118c74",
+			"statusBar.background": "#718c9b",
+			"statusBarItem.activeBackground": "#262a2c",
+			"statusBarItem.errorBackground": "#495155",
+			"statusBarItem.warningBackground": "#495155",
+			//tab设置
+			"tab.activeBackground": "#ffffff",
+			"tab.activeForeground": "#000000",
+			//问题列表设置
+			"list.activeSelectionBackground": "#e8e8e8",
+			"list.activeSelectionForeground": "#000000",
+			"list.activeSelectionIconForeground": "#000000",
+			"list.focusAndSelectionOutline": "#005fb8",
+			"list.hoverBackground": "#f2f2f2",
 			"errorLens.errorForegroundLight": "#ff0000",
 			"errorLens.errorMessageBackground": "#fce6dc",
 			"errorLens.warningForegroundLight": "#bf8803",
@@ -357,7 +331,7 @@
 			"variables": "#c5c8c6", //设定变量颜色
 			"types": "#4FC1FF", //设定类型颜色(#ee5d43)(#df6b74)(#f92672)
 			"keywords": { //设定关键字颜色（可加入"fontStyle": "bold"）(备用#64afef)
-				"foreground": "#C586C0",
+				"foreground": "#64afef",
 				"fontStyle": ""
 			},
 			"functions": "#96E072", //设定函数颜色(备用#98c379)(备用#61ce3c)(备用#90a959)
@@ -390,7 +364,16 @@
 					}
 				},
 				{
-					"scope": [ //Java的变量名
+					"scope": [ //Java的control
+						"keyword.control.java",
+						"keyword.control.new.java",
+					],
+					"settings": {
+						"foreground": "#c586c0",
+					}
+				},
+				{
+					"scope": [ //Java的int关键字
 						"storage.type.primitive.java",
 					],
 					"settings": {
@@ -402,7 +385,7 @@
 						"meta.declaration.annotation.java",
 					],
 					"settings": {
-						"foreground": "#00af00",
+						"foreground": "#4EC9B0",
 					}
 				},
 				{
@@ -474,11 +457,87 @@
 					}
 				},
 				{
-					"scope": [ //Java的变量名
+					"scope": [ //Java的int关键字
 						"storage.type.primitive.java",
 					],
 					"settings": {
-						"foreground": "#0000ff",
+						"foreground": "#7F0055",
+						"fontStyle": "bold"
+					}
+				},
+				{
+					"scope": [ //Java的new关键字
+						"keyword.control.new.java",
+						"keyword.control.java",
+					],
+					"settings": {
+						"foreground": "#7F0055",
+						"fontStyle": "bold"
+					}
+				},
+				{
+					"scope": [ //Java的标注
+						"meta.declaration.annotation.java",
+					],
+					"settings": {
+						"foreground": "#646464",
+					}
+				},
+				{
+					"name": "Tag content", //XML Tag
+					"scope": [
+						"entity.name.tag",
+						"entity.name.tag.localname",
+					],
+					"settings": {
+						"foreground": "#0550ae",
+					}
+				},
+				{
+					"name": "XML property", //XML property
+					"scope": [
+						"entity.other.attribute-name.localname.xml",
+					],
+					"settings": {
+						"foreground": "#ff0000",
+					}
+				},
+				{
+					"name": "XML String", //XML String
+					"scope": [
+						"string.quoted.double.xml",
+					],
+					"settings": {
+						"foreground": "#2f5e5e",
+					}
+				},
+				{
+					"name": "XML comment", //XML comment
+					"scope": [
+						"comment.block.xml",
+					],
+					"settings": {
+						"foreground": "#70a670",
+					}
+				},
+				{
+					"name": "java-properties", //java-properties
+					"scope": [
+						"support.constant.java-properties",
+						"meta.key-value.java-properties",
+						"source.java-properties",
+					],
+					"settings": {
+						"foreground": "#000000",
+					}
+				},
+				{
+					"name": "java-properties-value", //java-properties
+					"scope": [
+						"string.unquoted.java-properties",
+					],
+					"settings": {
+						"foreground": "#0550be",
 					}
 				},
 			],
@@ -523,10 +582,10 @@
 					"foreground": "#00af00"
 				},
 				"enum": {
-					"foreground": "#ee5d43"
+					"foreground": "#cc81ba"
 				},
 				"enumMember": {
-					"foreground": "#4fc1ff"
+					"foreground": "#8ddaf8"
 				},
 				"event": {
 					"foreground": "#ee5d43"
@@ -535,7 +594,10 @@
 					"foreground": "#96E072" //#DCDCAA
 				},
 				"keyword": {
-					"foreground": "#569CD6" //#64afef
+					"foreground": "#569cd6" //#64afef
+				},
+				"keyword.control": {
+					"foreground": "#44a793"
 				},
 				//"label": {
 				//},
@@ -543,7 +605,7 @@
 					"foreground": "#96E072"
 				},
 				"namespace": {
-					"foreground": "#4ec9b0"
+					"foreground": "#e6e6fa"
 				},
 				"number": {
 					"foreground": "#00e8ef"
@@ -564,7 +626,7 @@
 					"foreground": "#00af00"
 				},
 				"annotation": {
-					"foreground": "#00af00"
+					"foreground": "#4EC9B0"
 				},
 				"lifetime": {
 					"foreground": "#cdcdff"
@@ -572,12 +634,16 @@
 				"*.deprecated": {
 					"strikethrough": true
 				},
+				"keyword.control:python": {
+					"foreground": "#0000ff" //#64afef
+				},
 			}
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
 			"enabled": true,
 			"rules": {
 				"variable": {
+					//"foreground": "#6a3e3e"
 					"foreground": "#000000"
 				},
 				"parameter": {
@@ -587,19 +653,42 @@
 					"foreground": "#408080"
 				},
 				"property": {
-					"foreground": "#be00be"
+					"foreground": "#0000c0"
 				},
 				"cliProperty": {
-					"foreground": "#be00be"
+					"foreground": "#0000c0"
 				},
 				"interface": {
 					"foreground": "#0080ff"
 				},
 				"class": {
-					"foreground": "#ff0000"
+					"foreground": "#2B91AF"
+				},
+				"struct": {
+					"foreground": "#2B91AF"
 				},
 				"macro": {
 					"foreground": "#0000a0"
+				},
+				"namespace": {
+					"foreground": "#000000"
+				},
+				"annotation": {
+					"foreground": "#646464"
+				},
+				"keywords": {
+					"foreground": "#0000ff",
+				},
+				"keyword:java": {
+					"foreground": "#7F0055",
+					"bold": true
+				},
+				"keyword.control:java": {
+					"foreground": "#7F0055",
+					"bold": true
+				},
+				"class:java": {
+					"foreground": "#000000",
 				},
 			}
 		},
@@ -962,27 +1051,139 @@
 	"vim.normalModeKeyBindingsNonRecursive": [
 		//{ "before": ["J"], "commands": [":.+10"], "silent": true },
 		//{ "before": ["K"], "commands": [":.-10"], "silent": true }
-		{ "before": ["J"], "after": ["1", "0", "j"] }, //加速向下
-		{ "before": ["K"], "after": ["1", "0", "k"] }, //加速向上
-		{ "before": ["<leader>", "s"], "commands": [":w"] }, // 设定\+s保存文件
-		{ "before": ["<leader>", "q"], "commands": [":q"] }, // 设定\+q关闭文件
-		{ "before": ["<leader>", "l"], "commands": [":nohlsearch"] }, // 设定\+l关闭高亮
+		{
+			"before": [
+				"J"
+			],
+			"after": [
+				"1",
+				"0",
+				"j"
+			]
+		}, //加速向下
+		{
+			"before": [
+				"K"
+			],
+			"after": [
+				"1",
+				"0",
+				"k"
+			]
+		}, //加速向上
+		{
+			"before": [
+				"<leader>",
+				"s"
+			],
+			"commands": [
+				":w"
+			]
+		}, // 设定\+s保存文件
+		{
+			"before": [
+				"<leader>",
+				"q"
+			],
+			"commands": [
+				":q"
+			]
+		}, // 设定\+q关闭文件
+		{
+			"before": [
+				"<leader>",
+				"l"
+			],
+			"commands": [
+				":nohlsearch"
+			]
+		}, // 设定\+l关闭高亮
 		//{ "before": ["<Leader>", "h"], "after": ["<C-w>", "h"] }, //移动到左边的窗口
 		//{ "before": ["<Leader>", "j"], "after": ["<C-w>", "j"] }, //移动到下边的窗口
 		//{ "before": ["<Leader>", "k"], "after": ["<C-w>", "k"] }, //移动到上边的窗口
 		//{ "before": ["<Leader>", "l"], "after": ["<C-w>", "l"] }, //移动到右边的窗口
-		{ "before": ["n"], "after": ["n", "z", "z"] }, // 在画面中央表示搜索结果
-		{ "before": ["N"], "after": ["N", "z", "z"] },
-		{ "before": ["*"], "after": ["*", "z", "z"] },
-		{ "before": ["#"], "after": ["#", "z", "z"] }
+		{
+			"before": [
+				"n"
+			],
+			"after": [
+				"n",
+				"z",
+				"z"
+			]
+		}, // 在画面中央表示搜索结果
+		{
+			"before": [
+				"N"
+			],
+			"after": [
+				"N",
+				"z",
+				"z"
+			]
+		},
+		{
+			"before": [
+				"*"
+			],
+			"after": [
+				"*",
+				"z",
+				"z"
+			]
+		},
+		{
+			"before": [
+				"#"
+			],
+			"after": [
+				"#",
+				"z",
+				"z"
+			]
+		}
 	],
 	"vim.visualModeKeyBindingsNonRecursive": [
-		{ "before": ["J"], "after": ["1", "0", "j"] }, //加速向下
-		{ "before": ["K"], "after": ["1", "0", "k"] } //加速向上
+		{
+			"before": [
+				"J"
+			],
+			"after": [
+				"1",
+				"0",
+				"j"
+			]
+		}, //加速向下
+		{
+			"before": [
+				"K"
+			],
+			"after": [
+				"1",
+				"0",
+				"k"
+			]
+		} //加速向上
 	],
 	"vim.insertModeKeyBindings": [
-		{ "before": ["j", "j"], "after": ["<Esc>"] }, //回到普通模式
-		{ "before": [";", ";"], "commands": ["editor.action.triggerSuggest"] } //打开建议
+		{
+			"before": [
+				"j",
+				"j"
+			],
+			"after": [
+				"<Esc>"
+			]
+		}, //回到普通模式
+		{
+			"before": [
+				";",
+				";"
+			],
+			"commands": [
+				"editor.action.triggerSuggest"
+			]
+		} //打开建议
 	],
 	"hediet.vscode-drawio.resizeImages": null,
 }
