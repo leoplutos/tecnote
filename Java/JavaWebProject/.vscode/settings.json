@@ -60,4 +60,13 @@
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
 		"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8",
 	},
+	"java.compile.nullAnalysis.mode": "automatic",
+	"java.configuration.updateBuildConfiguration": "disabled",
+	//"java.errors.incompleteClasspath.severity": "error",
+	"maven.terminal.customEnv": [
+		{
+			"environmentVariable": "JAVA_HOME",
+			"value": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9"
+		},
+	]
 }

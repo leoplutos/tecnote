@@ -85,28 +85,38 @@ D:\Tools\WorkTool\Java\m2\repo
 
 #### Maven工程的 ``pom.xml`` 文件例子
 ```
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>my.mavenbatsample</groupId>
-  <artifactId>JavaMavenBatProject</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>JavaMavenBatProject</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>my.mavenbatsample</groupId>
+	<artifactId>OkHttpTest</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>OkHttpTest</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<!--okhttp 依赖-->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.12.0</version>
+		</dependency>
+        <!--junit 依赖-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
 ```
 
@@ -138,6 +148,14 @@ mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 ar
 ```
 mvn test
 ```
+默认情况下，运行测试后 surfire 插件将在 ``{base-dir}/target/surfire-reports`` 中创建 XML 和 txt 文件报告，并不会生成 ``html`` 报告  
+生成 HTML 报告，可以使用
+```
+mvn surefire-report:report-only
+```
+运行后即可在 ``{base-dir}/target/site`` 中看到 ``html`` 报告  
+
+[Test Runner for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test) 也是一个非常好用的插件
 
 ## Maven 打包时自定义变量的使用
 Maven打包时，如果有一些变量在多个地方使用，可以使用 ``-D`` 的方式或者 ``properties`` 的方式

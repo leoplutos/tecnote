@@ -38,5 +38,6 @@
 		"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8",
 	},
 	"java.compile.nullAnalysis.mode": "automatic",
-	"java.configuration.updateBuildConfiguration": "interactive",
+	"java.configuration.updateBuildConfiguration": "disabled",
+	//"java.errors.incompleteClasspath.severity": "error",
 }

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="eAdaptorSoapWebService" targetNamespace="http://CargoWise.com/eHub/2010/06"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+	xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+	xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+	xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://CargoWise.com/eHub/2010/06"
+	xmlns:wsa10="http://www.w3.org/2005/08/addressing"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+	<wsp:Policy wsu:Id="BasicHttpBinding_eAdapterStreamedService_policy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:TransportToken>
+							<wsp:Policy>
+								<sp:HttpsToken RequireClientCertificate="false"/>
+							</wsp:Policy>
+						</sp:TransportToken>
+						<sp:AlgorithmSuite>
+							<wsp:Policy>
+								<sp:Basic256/>
+							</wsp:Policy>
+						</sp:AlgorithmSuite>
+						<sp:Layout>
+							<wsp:Policy>
+								<sp:Lax/>
+							</wsp:Policy>
+						</sp:Layout>
+						<sp:IncludeTimestamp/>
+					</wsp:Policy>
+				</sp:TransportBinding>
+				<sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+							<wsp:Policy>
+								<sp:WssUsernameToken10/>
+							</wsp:Policy>
+						</sp:UsernameToken>
+					</wsp:Policy>
+				</sp:SignedSupportingTokens>
+				<sp:Wss10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy/>
+				</sp:Wss10>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://CargoWise.com/eHub/2010/06"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:import namespace="http://schemas.datacontract.org/2004/07/CargoWise.eHub.Common"/>
+			<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			<xs:element name="Ping">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="PingResult" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SendStreamRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="Messages" nillable="true" type="q1:ArrayOfeHubGatewayMessage"
+							xmlns:q1="http://schemas.datacontract.org/2004/07/CargoWise.eHub.Common"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SendStreamRequestTrackingID" type="q2:guid"
+				xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/"/>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+			<xs:element name="anyType" nillable="true" type="xs:anyType"/>
+			<xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+			<xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+			<xs:element name="boolean" nillable="true" type="xs:boolean"/>
+			<xs:element name="byte" nillable="true" type="xs:byte"/>
+			<xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+			<xs:element name="decimal" nillable="true" type="xs:decimal"/>
+			<xs:element name="double" nillable="true" type="xs:double"/>
+			<xs:element name="float" nillable="true" type="xs:float"/>
+			<xs:element name="int" nillable="true" type="xs:int"/>
+			<xs:element name="long" nillable="true" type="xs:long"/>
+			<xs:element name="QName" nillable="true" type="xs:QName"/>
+			<xs:element name="short" nillable="true" type="xs:short"/>
+			<xs:element name="string" nillable="true" type="xs:string"/>
+			<xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+			<xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+			<xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+			<xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+			<xs:element name="char" nillable="true" type="tns:char"/>
+			<xs:simpleType name="char">
+				<xs:restriction base="xs:int"/>
+			</xs:simpleType>
+			<xs:element name="duration" nillable="true" type="tns:duration"/>
+			<xs:simpleType name="duration">
+				<xs:restriction base="xs:duration">
+					<xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+					<xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+					<xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="guid" nillable="true" type="tns:guid"/>
+			<xs:simpleType name="guid">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:attribute name="FactoryType" type="xs:QName"/>
+			<xs:attribute name="Id" type="xs:ID"/>
+			<xs:attribute name="Ref" type="xs:IDREF"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CargoWise.eHub.Common"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schemas.datacontract.org/2004/07/CargoWise.eHub.Common"
+			xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+			<xs:import namespace="http://schemas.datacontract.org/2004/07/System.IO"/>
+			<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			<xs:complexType name="ArrayOfeHubGatewayMessage">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="eHubGatewayMessage" nillable="true" type="tns:eHubGatewayMessage"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfeHubGatewayMessage" nillable="true" type="tns:ArrayOfeHubGatewayMessage"/>
+			<xs:complexType name="eHubGatewayMessage">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ApplicationCode" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="ClientID" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="EmailSubject" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="MessageStream" nillable="true" type="q1:Stream"
+						xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO"/>
+					<xs:element minOccurs="0" name="MessageTrackingID" type="ser:guid"/>
+					<xs:element minOccurs="0" name="SchemaName" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="SchemaType" type="tns:MessageSchemaType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="eHubGatewayMessage" nillable="true" type="tns:eHubGatewayMessage"/>
+			<xs:simpleType name="MessageSchemaType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Xml"/>
+					<xs:enumeration value="FlatFile"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="MessageSchemaType" nillable="true" type="tns:MessageSchemaType"/>
+			<xs:complexType name="VirtualStream">
+				<xs:complexContent mixed="false">
+					<xs:extension base="q2:Stream"
+						xmlns:q2="http://schemas.datacontract.org/2004/07/System.IO">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:element name="VirtualStream" nillable="true" type="tns:VirtualStream"/>
+			<xs:complexType name="ApplicationFault">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="MessageExceptionDictionary" nillable="true" type="tns:SerializableDictionaryOfguidstring"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ApplicationFault" nillable="true" type="tns:ApplicationFault"/>
+			<xs:complexType name="SerializableDictionaryOfguidstring">
+				<xs:sequence>
+					<!--
+					<xs:element ref="xs:schema"/>
+					-->
+					<xs:any/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="SerializableDictionaryOfguidstring" nillable="true" type="tns:SerializableDictionaryOfguidstring"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.IO"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schemas.datacontract.org/2004/07/System.IO">
+			<xs:import namespace="http://schemas.datacontract.org/2004/07/System"/>
+			<xs:import namespace="http://schemas.datacontract.org/2004/07/System.Reflection"/>
+			<xs:complexType name="Stream">
+				<xs:complexContent mixed="false">
+					<xs:extension base="q1:MarshalByRefObject"
+						xmlns:q1="http://schemas.datacontract.org/2004/07/System">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:element name="Stream" nillable="true" type="tns:Stream"/>
+			<xs:complexType name="FileStream">
+				<xs:complexContent mixed="false">
+					<xs:extension base="tns:Stream">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:element name="FileStream" nillable="true" type="tns:FileStream"/>
+			<xs:complexType name="UnmanagedMemoryStream">
+				<xs:complexContent mixed="false">
+					<xs:extension base="tns:Stream">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="PositionPointer" nillable="true" type="q2:Pointer"
+								xmlns:q2="http://schemas.datacontract.org/2004/07/System.Reflection"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:element name="UnmanagedMemoryStream" nillable="true" type="tns:UnmanagedMemoryStream"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schemas.datacontract.org/2004/07/System">
+			<xs:complexType name="MarshalByRefObject">
+				<xs:sequence>
+					<xs:element name="__identity" nillable="true" type="xs:anyType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="MarshalByRefObject" nillable="true" type="tns:MarshalByRefObject"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Reflection"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schemas.datacontract.org/2004/07/System.Reflection"
+			xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+			<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			<xs:complexType name="Pointer">
+				<xs:sequence>
+					<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="skip"/>
+				</xs:sequence>
+				<xs:attribute ref="ser:FactoryType"/>
+			</xs:complexType>
+			<xs:element name="Pointer" nillable="true" type="tns:Pointer"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="eAdapterStreamedService_Ping_InputMessage">
+		<wsdl:part name="parameters" element="tns:Ping"/>
+	</wsdl:message>
+	<wsdl:message name="eAdapterStreamedService_Ping_OutputMessage">
+		<wsdl:part name="parameters" element="tns:PingResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SendStreamRequest">
+		<wsdl:part name="parameters" element="tns:SendStreamRequest"/>
+	</wsdl:message>
+	<wsdl:message name="SendStreamRequest_Headers">
+		<wsdl:part name="SendStreamRequestTrackingID" element="tns:SendStreamRequestTrackingID"/>
+	</wsdl:message>
+	<wsdl:message name="eAdapterStreamedService_SendStream_OutputMessage"/>
+	<wsdl:message name="eAdapterStreamedService_SendStream_ApplicationFaultFault_FaultMessage">
+		<wsdl:part name="detail" element="q1:ApplicationFault"
+			xmlns:q1="http://schemas.datacontract.org/2004/07/CargoWise.eHub.Common"/>
+	</wsdl:message>
+	<wsdl:portType name="eAdapterStreamedService">
+		<wsdl:operation name="Ping">
+			<wsdl:input wsaw:Action="http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/Ping" message="tns:eAdapterStreamedService_Ping_InputMessage"/>
+			<wsdl:output wsaw:Action="http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/PingResponse" message="tns:eAdapterStreamedService_Ping_OutputMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SendStream">
+			<wsdl:input wsaw:Action="http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/SendStream" name="SendStreamRequest" message="tns:SendStreamRequest"/>
+			<wsdl:output wsaw:Action="http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/SendStreamResponse" message="tns:eAdapterStreamedService_SendStream_OutputMessage"/>
+			<wsdl:fault wsaw:Action="http://CargoWise.com/eHub/2010/06/FaultAction" name="ApplicationFaultFault" message="tns:eAdapterStreamedService_SendStream_ApplicationFaultFault_FaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BasicHttpBinding_eAdapterStreamedService" type="tns:eAdapterStreamedService">
+		<wsp:PolicyReference URI="#BasicHttpBinding_eAdapterStreamedService_policy"/>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="Ping">
+			<soap:operation soapAction="http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/Ping" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SendStream">
+			<soap:operation soapAction="http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/SendStream" style="document"/>
+			<wsdl:input name="SendStreamRequest">
+				<soap:header message="tns:SendStreamRequest_Headers" part="SendStreamRequestTrackingID" use="literal"/>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ApplicationFaultFault">
+				<soap:fault use="literal" name="ApplicationFaultFault" namespace=""/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="eAdaptorSoapWebService">
+		<wsdl:port name="BasicHttpBinding_eAdapterStreamedService" binding="tns:BasicHttpBinding_eAdapterStreamedService">
+			<soap:address location="https://mico-2020jebyhu/eAdaptorSoapWebService.svc"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

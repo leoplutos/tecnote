@@ -8,8 +8,8 @@
 			"default": true
 		},
 	],
-	"java.configuration.maven.userSettings": "C:/Users/Leo-G5000/.m2/settings.xml",
-	"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml",
+	"java.configuration.maven.userSettings": "C:/Users/Administrator/.m2/settings.xml",
+	"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.7/conf/settings.xml",
 	//"editor.codeLens": false, //不在编辑器中显示codeLens，不表示main函数上方的[Run | Debug]
 	"java.format.settings.profile": "GoogleStyle", //使用gogole样式格式化代码
 	"java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8", //添加Java运行调试的参数

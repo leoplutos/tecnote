@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import com.google.common.collect.ImmutableMap;
-
 import io.grpc.EquivalentAddressGroup;
 import io.grpc.NameResolver;
 import io.grpc.Status;
@@ -37,6 +35,18 @@ public class MultiAddressNameResolver extends NameResolver {
 								.map(port -> new InetSocketAddress("127.0.0.1", port))
 								.collect(Collectors.toList()))
 				.build();
+
+		// // ConcurrentHashMap是一个线程安全的HashMap实现，它使用了分段锁（segmentation）技术来提高并发性能
+		// addrStore = new java.util.concurrent.ConcurrentHashMap<>();
+		// // CopyOnWriteArrayList是一个线程安全的ArrayList变体，它通过复制整个底层数组来实现线程安全
+		// List<InetSocketAddress> addrList = new
+		// java.util.concurrent.CopyOnWriteArrayList<>();
+		// addrList.add(new InetSocketAddress("127.0.0.1", 50051));
+		// addrList.add(new InetSocketAddress("127.0.0.1", 50052));
+		// addrList.add(new InetSocketAddress("127.0.0.1", 50053));
+		// addrList.add(new InetSocketAddress("127.0.0.1", 50054));
+		// addrStore.put(MultiAddressNameResolverProvider.MultiAddressServiceName,
+		// addrList);
 	}
 
 	@Override

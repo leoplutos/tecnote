@@ -201,6 +201,12 @@ javap -v com/spring/net/a.class
 ## JDK 自带的 Document + XPath 解析 XML
  - [ParseXmlUtil.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/ParseXmlUtil.java)
 
+## Spring WS的例子
+ - [SpringWsTest](./SpringWsTest)
+
+## OkHTTP,Moshi,Soap通信,JAXB,XSD解析,JUnit等例子
+ - [OkHttpTest](./OkHttpTest)
+
 ## 其他
 
 ### Java SSH服务端的例子

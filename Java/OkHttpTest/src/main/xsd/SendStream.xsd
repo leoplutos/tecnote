@@ -1,0 +1,45 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://CargoWise.com/eHub/2010/06" elementFormDefault="qualified"
+	xmlns:my="http://CargoWise.com/eHub/2010/06">
+
+	<!-- 定义一个简单类型用于Message文本内容 -->
+	<xs:simpleType name="MessageType">
+		<xs:restriction base="xs:string">
+			<!-- 可以添加对字符串的限制，如长度、模式等，可以为空 -->
+			<!-- 定义一个包含必需内容的类型 -->
+			<xs:pattern value=".+"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="SendStreamRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Payload">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Message">
+								<xs:complexType>
+									<!-- 允许文本内容和子元素的混合（虽然在这个例子中我们不需要子元素） -->
+									<xs:simpleContent>
+										<!-- 引用定义的简单类型作为文本内容的基础 -->
+										<xs:extension base="my:MessageType">
+											<!-- 在这里定义属性 -->
+											<xs:attribute name="ApplicationCode" type="xs:string" use="required"/>
+											<xs:attribute name="ClientID" type="xs:string" use="required"/>
+											<xs:attribute name="TrackingID" type="xs:string" use="required"/>
+											<xs:attribute name="SchemaName" type="xs:string" use="required"/>
+											<xs:attribute name="SchemaType" type="xs:string" use="required"/>
+											<xs:attribute name="EmailSubject" type="xs:string" />
+											<xs:attribute name="FileName" type="xs:string" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
+ 

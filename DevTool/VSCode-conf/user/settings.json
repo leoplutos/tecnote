@@ -457,16 +457,9 @@
 					}
 				},
 				{
-					"scope": [ //Java的int关键字
+					"scope": [ //Java的int/new关键字
 						"storage.type.primitive.java",
-					],
-					"settings": {
-						"foreground": "#7F0055",
-						"fontStyle": "bold"
-					}
-				},
-				{
-					"scope": [ //Java的new关键字
+						"keyword.other.import.java",
 						"keyword.control.new.java",
 						"keyword.control.java",
 					],
@@ -843,6 +836,7 @@
 	"[java][java-properties]": {
 		"editor.guides.indentation": true, //启用缩进参考线
 	},
+	"maven.executable.path": "D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7\\bin\\mvn.cmd",
 	"[python]": {
 		"editor.detectIndentation": true, //自动检测tabsize
 		"editor.insertSpaces": true, //按下tab时替换为空格
