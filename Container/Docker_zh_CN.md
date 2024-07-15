@@ -180,7 +180,7 @@ NOTE：nanoserver是基于 Windows 上的虚拟化实践。
 ## WSL2下安装使用Docker(使用 Linux 容器)
 这个安装方式为：使用 ``WSL2后端`` 并且使用 ``Linux 容器``  
 
-### 安装WSL2并且安装Ubuntu
+### 安装WSL2并且安装Ubuntu-22.04
 参照 [这里](../Windows/WSL_zh_CN.md) 安装
 
 ### 在WSL2下安装Docker
@@ -189,15 +189,64 @@ NOTE：nanoserver是基于 Windows 上的虚拟化实践。
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
-参照 [官网说明](https://docs.docker.com/engine/install/ubuntu/) 运行命令
-```
-cd ~/work/lch/tmp
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-```
-执行脚本安装过程中，脚本提示“建议使用Docker Desktop for windows”，20s内按Ctrl+C会退出安装，所以需要等待20s，另外此种方式需要访问外网。
+~~参照 [官网说明](https://docs.docker.com/engine/install/ubuntu/) 运行命令~~  
+~~cd ~/work/lch/tmp~~  
+~~curl -fsSL https://get.docker.com -o get-docker.sh~~  
+~~sudo sh get-docker.sh~~  
+~~执行脚本安装过程中，脚本提示“建议使用Docker Desktop for windows”，20s内按Ctrl+C会退出安装，所以需要等待20s，另外此种方式需要访问外网。~~  
 
-### 设定配置文件
+因为 docker 国内已经无法访问，使用 [清华大源](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/) 来安装
+
+安装依赖
+```
+sudo apt update
+sudo apt install ca-certificates curl gnupg
+```
+
+信任 Docker 的 GPG 公钥并添加仓库
+```
+sudo install -m 0755 -d /etc/apt/keyrings
+
+sudo curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+sudo echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+安装
+```
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+安装的组件包括：
+
+- docker-ce：Docker Engine
+- docker-ce-cli：用于与 Docker 守护进程通信的命令行工具
+- containerd.io：管理容器生命周期的容器运行时环境
+- docker-buildx-plugin：增强镜像构建功能的 Docker 扩展工具，特别是在多平台构建方面
+- docker-compose-plugin：通过单个 YAML 文件管理多容器 Docker 应用的配置管理插件
+
+检查 Docker 服务状态
+```
+sudo systemctl is-active docker
+```
+
+安装后命令行确认
+```
+docker --version
+dockerd --version
+docker-proxy --version
+```
+
+### 替换 DockerHub 国内镜像源
+现在只有这个镜像源可用了  
+https://github.com/DaoCloud/public-image-mirror
+
 Linux配置文件位置
 ```
 /etc/docker/daemon.json
@@ -210,10 +259,8 @@ sudo vim /etc/docker/daemon.json
 添加内容
 ```
 {
-    "debug": false,
-    "iptables": false,
-    "experimental": true,
     "registry-mirrors": [
+        "https://docker.m.daocloud.io",
         "https://hub-mirror.c.163.com",
         "https://mirror.baidubce.com",
         "https://ccr.ccs.tencentyun.com",
@@ -222,12 +269,6 @@ sudo vim /etc/docker/daemon.json
         "https://reg-mirror.qiniu.com",
         "https://dockerhub.azk8s.cn",
         "https://docker.mirrors.ustc.edu.cn"
-    ],
-    "insecure-registries": [
-        "127.0.0.1:3111"
-    ],
-    "hosts": [
-        "tcp://localhost:3102"
     ]
 }
 ```
@@ -239,24 +280,49 @@ sudo vim /etc/docker/daemon.json
 
 启动服务
 ```
-sudo service docker start
+systemctl daemon-reload
+systemctl restart docker.service
+#sudo service docker start
 ```
 确认
 ```
-service docker status
-ps aux | grep docker
-export DOCKER_HOST="tcp://localhost:3102"
-docker version
-docker ps
-docker info
+systemctl status docker.service
+sudo docker info
+# service docker status
+# ps aux | grep docker
+# export DOCKER_HOST="tcp://localhost:3102"
+# docker version
+# docker ps
+# docker info
 ```
-运行一个HelloWorld
+
+### 允许非 root 用户运行 Docker 命令
+在大多数安装Docker的系统上，默认会创建一个名为docker的用户组。可以通过运行以下命令来确认这个组是否存在
+```
+sudo addgroup --system docker
+```
+默认情况下，只有 root 用户或具有 sudo 权限的用户才能够执行 Docker 命令。如果不加sudo前缀直接运行docker命令，系统会报权限错误。
+```
+sudo usermod -aG docker $USER
+newgrp docker
+sudo chown root:docker /var/run/docker.sock
+sudo chmod g+w /var/run/docker.sock
+```
+在这条命令中，``$USER`` 是一个环境变量，表示当前登录的用户名。
+
+如果上述设定还是不行的话，运行
+```
+unset DOCKER_HOST
+```
+如果这样做有效，在 ``.bashrc`` 文件中注释掉 ``export DOCKER_HOST=xxx``
+
+### 运行一个HelloWorld
 ```
 docker run hello-world
 ```
 
 ## 常用Docker命令
- - 列出所有镜像：docker images ls
+ - 列出所有镜像：``docker images`` 或 ``docker image ls``
  - 搜索镜像：docker search 镜像
  - 下载镜像：docker pull 镜像id:targe
  - 删除镜像：docker rmi -f 镜像id 镜像id 镜像id
@@ -297,6 +363,18 @@ docker run hello-world
  - 进入运行的容器：docker attach -it 容器id /bin/bash（进入原有进程）
  - 退出容器不关闭容器：  Ctrl + P + Q
  - 退出容器并关闭容器：  exit
+
+
+## 卸载 Docker
+卸载 Docker 及其相关组件
+```
+sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+```
+执行以下命令来删除 Docker 创建的目录
+```
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+```
 
 ## 使用案例-在WSL2下使用Docker
 

@@ -1,6 +1,10 @@
 # Teraterm设定
 
 ## TeraTerm下载方法
+https://github.com/TeraTermProject/teraterm  
+https://github.com/TeraTermProject/osdn-download  
+
+## TeraTerm下载方法（旧）
 #### 1，官网下载页面确定需要的软件版本号和对应编号
 **网址：**  
 https://zh.osdn.net/projects/ttssh2/releases/74780
@@ -78,16 +82,16 @@ end
 ## 2.Teraterm的自动log记录设定
 
 Setup → Additional settings... → Log（tab）  
-#### 2-1.在[Default log file name]中输入如下内容
+#### 2-1.在 ``Default log file name`` 中输入如下内容
 ```
 teraterm-%Y%m%d_%H%M%S_&h.log
 ```
 ※ 上面的「&h」代表连接的远程主机的名字
 
-#### 2-2.在[Default log save folder]中  
+#### 2-2.在 ``Default log save folder`` 中  
 根据需要选择log路径
 
-#### 2-3.选中[Auto start logging]Checkbox
+#### 2-3.选中 ``Auto start logging`` Checkbox
 
 #### 2-4.设置完成之后，需要保存才能生效
 Setup → Save setup...
@@ -108,7 +112,7 @@ Setup → Save setup...
 
 #### 3-3.编辑CNF文件
 在teraterm路径下有KEYBOARD.CNF，修改这个文件（注意备份）  
-打开到最下面的[User keys]代码块，可以定义用户自定义按键  
+打开到最下面的 ``User keys`` 代码块，可以定义用户自定义按键  
 定义规则为：
 ```
 <User key name>=<PC key code>,<Control flag>,<String>
@@ -117,30 +121,30 @@ Setup → Save setup...
 | Control flag | String                                                                            |
 |--------------|-----------------------------------------------------------------------------------|
 | 0            | 发行命令                                                                          |
-| 1            | 对\<String\>中包含的中日文和换行符，按照Tera Term的设定进行变换，发行变换后的内容 |
-| 2            | 运行名字为\<String\>的宏脚本ttl文件                                               |
+| 1            | 对``<String>``中包含的中日文和换行符，按照Tera Term的设定进行变换，发行变换后的内容 |
+| 2            | 运行名字为``<String>``的宏脚本ttl文件                                               |
 | 3            | 菜单操作的Keycode                                                                 |
 
 
 **例子1：**  
-按下Ctrl + 1[1026]，就执行Edit菜单下的清空缓存[50260]
+按下Ctrl + 1 ``1026``，就执行Edit菜单下的清空缓存``50260``
 ```
 User1=1026,3,50260
 ```
 
 **例子2：**  
-按下Ctrl + 2[1027]，运行ttl路径下的lchenv.ttl脚本
+按下Ctrl + 2 ``1027``，运行ttl路径下的lchenv.ttl脚本
 ```
 User2=1027,2,ttl/lchenv.ttl
 ```
 
 **例子3：**  
-按下Ctrl + 3[1028]，就输出[pwd]
+按下Ctrl + 3 ``1028``，就输出 ``pwd``
 ```
 User3=1028,0,pwd
 ```
 
-将内容加到[User keys]代码块下面，并保存文件。
+将内容加到 ``User keys`` 代码块下面，并保存文件。
 ```
 [User keys]
 User1=1026,3,50260
@@ -149,7 +153,7 @@ User3=1028,0,pwd
 ```
 
 #### 3-4.让小键盘的数字和符号生效
-同样是KEYBOARD.CNF，找到[VT numeric keypad]代码块，修改
+同样是KEYBOARD.CNF，找到 ``VT numeric keypad`` 代码块，修改
 ```
 Num0=xxx
 ```
@@ -157,7 +161,7 @@ Num0=xxx
 ```
 Num0=off
 ```
-将整个[VT numeric keypad]代码块的内容全部修改为off，并保存文件。
+将整个 ``VT numeric keypad`` 代码块的内容全部修改为off，并保存文件。
 ```
 [VT numeric keypad]
 ;Num pad 0 key
@@ -169,7 +173,7 @@ Num1=79 → Num1=off
 
 #### 3-5.载入keymap文件
 在TeraTerm菜单栏上选择 Setup → Load Key map，弹出的文件选择窗口中选择KEYBOARD.CNF就完成载入了。  
-如果想每次启动TeraTerm都自动载入的话，将下面内容加入到[1.Teraterm的宏脚本]的ttl文件中，并且用1的方法启动即可。
+如果想每次启动TeraTerm都自动载入的话，将下面内容加入到 ``1.Teraterm的宏脚本`` 的ttl文件中，并且用1的方法启动即可。
 ```
 ;自动载入keymap文件
 loadkeymap 'KEYBOARD.CNF'

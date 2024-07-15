@@ -231,6 +231,9 @@ git-credential-manager.exe和 git-credential-wincred.exe 都是将凭据存储�
 #### 3.cache
 将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且默认在15分钟后从内存中清除。
 
+## gitignore
+可以看这个示例文件 [.gitignore](.gitignore_sample)
+
 # 其他
 
 ### .gitignore文件不生效问题

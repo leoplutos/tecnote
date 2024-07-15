@@ -143,8 +143,9 @@ PasswordAuthentication yes
 
 PermitRootLogin yes
 ```
-开启服务
+重启或开启服务
 ```
+sudo service ssh restart
 sudo service ssh start
 ```
 查看IP地址
@@ -324,19 +325,23 @@ sudo apt update
 sudo apt upgrade
 sudo apt autoremove
 sudo apt install openjdk-17-jdk
+#sudo apt install openjdk-21-jdk
 #sudo apt remove openjdk-17-jdk --purge
 #sudo update-alternatives --config java
 
 #maven
-sudo mkdir -p /usr/local/maven
-cd /usr/local/maven
-sudo tar -zxvf ~/work/lch/tmp/apache-maven-3.9.4-bin.tar.gz -C /usr/local/maven
-sudo ln -s /usr/local/maven/apache-maven-3.9.4/bin/mvn /usr/local/bin/
+sudo apt -y install maven
+#sudo mkdir -p /usr/local/maven
+#cd /usr/local/maven
+#sudo tar -zxvf ~/work/lch/tmp/apache-maven-3.9.4-bin.tar.gz -C /usr/local/maven
+#sudo ln -s /usr/local/maven/apache-maven-3.9.4/bin/mvn /usr/local/bin/
 mvn --version
 #修改maven仓库源
 mkdir -p ~/.m2/repo/
-sudo cp -afp /usr/local/maven/apache-maven-3.9.4/conf/settings.xml /usr/local/maven/apache-maven-3.9.4/conf/settings.xml_bak20231024
-sudo vim /usr/local/maven/apache-maven-3.9.4/conf/settings.xml
+touch ~/.m2/settings.xml
+vim ~/.m2/settings.xml
+#sudo cp -afp /usr/local/maven/apache-maven-3.9.4/conf/settings.xml /usr/local/maven/apache-maven-3.9.4/conf/settings.xml_bak20231024
+#sudo vim /usr/local/maven/apache-maven-3.9.4/conf/settings.xml
 
 #ant
 sudo mkdir -p /usr/local/ant

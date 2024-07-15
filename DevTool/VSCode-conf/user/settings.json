@@ -3,7 +3,7 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
-	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'Consolas', 'Consolas ligaturized v3', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Cascadia Code', 'Courier New', monospace",
+	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'Consolas 7NF', 'Consolas ligaturized v3', 'Consolas', 'Cascadia Code NF', 'Cascadia Code', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Courier New', monospace",
 	"editor.fontSize": 16, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
@@ -125,9 +125,11 @@
 			"editorRuler.foreground": "default", //标尺的颜色
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
-			"editor.findMatchBackground": "#9e7a03fa", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
+			"editor.findMatchBackground": "#00ff00fe", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
+			"editor.findMatchForeground":"default",
 			//"editor.findMatchBorder": "#ffee00", // 当前查找内容边框颜色
-			"editor.findMatchHighlightBackground": "#ea5c0040", //所有查找内容颜色。（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
+			"editor.findMatchHighlightBackground": "default", //所有查找内容颜色。深暗红：#ea5c0040,（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
+			"editor.findMatchHighlightForeground": "#000000fe",
 			//"search.resultsInfoForeground" : "#ffff00", //查找内容颜色
 			"editorCodeLens.foreground": "#f0c674", //代码镜头的颜色-main函数上方的[Run | Debug]（备用：#DEDEF0）
 			"editorInlayHint.background": "#2e2e2e", //内联提示的背景色

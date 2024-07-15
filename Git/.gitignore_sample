@@ -1,0 +1,14 @@
+# ignore files
+*.suo
+*.user
+*.project
+*.classpath
+*.factorypath
+
+# ignore ALL files in directory
+bin/
+obj/
+target/
+.vs/
+.settings
+.metadata

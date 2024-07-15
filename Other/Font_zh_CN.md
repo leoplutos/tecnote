@@ -85,6 +85,14 @@ Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一�
 #### Consolas
 
 * [**Consolas连字版本-github**](https://github.com/somq/consolas-ligaturized)  
+* [**Consolas-NerdFont版本-github**](https://github.com/Znuff/consolas-powerline)  
+
+#### Cascadia Code
+ Cascadia 是微软出品的一款开源等宽字体，Windows Terminal 中的默认字体就是它。目前有四个变种，Mono 表示不连字，PL 表示 PowerLine。
+
+* [微软官网介绍](https://learn.microsoft.com/zh-cn/windows/terminal/cascadia-code)
+* [Cascadia Code](https://github.com/microsoft/cascadia-code)  
+
 
 #### 其他
 
@@ -101,9 +109,6 @@ Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一�
  Inconsolata的中文合成字体  
  SourceHanSansHWSC-Ligconsolata-Regular（字体名为：SourceHanSansHWSC-Ligconsolata）字体不包含合字字符。  
  SourceHanHWSC-Ligconsolata-FiraCode-liga-Regular（字体名为：SourceHanHWSC-Hybird-liga）包含了13个合字字符（->, =>, ::, ++, ==，!=, ===， !==， <=， >=, /, /, //）。
-
-* [Cascadia Code](https://github.com/microsoft/cascadia-code)  
- Cascadia 是微软出品的一款开源等宽字体，Windows Terminal 中的默认字体就是它。目前有四个变种，Mono 表示不连字，PL 表示 PowerLine。
 
 * [Fira Code](https://github.com/tonsky/FiraCode/releases)  
  Fira 是 Mozilla 主推的字体系列，Fira Code 是基于 Fira Mono 等宽字体的一个扩展，主要特点是加入了编程连字特性（ligatures）
