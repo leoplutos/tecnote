@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "backendsanic"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = ["yourname <yourname@example.com>"]
 readme = "README.md"
@@ -11,6 +11,7 @@ python = "^3.8"
 sanic = "^23.6.0"
 sanic-ext = "^23.6.0"
 pyjwt = "^2.8.0"
+setuptools = "^70.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -22,7 +23,7 @@ name = "aliyun"
 url = "https://mirrors.aliyun.com/pypi/simple/"
 #name = "tsinghua"
 #url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-priority = "default"
+priority = "primary"
 
 [tool.pyright]
 venvPath = "."

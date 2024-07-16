@@ -20,6 +20,13 @@ https://hub.docker.com/_/eclipse-temurin/
 还可以找到官方镜像tag  
 https://github.com/docker-library/docs/tree/master/eclipse-temurin#simple-tags
 
+这里放一些tag的含义
+ - jammy：Ubuntu 22.04 LTS
+ - focal：Ubuntu 20.04 LTS
+ - centos7：CentOS 7
+ - ubi9-minimal：红帽通用基础最小映像
+ - alpine：基于alpine linux项目，这是一个专门为容器内部使用而构建的操作系统。在很长一段时间里，这些是最受欢迎的镜像变体，因为它们的尺寸很小
+
 ## 1.基于eclipse-temurin镜像部署Spring Boot应用的实现示例
 
 ### 示例工程

@@ -35,7 +35,7 @@ D:\Tools\WorkTool\Java\m2\repo
 ```
 
 2. 创建用户配置文件 ``settings.xml``，文件内容如下
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -43,7 +43,9 @@ D:\Tools\WorkTool\Java\m2\repo
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
     <!-- 1. 配置本地仓库目录 -->
+    <!--
     <localRepository>D:/Tools/WorkTool/Java/m2/repo</localRepository>
+    -->
 
     <pluginGroups></pluginGroups>
     <proxies></proxies>
@@ -84,7 +86,7 @@ D:\Tools\WorkTool\Java\m2\repo
  - [java工程](../Go/Grpc/java)
 
 #### Maven工程的 ``pom.xml`` 文件例子
-```
+```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -170,13 +172,13 @@ mvn -DpropertyName=propertyValue clean package
 - 如果 ``propertyName`` 已经存在 ``pom.xml`` 中，其值将被作为参数传递的-D值覆盖
 
 如果你的 ``pom.xml`` 如下
-```
+```xml
 <properties>
     <theme>myDefaultTheme</theme>
 </properties>
 ```
 那么执行 ``mvn -Dtheme=halloween clean package`` 会覆盖 theme 的值，具有如下效果
-```
+```xml
 <properties>
     <theme>halloween</theme>
 </properties>
@@ -185,7 +187,7 @@ mvn -DpropertyName=propertyValue clean package
 #### Profiles配置文件
 在 ``pom.xml`` 中， ``<profiles>`` 指定的 ``<id>`` 可以通过 ``-P``进行传递或者赋值
 如果你的 ``pom.xml`` 如下
-```
+```xml
 <profiles>
     <profile>
         <id>test</id>
@@ -194,6 +196,37 @@ mvn -DpropertyName=propertyValue clean package
 </profiles>
 ```
 那么执行 ``mvn package -P test`` 会触发配置文件
+
+#### 默认路径
+Maven的默认输出路径如下
+```xml
+<build>
+	<directory>${project.basedir}/target</directory>
+	<outputDirectory>${project.build.directory}/classes</outputDirectory>
+	<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+	<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+	<scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
+	<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>  
+</build>
+```
+
+如果想修改路径，比如输出路径可以使用 ``Profiles`` 配置文件
+```xml
+<profiles>
+	<profile>
+		<id>it</id>
+		<properties>
+			<!--修改编译结果路径为build-->
+			<profiles.buildDirectory>build</profiles.buildDirectory>
+		</properties>
+	</profile>
+</profiles>
+<build>
+	<!--生成路径根据profile的设定变化-->
+	<directory>${project.basedir}/${profiles.buildDirectory}</directory>
+</build>
+```
+运行 ``mvn clean compile -P it`` 即可触发配置
 
 ## mvnw
 ``mvnw`` 是 [Maven Wrapper](https://maven.apache.org/wrapper/) 的缩写。因为我们安装Maven时，默认情况下，系统所有项目都会使用全局安装的这个Maven版本。但是，对于某些项目来说，它可能必须使用某个特定的Maven版本，这个时候，就可以使用Maven Wrapper，它可以负责给这个特定的项目安装指定版本的Maven，而其他项目不受影响。
@@ -225,7 +258,7 @@ distributionUrl=https://mirrors.cloud.tencent.com/apache/maven/maven-3/3.9.5/bin
 ## 其他
 
 #### Google Cloud Storage 的镜像
-```
+```xml
 <settings>
     <mirrors>
         <mirror>

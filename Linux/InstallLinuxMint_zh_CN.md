@@ -45,6 +45,12 @@ Linux Mint 是基于 ``Ubuntu`` 改进的开源免费桌面 Linux 系统，运�
 
 ## 安装后的设置
 
+### 修改root密码
+```
+sudo passwd root
+```
+
+### nano快捷键
 因为Mint安装好后没有 ``Vim``，只有 ``nano``。在这里记录一下nano的快捷键  
 - CTRL+o 然后回车 → 保存
 - CTRL+x → 退出

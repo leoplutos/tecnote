@@ -1,13 +1,13 @@
 # .bashrc for personal
 
 # Source global definitions
-if [ -f ~/.bash_profile ]; then
-	. ~/.bash_profile
-fi
+#if [ -f ~/.bash_profile ]; then
+#	. ~/.bash_profile
+#fi
 
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
+#if [ -f ~/.bashrc ]; then
+#	. ~/.bashrc
+#fi
 
 #export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
 #设定UBUNTU_ICON=NerdFont的Ubuntu图标，最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {f31b}{U+00A0}
@@ -33,7 +33,8 @@ PS_CYAN="\e[0;36m"
 PS_CLEAR="\e[0m"
 export PS1='`exitStatus=$?;echo -n "\['${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}'\]""\u@\h""\['${PS_CLEAR}:${PS_YELLOW}'\]""\w""\['${PS_CLEAR}'\]""\n";if [ $exitStatus -ne 0 ];then echo -n "\['${PS_RED}'\]""[""\['${PS_LIGHT_RED}'\]""${exitStatus}""\['${PS_RED}'\]""]";fi;echo -n "\['${PS_CLEAR}${PS_BLUE}'\]""\$""\['${PS_CLEAR}'\]"` '
 
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
+#export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
 export INPUTRC='~/work/lch/rc/inputrc/inputrc'
 export personal_workspace=~/work/lch/workspace
 export personal_rc=~/work/lch/rc
@@ -42,7 +43,7 @@ export personal_tool=~/work/lch/tool
 export personal_log=~/work/lch/log
 export TERM="xterm-256color"
 export COLORTERM=truecolor
-export DOCKER_HOST="tcp://localhost:3102"
+#export DOCKER_HOST="tcp://localhost:3102"
 
 #环境变量加入pip3下载的内容
 export PATH=$PATH:~/.local/bin
@@ -74,6 +75,10 @@ alias nvimc='func_nvimc() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.l
 alias nvimv='func_nvimv() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"; }; func_nvimv'
 alias lg='lazygit'
 alias gu='gitui'
+alias dk='docker'
+alias dki='docker images'
+alias dkc='docker ps -a'
+alias dkl='docker logs -ft --tail ?'
 alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'
 alias tmuxn='tmux -2u -f ~/work/lch/rc/tmuxrc/tmux3.2.conf new-session -s lch_session -n lch_window'
 alias tmuxa='tmux -2u a -t lch_session'

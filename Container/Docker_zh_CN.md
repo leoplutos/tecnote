@@ -568,3 +568,28 @@ docker run -d -p 3300:3300 -it my-test-app:test
 因为 ``Docker Desktop for Windows`` 已经涉及到授权问题，可以选择使用 ``Rancher Desktop``，github上5.2k星，界面和 ``Docker Desktop for Windows``差别不大，支持 ``Kubernetes`` 本地环境（k3s），商业环境友好
  - [官网](https://rancherdesktop.io/)
  - [Github地址](https://github.com/rancher-sandbox/rancher-desktop/)
+
+### 容器既没有 netstat 和 lsof 也不是 root 时如何排查网络
+直接手动解析 procfs 里面的输出，执行
+```
+awk 'function hextodec(str,ret,n,i,k,c){
+    ret = 0
+    n = length(str)
+    for (i = 1; i <= n; i++) {
+        c = tolower(substr(str, i, 1))
+        k = index("123456789abcdef", c)
+        ret = ret * 16 + k
+    }
+    return ret
+}
+function getIP(str,ret){
+    ret=hextodec(substr(str,index(str,":")-2,2)); 
+    for (i=5; i>0; i-=2) {
+        ret = ret"."hextodec(substr(str,i,2))
+    }
+    ret = ret":"hextodec(substr(str,index(str,":")+1,4))
+    return ret
+} 
+NR > 1 {{if(NR==2)print "Local - Remote";local=getIP($2);remote=getIP($3)}{print local" - "remote}}' /proc/net/tcp
+```
+就可以获得类似 ``netstat`` 的输出了

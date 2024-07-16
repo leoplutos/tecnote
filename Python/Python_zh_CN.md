@@ -75,6 +75,19 @@ C:\Users\Leo-G5000\Python3rdLib
 python -m site
 ```
 
+## Windows下运行python.exe失效的办法
+在 cmd 中运行 ``where python``，如果像下面一样出现了2个可执行文件
+```
+# where python
+
+C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps\python.exe
+D:\Tools\Python312\python.exe
+```
+那么可以如下设定  
+打开 ``设置`` → 在搜索处输入 ``alias`` → 选择 ``管理应用执行别名``  
+将 ``python.exe`` 全部关闭  
+再次运行 ``where python``，发现只剩下我们安装的了
+
 ## 检查文件扩展名的例子
 [getFileExtension.py](getFileExtension.py)
 

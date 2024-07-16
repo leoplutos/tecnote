@@ -24,4 +24,5 @@ if __name__ == "__main__":
     db.init_db()
     # 启动Web服务
     # app.run(host="localhost", port=9501)
-    app.run(port=9501)
+    app.run(host='0.0.0.0', port=9501)
+    # app.run(port=9501)

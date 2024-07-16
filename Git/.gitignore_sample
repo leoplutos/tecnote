@@ -9,6 +9,7 @@
 bin/
 obj/
 target/
+build/
 .vs/
 .settings
 .metadata

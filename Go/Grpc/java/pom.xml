@@ -21,6 +21,8 @@
 			<id>dev</id>
 			<properties>
 				<profiles.active>dev</profiles.active>
+				<!--dev环境使用默认的target-->
+				<profiles.buildDirectory>target</profiles.buildDirectory>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -31,6 +33,8 @@
 			<id>it</id>
 			<properties>
 				<profiles.active>it</profiles.active>
+				<!--修改编译结果路径为build-->
+				<profiles.buildDirectory>build</profiles.buildDirectory>
 			</properties>
 		</profile>
 		<profile>
@@ -38,6 +42,8 @@
 			<id>prd</id>
 			<properties>
 				<profiles.active>prd</profiles.active>
+				<!--修改编译结果路径为build-->
+				<profiles.buildDirectory>build</profiles.buildDirectory>
 			</properties>
 		</profile>
 		<profile>
@@ -45,10 +51,14 @@
 			<id>docker</id>
 			<properties>
 				<profiles.active>docker</profiles.active>
+				<!--修改编译结果路径为build-->
+				<profiles.buildDirectory>build</profiles.buildDirectory>
 			</properties>
 		</profile>
 	</profiles>
 	<build>
+		<!--生成路径根据profile的设定变化-->
+		<directory>${project.basedir}/${profiles.buildDirectory}</directory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

@@ -9,14 +9,14 @@
 ```
 mvn clean compile -P dev
 mvn clean compile -P it
-mvn clean compile -P prd
+mvn clean compile -P prd -Dmaven.test.skip=true
 ```
 
 **打包命令**（开发环境，测试环境，商用环境）
 ```
 mvn clean package -P dev
 mvn clean package -P it
-mvn clean package -P prd
+mvn clean package -P prd -Dmaven.test.skip=true
 ```
 
 ### 打包后
@@ -52,9 +52,9 @@ GRPCBatch
 mvn -f pom_docker.xml clean compile
 ```
 
-**打包命令**（开发环境，测试环境，商用环境，Docker用）
+**打包命令**（Docker用）
 ```
-mvn -f pom_docker.xml clean compile assembly:single
+mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
 ```
 
 ### 打包后
