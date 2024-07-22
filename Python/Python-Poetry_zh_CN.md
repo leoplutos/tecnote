@@ -75,7 +75,8 @@ name = "aliyun"
 url = "https://mirrors.aliyun.com/pypi/simple/"
 #name = "tsinghua"
 #url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-priority = "default"
+#priority = "default"
+priority = "primary"
 ```
 
 #### 虚拟环境下运行python命令
@@ -111,6 +112,14 @@ poetry add Faker
 查看依赖包
 ```
 poetry show
+```
+删除依赖包
+```
+poetry remove Faker
+```
+更新权限（在某些情况下，删除依赖项也可能影响其他依赖项。为了确保您的项目保持稳定，最好更新您的依赖项）
+```
+poetry update
 ```
 
 ### 打包与发布

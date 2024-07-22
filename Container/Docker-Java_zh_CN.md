@@ -18,7 +18,10 @@ https://github.com/adoptium/containers
 https://hub.docker.com/_/eclipse-temurin/  
 
 还可以找到官方镜像tag  
-https://github.com/docker-library/docs/tree/master/eclipse-temurin#simple-tags
+https://github.com/docker-library/docs/tree/master/eclipse-temurin#simple-tags  
+因为做了编译环境和运行环境隔离，还使用到了  
+https://github.com/docker-library/docs/tree/master/maven  
+https://github.com/docker-library/docs/tree/master/alpine  
 
 这里放一些tag的含义
  - jammy：Ubuntu 22.04 LTS
@@ -36,7 +39,9 @@ https://github.com/docker-library/docs/tree/master/eclipse-temurin#simple-tags
 
      - /shell/maven_build.sh：编译java工程的shell
      - /shell/docker_build.sh：制作docker镜像的shell
-     - /shell/app_dockerfile：docker脚本
+     - /shell/app_dockerfile：docker脚本（普通构建）
+
+此示例工程需要在宿主机用Maven编译好jar文件，然后放到容器内运行
 
 ### 编译与制作镜像
 
@@ -59,13 +64,14 @@ docker images
 ### 通过镜像启动容器
 启动容器（将容器内的8090端口映射到宿主机的8082）
 ```
-docker run -d -p 8082:8090 -it spring_boot_undertow:1.0.0
+docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
 ```
 启动参数
 - ``-d`` ``–detach``：在后台运行容器，并且打印容器id
 - ``-i`` ``–interactive``：即使没有连接，也要保持标准输入保持打开状态，一般与 ``-t`` 连用
 - ``-t`` ``–tty``：分配一个伪tty，一般与 ``-i`` 连用
-- ``-p``：指定端口映射，格式为：主机(宿主)端口:容器端口
+- ``-p``：指定端口映射，格式为：宿主机端口:容器端口
+- ``--name``：容器名
 
 启动后可以访问  
 http://localhost:8082/hello  
@@ -86,28 +92,26 @@ docker exec -it {容器ID} /bin/ash
 ```
 ``docker exec``是开辟新进程，所以使用``exit``退出，容器也不会停止
 
-## 2.基于eclipse-temurin镜像部署gRPC应用的实现示例
+## 2.基于Maven镜像部署gRPC应用的实现示例
 
 ### 示例工程
 一个基于gRPC示例工程
 
  - [JavaGppc](../Go/Grpc/java/)
 
-     - /shell/maven_build.sh：编译java工程的shell
      - /shell/docker_build.sh：制作docker镜像的shell
-     - /shell/app_dockerfile：docker脚本
+     - /shell/app_dockerfile：docker脚本（多阶段构建）
+     - /shell/settings.xml：Maven国内源设定文件
+
+此示例工程不需要在宿主机编译，使用多阶段构建，将编译环境（jdk）和运行环境分离（jre）
 
 ### 编译与制作容器
 
 将工程放到 ``~/workspace/`` 下
 
-编译工程
-```
-cd ~/workspace/JavaGppc/shell
-bash maven_build.sh
-```
 制作docker镜像
 ```
+cd ~/workspace/JavaGppc/shell
 bash docker_build.sh
 ```
 镜像制作完毕可以用下的命令查看（``docker images`` 看的是镜像）
@@ -118,7 +122,7 @@ docker images
 ### 通过镜像启动容器
 启动容器（将容器内的50051端口映射到宿主机的50054）
 ```
-docker run -d -p 50054:50051 -it java_gppc:1.0.0
+docker run -itd -p 50054:50051 --name gppc_50054 java_gppc:1.0.0
 ```
 
 启动后可以使用 [httpYac.http](../DevTool/httpYac.http) 中的 gRPC 客户端测试

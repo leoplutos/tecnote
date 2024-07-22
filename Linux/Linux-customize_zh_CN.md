@@ -1,8 +1,8 @@
 # Linux自定义欢迎界面
 
 ## /etc/motd简介
-在类 Unix 系统中，/etc/motd 是一个包含「今日消息（Message of the day）」的文件，用于自定义欢迎界面，在用户成功登录终端后显示。
-此外，作为ssh访问系统用户必须配置/etc/ssh/sshd_config文件。
+在类 Unix 系统中，``/etc/motd`` 是一个包含「今日消息（Message of the day）」的文件，用于自定义欢迎界面，在用户成功登录终端后显示。
+此外，作为ssh访问系统用户必须配置 ``/etc/ssh/sshd_config`` 文件。
 
 ## 更改ssh配置文件
 ```bash
@@ -68,10 +68,10 @@ alias
 ```
 **设置别名**
 ```bash
-alias ll='ls -l --color=auto'
-alias lla='ls -al --color=auto'
-alias llt='ls -ltr --color=auto'
-alias gdbx='gdb -x /lch/workspace/gdbinit/.gdbinit'
+alias ll='ls -hl --full-time --time-style=long-iso --color=auto'
+alias lla='ls -hal --full-time --time-style=long-iso --color=auto'
+alias llt='ls -htl --full-time --time-style=long-iso --color=auto'
+alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'
 ```
 **删除别名**
 ```bash
@@ -79,23 +79,20 @@ unalias gdbx
 ```
 
 ## 设定持久化
-* **全局设置**  
-通过修改 ~/.bash_profile (或者 ~/.bashrc ) 文件来全局设置。在 ~/.bash_profile 中加入下面内容
+
+### 全局设置
+
+通过修改 ``~/.bash_profile`` (或者 ``~/.bashrc`` ) 文件来全局设置。内容如下
+
 ```bash
-alias ll='ls -l --color=auto'
+alias ll='ls -hl --full-time --time-style=long-iso --color=auto'
 ```
-* **非全局设置**  
-为了不污染服务器，笔者习惯加到自己teraterm的ttl文件里。
-```
-sendln "alias ll='ls -l --color=auto'"
-wait '#'
-sendln "alias lla='ls -al --color=auto'"
-wait '#'
-sendln "alias llt='ls -ltr --color=auto'"
-wait '#'
-sendln "alias gdbx='gdb -x /lch/workspace/gdbinit/.gdbinit'"
-wait '#'
-```
+
+### 非全局设置
+
+为了不污染服务器，笔者习惯加到自己的 ``.bashrc-personal`` 中，然后在 ``ttl`` 中 ``source`` 一下  
+[.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
+[user@192.168.0.3-8122-bashrc.ttl](../DevTool/user%40192.168.0.3-8122-bashrc.ttl)  
 
 # Linux自定义命令提示符
 
@@ -114,23 +111,75 @@ echo $PS1
 ``\e`` 等同于 ``\033``
 
 ## 设定持久化
-* **全局设置**  
-通过修改 ~/.bash_profile (或者 ~/.bashrc ) 文件来全局设置。在 ~/.bash_profile 中加入下面内容
+
+### 全局设置
+
+通过修改 ``~/.bash_profile`` (或者 ``~/.bashrc`` ) 文件来全局设置。内容如下
+
+#### 无NerdFont版本
+
 ```bash
-PS_IP=$(hostname -I)
+PS_IP=$(hostname -I | awk '{print$1}')
 PS_IP=`echo ${PS_IP}`
-PS_GREEN='\[\033[0;32m\]'
-PS_YELLOW='\[\033[0;33m\]'
-PS_BLUE='\[\033[0;34m\]'
-PS_MAGENTA='\[\033[0;35m\]'
-PS_CLEAR='\[\033[0m\]'
-export PS1="${PS_GREEN}[D1][${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+PS_RED="\[\033[0;31m\]"
+PS_LIGHT_RED="\[\033[1;31m\]"
+PS_GREEN="\[\033[0;32m\]"
+PS_YELLOW="\[\033[0;33m\]"
+PS_BLUE="\[\033[0;34m\]"
+PS_MAGENTA="\[\033[0;35m\]"
+PS_CYAN="\[\033[0;36m\]"
+PS_CLEAR="\[\033[0m\]"
+export PS1="${PS_YELLOW}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
 ```
-* **非全局设置**  
+
+#### 有NerdFont版本
+```bash
+UBUNTU_ICON=`echo  `
+PS_IP=$(hostname -I | awk '{print$1}')
+PS_IP=`echo ${PS_IP}`
+PS_RED="\[\033[0;31m\]"
+PS_LIGHT_RED="\[\033[1;31m\]"
+PS_GREEN="\[\033[0;32m\]"
+PS_YELLOW="\[\033[0;33m\]"
+PS_BLUE="\[\033[0;34m\]"
+PS_MAGENTA="\[\033[0;35m\]"
+PS_CYAN="\[\033[0;36m\]"
+PS_CLEAR="\[\033[0m\]"
+export PS1="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+```
+
+#### 显示错误码的版本
+```bash
+PROMPT_COMMAND=__prompt_command
+__prompt_command() {
+    local EXIT_STATUS="$?"
+    PS1=""
+    local UBUNTU_ICON=' '
+    local PS_IP=$(hostname -I | awk '{print$1}')
+    local PS_RED='\[\e[0;31m\]'
+    local PS_LIGHT_RED='\[\e[1;31m\]'
+    local PS_GREEN='\[\e[0;32m\]'
+    local PS_YELLOW='\[\e[0;33m\]'
+    local PS_BLUE='\[\e[0;34m\]'
+    local PS_MAGENTA='\[\e[0;35m\]'
+    local PS_CYAN='\[\e[0;36m\]'
+    local PS_CLEAR='\[\e[0m\]'
+    if [ $EXIT_STATUS != 0 ]; then
+        PS1+="${PS_LIGHT_RED}[${EXIT_STATUS}] "
+    else
+        PS1+=""
+    fi
+    PS1+="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+}
+```
+
+### 非全局设置
+
 为了不污染服务器，笔者习惯加到自己的 ``.bashrc-personal`` 中，然后在 ``ttl`` 中 ``source`` 一下  
 [.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
 [user@192.168.0.3-8122-bashrc.ttl](../DevTool/user%40192.168.0.3-8122-bashrc.ttl)  
 
+在 [stackoverflow](https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command) 中有很好的讨论
 
 ## 格式控制详解
 ```bash
@@ -189,26 +238,6 @@ export PS1="${PS_GREEN}[D1][${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${
 
 ```
 
-## 常用PS1格式
-```bash
-# 初始情况
-export PS1="[\u@\h \W]\\$ "
-export # 去掉中括号>>>
-export PS1="\u@\h \W\\$ "
-export # 字体颜色变为紫红色并高亮显示
-export PS1="\e[1;35m\u@\h \W\\$ \e[0m"
-export # 仅让\u@\h（用户名@主机名部分）紫红色高亮显示
-export PS1="\e[1;35m\u@\h\e[0m \W\\$ "
-export # 在此基础上让当前目录字体（非高亮）显示黄色
-export PS1="\e[1;35m\u@\h\e[0m \e[33m\W\\$ \e[0m"
-export # 将当前目录替换成完整目录 'W'-> 'w'
-export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\\$ \e[0m"
-export # 让当前目录颜色不要影响到$的颜色
-export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\e[0m\\$ "
-export # 让$显示为蓝色，且不影响到后面的命令
-export PS1="\e[1;35m\u@\h\e[0m:\e[33m\w\e[0m\e[34m\\$\e[0m "
-```
-
 ## 更改ls的内容颜色
 设定文件所在位置：  
 全局
@@ -230,5 +259,3 @@ or
 dircolors -p > ~/.dir_colors
 ```
 然后修改 ``~/.dir_colors`` 即可
-
-

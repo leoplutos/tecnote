@@ -12,6 +12,8 @@ sanic = "^23.6.0"
 sanic-ext = "^23.6.0"
 pyjwt = "^2.8.0"
 setuptools = "^70.0.0"
+sanic-cors = "^2.2.0"
+pydblite = "^3.0.4"
 
 [build-system]
 requires = ["poetry-core"]

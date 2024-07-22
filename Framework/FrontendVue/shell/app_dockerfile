@@ -1,0 +1,84 @@
+# 多阶段构建
+
+# 阶段1：编译，命名为builder
+# 使用Nodejs镜像
+# slim 镜像一般都基于 Debian 和 glibc，删除了许多非必需的软件包，优化了体积
+FROM node:20-bookworm-slim AS builder
+
+# 设定debian12镜像仓库为国内源
+RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+
+# 构建时变量，仅在构建Docker映像期间可用
+ARG NODE_ENV=production
+ARG registry=https://npmreg.proxy.ustclug.org/
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加curl,netstat
+# RUN apt-get update
+# RUN apt-get install curl -y
+# RUN apt-get install net-tools -y
+
+# 将本地文件复制到镜像中
+# 复制所有内容
+COPY . /opt/app/FrontendVue
+
+# 设定镜像
+RUN npm config set registry $registry
+
+# 设置工作目录
+WORKDIR /opt/app/FrontendVue
+# 安装依赖（使用--production=false来强制安装devDependencies中的依赖）
+RUN npm install --production=false
+
+# EXPOSE 9500
+# EXPOSE 4173
+
+# 运行命令（开发）
+# RUN npm run dev
+# 编译命令（打包，会在dist目录下生成结果）
+RUN npm run build
+# 预览命令（打包之后，想要预览打包出来的代码的效果）
+# RUN npm run preview
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+# 根据需要选择nginx的基于alpine的环境
+FROM nginx:1.26-alpine3.19-slim
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 当前时间
+ARG TIMENOW
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加bash，curl
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash curl
+
+# 从阶段1复制编译结果
+# 将dist目录下的内容复制到 /usr/share/nginx/html/ 这个目录下面
+COPY --from=builder /opt/app/FrontendVue/dist/ /usr/share/nginx/html/
+# 设定nginx的配置文件default.conf
+RUN cp -afp /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf_origin_bak
+COPY --from=builder /opt/app/FrontendVue/shell/default.conf /etc/nginx/conf.d/default.conf
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /usr/share/nginx/html/
+
+# 声明容器运行时监听的特定网络端口
+EXPOSE 80

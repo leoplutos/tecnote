@@ -1,12 +1,13 @@
-# Python 版本
+# Nodejs 版本
 # slim 镜像一般都基于 Debian 和 glibc，删除了许多非必需的软件包，优化了体积
-FROM python:3.12.4-slim-bookworm
+FROM node:20-bookworm-slim
 
 # 设定debian12镜像仓库为国内源
 RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
 
 # 构建时变量，仅在构建Docker映像期间可用
-ARG registry=https://pypi.tuna.tsinghua.edu.cn/simple
+ARG NODE_ENV=production
+ARG registry=https://npmreg.proxy.ustclug.org/
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -18,13 +19,20 @@ RUN apt-get install curl -y
 
 # 将本地文件复制到镜像中
 # 复制src文件夹
-COPY src /opt/app/BackendSanic/src
-# 复制pyproject.toml文件
-COPY pyproject.toml /opt/app/BackendSanic/pyproject.toml
+COPY src /opt/app/BackendExpress/src
+# 复制package.json,tsconfig.json文件
+COPY package.json /opt/app/BackendExpress/package.json
+COPY tsconfig.json /opt/app/BackendExpress/tsconfig.json
 
-# 安装 Poetry
-RUN pip install poetry -i $registry
-RUN poetry config virtualenvs.in-project true
+# 设定镜像
+RUN npm config set registry $registry
+
+# 设置工作目录
+WORKDIR /opt/app/BackendExpress
+# 安装依赖（使用--production=false来强制安装devDependencies中的依赖）
+RUN npm install --production=false
+# 编译TypeScript
+RUN npm run tsc
 
 # 个人习惯定制化
 RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
@@ -35,14 +43,11 @@ RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
 RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
 RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
 
-# 设置工作目录
-WORKDIR /opt/app/BackendSanic
-
-# 安装 Python 依赖
-RUN poetry install
+# 在容器内部设置环境变量（NODE_ENV=production）
+ENV NODE_ENV=$NODE_ENV
 
 # 声明容器运行时监听的特定网络端口
-EXPOSE 9501
+EXPOSE 3300
 
 # 指定容器创建时的默认命令
-CMD ["poetry", "run", "python", "src/backendsanic/server.py"]
+CMD ["node", "dist/App.js"]

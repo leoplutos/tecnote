@@ -4,50 +4,66 @@
 #### 下载
 访问官网：  
 https://forge.rust-lang.org/infra/other-installation-methods.html  
-下载：rustup-init.exe  
+下载：``rustup-init.exe  ``
 下载后放到要安装的路径下。  
-比如：D:\Tools\WorkTool\Rust\Rust_gnu_1.70
+比如：``D:\Tools\WorkTool\Rust\Rust_gnu_1.79``
 
 #### 新建rust启动cmd文件
-在要安装的路径下新建start_rust.cmd，内容如下
+在要安装的路径下新建 ``start_rust.cmd``，内容如下
 ```
-set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
-set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
+@echo off
+set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
+set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 set PATH=%PATH%;%CARGO_HOME%\bin
-set CARGO_HOME
-set RUSTUP_HOME
-set PATH
+:: 国内源：中国科学技术大学
+set RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+set RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+:: 国内源：清华大学
+:: RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+echo CARGO_HOME: %CARGO_HOME%
+echo RUSTUP_HOME: %RUSTUP_HOME%
+echo RUSTUP_DIST_SERVER: %RUSTUP_DIST_SERVER%
+echo RUSTUP_UPDATE_ROOT: %RUSTUP_UPDATE_ROOT%
+echo PATH: %PATH%
 cmd
+
 ```
-双击start_rust.cmd启动命令行。
+双击 ``start_rust.cmd`` 启动命令行。
 
 #### 安装
 在start_rust.cmd启动命令行中运行 rustup-init.exe  
 ```
 rustup-init.exe
 ```
-先询问是否安装Visual C++，因为笔者使用gnu工具链所以选3
+先询问是否安装Visual C++，因为笔者使用gnu工具链所以输入 ``y`` 继续
 ```
 Rust Visual C++ prerequisites
 
-Rust requires a linker and Windows API libraries but they don't seem to be
-available.
+Rust requires the Microsoft C++ build tools for Visual Studio 2013 or
+later, but they don't seem to be installed.
 
-These components can be acquired through a Visual Studio installer.
+You can acquire the build tools by installing Microsoft Visual Studio.
 
-1) Quick install via the Visual Studio Community installer
-   (free for individuals, academic uses, and open source).
+  https://visualstudio.microsoft.com/downloads/
 
-2) Manually install the prerequisites
-   (for enterprise and advanced users).
+Check the box for "Desktop development with C++" which will ensure that the
+needed components are installed. If your locale language is not English,
+then additionally check the box for English under Language packs.
 
-3) Don't install the prerequisites
-   (if you're targeting the GNU ABI).
+For more details see:
 
->3
+  https://rust-lang.github.io/rustup/installation/windows-msvc.html
+
+Install the C++ build tools before proceeding.
+
+If you will be targeting the GNU ABI or otherwise know what you are
+doing then it is fine to continue installation without the build
+tools, but otherwise, install the C++ build tools before proceeding.
+
+Continue? (y/N)
 ```
 
-然后会出现欢迎信息，选2（自定义安装）
+然后会出现欢迎信息，选 ``2``（自定义安装）
 ```
 Welcome to Rust!
 
@@ -57,20 +73,20 @@ programming language, and its package manager, Cargo.
 Rustup metadata and toolchains will be installed into the Rustup
 home directory, located at:
 
-  D:\Tools\WorkTool\Rust\Rust_gnu_1.70
+  D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 
 This can be modified with the RUSTUP_HOME environment variable.
 
 The Cargo home directory is located at:
 
-  D:\Tools\WorkTool\Rust\Rust_gnu_1.70
+  D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 
 This can be modified with the CARGO_HOME environment variable.
 
 The cargo, rustc, rustup and other commands will be added to
 Cargo's bin directory, located at:
 
-  D:\Tools\WorkTool\Rust\Rust_gnu_1.70\bin
+  D:\Tools\WorkTool\Rust\Rust_gnu_1.79\bin
 
 This path will then be added to your PATH environment variable by
 modifying the HKEY_CURRENT_USER/Environment/PATH registry key.
@@ -86,37 +102,20 @@ Current installation options:
                profile: default
   modify PATH variable: yes
 
-1) Proceed with installation (default)
+1) Proceed with standard installation (default - just press enter)
 2) Customize installation
 3) Cancel installation
-
->2
+>
 ```
 
 接下来按如下设定安装选项  
-* x86_64-pc-windows-gnu
-* stable
-* default
-* n  
+- default host triple: ``x86_64-pc-windows-gnu``
+- default toolchain: ``stable``
+- profile: ``default``
+- modify PATH variable: ``no``
 
-然后选1（安装）
+然后选 ``1``（安装）
 ```
-I'm going to ask you the value of each of these installation options.
-You may simply press the Enter key to leave unchanged.
-
-Default host triple? [x86_64-pc-windows-msvc]
-x86_64-pc-windows-gnu
-
-Default toolchain? (stable/beta/nightly/none) [stable]
-stable
-
-Profile (which tools and data to install)? (minimal/default/complete) [default]
-default
-
-Modify PATH variable? (Y/n)
-n
-
-
 Current installation options:
 
 
@@ -125,14 +124,14 @@ Current installation options:
                profile: default
   modify PATH variable: no
 
-1) Proceed with installation (default)
+1) Proceed with selected options (default - just press enter)
 2) Customize installation
 3) Cancel installation
->1
+>
 ```
 之后就是在线安装，提示如下信息即安装完成
 ```
-stable-x86_64-pc-windows-gnu installed - rustc 1.70.0 (90c541806 2023-05-31)
+stable-x86_64-pc-windows-gnu installed - rustc 1.79.0 (129f3b996 2024-06-10)
 
 Rust is installed now. Great!
 ```
@@ -163,8 +162,8 @@ rustup self uninstall
 ```
 
 ## Rust使用国内源
-在 ``rust_home`` 环境变量的路径下新建 ``config.toml``
-内容如下即可
+文件位置
+``$HOME/.cargo/config.toml`` (``$CARGO_HOME``下)
 ```
 [source.crates-io]
 replace-with = 'ustc'

@@ -26,7 +26,10 @@ mkdir BackendGin
 cd BackendGin
 go mod init BackendGin
 ```
-然后下载笔者的工程 [BackendGin](./BackendGin) 覆盖即可
+然后下载笔者的工程 [BackendGin](./BackendGin) 覆盖后运行
+```
+go mod tidy
+```
 
 ### 后端工程开发VSCode插件
  - [Go](https://marketplace.visualstudio.com/items?itemName=golang.Go)

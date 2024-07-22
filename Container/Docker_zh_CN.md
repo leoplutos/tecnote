@@ -282,7 +282,7 @@ sudo vim /etc/docker/daemon.json
 ```
 systemctl daemon-reload
 systemctl restart docker.service
-#sudo service docker start
+# sudo service docker start
 ```
 确认
 ```
@@ -316,56 +316,12 @@ unset DOCKER_HOST
 ```
 如果这样做有效，在 ``.bashrc`` 文件中注释掉 ``export DOCKER_HOST=xxx``
 
-### 运行一个HelloWorld
+### 运行一个HelloWorld容器
 ```
 docker run hello-world
 ```
 
-## 常用Docker命令
- - 列出所有镜像：``docker images`` 或 ``docker image ls``
- - 搜索镜像：docker search 镜像
- - 下载镜像：docker pull 镜像id:targe
- - 删除镜像：docker rmi -f 镜像id 镜像id 镜像id
- - 批量删除：docker rmi -f ${docker images -aq}
- + 启动镜像： docker run \[可选参数\] image
-    + --name="xxx"  给容器起名
-    + -d  后台方式运行
-    + -it  使用交互式方式运行，进入容器内部
-    + -p  指定容器端口，通常用 -p ip:主机端口:容器端口
-    + -P  随机指定端口
- + 列出所有运行的容器：docker ps
-    + -a 列出正在运行和历史运行的容器
-    + -n=? 显示最近创建的容器
-    + -q 只显示容器的编号
- - 启动容器：docker start 容器id
- - 停止容器：docker stop 容器id
- - 强制停止容器：docker kill 容器id
- - 重启容器：docker restart 容器id
- - 暂停容器：docker pause 容器id
- - 取消暂停容器：docker unpause 容器id
- - 删除容器：docker rm 容器id
- - 删除所有容器：docker rm -f $(docker ps -aq)
- - 删除所有容器：docker ps -aq | xargs docker rm -f
- - 制作镜像：docker commit -m="描述信息" -a="作者" 容器id 目标镜像名:\[TAG\]
- - 启动一个远程Shell：docker run -it centos /bin/bash
- - 拷贝容器文件到主机：docker cp 容器id:容器文件 主机目录
- - 构造日志：docker run -d centos /bin/bash -c 'echo date; echo date; echo date'
- - 查看日志：docker logs -ft --tail ? 容器id
- - 查看容器端口：docker container port 容器id/容器名
- - 查看容器占用资源：docker stats
- - 查看容器的进程：docker top 容器id/容器名
- - 查看进行元数据：docker inspect 容器id
- - 查看数据卷：docker volume ls
- - 查看数据卷信息：docker volume inspect 数据卷名
- - 查看容器ip地址：docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器id/容器名
- - 查看容器ip地址：docker inspect 容器id/容器名 | grep '"IPAddress":' | head -n 1 | awk '{ print $2}' | awk -F '"' '{print $2}'
- - 进入运行的容器：docker exec -it 容器id /bin/bash（开辟新进程）
- - 进入运行的容器：docker attach -it 容器id /bin/bash（进入原有进程）
- - 退出容器不关闭容器：  Ctrl + P + Q
- - 退出容器并关闭容器：  exit
-
-
-## 卸载 Docker
+### 卸载 Docker
 卸载 Docker 及其相关组件
 ```
 sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
@@ -376,198 +332,132 @@ sudo rm -rf /var/lib/docker
 sudo rm -rf /var/lib/containerd
 ```
 
-## 使用案例-在WSL2下使用Docker
+## 常用Docker命令
+ - 列出所有镜像：``docker images`` 或 ``docker image ls``
+ - 搜索镜像：``docker search {镜像}``
+ - 下载镜像：``docker pull {镜像id:targe}``
+ - 删除镜像：``docker rmi -f {镜像id} {镜像id} {镜像id}``
+ - 批量删除：``docker rmi -f ${docker images -aq}``
+ + 启动镜像： ``docker run [可选参数] image``
+    + ``--name="xxx"``  给容器起名
+    + ``-d``  后台方式运行
+    + ``-it``  使用交互式方式运行，进入容器内部
+    + ``-p``  指定容器端口，通常用 -p ip:主机端口:容器端口
+    + ``-P``  随机指定端口
+ + 列出所有运行的容器：``docker ps``
+    + ``-a`` 列出正在运行和历史运行的容器
+    + ``-n=?`` 显示最近创建的容器
+    + ``-q`` 只显示容器的编号
+ - 启动容器：``docker start {容器id}``
+ - 停止容器：``docker stop {容器id}``
+ - 强制停止容器：``docker kill {容器id}``
+ - 重启容器：``docker restart {容器id}``
+ - 暂停容器：``docker pause {容器id}``
+ - 取消暂停容器：``docker unpause {容器id}``
+ - 删除容器：``docker rm {容器id}``
+ - 删除所有容器：``docker rm -f $(docker ps -aq)``
+ - 删除所有容器：``docker ps -aq | xargs docker rm -f``
+ - 制作镜像：``docker commit -m="描述信息" -a="作者" {容器id} 目标镜像名:[TAG]``
+ - 启动一个远程Shell：``docker run -it centos /bin/bash``
+ - 拷贝容器文件到主机：``docker cp {容器id:容器文件} {主机目录}``
+ - 构造日志：``docker run -d centos /bin/bash -c 'echo date; echo date; echo date'``
+ - 查看日志：``docker logs -ft --tail ? {容器id}``
+ - 查看容器端口：``docker container port {容器id/容器名}``
+ - 查看容器占用资源：``docker stats``
+ - 查看容器的进程：``docker top {容器id/容器名}``
+ - 查看进行元数据：``docker inspect {容器id}``
+ - 查看数据卷：``docker volume ls``
+ - 查看数据卷信息：``docker volume inspect {数据卷名}``
+ - 查看容器ip地址：``docker inspect --format='{{.NetworkSettings.IPAddress}}' {容器id/容器名}``
+ - 查看容器ip地址：``docker inspect {容器id/容器名} | grep '"IPAddress":' | head -n 1 | awk '{ print $2}' | awk -F '"' '{print $2}'``
+ - 进入运行的容器：``docker exec -it {容器id} /bin/bash``（开辟新进程）
+ - 进入运行的容器：``docker attach -it {容器id} /bin/bash``（进入原有进程）
+ - 退出容器不关闭容器：``Ctrl + P + Q``
+ - 退出容器并关闭容器：``exit``
 
-使用 Linux 容器创建一个 Nodejs 镜像
 
-### Docker 安装 Node.js
-查看可用的 Node 版本
+## 容器的通信
+安装 Docker 以后，会默认创建三种网络，可以通过下面命令查看
 ```
-docker search node
+docker network ls
 ```
-拉取 node 镜像
-```
-docker pull node:18-alpine
-```
-查看是否下载成功
-```
-docker images
-```
-NOTE：Node.js Docker团队维护了一个 ``node:alpine`` 镜像tag以及他的变体，alpine 经常因为其非常小的镜像体积而被引用，小体积意味着更新的软件占用空间和更少的漏洞
+他们分别是
+- Bridge
+- Host
+- None
 
-### 构建一个简单的Web服务
-```
-mkdir -p ~/work/lch/workspace/typescript/docker_express
-cd ~/work/lch/workspace/typescript/docker_express
-npm init -y
-npm install express @types/express --save
-npm install typescript --save-dev
-npx tsc --init
-```
-修改 ``package.json``
-```
-nvim package.json
-```
- 内容如下
-```
-{
-	"name": "docker_express",
-	"version": "1.0.0",
-	"description": "",
-	"main": "App.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"tsc": "tsc -p tsconfig.json",
-		"start": "node dist/App.js"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@types/express": "^4.17.21",
-		"express": "^4.18.2"
-	},
-	"devDependencies": {
-		"typescript": "^5.3.2"
-	}
-}
-```
-修改 ``tsconfig.json``
-```
-nvim tsconfig.json
-```
- 内容如下
-```
-{
-	"compilerOptions": {
-		"target": "ES2020",
-		"module": "commonjs",
-		"outDir": "dist",
-		"rootDir": "src",
-		"declaration": true,
-		"sourceMap": true,
-		//"mapRoot": "maps",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"skipLibCheck": true
-	},
-	"exclude": [
-		"node_modules"
-	]
-}
-```
-```
-mkdir -p ~/work/lch/workspace/typescript/docker_express/src
-touch ~/work/lch/workspace/typescript/docker_express/src/App.ts
-```
-修改 ``App.ts``
-```
-nvim src/App.ts
-```
- 内容如下
-```typescript
-import express from 'express';
-import { Express, Request, Response } from 'express';
+安装了 docker 之后，在宿主机运行 ``ip addr`` 会看到一个叫 ``docker0`` 的网卡，作用是为容器充当路由器。每启动一个 docker 容器，就会为容器分配一个 ip 对，和 ``docker0`` 的网卡进行Bridge（桥接）模式。使用的是 ``evth-pair``技术
 
-const app: Express = express();
-const PORT: number = 3300;
+### Bridge模式
 
-app.use(express.json());
+**``重要``**：启动Bridge模式时，容器内的端口监听一定要监听 ``0.0.0.0``   
+比如：
+- OK例子：``0.0.0.0:9501``
+- NG例子：``127.0.0.1:9501``
 
-app.get('/', (reueset: Request, response: Response) => {
-	console.log("responsed!");
-	response.status(200).send('Hello, This is build by docker!');
-});
+Bridge 网络模式 是 Docker 的默认网络模式，又称网桥模式，它为 Docker 容器提供了一种简单且有效的网络连接方式。以下是 Bridge 网络模式的主要作用和应用：
 
-app.listen(PORT, () => {
-	console.log(`Express with Typescript! Server is listening on port ${PORT}`);
-});
-```
-然后在本地进行测试
-```
-rm -rf dist
-npm run tsc
-npm run start
-```
-打开浏览器访问  
-http://localhost:3300/  
-确认服务正常启动
+1. 容器间通信：在 Bridge 网络模式下，同一 Bridge 网络中的 Docker 容器可以通过 IP 地址或者容器名进行通信。这使得在同一主机上运行的不同容器可以方便地共享数据和服务。
 
-### 构建Web服务为Docker镜像
-项目根目录中创建 Docker 配置文件 ``Dockerfile``
-```
-cd ~/work/lch/workspace/typescript/docker_express
-touch Dockerfile
-nvim Dockerfile
-```
-内容如下
-```
-# Node 版本
-FROM node:18-alpine
+2. 网络隔离：每个 Bridge 网络都是独立的，不同 Bridge 网络之间的容器无法直接通信。这为 Docker 容器提供了一种有效的网络隔离机制，可以防止不同应用之间的网络干扰。
 
-# 构建时变量，仅在构建Docker映像期间可用
-ARG NODE_ENV=production
-ARG registry=https://npmreg.proxy.ustclug.org/
-# 在容器内部设置环境变量
-ENV NODE_ENV $NODE_ENV
+3. 端口映射：Bridge 网络模式支持 Docker 容器和主机之间的端口映射。这意味着，您可以将 Docker 容器的网络服务通过特定的端口暴露给主机，从而使得外部网络可以访问到 Docker 容器的服务。
 
-# 将文件或目录复制到镜像中，这里复制的为编译后的js文件
-COPY ./dist /dist
-COPY ./package.json /package.json
-COPY ./package-lock.json /package-lock.json
-
-# 执行后面跟着的命令行命令
-RUN npm config set registry $registry
-RUN NODE_ENV=$NODE_ENV npm install
-
-# 声明容器运行时监听的特定网络端口
-EXPOSE 3300
-
-# 指定容器创建时的默认命令
-CMD ["node", "dist/App.js"]
+Bridge模式的启动命令
 ```
-构建 Docker 镜像
+docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
 ```
-docker build --tag my-test-app:test . --network=host
-```
-``--network=host``参数一定要加上，不然无法联网，会在 ``npm install`` 的时候超时
+- 容器名：spring_8082
+- 宿主机端口：8082
+- 容器虚拟机端口：8090
+- 镜像：spring_boot_undertow:1.0.0
 
-确认镜像是否构建成功
+查看容器 ``spring_8082`` 规格
 ```
-docker images
+docker inspect spring_8082
+```
+可以看到
+```
+"Gateway": "172.17.0.1",
+"IPAddress": "172.17.0.3",
+```
+- Gateway：这是 Docker 容器的默认网关，也就是容器发送的所有非本地地址的网络流量都会通过这个网关路由。在大多数情况下，这个网关就是 Docker 容器所在的主机。
+- IPAddress：这是 Docker 容器在其网络内的 IP 地址。每个 Docker 容器在其所连接的网络中都会有一个唯一的 IP 地址，其他容器可以通过这个 IP 地址与其进行通信。
+
+查看默认网络 ``bridge`` 规格
+```
+docker inspect bridge
 ```
 
-运行容器
-```
-docker run -p 3300:3300 -it my-test-app:test
-```
+### Host模式
+Host 网络模式 是 Docker 的一种网络模式，又称主机模式，它允许 Docker 容器共享宿主机的网络命名空间。以下是 Host 网络模式的主要作用和应用：
 
-打开浏览器访问  
-http://localhost:3300/  
-确认服务正常启动
+- 性能优化：在 Host 网络模式下，Docker 容器可以直接使用宿主机的网络，无需通过 Docker 的网络桥接，这可以减少网络延迟，提高网络性能。
 
-NOTE：容器运行如果不是后台运行的话是无法使用 ``Ctrl+c`` 停止的，可以使用下面的命令
-```
-docker ps
-docker stop ${CONTAINER ID}
-```
+- 端口管理：在 Host 网络模式下，Docker 容器内的端口会直接映射到宿主机的端口，无需进行额外的端口映射设置。这使得端口管理更加简单，也避免了端口映射可能带来的端口冲突问题。
 
-**后台运行容器**  
-通过 ``-d`` 参数指定容器后台运行
+- 网络服务部署：对于需要直接使用宿主机网络的网络服务，例如需要监听宿主机所有 IP 地址的服务，或者需要使用特定网络接口或协议的服务，Host 网络模式是一个很好的选择。
+
+需要注意的是，Host 网络模式下的 Docker 容器会直接共享宿主机的网络，这可能会带来一些安全风险，因此在使用 Host 网络模式时，需要对 Docker 容器的网络访问进行适当的控制和限制。
+
+Host模式的启动命令
 ```
-docker run -d -p 3300:3300 -it my-test-app:test
+docker run -itd -p 8082:8090 --name spring_8082 --net host spring_boot_undertow:1.0.0
 ```
 
-### 搭建私有仓库
-看 [这里](https://zhuanlan.zhihu.com/p/78543733)
+### None模式
+None 网络模式 是 Docker 的一种网络模式，它为 Docker 容器提供了一个最小化的网络环境。  
+在 None 网络模式下，Docker 容器拥有自己的网络命名空间，但是不会进行任何网络设备、IP 地址和路由的配置。这意味着，Docker 容器在 None 网络模式下无法进行网络通信。
+以下是 None 网络模式的主要应用：
 
-## 其他
+- 网络隔离：None 网络模式可以为 Docker 容器提供一个完全隔离的网络环境，这对于需要高度网络隔离的应用非常有用。例如，您可以使用 None 网络模式来运行一些安全敏感的应用，以防止这些应用被网络攻击。
 
-### 关于 Docker Desktop for Windows 的替代品 Rancher Desktop
-因为 ``Docker Desktop for Windows`` 已经涉及到授权问题，可以选择使用 ``Rancher Desktop``，github上5.2k星，界面和 ``Docker Desktop for Windows``差别不大，支持 ``Kubernetes`` 本地环境（k3s），商业环境友好
- - [官网](https://rancherdesktop.io/)
- - [Github地址](https://github.com/rancher-sandbox/rancher-desktop/)
+- 自定义网络配置：虽然 None 网络模式下的 Docker 容器默认无法进行网络通信，但是您可以在容器内部进行自定义的网络配置，以满足特殊的网络需求。例如，您可以在 None 网络模式下的 Docker 容器内部设置 VPN，以实现容器的网络通信。
+
+Host模式的启动命令
+```
+docker run -itd --name spring_8082 --net none spring_boot_undertow:1.0.0
+```
 
 ### 容器既没有 netstat 和 lsof 也不是 root 时如何排查网络
 直接手动解析 procfs 里面的输出，执行
@@ -583,13 +473,75 @@ awk 'function hextodec(str,ret,n,i,k,c){
     return ret
 }
 function getIP(str,ret){
-    ret=hextodec(substr(str,index(str,":")-2,2)); 
+    ret=hextodec(substr(str,index(str,":")-2,2));
     for (i=5; i>0; i-=2) {
         ret = ret"."hextodec(substr(str,i,2))
     }
     ret = ret":"hextodec(substr(str,index(str,":")+1,4))
     return ret
-} 
+}
 NR > 1 {{if(NR==2)print "Local - Remote";local=getIP($2);remote=getIP($3)}{print local" - "remote}}' /proc/net/tcp
 ```
 就可以获得类似 ``netstat`` 的输出了
+
+或者在宿主机使用命令
+```
+docker container port {容器id/容器名}
+```
+
+## Docker容器数据卷
+Docker将运行的环境打包形成容器运行， Docker容器产生的数据，如果不通过docker commit生成新的镜像，使得数据做为镜像的一部分保存下来， 那么当容器删除后，数据自然也就没有了。 为了能保存数据在Docker中我们使用卷。
+
+**卷的设计目的就是数据的持久化，完全独立于容器的生存周期，因此Docker不会在容器删除时删除其挂载的数据卷。**
+
+数据卷的特点:
+
+- 数据卷可在容器之间共享或重用数据
+- 卷中的更改可以直接生效
+- 数据卷中的更改不会包含在镜像的更新中
+- 数据卷的生命周期一直持续到没有容器使用它为止
+
+### 使用方式
+运行容器，指定挂载数据卷
+```
+docker run -it -v 主机目录:容器目录
+```
+
+查看所有的数据卷
+```
+docker volume ls
+```
+
+更多数据卷的介绍可以看 [这里](https://blog.csdn.net/huangjhai/article/details/119860628)
+
+## 其他
+
+### 宿主机和容器之间的文件复制
+
+需要注意的是，不管容器有没有启动，拷贝命令都会生效
+
+#### 从容器复制文件到宿主机
+将容器的 ``/home/licence.txt`` 文件复制到宿主机的 ``/home`` 目录下
+```
+docker cp nginx-web:/home/licence.txt /home
+```
+
+#### 从宿主机复制文件到容器
+将宿主机的 ``/home/licence.txt`` 文件复制到容器的 ``/home`` 目录下
+```
+docker cp /home/licence.txt nginx-web:/home
+```
+
+### 容器直接退出，如何进入容器调试 
+此时可覆盖主进程启动命令，更换一个挂起的命令即可
+```
+docker run -it --entrypoint /bin/bash {镜像}
+```
+
+### 搭建私有仓库
+看 [这里](https://zhuanlan.zhihu.com/p/78543733)
+
+### 关于 Docker Desktop for Windows 的替代品 Rancher Desktop
+因为 ``Docker Desktop for Windows`` 已经涉及到授权问题，可以选择使用 ``Rancher Desktop``，github上5.2k星，界面和 ``Docker Desktop for Windows``差别不大，支持 ``Kubernetes`` 本地环境（k3s），商业环境友好
+ - [官网](https://rancherdesktop.io/)
+ - [Github地址](https://github.com/rancher-sandbox/rancher-desktop/)

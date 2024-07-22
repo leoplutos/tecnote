@@ -1,5 +1,5 @@
 {
-	"go.goroot": "D:\\Tools\\WorkTool\\Go\\go1.21.1.windows-amd64",
+	"go.goroot": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
 	"go.gopath": "D:\\Tools\\WorkTool\\Go\\go_global",
 	"gopls": {
 		//"formatting.gofumpt": true,

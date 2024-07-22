@@ -1,55 +1,52 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import sqlite3
-from typing import Any
+from pydblite.pydblite import Base
 
 
-class SqliteDb:
-    def __init__(self, databaseuri: str = "file:mem1?mode=memory&cache=shared"):
-        self.__databaseuri = databaseuri
-        self.__db = sqlite3.connect(self.__databaseuri)
+class Pydblite:
 
-    def close(self):
-        self.__db.cursor().close()
-        self.__db.close()
-
-    def execute(self, sql: str, param: Any = None) -> int:
-        cursor = self.__db.cursor()
+    def __init__(self):
         try:
-            if param is None:
-                cursor.execute(sql)
-            else:
-                if type(param) is list:
-                    cursor.executemany(sql, param)
-                else:
-                    cursor.execute(sql, param)
-            count = self.__db.total_changes
-            return count
+            # 创建表login
+            login = Base('login', save_to_file=False)
+            # 字段
+            login.create('userid', 'password')
+            # 插入数据
+            login.insert(userid='admin', password='123')
+            self.__login = login
+
+            # 创建表todo
+            todo = Base('todo', save_to_file=False)
+            # 字段
+            todo.create('todoid', 'todoname', 'image', 'studied')
+            # 插入数据
+            todo.insert(todoid=1, todoname='Vue', image='./img/vue.png', studied=False)
+            todo.insert(
+                todoid=2, todoname='数据库', image='./img/database.png', studied=False
+            )
+            todo.insert(
+                todoid=3, todoname='Python', image='./img/python.png', studied=False
+            )
+            todo.insert(
+                todoid=4, todoname='Golang', image='./img/go.png', studied=False
+            )
+            self.__todo = todo
         except Exception as e:
             print(e)
-            return -1
         finally:
             pass
 
-    def query(self, sql: str, param: Any = None) -> "list[Any]":
-        cursor = self.__db.cursor()
-        if param is None:
-            cursor.execute(sql)
-        else:
-            cursor.execute(sql, param)
-        return cursor.fetchall()
+    def query_login(self, user_id, password):
+        return self.__login(userid=user_id, password=password)
 
-    def queryone(self, sql: str, param: Any = None) -> Any:
-        cursor = self.__db.cursor()
-        if param is None:
-            cursor.execute(sql)
-        else:
-            cursor.execute(sql, param)
-        return cursor.fetchone()
+    def query_todo(self):
+        return self.__todo()
 
-    def commit(self):
-        self.__db.commit()
+    @classmethod
+    def query_login_info(cls, user_id, password):
+        return cls().query_login(user_id, password)
 
-    def rollback(self):
-        self.__db.rollback()
+    @classmethod
+    def query_todo_info(cls):
+        return cls().query_todo()

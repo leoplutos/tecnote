@@ -27,8 +27,8 @@ func setupEngine() *gin.Engine {
 		authRouter.Match([]string{http.MethodPost, http.MethodGet}, "/todo/getAll", controller.Todo)
 	}
 
-	//设置信任ip
-	engine.SetTrustedProxies([]string{"127.0.0.1"})
+	// 设置受信任代理,如果不设置默认信任所有代理，不安全
+	engine.SetTrustedProxies([]string{"127.0.0.1", "172.30.8.172"})
 
 	return engine
 }

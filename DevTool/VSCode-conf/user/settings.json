@@ -73,7 +73,8 @@
 		//"somefile": true
 	},
 	"files.associations": {
-		"*.pc": "c" //设定.pc扩展名关联为c程序
+		"*.pc": "c", //设定.pc扩展名关联为c程序
+		"docker-compose.y*ml": "yaml"
 	},
 	"security.workspace.trust.untrustedFiles": "open", //6.10号版本的VS Code加了个新功能: Workspace Trust就是会在你每打开一个文件夹的时候就询问是否信任
 	"update.mode": "manual", //禁止自动升级VSCode版本
@@ -126,7 +127,7 @@
 			"editorCursor.background": "#000000", //光标背景色
 			"editorCursor.foreground": "#00ffff", //光标前景色
 			"editor.findMatchBackground": "#00ff00fe", //当前查找内容颜色。（备用：#000000）（浅绿：#00d700）
-			"editor.findMatchForeground":"default",
+			"editor.findMatchForeground": "default",
 			//"editor.findMatchBorder": "#ffee00", // 当前查找内容边框颜色
 			"editor.findMatchHighlightBackground": "default", //所有查找内容颜色。深暗红：#ea5c0040,（备用：#59b8b377）黄色：#ffff00，暗红：#fa05，深暗红：#ea5c0055，蓝绿：#314365，
 			"editor.findMatchHighlightForeground": "#000000fe",
@@ -632,6 +633,9 @@
 				"keyword.control:python": {
 					"foreground": "#0000ff" //#64afef
 				},
+				"namespace:go": {
+					"foreground": "#4EC9B0"
+				},
 			}
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
@@ -889,6 +893,9 @@
 	"javascript.inlayHints.parameterNames.enabled": "all", //参数名称叠加提示
 	"typescript.format.semicolons": "insert", // TypeScript-在语句末尾插入分号
 	"typescript.inlayHints.parameterNames.enabled": "all", //参数名称叠加提示
+	"[yaml]": {
+		"editor.defaultFormatter": "redhat.vscode-yaml"
+	},
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
 	//-----------------------------------------------"

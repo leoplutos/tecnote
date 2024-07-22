@@ -1,0 +1,44 @@
+services:
+  vue_9500:
+    restart: always
+    image: frontend_vue:1.0.0
+    container_name: vue_9500
+    privileged: true
+    ports:
+      - "9500:80"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 1024M
+    #env_file: /absolute/path/to/your/.env
+    #environment:
+    #  NACOS_SERVERS: ${NACOS_SERVERS}
+    #volumes:
+    #  - ./logs_02/:/home/nacos/logs/
+    #healthcheck:
+    #  test: ["CMD", "curl", "-f", "http://localhost/alive"]
+    #  interval: 5s
+    #  timeout: 3s
+    #depends_on:
+    #  - redis
+  gin_9501:
+    restart: always
+    image: backend_gin:1.0.0
+    container_name: gin_9501
+    privileged: true
+    ports:
+      - "9501:9501"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 1024M
+    #env_file: /absolute/path/to/your/.env
+    #environment:
+    #  NACOS_SERVERS: ${NACOS_SERVERS}
+    #volumes:
+    #  - ./logs_02/:/home/nacos/logs/
+#networks:
+#  default:
+#    driver: custom-driver-1

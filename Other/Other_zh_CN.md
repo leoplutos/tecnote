@@ -278,6 +278,9 @@ https://github.com/awesome-selfhosted/awesome-selfhosted
  - [64bit版](https://dl.google.com/japanese-ime/2.25.3700.0/googlejapaneseinput64.msi)
  - [32bit版](https://dl.google.com/japanese-ime/2.25.3700.0/googlejapaneseinput32.msi)
 
+## GitHub中文排行榜
+https://github.com/GrowingGit/GitHub-Chinese-Top-Charts
+
 ## 其他软件
 
 - TVBox

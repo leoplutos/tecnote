@@ -20,7 +20,7 @@ async fn main() -> std::io::Result<()> {
     // 初始化内存数据库
     let _ = bootstrap::db::initialize_db();
 
-    println!("starting HTTP server at http://localhost:9501/");
+    println!("HTTP服务已经启动在 0.0.0.0:9501");
     HttpServer::new(|| {
         App::new()
             //添加中间件
@@ -29,7 +29,7 @@ async fn main() -> std::io::Result<()> {
             .service(controller::login_controller::login)
             .service(controller::todo_controller::todo_get_all)
     })
-    .bind(("127.0.0.1", 9501))?
+    .bind(("0.0.0.0", 9501))?
     .run()
     .await
 }

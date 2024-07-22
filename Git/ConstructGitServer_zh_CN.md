@@ -32,7 +32,7 @@ Gitea 是一个开源社区驱动的轻量级代码托管解决方案，后端�
 - 支持后台管理面板
 - 支持多语言
 
-## 下载安装
+## 下载安装（服务器部署）
  - [Gogs官网](https://gogs.io/)
  - [Gogs GIthub主页](https://github.com/gogs/gogs)
  - [Gitea官网](https://docs.gitea.com/zh-cn/)
@@ -42,7 +42,7 @@ Gitea 是一个开源社区驱动的轻量级代码托管解决方案，后端�
  - [环境要求](https://gogs.io/docs/installation)
  - [下载二进制](https://gogs.io/docs/installation/install_from_binary)
 
-## 安装步骤
+## 安装步骤（服务器部署）
 
 1. 安装所需软件
 ```
@@ -158,6 +158,9 @@ sudo -u git cat /home/git/gogs/custom/conf/app.ini
 还可以配置 Nginx 作为 SSL 代理服务器 和 邮件通知等内容  
 因为笔者暂时不需要就没有设定  
 更多可以看这里：[如何在 Ubuntu 18.04 上安装和配置 Gogs](https://cloud.tencent.com/developer/article/1626705)
+
+## 下载安装（Docker部署）
+ - [Gogs Docker 说明页](https://github.com/gogs/gogs/tree/main/docker)
 
 ## 创建仓库
 

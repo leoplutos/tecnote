@@ -9,29 +9,45 @@
 #	. ~/.bashrc
 #fi
 
-#export PS1='\e[1;35m\u@\h\e[0m:\e[33m\W\e[0m\e[34m\$\e[0m '
+# 提示符设定
+
+# 普通版本
 #设定UBUNTU_ICON=NerdFont的Ubuntu图标，最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {f31b}{U+00A0}
-UBUNTU_ICON=`echo  `
-PS_IP=$(hostname -I | awk '{print$1}')
-PS_IP=`echo ${PS_IP}`
-#PS_RED='\[\033[0;31m\]'
-#PS_LIGHT_RED='\[\033[1;31m\]'
-#PS_GREEN='\[\033[0;32m\]'
-#PS_YELLOW='\[\033[0;33m\]'
-#PS_BLUE='\[\033[0;34m\]'
-#PS_MAGENTA='\[\033[0;35m\]'
-#PS_CYAN='\[\033[0;36m\]'
-#PS_CLEAR='\[\033[0m\]'
-#export PS1="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
-PS_RED="\e[0;31m"
-PS_LIGHT_RED="\e[1;31m"
-PS_GREEN="\e[0;32m"
-PS_YELLOW="\e[0;33m"
-PS_BLUE="\e[0;34m"
-PS_MAGENTA="\e[0;35m"
-PS_CYAN="\e[0;36m"
-PS_CLEAR="\e[0m"
-export PS1='`exitStatus=$?;echo -n "\['${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_CLEAR}${PS_GREEN}[${PS_IP}]${PS_CLEAR}${PS_MAGENTA}'\]""\u@\h""\['${PS_CLEAR}:${PS_YELLOW}'\]""\w""\['${PS_CLEAR}'\]""\n";if [ $exitStatus -ne 0 ];then echo -n "\['${PS_RED}'\]""[""\['${PS_LIGHT_RED}'\]""${exitStatus}""\['${PS_RED}'\]""]";fi;echo -n "\['${PS_CLEAR}${PS_BLUE}'\]""\$""\['${PS_CLEAR}'\]"` '
+#UBUNTU_ICON=`echo  `
+#PS_IP=$(hostname -I | awk '{print$1}')
+#PS_IP=`echo ${PS_IP}`
+#PS_RED="\[\033[0;31m\]"
+#PS_LIGHT_RED="\[\033[1;31m\]"
+#PS_GREEN="\[\033[0;32m\]"
+#PS_YELLOW="\[\033[0;33m\]"
+#PS_BLUE="\[\033[0;34m\]"
+#PS_MAGENTA="\[\033[0;35m\]"
+#PS_CYAN="\[\033[0;36m\]"
+#PS_CLEAR="\[\033[0m\]"
+#export PS1="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+
+# 显示错误信息的版本
+PROMPT_COMMAND=__prompt_command
+__prompt_command() {
+    local EXIT_STATUS="$?"
+    PS1=""
+    local UBUNTU_ICON=' '
+    local PS_IP=$(hostname -I | awk '{print$1}')
+    local PS_RED='\[\e[0;31m\]'
+    local PS_LIGHT_RED='\[\e[1;31m\]'
+    local PS_GREEN='\[\e[0;32m\]'
+    local PS_YELLOW='\[\e[0;33m\]'
+    local PS_BLUE='\[\e[0;34m\]'
+    local PS_MAGENTA='\[\e[0;35m\]'
+    local PS_CYAN='\[\e[0;36m\]'
+    local PS_CLEAR='\[\e[0m\]'
+    if [ $EXIT_STATUS != 0 ]; then
+        PS1+="${PS_LIGHT_RED}[${EXIT_STATUS}] "
+    else
+        PS1+=""
+    fi
+    PS1+="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+}
 
 #export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
@@ -79,6 +95,12 @@ alias dk='docker'
 alias dki='docker images'
 alias dkc='docker ps -a'
 alias dkl='docker logs -ft --tail ?'
+alias dke='func_docker_exec() { docker exec -it $1 /bin/bash; }; func_docker_exec'
+alias dc='docker compose'
+alias dcc='docker compose ps -a'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dcl='docker compose logs'
 alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'
 alias tmuxn='tmux -2u -f ~/work/lch/rc/tmuxrc/tmux3.2.conf new-session -s lch_session -n lch_window'
 alias tmuxa='tmux -2u a -t lch_session'

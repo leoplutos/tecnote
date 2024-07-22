@@ -68,6 +68,7 @@ Java所需插件比较多。有2种安装方式：
 * [Hex Editor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行方式为：按下F1，然后输入：open active file in hex editor
 * [Compare Folders](https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹对比差分
 * [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml)
+* [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 * [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
 * [嵌入式SQL高亮(可选)](https://marketplace.visualstudio.com/items?itemName=shanduur.c-embedded-sql)
 * [Project Manager(可选)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)

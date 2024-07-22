@@ -64,6 +64,7 @@ http://localhost:9501/login
 
 制作docker镜像
 ```
+cd ~/workspace/BackendSanic/shell
 bash docker_build.sh
 ```
 镜像制作完毕可以用下的命令查看（``docker images`` 看的是镜像）
@@ -74,7 +75,10 @@ docker images
 ### 通过镜像启动容器
 启动容器（将容器内的9501端口映射到宿主机的9501）
 ```
-docker run -d -p 9501:9501 -it backend_sanic:1.0.0
+docker run -itd -p 9501:9501 --name sanic_9501 backend_sanic:1.0.0
+
+# 启动失败时调试用
+# docker run -it -p 9501:9501 --entrypoint /bin/bash backend_sanic:1.0.0
 ```
 
 启动后可以访问  

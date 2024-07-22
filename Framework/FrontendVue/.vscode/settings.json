@@ -1,0 +1,6 @@
+{
+	"editor.guides.indentation": true, //缩进参考线
+	"files.exclude": { //隐藏node_modules目录
+		"**/node_modules": true
+	}
+}

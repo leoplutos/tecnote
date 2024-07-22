@@ -1,0 +1,45 @@
+# 普通构建
+## 根据需要选择不同版本的 Golang 版
+# FROM golang:1.22.5-bookworm
+FROM golang:1.22.5-alpine
+
+# 创建应用路径
+RUN mkdir /opt/app
+# 如果需要bash（Alpine默认不带bash）
+#RUN apk add --no-cache --upgrade bash
+
+# 构建时变量，仅在构建Docker映像期间可用
+# ARG NODE_ENV=production
+# 在容器内部设置环境变量
+# ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8"
+# Go语言设定
+RUN go env -w GO111MODULE=on
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+
+# 将本地文件复制到镜像中
+# 复制src文件夹
+COPY src /opt/app/BackendGin/src
+# 复制go.mod文件
+COPY go.mod /opt/app/BackendGin/go.mod
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/BackendGin
+
+# 编译工程
+RUN go mod tidy
+RUN go build -o ./bin/backendgin ./src/main.go
+
+# 声明容器运行时监听的特定网络端口
+EXPOSE 9501
+
+# 指定容器创建时的默认命令
+CMD ["./bin/backendgin"]
