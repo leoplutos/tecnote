@@ -32,6 +32,7 @@ if defined USE_NERD_FONT_FLG (
 for /f "delims=" %%i in ('echo  ') do (set WIN_ICON=%%i)
 ::for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
 for /f "tokens=3" %%a in ('"netsh interface ip show address "以太网" | findstr "IP Address""') do (set PS_IP=%%a)
+set PS_BLACK=$E[30m
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
 set PS_YELLOW=$E[33m
@@ -40,6 +41,8 @@ set PS_MAGENTA=$E[35m
 set PS_CYAN=$E[36m
 set PS_CLEAR=$E[0m
 set PROMPT=%PS_YELLOW%%WIN_ICON%[cmd]%PS_CLEAR%%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
+::亮色用
+::set PROMPT=%PS_BLUE%%WIN_ICON%[cmd]%PS_CLEAR%%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
 echo Prompt Setting Complited
 ::进入用户文件夹
 cd /d %USERPROFILE%
@@ -47,6 +50,7 @@ goto GoOn
 
 :SetPromptWithOutNerdFont
 for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
+set PS_BLACK=$E[30m
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
 set PS_YELLOW=$E[33m
@@ -55,6 +59,8 @@ set PS_MAGENTA=$E[35m
 set PS_CYAN=$E[36m
 set PS_CLEAR=$E[0m
 set PROMPT=%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
+::亮色用
+::set PROMPT=%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
 echo Prompt Setting Complited
 goto GoOn
 

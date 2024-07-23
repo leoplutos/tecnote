@@ -20,9 +20,9 @@ MinGW-W64是一个64位的GNU工具链，是MinGW的升级版，原本它是MinG
 ### MSVCRT 和 UCRT 介绍
 MSVCRT和UCRT都是用于Windows平台的C运行时库，提供了基本的C函数和类型，用于C程序的开发和运行。
 
-MSVCRT（Microsoft Visual C Runtime）是Microsoft Visual C++早期版本使用的运行时库，用于支持C程序的运行。它提供了一些常用的C函数，如printf、scanf、malloc、free等。MSVCRT只能在32位Windows系统上运行，对于64位系统和Windows Store应用程序不支持。
+``MSVCRT``（Microsoft Visual C Runtime）是Microsoft Visual C++早期版本使用的运行时库，用于支持C程序的运行。它提供了一些常用的C函数，如printf、scanf、malloc、free等。MSVCRT只能在32位Windows系统上运行，对于64位系统和Windows Store应用程序不支持。
 
-UCRT（Universal C Runtime）是在Windows 10中引入的新的C运行时库，用于支持C程序的运行和开发。UCRT提供了一些新的C函数，同时还支持Unicode字符集和安全函数，如strcpy_s、strcat_s、_itoa_s等。UCRT同时支持32位和64位系统，并且可以与Windows Store应用程序一起使用。
+``UCRT``（Universal C Runtime）是在Windows 10中引入的新的C运行时库，用于支持C程序的运行和开发。UCRT提供了一些新的C函数，同时还支持Unicode字符集和安全函数，如strcpy_s、strcat_s、_itoa_s等。UCRT同时支持32位和64位系统，并且可以与Windows Store应用程序一起使用。
 
 总的来说，UCRT是Microsoft为了更好地支持Windows 10和Windows Store应用程序而开发的新一代C运行时库，相比于MSVCRT，UCRT提供了更多的功能和更好的兼容性，对 UTF-8 语言环境的支持更好。但对旧的32位Windows系统，MSVCRT仍然是必需的。
 
@@ -39,11 +39,20 @@ UCRT（Universal C Runtime）是在Windows 10中引入的新的C运行时库，�
 - ``rev1`` 构建版本
 
 ### 笔者选择的为
-[x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev0.7z](https://github.com/niXman/mingw-builds-binaries/releases/download/13.2.0-rt_v11-rev0/x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev0.7z)
+因为笔者以前使用的是 ``Code::Blocks`` 内置的 MinGW，版本为 ``gcc (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0``
+
+所以选择
+[x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1.7z](https://github.com/niXman/mingw-builds-binaries/releases/download/13.2.0-rt_v11-rev1/x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1.7z)
 
 ## 配置
 下载后解压缩，配置到环境变量里就可以在命令行使用了
 ```
-gcc --version
-gdb --version
+# gcc --version
+
+gcc (x86_64-posix-seh-rev1, Built by MinGW-Builds project) 13.2.0
+```
+```
+# gdb --version
+
+GNU gdb (GDB) 11.2
 ```

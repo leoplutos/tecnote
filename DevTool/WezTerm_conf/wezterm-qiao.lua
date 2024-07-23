@@ -214,7 +214,7 @@ wezterm.on('update-status', function(window, pane)
   window:set_right_status(wezterm.format {
     { Foreground = {
         --Color = '#e1e1ff'
-        Color = '#c8d3f5'
+        Color = '#3232FF'
     } },
     { Text = date .. '   ' .. battery, },
   })
@@ -230,48 +230,48 @@ end)
 -- 字体
 --config.font = wezterm.font('等距更纱黑体 SC Nerd Font', { weight = 'Bold', italic = false })
 config.font = wezterm.font_with_fallback({
+        'Consolas 7NF',
+        'Consolas ligaturized v3',
         --'等距更纱黑体 SC Nerd Font Light',
         '等距更纱黑体 SC Nerd Font',
         --'更紗等幅ゴシック J Nerd Font light',
         '更紗等幅ゴシック J Nerd Font',
         'Cascadia Code NF',
-        'Consolas 7NF',
-        'Consolas ligaturized v3',
         'JetBrains Mono',
     })
 config.font_size = 12.0
 
 --颜色设定
 config.colors = {
-  foreground = '#DADADA',
-  background = '#1D1F21',
-  cursor_bg = '#00FFFF',
-  cursor_fg = '#1e1e1e',
-  cursor_border = '#afffff',
+  foreground = '#1E1E1E',
+  background = '#FCF4DC',
+  cursor_bg = '#000000',
+  cursor_fg = '#000000',
+  cursor_border = '#000000',
   --selection_fg = '#DADADA',
   --selection_bg = '#585b70',
-  selection_bg = '#20374c',
-  scrollbar_thumb = '#585b70',
+  selection_bg = '#aaa7c9',
+  scrollbar_thumb = '#8b867a',
   split = '#235b76',
   ansi = {
-    '#000000',
-    '#CD3131',
-    '#0DBC79',
-    '#E5E510',
-    '#2472C8',
-    '#BC3FBC',
-    '#11A8CD',
-    '#E5E5E5',
+    '#1E1E1E',
+    '#FF0000',
+    '#4E9A06',
+    '#C4A000',
+    '#4040FF',
+    '#75507B',
+    '#00C0C0',
+    '#E7E7E7',
   },
   brights = {
     '#666666',
-    '#F14C4C',
-    '#23D18B',
-    '#F5F543',
-    '#3B8EEA',
-    '#D670D6',
-    '#29B8DB',
-    '#E5E5E5',
+    '#EF2929',
+    '#16C60C',
+    '#FCE94F',
+    '#8080FF',
+    '#FF1CFF',
+    '#00DCDC',
+    '#FFFFFF',
   },
   --indexed = { [136] = '#af8700' },
   compose_cursor = '#ffa500',
@@ -279,18 +279,18 @@ config.colors = {
   copy_mode_active_highlight_fg = { AnsiColor = 'Black' },
   copy_mode_inactive_highlight_bg = { Color = '#52ad70' },
   copy_mode_inactive_highlight_fg = { AnsiColor = 'White' },
-  quick_select_label_bg = { Color = '#ff007c' },
+  quick_select_label_bg = { Color = '#20374c' },
   quick_select_label_fg = { Color = '#ffffff' },
-  quick_select_match_bg = { Color = '#114957' },
-  quick_select_match_fg = { Color = '#c5d0f3' },
+  quick_select_match_bg = { Color = '#fe966c' },
+  quick_select_match_fg = { Color = '#29242e' },
   visual_bell = '#313244',
 
   tab_bar = {
-    background = '#2e2e2e',
-    inactive_tab_edge = '#2e2e2e',
+    background = '#e8e8e8',
+    inactive_tab_edge = '#e8e8e8',
     active_tab = {
-      bg_color = '#1D1F21',
-      fg_color = '#ffffff',
+      bg_color = '#FCF4DC',
+      fg_color = '#000000',
       intensity = 'Normal',
       underline = 'None',
       italic = false,
@@ -298,24 +298,24 @@ config.colors = {
     },
 
     inactive_tab = {
-      bg_color = '#2e2e2e',
-      fg_color = '#808080',
+      bg_color = '#e8e8e8',
+      fg_color = '#5e5e5e',
     },
 
     inactive_tab_hover = {
-      bg_color = '#3b3052',
-      fg_color = '#909090',
+      bg_color = '#f6f6f6',
+      fg_color = '#5e5e5e',
       italic = true,
     },
 
     new_tab = {
-      bg_color = '#2e2e2e',
-      fg_color = '#e1e1e1',
+      bg_color = '#e8e8e8',
+      fg_color = '#000000',
     },
 
     new_tab_hover = {
-      bg_color = '#3b3b3b',
-      fg_color = '#e3e3e3',
+      bg_color = '#dbdbdb',
+      fg_color = '#3d3d3d',
       italic = true,
     },
   },
@@ -324,8 +324,8 @@ config.colors = {
 config.window_frame = {
   --font = wezterm.font { family = '等距更纱黑体 SC Nerd Font', weight = 'Bold' },
   --font_size = 12.0,
-  active_titlebar_bg = '#2e2e2e',
-  inactive_titlebar_bg = '#2e2e2e',
+  active_titlebar_bg = '#e8e8e8',
+  inactive_titlebar_bg = '#e8e8e8',
 }
 config.inactive_pane_hsb = {
     saturation = 0.9, brightness = 0.8

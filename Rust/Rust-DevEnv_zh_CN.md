@@ -175,11 +175,15 @@ registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 check-revoke = false
 ```
 
+## gcc安装
+在 Windows 平台下，如果使用 ``-gnu`` 的话，有时会需要 ``gcc.exe`` 在 PATH 中可用  
+参考 [这里](../C/MinGW_zh_CN.md) 安装 ``MinGW`` 即可
+
 ## Linux环境
 这里拿Ubuntu举例。Ubuntu的换源参照这里。  
 [废旧手机安装Linux](../Other/Android-Linux_zh_CN.md)
 
-**安装rust**
+#### 安装rust
 ```bash
 apt install cargo
 ```

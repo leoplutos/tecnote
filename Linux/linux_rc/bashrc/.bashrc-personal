@@ -33,6 +33,7 @@ __prompt_command() {
     PS1=""
     local UBUNTU_ICON=' '
     local PS_IP=$(hostname -I | awk '{print$1}')
+    local PS_BLACK='\[\e[0;30m\]'
     local PS_RED='\[\e[0;31m\]'
     local PS_LIGHT_RED='\[\e[1;31m\]'
     local PS_GREEN='\[\e[0;32m\]'
@@ -47,6 +48,8 @@ __prompt_command() {
         PS1+=""
     fi
     PS1+="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+    # 亮色用
+    #PS1+="${PS_BLUE}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_BLACK}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
 }
 
 #export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"

@@ -3,8 +3,8 @@
 	//               基本设定                        "
 	//-----------------------------------------------"
 	//"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
-	"editor.fontFamily": "'Consolas', 'Consolas ligaturized v3', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック'",
-	//"editor.fontFamily": "'Consolas', 'Consolas ligaturized v3', 'MS Gothic', 'ＭＳ ゴシック', 'NSimSun', '新宋体'",
+	"editor.fontFamily": "'Consolas 7NF', 'Consolas', 'Consolas ligaturized v3', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Cascadia Code NF', 'Courier New', monospace",
+	//"editor.fontFamily": "'Consolas 7NF', 'Consolas', 'Consolas ligaturized v3', 'MS Gothic', 'ＭＳ ゴシック', 'NSimSun', '新宋体', 'Cascadia Code NF', 'Courier New', monospace",
 	"editor.fontSize": 13, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
@@ -74,7 +74,8 @@
 		//"somefile": true
 	},
 	"files.associations": {
-		"*.pc": "c" //设定.pc扩展名关联为c程序
+		"*.pc": "c", //设定.pc扩展名关联为c程序
+		"docker-compose.y*ml": "yaml"
 	},
 	"security.workspace.trust.untrustedFiles": "open", //6.10号版本的VS Code加了个新功能: Workspace Trust就是会在你每打开一个文件夹的时候就询问是否信任
 	"update.mode": "manual", //禁止自动升级VSCode版本
@@ -203,10 +204,10 @@
 			"panelTitle.inactiveForeground": "#000000",
 			"panelTitle.activeBorder": "#000000",
 			//终端设置
-			"terminal.background": "#e1e7d1", //终端背景色
-			"terminal.foreground": "#000000", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			"terminal.background": "#FCF4DC", //终端背景色（备用：#e1e7d1）
+			"terminal.foreground": "#1E1E1E", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
-			"terminalCursor.foreground": "#949696", //终端光标前景色
+			"terminalCursor.foreground": "#000000", //终端光标前景色
 			//资源管理器设置
 			"sideBar.background": "#eeeee5", //左部侧边栏背景色
 			"sideBar.foreground": "#2c2c2c", //左部侧边栏前景色
@@ -242,10 +243,10 @@
 			"editor.findMatchHighlightBackground": "#ffff0077", //所有查找内容颜色
 			"editorCodeLens.foreground": "#859900", //代码镜头的颜色-main函数上方的[Run | Debug]
 			//终端设置
-			"terminal.background": "#e1e7d1", //终端背景色
-			"terminal.foreground": "#000000", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			"terminal.background": "#FCF4DC", //终端背景色（备用：#e1e7d1）
+			"terminal.foreground": "#1E1E1E", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
 			"terminalCursor.background": "#000000", //终端光标背景色
-			"terminalCursor.foreground": "#949696", //终端光标前景色
+			"terminalCursor.foreground": "#000000", //终端光标前景色
 			//状态栏设置
 			"statusBar.background": "#718c9b",
 			"statusBarItem.activeBackground": "#262a2c",
@@ -261,22 +262,22 @@
 			"list.focusAndSelectionOutline": "#005fb8",
 			"list.hoverBackground": "#f2f2f2",
 		},
-		"terminal.ansiBlack": "#000000",
-		"terminal.ansiBlue": "#1010ff", //备用：#2472c8
-		"terminal.ansiBrightBlack": "#555753",
-		"terminal.ansiBrightBlue": "#729fff",
-		"terminal.ansiBrightCyan": "#34e2e2",
-		"terminal.ansiBrightGreen": "#8ae234",
-		"terminal.ansiBrightMagenta": "#ad7fa8",
-		"terminal.ansiBrightRed": "#ef2929",
-		"terminal.ansiBrightWhite": "#eeeeec",
-		"terminal.ansiBrightYellow": "#fce94f",
-		"terminal.ansiCyan": "#06989a",
-		"terminal.ansiGreen": "#4e9a06", //备用：#0dbc79
-		"terminal.ansiMagenta": "#75507b",
-		"terminal.ansiRed": "#cc0000", //备用：#cd3131
-		"terminal.ansiWhite": "#f3f7cf",
-		"terminal.ansiYellow": "#c4ff00",
+		"terminal.ansiBlack": "#1E1E1E",
+		"terminal.ansiBlue": "#4040FF", //备用：#2472c8
+		"terminal.ansiBrightBlack": "#666666",
+		"terminal.ansiBrightBlue": "#8080FF",
+		"terminal.ansiBrightCyan": "#00DCDC",
+		"terminal.ansiBrightGreen": "#16C60C",
+		"terminal.ansiBrightMagenta": "#FF1CFF",
+		"terminal.ansiBrightRed": "#EF2929",
+		"terminal.ansiBrightWhite": "#FFFFFF",
+		"terminal.ansiBrightYellow": "#FCE94F",
+		"terminal.ansiCyan": "#00C0C0",
+		"terminal.ansiGreen": "#4E9A06", //备用：#0dbc79
+		"terminal.ansiMagenta": "#75507B",
+		"terminal.ansiRed": "#FF0000", //备用：#cd3131
+		"terminal.ansiWhite": "#E7E7E7",
+		"terminal.ansiYellow": "#C4A000",
 	},
 	"editor.tokenColorCustomizations": {
 		"[Default Dark+]": { //Default Dark+主题的自定义
@@ -704,6 +705,9 @@
 	"javascript.inlayHints.parameterNames.enabled": "all", //参数名称叠加提示
 	"typescript.format.semicolons": "insert", // TypeScript-在语句末尾插入分号
 	"typescript.inlayHints.parameterNames.enabled": "all", //参数名称叠加提示
+	"[yaml]": {
+		"editor.defaultFormatter": "redhat.vscode-yaml"
+	},
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
 	//-----------------------------------------------"

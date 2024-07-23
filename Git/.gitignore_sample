@@ -4,6 +4,10 @@
 *.project
 *.classpath
 *.factorypath
+*.lock
+package-lock.json
+go.sum
+*.tsbuildinfo
 
 # ignore ALL files in directory
 bin/
@@ -11,5 +15,9 @@ obj/
 target/
 build/
 .vs/
-.settings
-.metadata
+.settings/
+.metadata/
+.venv/
+__pycache__/
+node_modules/
+dist/

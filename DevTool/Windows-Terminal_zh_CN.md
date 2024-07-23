@@ -37,10 +37,14 @@ https://github.com/microsoft/terminal/releases
 - Ctrl + Shift + p ： 打开命令中心
 
 ## 配色
-笔者使用的配色  
-打开设定文件，在 ``schemes`` 的地方加入如下内容。(配色名为``lch-dark``)
+
+打开设定文件，在 ``schemes`` 的地方加入如下内容。
+
+### 暗色系
+
+配色名为``lch-dark``
 ```
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#1D1F21",
@@ -68,12 +72,45 @@ https://github.com/microsoft/terminal/releases
     ],
 ```
 
+
+### 亮色系
+
+配色名为``qy-light``
+```
+    "schemes":
+    [
+        {
+            "background": "#FCF4DC",
+            "black": "#1E1E1E",
+            "blue": "#4040FF",
+            "brightBlack": "#666666",
+            "brightBlue": "#8080FF",
+            "brightCyan": "#00DCDC",
+            "brightGreen": "#16C60C",
+            "brightPurple": "#FF1CFF",
+            "brightRed": "#EF2929",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FCE94F",
+            "cursorColor": "#000000",
+            "cyan": "#00C0C0",
+            "foreground": "#1E1E1E",
+            "green": "#4E9A06",
+            "name": "qy-light",
+            "purple": "#75507B",
+            "red": "#FF0000",
+            "selectionBackground": "#595AB7",
+            "white": "#E7E7E7",
+            "yellow": "#C4A000"
+        }
+    ],
+```
+
 ## 自定义内容
 打开设定文件，在 ``actions`` 的地方加入如下内容。
 - Alt + k ： 清空屏幕
 - Alt + z ： 进入/退出禅模式
 ```
-    "actions": 
+    "actions":
     [
         {
           "name": "Clear Screen",
@@ -89,7 +126,7 @@ https://github.com/microsoft/terminal/releases
         },
         {
             "name": "Source personal bashrc",
-            "command": 
+            "command":
             {
                 "action": "sendInput",
                 "input": "source ~/work/lch/rc/bashrc/.bashrc-personal\r"

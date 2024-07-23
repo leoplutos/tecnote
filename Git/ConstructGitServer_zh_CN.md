@@ -112,10 +112,8 @@ sudo systemctl enable gogs
 
 5. 使用 web 安装器安装 Gogs
 
-打开你的浏览器，输入
-```
-http://YOUR_DOMAIN_IR_IP:3000
-```
+打开你的浏览器，输入  
+http://localhost:3000/  
 屏幕将会安装向导  
 按如下填写
 
@@ -161,6 +159,30 @@ sudo -u git cat /home/git/gogs/custom/conf/app.ini
 
 ## 下载安装（Docker部署）
  - [Gogs Docker 说明页](https://github.com/gogs/gogs/tree/main/docker)
+ - [Docker Hub](https://hub.docker.com/u/gogs)
+ - [可用Tag](https://github.com/gogs/gogs/pkgs/container/gogs)
+
+构建命令
+```
+# 拉取镜像
+docker pull gogs/gogs:0.13
+
+# 创建本地数据卷
+sudo mkdir -p /var/gogs
+
+# （第一次启动）启动容器并挂载数据卷
+docker run -itd --name=gogs -p 10022:22 -p 13000:3000 -v /var/gogs:/data gogs/gogs:0.13
+```
+剩下步骤和 ``服务器部署`` 一致，访问 http://localhost:13000/ 安装即可
+
+安装后如果跳转到了 ``3000`` 端口的话，修改为 ``13000`` 即可
+
+### 容器内的自定义目录
+``自定义目录`` 在 Docker 环境中可能并不明显。 宿主机的 ``/var/gogs/gogs`` 和 容器内 ``/data/gogs`` 已经是 ``自定义目录``，无需创建另一个图层，而是直接编辑该目录下的相应文件。
+
+因为挂载了数据卷，所以自定义文件为
+ - 容器内 ``/data/gogs/conf/app.ini``
+ - 宿主机 ``/var/gogs/gogs/conf/app.ini``
 
 ## 创建仓库
 
