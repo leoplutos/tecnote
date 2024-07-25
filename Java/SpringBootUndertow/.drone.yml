@@ -1,0 +1,94 @@
+# 配置Drone自动编译发布
+
+kind: pipeline
+type: docker
+name: springbootundertow_deploy
+
+# 此处可以不设置，将获取最新的git镜像
+clone:
+  #disable: true
+  depth: 50
+  #git:
+  #  url: http://host.docker.internal:13000/nx_group/nx_test.git
+
+steps:
+  # 设置Git镜像版本，下载仓库文件
+  # 如果上面没有设置clone，此处需要删除（如果不删除，在pipeline中将多一个clone，pipeline会出错）
+  #- name: clone
+  #  image: drone/git:1.2.1
+
+  # 构建和编译Java项目
+  - name: build
+    image: maven:3.9.8-eclipse-temurin-21-jammy
+    # 依赖的步骤
+    #depends_on: [clone]
+    volumes:
+      # 容器内Maven缓存目录
+      - name: mvn-cache
+        path: /root/.m2
+    commands:
+      - export JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR"
+      - mvn clean package -Dmaven.test.skip=true
+
+  # 使用SCP将编译结果传送到宿主机
+  - name: send_jar
+    image: appleboy/drone-scp
+    # 依赖的步骤
+    depends_on: [build]
+    settings:
+    # from_secret的设置方式为 在 drone 网页设定，关键信息隐藏
+      host:
+        from_secret: ssh_host
+      port:
+        from_secret: ssh_port
+      username:
+        from_secret: ssh_user
+      password:
+        from_secret: ssh_password
+      # 最终会复制到/home/lch/workspace/drone_deploy/target/SpringBootUndertow-1.0.0.jar
+      target: /home/lch/workspace/drone_deploy
+      source: target/*.jar
+
+  # SSH连接到宿主机，停止当前容器→删除当前容器→删除当前镜像→制作新的镜像→启动新的容器
+  - name: deploy
+    image: appleboy/drone-ssh
+    # 依赖的步骤
+    depends_on: [send_jar]
+    settings:
+      # from_secret的设置方式为 在 drone 网页设定，关键信息隐藏
+      host:
+        from_secret: ssh_host
+      port:
+        from_secret: ssh_port
+      username:
+        from_secret: ssh_user
+      password:
+        from_secret: ssh_password
+      command_timeout: 10m
+      script:
+        - echo ====开始部署=======
+        # 停止当前容器
+        - docker stop spring_8082
+        # 删除当前容器
+        - docker rm spring_8082
+        # 删除当前镜像
+        - docker rmi spring_boot_undertow:1.0.0
+        # 制作新的镜像
+        - rm /home/lch/workspace/SpringBootUndertow/target/SpringBootUndertow-1.0.0.jar
+        - cp -afp /home/lch/workspace/drone_deploy/target/SpringBootUndertow-1.0.0.jar /home/lch/workspace/SpringBootUndertow/target/SpringBootUndertow-1.0.0.jar
+        - cd /home/lch/workspace/SpringBootUndertow/shell
+        - bash docker_build.sh
+        # 启动新的容器
+        - docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
+        - echo ====部署成功=======
+
+# 挂载宿主机目录
+volumes:
+  - name: mvn-cache
+    host:
+      path: /home/lch/.m2
+
+# 对应Gogs仓库分支
+trigger:
+  branch:
+    - master

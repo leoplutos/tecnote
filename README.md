@@ -23,6 +23,7 @@
 * [Git命令](Git/Git_zh_CN.md)
 * [Git-bash-for-windows](Git/Git-bash_zh_CN.md)
 * [构建私有Git服务器-Gogs](Git/ConstructGitServer_zh_CN.md)
+* [构建私有Git服务器-CI/CD篇](Git/Git_CICD.md)
 * [Git-bash安装pacman](Git/Git-pacman_zh_CN.md)
 * [Git使用WinMerge作为difftool](Git/Git-difftool_zh_CN.md)
 

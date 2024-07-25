@@ -86,7 +86,7 @@ Docker 本身并不是容器，它是 ``创建容器的工具``，是 ``应用�
  - docker-proxy.exe：对应 Docker 配置参数 ``userland-proxy``
 
 #### 命令行确认
-```
+```bash
 docker --version
 dockerd --version
 docker-proxy --version
@@ -107,14 +107,13 @@ C:\ProgramData\docker\config\daemon.json
     "debug": false,
     "experimental": true,
     "registry-mirrors": [
-        "https://hub-mirror.c.163.com",
-        "https://mirror.baidubce.com",
-        "https://ccr.ccs.tencentyun.com",
-        "https://dockerproxy.com",
-        "https://registry.docker-cn.com",
-        "https://reg-mirror.qiniu.com",
-        "https://dockerhub.azk8s.cn",
-        "https://docker.mirrors.ustc.edu.cn"
+        "https://docker.m.daocloud.io",
+        "https://dockerhub.icu",
+        "https://docker.chenby.cn",
+        "https://docker.1panel.live",
+        "https://docker.awsl9527.cn",
+        "https://docker.anyhub.us.kg",
+        "https://dhub.kubesre.xyz"
     ],
     "insecure-registries": [
         "127.0.0.1:3111"
@@ -198,13 +197,13 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 因为 docker 国内已经无法访问，使用 [清华大源](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/) 来安装
 
 安装依赖
-```
+```bash
 sudo apt update
 sudo apt install ca-certificates curl gnupg
 ```
 
 信任 Docker 的 GPG 公钥并添加仓库
-```
+```bash
 sudo install -m 0755 -d /etc/apt/keyrings
 
 sudo curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -218,7 +217,7 @@ sudo echo \
 ```
 
 安装
-```
+```bash
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
@@ -232,44 +231,50 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 - docker-compose-plugin：通过单个 YAML 文件管理多容器 Docker 应用的配置管理插件
 
 检查 Docker 服务状态
-```
+```bash
 sudo systemctl is-active docker
 ```
 
 安装后命令行确认
-```
+```bash
 docker --version
 dockerd --version
 docker-proxy --version
 ```
 
 ### 替换 DockerHub 国内镜像源
-现在只有这个镜像源可用了  
+现在这个镜像比较稳定，但是有白名单限制  
 https://github.com/DaoCloud/public-image-mirror
 
+白名单列表  
+https://github.com/DaoCloud/public-image-mirror/issues/2328
+
 Linux配置文件位置
-```
+```bash
 /etc/docker/daemon.json
 ```
 运行命令
-```
+```bash
 sudo touch /etc/docker/daemon.json
 sudo vim /etc/docker/daemon.json
 ```
 添加内容
-```
+```bash
 {
     "registry-mirrors": [
         "https://docker.m.daocloud.io",
-        "https://hub-mirror.c.163.com",
-        "https://mirror.baidubce.com",
-        "https://ccr.ccs.tencentyun.com",
-        "https://dockerproxy.com",
-        "https://registry.docker-cn.com",
-        "https://reg-mirror.qiniu.com",
-        "https://dockerhub.azk8s.cn",
-        "https://docker.mirrors.ustc.edu.cn"
-    ]
+        "https://dockerhub.icu",
+        "https://docker.chenby.cn",
+        "https://docker.1panel.live",
+        "https://docker.awsl9527.cn",
+        "https://docker.anyhub.us.kg",
+        "https://dhub.kubesre.xyz"
+    ],
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "10m",
+        "max-file": "10"
+    }
 }
 ```
 
@@ -279,13 +284,13 @@ sudo vim /etc/docker/daemon.json
 ~~输入数字 ``1`` 后按 ``回车`` 以选择 ``iptables-legacy``~~  
 
 启动服务
-```
+```bash
 systemctl daemon-reload
 systemctl restart docker.service
 # sudo service docker start
 ```
 确认
-```
+```bash
 systemctl status docker.service
 sudo docker info
 # service docker status
@@ -298,11 +303,11 @@ sudo docker info
 
 ### 允许非 root 用户运行 Docker 命令
 在大多数安装Docker的系统上，默认会创建一个名为docker的用户组。可以通过运行以下命令来确认这个组是否存在
-```
+```bash
 sudo addgroup --system docker
 ```
 默认情况下，只有 root 用户或具有 sudo 权限的用户才能够执行 Docker 命令。如果不加sudo前缀直接运行docker命令，系统会报权限错误。
-```
+```bash
 sudo usermod -aG docker $USER
 newgrp docker
 sudo chown root:docker /var/run/docker.sock
@@ -311,23 +316,23 @@ sudo chmod g+w /var/run/docker.sock
 在这条命令中，``$USER`` 是一个环境变量，表示当前登录的用户名。
 
 如果上述设定还是不行的话，运行
-```
+```bash
 unset DOCKER_HOST
 ```
 如果这样做有效，在 ``.bashrc`` 文件中注释掉 ``export DOCKER_HOST=xxx``
 
 ### 运行一个HelloWorld容器
-```
+```bash
 docker run hello-world
 ```
 
 ### 卸载 Docker
 卸载 Docker 及其相关组件
-```
+```bash
 sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
 ```
 执行以下命令来删除 Docker 创建的目录
-```
+```bash
 sudo rm -rf /var/lib/docker
 sudo rm -rf /var/lib/containerd
 ```
@@ -378,7 +383,7 @@ sudo rm -rf /var/lib/containerd
 
 ## 容器的通信
 安装 Docker 以后，会默认创建三种网络，可以通过下面命令查看
-```
+```bash
 docker network ls
 ```
 他们分别是
@@ -404,7 +409,7 @@ Bridge 网络模式 是 Docker 的默认网络模式，又称网桥模式，它�
 3. 端口映射：Bridge 网络模式支持 Docker 容器和主机之间的端口映射。这意味着，您可以将 Docker 容器的网络服务通过特定的端口暴露给主机，从而使得外部网络可以访问到 Docker 容器的服务。
 
 Bridge模式的启动命令
-```
+```bash
 docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
 ```
 - 容器名：spring_8082
@@ -413,11 +418,11 @@ docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
 - 镜像：spring_boot_undertow:1.0.0
 
 查看容器 ``spring_8082`` 规格
-```
+```bash
 docker inspect spring_8082
 ```
 可以看到
-```
+```bash
 "Gateway": "172.17.0.1",
 "IPAddress": "172.17.0.3",
 ```
@@ -425,7 +430,7 @@ docker inspect spring_8082
 - IPAddress：这是 Docker 容器在其网络内的 IP 地址。每个 Docker 容器在其所连接的网络中都会有一个唯一的 IP 地址，其他容器可以通过这个 IP 地址与其进行通信。
 
 查看默认网络 ``bridge`` 规格
-```
+```bash
 docker inspect bridge
 ```
 
@@ -441,7 +446,7 @@ Host 网络模式 是 Docker 的一种网络模式，又称主机模式，它允
 需要注意的是，Host 网络模式下的 Docker 容器会直接共享宿主机的网络，这可能会带来一些安全风险，因此在使用 Host 网络模式时，需要对 Docker 容器的网络访问进行适当的控制和限制。
 
 Host模式的启动命令
-```
+```bash
 docker run -itd -p 8082:8090 --name spring_8082 --net host spring_boot_undertow:1.0.0
 ```
 
@@ -455,13 +460,13 @@ None 网络模式 是 Docker 的一种网络模式，它为 Docker 容器提供�
 - 自定义网络配置：虽然 None 网络模式下的 Docker 容器默认无法进行网络通信，但是您可以在容器内部进行自定义的网络配置，以满足特殊的网络需求。例如，您可以在 None 网络模式下的 Docker 容器内部设置 VPN，以实现容器的网络通信。
 
 Host模式的启动命令
-```
+```bash
 docker run -itd --name spring_8082 --net none spring_boot_undertow:1.0.0
 ```
 
 ### 容器既没有 netstat 和 lsof 也不是 root 时如何排查网络
 直接手动解析 procfs 里面的输出，执行
-```
+```bash
 awk 'function hextodec(str,ret,n,i,k,c){
     ret = 0
     n = length(str)
@@ -485,8 +490,48 @@ NR > 1 {{if(NR==2)print "Local - Remote";local=getIP($2);remote=getIP($3)}{print
 就可以获得类似 ``netstat`` 的输出了
 
 或者在宿主机使用命令
-```
+```bash
 docker container port {容器id/容器名}
+```
+
+### 配置容器内访问主机服务
+当我们在Docker容器中运行应用程序时，有时候需要访问宿主机的IP地址。然而，默认情况下，Docker容器内无法直接使用宿主机的IP地址。为了解决这个问题，Docker提供了一个特殊的主机名 ``host.docker.internal``，使得容器可以轻松访问宿主机。
+
+用 ``--add-host`` 参数将宿主机的IP地址映射到 ``host.docker.internal`` 主机名
+
+```bash
+docker run --add-host=host.docker.internal:host-gateway <image>
+```
+在这个命令中，我们使用 ``--add-host`` 参数将宿主机的IP地址映射到 ``host.docker.internal`` 主机名。``host-gateway`` 是Docker网络中宿主机的默认网关地址。
+
+在容器内部，您可以使用 ``host.docker.internal`` 主机名来访问宿主机的IP地址。例如，在Python代码中使用 ``socket.gethostbyname()`` 函数：
+```python
+import socket
+
+# 获取宿主机IP
+host_ip = socket.gethostbyname('host.docker.internal')
+print("Host IP:", host_ip)
+```
+
+### 如何使用容器名进行容器间的通信
+
+- 针对已经运行的容器
+    ```
+    docker network create myNetwork
+    docker network connect myNetwork web1
+    docker network connect myNetwork web2
+    ```
+
+- 针对没有创建的容器
+    ```
+    docker network create myNetwork
+    docker run -itd --name=web1 --net myNetwork nginx
+    docker run -itd --name=web2 --net myNetwork nginx
+    ```
+
+删除命令
+```
+docker network rm myNetwork
 ```
 
 ## Docker容器数据卷
@@ -503,12 +548,12 @@ Docker将运行的环境打包形成容器运行， Docker容器产生的数据�
 
 ### 使用方式
 运行容器，指定挂载数据卷
-```
+```bash
 docker run -it -v 主机目录:容器目录
 ```
 
 查看所有的数据卷
-```
+```bash
 docker volume ls
 ```
 
@@ -522,19 +567,19 @@ docker volume ls
 
 #### 从容器复制文件到宿主机
 将容器的 ``/home/licence.txt`` 文件复制到宿主机的 ``/home`` 目录下
-```
+```bash
 docker cp nginx-web:/home/licence.txt /home
 ```
 
 #### 从宿主机复制文件到容器
 将宿主机的 ``/home/licence.txt`` 文件复制到容器的 ``/home`` 目录下
-```
+```bash
 docker cp /home/licence.txt nginx-web:/home
 ```
 
 ### 容器直接退出，如何进入容器调试 
 此时可覆盖主进程启动命令，更换一个挂起的命令即可
-```
+```bash
 docker run -it --entrypoint /bin/bash {镜像}
 ```
 
