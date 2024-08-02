@@ -168,6 +168,8 @@ doskey cdw=cd /d %personal_workspace%
 doskey cdl=cd /d %personal_log%
 doskey lg=lazygit $*
 doskey gu=gitui $*
+doskey vi=vim $*
+doskey vim=nvim $*
 doskey vimf=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 doskey vimc=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 doskey vimv=vim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"

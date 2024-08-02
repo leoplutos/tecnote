@@ -288,13 +288,21 @@ https://github.com/GrowingGit/GitHub-Chinese-Top-Charts
     - [github-page](https://raw.liucn.cc/box/)&nbsp;&nbsp;&nbsp;&nbsp;这里也有一些源
     - [俊版 github](https://github.com/roacn/TVBoxOSC)
     - [影视仓 聚玩盒子](https://www.juwanhezi.com/item/246)
-- TVBox源
-    - https://raw.liucn.cc/box/m.json
-    - https://raw.liucn.cc/box/dc.txt
+- TVBox视频源
+    - TVBox俊版用 https://raw.liucn.cc/box/m.json
+    - 影视仓用1 https://raw.liucn.cc/box/dc.txt
+    - 影视仓用2 http://www.饭太硬.com/tv/
+- TVBox直播源
+    - IPTV-github https://github.com/leyan1987/iptv
+    - 可以直接用的地址 https://mirror.ghproxy.com/https://raw.githubusercontent.com/leyan1987/iptv/main/iptv.txt
 
 - 下载软件
     - [cobalt](https://github.com/imputnet/cobalt)
     - [Gopeed](https://gopeed.com/zh-CN)
+    - [mediago](https://github.com/caorushizi/mediago)
+
+## 启动器
+https://github.com/Flow-Launcher/Flow.Launcher
 
 ## 开源的Google Play商店客户端，无需谷歌框架，可以使用匿名账户登录并下载应用程序
 https://mp.weixin.qq.com/s/2QHDHYBUuT-6VBGz1KywRQ

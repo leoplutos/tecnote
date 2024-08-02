@@ -1,0 +1,123 @@
+# 配置 Gitea Actions 的工作流
+
+# 工作流名称
+name: "Deploy Action"
+run-name: Gitea Actions 🚀 For deploy
+# 在main分支被push时触发
+on:
+  push:
+    branches:
+      - main
+
+# 任务定义
+jobs:
+  Deploy-Actions:
+    # 定义在哪种类型的运行器上执行
+    # https://gitea.com/gitea/runner-images
+    runs-on: ubuntu-latest
+    # 自定义环境变量
+    env:
+      JAVA_TOOL_OPTIONS: -Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR
+      #GITHUB_URL: https://github.com/
+      GITHUB_URL: https://bgithub.xyz/
+    steps:
+      - name: 任务说明
+        run: |
+          echo "🎉 此任务源自 ${{ gitea.event_name }} 事件的自动触发"
+          echo "🐧 此任务在 Gitea 托管的 ${{ runner.os }} 服务器上运行"
+          echo "🔎 分支是 ${{ gitea.ref }}, 仓库是 ${{ gitea.repository }}"
+
+      - name: 克隆仓库代码
+        # https://gitea.com/actions/checkout
+        uses: https://gitea.com/actions/checkout@v4
+
+      - name: 缓存本地Maven仓库
+        # https://gitea.com/actions/cache
+        uses: https://gitea.com/actions/cache@v4
+        with:
+          path: |
+            ~/.m2
+            /root/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+            ${{ runner.os }}-
+
+      - name: 自定义 temurin OpenJDK 21 下载
+        run: |
+          download_url="${{ env.GITHUB_URL }}adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz"
+          wget -O $RUNNER_TEMP/java_package.tar.gz $download_url
+
+      - name: 设置编译环境 temurin OpenJDK 21
+        # https://gitea.com/actions/setup-java
+        uses: https://gitea.com/actions/setup-java@v4
+        with:
+          #distribution: "temurin"
+          distribution: 'jdkfile'
+          jdkFile: ${{ runner.temp }}/java_package.tar.gz
+          java-version: "21"
+          cache: 'maven'
+          mvn-toolchain-vendor: Eclipse Temurin
+
+      - name: 设置编译环境 Maven
+        # https://github.com/stCarolas/setup-maven
+        uses: ${{ env.GITHUB_URL }}stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.7
+
+      - name: 设定Maven阿里云镜像
+        # https://github.com/s4u/maven-settings-action
+        uses: ${{ env.GITHUB_URL }}s4u/maven-settings-action@v3.0.0
+        with:
+          mirrors: '[{"id": "alimaven", "name": "aliyun maven", "mirrorOf": "central", "url": "http://maven.aliyun.com/nexus/content/groups/public/"}]'
+
+      - name: Maven编译
+        run: |
+          export JAVA_TOOL_OPTIONS="${{ env.JAVA_TOOL_OPTIONS }}"
+          mvn clean package -Dmaven.test.skip=true
+
+      - name: SSH部署
+        # https://github.com/cross-the-world/ssh-scp-ssh-pipelines
+        # 这个步骤失败了，需要继续调查
+        uses: ${{ env.GITHUB_URL }}cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+          # secrets 为在 gitea 页面设置的密匙，关键信息隐藏
+          #host: ${{ secrets.TARGET_HOST }}
+          #port: ${{ secrets.TARGET_PORT }}
+          #user: ${{ secrets.TARGET_USER }}
+          #pass: ${{ secrets.TARGET_PASSWORD }}
+          host: 172.18.0.1
+          port: 8122
+          user: lch
+          pass: 123456
+          connect_timeout: 10s
+          first_ssh: |
+            echo ====开始部署=======
+            # 停止当前容器
+            docker stop spring_8082
+            # 删除当前容器
+            docker rm spring_8082
+            # 删除当前镜像
+            docker rmi spring_boot_undertow:1.0.0
+            # 制作新的镜像
+            rm /home/lch/workspace/SpringBootUndertow/target/SpringBootUndertow-1.0.0.jar
+          scp: |
+            './target/*.jar' => /home/lch/workspace/drone_deploy/target/
+          last_ssh: |
+            cp -afp /home/lch/workspace/drone_deploy/target/SpringBootUndertow-1.0.0.jar /home/lch/workspace/SpringBootUndertow/target/SpringBootUndertow-1.0.0.jar
+            cd /home/lch/workspace/SpringBootUndertow/shell
+            bash docker_build.sh
+            # 启动新的容器
+            docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
+            echo ====部署成功=======
+
+      - name: 任务结果
+        run: |
+          echo "💡 仓库 ${{ gitea.repository }} 已克隆到运行器"
+          echo "仓库中的文件"
+          ls -l ${{ gitea.workspace }}
+          ls -l ${{ gitea.workspace }}/target
+          echo "🍏 任务结果码 ${{ job.status }}"

@@ -45,7 +45,7 @@ Lib/site-packages下为第三方库，Scripts下安装有pip。
 #### 修改pip.exe
 pip安装是绝对路径，移动 python 文件夹后 pip 又会无法使用，需要进一步修改pip.exe文件。  
 进入Scripts文件夹，可删除pip.exe以外的pip(比如：pip3.exe，pip3.8.exe)文件，其实一模一样。  
-用 winhex 或者 VSCode的[Hex Editor]插件 打开pip.exe，查找 python 关键字，可以看到用的是绝对路径，修改为相对路径。  
+用 [ImHex](https://github.com/WerWolv/ImHex) 或者 VSCode的 ``Hex Editor`` 插件 打开pip.exe，查找 python 关键字，可以看到用的是绝对路径，修改为相对路径。  
 修改步骤：  
 
 1. 拉到exe文件的最下面，将 ``python.exe`` 从绝对路径修改成相对路径 

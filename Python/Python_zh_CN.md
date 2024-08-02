@@ -23,6 +23,9 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 更多：  
 https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
+除了清华源，还可以使用阿里源  
+https://mirrors.aliyun.com/pypi/simple
+
 ## 关于Python的父目录子目录
 
 ### 引用子目录下的内容
@@ -103,6 +106,9 @@ D:\Tools\Python312\python.exe
 在Sakura Editor中，如果使用了grep替换操作后，会生成一个扩展名为.skrold的文件  
 这个脚本的目的就是找到所有扩展名为.skrold的文件并且复原到源文件  
 比如：a.txt.skrold的内容 复制到 a.txt
+
+## 工程打包分发
+https://github.com/skywind3000/PyStand
 
 ## 网页自动化工具DrissionPage
  - [官网](https://www.drissionpage.cn/)

@@ -56,8 +56,35 @@ Neovim 新加了一个健康检查的命令
 可以查看当前的运行情况
 
 ## 笔者的设定文件
-笔者主要用 ``VS Code`` 的 ``Neovim`` 插件，所以配置主要用于 ``VS Code`` 的使用
-* [Neovim-conf](Neovim-conf)
+笔者已经将设定全部迁移到了 [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+- [Neovim_lazy-conf](Neovim_lazy-conf)
+- ~~[Neovim-conf](Neovim-conf)~~
+
+```
+~/.config/nvim
+├── colors  （主题）
+├── lazy  （lazy.nvim和下载插件都放在这里）
+├── lua
+│   ├── config
+│   │   └── _basic.lua  （基础设定）
+│   │   └── _lazy.lua  （lazy.nvim设定）
+│   │   └── _nerdfont.lua  （全局图标设定）
+│   └── plugins  （各个插件设定）
+│       ├── _lualine_nvim.lua
+│       ├── **
+│       └── _indent_blankline_nvim.lua
+├── mason  （mason.nvim插件下载的内容都放在这里）
+└── init.lua
+```
+
+主题使用以前的vim自定义主题
+```cmd
+::SET GITHUB_RAW_URL=https://raw.githubusercontent.com
+SET GITHUB_RAW_URL=https://raw.bgithub.xyz
+curl --create-dirs -o %LOCALAPPDATA%\nvim\colors\lch-dark.vim %GITHUB_RAW_URL%/leoplutos/tecnote/master/DevTool/Vim-conf/vimconf/colors/lch-dark.vim
+```
+
 
 ## Python支持
 Neovim 的 ``Python`` 支持方式和 Vim 不一样

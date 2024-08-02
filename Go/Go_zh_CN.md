@@ -167,7 +167,8 @@ https://mp.weixin.qq.com/s/j21kENP0RUYlS2kchH8d2w
 ## aconfig：Go语言中简洁高效的配置加载库
 https://mp.weixin.qq.com/s/5-RvGSkD_4logC0BQ7VVZQ
 
+## ants：强大的高性能与低成本 Go 协程池
+https://github.com/panjf2000/ants
 
-
-
-
+## .env 加载环境变量
+https://github.com/joho/godotenv

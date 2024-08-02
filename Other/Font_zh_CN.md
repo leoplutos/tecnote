@@ -136,7 +136,7 @@ Roboto Mono是一个以Roboto为基础的等宽字体。该字体主要为显示
 * [Microsoft YaHei Mono](https://github.com/microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip)
 
 
-## Nerd字体
+## Nerd Font 字体
 Nerd font是针对已有的字体打 patch，把一些 icon 字符插入进去。  
 不过 Nerd font 就比较厉害了，是一个“集大成者”，他几乎把目前市面上主流的 icon 字符全打进去了，包括 powerline icon 字符以及 Font Awesome 等几千个 icon 字符。
 
@@ -144,10 +144,11 @@ Nerd font是针对已有的字体打 patch，把一些 icon 字符插入进去�
 * [github](https://github.com/ryanoasis/nerd-fonts)
 
 #### 一些Nerd font
-* [Cascadia Code Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip)
-* [Fantasque Sans Mono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/FantasqueSansMono.zip)
-* [Inconsolata Go Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/InconsolataGo.zip)
-* [Inconsolata LGC Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/InconsolataLGC.zip)
+* [JetBrains Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip)
+* [Cascadia Code Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip)
+* [Fantasque Sans Mono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FantasqueSansMono.zip)
+* [Inconsolata Go Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/InconsolataGo.zip)
+* [Inconsolata LGC Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/InconsolataLGC.zip)
 
 ## 字体安装
 * Windows 和 Mac  

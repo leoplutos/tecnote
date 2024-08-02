@@ -35,9 +35,9 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 ### 重启
 启用上面两项设定后，重启计算机
 
-### 下载 Linux 内核更新包
-下载WSL Kernel Update包，并手动安装（双击以运行 - 系统将提示你提供提升的权限，选择“是”以批准此安装。）  
-[wsl_update_x64.msi](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+### 下载 Linux 内核更新包（不需要）
+~~下载WSL Kernel Update包，并手动安装（双击以运行 - 系统将提示你提供提升的权限，选择“是”以批准此安装。）~~  
+~~[wsl_update_x64.msi](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)~~
 
 ### 将 WSL2 设置为默认版本
 以管理员身份打开 PowerShell 并运行：
@@ -48,6 +48,8 @@ wsl --set-default-version 2
 ### 更新 WSL 内核
 ```
 wsl --update
+或者
+wsl --update --web-download
 ```
 
 ### 查看Linux发行版并且安装Linux
@@ -55,9 +57,14 @@ wsl --update
 ```
 wsl --list --online
 ```
+如果报错可以用这个url  
+https://raw.bgithub.xyz/microsoft/WSL/master/distributions/DistributionInfo.json  
+
 安装制定发行版，比如Ubuntu
 ```
 wsl --install -d Ubuntu-22.04
+或者
+wsl --install -d Debian
 ```
 
 ### 第一次进入WSL

@@ -30,3 +30,7 @@ priority = "primary"
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+#指定一个执行环境，其中src/backendsanic是根路径。pyright将在执行时将该路径加到sys.path。
+executionEnvironments = [
+  { root = "src/backendsanic" }
+]

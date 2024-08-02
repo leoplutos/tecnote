@@ -1,5 +1,9 @@
 # Windows
 
+## 激活
+https://github.com/massgravel/Microsoft-Activation-Scripts  
+https://github.com/abbodi1406/KMS_VL_ALL_AIO  
+
 ## 右键→发送到
 ``Win键+r`` 然后输入
 ```

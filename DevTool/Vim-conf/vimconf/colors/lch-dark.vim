@@ -72,7 +72,7 @@ hi PmenuSelBg   ctermbg=24 guibg=#073655
 "TabLine    : 上部TAB栏
 hi TabLine      term=none cterm=none ctermfg=248 ctermbg=238 gui=none guifg=#a8a8a8 guibg=#444444
 hi TabLineSel   term=underline cterm=none ctermfg=231 ctermbg=108 gui=none guifg=#ffffff guibg=#96b38c
-hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=239 gui=none guifg=#d4d4d4 guibg=#514746
+hi TabLineFill  term=reverse cterm=none ctermfg=188 ctermbg=239 gui=none guifg=#d4d4d4 guibg=#2e2e2e
 hi CursorColumn term=reverse ctermbg=233 guibg=#121212
 "CursorLineNr     : 当前行号
 hi CursorLineNr term=none cterm=none ctermfg=226 gui=none guifg=#ffff00
@@ -249,7 +249,7 @@ if has('nvim')
   hi MsgArea term=none cterm=none ctermfg=189 gui=none guifg=#c0caf5
   hi MsgSeparator term=none cterm=none ctermfg=146 ctermbg=235 gui=none guifg=#a9b1d6 guibg=#1f2335
   hi NormalFloat term=none cterm=none ctermfg=188 ctermbg=235 gui=none guifg=#d4d4d4 guibg=#252526
-  hi FloatBorder term=none cterm=none ctermfg=60 ctermbg=235 gui=none guifg=#535972 guibg=#252526
+  hi FloatBorder term=none cterm=none ctermfg=60 ctermbg=235 gui=none guifg=#4678a4 guibg=#252526
   hi FloatSelBg  term=none cterm=none ctermbg=24 gui=none guibg=#00395c
   hi clear FloatTitle
   hi! link FloatTitle StartMenuHeader

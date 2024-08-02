@@ -194,7 +194,8 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 ~~sudo sh get-docker.sh~~  
 ~~执行脚本安装过程中，脚本提示“建议使用Docker Desktop for windows”，20s内按Ctrl+C会退出安装，所以需要等待20s，另外此种方式需要访问外网。~~  
 
-因为 docker 国内已经无法访问，使用 [清华大源](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/) 来安装
+#### 方式1：使用清华大学源
+因为 docker 国内已经无法访问，使用 [清华大学源](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/) 来安装
 
 安装依赖
 ```bash
@@ -242,6 +243,9 @@ dockerd --version
 docker-proxy --version
 ```
 
+#### 方式2：使用技术爬爬虾每天同步的仓库
+https://github.com/tech-shrimp/docker_installer
+
 ### 替换 DockerHub 国内镜像源
 现在这个镜像比较稳定，但是有白名单限制  
 https://github.com/DaoCloud/public-image-mirror
@@ -277,6 +281,10 @@ sudo vim /etc/docker/daemon.json
     }
 }
 ```
+
+### AtomHub 可信镜像中心
+这里有国内版  
+https://hub.atomgit.com/  
 
 ### 确认
 ~~更新设定~~  
