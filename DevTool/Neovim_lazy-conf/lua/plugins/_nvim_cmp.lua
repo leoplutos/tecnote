@@ -5,11 +5,13 @@ return {
     version = "*",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "onsails/lspkind.nvim",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
+      {"hrsh7th/cmp-nvim-lsp"},
+      {"hrsh7th/cmp-buffer"},
+      {"onsails/lspkind.nvim"},
+      --使用原生snip适配
+      --{"hrsh7th/cmp-vsnip"},
+      --{"hrsh7th/vim-vsnip"},
+      {"garymjr/nvim-snippets", opts = { search_paths = { vim.fn.stdpath('config') .. '/snippets', vim.g.vscode_snippets } } },
     },
     config = function()
 
@@ -32,8 +34,12 @@ return {
         -- 设置代码片段引擎，用于根据代码片段补全
         snippet = {
           expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            --vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
           end,
+        },
+        experimental = {
+          ghost_text = true,
         },
         -- 自动补全和补全说明窗口设定
         window = {
@@ -67,40 +73,73 @@ return {
           ['<C-s>'] = cmp.mapping.complete({
               config = {
                 sources = {
-                  { name = 'vsnip' }
+                  --{ name = 'vsnip' }
+                  { name = 'snippets' }
                 }
               }
             }),
           ['<Esc>'] = cmp.mapping.abort(),
+          --['<Esc>'] = cmp.mapping(function(fallback)
+          --  cmp.abort()
+          --  fallback()
+          --end, { "i", "s" }),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          --['<CR>'] = cmp.mapping.confirm(),
+          --['<CR>'] = cmp.mapping(function(fallback)
+          --    --require("util").create_undo()
+          --    if cmp.confirm({ select = true }) then
+          --      return
+          --    end
+          --  end
+          --  return fallback()
+          --end, { "i", "s" }),
           ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
+          --['<Tab>'] = cmp.mapping(function(fallback)
+          --  if cmp.visible() then
+          --    cmp.select_next_item()
+          --  elseif vim.fn["vsnip#available"](1) == 1 then
+          --    feedkey("<Plug>(vsnip-expand-or-jump)", "")
+          --  elseif has_words_before() then
+          --    cmp.complete()
+          --  else
+          --    fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+          --  end
+          --end, { "i", "s" }),
+          --['<S-Tab>'] = cmp.mapping(function()
+          --  if cmp.visible() then
+          --    cmp.select_prev_item()
+          --  elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+          --    feedkey("<Plug>(vsnip-jump-prev)", "")
+          --  end
+          --end, { "i", "s" })
+          ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
-              feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif vim.snippet.active({ direction = 1 }) then
+              feedkey("<cmd>lua vim.snippet.jump(1)<CR>", "")
             elseif has_words_before() then
               cmp.complete()
             else
               fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
             end
           end, { "i", "s" }),
-          ['<S-Tab>'] = cmp.mapping(function()
+          ["<S-Tab>"] = cmp.mapping(function()
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-              feedkey("<Plug>(vsnip-jump-prev)", "")
+            elseif vim.snippet.active({ direction = -1 }) then
+              feedkey("<cmd>lua vim.snippet.jump(-1)<CR>", "")
             end
-          end, { "i", "s" })
+          end, { "i", "s" }),
         }),
         -- 补全来源
         sources = cmp.config.sources({
           { name = 'nvim_lsp', keyword_length=2, group_index = 1, priority=1 },
           { name = 'nvim_lsp_signature_help', keyword_length=2, group_index = 1, priority=2 },
-          { name = 'vsnip', keyword_length=2, group_index = 1, priority=3 },
-          { name = 'buffer', keyword_length=2, group_index = 2, priority=4 },
+          --{ name = 'vsnip', keyword_length=2, group_index = 1, priority=3 },
+          { name = 'snippets', keyword_length=2, max_item_count = 5, group_index = 1, priority=3 },
+          { name = 'buffer', keyword_length=2, max_item_count = 5, group_index = 2, priority=4 },
           { name = 'path', keyword_length=2, group_index = 2, priority=5 },
           { name = 'dictionary', keyword_length=2, group_index = 2, priority=6 },
         }),
@@ -118,8 +157,9 @@ return {
               nvim_lsp = "[Lsp]",
               nvim_lua = "[Lua]",
               path = "[Path]",
-              luasnip = "[Snip]",
-              vsnip = "[Snip]",
+              luasnip = "[Luasnip]",
+              vsnip = "[Vsnip]",
+              snippets = "[Snippets]",
             },
           }),
         },

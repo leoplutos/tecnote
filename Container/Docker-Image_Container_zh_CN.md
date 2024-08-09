@@ -1,4 +1,114 @@
-# Docker的镜像和容器
+# Docker的常用镜像以及镜像和容器的区别
+
+## Docker的常用镜像
+
+### HTTP测试服务器
+[httpbin.org](https://httpbin.org/) 可以测试 HTTP 请求和响应的各种信息，比如 cookie、ip、headers 和登录验证等，且支持 GET、POST 等多种方法。对 Web 开发和测试很有帮助
+
+https://httpbin.org/  
+https://github.com/postmanlabs/httpbin  
+https://hub.docker.com/r/kennethreitz/httpbin/  
+
+端口：
+ - 50080： HTTP端口
+
+使用命令
+```bash
+# 拉取镜像
+docker pull kennethreitz/httpbin
+
+docker run -itd \
+  -p 50080:80 \
+  --name httpbin \
+  kennethreitz/httpbin
+```
+可以添加的参数
+ - ``--restart=always \``
+
+启动后使用命令确认
+```
+curl -X POST "http://127.0.0.1:50080/delay/2" -H "accept: application/json"
+```
+
+### FTP服务器
+https://github.com/fauria/docker-vsftpd  
+https://hub.docker.com/r/fauria/vsftpd/  
+
+FTP 分为 ``主动模式（PORT）`` 和 ``被动模式(PASV)``
+
+主动模式使用 ``20`` 和 ``21`` 端口，其中 ``20`` 为数据端口，``21`` 为控制端口。
+
+被动模式使用 ``21`` 控制端口和一个其他随机端口作数据端口。
+
+主动模式因为防火墙的原因，经常会断掉，因此被动模式是通常情况下的优选
+
+端口：
+ - 50020： 数据端口
+ - 50021： 控制端口
+ - 60020： 被动模式数据端口
+
+账号密码：
+ - ftpuser／123456
+
+使用命令
+```bash
+# 挂载目录
+mkdir -p /home/$USER/vsftpd
+mkdir -p /home/$USER/vsftpd_log
+
+# 拉取镜像
+docker pull fauria/vsftpd
+
+docker run -itd \
+  -v /home/$USER/vsftpd:/home/vsftpd \
+  -v /home/$USER/vsftpd_log/:/var/log/vsftpd/ \
+  -p 50020:20 -p 50021:21 -p 60020:60020 \
+  -e FTP_USER=ftpuser \
+  -e FTP_PASS=123456 \
+  -e PASV_ADDRESS=127.0.0.1 \
+  -e PASV_MIN_PORT=60020 \
+  -e PASV_MAX_PORT=60020 \
+  -e LOG_STDOUT=1 \
+  --name vsftpd \
+  fauria/vsftpd
+```
+可以添加的参数
+ - ``--restart=always \``
+
+启动后在 Windows 下打开资源管理器， 输入 ``ftp://ftpuser:123456@127.0.0.1:50021`` 即可访问
+
+### SFTP服务器
+https://github.com/atmoz/sftp  
+https://hub.docker.com/r/atmoz/sftp/  
+
+端口：
+ - 50022： OpenSSH 服务器端口
+
+账号密码：
+ - sftpuser／123456
+
+上传文件目录
+ - upload
+
+使用命令
+```bash
+# 挂载目录
+mkdir -p /home/$USER/sftp/upload
+
+# 拉取镜像
+docker pull atmoz/sftp
+
+docker run -itd \
+  -v /home/$USER/sftp/upload:/home/sftpuser/upload \
+  -p 50022:22 \
+  --name sftp \
+  atmoz/sftp \
+  sftpuser:123456:::upload
+```
+可以添加的参数
+ - ``--restart=always \``
+
+启动后使用 WinSCP 等工具测试连接
 
 ## 镜像和容器的区别
 

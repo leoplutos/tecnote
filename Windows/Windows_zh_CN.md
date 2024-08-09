@@ -44,6 +44,9 @@ curl -L -O https://download.url/a.zip  -C -
 ## 系统优化工具 - Optimizer
 [github - optimizer](https://github.com/hellzerg/optimizer)
 
+## 系统优化工具 - Win11Debloat
+[github - Win11Debloat](https://github.com/Raphire/Win11Debloat)
+
 ## 精简版Windows - AtlasOS
 [github - Atlas](https://github.com/Atlas-OS/Atlas)
 

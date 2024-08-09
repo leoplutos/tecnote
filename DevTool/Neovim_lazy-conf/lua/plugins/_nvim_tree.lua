@@ -73,21 +73,7 @@ return {
           -- 添加事件Event.TreeRendered(每次nvim-tree重绘的时候运行的命令)
           local Event = api.events.Event
           api.events.subscribe(Event.TreeRendered, function(data)
-            vim.cmd([[
-            "因为使用了vim-startify（启动页导航）插件，所以需要进入每个nvim-tree的时候刷新设置
-            " 使用GetProjectRoot()函数找到跟目录
-            let g:g_s_projectrootpath = GetProjectRoot()
-            " 在工程跟路径下递归查找子文件
-            "set path+=**
-            exec 'set path='
-            exec 'set path+=' . g:g_s_projectrootpath . '/**'
-            " 搜索除外内容
-            set wildignore=*.o,*.obj,*.dll,*.exe,*.bin,*.so*,*.a,*.out,*.jar,*.pak,*.class,*.zip,*gz,*.xz,*.bz2,*.7z,*.lha,*.deb,*.rpm,*.pdf,*.png,*.jpg,*.gif,*.bmp,*.doc*,*.xls*,*.ppt*,tags,.tags,.hg,.gitignore,.gitattributes,.git/**,.svn/**,.settings/**,.vscode/**
-            " 设定环境变量
-            let $PYTHONPATH = ''
-            let $PYTHONPATH .= g:g_s_projectrootpath
-            let $PYTHONPATH .= ';'.g:g_s_projectrootpath.'/src'
-            ]])
+            --vim.cmd([[]])
           end)
         end,
       }

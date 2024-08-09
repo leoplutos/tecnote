@@ -13,7 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/todo")
 // 支持跨域的标注
-@CrossOrigin(origins = { "http://localhost:9500", "null" })
+// @CrossOrigin(origins = { "http://localhost:9500", "null" })
+@CrossOrigin(origins = { "*" })
 public class TodoListRestController {
 
 	@Autowired

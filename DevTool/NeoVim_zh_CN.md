@@ -13,8 +13,6 @@ Neovim支持LSP，支持Tree-sitter，支持Lua
 
 ### 下载地址
 * [Github地址](https://github.com/neovim/neovim)
-* [Windows平台v0.9.4稳定免安装版](https://github.com/neovim/neovim/releases/download/v0.9.4/nvim-win64.zip)
-* [Windows平台开发版下载地址](https://github.com/neovim/neovim/releases/download/nightly/nvim-win64.zip)
 
 #### 安装
 下载 ``nvim-win64.zip`` 之后，解压缩  
@@ -24,28 +22,27 @@ Neovim支持LSP，支持Tree-sitter，支持Lua
   基于qt的前端GUI，直接运行即可打开
 
 - nvim.exe  
-  nvim的核心程序，需要在终端下 ``CLI``命令行 运行打开
+  nvim的核心程序，需要在终端下 ``CLI`` 命令行运行打开
 
-## Neo-Vim的配置加载
+## 配置文件
 
-Windows平台下默认设定文件为：
+### Windows平台
+```
+%LOCALAPPDATA%\nvim\init.lua
 
-#### 路径（如不存在需要新建）
-```
-%LOCALAPPDATA%\nvim
-```
-#### 文件名
-```
-init.lua
-```
 或者
-```
-init.vim
-```
 
+%LOCALAPPDATA%\nvim\init.vim
+```
 #### 如果运行的是 ``nvim-qt.exe`` 还会加载
 ```
 ginit.vim
+```
+
+### Linux和MacOS平台
+
+```
+~/.config/nvim/init.lua
 ```
 
 ## 健康检查
@@ -117,9 +114,9 @@ Github：https://github.com/neovide/neovide
 #### 启动
 下载好执行文件之后，如果 ``nvim.exe`` 在环境变量里直接运行 ``neovide.exe`` 即可  
 如果环境受限无法修改环境变量可以用如下方式启动，新建 ``neovide.cmd``  
-内容如下（delete_vim_log.cmd为删除log文件的脚本，可不加）
+内容如下
 ```
-call D:\Tools\WorkTool\Cmd\delete_vim_log.cmd
+call D:\Tools\WorkTool\Cmd\cmdautorun.cmd
 set NEOVIM_BIN=D:/Tools/WorkTool/Text/nvim-win64/bin/nvim.exe
 start /b D:\Tools\WorkTool\Text\nvim-win64\bin\neovide.exe -- --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 ```

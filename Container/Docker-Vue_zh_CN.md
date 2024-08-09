@@ -89,3 +89,27 @@ nginx -s reload
 - Vue + Python Sanic
 - Vue + Go Gin
 - Vue + Rust actix-web
+
+另外，需要容器之间的通信，所以启动命令采用了使用 ``host.docker.internal`` 的方式，
+
+前端容器启动命令
+```
+docker run -itd \
+  --add-host=host.docker.internal:host-gateway \
+  -p 9500:80 \
+  -v /etc/timezone:/etc/timezone:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  --name vue_9500 \
+  frontend_vue:1.0.0
+```
+
+后端容器启动命令
+```
+docker run -itd \
+  --add-host=host.docker.internal:host-gateway \
+  -p 9501:9501 \
+  -v /etc/timezone:/etc/timezone:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  --name spring_9501 \
+  backend_spring:1.0.0
+```

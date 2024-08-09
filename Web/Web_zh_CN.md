@@ -20,6 +20,10 @@
 - [官网](https://picocss.com/)
 - [笔者的一个例子](./Picocss/picocss.html)
 
+
+## 公共API速查表
+https://github.com/public-apis/public-apis
+
 ## 其他
 - [前端如何防止接口重复提交](https://mp.weixin.qq.com/s/bANThYgp1iqg9Bf8mVJNAQ)
 - [音视频流-WebRTC 技术介绍](https://mp.weixin.qq.com/s/01Lw-8sRyHYQV3_ICrR7ng)

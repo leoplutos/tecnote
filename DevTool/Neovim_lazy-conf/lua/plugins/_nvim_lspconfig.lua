@@ -5,6 +5,10 @@ return {
     version = "*",
     event = "VeryLazy",
     priority = 53,
+    dependencies = {
+      --支持CSharp [csharp_ls] 反编译的插件
+      --"Decodetalkers/csharpls-extended-lsp.nvim",
+    },
     opts = {
     },
     config = function()

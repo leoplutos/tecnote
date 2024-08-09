@@ -1,12 +1,15 @@
 {
-	"cargo.home": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70",
 	"rust-analyzer.server.extraEnv": {
 		"RUSTUP_TOOLCHAIN": "stable",
 		"RA_LOG": "lsp_server=warn",
-		"RUST_SRC_PATH": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src",
-		"CARGO": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\bin\\cargo.exe",
-		"RUSTC": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\bin\\rustc.exe",
-		"RUSTFMT": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.70\\bin\\rustfmt.exe",
+		"RUST_SRC_PATH": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src",
+		"CARGO_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+		"RUSTUP_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+		"RUSTUP_DIST_SERVER": "https://mirrors.ustc.edu.cn/rust-static",
+		"RUSTUP_UPDATE_ROOT": "https://mirrors.ustc.edu.cn/rust-static/rustup",
+		// "CARGO": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin\\cargo.exe",
+		// "RUSTC": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin\\rustc.exe",
+		// "RUSTFMT": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin\\rustfmt.exe",
 	},
 	//"rust-analyzer.linkedProjects": [
 		//"path/to/Cargo.toml",

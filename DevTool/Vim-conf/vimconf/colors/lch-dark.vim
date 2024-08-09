@@ -131,18 +131,22 @@ hi Variables    term=none cterm=none ctermfg=187 gui=none guifg=#d4d4b0
 hi clear Typedef
 hi! link Typedef Structure
 hi ThinTitle    term=none cterm=none ctermfg=214 gui=none guifg=#f39c12
-hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#00af00
+hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#4ec9b0
 hi clear SpecialComment
 hi! link SpecialComment Comment
 hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
 hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#dd50dd
-hi EnumMember   term=none cterm=none ctermfg=39 gui=none guifg=#4fc1ff
+hi Enum         term=none cterm=none ctermfg=39 gui=none guifg=#CC81BA
+hi EnumMember   term=none cterm=none ctermfg=39 gui=none guifg=#8DDAF8
 hi Property     term=none cterm=none ctermfg=43 gui=none guifg=#4ec9b0
 hi Parameter    term=none cterm=none ctermfg=66 gui=none guifg=#4d8a94
 hi Struct       term=none cterm=none ctermfg=202 gui=none guifg=#ee5d43
 hi Regexp       term=none cterm=none ctermfg=60 gui=none guifg=#646695
-hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#569cd6
+hi Macro        term=none cterm=none ctermfg=75 gui=none guifg=#96E072
 hi Lifetime     term=none cterm=none ctermfg=189 gui=none guifg=#cdcdff
+hi Operator    term=none cterm=none ctermfg=43 gui=none guifg=#C586C0
+hi NameSpace    term=none cterm=none ctermfg=43 gui=none guifg=#e6e6fa
+hi Class        term=none cterm=none ctermfg=43 gui=none guifg=#9CDCFE
 hi BreakPoint   term=none cterm=none ctermfg=160 gui=none guifg=#e51400
 hi BreakLogPoint   term=none cterm=none ctermfg=75 gui=none guifg=#61afef
 hi BreakPointDisabled   term=none cterm=none ctermfg=102 gui=none guifg=#848484
@@ -153,7 +157,8 @@ hi DapVirtualText term=none cterm=none ctermfg=247 ctermbg=238 gui=none guifg=#a
 "hi ToolbarButton cterm=bold ctermfg=234 ctermbg=230 gui=bold guifg=#1d202f guibg=#eee8d5
 hi ToolbarLine  term=underline ctermbg=60 guibg=#46475c
 hi ToolbarButton cterm=bold ctermfg=234 ctermbg=73 gui=bold guifg=#1d202f guibg=#4abcc1
-hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough guisp=#ff0000
+hi Deprecated   term=strikethrough cterm=strikethrough gui=strikethrough
+hi Mutable      term=underline cterm=underline gui=underline
 hi FileExplorerNormal term=none cterm=none ctermfg=252 ctermbg=235 gui=none guifg=#cccccc guibg=#252526
 hi FinderNormal term=none cterm=none ctermfg=188 ctermbg=235 gui=none guifg=#d4d4d4 guibg=#252526
 hi FinderInputText term=none cterm=none ctermfg=188 ctermbg=237 gui=none guifg=#d4d4d4 guibg=#3c3c3c
@@ -275,16 +280,28 @@ if has('nvim')
   hi Substitute term=none cterm=none ctermfg=231 ctermbg=198 gui=none guifg=#ffffff guibg=#ff007c
 
   "TreeSitter区域
+  hi clear @type
+  hi! link @type Type
+  hi clear @type.python
+  hi! link @type.python Class
   hi clear @parameter
   hi! link @parameter Parameter
   hi clear @field
-  hi! link @field Identifier
+  hi! link @field Property
   hi clear @property
   hi! link @property Property
   hi clear @variable
   hi! link @variable @lsp
   hi clear @namespace
-  hi! link @namespace Property
+  hi! link @namespace NameSpace
+  hi clear @include
+  hi! link @include PreProc
+  hi clear @method
+  hi! link @method Function
+  hi clear @repeat
+  hi! link @repeat Statement
+  hi clear @attribute
+  hi! link @attribute Annotation
 
   "Lsp区域
   hi clear LspReferenceText
@@ -358,14 +375,12 @@ if has('nvim')
   "hi clear ALEErrorSign
   "hi clear ALEWarningSign
   "hi clear DapStoppedLine
-  hi clear @type
-  hi! link @type Type
   hi clear @lsp.type.class
-  hi! link @lsp.type.class Struct
+  hi! link @lsp.type.class Class
   hi clear @lsp.type.decorator
   hi! link @lsp.type.decorator Annotation
   hi clear @lsp.type.enum
-  hi! link @lsp.type.enum Struct
+  hi! link @lsp.type.enum Enum
   hi clear @lsp.type.enumMember
   hi! link @lsp.type.enumMember EnumMember
   hi clear @lsp.type.function
@@ -377,15 +392,21 @@ if has('nvim')
   hi clear @lsp.type.method
   hi! link @lsp.type.method Function
   hi clear @lsp.type.namespace
-  hi! link @lsp.type.namespace Property
+  hi! link @lsp.type.namespace NameSpace
+  hi clear @lsp.type.namespace.go
+  hi! link @lsp.type.namespace.go Property
   hi clear @lsp.type.parameter
   hi! link @lsp.type.parameter Parameter
   hi clear @lsp.type.property
   hi! link @lsp.type.property Property
   hi clear @lsp.type.struct
   hi! link @lsp.type.struct Struct
+  hi clear @lsp.type.struct.rust
+  hi! link @lsp.type.struct.rust Class
   hi clear @lsp.type.type
-  hi! link @lsp.type.type Struct
+  hi! link @lsp.type.type Type
+  hi clear @lsp.type.type.go
+  hi! link @lsp.type.type.go Class
   hi clear @lsp.type.typeParameter
   hi! link @lsp.type.typeParameter Parameter
   hi clear @lsp.type.variable
@@ -406,6 +427,40 @@ if has('nvim')
   hi! link @lsp.type.operator Special
   hi clear @lsp.type.builtinType
   hi! link @lsp.type.builtinType Statement
+  hi clear @lsp.type.builtinType.rust
+  hi! link @lsp.type.builtinType.rust Operator
+  hi clear @lsp.type.builtinAttribute.rust
+  hi! link @lsp.type.builtinAttribute.rust Annotation
+  hi clear @lsp.type.attributeBracket.rust
+  hi! link @lsp.type.attributeBracket.rust Annotation
+  hi clear @lsp.type.annotation
+  hi! link @lsp.type.annotation Annotation
+  hi clear @lsp.type.annotationMember
+  hi! link @lsp.type.annotationMember Function
+  hi clear @lsp.type.recordComponent
+  hi! link @lsp.type.recordComponent Parameter
+  hi clear @lsp.type.typeAlias
+  hi! link @lsp.type.typeAlias Operator
+  hi clear @lsp.typemod.function
+  hi! link @lsp.typemod.function Function
+  hi clear @lsp.typemod.method
+  hi! link @lsp.typemod.method Function
+  hi clear @lsp.typemod.typeAlias.defaultLibrary.rust
+  hi! link @lsp.typemod.typeAlias.defaultLibrary.rust Operator
+  hi clear @lsp.typemod.macro.library
+  hi! link @lsp.typemod.macro.library Macro
+  hi clear @lsp.mod.defaultLibrary
+  hi! link @lsp.mod.defaultLibrary Statement
+  hi clear @lsp.mod.defaultLibrary.rust
+  hi! link @lsp.mod.defaultLibrary.rust Class
+  hi clear @lsp.typemod.function.defaultLibrary.go
+  hi! link @lsp.typemod.function.defaultLibrary.go Function
+  hi clear @lsp.typemod.namespace
+  hi! link @lsp.typemod.namespace NameSpace
+  hi clear @lsp.mod.mutable.rust
+  hi! link @lsp.mod.mutable.rust Mutable
+  hi clear @lsp.type.member.typescript
+  hi! link @lsp.type.member.typescript Function
 
   "ident_line区域
   hi IndentBlankLineBase cterm=nocombine ctermfg=237 gui=nocombine guifg=#333843

@@ -8,13 +8,16 @@ vim.g.user_home = vim.fn.expand('~')
 vim.g.lazy_nvim_root = vim.fn.stdpath("config") .. "/lazy"
 vim.g.lazy_nvim_path = vim.g.lazy_nvim_root .. "/lazy.nvim"
 vim.g.mason_nvim_root = vim.fn.stdpath("config") .. "/mason"
-vim.g.g_s_rootmarkers = {'.git', '.svn', '.root', '.hg', 'pom.xml', 'package.json', '.vscode', '.venv'}
+vim.g.g_s_rootmarkers = {'.git', '.svn', '.root', '.hg', 'pom.xml', 'gradlew', 'mvnw', '.venv', 'pyproject.toml', 'go.mod', 'go.work', 'Cargo.toml', 'package.json', 'tsconfig.json', 'jsconfig.json', '.vscode'}
 if (vim.g.os_flg == 'windows') then
+  vim.opt.shellslash = true
   vim.g.terminal_shell = 'cmd.exe /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd'
   vim.g.java_maven_conf_path = 'D:/Tools/WorkTool/Java/apache-maven-3.9.7/conf/settings.xml'
+  vim.g.vscode_snippets = vim.g.user_home .. "/AppData/Roaming/Code/User"
 else
   vim.g.terminal_shell = '/bin/bash -l -i'
   vim.g.java_maven_conf_path = '/usr/share/maven/conf/settings.xml'
+  vim.g.vscode_snippets = vim.g.user_home .. "/AppData/Roaming/Code/User"
 end
 
 vim.g.mapleader = "\\"
@@ -58,48 +61,32 @@ vim.opt.ttimeoutlen = 1
 vim.opt.pumheight = 15
 vim.opt.formatoptions = 'tcqjmB'
 vim.opt.matchpairs = '(:),{:},[:],<:>'
-vim.opt.shellslash = true
 vim.opt.jumpoptions = 'stack'
 vim.o.ambiwidth = 'single'
-
-vim.cmd([[
-"-----------------------------------------------"
-"               工程跟路径函数定义              "
-"               使用s:project_root()函数取得    "
-"-----------------------------------------------"
-function! GetProjectRoot()
-  let name = expand('%:p')
-  return FindRoot(name, g:g_s_rootmarkers, 0)
-endfunction
-function! FindRoot(name, markers, strict)
-  let name = fnamemodify((a:name != '')? a:name : bufname('%'), ':p')
-  let finding = ''
-  " iterate all markers
-  for marker in a:markers
-    if marker != ''
-      " search as a file
-      let x = findfile(marker, name . '/;')
-      let x = (x == '')? '' : fnamemodify(x, ':p:h')
-      " search as a directory
-      let y = finddir(marker, name . '/;')
-      let y = (y == '')? '' : fnamemodify(y, ':p:h:h')
-      " which one is the nearest directory ?
-      let z = (strchars(x) > strchars(y))? x : y
-      " keep the nearest one in finding
-      let finding = (strchars(z) > strchars(finding))? z : finding
-    endif
-  endfor
-  if finding == ''
-    let path = (a:strict == 0)? fnamemodify(name, ':h') : ''
-  else
-    let path = fnamemodify(finding, ':p')
-  endif
-  if has('win32') || has('win16') || has('win64') || has('win95')
-    let path = substitute(path, '\/', '\', 'g')
-  endif
-  if path =~ '[\/\\]$'
-    let path = fnamemodify(path, ':h')
-  endif
-  return path
-endfunction
-]])
+-- 同步系统剪切板
+function my_paste(reg)
+  return function(lines)
+    -- 返回 " 寄存器的内容，用来作为 p 操作符的粘贴物
+    local content = vim.fn.getreg('"')
+    return vim.split(content, '\n')
+  end
+end
+if (vim.env.SSH_TTY == nil) then
+  -- 当前环境为本地环境，也包括 WSL
+  vim.opt.clipboard = "unnamedplus"
+else
+  -- 远程环境
+  vim.opt.clipboard:append("unnamedplus")
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      -- 小括号里面的内容可能是毫无意义的，但是保持原样可能看起来更好一点
+      ["+"] = my_paste("+"),
+      ["*"] = my_paste("*"),
+    },
+  }
+end

@@ -1,3 +1,20 @@
+###
+
+# 发送POST请求
+POST https://httpbin.org/post
+
+{
+    "message": "hello"
+}
+
+###
+
+# 发送POST请求（延迟2秒应答，最多可设置10秒）
+POST https://httpbin.org/delay/2
+
+
+###
+
 # 发送到 Soap/XML
 # https://www.learnwebservices.com/
 # https://apps.learnwebservices.com/services/hello?WSDL

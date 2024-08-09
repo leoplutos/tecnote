@@ -88,6 +88,8 @@ else
   require('config._keybindings')
   -- 加载lua/config/_nerdfont.lua
   require('config._nerdfont')
+  -- 加载lua/config/_autocmd.lua
+  require('config._autocmd')
   -- 加载lua/config/_lazy.lua
   require('config._lazy')
 
@@ -113,7 +115,8 @@ else
     -- vim.g.neovide_scroll_animation_length = 0.3
     vim.g.neovide_hide_mouse_when_typing = true
     -- vim.g.neovide_underline_automatic_scaling = false
-    -- vim.g.neovide_theme = 'auto'
+    -- 可以设定：light, dark, auto
+    vim.g.neovide_theme = 'dark' 
     -- vim.g.neovide_refresh_rate = 60
     -- vim.g.neovide_refresh_rate_idle = 5
     -- vim.g.neovide_no_idle = true

@@ -18,9 +18,10 @@ return {
         --  local dot_root_path = vim.fn.finddir(".root", ".;")
         --  return vim.fn.fnamemodify(dot_root_path, ":h")
         --end
+        local root_path = vim.fs.root(0, vim.g.g_s_rootmarkers)
         local find_opts = {
           --cwd = get_root_dir(),
-          cwd = vim.fn.GetProjectRoot(),
+          cwd = root_path,
           hidden = true,
         }
         require("telescope.builtin").find_files(find_opts)
@@ -32,9 +33,10 @@ return {
         --  local dot_root_path = vim.fn.finddir(".root", ".;")
         --  return vim.fn.fnamemodify(dot_root_path, ":h")
         --end
+        local root_path = vim.fs.root(0, vim.g.g_s_rootmarkers)
         local grep_opts = {
           --cwd = get_root_dir(),
-          cwd = vim.fn.GetProjectRoot(),
+          cwd = root_path,
         }
         require("telescope.builtin").live_grep(grep_opts)
       end

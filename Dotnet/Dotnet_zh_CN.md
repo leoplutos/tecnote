@@ -283,6 +283,10 @@ https://blog.csdn.net/weixin_36536176/article/details/105050876
 
 ## 其他
 
+### NuGet源
+ - nuget.org： https://www.nuget.org/api/v2/
+ - NuGet国内镜像： https://nuget.cdn.azure.cn/v3/index.json
+
 ### Visual Studio Express 2013 无法访问 NuGet
 
 **解决办法**

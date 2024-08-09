@@ -136,39 +136,45 @@ go install -v github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 golangci-lint version
 ```
 
-## ORM框架
+## 第三方库和技术文章
+
+### ORM框架
 GORM 是用于Golang的出色ORM（对象关系映射）库，它以开发人员友好而闻名
  - [官网](https://gorm.io/)
  - [Github](https://github.com/go-gorm/gorm)
  - [公众号示例](https://mp.weixin.qq.com/s/YtJSWOH-35QAPjtHBSmFng)
 
-## 轻量级全文检索引擎
+### 轻量级全文检索引擎
 ZincSearch
  - [Github](https://github.com/zincsearch/zincsearch)
  - [公众号示例](https://mp.weixin.qq.com/s/pzQgv0ofHyQoo8ChnpBQ0g)
 
-## 命令行视频下载工具
+### 命令行视频下载工具
 lux
  - [Github](https://github.com/iawia002/lux)
 
-## 修改可执行文件的图标
+### 修改可执行文件的图标
  - [Github](https://github.com/akavel/rsrc)
  - [公众号示例](https://mp.weixin.qq.com/s/SM2_YGTOKqrPELjJ3xfckg)
 
-## Go 如何优雅实现业务并发？
+### Go 如何优雅实现业务并发？
 https://mp.weixin.qq.com/s/0JS7XWcpRauj14xWGWopFw
 
-## 如何使用Go语言优雅地实现接口限流
+### 如何使用Go语言优雅地实现接口限流
 https://mp.weixin.qq.com/s/bS65ip_l9SSAhdYBjxPPSg
 
-## Golang实现异步队列
+### Golang实现异步队列
 https://mp.weixin.qq.com/s/j21kENP0RUYlS2kchH8d2w
 
-## aconfig：Go语言中简洁高效的配置加载库
+### aconfig：Go语言中简洁高效的配置加载库
 https://mp.weixin.qq.com/s/5-RvGSkD_4logC0BQ7VVZQ
 
-## ants：强大的高性能与低成本 Go 协程池
+### ants：强大的高性能与低成本 Go 协程池
 https://github.com/panjf2000/ants
 
-## .env 加载环境变量
+### .env 加载环境变量
 https://github.com/joho/godotenv
+
+### Viper：Go 配置库，支持 JSON、TOML、YAML、HCL、INI、envfile 和 Java 属性文件
+https://github.com/spf13/viper
+

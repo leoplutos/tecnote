@@ -1,6 +1,7 @@
 # NodeJs相关
 
 ## 下载
+https://nodejs.cn/  
 https://nodejs.org/zh-cn/download  
 
 选择 Windows 二进制文件 (.zip)  

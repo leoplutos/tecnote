@@ -281,6 +281,15 @@ https://github.com/awesome-selfhosted/awesome-selfhosted
 ## GitHub中文排行榜
 https://github.com/GrowingGit/GitHub-Chinese-Top-Charts
 
+## 网络障碍模拟工具 Clumsy
+https://github.com/jagt/clumsy
+
+## 端口扫描工具 RustScan
+https://github.com/RustScan/rustscan
+
+## 无限画布工具 Lorien
+https://github.com/mbrlabs/Lorien
+
 ## 其他软件
 
 - TVBox
