@@ -271,6 +271,9 @@ https://yandex.com/
 ## 开源网络"瑞士军刀"
 https://github.com/gchq/CyberChef
 
+## 自我托管的PDF操作神器:Stirling-PDF
+https://github.com/Stirling-Tools/Stirling-PDF
+
 ## 自我托管的软件列表
 https://github.com/awesome-selfhosted/awesome-selfhosted
 

@@ -50,3 +50,12 @@ strip 命令用于清除二进制文件中的非关键信息. 可以通过 ``sud
 使用 upx 这样的压缩工具. 可以通过 ``sudo apt install upx`` 命令来安装 upx 包
 3. 不包含 unwind 信息
 4. 清理包依赖列表中存有的多个不同版本的同名包
+
+
+## 第三方库
+
+#### log
+- 简单的工程使用slog即可  https://github.com/slog-rs/slog  
+- 异步以及微服务使用  https://github.com/tokio-rs/tracing  
+    一个[tracing的教程](https://course.rs/logs/tracing.html)
+

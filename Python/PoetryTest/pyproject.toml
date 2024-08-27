@@ -1,28 +1,30 @@
 [tool.poetry]
 name = "poetrytest"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = ["yourname <yourname@example.com>"]
 readme = "README.md"
 packages = [
   {include = "poetrytest", from = "src"},
-  {include = "sub_module", from = "src/poetrytest" },
 ]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.8"
 faker = "^21.0.0"
 pytest = "^7.4.3"
+redis = {extras = ["hiredis"], version = "^5.0.8"}
+etcd3 = {git = "https://bgithub.xyz/kragniz/python-etcd3"}
 
 [[tool.poetry.source]]
 name = "aliyun"
 url = "https://mirrors.aliyun.com/pypi/simple/"
 #name = "tsinghua"
 #url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-priority = "default"
+priority = "primary"
 
 [tool.poetry.scripts]
-pyrun="poetrytest.app:main"
+pyrun="src.poetrytest.app:main"
 
 [build-system]
 requires = ["poetry-core"]
@@ -31,3 +33,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+#指定一个执行环境，其中src/poetrytest是根路径。pyright将在执行时将该路径加到sys.path。
+executionEnvironments = [
+  { root = "src/poetrytest" }
+]

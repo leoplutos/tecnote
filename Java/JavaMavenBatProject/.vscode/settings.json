@@ -1,15 +1,16 @@
 {
-	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
+	"editor.guides.indentation": true, //缩进参考线
+	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
 	"java.jdt.ls.vmargs": "-Dfile.encoding=UTF-8",
 	"java.configuration.runtimes": [
 		{
-			"name": "JavaSE-17",
-			"path": "D:\\Tools\\WorkTool\\Java\\jdk17.0.6",
+			"name": "JavaSE-21",
+			"path": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
 			"default": true
 		},
 	],
 	"java.configuration.maven.userSettings": "C:/Users/Leo-G5000/.m2/settings.xml",
-	"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.4/conf/settings.xml",
+	"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.7/conf/settings.xml",
 	//"editor.codeLens": false, //不在编辑器中显示codeLens，不表示main函数上方的[Run | Debug]
 	"java.format.settings.profile": "GoogleStyle", //使用gogole样式格式化代码
 	"java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8", //添加Java运行调试的参数
@@ -36,7 +37,7 @@
 		"overrideName": true
 	},
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
-		"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8",
+		"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8 -Dgrpc.port=50051",
 	},
 	"java.compile.nullAnalysis.mode": "automatic",
 	"java.configuration.updateBuildConfiguration": "disabled",

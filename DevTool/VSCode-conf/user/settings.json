@@ -362,7 +362,7 @@
 						"meta.attribute.rust",
 					],
 					"settings": {
-						"foreground": "#00af00",
+						"foreground": "#4EC9B0",
 						"fontStyle": ""
 					}
 				},
@@ -411,17 +411,17 @@
 			],
 		},
 		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
-			"comments": "#70a670", //设定注释颜色liang 备用#a8a8a8
+			"comments": "#afafaf", //设定注释颜色liang 备用#a8a8a8
 			//"comments": "#008000", //设定注释颜色qiao
-			"numbers": "#0087ff", //设定数字颜色
+			"numbers": "#000000", //设定数字颜色
 			"strings": "#2F5E5E", //设定字符串颜色 (备用#2F5E5E)(备用01a252)
 			"variables": "#000000", //设定变量颜色
-			"types": "#e02838", //设定类型颜色
+			"types": "#0000ff", //设定类型颜色
 			"keywords": { //设定关键字颜色（可加入"fontStyle": "bold"）
 				"foreground": "#0000ff",
 				"fontStyle": ""
 			},
-			"functions": "#006400", //设定函数颜色(备用#795E26)(备用深绿#008300)(备用深绿#006400)
+			"functions": "#cc9966", //设定函数颜色(备用#795E26)(备用深绿#008300)(备用深绿#006400)
 			"textMateRules": [ //作用域所对应的颜色
 				{
 					"scope": [ //grep搜索结果的文件路径和文件名
@@ -465,6 +465,8 @@
 						"keyword.other.import.java",
 						"keyword.control.new.java",
 						"keyword.control.java",
+						"keyword.control.try.java",
+						"keyword.control.catch.java",
 					],
 					"settings": {
 						"foreground": "#7F0055",
@@ -566,16 +568,28 @@
 					"foreground": "#9CDCFE" //#ee5d43 #4fc1ff
 				},
 				"macro": {
-					"foreground": "#569cd6"
+					"foreground": "#96E072"
 				},
 				"type": {
-					"foreground": "#ee5d43"
+					"foreground": "#9CDCFE" //#ee5d43
+				},
+				"type:rust": {
+					"foreground": "#c586c0" //#ee5d43
+				},
+				"type.defaultLibrary": {
+					"foreground": "#64afef"
+				},
+				"type.defaultLibrary:rust": {
+					"foreground": "#c586c0"
+				},
+				"variable.readonly.defaultLibrary": {
+					"foreground": "#64afef"
 				},
 				"comment": {
 					"foreground": "#5f6167"
 				},
 				"decorator": {
-					"foreground": "#00af00"
+					"foreground": "#4EC9B0"
 				},
 				"enum": {
 					"foreground": "#cc81ba"
@@ -610,7 +624,7 @@
 					"foreground": "#809980"
 				},
 				"operator": {
-					"foreground": "#9CDCFE"
+					//"foreground": "#9CDCFE"
 				},
 				"regexp": {
 					"foreground": "#646695"
@@ -618,10 +632,22 @@
 				"struct": {
 					"foreground": "#ee5d43"
 				},
+				"struct:rust": {
+					"foreground": "#9CDCFE"
+				},
 				"generic": {
-					"foreground": "#00af00"
+					"foreground": "#d4d4d4"
 				},
 				"annotation": {
+					"foreground": "#4EC9B0"
+				},
+				"derive": {
+					"foreground": "#4EC9B0"
+				},
+				"attributeBracket": {
+					"foreground": "#4EC9B0"
+				},
+				"builtinAttribute": {
 					"foreground": "#4EC9B0"
 				},
 				"lifetime": {
@@ -652,22 +678,22 @@
 					"foreground": "#408080"
 				},
 				"property": {
-					"foreground": "#0000c0"
+					"foreground": "#be00be"
 				},
 				"cliProperty": {
-					"foreground": "#0000c0"
+					"foreground": "#be00be"
 				},
 				"interface": {
 					"foreground": "#0080ff"
 				},
 				"class": {
-					"foreground": "#2B91AF"
+					"foreground": "#0000af"
 				},
 				"struct": {
-					"foreground": "#2B91AF"
+					"foreground": "#0000af"
 				},
 				"macro": {
-					"foreground": "#0000a0"
+					"foreground": "#646464"
 				},
 				"namespace": {
 					"foreground": "#000000"
@@ -687,7 +713,7 @@
 					"bold": true
 				},
 				"class:java": {
-					"foreground": "#000000",
+					"foreground": "#0000af",
 				},
 			}
 		},
@@ -752,7 +778,7 @@
 	},
 	"terminal.integrated.env.osx": {},
 	"terminal.integrated.env.linux": {},
-	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端-cmd
+	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
 	//"terminal.integrated.defaultProfile.windows": "Win-PowerShell", //设定默认终端-PowerShell
 	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
 	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
@@ -785,6 +811,8 @@
 	"terminal.integrated.commandsToSkipShell": [ //设定在终端可以使用的快捷键命令，前面要加-
 		"-workbench.action.terminal.selectAll"
 	],
+	"terminal.integrated.suggest.enabled": true,
+	"terminal.integrated.suggest.runOnEnter": "exactMatchIgnoreExtension",
 	//-----------------------------------------------"
 	//               git设定                         "
 	//-----------------------------------------------"
@@ -820,6 +848,7 @@
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
+	"debug.showVariableTypes": true,
 	"diffEditor.ignoreTrimWhitespace": false, //差异编辑器-是否忽略空格或尾随空格
 	"diffEditor.diffAlgorithm": "advanced", // 差异编辑器-新差异算法
 	"diffEditor.experimental.showMoves": true, // 检测代码移动

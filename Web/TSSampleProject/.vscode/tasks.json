@@ -9,35 +9,94 @@
 			]
 		},
 		"env": { //自定义环境变量
-			"PATH": "${env:path};D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64"
+			"FASTIFY_AUTOLOAD_TYPESCRIPT": "1", //开启fastify-autoload对typescript的支持
+			"PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64"
 		}
 	},
 	"tasks": [
 		{
-			"label": "typescript_build",
-			"type": "typescript",
-			"tsconfig": "tsconfig.json",
+			"label": "bun_build",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"run",
+				"build",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "bun x tsc -p tsconfig.json",
 			"problemMatcher": [
 				"$tsc"
 			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			},
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			}
 		},
 		{
-			"type": "npm",
-			"script": "start",
+			"label": "bun_dev",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"run",
+				"dev",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "bun run src/index.ts",
 			"problemMatcher": [],
-			"label": "npm: start",
-			"detail": "node dist/index.js"
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
 		},
 		{
-			"type": "npm",
-			"script": "tsc",
+			"label": "bun_runRedisClientExample",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"src/components/RedisClientExample.ts",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "bun run src/components/RedisClientExample.ts",
 			"problemMatcher": [],
-			"label": "npm: tsc",
-			"detail": "tsc -p tsconfig.json"
-		}
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "bun_runEtcdClientExample.ts",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"src/components/EtcdClientExample.ts",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "bun run src/components/EtcdClientExample.ts",
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
 	]
 }

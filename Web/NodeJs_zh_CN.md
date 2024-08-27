@@ -20,38 +20,41 @@ https://dev.nodejs.cn/learn/
 ## 配置命令
 
 查看默认配置
-```
+```bash
 npm config ls -ls
 ```
 
 设置全局安装路径
-```
+```bash
 npm config set prefix "D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global"
 ```
 
 设置缓存路径
-```
+```bash
 npm config set cache "D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_cache"
 ```
 
 ## 设置国内源
-```
-npm config set registry https://npmreg.proxy.ustclug.org/
+```bash
+# npm config set registry https://npmreg.proxy.ustclug.org/
+npm config set registry https://registry.npmmirror.com/
 npm info underscore
 ```
 ※这个只是为了检验上面的设置命令是否成功，若成功，会返回指定包的信息  
 
 使用命令临时指定
-```
-npm --registry https://npmreg.proxy.ustclug.org/ info underscore
+```bash
+# npm --registry https://npmreg.proxy.ustclug.org/ info underscore
+npm --registry https://registry.npmmirror.com/ info underscore
 ```
 ※npm info underscore依然是为了检验是否设置成功
 
 ## 安装第三方包
 
 安装第三方包到本地（模块下载到当前命令行所在目录）
-```
-npm --registry https://npmreg.proxy.ustclug.org/ install <packagename>
+```bash
+# npm --registry https://npmreg.proxy.ustclug.org/ install <packagename>
+npm --registry https://registry.npmmirror.com/ install <packagename>
 ```
 
 安装第三方包到全局（-g参数，模块将被下载安装到全局目录）
@@ -73,7 +76,11 @@ npm i --save-dev @types/node
 ```
 ``--save-dev`` 选项为 添加条目到 package.json 文件中的开发依赖
 
-## 几个实用的第三方包
+## 第三方库
+
+#### log
+https://github.com/pinojs/pino  
+https://github.com/pinojs/pino-pretty  
 
 #### prettier格式化
 安装命令

@@ -9,8 +9,8 @@ Dotnet 平台主要分为三个部分
 
 ### .NET Framework
 2002年发布，仅支持Windows平台，可以开发
-- window桌面程序：winform、UWP、wpf等
-- web应用程序：Asp.Net webform、Asp.Net MVC
+- Window桌面程序：WinForm、UWP、WPF等
+- Web应用程序：Asp.Net Webform、Asp.Net MVC
 
 ### .NET Core
 2016年6月27号发布，是微软最新退出开源的、跨平台的平台，可以用来创建运行在Windows、Mac、Linux上的应用程序
@@ -32,23 +32,59 @@ https://dotnet.microsoft.com/zh-cn/download
 dotnet --version
 ```
 
-2. 创建工程 
-```
+2. 创建工程
+```bash
 cd D:\WorkSpace\Dotnet
-mkdir DotnetSampleProject
-cd DotnetSampleProject
-touch .root
-dotnet new console --framework net7.0
-#dotnet run
+mkdir dotnet-core-sample
+cd dotnet-core-sample
+
+# 创建sln文件
+dotnet new sln -n dotnet-core-sample
+
+# 创建console项目
+dotnet new console -n dotnet-console-sample --framework net8.0 --use-program-main
+
+# 将项目添加到解决方案
+dotnet sln add dotnet-console-sample/dotnet-console-sample.csproj
+
+# 运行
+dotnet run --project dotnet-console-sample
 ```
-如果没有工程模板文件可以如下创建
-```
-dotnet new sln
-```
+
+笔者的例子工程 [dotnet-core-sample](./dotnet-core-sample/)
+
+### 常用工程命令
+
+ - 创建项目：``dotnet new [template]``  &nbsp;&nbsp;  查看可用template ``dotnet new list``
+ - 编译项目：``dotnet build``
+ - 运行项目：``dotnet run``
+ - 运行项目（DLL）：``dotnet filename.dll``
+ - 清理项目的生成输出：``dotnet clean``
+ - 运行单元测试：``dotnet test``
+ - 部署项目：``dotnet publish``
+ - 添加依赖：``dotnet add``
+ - 删除依赖：``dotnet remove``
+ - 还原项目依赖：``dotnet restore``
+ - 创建 NuGet 包：``dotnet pack``
+ - 安装工具：``dotnet tool``
+
+### 解决方案命令
+ - 将一个或者多个项目添加到解决方案：``dotnet sln add [project path]``
+ - 列出解决方案文件中的所有项目：``dotnet sln list``
+ - 从解决方案中移除一个或者多个项目，多个项目路径用空格隔开：``dotnet sln remove [project path]``
+
+### 常用环境命令
+ - SDK版本信息：``dotnet --list-sdks``
+ - 运行时版本信息：``dotnet --list-runtimes``
+ - 查看NuGet包源：``dotnet nuget list source``
+ - 添加一个Nuget的包源：``dotnet nuget add source https://nuget.cdn.azure.cn/v3/index.json -n NuGet国内镜像``
+ - 将包添加到项目中：``dotnet add package xxxx``
+ - 将引用添加到项目中：``dotnet add reference src/xxxx.csproj``
+ - 将项目ProjectA添加对ProjectB的引用：``dotnet add src/ProjectA.csproj reference src/ProjectB.csproj``
 
 ### 新版 .NET Core 的 VSCode 配置
 安装VSCode插件（需要.net 7.0或者更高）  
-使用插件为  [**C# Dev Kit**](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+使用插件为  [**C#**](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 
 
 ### 新版 .NET Core 的 Vim 配置
@@ -74,7 +110,7 @@ csharp-ls --version
 dotnet new console --language C# --output MyProject --target-framework-override net48
 ```
 
-### 关于 .NET Core 的包管理
+### 全局安装csharp-ls
 
 比如安装包 ``csharp-ls`` 的命令为  
 ```
@@ -263,7 +299,7 @@ Fody: No configuration entry found for the installed weaver Costura. This weaver
 ```
 
 ## C# 的异步例子
- - [AsyncExample.cs](./AsyncExample.cs)
+ - [AsyncExample.cs](./dotnet-core-sample/dotnet-console-sample/Async/AsyncExample.cs)
 
 ## WCF 相关
 
@@ -280,6 +316,10 @@ https://www.cnblogs.com/Gyoung/archive/2012/10/19/2731519.html
 WCF服务对象实例化的三种方式  
 https://blog.csdn.net/weixin_36536176/article/details/105050876
 
+## 第三方库
+
+### Log日志
+https://github.com/serilog/serilog  
 
 ## 其他
 

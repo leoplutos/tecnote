@@ -191,7 +191,6 @@ javap -v com/spring/net/a.class
 | JDK 1.2      | 46            | (0x2E)   |
 | JDK 1.1      | 45            | (0x2D)   |  
 
-
 ## Java 的异步例子
  - [AsyncExample.java](./AsyncExample.java)
 
@@ -208,6 +207,10 @@ javap -v com/spring/net/a.class
  - [OkHttpTest](./OkHttpTest)
 
 ## 其他
+
+### MapStruct-对象属性复制
+ - [官网](https://mapstruct.org/)
+ - [Github](https://github.com/mapstruct/mapstruct)
 
 ### Java SSH服务端的例子
 Apache MINA

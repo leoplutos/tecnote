@@ -1,5 +1,5 @@
-import SubComp1 from "./components/SubComp1";
-import subComp2Event from "./components/SubComp2";
+import SubComp1 from "./components/SubComp1.js";
+import subComp2Event from "./components/SubComp2.js";
 
 let strMsg1: string = "这是一个TypeScript的示例";
 let strMsg2: string = `o0O 8g&@ == != ilI|

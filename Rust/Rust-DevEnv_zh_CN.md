@@ -164,15 +164,17 @@ rustup self uninstall
 ## Rust使用国内源
 文件位置
 ``$HOME/.cargo/config.toml`` (``$CARGO_HOME``下)
-```
+```toml
 [source.crates-io]
 replace-with = 'ustc'
 
 [source.ustc]
-registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+#registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
 
 [http]
 check-revoke = false
+
 ```
 
 ## gcc安装

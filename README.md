@@ -39,6 +39,7 @@
 * [前后端分离-后端Sanic](Framework/Backend_Python_Sanic_zh_CN.md)
 * [前后端分离-后端Gin](Framework/Backend_Golang_Gin_zh_CN.md)
 * [前后端分离-后端Actix-Web](Framework/Backend_Rust_ActixWeb_zh_CN.md)
+* [前后端分离-后端Fastify](Framework/Backend_Node_Fastify_zh_CN.md)
 
 ## Rust相关
 * [Rust语言相关](Rust/Rust_zh_CN.md)
@@ -83,6 +84,7 @@
 * [Web相关](Web/Web_zh_CN.md)
 * [TypeScript相关](Web/TypeScript_zh_CN.md)
 * [NodeJs相关](Web/NodeJs_zh_CN.md)
+* [BunJs相关](Web/BunJs_zh_CN.md)
 * [WebAssembly相关](Web/WebAssembly_zh_CN.md)
 * [Vue相关](Web/Vue_zh_CN.md)
 * [AngularJS相关](Web/AngularJS_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本1.x
@@ -129,11 +131,14 @@
 ## DB
 * [数据库相关](DB/DB_zh_CN.md)
 * [Postgresql](DB/Postgresql_zh_CN.md)
-* [Redis](DB/Redis_zh_CN.md)
 * [DBeaver和A5M2](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
 * [Sqlite3](DB/Sqlite3_zh_CN.md)
 * [OpenSearch](DB/OpenSearch_zh_CN.md)
+
+## 分布式协调服务相关
+* [Redis](Distributed/Redis_zh_CN.md)
+* [Etcd](Distributed/Etcd_zh_CN.md.md)
 
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)
@@ -147,4 +152,4 @@
 * [ripgrep-文本搜索工具](Other/Ripgrep_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 * [USB启动](Other/Usbboot_zh_CN.md)
-* [开发者书籍 - Open Developer Books](https://odb.lcjuves.com/)
+* [免费的编程中文书籍索引](Other/Book_zh_CN.md)

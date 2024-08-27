@@ -138,6 +138,9 @@ golangci-lint version
 
 ## 第三方库和技术文章
 
+### log
+https://github.com/rs/zerolog
+
 ### ORM框架
 GORM 是用于Golang的出色ORM（对象关系映射）库，它以开发人员友好而闻名
  - [官网](https://gorm.io/)

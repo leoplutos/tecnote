@@ -597,6 +597,8 @@
 	"terminal.integrated.commandsToSkipShell": [ //设定在终端可以使用的快捷键命令，前面要加-
 		"-workbench.action.terminal.selectAll"
 	],
+	"terminal.integrated.suggest.enabled": true,
+	"terminal.integrated.suggest.runOnEnter": "exactMatchIgnoreExtension",
 	//-----------------------------------------------"
 	//               git设定                         "
 	//-----------------------------------------------"
@@ -632,6 +634,7 @@
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
+	"debug.showVariableTypes": true,
 	"diffEditor.ignoreTrimWhitespace": false, //差异编辑器-是否忽略空格或尾随空格
 	"diffEditor.diffAlgorithm": "advanced", // 差异编辑器-新差异算法
 	"diffEditor.experimental.showMoves": true, // 检测代码移动

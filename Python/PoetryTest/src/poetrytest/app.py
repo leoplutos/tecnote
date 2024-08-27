@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import logging
 from sub_module import sub_mod1
 from sub_module import sub_mod2
@@ -6,7 +9,7 @@ from sub_module import sub_mod2
 def main():
     logging.basicConfig(
         level=logging.DEBUG,
-        format="%(asctime)s %(levelname)s [%(process)s] %(filename)s:%(lineno)d - %(message)s",
+        format="[%(asctime)s] %(levelname)s [%(thread)s][%(filename)s:%(lineno)d] - %(message)s",
     )
     print("这是一个main函数")
     sub_mod1.sub_fun1()

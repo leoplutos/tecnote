@@ -122,7 +122,26 @@ SOAPAction: "http://CargoWise.com/eHub/2010/06/eAdapterStreamedService/SendStrea
 	</soapenv:Body>
 </soapenv:Envelope>
 
+###
 
+# 发送到 HTTP+XML
+# https://xxxxxxservices.xxxxxxxx.net/eAdaptor
+POST https://xxxxxxservices.xxxxxxxx.net/eAdaptor HTTP/1.1
+Content-Type: text/xml;charset=UTF-8
+Authorization: Basic user pwd123
+
+<UniversalShipmentRequest xmlns="http://www.cargowise.com/Schemas/Universal/2011/11" version="1.1">
+  <ShipmentRequest>
+    <DataContext>
+      <DataTargetCollection>
+        <DataTarget>
+          <Type>CustomsDeclaration</Type>
+          <Key>SHHAJ00000000</Key>
+        </DataTarget>
+      </DataTargetCollection>
+    </DataContext>
+  </ShipmentRequest>
+</UniversalShipmentRequest>
 ###
 
 

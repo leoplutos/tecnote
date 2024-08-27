@@ -1,0 +1,20 @@
+[package]
+name = "rust_sample"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]] # 运行 Redis 客户端
+name = "redis"
+path = "src/redis_client_example.rs"
+
+[[bin]] # 运行 Etcd 客户端
+name = "etcd"
+path = "src/etcd_client_example.rs"
+
+[dependencies]
+tracing = "0.1"
+tracing-subscriber = "0.3"
+uuid = { version = "1.10.0", features = ["v4", "fast-rng", "macro-diagnostics"] }
+redis = "0.26.1"
+etcd-client = "0.14"
+tokio = { version = "1.0", features = ["full"] }
