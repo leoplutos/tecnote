@@ -1,0 +1,6 @@
+{
+	"editor.guides.indentation": true, //缩进参考线
+	"editor.codeLens": false,
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+	},
+}

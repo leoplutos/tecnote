@@ -1,0 +1,78 @@
+# 多阶段构建
+
+# 阶段1：编译，命名为builder
+# 使用alpine镜像
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS builder
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加bash，curl
+# RUN apk update --quiet
+# RUN apk add --no-cache --upgrade bash curl
+
+# 将本地文件复制到镜像中
+# 复制所有
+COPY . /opt/app/dotnet-core-sample/
+
+# 添加nuget国内源
+RUN dotnet nuget add source https://nuget.cdn.azure.cn/v3/index.json -n nuget_cn
+# 禁用默认源
+RUN dotnet nuget disable source nuget.org
+
+# 设置工作目录
+WORKDIR /opt/app/dotnet-core-sample
+
+# 安装依赖
+RUN dotnet clean
+# 编译工程（在/opt/app/dotnet-core-sample/target下会编译出结果）
+RUN --mount=type=cache,target=/root/.nuget/packages dotnet publish -c Release -o target
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+# 根据需要选择运行时
+FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加bash，curl
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash curl
+
+# 从阶段1复制编译结果
+COPY --from=builder /opt/app/dotnet-core-sample/target /opt/app/dotnet-core-sample/
+
+# 设定环境变量
+# ENV NODE_ENV="production"
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/dotnet-core-sample/
+
+# 声明容器运行时监听的特定网络端口
+# EXPOSE 9501
+
+# 指定容器创建时的默认命令
+## 方式1
+# CMD ["dotnet", "dotnet-console-sample.dll", "Async"]
+## 方式2
+# CMD ["./dotnet-console-sample", "Async"]
+
+# 启动容器运行此命令即可
+# docker run -itd --name dotnet-console-app dotnet-console-app:1.0.0

@@ -11,7 +11,10 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ConfigLoader {
+// Apache Commons Config2的加载类
+// 推荐使用 Configuration
+@Deprecated
+public final class ConfigLoader {
 
 	// log4j2日志
 	protected static final Logger log = LogManager.getLogger();
@@ -23,6 +26,7 @@ public class ConfigLoader {
 	private ConfigLoader() {
 	}
 
+	@Deprecated
 	public static Configuration getInstance(final String configFileName) throws ConfigurationException {
 		if (instance == null) {
 			synchronized (Configuration.class) {

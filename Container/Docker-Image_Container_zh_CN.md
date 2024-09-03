@@ -120,11 +120,11 @@ docker run -itd \
 ```
 docker images
 REPOSITORY             TAG       IMAGE ID       CREATED         SIZE
-java_gppc              1.0.0     bf5d9e0d84c1   5 minutes ago   482MB
+java_grpc              1.0.0     bf5d9e0d84c1   5 minutes ago   482MB
 spring_boot_undertow   1.0.0     1bd92c8bc1a5   4 hours ago     393MB
 hello-world            latest    d2c94e258dcb   14 months ago   13.3kB
 ```
-我本地有3个镜像 ``java_gppc``， ``spring_boot_undertow`` 和 ``world``，他们分别有各自的 ``IMAGE ID``
+我本地有3个镜像 ``java_grpc``， ``spring_boot_undertow`` 和 ``world``，他们分别有各自的 ``IMAGE ID``
 
 ### 容器
 容器是一种轻量级、可移植的、独立的环境，可以不准确的理解为它就是一个 ``线程``
@@ -133,7 +133,7 @@ hello-world            latest    d2c94e258dcb   14 months ago   13.3kB
 ```
 docker ps -a
 CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS
-d67dedbaadb7   java_gppc:1.0.0              "…"                     11 minutes ago   Exited (143) 7 minutes ago
+d67dedbaadb7   java_grpc:1.0.0              "…"                     11 minutes ago   Exited (143) 7 minutes ago
 18775ff1b2d3   spring_boot_undertow:1.0.0   "…"                     3 hours ago      Exited (143) 3 hours ago
 5d7edebed187   spring_boot_undertow:1.0.0   "…"                     4 hours ago      Exited (143) 3 hours ago
 9a2a82b88b4e   spring_boot_undertow:1.0.0   "…"                     4 hours ago      Exited (143) 4 hours ago
@@ -169,13 +169,13 @@ docker rm {容器ID)
 ```
 docker images
 mkdir -p ~/workspace/docker_tmp
-docker save -o ~/workspace/docker_tmp/img_java_gppc.tar.gz java_gppc:1.0.0
+docker save -o ~/workspace/docker_tmp/img_java_grpc.tar.gz java_grpc:1.0.0
 ll ~/workspace/docker_tmp
 ```
 
 导入镜像
 ```
-docker load -i ~/workspace/docker_tmp/img_java_gppc.tar.gz
+docker load -i ~/workspace/docker_tmp/img_java_grpc.tar.gz
 docker images
 ```
 
@@ -188,13 +188,13 @@ docker images
 容器备份
 ```
 docker ps -a
-docker export -o ~/workspace/docker_tmp/ctn_java_gppc.tar {容器ID}
+docker export -o ~/workspace/docker_tmp/ctn_java_grpc.tar {容器ID}
 ll ~/workspace/docker_tmp
 ```
 
 导入镜像（注意：虽然备份的是容器，但是导入的是镜像）
 ```
 cd ~/workspace/docker_tmp
-docker import ctn_java_gppc.tar java_gppc_xxx:1.0.0
+docker import ctn_java_grpc.tar java_grpc_xxx:1.0.0
 docker images
 ```

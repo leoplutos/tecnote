@@ -66,73 +66,101 @@ goto GoOn
 
 :GoOn
 ::设置环境变量
+::C
 set MINGW_HOME=D:\Tools\WorkTool\C\MinGW64\bin
 set PATH=%PATH%;%MINGW_HOME%
-set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
-set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.70
-set RUST_SRC_PATH=D:\Tools\WorkTool\Rust\Rust_gnu_1.70\toolchains\stable-x86_64-pc-windows-gnu\lib\rustlib\src\rust\src
-set GO111MODULE=on
-set DOCKER_HOST=tcp://localhost:3101
+::Rust
+set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
+set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
+set RUST_SRC_PATH=D:\Tools\WorkTool\Rust\Rust_gnu_1.79\toolchains\stable-x86_64-pc-windows-gnu\lib\rustlib\src\rust\src
 set PATH=%PATH%;%CARGO_HOME%\bin
-set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep\bin
-set PATH=%PATH%;%RIPGREP_HOME%
-set FZF_HOME=D:\Tools\WorkTool\Search\fzf\bin
-set PATH=%PATH%;%FZF_HOME%
-set BAT_HOME=D:\Tools\WorkTool\Search\bat\bin
-set PATH=%PATH%;%BAT_HOME%
+::Golang
+set GO111MODULE=on
+set GOROOT=D:\Tools\WorkTool\Go\go1.22.5.windows-amd64
+set GOPATH=D:\Tools\WorkTool\Go\go_global
+set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
+::Java
+set JAVA_HOME=D:\Tools\WorkTool\Java\jdk-21.0.3+9
+set PATH=%PATH%;%JAVA_HOME%\bin
+::set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
+::set PATH=%PATH%;%ANT_HOME%\bin
+set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.7
+set PATH=%PATH%;%MAVEN_HOME%\bin
+set GRADLE_HOME=D:\Tools\WorkTool\Java\gradle-8.5
+set PATH=%PATH%;%GRADLE_HOME%\bin
+::Python
+set PYTHON_HOME=D:\Tools\Python312
+set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
+::Kotlin
+set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
+set PATH=%PATH%;%KOTLIN_HOME%\bin
+::NodeJs
+set NODEJS_HOME=D:\Tools\WorkTool\Web\node-v20.15.1-win-x64
+set PATH=%PATH%;%NODEJS_HOME%
+set NODEJS_GLOBAL_HOME=%NODEJS_HOME%\node_global
+set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
+::BunJs
+set BUNJS_HOME=D:\Tools\WorkTool\Web\bun-windows-x64
+set PATH=%PATH%;%BUNJS_HOME%
+::Git
 set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
 set PATH=%PATH%;%GIT_HOME%
 set GITUI_HOME=D:\Tools\WorkTool\Team\gitui-win
 set PATH=%PATH%;%GITUI_HOME%
 set LAZYGIT_HOME=D:\Tools\WorkTool\Team\Lazygit
 set PATH=%PATH%;%LAZYGIT_HOME%
-set JAVA_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
-set PATH=%PATH%;%JAVA_HOME%\bin
-set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
-set PATH=%PATH%;%KOTLIN_HOME%\bin
-set PYTHON_HOME=D:\Tools\WorkTool\Python\Python38-32
-set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
+::Search
+set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep\bin
+set PATH=%PATH%;%RIPGREP_HOME%
+set FZF_HOME=D:\Tools\WorkTool\Search\fzf\bin
+set PATH=%PATH%;%FZF_HOME%
+set BAT_HOME=D:\Tools\WorkTool\Search\bat\bin
+set PATH=%PATH%;%BAT_HOME%
+::VSCode
 set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64
 set PATH=%PATH%;%VSCODE_HOME%
-set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
-set PATH=%PATH%;%NINJA_HOME%
+::NeoVim
 ::set VIM_HOME=D:\Tools\WorkTool\Team\Git\usr\bin
 ::set PATH=%PATH%;%VIM_HOME%
-set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
-set PATH=%PATH%;%GVIM_HOME%
+::set GVIM_HOME=D:\Tools\WorkTool\Text\vim90
+::set PATH=%PATH%;%GVIM_HOME%
 set NVIM_HOME=D:\Tools\WorkTool\Text\nvim-win64\bin
 set PATH=%PATH%;%NVIM_HOME%
+::BuildTool
+set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
+set PATH=%PATH%;%NINJA_HOME%
+::Editor
 set HELIX_HOME=D:\Tools\WorkTool\Text\helix
 set PATH=%PATH%;%HELIX_HOME%
-set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
-set PATH=%PATH%;%ANT_HOME%\bin
-set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
-set PATH=%PATH%;%MAVEN_HOME%\bin
-set GRADLE_HOME=D:\Tools\WorkTool\Java\gradle-8.5
-set PATH=%PATH%;%GRADLE_HOME%\bin
-set NODEJS_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64
-set PATH=%PATH%;%NODEJS_HOME%
-set NODEJS_GLOBAL_HOME=D:\Tools\WorkTool\NodeJs\node-v18.17.1-win-x64\node_global
-set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
-set GOROOT=D:\Tools\WorkTool\Go\go1.21.1.windows-amd64
-set GOPATH=D:\Tools\WorkTool\Go\go_global
-set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
+::WezTerm
 set WEZTERM_HOME=D:\Tools\WorkTool\Linux\WezTerm
 set PATH=%PATH%;%WEZTERM_HOME%
+::Sqlite
 set SQLITE3_HOME=D:\Tools\WorkTool\DB\Sqlite3
 set PATH=%PATH%;%SQLITE3_HOME%
+::Gobang
 set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
 set PATH=%PATH%;%GOBANG_HOME%
+::gRPC
 set PROTOC_HOME=D:\Tools\WorkTool\Go\protoc-25.0-win64
 set PATH=%PATH%;%PROTOC_HOME%\bin
 set PROTOC_JAVASCRIPT_HOME=D:\Tools\WorkTool\Go\protobuf-javascript-3.21.2-win64
 set PATH=%PATH%;%PROTOC_JAVASCRIPT_HOME%\bin
-set REDIS_HOME=D:\Tools\WorkTool\DB\Redis\Redis-x64-5.0.14.1
+::Redis
+set REDIS_HOME=D:\Tools\WorkTool\DB\Redis-x64-5.0.14.1
 set PATH=%PATH%;%REDIS_HOME%
+::Etcd
+set ETCDCTL_API=3
+set ENDPOINTS=localhost:2379
+set ETCD_HOME=D:\Tools\WorkTool\DB\etcd-v3.5.15-windows-amd64
+set PATH=%PATH%;%ETCD_HOME%
+::7-Zip
 set ZIP7_HOME=C:\Program Files\7-Zip
 set PATH=%PATH%;%ZIP7_HOME%
-set DOCKER_HOME=D:\Tools\WorkTool\Container\docker
-set PATH=%PATH%;%DOCKER_HOME%
+::Docker
+::set DOCKER_HOME=D:\Tools\WorkTool\Container\docker
+::set PATH=%PATH%;%DOCKER_HOME%
+::set DOCKER_HOST=tcp://localhost:3101
 ::echo 环境变量载入完成
 echo Environment Variable Setting Complited
 

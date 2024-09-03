@@ -4,23 +4,37 @@ using Etcdserverpb;
 using Google.Protobuf;
 using V3Lockpb;
 using Grpc.Core;
-
+using Microsoft.Extensions.Configuration;
 
 namespace dotnet_console_sample.Etcd
 {
 	class EtcdClientExample
 	{
-		private EtcdClient client = null;
+		// appsettings.json 和 环境变量
+		private readonly IConfiguration _config;
+		private EtcdClient client;
 		private readonly string prefix = "/CSharpKey";
+
+		public EtcdClientExample(IConfiguration config)
+		{
+			_config = config;
+		}
 
 		public void EtcdClient()
 		{
+			// 从 appsettings.json 中读取内容
+			string? host = _config["EtcdSettings:Host"];
+			string? portStr = _config["EtcdSettings:Port"];
+			//Log.Information("Etcd   Host:{host} Port:{portStr}", host, portStr);
+
 			// 建立连接
+			string endPoints = "http://" + host + ":" + portStr;
+			Log.Information("Etcd   EndPoints:{EndPoints}", endPoints);
 			// .Net Framework 用法
 			//EtcdClient etcdClient = new EtcdClient("https://localhost:23790,https://localhost:23791,https://localhost:23792");
 			// client = new EtcdClient("http://localhost:2379");
 			// .Net Core 用法
-			client = new EtcdClient("http://localhost:2379", configureChannelOptions: (options =>
+			client = new EtcdClient(endPoints, configureChannelOptions: (options =>
 			{
 				options.Credentials = ChannelCredentials.Insecure;
 			}));
@@ -78,6 +92,9 @@ namespace dotnet_console_sample.Etcd
 
 			// 调用租约函数
 			LeaseRegister();
+
+			// 释放Etcd资源
+			client.Dispose();
 
 			// Console.WriteLine("按任意键继续");
 			// Console.ReadKey();

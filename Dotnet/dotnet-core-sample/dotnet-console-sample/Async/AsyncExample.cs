@@ -1,9 +1,18 @@
 using Serilog;
+using Microsoft.Extensions.Configuration;
 
 namespace dotnet_console_sample.Async
 {
 	class AsyncExample
 	{
+		// appsettings.json 和 环境变量
+		private readonly IConfiguration _config;
+
+		public AsyncExample(IConfiguration config)
+		{
+			_config = config;
+		}
+
 		// 异步函数
 		async Task<string> DoSomethingAsync(int value)
 		{
@@ -25,13 +34,26 @@ namespace dotnet_console_sample.Async
 		public async Task AsyncExampleStart()
 		{
 			Log.Information("AsyncExampleStart开始!!!");
+			// 从 appsettings.json 中读取内容
+			int threadCount = 5;
+			string? threadCountStr = _config["AsyncSettings:Thread.Count"];
+			try
+			{
+				threadCount = int.Parse(threadCountStr!);
+			}
+			catch (Exception)
+			{
+				threadCount = 5;
+			}
+			Log.Information("线程数量为: {ThreadCount}", threadCount);
+
 			// 堵塞，等待调用结果
 			//string result = await DoSomethingAsync(1);
 			// 不堵塞，不等待结果直接继续运行
 			//Task<string> result = DoSomethingAsync(1);
 			// 不堵塞，不等待结果直接继续运行（多次循环调用）
 			var taskList = new List<Task>();
-			for (int i = 1; i <= 5; i++)
+			for (int i = 1; i <= threadCount; i++)
 			{
 				var task = DoSomethingAsync(i);
 				// 设定回调方法（方式1），因为是不堵塞调用所以会发生CS4014警告，使用丢弃变量可以屏蔽警告

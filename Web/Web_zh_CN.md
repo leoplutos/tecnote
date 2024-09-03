@@ -1,5 +1,19 @@
 # Web相关
 
+## Web Framework性能对比
+https://www.techempower.com/benchmarks/#section=data-r22&hw=ph&test=composite
+
+### 2023-10-17(Round 22) 结果
+- 10.axum（Rust）
+- 13.actix（Rust）
+- 15.asp.net core（C#）
+- 78.gin（Golang）
+- 86.fastapi（Python）
+- 88.spring（Java）
+- 102.fastify（NodeJs）
+
+**NOTE**: ``Sanic``（Python）没有上榜，估计是没有提交测试，在 [这里](https://klen.github.io/py-frameworks-bench/) 的对比中可以看到是比fastapi快的
+
 ## CSS 开源 UI 框架 - Pico.css
 
 #### Pico.css 框架的特点

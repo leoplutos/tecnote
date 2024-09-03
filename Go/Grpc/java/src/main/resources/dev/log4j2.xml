@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- dev -->
 <!-- status="warn" 日志框架本身的输出日志级别，可以修改为debug monitorInterval="5" 自动加载配置文件的间隔时间，不低于 5秒；生产环境中修改配置文件，是热更新，无需重启应用
  -->
 <configuration status="warn" monitorInterval="5">
@@ -22,7 +21,7 @@
 		<!-- 日志文件输出 appender -->
 		<!--
         <File name="file" fileName="${LOG_HOME}/myfile.log">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level][%t] %l %c{36} - %m%n" />
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level][%tid] %l %c{36} - %m%n" />
         </File>
         -->
 
@@ -48,18 +47,21 @@
         </RollingFile>
         -->
 
-		<!-- 异步日志 -->
-		<Async name="Async">
-			<AppenderRef ref="Console"/>
-		</Async>
 	</Appenders>
 
 	<!-- logger 定义 -->
 	<Loggers>
+		<!-- 过滤io.netty的日志 -->
+		<Logger name="io.netty" level="warn" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="io.grpc.netty" level="warn" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
 		<!-- 使用 rootLogger 配置 日志级别 level="trace" -->
-		<Root level="info">
+		<Root level="debug">
 			<!-- 指定日志使用的处理器 -->
-			<AppenderRef ref="Async" />
+			<AppenderRef ref="Console" />
 			<!--<AppenderRef ref="file" />-->
 			<!--<AppenderRef ref="rollingFile" />-->
 			<!--<AppenderRef ref="accessFile" />-->

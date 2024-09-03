@@ -1,12 +1,34 @@
 using Serilog;
 using StackExchange.Redis;
+using Microsoft.Extensions.Configuration;
 
 namespace dotnet_console_sample.Redis
 {
 	class RedisClientExample
 	{
+		// appsettings.json 和 环境变量
+		private readonly IConfiguration _config;
+
+		public RedisClientExample(IConfiguration config)
+		{
+			_config = config;
+		}
+
 		public void RedisClient()
 		{
+			string? host = _config["RedisSettings:Host"];
+			string? portStr = _config["RedisSettings:Port"];
+			int port;
+			try
+			{
+				port = int.Parse(portStr!);
+			}
+			catch (Exception)
+			{
+				port = 2379;
+			}
+			Log.Information("Redis   Host:{host} Port:{port}", host, port);
+
 			// 连接参数
 			ConfigurationOptions config = new ConfigurationOptions
 			{
@@ -17,7 +39,7 @@ namespace dotnet_console_sample.Redis
 			// .Net Framework 用法
 			//config.get_EndPoints().Add("localhost", 6379);
 			// .Net Core 用法
-			config.EndPoints.Add("localhost", 6379);
+			config.EndPoints.Add(host!, port);
 
 			// 建立连接
 			// ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");

@@ -1,11 +1,9 @@
 package javagrpc.service;
 
-import java.util.LinkedHashMap;
 import java.util.UUID;
-
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import io.grpc.stub.StreamObserver;
 import javagrpc.grpc.stub.ProductInfoGrpc.ProductInfoImplBase;
 import javagrpc.grpc.stub.ProductInfoPb.Product;
@@ -17,13 +15,21 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 
 	// log4j2日志
 	protected static final Logger log = LogManager.getLogger();
+	// 服务器启动的端口
+	private final int port;
+
+	// 带服务端端口号的构造函数
+	public ProductServiceImpl(int port) {
+		this.port = port;
+	}
 
 	// 添加Product
 	@Override
 	public void addProduct(Product request, StreamObserver<ProductId> responseObserver) {
 		UUID uuid = UUID.randomUUID();
+		String pid = uuid.toString() + " | ServerPort: " + String.valueOf(this.port);
 		Product info = Product.newBuilder()
-				.setId(uuid.toString())
+				.setId(pid)
 				.setName(request.getName())
 				.setDescription(request.getDescription())
 				.build();
@@ -32,7 +38,7 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 		log.info("[Java][Server] AddProduct success. id: {}, name: {}, description: {}", info.getId(),
 				info.getName(), info.getDescription());
 
-		ProductId id = ProductId.newBuilder().setValue(uuid.toString()).build();
+		ProductId id = ProductId.newBuilder().setValue(pid).build();
 		try {
 			// 模拟长时间运行的任务，例如网络请求或数据库查询
 			Thread.sleep(2000);
@@ -47,7 +53,7 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 	@Override
 	public void getProduct(ProductId request, StreamObserver<Product> responseObserver) {
 		if (ServerMain.productMap == null) {
-			ServerMain.productMap = new LinkedHashMap<String, Product>();
+			ServerMain.productMap = new ConcurrentHashMap<String, Product>();
 		}
 		Product respon = ServerMain.productMap.get(request.getValue());
 		if (respon == null) {

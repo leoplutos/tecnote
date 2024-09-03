@@ -163,6 +163,7 @@
 			<version>6.0.53</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- log4j2依赖 -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
@@ -173,6 +174,18 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.23.1</version>
+		</dependency>
+		<!-- log4j2和slf4j桥接依赖-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.23.1</version>
+		</dependency>
+		<!-- jetcd依赖 -->
+		<dependency>
+			<groupId>io.etcd</groupId>
+			<artifactId>jetcd-core</artifactId>
+			<version>0.8.3</version>
 		</dependency>
 		<!-- Apache Commons Config依赖 -->
 		<dependency>

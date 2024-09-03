@@ -66,6 +66,6 @@ mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=
 
 启动服务命令
 ```
-set JAVA_TOOL_OPTIONS=-Duser.language=en -Dfile.encoding=UTF-8 -Dgrpc.port=50051
+set JAVA_TOOL_OPTIONS=-Duser.language=en -Dfile.encoding=UTF-8
 java -jar javagrpc-1.0.jar
 ```

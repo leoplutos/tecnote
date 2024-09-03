@@ -10,13 +10,25 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="dotnet-etcd" Version="7.1.1" />
-	  <PackageReference Include="Serilog" Version="4.0.1" />
-	  <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
-	  <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
-	  <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-	  <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-	  <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
+		<PackageReference Include="dotnet-etcd" Version="7.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.json" Version="8.0.0" />
+		<PackageReference Include="Serilog" Version="4.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.8.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="appsettings.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

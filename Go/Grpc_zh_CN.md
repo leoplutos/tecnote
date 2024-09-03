@@ -42,41 +42,6 @@ RPC，全称 Remote Procedure Call，中文译为远程过程调用。通俗地�
 C语言弄环境有些麻烦，笔者偷懒没有写例子，可以了解一下这两个仓库 [Juniper-grpc-c](https://github.com/Juniper/grpc-c) 和 [lixiangyun-grpc-c](https://github.com/lixiangyun/grpc-c)
 
 **代码**在 [这里](./Grpc)  
-文件数结构如下
-```
-Grpc
-│   ProductInfo.proto
-├───go
-│   │   .root
-│   │   go.mod
-│   │   go.sum
-│   └───product
-│       ├───client
-│       │       main.go
-│       └───server
-│               main.go
-├───java
-│   │   .root
-│   │   pom.xml
-│   └───src
-│       └───main
-│           └───java
-│               └───javagrpc
-│                       ClientMain.java
-│                       ServerMain.java
-├───python
-│       .root
-│       client.py
-│       server.py
-└───rust
-    │   .root
-    │   build.rs
-    │   Cargo.toml
-    └───src
-            client.rs
-            main.rs
-            server.rs
-```
 
 ### 安装 protobuf
 
@@ -121,7 +86,7 @@ protoc --version
 ### 编写 proto 文件 (定义IDL)
 所有语言使用同一个定义文件，在工程根路径下，文件名： ``ProductInfo.proto``
 
-### Go语言设置
+## Go语言示例
 
 官方 [Github](https://github.com/grpc/grpc-go) 仓库
 
@@ -169,7 +134,7 @@ go build -o ./bin/server.exe ./product/server/main.go
 go build -o ./bin/client.exe ./product/client/main.go
 ```
 
-### Python语言设置
+## Python语言示例
 
 官方 [Github](https://github.com/grpc/grpc/tree/master/src/python/grpcio) 仓库
 
@@ -201,7 +166,7 @@ python client.py
 一个Python的负载均衡实现  
 https://github.com/flagman/grpc-load-balancer
 
-### Java语言设置（已实现客户端负载均衡）
+## Java语言示例（已实现客户端负载均衡）
 
 官方 [Github](https://github.com/grpc/grpc-java) 仓库
 
@@ -212,7 +177,7 @@ https://github.com/flagman/grpc-load-balancer
  - xxxFutureStub：批量式（可同步可异步，基于 Future-Listener 机制）
  - xxxStub：异步（基于 Reactive 的响应式编程模式）
 
-##### 不同 stub 支持的模式
+#### 不同 stub 支持的模式
 | name            | 描述      | 1v1 | 1vN | Nv1 | NvN |
 |-----------------|-----------|-----|-----|-----|-----|
 | xxxBlockingStub | 同步/阻塞 | ✔   | ✔   | ❌   | ❌   |
@@ -267,13 +232,13 @@ protoc --java_out=./java/src/main/java ProductInfo.proto
 protoc --plugin=protoc-gen-grpc-java=D:/Tools/WorkTool/Go/protoc-25.0-win64/bin/protoc-gen-grpc-java-1.59.0-windows-x86_64.exe --grpc-java_out=./java/src/main/java ProductInfo.proto
 ```
 
-###### 下面这个仓库有很多示例
+#### 下面这个仓库有很多示例
 https://github.com/saturnism/grpc-by-example-java
 
 #### Java中和SpringBoot集成
 可以参考 [这里](https://zhuanlan.zhihu.com/p/464658805) 的 ``方式二``
 
-### Rust语言设置
+## Rust语言示例
 
 需要Rust版本大于 ``1.39``  
 这里主要使用 ``tonic`` [Github地址](https://github.com/hyperium/tonic)&nbsp;&nbsp;[Crate地址](https://docs.rs/tonic/latest/tonic/)  
@@ -297,7 +262,7 @@ cd D:\WorkSpace\Grpc\rust
 #运行客户端
 cargo run --bin rustclient
 ```
-### TypScript语言+Node.js设置
+## TypScript语言+Node.js示例
 
 官方 [Github](https://github.com/grpc/grpc-node) 仓库
 
@@ -310,7 +275,7 @@ cargo run --bin rustclient
 
 笔者觉得动态加载版本比较简单一些，推荐使用
 
-#### 静态编译版本
+### 静态编译版本
 安装所需构筑工具和第三方库
 ```
 cd D:\WorkSpace\Grpc\node
@@ -340,7 +305,7 @@ cd D:\WorkSpace\Grpc\node
 npm run client
 ```
 
-#### 动态加载版本
+### 动态加载版本
 安装所需第三方库
 ```
 cd D:\WorkSpace\Grpc\node_dynamic
@@ -361,7 +326,7 @@ cd D:\WorkSpace\Grpc\node_dynamic
 npm run client
 ```
 
-### C#
+## C#语言示例
 
 目前，在.NET上有两种官方实现
 - [Grpc.Core](https://github.com/grpc/grpc/tree/v1.46.x/src/csharp/) ：这个是原来的gRPC C#库，它基于原生gPRC（C-Core）核心库实现，已经进入到了维护模式
@@ -369,15 +334,67 @@ npm run client
 
 如果是新项目，推荐用后者；如果是老项目（比如还在用.netframework的老项目），可以考虑用前者。在 Grpc.Examples 文件夹下可以找到示例
 
-#### 旧版 .net Framework 示例（已实现客户端负载均衡）
+### 新版 .NET Core 示例
 
-##### 项目说明
+#### 项目说明
+- netcore - 主工程（.NET Core 8）
+    - netcoreServer - 服务端（grpc-dotnet实现）
+    - netcoreClient - 客户端（grpc-dotnet实现，异步式和阻塞式都有）
+
+创建命令
+```bash
+cd D:\WorkSpace\Grpc
+mkdir netcore
+cd netcore
+# 创建sln文件
+dotnet new sln -n netcore
+# 创建服务端项目
+dotnet new grpc -o netcoreServer --framework net8.0
+# 创建客户端项目
+dotnet new console -o netcoreClient --framework net8.0
+# 将项目添加到解决方案
+dotnet sln add netcoreServer/netcoreServer.csproj
+dotnet sln add netcoreClient/netcoreClient.csproj
+# 添加服务端依赖（无）
+# 添加客户端依赖
+cd netcoreClient
+dotnet add package Grpc.Net.Client
+dotnet add package Google.Protobuf
+dotnet add package Grpc.Tools
+cd ..
+# 运行服务端
+dotnet run --project netcoreServer
+# 运行客户端
+dotnet run --project netcoreClient -- Sync
+dotnet run --project netcoreClient -- Async
+```
+
+或者下载笔者的工程后运行命令
+```bash
+cd D:\WorkSpace\Grpc\netcore
+# 运行服务端
+dotnet run --project netcoreServer
+# 运行客户端
+dotnet run --project netcoreClient -- Sync
+dotnet run --project netcoreClient -- Async
+```
+
+#### 微软官方的教程
+微软官方的示例写的很好，直接看 [这里](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio) 即可
+
+#### 官方例子
+这里也有例子  
+https://github.com/grpc/grpc-dotnet/tree/master/examples
+
+### 旧版 .NET Framework 示例（已实现客户端负载均衡）
+
+#### 项目说明
 - netframework - 主工程（.NET Framework 4.8）
     - netframeworkServer - 服务端（Grpc.Core实现）
     - netframeworkClient - 客户端（Grpc.Core实现，阻塞式，有客户端负载均衡）
     - netframeworkClientAsync - 客户端（Grpc.Core实现，异步式，有客户端负载均衡）
 
-##### 工程创建方式（Grpc.Core实现）
+#### 工程创建方式（Grpc.Core实现）
 1. 参考 [这里](../Dotnet/Dotnet_zh_CN.md) 安装 ``Visual Studio Express 2017``
 2. 使用 VS 打开 [netframework](./Grpc/netframework/) 工程
 3. 鼠标右键 -> ``管理 NuGet 程序包`` -> 将 [Grpc](https://www.nuget.org/packages/Grpc/) 添加为依赖项
@@ -394,23 +411,17 @@ npm run client
 **Note2**：可以在 ``解决方案资源管理器`` 中右键 -> ``还原 NuGet 包`` 以随时还原包
 
 
-##### 关于.Net Framework工程中使用grpc-dotnet实现
+#### 关于.Net Framework工程中使用grpc-dotnet实现
 在 [微软官方网站](https://learn.microsoft.com/zh-cn/aspnet/core/grpc/netstandard?view=aspnetcore-8.0#net-framework) 有前提说明
 因为需要 ``Wndows 11 +``，所以笔者测试报错了，结论就是老老实实用 ``Grpc.Core`` 实现吧
 ```
 System.InvalidOperationException: The channel configuration isn't valid on this operating system. The channel is configured to use WinHttpHandler and the current version of Windows doesn't support HTTP/2 features required by gRPC. Windows Server 2022 or Windows 11 or later is required. For more information, see https://aka.ms/aspnet/grpc/netframework.
 ```
 
-###### 下面这个仓库有很多示例
+#### 下面这个仓库有很多示例
 https://github.com/wicharypawel/net-core-grpc-load-balance
 
-#### 新版 .net Core 示例
-微软官方的示例写的很好，直接看 [这里](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio) 即可
-
-这里也有例子  
-https://github.com/grpc/grpc-dotnet/tree/master/examples
-
-### 关于Web方面
+## 关于Web方面
 gRPC原本设想是在纯后端使用的，由于浏览器的限制，不能直接从浏览器发送gRPC请求到后端。如果真的有这种需求的话，有两种对应方法
 
 #### 方式1
@@ -511,7 +522,6 @@ OpenTelemetry 也提供了SDK为各个框架提供支持，[这里](https://gith
 4. 访问 Jaeger UI   ``http://localhost:16686/`` 即可看到数据
 
 原理就是我们自己写的程序会向 ``jaeger`` 进程 ``http://localhost:4318/`` 访问，发布监控数据
-
 
 ## awesome-grpc
 https://github.com/grpc-ecosystem/awesome-grpc

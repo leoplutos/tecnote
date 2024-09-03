@@ -39,6 +39,7 @@
 * [前后端分离-后端Sanic](Framework/Backend_Python_Sanic_zh_CN.md)
 * [前后端分离-后端Gin](Framework/Backend_Golang_Gin_zh_CN.md)
 * [前后端分离-后端Actix-Web](Framework/Backend_Rust_ActixWeb_zh_CN.md)
+* [前后端分离-后端.NET Core](Framework/Backend_Dotnet_Webapi_zh_CN.md)
 * [前后端分离-后端Fastify](Framework/Backend_Node_Fastify_zh_CN.md)
 
 ## Rust相关
@@ -66,6 +67,7 @@
 ## Google/Golang相关
 * [Golang相关](Go/Go_zh_CN.md)
 * [gRPC](Go/Grpc_zh_CN.md)
+* [gRPC服务发现](Go/Grpc_Resolver_zh_CN.md)
 * [Golang-Web框架-Gin](Go/Go-Gin_zh_CN.md)
 
 ## Java/Kotlin相关
@@ -98,6 +100,7 @@
 * [Docker实战-Python篇](Container/Docker-Python_zh_CN.md)
 * [Docker实战-Go篇](Container/Docker-Go_zh_CN.md)
 * [Docker实战-Rust篇](Container/Docker-Rust_zh_CN.md)
+* [Docker实战-Dotnet篇](Container/Docker-Dotnet_zh_CN.md)
 * [Docker实战-NodeJs篇](Container/Docker-Nodejs_zh_CN.md)
 * [Docker实战-Vue篇](Container/Docker-Vue_zh_CN.md)
 * [Docker容器编排-Docker-Compose](Container/Docker-Compose_zh_CN.md)

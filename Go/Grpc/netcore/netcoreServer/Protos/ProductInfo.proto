@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+//proto文件的命名空间-grpc_demo
+package grpc_demo;
+
+//Go代码生成的包空间-product
+option go_package = "go/product";
+//Java代码类的包名
+//option java_package = "src.main.java.javagrpc";
+option java_package = "javagrpc";
+//Java代码类的文件名，否则默认生成的类名为proto文件名的驼峰命名
+option java_outer_classname = "ProductInfoPb";
+// 定义的所有消息、枚举和服务生成对应的多个类文件，而不是以内部类的形式出现
+option java_multiple_files = false;
+
+service ProductInfo {
+    // 添加商品
+    rpc addProduct(Product) returns (ProductId);
+    // 获取商品
+    rpc getProduct(ProductId) returns (Product);
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message ProductId {
+    string value = 1;
+}

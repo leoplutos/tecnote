@@ -4,28 +4,31 @@ import io.grpc.ClientInterceptor;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.NameResolver;
 import io.grpc.NameResolverRegistry;
 import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.health.v1.HealthCheckResponse;
 import io.grpc.health.v1.HealthGrpc;
 import io.grpc.stub.StreamObserver;
 import io.opentelemetry.api.OpenTelemetry;
-import javagrpc.grpc.lb.MultiAddressNameResolverProvider;
+import javagrpc.common.Const;
+import javagrpc.grpc.lb.EtcdNameResolverProvider;
+import javagrpc.grpc.lb.MultiAddressNameResolverFactory;
 import javagrpc.grpc.stub.ProductInfoGrpc;
 import javagrpc.grpc.stub.ProductInfoPb;
 import javagrpc.grpc.stub.ProductInfoPb.Product;
 import javagrpc.grpc.stub.ProductInfoPb.ProductId;
 import javagrpc.opentelemetry.OpentelemetryConfig;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import javagrpc.util.Config;
+import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
+import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,25 +47,57 @@ public class ClientAsyncMain {
 	private final HealthGrpc.HealthStub healthStub;
 	private final HealthCheckRequest healthRequest;
 
-	public ClientAsyncMain() {
+	static {
+		// 设定vertx的默认日志
+		// System.setProperty("vertx.logger-delegate-factory-class-name",
+		// "io.vertx.core.logging.Log4j2LogDelegateFactory");
+		// 禁用vertx缓存目录，不然在Maven运行结束时会报错
+		// https://github.com/vert-x3/issues/issues/288
+		System.setProperty("vertx.disableFileCPResolving", "true");
+		System.setProperty("vertx.disableFileCaching", "true");
+	}
 
-		// 使用负责均衡器的例子
-		NameResolverRegistry.getDefaultRegistry().register(new MultiAddressNameResolverProvider());
-		String target = String.format("%s:///%s", MultiAddressNameResolverProvider.MultiAddressScheme,
-				MultiAddressNameResolverProvider.MultiAddressServiceName);
-		// 对于回调，gRPC 使用缓存线程池，该线程池根据需要创建新线程，但在以前构建的线程可用时会重用它们。如果需要，可以将线程池作为
-		executorService = Executors.newFixedThreadPool(10);
+	@SuppressWarnings("deprecation")
+	public ClientAsyncMain(boolean isWithEtcd) {
 		// OpenTelemetry监测的拦截器
 		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
 		ClientInterceptor otelClientInterceptor = OpentelemetryConfig.getClientInterceptor(openTelemetry);
-		// 建立gRPC通道
-		channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
-				.defaultLoadBalancingPolicy("round_robin")
-				.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
-				.executor(executorService)
-				// .usePlaintext()
-				.intercept(otelClientInterceptor) // 添加otel拦截器
-				.build();
+		// 对于回调，gRPC 使用缓存线程池，该线程池根据需要创建新线程，但在以前构建的线程可用时会重用它们。如果需要，可以将线程池作为
+		executorService = Executors.newFixedThreadPool(10);
+
+		if (isWithEtcd) {
+			// 使用Etcd的服务注册
+
+			// 注册Etcd服务发现
+			NameResolverRegistry.getDefaultRegistry().register(new EtcdNameResolverProvider());
+			// 服务发现URI
+			String channelTarget = Const.CHANNEL_TARGET;
+			log.info("[Java][Client] gRPC channelTarget: {}", channelTarget);
+
+			// 连接频道
+			channel = Grpc.newChannelBuilder(channelTarget, InsecureChannelCredentials.create())
+					.defaultLoadBalancingPolicy("round_robin")
+					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
+					.intercept(otelClientInterceptor) // 添加otel拦截器
+					.executor(executorService)
+					// .usePlaintext()
+					.build();
+		} else {
+			// 使用固定IP
+			NameResolver.Factory nameResolverFactory = new MultiAddressNameResolverFactory(
+					new InetSocketAddress("127.0.0.1", 50051),
+					new InetSocketAddress("127.0.0.1", 50052),
+					new InetSocketAddress("127.0.0.1", 50053),
+					new InetSocketAddress("127.0.0.1", 50054));
+			channel = ManagedChannelBuilder.forTarget("")
+					.nameResolverFactory(nameResolverFactory) // 此方法已废弃
+					.defaultLoadBalancingPolicy("round_robin")
+					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
+					.intercept(otelClientInterceptor) // 添加otel拦截器
+					.executor(executorService)
+					.usePlaintext()
+					.build();
+		}
 
 		// HealthCheck服务的请求
 		healthRequest = HealthCheckRequest.getDefaultInstance();
@@ -105,8 +140,8 @@ public class ClientAsyncMain {
 			@Override
 			public void onNext(ProductId productId) {
 				task.complete(productId);
-				String addId = productId.getValue();
-				log.info("[Java][Client] Add product success. id: {}", addId);
+				//String addId = productId.getValue();
+				//log.info("[Java][Client] Add product success. id: {}", addId);
 			}
 		});
 		return task;
@@ -139,33 +174,55 @@ public class ClientAsyncMain {
 		return task;
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws Exception {
 		log.info("ClientMainAsync 开始");
 
-		ClientAsyncMain clientAsync = new ClientAsyncMain();
+		// 读取 properties 和 环境变量
+		Configuration config = Config.getInstance();
+		// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
+		String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
+		boolean isWithEtcd = false;
+		if ("true".equals(resolve)) {
+			isWithEtcd = true;
+		}
+		log.info("[Java][Client] 是否启用Etcd服务发现: {}", isWithEtcd);
+
+		ClientAsyncMain clientAsync = new ClientAsyncMain(isWithEtcd);
 
 		// 不堵塞，不等待结果直接继续运行（多次循环调用）
-		List<CompletableFuture<?>> taskList = new ArrayList<CompletableFuture<?>>();
+		// List<CompletableFuture<?>> taskList = new
+		// CopyOnWriteArrayList<CompletableFuture<?>>();
 
-		for (int i = 0; i < 5; i++) {
+		// for (int i = 0; i < 500; i++) {
+		// // 异步服务调用
+		// CompletableFuture<ProductId> task1 = clientAsync.addProductAsync("Mac Book
+		// Pro 2021", "Add by Java");
+		// taskList.add(task1);
+
+		// // 异步服务调用
+		// CompletableFuture<Product> task2 = clientAsync.getProductAsync("123");
+		// taskList.add(task2);
+		// }
+
+		// // 检查服务状态
+		// CompletableFuture<HealthCheckResponse> healthTask =
+		// clientAsync.checkHealthAsync();
+		// taskList.add(healthTask);
+
+		// log.info("ClientMainAsync 结束");
+
+		// // 有多个task时使用allOf(completableFutures).join()来等待所有子线程结束
+		// CompletableFuture.allOf(taskList.toArray(CompletableFuture[]::new))
+		// // .whenComplete((v, th) -> {System.out.println("所有子任务执行完成!!!");})
+		// .join();
+
+		for (int i = 0; i < 500; i++) {
 			// 异步服务调用
-			CompletableFuture<ProductId> task1 = clientAsync.addProductAsync("Mac Book Pro 2021", "Add by Java");
-			taskList.add(task1);
-			// 异步服务调用
-			CompletableFuture<Product> task2 = clientAsync.getProductAsync("123");
-			taskList.add(task2);
+			ProductId pid = clientAsync.addProductAsync("Mac Book Pro 2021", "Add by Java").get();
+			log.info("[Java][Client] Add product success. id: {}", pid.getValue());
 		}
-
 		// 检查服务状态
-		CompletableFuture<HealthCheckResponse> healthTask = clientAsync.checkHealthAsync();
-		taskList.add(healthTask);
-
-		log.info("ClientMainAsync 结束");
-
-		// 有多个task时使用allOf(completableFutures).join()来等待所有子线程结束
-		CompletableFuture.allOf(taskList.toArray(CompletableFuture[]::new))
-				// .whenComplete((v, th) -> {System.out.println("所有子任务执行完成!!!");})
-				.join();
+		clientAsync.checkHealthAsync().get();
 
 		// 关闭连接
 		clientAsync.shutdown();
@@ -195,8 +252,8 @@ public class ClientAsyncMain {
 	}
 
 	private static Map<String, Object> generateHealthConfig(String serviceName) {
-		Map<String, Object> config = new HashMap<>();
-		Map<String, Object> serviceMap = new HashMap<>();
+		Map<String, Object> config = new ConcurrentHashMap<>();
+		Map<String, Object> serviceMap = new ConcurrentHashMap<>();
 
 		config.put("healthCheckConfig", serviceMap);
 		serviceMap.put("serviceName", serviceName);

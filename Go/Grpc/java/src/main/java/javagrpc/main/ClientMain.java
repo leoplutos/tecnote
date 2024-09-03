@@ -5,22 +5,27 @@ import io.grpc.ClientInterceptor;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.NameResolver;
 import io.grpc.NameResolverRegistry;
 import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.health.v1.HealthCheckResponse;
 import io.grpc.health.v1.HealthCheckResponse.ServingStatus;
 import io.grpc.health.v1.HealthGrpc;
 import io.opentelemetry.api.OpenTelemetry;
-import javagrpc.grpc.lb.MultiAddressNameResolverProvider;
+import javagrpc.common.Const;
+import javagrpc.grpc.lb.EtcdNameResolverProvider;
+import javagrpc.grpc.lb.MultiAddressNameResolverFactory;
 import javagrpc.grpc.stub.ProductInfoGrpc;
 import javagrpc.grpc.stub.ProductInfoPb.Product;
 import javagrpc.grpc.stub.ProductInfoPb.ProductId;
 import javagrpc.opentelemetry.OpentelemetryConfig;
-
-import java.util.HashMap;
+import javagrpc.util.Config;
+import java.net.InetSocketAddress;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-
+import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +33,6 @@ public class ClientMain {
 
 	// log4j2日志
 	protected static final Logger log = LogManager.getLogger();
-
 	// 远程连接管理器,管理连接的生命周期
 	private final ManagedChannel channel;
 	// 业务请求客户端(阻塞同步存根)
@@ -37,41 +41,54 @@ public class ClientMain {
 	private final HealthGrpc.HealthBlockingStub healthBlockingStub;
 	private final HealthCheckRequest healthRequest;
 
-	public ClientMain() {
+	static {
+		// 设定vertx的默认日志
+		// System.setProperty("vertx.logger-delegate-factory-class-name",
+		// "io.vertx.core.logging.Log4j2LogDelegateFactory");
+		// 禁用vertx缓存目录，不然在Maven运行结束时会报错
+		// https://github.com/vert-x3/issues/issues/288
+		System.setProperty("vertx.disableFileCPResolving", "true");
+		System.setProperty("vertx.disableFileCaching", "true");
+	}
 
-		// 没有负载均衡器的例子
-		// String host = "127.0.0.1";
-		// int port = 50051;
-		// channel = ManagedChannelBuilder.forAddress(host,
-		// port).usePlaintext().build();
-		// 使用负责均衡器的例子(nameResolverFactory官方已弃用)
-		// NameResolver.Factory nameResolverFactory = new
-		// MultiAddressNameResolverFactory(
-		// new InetSocketAddress("127.0.0.1", 50051),
-		// new InetSocketAddress("127.0.0.1", 50052),
-		// new InetSocketAddress("127.0.0.1", 50053),
-		// new InetSocketAddress("127.0.0.1", 50054));
-		// channel = ManagedChannelBuilder.forTarget("service")
-		// .nameResolverFactory(nameResolverFactory)
-		// .defaultLoadBalancingPolicy("round_robin")
-		// .usePlaintext()
-		// .build();
-		// 使用负责均衡器的例子
-		NameResolverRegistry.getDefaultRegistry().register(new MultiAddressNameResolverProvider());
-		String target = String.format("%s:///%s", MultiAddressNameResolverProvider.MultiAddressScheme,
-				MultiAddressNameResolverProvider.MultiAddressServiceName);
+	@SuppressWarnings("deprecation")
+	public ClientMain(boolean isWithEtcd) {
+
 		// OpenTelemetry监测的拦截器
 		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
 		ClientInterceptor otelClientInterceptor = OpentelemetryConfig.getClientInterceptor(openTelemetry);
-		// channel =
-		// ManagedChannelBuilder.forTarget(target).defaultLoadBalancingPolicy("round_robin").usePlaintext()
-		// .build();
-		channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
-				.defaultLoadBalancingPolicy("round_robin")
-				.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
-				// .usePlaintext()
-				.intercept(otelClientInterceptor) // 添加otel拦截器
-				.build();
+
+		if (isWithEtcd) {
+			// 使用Etcd的服务注册
+
+			// 注册Etcd服务发现
+			NameResolverRegistry.getDefaultRegistry().register(new EtcdNameResolverProvider());
+			// 服务发现URI
+			String channelTarget = Const.CHANNEL_TARGET;
+			log.info("[Java][Client] gRPC channelTarget: {}", channelTarget);
+
+			// 连接频道
+			channel = Grpc.newChannelBuilder(channelTarget, InsecureChannelCredentials.create())
+					.defaultLoadBalancingPolicy("round_robin")
+					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
+					.intercept(otelClientInterceptor) // 添加otel拦截器
+					// .usePlaintext()
+					.build();
+		} else {
+			// 使用固定IP
+			NameResolver.Factory nameResolverFactory = new MultiAddressNameResolverFactory(
+					new InetSocketAddress("127.0.0.1", 50051),
+					new InetSocketAddress("127.0.0.1", 50052),
+					new InetSocketAddress("127.0.0.1", 50053),
+					new InetSocketAddress("127.0.0.1", 50054));
+			channel = ManagedChannelBuilder.forTarget("")
+					.nameResolverFactory(nameResolverFactory) // 此方法已废弃
+					.defaultLoadBalancingPolicy("round_robin")
+					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
+					.intercept(otelClientInterceptor) // 添加otel拦截器
+					.usePlaintext()
+					.build();
+		}
 
 		// HealthCheck服务的请求
 		healthRequest = HealthCheckRequest.getDefaultInstance();
@@ -108,20 +125,31 @@ public class ClientMain {
 		return response;
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws Exception {
 		log.info("ClientMain 开始");
 
-		ClientMain client = new ClientMain();
+		// 读取 properties 和 环境变量
+		Configuration config = Config.getInstance();
+		// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
+		String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
+		boolean isWithEtcd = false;
+		if ("true".equals(resolve)) {
+			isWithEtcd = true;
+		}
+		log.info("[Java][Client] 是否启用Etcd服务发现: {}", isWithEtcd);
 
-		for (int i = 0; i < 5; i++) {
+		ClientMain client = new ClientMain(isWithEtcd);
+
+		for (int i = 0; i < 500; i++) {
 			// 添加商品
 			String addId = client.addProduct("Mac Book Pro 2021", "Add by Java");
 			log.info("[Java][Client] Add product success. id: {}", addId);
 
 			// 取得商品
-			Product product = client.getProduct(addId);
-			log.info("[Java][Client] Get product success. id: {}, name: {}, description: {}", product.getId(),
-					product.getName(), product.getDescription());
+			// Product product = client.getProduct(addId);
+			// log.info("[Java][Client] Get product success. id: {}, name: {}, description:
+			// {}", product.getId(),
+			// product.getName(), product.getDescription());
 		}
 
 		// 检查服务状态
@@ -141,8 +169,8 @@ public class ClientMain {
 	}
 
 	private static Map<String, Object> generateHealthConfig(String serviceName) {
-		Map<String, Object> config = new HashMap<>();
-		Map<String, Object> serviceMap = new HashMap<>();
+		Map<String, Object> config = new ConcurrentHashMap<>();
+		Map<String, Object> serviceMap = new ConcurrentHashMap<>();
 
 		config.put("healthCheckConfig", serviceMap);
 		serviceMap.put("serviceName", serviceName);

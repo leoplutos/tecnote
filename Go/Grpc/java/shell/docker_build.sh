@@ -2,5 +2,5 @@
 
 cd ..
 echo "开始构建镜像"
-docker build -t java_gppc:1.0.0 -f ./shell/app_dockerfile .
+docker build -t java_grpc:1.0.0 -f ./shell/app_dockerfile .
 echo "成功构建镜像"

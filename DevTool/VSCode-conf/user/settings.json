@@ -834,7 +834,7 @@
 	//-----------------------------------------------"
 	"emmet.showSuggestionsAsSnippets": true, //显式弹出语法展开提示
 	"emmet.triggerExpansionOnTab": true, //在按 Tab 时会展开 Emmet 缩写
-	"editor.snippetSuggestions": "top", //将语法展开提示在提示列表中置顶
+	"editor.snippetSuggestions": "inline", //将语法展开提示在提示列表中置顶
 	"emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly", //emmet只显示标记语言和样式表的展开提示
 	"emmet.includeLanguages": {
 		//emmet能识别缩写语法的场景

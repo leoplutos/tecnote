@@ -97,7 +97,7 @@ docker exec -it {容器ID} /bin/ash
 ### 示例工程
 一个基于gRPC示例工程
 
- - [JavaGppc](../Go/Grpc/java/)
+ - [JavaGrpc](../Go/Grpc/java/)
 
      - /shell/docker_build.sh：制作docker镜像的shell
      - /shell/app_dockerfile：docker脚本（多阶段构建）
@@ -111,7 +111,7 @@ docker exec -it {容器ID} /bin/ash
 
 制作docker镜像
 ```
-cd ~/workspace/JavaGppc/shell
+cd ~/workspace/JavaGrpc/shell
 bash docker_build.sh
 ```
 镜像制作完毕可以用下的命令查看（``docker images`` 看的是镜像）
@@ -120,9 +120,14 @@ docker images
 ```
 
 ### 通过镜像启动容器
-启动容器（将容器内的50051端口映射到宿主机的50054）
-```
-docker run -itd -p 50054:50051 --name gppc_50054 java_gppc:1.0.0
+启动容器（将容器内的50051端口映射到宿主机的50051）
+```bash
+docker run -itd \
+  -p 50051:50051 \
+  -e "GRPC_SERVER_RESOLVE=false" \
+  -e "GRPC_SERVER_HTTP_PORTS=50051" \
+  --name grpc_50051 \
+  java_grpc:1.0.0
 ```
 
 启动后可以使用 [httpYac.http](../DevTool/httpYac.http) 中的 gRPC 客户端测试
