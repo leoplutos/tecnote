@@ -418,6 +418,14 @@ gradlew clean bootWar
 http://localhost:8081/SpringBootKotlin/hello  
 http://localhost:8081/SpringBootKotlin/hello?message=mytest  
 
+
+## 开启虚拟线程
+需要 Spring Boot 3.2 和 Java 21  
+``application.properties`` 中加入如下设定
+```
+spring.threads.virtual.enabled=true
+```
+
 ## 创建Java-Maven-Batch工程
 
 ### Spring Batch 简介

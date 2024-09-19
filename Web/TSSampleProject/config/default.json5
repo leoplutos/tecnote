@@ -1,0 +1,21 @@
+// 默认设定
+{
+	"hacker": true,
+	"name": "张三",
+	"age": 35,
+	"hobbies": [
+		"滑雪",
+		"乒乓球",
+		"编程"
+	],
+	"clothing": {
+		"jacket": "皮革",
+		"trousers": "牛仔裤"
+	},
+	"food": {
+		"breakfast": {
+			"main": "米饭",
+			"drink": "鸡蛋汤"
+		}
+	}
+}

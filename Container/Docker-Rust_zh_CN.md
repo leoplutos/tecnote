@@ -55,23 +55,25 @@ Docker 的镜像内容中，并非只是一个文件，而是有依赖关系的�
 将工程放到 ``~/workspace/`` 下（只需要 ``shell``文件夹，``src``文件夹和``Cargo.toml``文件）
 
 制作docker镜像
-```
+```bash
 cd ~/workspace/backend-actix-web/shell
 bash docker_build.sh
 ```
 镜像制作完毕可以用下的命令查看（``docker images`` 看的是镜像）
-```
+```bash
 docker images
 ```
 
 ### 通过镜像启动容器
 启动容器（将容器内的9501端口映射到宿主机的9503）
-```
+```bash
 docker run -itd -p 9503:9501 --name actix_web_9503 backend_actix_web:1.0.0
 
 # 启动失败时调试用
 # docker run -it --entrypoint /bin/bash backend_actix_web:1.0.0
 ```
+
+默认端口 ``9501``，可以用环境变量 ``RUST_HTTP_PORT`` 指定端口
 
 启动后可以访问  
 http://localhost:9503/  

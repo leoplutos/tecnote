@@ -81,6 +81,8 @@ docker run -itd \
   backend_aspwebapi:1.0.0
 ```
 
+默认端口 ``9501``，可以用环境变量 ``ASPNETCORE_HTTP_PORTS`` 指定端口
+
 启动后可以用命令确认
 ```bash
 curl -X POST http://localhost:9501/login
@@ -117,9 +119,11 @@ docker run -itd \
   dotnet_grpc:1.0.0
 ```
 
+默认端口 ``50051``，可以用环境变量 ``ASPNETCORE_HTTP_PORTS`` 指定端口
+
 启动后可以使用 [httpYac.http](../DevTool/httpYac.http) 中的 gRPC 客户端测试
 
-进入容器内查看信息（``docker ps`` 看的是容器）
-```
+进入容器内查看信息
+```bash
 docker exec -it {容器ID} /bin/bash
 ```

@@ -9,42 +9,93 @@
 			]
 		},
 		"env": { //自定义环境变量
-			"PATH": "${env:path};D:/Tools/WorkTool/NodeJs/node-v18.17.1-win-x64"
+			// 添加 bun
+			"PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64;D:/Tools/WorkTool/Web/node-v20.15.1-win-x64;"
 		}
 	},
 	"tasks": [
 		{
-			"label": "typescript_build",
-			"type": "typescript",
-			"tsconfig": "tsconfig.json",
-			"problemMatcher": [
-				"$tsc"
+			"label": "buf_generate",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"run",
+				"generate",
 			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
 			}
 		},
 		{
-			"type": "npm",
-			"script": "server",
-			"problemMatcher": [],
-			"label": "npm: server",
-			"detail": "node dist/node-server.js"
+			"label": "bun_build",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"run",
+				"build",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "bun x tsc -p tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
 		},
 		{
-			"type": "npm",
-			"script": "client",
-			"problemMatcher": [],
-			"label": "npm: client",
-			"detail": "node dist/node-client.js"
+			"label": "node_runServer",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"dist/server.js",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "node dist/server.js",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
 		},
 		{
-			"type": "npm",
-			"script": "tsc",
-			"problemMatcher": [],
-			"label": "npm: tsc",
-			"detail": "tsc -p tsconfig.json"
-		}
+			"label": "node_runClient",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"dist/client.js",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "node dist/client.js",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
 	]
 }

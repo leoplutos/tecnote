@@ -1,0 +1,70 @@
+# 多阶段构建
+
+# 阶段1：生成存根，命名为buf_generate
+# 使用buf工具链生成gRPC的存根
+FROM bufbuild/buf:latest AS buf_generate
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 将本地文件复制到镜像中
+COPY src /opt/app/PythonGrpc/src/
+COPY proto /opt/app/PythonGrpc/proto/
+COPY buf*.yaml /opt/app/PythonGrpc/
+COPY pyproject.toml /opt/app/PythonGrpc/
+
+# 设置工作目录
+WORKDIR /opt/app/PythonGrpc
+
+# 生成存根
+RUN buf generate
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+# Python 版本
+FROM python:3.12.5-alpine3.20
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 构建时变量，仅在构建Docker映像期间可用
+ARG registry=https://mirrors.aliyun.com/pypi/simple/
+
+# 设置环境变量
+ENV PYTHON_ENVIRONMENT=docker
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加bash
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash
+
+# 从阶段1复制
+COPY --from=buf_generate /opt/app/PythonGrpc/ /opt/app/PythonGrpc/
+
+# 安装 Poetry，开启缓存，加速下载依赖
+RUN --mount=type=cache,target=/root/.cache/pip pip install poetry -i $registry
+RUN poetry config virtualenvs.in-project true
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/PythonGrpc
+
+# 安装 Python 依赖，开启缓存，加速下载依赖
+RUN poetry install
+
+# 声明容器运行时监听的特定网络端口
+EXPOSE 50051
+
+# 指定容器创建时的默认命令
+# CMD ["poetry", "run", "python", "src/server.py"]

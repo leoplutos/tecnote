@@ -3,8 +3,8 @@ package controller
 import (
 	"BackendGin/src/common/response"
 	"BackendGin/src/entity"
+	"BackendGin/src/log"
 	"BackendGin/src/service"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -21,8 +21,7 @@ func Login(c *gin.Context) {
 	//获取json中的key,注意使用 . 访问
 	userId := login.Userid
 	password := login.Password
-	fmt.Println("请求Login处理成功")
-	fmt.Printf("Request Json userId:[%s]  password:[%s]\n", userId, password)
+	log.Logger.Info().Msgf("请求Login处理成功 userId:[%s]  password:[%s]\n", userId, password)
 	if userId == "" {
 		response.Fail(c, http.StatusBadRequest, "账号不能为空")
 		return

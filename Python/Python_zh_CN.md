@@ -84,7 +84,7 @@ python -m site
 # where python
 
 C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps\python.exe
-D:\Tools\Python312\python.exe
+D:\Tools\WorkTool\Python\Python312\python.exe
 ```
 那么可以如下设定  
 打开 ``设置`` → 在搜索处输入 ``alias`` → 选择 ``管理应用执行别名``  

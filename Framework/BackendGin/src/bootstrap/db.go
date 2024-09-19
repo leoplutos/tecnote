@@ -3,11 +3,12 @@ package bootstrap
 import (
 	"BackendGin/src/entity"
 	"BackendGin/src/global"
-	"fmt"
+	"BackendGin/src/log"
 	"github.com/hashicorp/go-memdb"
 )
 
 func InitializeDB() *memdb.MemDB {
+	log.Logger.Info().Msg("内存数据库初始化开始")
 	// 创建内存数据库 - 实例化 db scheme 对象
 	schema := &memdb.DBSchema{
 		Tables: map[string]*memdb.TableSchema{
@@ -91,10 +92,10 @@ func InitializeDBDate() {
 		}
 	}
 
-	fmt.Println("内存数据库初始化完成")
-
 	// 事务提交，完成写操作.
 	txn.Commit()
+
+	log.Logger.Info().Msg("内存数据库初始化结束")
 
 	// 数据确认用
 	/*
@@ -108,10 +109,10 @@ func InitializeDBDate() {
 			panic(err)
 		}
 
-		fmt.Println("All the login:")
+		log.Logger.Info().Msg("All the login:")
 		for obj := it.Next(); obj != nil; obj = it.Next() {
 			p := obj.(*entity.Login)
-			fmt.Printf("  %s  %s  \n", p.Userid, p.Password)
+			log.Logger.Info().Msgf("  %s  %s  \n", p.Userid, p.Password)
 		}
 
 		// 返回可以遍历数据的迭代器.
@@ -120,10 +121,10 @@ func InitializeDBDate() {
 			panic(err)
 		}
 
-		fmt.Println("All the todo:")
+		log.Logger.Info().Msg("All the todo:")
 		for obj := it.Next(); obj != nil; obj = it.Next() {
 			p := obj.(*entity.Todo)
-			fmt.Printf("  %d  %s  %s  %t  \n", p.Todoid, p.Todoname, p.Image, p.Studied)
+			log.Logger.Info().Msgf("  %d  %s  %s  %t  \n", p.Todoid, p.Todoname, p.Image, p.Studied)
 		}
 	*/
 }

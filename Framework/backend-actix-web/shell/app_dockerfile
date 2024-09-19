@@ -10,26 +10,30 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 使用alpine镜像编译的话，如果编译和运行的环境不一致，会报openssl的问题
-RUN apk add -q --update-cache --no-cache build-base openssl-dev cmake
+# 安装 编译器、标准库和 make 工具（build-base 相当于 Ubuntu 的 build-essentials）
+RUN apk add -q --update-cache --no-cache build-base
+# RUN apk add -q --update-cache --no-cache openssl-dev cmake
 
 # 在容器内部设置环境变量
-ENV RUSTFLAGS="-C target-feature=-crt-static"
+# RUSTFLAGS 在 Cargo.toml 中设定
 
 # 将本地文件复制到镜像中
 # 复制src文件夹
 COPY src /opt/app/backend-actix-web/src
+# 复制.cargo文件夹
+COPY .cargo /opt/app/backend-actix-web/.cargo
 # 复制Cargo.toml文件
 COPY Cargo.toml /opt/app/backend-actix-web/Cargo.toml
-# 复制config.toml文件到$CARGO_HOME（设置国内源）
-COPY ./shell/config.toml /usr/local/cargo/config.toml
 
 # 设置工作目录
 WORKDIR /opt/app/backend-actix-web
 
-# 编译工程
+# 开启缓存，编译工程
 RUN set -eux
-RUN cargo build --release
+RUN --mount=type=cache,target=/app/target/ \
+    --mount=type=cache,target=/usr/local/cargo/git/db \
+    --mount=type=cache,target=/usr/local/cargo/registry/ \
+    cargo build --release
 
 #---------------------------------------------------------------------
 
@@ -40,16 +44,18 @@ FROM alpine:3.20
 # 设定alpine镜像仓库为国内源
 RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
+# 设置环境变量
+ENV RUST_ENVIRONMENT=prd
+
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash等
+# 添加bash和libgcc
 RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash
-RUN apk add -q --no-cache libgcc tini curl openssl
+RUN apk add -q --update-cache --no-cache bash libgcc
 
 # 从阶段1复制编译结果
-COPY --from=builder /opt/app/backend-actix-web/target/release/backend-actix-web /opt/app/backend-actix-web/backend-actix-web
+COPY --from=builder /opt/app/backend-actix-web/target/release/backend-actix-web /opt/app/backend-actix-web/
 
 # 个人习惯定制化
 RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc

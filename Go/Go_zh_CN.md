@@ -23,13 +23,13 @@ http://docs.studygolang.com/doc/
 #### 确认版本
 
 下载后解压缩，cd进入到解压缩的文件夹运行命令
-```
+```bash
 go version
 ```
 
 #### 环境变量
 配置2个环境变量
-```
+```bash
 set GOPATH=D:\Tools\WorkTool\Go\go_global
 set GO111MODULE=on
 ```
@@ -37,43 +37,48 @@ set GO111MODULE=on
 ``GO111MODULE`` 设置为强制使用 Go 模块
 
 为了能在国内网络环境下正常的安装go开发工具包，需要运行如下命令
-```
+```bash
 go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
 #### 
 查看go的设定
-```
+```bash
 go env
 ```
 
 ## 创建 Go 工程
 
-```
+```bash
 cd D:\WorkSpace\Go\GoSampleProject
 ```
 
 初始化命令
-```
+```bash
 go mod init my.sample/GoSampleProject
 go mod tidy
 ```
 
 编译命令
-```
+```bash
 go build ./src
 go build ./src/main.go
 go build -o ./bin/main.exe ./src/main.go
 ```
 
 运行命令
-```
+```bash
 go run ./src/main.go
 ```
 
-全局包安装命令（会安装到 ``${GOPATH}`` 下）
+安装所需第三方库
+```bash
+go get -u github.com/google/uuid
 ```
+
+全局包安装命令（会安装到 ``${GOPATH}`` 下）
+```bash
 go install my.sample/GoSampleProject@latest
 ```
 

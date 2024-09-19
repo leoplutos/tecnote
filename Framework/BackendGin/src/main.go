@@ -2,8 +2,9 @@ package main
 
 import (
 	"BackendGin/src/bootstrap"
+	"BackendGin/src/config"
 	"BackendGin/src/global"
-	"fmt"
+	"BackendGin/src/log"
 )
 
 // 主入口
@@ -13,17 +14,22 @@ func main() {
 	// 数据库中插入初始数据
 	bootstrap.InitializeDBDate()
 	// 初始化JWT设定
-	global.App.Jwt_secret = "3Bde3BGEbYqtqyEUzW3ry8jKFcaPH17fRmTmqE7MDr05Lwj95uruRKrrkb44TJ4s"
-	global.App.Jwt_ttl = 43200
-	global.App.Jwt_blacklist_grace_period = 10
-	global.App.Jwt_refresh_grace_period = 1800
+	jwt_secret := config.Viper.GetString("jwt.secret")
+	jwt_ttl := config.Viper.GetInt("jwt.ttl")
+	jwt_blacklist_grace_period := config.Viper.GetInt("jwt.blacklist_grace_period")
+	jwt_refresh_grace_period := config.Viper.GetInt("jwt.refresh_grace_period")
+	// log.Logger.Info().Msgf("jwt_secret:%s  jwt_ttl:%d  jwt_blacklist_grace_period:%d  jwt_refresh_grace_period:%d", jwt_secret, jwt_ttl, jwt_blacklist_grace_period, jwt_refresh_grace_period)
+	global.App.Jwt_secret = jwt_secret
+	global.App.Jwt_ttl = jwt_ttl
+	global.App.Jwt_blacklist_grace_period = jwt_blacklist_grace_period
+	global.App.Jwt_refresh_grace_period = jwt_refresh_grace_period
 	// 程序关闭前，释放数据库连接
 	defer func() {
 		if global.App.DB != nil {
 			//因为使用的是内存数据库，所以这里注释掉
 			//db := global.App.DB
 			//db.Close()
-			fmt.Println("已关闭数据库连接")
+			log.Logger.Info().Msg("已关闭数据库连接")
 		}
 	}()
 	// 启动Gin服务器

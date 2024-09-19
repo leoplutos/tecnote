@@ -22,7 +22,8 @@ COPY bunfig.toml /opt/app/BackendFastify/bunfig.toml
 WORKDIR /opt/app/BackendFastify
 
 # 安装依赖并且编译工程
-RUN bun install
+# RUN --mount=type=cache,target=/root/.npm npm install
+RUN --mount=type=cache,target=/root/.bun bun install
 RUN bun run build
 
 #---------------------------------------------------------------------
@@ -37,9 +38,9 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash，curl
+# 添加bash
 RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash curl
+RUN apk add --no-cache --upgrade bash
 
 # 从阶段1复制编译结果
 COPY --from=builder /opt/app/BackendFastify/package.json /opt/app/BackendFastify/package.json

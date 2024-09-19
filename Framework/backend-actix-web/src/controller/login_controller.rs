@@ -1,9 +1,11 @@
-use crate::common_response::common_result::CommonResult;
 use crate::middleware::jwt_util::create_jwt;
+use crate::utils::result::Result as CommonResult;
 use actix_web::{post, web, Responder, Result};
 use serde::{Deserialize, Serialize};
+use tracing as log;
 
 #[derive(Serialize, Deserialize)]
+#[allow(non_snake_case)]
 pub struct LoginRequest {
     userId: String,
     password: String,
@@ -22,11 +24,13 @@ async fn login(login: web::Json<LoginRequest>) -> Result<impl Responder> {
             CommonResult::fail(400, String::from("密码不能为空"), String::from(""));
         return Ok(web::Json(result));
     }
-    // db校验
-    let check_result = check_user_info(LoginRequest {
+    // DB校验
+    let check_result = get_user_async(LoginRequest {
         userId: login.userId.clone(),
         password: login.password.clone(),
-    })?;
+    })
+    .await?;
+    log::info!("请求Login成功. {}", &check_result);
     if check_result {
         //通过jwt发行token
         let token = create_jwt(&login.userId.clone());
@@ -40,7 +44,7 @@ async fn login(login: web::Json<LoginRequest>) -> Result<impl Responder> {
 }
 
 // 在内存数据库中取得清单列表
-pub fn check_user_info(userinfo: LoginRequest) -> Result<bool> {
+async fn get_user_async(userinfo: LoginRequest) -> Result<bool> {
     //在lazy_static中取得全局数据库连接
     let binding = crate::DB.lock().unwrap();
     let conn = &mut binding.as_ref().unwrap();
@@ -49,7 +53,6 @@ pub fn check_user_info(userinfo: LoginRequest) -> Result<bool> {
         .unwrap();
     let mut rows = stmt.query([userinfo.userId, userinfo.password]).unwrap();
     while let Some(_row) = rows.next().unwrap() {
-        println!("{:?}", _row);
         return Ok(true);
     }
     return Ok(false);

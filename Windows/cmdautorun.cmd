@@ -89,7 +89,7 @@ set PATH=%PATH%;%MAVEN_HOME%\bin
 set GRADLE_HOME=D:\Tools\WorkTool\Java\gradle-8.5
 set PATH=%PATH%;%GRADLE_HOME%\bin
 ::Python
-set PYTHON_HOME=D:\Tools\Python312
+set PYTHON_HOME=D:\Tools\WorkTool\Python\Python312
 set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
 ::Kotlin
 set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
@@ -127,8 +127,13 @@ set PATH=%PATH%;%VSCODE_HOME%
 set NVIM_HOME=D:\Tools\WorkTool\Text\nvim-win64\bin
 set PATH=%PATH%;%NVIM_HOME%
 ::BuildTool
-set NINJA_HOME=D:\Tools\WorkTool\C\ninja-win
+set BUF_HOME=D:\Tools\WorkTool\Build\buf
+set PATH=%PATH%;%BUF_HOME%
+set NINJA_HOME=D:\Tools\WorkTool\Build\ninja-win
 set PATH=%PATH%;%NINJA_HOME%
+::gRPC
+set PROTOC_HOME=D:\Tools\WorkTool\Build\protoc-win64
+set PATH=%PATH%;%PROTOC_HOME%\bin
 ::Editor
 set HELIX_HOME=D:\Tools\WorkTool\Text\helix
 set PATH=%PATH%;%HELIX_HOME%
@@ -141,11 +146,6 @@ set PATH=%PATH%;%SQLITE3_HOME%
 ::Gobang
 set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
 set PATH=%PATH%;%GOBANG_HOME%
-::gRPC
-set PROTOC_HOME=D:\Tools\WorkTool\Go\protoc-25.0-win64
-set PATH=%PATH%;%PROTOC_HOME%\bin
-set PROTOC_JAVASCRIPT_HOME=D:\Tools\WorkTool\Go\protobuf-javascript-3.21.2-win64
-set PATH=%PATH%;%PROTOC_JAVASCRIPT_HOME%\bin
 ::Redis
 set REDIS_HOME=D:\Tools\WorkTool\DB\Redis-x64-5.0.14.1
 set PATH=%PATH%;%REDIS_HOME%

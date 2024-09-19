@@ -1,0 +1,80 @@
+# 阶段1：编译，命名为builder
+# Rust 编译的二进制文件动态链接到 libc 库，可以正常运行于 Ubuntu、Debian 和 Fedora 之类的镜像中，但不能运行于 Alpine 中
+# 因为 Alpine 使用的是 musl 而不是 glibc ，所以要在 Alpine 中运行的话编译环境也最好是 Alpine
+# FROM rust:1.79-slim-bookworm AS builder
+FROM rust:1.79.0-alpine3.20 AS builder
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 安装 编译器、标准库和 make 工具（build-base 相当于 Ubuntu 的 build-essentials）
+RUN apk add -q --update-cache --no-cache build-base
+# 安装 proto（etcd-client库需要用）
+RUN apk add -q --update-cache --no-cache protobuf
+
+# 在容器内部设置环境变量
+# RUSTFLAGS 在 Cargo.toml 中设定
+
+# 将本地文件复制到镜像中
+# 复制src文件夹
+COPY src /opt/app/rust_sample/src
+# 复制.cargo文件夹
+COPY .cargo /opt/app/rust_sample/.cargo
+# 复制Cargo.toml文件
+COPY Cargo.toml /opt/app/rust_sample/Cargo.toml
+# 复制所有以config开头的.toml文件
+COPY config*.toml /opt/app/rust_sample
+
+# 设置工作目录
+WORKDIR /opt/app/rust_sample
+
+# 开启缓存，编译工程
+RUN set -eux
+RUN --mount=type=cache,target=/app/target/ \
+    --mount=type=cache,target=/usr/local/cargo/git/db \
+    --mount=type=cache,target=/usr/local/cargo/registry/ \
+    cargo build --release
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+## 根据需要选择alpine
+FROM alpine:3.20
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 设置环境变量
+ENV RUST_ENVIRONMENT=prd
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加bash和libgcc
+RUN apk update --quiet
+RUN apk add -q --update-cache --no-cache bash libgcc
+
+# 从阶段1复制编译结果
+COPY --from=builder /opt/app/rust_sample/target/release/rust_sample /opt/app/rust_sample/
+COPY --from=builder /opt/app/rust_sample/config*.toml /opt/app/rust_sample/
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/rust_sample
+
+# 声明容器运行时监听的特定网络端口
+# EXPOSE 9501
+
+# 指定容器创建时的默认命令
+# CMD ["./rust_sample"]

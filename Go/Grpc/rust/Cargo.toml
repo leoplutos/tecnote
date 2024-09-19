@@ -1,5 +1,5 @@
 [package]
-name = "rust"
+name = "rust_grpc"
 version = "0.1.0"
 edition = "2021"
 
@@ -12,11 +12,13 @@ name = "rustclient"
 path = "src/client.rs"
 
 [dependencies]
-tonic = "0.10.2"
-prost = "0.12.1"
-tokio = { version = "1.33.0", features = ["macros", "rt-multi-thread"] }
-uuid = { version = "1.5.0", features = ["v4", "fast-rng", "macro-diagnostics"] }
-lazy_static = "1.4.0"
+tonic = "0.12.2"
+prost = "0.13.2"
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+uuid = { version = "1.10.0", features = ["v4", "fast-rng", "macro-diagnostics"] }
+lazy_static = "1.5.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["chrono"] }
 
 [build-dependencies]
-tonic-build = "0.10.2"
+tonic-build = "0.12.2"

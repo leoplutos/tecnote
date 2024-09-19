@@ -1,0 +1,19 @@
+env: prd
+
+zerolog:
+  # trace|debug|info|warn|error|fatal|panic|disabled|nolevel
+  min_level: info
+  # file|console
+  output: file
+
+lumberjack:
+  # 日志文件的位置
+  filename: D:\log\GoSampleProject\app.log
+  # 每个日志文件保存的最大尺寸 单位：MB
+  maxsize: 10
+  # 日志文件最多保存多少个备份
+  maxbackups: 5
+  # 文件最多保存多少天
+  maxage: 90
+  # 是否压缩/归档旧文件
+  compress: true

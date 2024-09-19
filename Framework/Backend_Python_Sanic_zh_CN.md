@@ -17,7 +17,7 @@
 
 ## 后端工程
 新建一个 ``Python 的 Sanic 工程``  
-```
+```bash
 cd D:\WorkSpace\FBS
 poetry new --src BackendSanic
 ```
@@ -31,19 +31,19 @@ poetry new --src BackendSanic
 ## 启动命令
 
 ### 前端工程启动（端口9500）
-```
+```bash
 cd D:\WorkSpace\FBS\FrontendVue
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```
 
 ### 后端工程启动（端口9501）
-```
+```bash
 cd D:\WorkSpace\FBS\BackendSanic
 poetry install
-poetry run python src/backendsanic/server.py
-#poetry run sanic src.backendsanic.server:app -p 9501
+poetry run sanic src.backendsanic.server:app --single-process --debug --no-repl --host=0.0.0.0 --port=9501
 ```
+
 ### 使用浏览器访问确认
 
 #### 前端页面入口
@@ -55,3 +55,5 @@ http://localhost:9500/
 http://localhost:9501/login  
 取得清单列表接口  
 http://localhost:9501/todo/getAll  
+Swagger UI  
+http://localhost:9501/docs/swagger

@@ -66,4 +66,6 @@
 			"source.organizeImports": "never"
 		}
 	},
+	//yaml设定
+	"yaml.format.enable": true
 }

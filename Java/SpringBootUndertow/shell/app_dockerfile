@@ -26,7 +26,7 @@ COPY target/*.jar /opt/app/SpringBootUndertow/SpringBootUndertow.jar
 # 构建时变量，仅在构建Docker映像期间可用
 # ARG NODE_ENV=production
 # 在容器内部设置环境变量
-ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR"
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
 
 # 个人习惯定制化
 RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc

@@ -1,0 +1,79 @@
+# 多阶段构建
+
+# 阶段1：编译，命名为builder
+# FROM golang:1.22.5-bookworm
+FROM golang:1.22.5-alpine3.20 AS builder
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 设置环境变量来禁用 cgo，这样 Go 就不会使用系统库，使用内置的实现来替代系统库
+ENV CGO_ENABLED=0
+
+# Go语言设定
+RUN go env -w GO111MODULE=on
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+
+# 将本地文件复制到镜像中
+# 复制src文件夹
+COPY src /opt/app/GoSampleProject/src
+# 复制所有以config开头的.yaml文件
+COPY config*.yaml /opt/app/GoSampleProject
+# 复制go.mod文件
+COPY go.mod /opt/app/GoSampleProject
+
+# 设置工作目录
+WORKDIR /opt/app/GoSampleProject
+
+# 开启$GOPATH的缓存，加速下载依赖
+RUN --mount=type=cache,target=/go/pkg go mod tidy
+# 编译工程
+## -ldflags
+## -w：去掉 dwarf 调试信息。会减小可执行文件的大小。
+## -s：去掉符号表信息。会进一步减小可执行文件的大小。
+RUN --mount=type=cache,target=/go/pkg \
+    go build -ldflags "-w -s" -o ./bin/gosample ./src/main.go
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+# 根据需要选择alpine
+FROM alpine:3.20
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 设置环境变量
+ENV GO_ENVIRONMENT=docker
+
+# 添加bash，curl
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash curl
+
+# 从阶段1复制编译结果
+COPY --from=builder /opt/app/GoSampleProject/bin/gosample /opt/app/GoSampleProject/
+COPY --from=builder /opt/app/GoSampleProject/config*.yaml /opt/app/GoSampleProject/
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/GoSampleProject
+
+# 声明容器运行时监听的特定网络端口
+# EXPOSE 9501
+
+# 指定容器创建时的默认命令
+# CMD ["./gosample"]

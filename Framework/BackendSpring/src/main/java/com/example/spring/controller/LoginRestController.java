@@ -1,5 +1,7 @@
 package com.example.spring.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,14 +19,17 @@ import com.example.spring.common.JwtUtils;
 import com.example.spring.common.Result;
 import com.example.spring.entity.Login;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 // 支持跨域的标注
 // @CrossOrigin(origins = { "http://localhost:9500", "null" })
 @CrossOrigin(origins = { "*" })
 public class LoginRestController {
+
+	// log4j2日志
+	protected static final Logger log = LogManager.getLogger();
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -35,6 +40,9 @@ public class LoginRestController {
 	// 同时支持POST和GET
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public Result<String> login(@RequestBody Login login) {
+		boolean isVirtual = Thread.currentThread().isVirtual();
+		log.info("Login开始. 是否虚拟线程: {}", isVirtual);
+
 		if (!StringUtils.hasLength(login.getUserId())) {
 			return Result.fail(401, "账号不能为空");
 		}
@@ -56,10 +64,11 @@ public class LoginRestController {
 			}
 
 			// 用户身份验证成功，生成并返回jwt令牌
-			Map<String, Object> claims = new HashMap<>();
+			Map<String, Object> claims = new ConcurrentHashMap<>();
 			claims.put("username", userDetails.getUsername());
 			claims.put("authorityString", authorityString);
 			String jwtToken = jwtUtils.getJwt(claims);
+			log.info("Login结束. 是否虚拟线程: {}", isVirtual);
 			return Result.success("登录成功", jwtToken);
 		} catch (Exception ex) {
 			// 默认情况下：用户名或者密码错误都会报 [BadCredentialsException: Bad credentials] 错误

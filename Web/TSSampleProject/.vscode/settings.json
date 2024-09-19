@@ -3,4 +3,7 @@
 	"files.exclude": {
 		"node_modules": true
 	},
+	"files.associations": {
+		"*.json5": "jsonc",
+	},
 }

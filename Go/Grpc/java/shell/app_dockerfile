@@ -16,7 +16,8 @@ RUN mkdir -p /root/.m2
 RUN mkdir /root/.m2/repository
 
 # 设定Java用环境变量
-ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR"
+# 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational"
 
 # 将本地文件复制到镜像中
 # 复制src文件夹
@@ -33,7 +34,8 @@ WORKDIR /opt/app/JavaGrpc
 # 编译工程
 # RUN mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
 # --mount=type=cache 用于指定一个挂载点。这个挂载点不是挂载宿主机上的文件系统到容器中，而是利用 Docker 的构建缓存来优化构建过程
-RUN --mount=type=cache,target=/root/.m2/repository mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
+RUN --mount=type=cache,target=/root/.m2/repository \
+    mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
 
 #---------------------------------------------------------------------
 
@@ -55,7 +57,8 @@ RUN apk add --no-cache --upgrade bash curl
 COPY --from=builder /opt/app/JavaGrpc/build/javagrpc-1.0.jar /opt/app/JavaGrpc/javagrpc-1.0.jar
 
 # 设定Java用环境变量
-ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR"
+# 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational"
 ENV JAVA_ENVIRONMENT="docker"
 ENV GRPC_SERVER_RESOLVE="true"
 ENV GRPC_SERVER_HTTP_PORTS="50051"

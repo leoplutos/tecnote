@@ -1,0 +1,66 @@
+{
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python312\\Scripts",
+			"SANIC_ENVIRONMENT": "development",
+		}
+	},
+	"tasks": [
+		{
+			"label": "poetry_run_python",
+			"type": "shell",
+			// poetry run sanic src.backendsanic.server:app --fast --debug --dev --no-repl --host=0.0.0.0 --port=9501
+			// poetry run sanic src.backendsanic.server:app --single-process --debug --no-repl --host=0.0.0.0 --port=9501
+			"command": "poetry",
+			"args": [
+				"run",
+				"sanic",
+				"src.backendsanic.server:app",
+				"--fast",
+				"--debug",
+				"--dev",
+				"--no-repl",
+				"--host=0.0.0.0",
+				"--port=9501",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "poetry_run_python(Deprecated)",
+			"type": "shell",
+			"command": "poetry",
+			"args": [
+				"run",
+				"python",
+				"src\\backendsanic\\server.py",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+	]
+}

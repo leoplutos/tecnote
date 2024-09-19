@@ -22,7 +22,7 @@ namespace dotnet_console_sample.Async
 		}
 
 		// 异步操作完成时调用的回调方法
-		async void CompletionCallback(Task<string> task)
+		async void CompletionCallbackAsync(Task<string> task)
 		{
 			// 等待异步操作完成
 			string result = await task;
@@ -57,7 +57,7 @@ namespace dotnet_console_sample.Async
 			{
 				var task = DoSomethingAsync(i);
 				// 设定回调方法（方式1），因为是不堵塞调用所以会发生CS4014警告，使用丢弃变量可以屏蔽警告
-				//_ = task.ContinueWith(CompletionCallback);
+				//_ = task.ContinueWith(CompletionCallbackAsync);
 				// 设定回调方法（方式2），因为是不堵塞调用所以会发生CS4014警告，使用丢弃变量可以屏蔽警告
 				_ = task.ContinueWith(async (t) =>
 				{

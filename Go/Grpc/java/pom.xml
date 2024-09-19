@@ -260,6 +260,12 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.23.1</version>
 		</dependency>
+		<!-- log4j2异步日志依赖 -->
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.4.4</version>
+		</dependency>
 		<!-- log4j2和slf4j桥接依赖-->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -272,13 +278,6 @@
 			<artifactId>jetcd-core</artifactId>
 			<version>0.8.3</version>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>com.lmax</groupId>
-			<artifactId>disruptor</artifactId>
-			<version>3.4.4</version>
-		</dependency>
-		-->
 		<!-- Apache Commons Config2依赖 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>

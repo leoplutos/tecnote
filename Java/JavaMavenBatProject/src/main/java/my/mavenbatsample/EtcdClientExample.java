@@ -225,11 +225,14 @@ public class EtcdClientExample {
 	}
 
 	public static void main(String[] args) {
-		EtcdClientExample example = new EtcdClientExample();
 		try {
+			EtcdClientExample example = new EtcdClientExample();
 			example.etcdClient();
 		} catch (Exception e) {
 			log.error(e);
+		} finally {
+			// 因为使用了异步日志，要在这里关闭
+			LogManager.shutdown();
 		}
 	}
 }

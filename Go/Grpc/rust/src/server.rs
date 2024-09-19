@@ -1,92 +1,65 @@
-//添加外部引用声明
-#[macro_use]
-extern crate lazy_static;
+use core::net::SocketAddr;
+use services::product_service::ProductServiceImpl;
+use std::error::Error;
+use stub::product::product_info_server::ProductInfoServer;
+use tonic::transport::Server;
+use tracing as log;
+use tracing::instrument;
 
-use tonic::{transport::Server, Request, Response, Status};
-
-// rust为当前工程名
-// product_info_server为proto文件中定义的server名字[ProductInfo]加上server
-use rust::product_info_server::{ProductInfo, ProductInfoServer};
-use rust::{Product, ProductId};
-use std::collections::HashMap;
-use std::sync::Mutex;
-use uuid::Uuid;
-
-pub mod rust {
-    //这里指定的字符串必须与proto的包名称一致[package grpc_demo;]
-    tonic::include_proto!("grpc_demo");
-}
-
-//使用第三方库lazy_static来管理全局静态变量
-lazy_static! {
-    static ref PRODUCT_MAP: Mutex<HashMap<String, Product>> = {
-        let mut map: HashMap<String, Product> = HashMap::new();
-        Mutex::new(map)
-    };
-}
-
-#[derive(Debug, Default)]
-pub struct MyProductInfo {}
-
-#[tonic::async_trait]
-impl ProductInfo for MyProductInfo {
-    //添加商品
-    async fn add_product(&self, request: Request<Product>) -> Result<Response<ProductId>, Status> {
-        // 创建新的uuid
-        let uuid: String = Uuid::new_v4().to_string();
-        // 请求的结构体
-        let request_product: Product = request.into_inner();
-        // 复制一个请求内容，并且赋予新的uuid
-        let new_product: Product = Product {
-            id: uuid,
-            //这里调用clone方法，不然所有权会丢失
-            name: request_product.name.clone(),
-            description: request_product.description.clone(),
-        };
-        // 添加到全局静态变量中
-        PRODUCT_MAP
-            .lock()
-            .unwrap()
-            .insert(new_product.id.clone(), new_product.clone());
-        println!("[Rust][Server] AddProduct success. {:?}", new_product);
-
-        //返回的结构体
-        let reply: ProductId = rust::ProductId {
-            value: new_product.id.clone(),
-        };
-
-        Ok(Response::new(reply))
+// 导入utils模块（utils.rs）
+pub mod utils;
+// 导入services模块（services.rs）
+pub mod services;
+// 导入自动生成存根
+pub mod stub {
+    // 如果有多个服务可以多次定义
+    pub mod product {
+        //这里指定的字符串必须与proto的包名称一致[package grpc_demo;]
+        tonic::include_proto!("grpc_demo");
     }
-
-    //获取商品
-    async fn get_product(&self, request: Request<ProductId>) -> Result<Response<Product>, Status> {
-        let get_id = request.into_inner().value;
-        // 从全局静态变量中取得
-        let get_product = match PRODUCT_MAP.lock().unwrap().get(&get_id) {
-            Some(product) => product.clone(),
-            _ => {
-                println!("[Rust][Server] GetProduct error. id: {}", &get_id);
-                panic!()
-            }
-        };
-        println!("[Rust][Server] GetProduct success. id: {}", &get_id);
-        Ok(Response::new(get_product))
-    }
+    // pub mod hello {
+    //     tonic::include_proto!("hello");
+    // }
+    // pub mod greeter {
+    //     tonic::include_proto!("greeter");
+    // }
 }
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let port = 50051;
+// 开始gRPC服务端
+#[instrument]
+async fn start_server_async() -> Result<(), Box<dyn Error>> {
+    // 初始化日志
+    utils::log::init_log_async().await?;
+
+    let port: u32 = 50051;
     //let addr_str = format!("{}{}", String::from("[::1]:"), port);
-    let addr_str = format!("{}{}", String::from("0.0.0.0:"), port);
-    let addr = addr_str.parse()?;
-    let server = MyProductInfo::default();
+    let addr_str: String = format!("{}:{}", "0.0.0.0", port);
+    let addr: SocketAddr = addr_str.parse()?;
+    // 业务逻辑
+    // let product_service = ProductInfoServer::new(ProductServiceImpl::default());
+    let product_service = ProductInfoServer::new(ProductServiceImpl::new_async(port).await?);
 
-    println!("[Rust][Server] start gRPC listen on port: {} ", port);
+    log::info!("[Rust][Server] gRPC 服务端已开启，端口为: {}", port);
+    // 开始gRPC服务端
     Server::builder()
-        .add_service(ProductInfoServer::new(server))
+        // 绑定业务逻辑
+        .add_service(product_service)
+        // 添加监听端口
         .serve(addr)
         .await?;
 
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    // 开始gRPC服务端
+    let ret = start_server_async().await;
+    match ret {
+        Ok(()) => log::info!("gRPC 服务端运行结束"),
+        Err(e) => {
+            log::error!("gRPC 服务端运行失败: {}", e)
+        }
+    }
     Ok(())
 }

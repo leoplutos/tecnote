@@ -7,15 +7,16 @@ use actix_web::{
 use futures_util::future::LocalBoxFuture;
 use std::future::{ready, Ready};
 
-// There are two steps in middleware processing.
-// 1. Middleware initialization, middleware factory gets called with
-//    next service in chain as parameter.
-// 2. Middleware's call method gets called with normal request.
+// 权限认证中间件
+// 中间件处理有两个步骤。
+// 1.中间件初始化，中间件工厂使用链中的 next service 作为参数。
+// 2.中间件的 call 方法在正常请求中被调用。
+
 pub struct Auth;
 
-// Middleware factory is `Transform` trait
-// `S` - type of the next service
-// `B` - type of response's body
+// 中间件需要实现 Transform 特征
+// `S` - 下一个服务的类型
+// `B` - 响应正文的类型
 impl<S, B> Transform<S, ServiceRequest> for Auth
 where
     S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
@@ -33,6 +34,7 @@ where
     }
 }
 
+// 自定义权限认证中间件
 pub struct AuthMiddleware<S> {
     service: S,
 }
@@ -49,6 +51,7 @@ where
 
     forward_ready!(service);
 
+    // call方法会在请求时被调用
     fn call(&self, req: ServiceRequest) -> Self::Future {
         // 进行鉴权操作，判断是否有权限
         if has_permission(&req) {
@@ -62,7 +65,8 @@ where
             // 没有权限，立即返回响应
             Box::pin(async move {
                 // 鉴权失败，返回未授权的响应，停止后续中间件的调用
-                Err(error::ErrorUnauthorized("Unauthorized"))
+                // Err(error::ErrorUnauthorized("Unauthorized"))
+                Err(error::ErrorUnauthorized("未携带token,请重新登录!!!"))
             })
         }
     }

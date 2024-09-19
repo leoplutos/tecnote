@@ -21,14 +21,14 @@ func JWTAuth(GuardName string) gin.HandlerFunc {
 			return []byte(global.App.Jwt_secret), nil
 		})
 		if err != nil {
-			response.Fail(c, 402, "未携带token,请登录")
+			response.Fail(c, 402, "token不正确,请重新登录!")
 			c.Abort()
 			return
 		}
 
 		claims := token.Claims.(*service.CustomClaims)
 		if claims.Issuer != GuardName {
-			response.Fail(c, 403, "未携带token,请登录")
+			response.Fail(c, 403, "token不正确,请重新登录!")
 			c.Abort()
 			return
 		}

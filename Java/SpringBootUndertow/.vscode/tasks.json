@@ -9,7 +9,8 @@
 			]
 		},
 		"env": { //自定义环境变量
-			"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8",
+			// 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational] 查看GC信息 [-XX:+PrintGCDetails]
+			"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational",
 			"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
 			"MAVEN_HOME": "D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7",
 			"PATH": "${env:path};${env:JAVA_HOME}\\bin;D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7\\bin;",
@@ -46,6 +47,7 @@
 			"args": [
 				"clean",
 				"package",
+				"-Dmaven.test.skip=true",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -65,10 +67,8 @@
 		{
 			"label": "springbootRun",
 			"type": "shell",
-			"command": "mvn",
-			"args": [
-				"spring-boot:run",
-			],
+			"command": "chcp 65001 && mvn spring-boot:run",
+			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},

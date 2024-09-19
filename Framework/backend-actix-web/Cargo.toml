@@ -9,7 +9,9 @@ edition = "2021"
 actix-web = "4"
 jsonwebtoken = "9"
 serde = { version = "1.0", features = ["derive"] }
-rusqlite = { version = "0.30.0", features = ["bundled"] }
-lazy_static = "1.4.0"
+rusqlite = { version = "0.32", features = ["bundled"] }
+lazy_static = "1.5"
 chrono = "0.4"
 futures-util = "0.3"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["chrono"] }

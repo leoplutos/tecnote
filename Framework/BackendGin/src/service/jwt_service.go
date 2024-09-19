@@ -17,7 +17,7 @@ type CustomClaims struct {
 }
 
 const (
-	TokenType    = "bearer"
+	// TokenType    = "bearer"
 	AppGuardName = "app"
 )
 

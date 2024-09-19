@@ -1,0 +1,6 @@
+env = "prd"
+
+# trace|debug|info|warn|error
+log_min_level = "info"
+# file|console
+log_output = "console"

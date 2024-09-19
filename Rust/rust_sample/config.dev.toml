@@ -1,0 +1,6 @@
+env = "dev"
+
+# trace|debug|info|warn|error
+log_min_level = "debug"
+# file|console
+log_output = "console"

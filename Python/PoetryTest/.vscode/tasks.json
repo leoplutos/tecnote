@@ -11,12 +11,12 @@
 		"env": { //自定义环境变量
 			// 更改 Protocol Buffers 的 Python 实现, 用纯 Python 的解析器
 			"PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python",
-			"PATH": "${env:path};D:\\Tools\\Python312\\Scripts",
+			"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python312\\Scripts",
 		}
 	},
 	"tasks": [
 		{
-			"label": "mvn_run_app",
+			"label": "poetry_run_app",
 			"type": "shell",
 			"command": "poetry",
 			"args": [
@@ -33,20 +33,16 @@
 				"reveal": "always",
 				"focus": true,
 				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
+			}
 		},
 		{
-			"label": "mvn_run_etcd_client_example",
+			"label": "poetry_run_etcd_client",
 			"type": "shell",
 			"command": "poetry",
 			"args": [
 				"run",
 				"python",
-				"src\\poetrytest\\sub_module\\etcd_client_example.py",
+				"src\\poetrytest\\etcd_client_example.py",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -57,11 +53,27 @@
 				"reveal": "always",
 				"focus": true,
 				"panel": "new"
+			}
+		},
+		{
+			"label": "poetry_run_redis_client",
+			"type": "shell",
+			"command": "poetry",
+			"args": [
+				"run",
+				"python",
+				"src\\poetrytest\\redis_client_example.py",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
 			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
 		},
 	]
 }

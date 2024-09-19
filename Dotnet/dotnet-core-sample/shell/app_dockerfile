@@ -29,7 +29,8 @@ WORKDIR /opt/app/dotnet-core-sample
 # 安装依赖
 RUN dotnet clean
 # 编译工程（在/opt/app/dotnet-core-sample/target下会编译出结果）
-RUN --mount=type=cache,target=/root/.nuget/packages dotnet publish -c Release -o target
+RUN --mount=type=cache,target=/root/.nuget/packages \
+    dotnet publish -c Release -o target
 
 #---------------------------------------------------------------------
 

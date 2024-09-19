@@ -34,7 +34,7 @@
 
 ## 前端工程
 参考 [这里](../Web/Vue_zh_CN.md) 新建一个 ``Vue工程``  
-```
+```bash
 cd D:\WorkSpace\FBS
 npm create vue@latest
 cd FrontendVue
@@ -47,7 +47,7 @@ cd FrontendVue
 
 ## 后端工程
 参考 [这里](../Java/Java-Spring_zh_CN.md) 新建一个 ``Java的Srping工程``  
-```
+```bash
 cd D:\WorkSpace\FBS
 mkdir BackendSpring
 curl https://start.spring.io/starter.zip -d language=java -d type=maven-project -d dependencies=web,jpa,h2,devtools -d packageName=com.example.spring -d name=BackendSpring -o BackendSpring.zip
@@ -65,17 +65,19 @@ del BackendSpring.zip
 ## 启动命令
 
 ### 前端工程启动（端口9500）
-```
+```bash
 cd D:\WorkSpace\FBS\FrontendVue
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```
 
 ### 后端工程启动（端口9501）
-```
+```bash
 cd D:\WorkSpace\FBS\BackendSpring
 mvnw spring-boot:run
 ```
+默认端口 ``9501``，可以用环境变量 ``SPRING_HTTP_PORT`` 指定端口
+
 ### 使用浏览器访问确认
 
 #### 前端页面入口

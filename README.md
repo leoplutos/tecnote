@@ -50,6 +50,9 @@
 * [Rust-Web框架-Actix-Web](Rust/Rust-Actix-Web_zh_CN.md)
 * [Rust语言圣经](Rust/Rust-Course_zh_CN.md)
 
+## Zig相关
+* [Zig语言相关](Zig/Zig_zh_CN.md)
+
 ## Python相关
 * [Python相关](Python/Python_zh_CN.md)
 * [Python-构建工具-Poetry](Python/Python-Poetry_zh_CN.md) ※推荐

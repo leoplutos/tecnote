@@ -4,15 +4,9 @@
 import logging
 
 
-def sub_fun2():
+def sub_fun2(param: int) -> tuple[int, int]:
     logging.debug("sub2 function is run.")
-    data = [
-        ('Apple', 'Fruit'),
-        ('Beetroot', 'Vegetable'),
-        ('Carrot', 'Vegetable'),
-        ('Date', 'Fruit'),
-        ('Eggplant', 'Vegetable'),
-        ('Fig', 'Fruit'),
-    ]
-    logging.info(f"sub2 data:{data}")
-    return 2
+    b, c = 1, 2
+    ret = (param + b) * c
+    logging.info(f"计算结果为: {ret}")
+    return ret, 0

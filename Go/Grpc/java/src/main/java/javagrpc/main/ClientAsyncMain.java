@@ -41,7 +41,7 @@ public class ClientAsyncMain {
 	private final ManagedChannel channel;
 	// 非阻塞异步存根（结果以回调的方式通知）
 	private final ProductInfoGrpc.ProductInfoStub productStub;
-	// 线程池
+	// 虚拟线程的执行器
 	private ExecutorService executorService;
 	// HealthCheck客户端
 	private final HealthGrpc.HealthStub healthStub;
@@ -62,8 +62,9 @@ public class ClientAsyncMain {
 		// OpenTelemetry监测的拦截器
 		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
 		ClientInterceptor otelClientInterceptor = OpentelemetryConfig.getClientInterceptor(openTelemetry);
-		// 对于回调，gRPC 使用缓存线程池，该线程池根据需要创建新线程，但在以前构建的线程可用时会重用它们。如果需要，可以将线程池作为
-		executorService = Executors.newFixedThreadPool(10);
+		// 虚拟线程的执行器，这个执行器在每次提交一个新任务时，都会为这个任务创建一个新的虚拟线程来执行它
+		// 虚拟线程属于非常轻量级的资源，因此，用时创建，用完就扔，不要池化虚拟线程
+		executorService = Executors.newVirtualThreadPerTaskExecutor();
 
 		if (isWithEtcd) {
 			// 使用Etcd的服务注册
@@ -113,7 +114,7 @@ public class ClientAsyncMain {
 		// 关闭连接
 		channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
-		// 关闭线程池
+		// 关闭执行器
 		if (executorService != null) {
 			executorService.shutdown();
 			executorService.awaitTermination(5, TimeUnit.SECONDS);
@@ -140,8 +141,8 @@ public class ClientAsyncMain {
 			@Override
 			public void onNext(ProductId productId) {
 				task.complete(productId);
-				//String addId = productId.getValue();
-				//log.info("[Java][Client] Add product success. id: {}", addId);
+				// String addId = productId.getValue();
+				// log.info("[Java][Client] Add product success. id: {}", addId);
 			}
 		});
 		return task;
@@ -175,57 +176,64 @@ public class ClientAsyncMain {
 	}
 
 	public static void main(String[] args) throws Exception {
-		log.info("ClientMainAsync 开始");
+		try {
+			log.info("ClientMainAsync 开始");
 
-		// 读取 properties 和 环境变量
-		Configuration config = Config.getInstance();
-		// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
-		String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
-		boolean isWithEtcd = false;
-		if ("true".equals(resolve)) {
-			isWithEtcd = true;
+			// 读取 properties 和 环境变量
+			Configuration config = Config.getInstance();
+			// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
+			String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
+			boolean isWithEtcd = false;
+			if ("true".equals(resolve)) {
+				isWithEtcd = true;
+			}
+			log.info("[Java][Client] 是否启用Etcd服务发现: {}", isWithEtcd);
+
+			ClientAsyncMain clientAsync = new ClientAsyncMain(isWithEtcd);
+
+			// 不堵塞，不等待结果直接继续运行（多次循环调用）
+			// List<CompletableFuture<?>> taskList = new
+			// CopyOnWriteArrayList<CompletableFuture<?>>();
+
+			// for (int i = 0; i < 500; i++) {
+			// // 异步服务调用
+			// CompletableFuture<ProductId> task1 = clientAsync.addProductAsync("Mac Book
+			// Pro 2021", "Add by Java");
+			// taskList.add(task1);
+
+			// // 异步服务调用
+			// CompletableFuture<Product> task2 = clientAsync.getProductAsync("123");
+			// taskList.add(task2);
+			// }
+
+			// // 检查服务状态
+			// CompletableFuture<HealthCheckResponse> healthTask =
+			// clientAsync.checkHealthAsync();
+			// taskList.add(healthTask);
+
+			// log.info("ClientMainAsync 结束");
+
+			// // 有多个task时使用allOf(completableFutures).join()来等待所有子线程结束
+			// CompletableFuture.allOf(taskList.toArray(CompletableFuture[]::new))
+			// // .whenComplete((v, th) -> {System.out.println("所有子任务执行完成!!!");})
+			// .join();
+
+			for (int i = 0; i < 500; i++) {
+				// 异步服务调用
+				ProductId pid = clientAsync.addProductAsync("Mac Book Pro 2021", "Add by Java").get();
+				log.info("[Java][Client] Add product success. id: {}", pid.getValue());
+			}
+			// 检查服务状态
+			clientAsync.checkHealthAsync().get();
+
+			// 关闭连接
+			clientAsync.shutdown();
+		} catch (Exception e) {
+			log.error(e);
+		} finally {
+			// 因为使用了异步日志，要在这里关闭
+			LogManager.shutdown();
 		}
-		log.info("[Java][Client] 是否启用Etcd服务发现: {}", isWithEtcd);
-
-		ClientAsyncMain clientAsync = new ClientAsyncMain(isWithEtcd);
-
-		// 不堵塞，不等待结果直接继续运行（多次循环调用）
-		// List<CompletableFuture<?>> taskList = new
-		// CopyOnWriteArrayList<CompletableFuture<?>>();
-
-		// for (int i = 0; i < 500; i++) {
-		// // 异步服务调用
-		// CompletableFuture<ProductId> task1 = clientAsync.addProductAsync("Mac Book
-		// Pro 2021", "Add by Java");
-		// taskList.add(task1);
-
-		// // 异步服务调用
-		// CompletableFuture<Product> task2 = clientAsync.getProductAsync("123");
-		// taskList.add(task2);
-		// }
-
-		// // 检查服务状态
-		// CompletableFuture<HealthCheckResponse> healthTask =
-		// clientAsync.checkHealthAsync();
-		// taskList.add(healthTask);
-
-		// log.info("ClientMainAsync 结束");
-
-		// // 有多个task时使用allOf(completableFutures).join()来等待所有子线程结束
-		// CompletableFuture.allOf(taskList.toArray(CompletableFuture[]::new))
-		// // .whenComplete((v, th) -> {System.out.println("所有子任务执行完成!!!");})
-		// .join();
-
-		for (int i = 0; i < 500; i++) {
-			// 异步服务调用
-			ProductId pid = clientAsync.addProductAsync("Mac Book Pro 2021", "Add by Java").get();
-			log.info("[Java][Client] Add product success. id: {}", pid.getValue());
-		}
-		// 检查服务状态
-		clientAsync.checkHealthAsync().get();
-
-		// 关闭连接
-		clientAsync.shutdown();
 	}
 
 	// 执行HealthCheck检查

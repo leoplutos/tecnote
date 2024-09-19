@@ -102,11 +102,12 @@ C:\ProgramData\docker\config\daemon.json
 ```
 
 修改配置文件（如果没有则新建），添加内容
-```
+```json
 {
     "debug": false,
     "experimental": true,
     "registry-mirrors": [
+        "https://docker.nju.edu.cn",
         "https://docker.m.daocloud.io",
         "https://dockerhub.icu",
         "https://docker.chenby.cn",
@@ -138,12 +139,12 @@ NOTE：Docker从1.3.X之后，与docker registry交互默认使用的是https，
 ### 注册服务并且开启Docker Daemon
 有两种方式，选择其一即可  
 **方式一**：使用 ``cmd``（**需要管理员权限**）  
-```
+```bash
 dockerd --register-service
 net start docker
 ```
 **方式二**：使用 ``Powershell``（**需要管理员权限**）  
-```
+```bash
 dockerd --register-service
 Start-Service docker
 ```
@@ -153,7 +154,7 @@ Windows键 + r → 输入 ``services.msc`` 回车 → 打开服务管理器
 
 ### 服务删除命令(卸载的时候使用)
 使用 ``cmd``（**需要管理员权限**）  
-```
+```bash
 net stop docker
 sc delete docker
 reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\docker /f
@@ -161,7 +162,7 @@ reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Applica
 ```
 
 ### 测试命令
-```
+```bash
 SET DOCKER_HOST=tcp://localhost:3101
 docker version
 docker ps
@@ -247,11 +248,21 @@ docker-proxy --version
 https://github.com/tech-shrimp/docker_installer
 
 ### 替换 DockerHub 国内镜像源
+
+#### 南大源
+https://sci.nju.edu.cn/9e/05/c30384a564741/page.htm
+
+#### DaoCloud源
 现在这个镜像比较稳定，但是有白名单限制  
 https://github.com/DaoCloud/public-image-mirror
 
 白名单列表  
 https://github.com/DaoCloud/public-image-mirror/issues/2328
+
+#### AtomHub 可信镜像中心（镜像比较少）
+https://hub.atomgit.com/  
+
+#### 配置方法
 
 Linux配置文件位置
 ```bash
@@ -263,9 +274,10 @@ sudo touch /etc/docker/daemon.json
 sudo vim /etc/docker/daemon.json
 ```
 添加内容
-```bash
+```json
 {
     "registry-mirrors": [
+        "https://docker.nju.edu.cn",
         "https://docker.m.daocloud.io",
         "https://dockerhub.icu",
         "https://docker.chenby.cn",
@@ -282,19 +294,13 @@ sudo vim /etc/docker/daemon.json
 }
 ```
 
-### AtomHub 可信镜像中心
-这里有国内版  
-https://hub.atomgit.com/  
-
 ### 确认
-~~更新设定~~  
-~~``sudo update-alternatives --config iptables``~~  
-~~输入数字 ``1`` 后按 ``回车`` 以选择 ``iptables-legacy``~~  
-
 启动服务
 ```bash
-systemctl daemon-reload
-systemctl restart docker.service
+# 重新加载 Docker 配置
+sudo systemctl daemon-reload
+# 重启 Docker 服务
+sudo systemctl restart docker.service
 # sudo service docker start
 ```
 确认
@@ -361,6 +367,7 @@ sudo rm -rf /var/lib/containerd
     + ``-a`` 列出正在运行和历史运行的容器
     + ``-n=?`` 显示最近创建的容器
     + ``-q`` 只显示容器的编号
+    + ``--no-trunc`` 不省略，示列的完整信息
  - 启动容器：``docker start {容器id}``
  - 停止容器：``docker stop {容器id}``
  - 强制停止容器：``docker kill {容器id}``
@@ -388,6 +395,8 @@ sudo rm -rf /var/lib/containerd
  - 退出容器不关闭容器：``Ctrl + P + Q``
  - 退出容器并关闭容器：``exit``
 
+## 制作镜像时开启缓存
+可以参考 [官方文档](https://docs.docker.com/build/cache/optimize/#use-cache-mounts)
 
 ## 容器的通信
 安装 Docker 以后，会默认创建三种网络，可以通过下面命令查看
@@ -589,6 +598,10 @@ docker cp /home/licence.txt nginx-web:/home
 此时可覆盖主进程启动命令，更换一个挂起的命令即可
 ```bash
 docker run -it --entrypoint /bin/bash {镜像}
+```
+对于没有 ``bash`` 的镜像比如 ``alpine``，可以使用
+```bash
+docker run -it --entrypoint /bin/ash {镜像}
 ```
 
 ### 搭建私有仓库

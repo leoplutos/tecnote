@@ -3,7 +3,8 @@ use std::time::Duration;
 use tracing as log;
 use uuid::Uuid;
 
-static PREFIX: &'static str = "/RustKey";
+// 编译此文件需要 PATH 里面有 protoc.exe
+static PREFIX: &str = "/RustKey";
 
 struct KV {
     key: String,
@@ -27,7 +28,7 @@ impl KV {
     }
 }
 
-async fn etcd_client() -> Result<(), Error> {
+async fn etcd_client_async() -> Result<(), Error> {
     // 连接参数
     let conn_timeout: u64 = 1000;
     let option =
@@ -47,10 +48,10 @@ async fn etcd_client() -> Result<(), Error> {
 
     // 设定Key
     let key_1: String = format!("{}{}", PREFIX, "/Key1");
-    let set_value_1: String = format!("使用Rust客户端添加_{}", Uuid::new_v4().to_string());
+    let set_value_1: String = format!("使用Rust客户端添加_{}", &Uuid::new_v4().to_string());
     let kv1 = KV::new(key_1, set_value_1);
     let key_2: String = format!("{}{}", PREFIX, "/Key2");
-    let set_value_2: String = format!("使用Rust客户端添加_{}", Uuid::new_v4().to_string());
+    let set_value_2: String = format!("使用Rust客户端添加_{}", &Uuid::new_v4().to_string());
     let kv2 = KV::new(key_2, set_value_2);
     let _ = client.put(kv1.key(), kv1.value(), None).await?;
     log::info!("添加Key成功    key={}    value={}", kv1.key(), kv1.value());
@@ -93,16 +94,16 @@ async fn etcd_client() -> Result<(), Error> {
     log::info!("[解锁]分布式锁成功    lockResKey={}", lock_resp_key_utf8);
 
     // 调用租约函数
-    let _ = lease_register(&mut client).await?;
+    lease_register_async(&mut client).await?;
 
     // 调用监听函数
-    let _ = watch_service(&mut client).await?;
+    watch_service_async(&mut client).await?;
 
     Ok(())
 }
 
 // 租约函数
-async fn lease_register(client: &mut Client) -> Result<(), Error> {
+async fn lease_register_async(client: &mut Client) -> Result<(), Error> {
     // 创建租约
     let ttl: i64 = 5;
     let resp = client.lease_grant(ttl, None).await?;
@@ -133,7 +134,7 @@ async fn lease_register(client: &mut Client) -> Result<(), Error> {
 }
 
 // 监听函数
-async fn watch_service(client: &mut Client) -> Result<(), Error> {
+async fn watch_service_async(client: &mut Client) -> Result<(), Error> {
     let watch_key: String = format!("{}{}", PREFIX, "/LsKey1");
     let (watcher, mut stream) = client.watch(watch_key, None).await?;
     log::info!("添加监听器成功 watch_id:{}", watcher.watch_id());
@@ -143,7 +144,7 @@ async fn watch_service(client: &mut Client) -> Result<(), Error> {
                 if let Some(kv) = event.kv() {
                     log::info!("租约  key={} 到期，续租", kv.key_str()?);
                 }
-                let _ = lease_register(client).await;
+                let _ = lease_register_async(client).await;
             }
         }
     }
@@ -155,7 +156,7 @@ async fn main() -> Result<(), Error> {
     // install global collector configured based on RUST_LOG env var.
     tracing_subscriber::fmt::init();
 
-    let _ = etcd_client().await?;
+    etcd_client_async().await?;
 
     Ok(())
 }

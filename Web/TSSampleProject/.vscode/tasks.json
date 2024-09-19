@@ -65,12 +65,12 @@
 			"type": "shell",
 			"command": "bun",
 			"args": [
-				"src/components/RedisClientExample.ts",
+				"src/RedisClientExample.ts",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun run src/components/RedisClientExample.ts",
+			"detail": "bun run src/RedisClientExample.ts",
 			"problemMatcher": [],
 			"presentation": {
 				"echo": true,
@@ -84,12 +84,12 @@
 			"type": "shell",
 			"command": "bun",
 			"args": [
-				"src/components/EtcdClientExample.ts",
+				"src/EtcdClientExample.ts",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun run src/components/EtcdClientExample.ts",
+			"detail": "bun run src/EtcdClientExample.ts",
 			"problemMatcher": [],
 			"presentation": {
 				"echo": true,

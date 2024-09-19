@@ -1,5 +1,7 @@
 package my.mavenbatsample;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -7,7 +9,6 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -19,6 +20,10 @@ import java.io.StringReader;
 /**
  */
 public class ParseXmlUtil {
+
+	// log4j2日志
+	protected static final Logger log = LogManager.getLogger();
+
 	// 查询价格大于80的书的标题的内容
 	private static final String XPath_EXPRESSION = "//book[price>80]/title/text()";
 
@@ -96,8 +101,10 @@ public class ParseXmlUtil {
 			// 根据表达式查询内容
 			processParseXmlWithXpath(document, XPath_EXPRESSION);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
+			// 因为使用了异步日志，要在这里关闭
+			LogManager.shutdown();
 		}
 	}
 

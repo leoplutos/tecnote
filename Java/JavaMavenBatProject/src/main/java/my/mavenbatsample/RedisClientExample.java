@@ -60,7 +60,14 @@ public class RedisClientExample {
 	}
 
 	public static void main(String[] args) {
-		RedisClientExample example = new RedisClientExample();
-		example.redisClient();
+		try {
+			RedisClientExample example = new RedisClientExample();
+			example.redisClient();
+		} catch (Exception e) {
+			log.error(e);
+		} finally {
+			// 因为使用了异步日志，要在这里关闭
+			LogManager.shutdown();
+		}
 	}
 }

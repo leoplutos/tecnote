@@ -1,0 +1,19 @@
+# 设定源
+[source.crates-io]
+replace-with = 'aliyun'
+[source.aliyun]
+#registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
+[http]
+check-revoke = false
+
+[build]
+# 针对性CPU编译，动态链接到C运行
+rustflags = ["-C", "target-cpu=native", "-C", "target-feature=-crt-static"]
+
+# 编译优化
+[profile.release]
+# 删除调试信息
+strip = "debuginfo"
+# 设置链接时优化
+lto = true

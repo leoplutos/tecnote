@@ -14,7 +14,9 @@ if (process.env.NODE_ENV === "production") {
 		transport: {
 			target: 'pino-pretty',
 			options: {
-				colorize: true
+				colorize: true,
+				singleLine: true,
+				translateTime: 'yyyy-mm-dd HH:MM:ss.l',
 			}
 		}
 	};
@@ -47,6 +49,7 @@ const start = async () => {
 	} catch (err) {
 		server.log.error(err);
 		process.exit(1);
+	} finally {
 	}
 };
 start();

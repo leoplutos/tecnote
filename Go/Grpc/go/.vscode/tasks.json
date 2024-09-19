@@ -1,0 +1,112 @@
+{
+	"version": "2.0.0",
+	"options": { //tasks.json定义的所有内容都使用cmd运行
+		"shell": {
+			"executable": "cmd.exe",
+			"args": [
+				"/d",
+				"/c"
+			]
+		},
+		"env": { //自定义环境变量
+			"GOROOT": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
+			"GOPATH": "D:\\Tools\\WorkTool\\Go\\go_global",
+			"GO111MODULE": "on",
+			"PATH": "${env:path};${env:GOROOT}\\bin;${env:GOPATH};D:\\Tools\\WorkTool\\Build\\buf",
+		}
+	},
+	"tasks": [
+		{
+			"label": "buf_generate",
+			"type": "shell",
+			"command": "buf",
+			"args": [
+				"generate",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "go_build_server",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"./bin/server.exe",
+				"./product/server/main.go",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "go_run_server",
+			"type": "shell",
+			"command": ".\\bin\\server.exe",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "go_build_client",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"./bin/client.exe",
+				"./product/client/main.go",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+		{
+			"label": "go_run_client",
+			"type": "shell",
+			"command": ".\\bin\\client.exe",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new"
+			}
+		},
+	]
+}

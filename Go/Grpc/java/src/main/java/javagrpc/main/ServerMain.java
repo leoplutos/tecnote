@@ -22,6 +22,8 @@ import java.net.InetAddress;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.LogManager;
@@ -39,8 +41,8 @@ public class ServerMain {
 	private Server server;
 	// HealthCheckService
 	private HealthStatusManager health;
-	// 线程池
-	// private ExecutorService executorService;
+	// 虚拟线程的执行器
+	private ExecutorService executorService;
 	// Etcd客户端
 	private Client etcd;
 
@@ -52,9 +54,9 @@ public class ServerMain {
 
 		productMap = new ConcurrentHashMap<String, Product>();
 		health = new HealthStatusManager();
-		// 线程池
-		// gPRC默认使用的线程是无限制的CachedThreadPool，如果想用线程池限制个数的话可以使用newFixedThreadPool
-		// executorService = Executors.newFixedThreadPool(10);
+		// 虚拟线程的执行器，这个执行器在每次提交一个新任务时，都会为这个任务创建一个新的虚拟线程来执行它
+		// 虚拟线程属于非常轻量级的资源，因此，用时创建，用完就扔，不要池化虚拟线程
+		executorService = Executors.newVirtualThreadPerTaskExecutor();
 		// OpenTelemetry监测的拦截器
 		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
 		// gRPC服务
@@ -62,7 +64,7 @@ public class ServerMain {
 				.addService(OpentelemetryConfig.configureServerInterceptor(openTelemetry, new ProductServiceImpl(port))) // 添加业务服务和otel拦截器
 				.addService(new StopServiceImpl())// 添加业务服务
 				.addService(health.getHealthService())// 添加HealthCheck服务
-				// .executor(executorService)
+				.executor(executorService)
 				.build()
 				.start();
 
@@ -124,6 +126,8 @@ public class ServerMain {
 					e.printStackTrace(System.err);
 				}
 				log.info("[Java][Server] shutting down gRPC server since JVM is shutting down");
+				// 因为使用了异步日志，要在这里关闭
+				LogManager.shutdown();
 			}
 		});
 	}
@@ -137,12 +141,11 @@ public class ServerMain {
 		if (etcd != null) {
 			etcd.close();
 		}
-
-		// 关闭线程池
-		// if (executorService != null) {
-		// executorService.shutdown();
-		// executorService.awaitTermination(5, TimeUnit.SECONDS);
-		// }
+		// 关闭执行器
+		if (executorService != null) {
+			executorService.shutdown();
+			executorService.awaitTermination(5, TimeUnit.SECONDS);
+		}
 	}
 
 	private void blockUntilShutdown() throws InterruptedException {
@@ -155,26 +158,32 @@ public class ServerMain {
 
 	// 程序主入口
 	public static void main(String[] args) throws Exception {
+		try {
+			// 读取 properties 和 环境变量
+			Configuration config = Config.getInstance();
+			int defaultPort = config.getInt("grpc.server.default.port", 50051);
+			log.info("[Java][Server] 默认端口: {}", defaultPort);
+			// 读取环境变量[GRPC_SERVER_HTTP_PORTS]的设定值
+			int port = config.getInt("GRPC_SERVER_HTTP_PORTS", defaultPort);
+			log.info("[Java][Server] 环境变量[GRPC_SERVER_HTTP_PORTS]设定端口: {}", port);
+			// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
+			String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
+			boolean isWithEtcd = false;
+			if ("true".equals(resolve)) {
+				isWithEtcd = true;
+			}
+			log.info("[Java][Server] 是否启用Etcd服务发现: {}", isWithEtcd);
 
-		// 读取 properties 和 环境变量
-		Configuration config = Config.getInstance();
-		int defaultPort = config.getInt("grpc.server.default.port", 50051);
-		log.info("[Java][Server] 默认端口: {}", defaultPort);
-		// 读取环境变量[GRPC_SERVER_HTTP_PORTS]的设定值
-		int port = config.getInt("GRPC_SERVER_HTTP_PORTS", defaultPort);
-		log.info("[Java][Server] 环境变量[GRPC_SERVER_HTTP_PORTS]设定端口: {}", port);
-		// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
-		String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
-		boolean isWithEtcd = false;
-		if ("true".equals(resolve)) {
-			isWithEtcd = true;
+			final ServerMain server = new ServerMain();
+			// 启动gRPC服务
+			server.start(port, isWithEtcd);
+			server.blockUntilShutdown();
+		} catch (Exception e) {
+			log.error(e);
+		} finally {
+			// 因为使用了异步日志，要在这里关闭
+			LogManager.shutdown();
 		}
-		log.info("[Java][Server] 是否启用Etcd服务发现: {}", isWithEtcd);
-
-		final ServerMain server = new ServerMain();
-		// 启动gRPC服务
-		server.start(port, isWithEtcd);
-		server.blockUntilShutdown();
 	}
 
 	private class StopServiceImpl extends StopServiceImplBase {

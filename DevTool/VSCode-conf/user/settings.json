@@ -546,6 +546,7 @@
 		"[Default Dark+]": { //Default Dark+主题的自定义
 			"enabled": true,
 			"rules": {
+				// 定义方法为 (*|type)(.modifier)*(:language)?
 				"variable": {
 					"foreground": "#d4d4d4"
 				},
@@ -631,6 +632,9 @@
 				},
 				"struct": {
 					"foreground": "#ee5d43"
+				},
+				"struct.defaultLibrary:rust": {
+					"foreground": "#c586c0"
 				},
 				"struct:rust": {
 					"foreground": "#9CDCFE"

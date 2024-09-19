@@ -1,0 +1,14 @@
+# 远程插件版本
+version: v2
+plugins:
+  # 使用远程插件
+  - remote: buf.build/grpc/python:v1.65.5
+    # 输出目录
+    out: src/stub
+  - remote: buf.build/protocolbuffers/python:v26.1
+    # 输出目录
+    out: src/stub
+    opt: pyi_out
+# 入口目录
+inputs:
+  - directory: proto

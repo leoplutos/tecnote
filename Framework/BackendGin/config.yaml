@@ -1,0 +1,11 @@
+jwt:
+  secret: 3Bde3BGEbYqtqyEUzW3ry8jKFcaPH17fRmTmqE7MDr05Lwj95uruRKrrkb44TJ4s
+  ttl: 43200
+  blacklist_grace_period: 10
+  refresh_grace_period: 180
+
+http:
+  port: 9501
+  trusted_proxies:
+    - 127.0.0.1
+    - 172.30.8.172

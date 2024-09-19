@@ -1,0 +1,13 @@
+// 开发环境设定
+{
+	"env": "dev",
+	// 日志设定
+	"pinolog": {
+		//trace|debug|info|warn|error|fatal
+		"min_level": "debug",
+		//file|console
+		"output": "console",
+		//日志文件的位置
+		"filename": "D:\\log\\app.log"
+	}
+}

@@ -70,6 +70,10 @@ IIS 为系统内置组件，只需要把组件设置启用即可，下面以 Win
 
     控制台出现信息 ``Publish: 1 succeeded, 0 failed, 0 skipped`` 即发布成功
 
+### 设置IIS开机不自动启动
+``Windows键`` + ``r`` → 输入 ``services.msc`` 回车  
+找到 ``World Wide Web Publishing Service`` 禁用并停止
+
 ### IIS命令
 
 #### 重启

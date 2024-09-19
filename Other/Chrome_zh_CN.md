@@ -157,11 +157,15 @@ Immersive Translate（沉浸式翻译），支持沉浸式双语网页翻译扩�
 - [Chrome插件商店](https://chrome.google.com/webstore/detail/jfedfbgedapdagkghmgibemcoggfppbb)
 - [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/oohmdefbjalncfplafanlagojlakmjci)
 
-## 浏览器请求状态管理 Header Editor
+## 替换 Google CDN 为国内源 ``ReplaceGoogleCDN``
+在国内访问 https://stackoverflow.com/ 的时候，因为使用了 Google CDN，所以会出现访问过慢的情况
 
-在国内访问 https://stackoverflow.com/ 的时候，会遇到 ``Human verification`` 验证无法通过这个插件就是解决这个问题的  
+- [Github仓库](https://github.com/justjavac/ReplaceGoogleCDN)
+- [Chrome插件商店](https://chrome.google.com/webstore/detail/replace-google-cdn/kpampjmfiopfpkkepbllemkibefkiice)
+- [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/replace-google-cdn/cojepngjobmaiajphkijbdcdjnnjhpjc)
 
-安装方式：https://blog.azurezeng.com/recaptcha-use-in-china/
+安装插件以后访问 https://stackoverflow.com/  
+起飞！！！
 
 ## 音乐下载插件 声海盗
 https://github.com/seekerlee/SoundPirate

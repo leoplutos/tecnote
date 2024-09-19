@@ -52,14 +52,14 @@
 	<!-- logger 定义 -->
 	<Loggers>
 		<!-- 过滤io.netty的日志 -->
-		<Logger name="io.netty" level="warn" additivity="false">
+		<Logger name="io.netty" level="warn" additivity="false" includeLocation="true">
 			<AppenderRef ref="Console"/>
 		</Logger>
-		<Logger name="io.grpc.netty" level="warn" additivity="false">
+		<Logger name="io.grpc.netty" level="warn" additivity="false" includeLocation="true">
 			<AppenderRef ref="Console"/>
 		</Logger>
 		<!-- 使用 rootLogger 配置 日志级别 level="trace" -->
-		<Root level="debug">
+		<Root level="debug" includeLocation="true">
 			<!-- 指定日志使用的处理器 -->
 			<AppenderRef ref="Console" />
 			<!--<AppenderRef ref="file" />-->

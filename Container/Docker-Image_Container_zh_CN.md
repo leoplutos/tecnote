@@ -110,6 +110,100 @@ docker run -itd \
 
 启动后使用 WinSCP 等工具测试连接
 
+### 邮件服务器
+https://github.com/Jinnrry/PMail  
+https://github.com/Jinnrry/PMail/blob/master/README_CN.md  
+https://github.com/jinnrry/PMail/pkgs/container/pmail  
+``ghcr.io``是 ``GitHub`` 的容器镜像仓库  
+
+端口：
+ - 80： 引导设置界面的http端口（下面的例子修改端口为9600）
+ - 443： 引导设置界面的https端口
+ - 25： SMTP端口
+ - 465： SMTP SSL端口
+ - 110： POP3端口
+ - 995： POP3 SSL端口
+
+使用命令
+```bash
+# 拉取镜像
+# docker pull ghcr.io/jinnrry/pmail:latest
+# 使用南大加速镜像
+docker pull ghcr.nju.edu.cn/jinnrry/pmail:latest
+
+# 启动容器，修改入口为/bin/ash
+docker run -itd \
+ -p 25:25 \
+ -p 9600:9600 \
+ -p 443:443 \
+ -p 110:110 \
+ -p 465:465 \
+ -p 995:995 \
+ --entrypoint /bin/ash \
+ --name pmail \
+ ghcr.nju.edu.cn/jinnrry/pmail:latest
+
+# 进入容器
+docker attach pmail
+
+# 设定alpine镜像仓库为国内源
+set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# 安装OpenSSL
+apk add openssl
+# 创建一个 2048 位的私钥（private.key）和一个自签证书（public.crt）
+mkdir -p /work/config/ssl
+openssl req -newkey rsa:2048 -nodes -keyout /work/config/ssl/private.key -x509 -days 365 -out /work/config/ssl/public.crt
+
+# 使用端口9600启动服务
+./pmail -p 9600
+```
+
+启动后访问 http://localhost:9600/ 进入引导设置界面设定，如果是内网环境，是不会成功的，最后一步会一直转圈，此时按如下设置即可
+```bash
+# 停止服务
+Ctrl + c
+# 修改配置文件
+vi ./config/config.json
+```
+内容如下
+```json
+{
+	"logLevel": "warn",
+	"domain": "10.202.195.1",
+	"domains": [
+		"10.202.195.1"
+	],
+	"webDomain": "mail.10.202.195.1.com",
+	"dkimPrivateKeyPath": "config/dkim/dkim.priv",
+	"sslType": "1",
+	"SSLPrivateKeyPath": "./config/ssl/private.key",
+	"SSLPublicKeyPath": "./config/ssl/public.crt",
+	"dbDSN": "./config/pmail.db",
+	"dbType": "sqlite",
+	"httpsEnabled": 2,
+	"spamFilterLevel": 0,
+	"httpPort": 9600,
+	"httpsPort": 0,
+	"weChatPushAppId": "",
+	"weChatPushSecret": "",
+	"weChatPushTemplateId": "",
+	"weChatPushUserId": "",
+	"tgBotToken": "",
+	"tgChatId": "",
+	"isInit": true,
+	"webPushUrl": "",
+	"webPushToken": ""
+}
+```
+
+```bash
+# 使用端口9600启动服务
+./pmail -p 9600
+# 退出容器，同时按下
+Ctrl + p + q
+```
+再次访问 http://localhost:9600/ 即可
+
 ## 镜像和容器的区别
 
 ### 镜像

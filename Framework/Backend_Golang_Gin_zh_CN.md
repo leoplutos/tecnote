@@ -20,14 +20,14 @@ https://github.com/jassue/jassue-gin
 
 ## 后端工程
 新建一个 ``Golang 的 Gin 工程``  
-```
+```bash
 cd D:\WorkSpace\FBS
 mkdir BackendGin
 cd BackendGin
 go mod init BackendGin
 ```
 然后下载笔者的工程 [BackendGin](./BackendGin) 覆盖后运行
-```
+```bash
 go mod tidy
 ```
 
@@ -37,18 +37,21 @@ go mod tidy
 ## 启动命令
 
 ### 前端工程启动（端口9500）
-```
+```bash
 cd D:\WorkSpace\FBS\FrontendVue
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```
 
 ### 后端工程启动（端口9501）
-```
+```bash
 cd D:\WorkSpace\FBS\BackendGin
 go build -o ./bin/BackendGin.exe ./src/main.go
 .\bin\BackendGin.exe
 ```
+
+默认端口 ``9501``，可以用环境变量 ``GIN_HTTP_PORT`` 指定端口
+
 ### 使用浏览器访问确认
 
 #### 前端页面入口

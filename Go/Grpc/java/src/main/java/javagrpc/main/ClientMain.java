@@ -126,39 +126,46 @@ public class ClientMain {
 	}
 
 	public static void main(String[] args) throws Exception {
-		log.info("ClientMain 开始");
+		try {
+			log.info("ClientMain 开始");
 
-		// 读取 properties 和 环境变量
-		Configuration config = Config.getInstance();
-		// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
-		String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
-		boolean isWithEtcd = false;
-		if ("true".equals(resolve)) {
-			isWithEtcd = true;
+			// 读取 properties 和 环境变量
+			Configuration config = Config.getInstance();
+			// 读取环境变量[GRPC_SERVER_RESOLVE]的设定值
+			String resolve = config.getString("GRPC_SERVER_RESOLVE", "false");
+			boolean isWithEtcd = false;
+			if ("true".equals(resolve)) {
+				isWithEtcd = true;
+			}
+			log.info("[Java][Client] 是否启用Etcd服务发现: {}", isWithEtcd);
+
+			ClientMain client = new ClientMain(isWithEtcd);
+
+			for (int i = 0; i < 500; i++) {
+				// 添加商品
+				String addId = client.addProduct("Mac Book Pro 2021", "Add by Java");
+				log.info("[Java][Client] Add product success. id: {}", addId);
+
+				// 取得商品
+				// Product product = client.getProduct(addId);
+				// log.info("[Java][Client] Get product success. id: {}, name: {}, description:
+				// {}", product.getId(),
+				// product.getName(), product.getDescription());
+			}
+
+			// 检查服务状态
+			client.checkHealth();
+
+			log.info("ClientMain 结束");
+
+			// 关闭连接
+			client.shutdown();
+		} catch (Exception e) {
+			log.error(e);
+		} finally {
+			// 因为使用了异步日志，要在这里关闭
+			LogManager.shutdown();
 		}
-		log.info("[Java][Client] 是否启用Etcd服务发现: {}", isWithEtcd);
-
-		ClientMain client = new ClientMain(isWithEtcd);
-
-		for (int i = 0; i < 500; i++) {
-			// 添加商品
-			String addId = client.addProduct("Mac Book Pro 2021", "Add by Java");
-			log.info("[Java][Client] Add product success. id: {}", addId);
-
-			// 取得商品
-			// Product product = client.getProduct(addId);
-			// log.info("[Java][Client] Get product success. id: {}, name: {}, description:
-			// {}", product.getId(),
-			// product.getName(), product.getDescription());
-		}
-
-		// 检查服务状态
-		client.checkHealth();
-
-		log.info("ClientMain 结束");
-
-		// 关闭连接
-		client.shutdown();
 	}
 
 	// 执行HealthCheck检查

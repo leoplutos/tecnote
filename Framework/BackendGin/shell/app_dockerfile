@@ -20,15 +20,22 @@ RUN go env -w GOPROXY=https://goproxy.cn,direct
 # 将本地文件复制到镜像中
 # 复制src文件夹
 COPY src /opt/app/BackendGin/src
+# 复制所有以config开头的.yaml文件
+COPY config*.yaml /opt/app/BackendGin
 # 复制go.mod文件
 COPY go.mod /opt/app/BackendGin/go.mod
 
 # 设置工作目录
 WORKDIR /opt/app/BackendGin
 
+# 开启$GOPATH的缓存，加速下载依赖
+RUN --mount=type=cache,target=/go/pkg go mod tidy
 # 编译工程
-RUN go mod tidy
-RUN go build -o ./bin/backendgin ./src/main.go
+## -ldflags
+## -w：去掉 dwarf 调试信息。会减小可执行文件的大小。
+## -s：去掉符号表信息。会进一步减小可执行文件的大小。
+RUN --mount=type=cache,target=/go/pkg \
+    go build -ldflags "-w -s" -o ./bin/backendgin ./src/main.go
 
 #---------------------------------------------------------------------
 
@@ -42,12 +49,16 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk
 # 创建应用路径
 RUN mkdir /opt/app
 
+# 设置环境变量
+ENV GIN_MODE=release
+
 # 添加bash，curl
 RUN apk update --quiet
 RUN apk add --no-cache --upgrade bash curl
 
 # 从阶段1复制编译结果
-COPY --from=builder /opt/app/BackendGin/bin/backendgin /opt/app/BackendGin/backendgin
+COPY --from=builder /opt/app/BackendGin/bin/backendgin /opt/app/BackendGin/
+COPY --from=builder /opt/app/BackendGin/config*.yaml /opt/app/BackendGin/
 
 # 个人习惯定制化
 RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc

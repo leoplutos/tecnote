@@ -17,7 +17,7 @@
 
 ## 后端工程
 新建一个 ``Rust 的 Actix-Web 工程``  
-```
+```bash
 cd D:\WorkSpace\FBS
 cargo new backend-actix-web
 cd backend-actix-web
@@ -31,17 +31,20 @@ cd backend-actix-web
 ## 启动命令
 
 ### 前端工程启动（端口9500）
-```
+```bash
 cd D:\WorkSpace\FBS\FrontendVue
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```
 
 ### 后端工程启动（端口9501）
-```
+```bash
 cd D:\WorkSpace\FBS\backend-actix-web
 cargo run
 ```
+
+默认端口 ``9501``，可以用环境变量 ``RUST_HTTP_PORT`` 指定端口
+
 ### 使用浏览器访问确认
 
 #### 前端页面入口

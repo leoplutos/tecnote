@@ -10,7 +10,7 @@
 
 ## 查找官方的镜像
 
-```
+```bash
 docker search golang
 ```
 可以找到官方的 ``golang`` 镜像，进而找到官方仓库  
@@ -42,7 +42,7 @@ https://github.com/docker-library/docs/tree/master/alpine
      - /shell/app_dockerfile_singel：docker脚本（普通构建）
 
 ### 宿主机确认工程无问题
-```
+```bash
 cd D:\WorkSpace\FBS\BackendGin
 go mod tidy
 go build -o ./bin/BackendGin.exe ./src/main.go
@@ -57,30 +57,56 @@ http://localhost:9501/login
 将工程放到 ``~/workspace/`` 下（只需要 ``shell``文件夹，``src``文件夹和``go.mod``文件）
 
 制作docker镜像
-```
+```bash
 cd ~/workspace/BackendGin/shell
 bash docker_build.sh
 ```
 镜像制作完毕可以用下的命令查看（``docker images`` 看的是镜像）
-```
+```bash
 docker images
 ```
 
 ### 通过镜像启动容器
 启动容器（将容器内的9501端口映射到宿主机的9502）
-```
+```bash
 docker run -itd -p 9502:9501 --name gin_9502 backend_gin:1.0.0
 ```
+默认端口 ``9501``，可以用环境变量 ``GIN_HTTP_PORT`` 指定端口
 
 启动后可以访问  
 http://localhost:9502/login  
 查看
 
 也可以用命令查看
-```
+```bash
 curl -v http://localhost:9502/login
 ```
 会返回
-```
+```json
 {"code":900,"message":"请求内容不正确","data":null}
+```
+
+## 基于Golang镜像部署gRPC应用的实现示例
+
+### 示例工程
+一个基于 ``Buf``工具链 的 gRPC 示例工程
+
+ - [go](../Go/Grpc/go/)
+
+     - /shell/docker_build.sh：制作docker镜像的shell
+     - /shell/app_dockerfile：docker脚本
+
+### 编译与制作镜像
+
+将工程放到 ``~/workspace/`` 下
+
+制作docker镜像
+```bash
+cd ~/workspace/GoGrpc/shell
+bash docker_build.sh
+```
+
+启动容器
+```bash
+docker run -itd -p 50051:50051 --name grpc_50051 go_grpc:1.0.0
 ```

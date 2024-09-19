@@ -26,13 +26,12 @@ echo RUSTUP_DIST_SERVER: %RUSTUP_DIST_SERVER%
 echo RUSTUP_UPDATE_ROOT: %RUSTUP_UPDATE_ROOT%
 echo PATH: %PATH%
 cmd
-
 ```
 双击 ``start_rust.cmd`` 启动命令行。
 
 #### 安装
 在start_rust.cmd启动命令行中运行 rustup-init.exe  
-```
+```bash
 rustup-init.exe
 ```
 先询问是否安装Visual C++，因为笔者使用gnu工具链所以输入 ``y`` 继续
@@ -153,28 +152,31 @@ rustup --version
 
 ## Rust的更新与卸载
 #### 更新rust
-```
+```bash
 rustup update
 ```
 #### 卸载rust
-```
+```bash
 rustup self uninstall
 ```
 
 ## Rust使用国内源
-文件位置
-``$HOME/.cargo/config.toml`` (``$CARGO_HOME``下)
+全局配置
+ - ``$USER_HOME/.cargo/config.toml``
+
+工程配置
+ - ``$PROJECT_HOME/.cargo/config.toml``
+
 ```toml
 [source.crates-io]
-replace-with = 'ustc'
+replace-with = 'aliyun'
 
-[source.ustc]
+[source.aliyun]
 #registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
 
 [http]
 check-revoke = false
-
 ```
 
 ## gcc安装

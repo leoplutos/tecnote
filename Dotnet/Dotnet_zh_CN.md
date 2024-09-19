@@ -105,6 +105,9 @@ dotnet tool install --global csharp-ls
 csharp-ls --version
 ```
 
+### 在 .NET Core 开启 AOT
+https://learn.microsoft.com/zh-cn/aspnet/core/fundamentals/native-aot
+
 ### 在 .NET Core 下使用命令行新建旧版 .NET Framework 工程
 ```
 dotnet new console --language C# --output MyProject --target-framework-override net48

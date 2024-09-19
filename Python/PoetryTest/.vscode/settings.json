@@ -1,6 +1,6 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
-	"python.analysis.typeCheckingMode": "basic",
+	// "python.analysis.typeCheckingMode": "basic",
 	"python.analysis.completeFunctionParens": true, // 添加括号以完成函数
 	"python.analysis.inlayHints.variableTypes": true, //变量类型的嵌入提示
 	"python.analysis.inlayHints.functionReturnTypes": true, //函数返回类型的嵌入提示
@@ -38,5 +38,10 @@
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
 		// 更改 Protocol Buffers 的 Python 实现, 用纯 Python 的解析器
 		"PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python"
+	},
+	//yaml设定
+	"yaml.format.enable": true,
+	"files.exclude": {
+		"**/__pycache__": true
 	},
 }

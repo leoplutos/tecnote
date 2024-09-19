@@ -1,24 +1,23 @@
 {
-	"name": "node",
+	"name": "node_grpc",
 	"version": "1.0.0",
-	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"tsc": "tsc -p tsconfig.json",
-		"server": "node dist/node-server.js",
-		"client": "node dist/node-client.js"
+		"server": "bun run src/server.ts",
+		"client": "bun run src/client.ts",
+		"build": "bun x tsc -p tsconfig.json",
+		"generate": "bun x buf generate",
+		"test": "jest"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"@grpc/grpc-js": "^1.9.11",
-		"@types/node": "^20.9.2",
-		"@types/node-uuid": "^0.0.32",
-		"@types/uuid": "^9.0.7",
-		"grpc_tools_node_protoc_ts": "^5.3.3",
-		"grpc-tools": "^1.12.4",
+	"dependencies": {
+		"@grpc/grpc-js": "^1.11.3",
 		"uuid": "^9.0.1"
+	},
+	"devDependencies": {
+		"@bufbuild/buf": "^1.42.0",
+		"@types/node": "^20.16.5",
+		"@types/node-uuid": "^0.0.32",
+		"@types/uuid": "^9.0.8"
 	}
 }

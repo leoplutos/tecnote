@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @Description: UserDetailsService 被 DaoAuthenticationProvider
@@ -43,11 +43,11 @@ public class UserLoginDetailsServiceImpl implements UserDetailsService {
 		// 根据用户ID，查询用户的权限
 		// List<Role> roles = authenticationMapper.findRoleByUserId(myUser.getId());
 		// 权限
-		List<GrantedAuthority> authorities = new ArrayList<>();
+		List<GrantedAuthority> authorities = new CopyOnWriteArrayList<>();
 		// SimpleGrantedAuthority为GrantedAuthority的基本具体实现，存储授予Authentication对象的权限的String表示形式
-		//authorities.add(new SimpleGrantedAuthority("admin"));
-		//authorities.add(new SimpleGrantedAuthority("user"));
-		//authorities.add(new SimpleGrantedAuthority("ROLE_admin"));
+		// authorities.add(new SimpleGrantedAuthority("admin"));
+		// authorities.add(new SimpleGrantedAuthority("user"));
+		// authorities.add(new SimpleGrantedAuthority("ROLE_admin"));
 		authorities.add(new SimpleGrantedAuthority("ROLE_user"));
 		// for (Role role : roles) {
 		// authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));

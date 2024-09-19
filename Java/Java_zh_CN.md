@@ -191,8 +191,11 @@ javap -v com/spring/net/a.class
 | JDK 1.2      | 46            | (0x2E)   |
 | JDK 1.1      | 45            | (0x2D)   |  
 
+## Java 的虚拟线程例子（需要 Java 21 以上）
+ - [App.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/App.java)
+
 ## Java 的异步例子
- - [AsyncExample.java](./AsyncExample.java)
+ - [AsyncExample.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/AsyncExample.java)
 
 ## Java 工厂模式的例子
  - [FactoryMode.java](./JavaMavenBatProject/src/main/java/my/mavenbatsample/FactoryMode.java)

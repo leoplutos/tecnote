@@ -1,0 +1,20 @@
+# 远程插件版本
+version: v2
+managed:
+  enabled: true
+plugins:
+  # 生成 grpc 相关代码（生成的代码不可用）
+  - remote: buf.build/community/stephenh-ts-proto:v1.178.0
+    out: src/stub
+    opt:
+      # 更多: https://github.com/stephenh/ts-proto
+      - esModuleInterop=true
+      # 启用grpc-js支持
+      - outputServices=grpc-js
+      # 不输出用于处理 JSON 编码数据的 Message.fromJSON and Message.toJSON 方法
+      - outputJsonMethods=false
+      # 在ESM 环境中执行生成的 ts-proto 代码 [import _m0 from "protobufjs/minimal.js"] 会附带后面的 [.js]
+      - importSuffix=.js
+# 入口目录
+inputs:
+  - directory: proto

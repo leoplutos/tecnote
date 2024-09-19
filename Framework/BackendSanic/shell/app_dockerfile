@@ -1,29 +1,37 @@
 # Python 版本
 # slim 镜像一般都基于 Debian 和 glibc，删除了许多非必需的软件包，优化了体积
-FROM python:3.12.4-slim-bookworm
+# FROM python:3.12.4-slim-bookworm
+FROM python:3.12.5-alpine3.20
 
 # 设定debian12镜像仓库为国内源
-RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+# RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 # 构建时变量，仅在构建Docker映像期间可用
-ARG registry=https://pypi.tuna.tsinghua.edu.cn/simple
+ARG registry=https://mirrors.aliyun.com/pypi/simple/
+
+# 设置环境变量
+ENV SANIC_ENVIRONMENT=production
+ENV SANIC_HTTP_PORT=9501
 
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加curl,netstat
-RUN apt-get update
-RUN apt-get install curl -y
-# RUN apt-get install net-tools -y
+# 添加bash
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash
 
 # 将本地文件复制到镜像中
 # 复制src文件夹
 COPY src /opt/app/BackendSanic/src
 # 复制pyproject.toml文件
 COPY pyproject.toml /opt/app/BackendSanic/pyproject.toml
+# 必须有README.md，不然poetry install会报警告
+COPY README.md /opt/app/BackendSanic/README.md
 
-# 安装 Poetry
-RUN pip install poetry -i $registry
+# 安装 Poetry，开启缓存，加速下载依赖
+RUN --mount=type=cache,target=/root/.cache/pip pip install poetry -i $registry
 RUN poetry config virtualenvs.in-project true
 
 # 个人习惯定制化
@@ -45,4 +53,5 @@ RUN poetry install
 EXPOSE 9501
 
 # 指定容器创建时的默认命令
-CMD ["poetry", "run", "python", "src/backendsanic/server.py"]
+# CMD ["poetry", "run", "sanic", "src.backendsanic.server:app", "--fast", "--no-repl", "--host=0.0.0.0", "--port=${SANIC_HTTP_PORT}"]
+CMD ["sh", "-c", "poetry run  sanic src.backendsanic.server:app --fast --no-repl --host=0.0.0.0 --port=${SANIC_HTTP_PORT}"]

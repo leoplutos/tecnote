@@ -26,6 +26,7 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 	// 添加Product
 	@Override
 	public void addProduct(Product request, StreamObserver<ProductId> responseObserver) {
+		boolean isVirtual = Thread.currentThread().isVirtual();
 		UUID uuid = UUID.randomUUID();
 		String pid = uuid.toString() + " | ServerPort: " + String.valueOf(this.port);
 		Product info = Product.newBuilder()
@@ -35,8 +36,8 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 				.build();
 		ServerMain.productMap.put(info.getId(), info);
 
-		log.info("[Java][Server] AddProduct success. id: {}, name: {}, description: {}", info.getId(),
-				info.getName(), info.getDescription());
+		log.info("[Java][Server] AddProduct success. id: {}, name: {}, description: {}. 是否虚拟线程: {}", info.getId(),
+				info.getName(), info.getDescription(), isVirtual);
 
 		ProductId id = ProductId.newBuilder().setValue(pid).build();
 		try {
@@ -52,6 +53,7 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 	// 取得Product
 	@Override
 	public void getProduct(ProductId request, StreamObserver<Product> responseObserver) {
+		boolean isVirtual = Thread.currentThread().isVirtual();
 		if (ServerMain.productMap == null) {
 			ServerMain.productMap = new ConcurrentHashMap<String, Product>();
 		}
@@ -65,7 +67,7 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 					.build();
 		}
 
-		log.info("[Java][Server] GetProduct success. id: {}", respon.getId());
+		log.info("[Java][Server] GetProduct success. id: {}. 是否虚拟线程: {}", respon.getId(), isVirtual);
 
 		try {
 			// 模拟长时间运行的任务，例如网络请求或数据库查询

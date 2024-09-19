@@ -1,0 +1,10 @@
+version: v2
+# 指定存放 .proto 文件的目录目录（buf generate的入口）
+modules:
+  - path: proto
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE

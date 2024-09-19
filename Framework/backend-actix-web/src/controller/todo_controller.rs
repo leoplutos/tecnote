@@ -1,23 +1,25 @@
-use crate::bootstrap::db::Todo;
-use crate::common_response::common_result::CommonResult;
+use crate::utils::db::Todo;
+use crate::utils::result::Result as CommonResult;
 use actix_web::{post, web, Responder, Result};
+use tracing as log;
 
 // 取得清单列表
 #[post("/todo/getAll")]
 async fn todo_get_all() -> Result<impl Responder> {
-    let result_list = get_todo_from_db()?;
-    println!("{:?}", result_list);
-    let result: CommonResult<_> = CommonResult::success(result_list);
+    // 在内存数据库中查询
+    let todo_list = get_todo_async().await?;
+    let result: CommonResult<_> = CommonResult::success(todo_list);
+    log::info!("请求TodoList成功");
     Ok(web::Json(result))
 }
 
 // 在内存数据库中取得清单列表
-pub fn get_todo_from_db() -> Result<Vec<Todo>> {
+async fn get_todo_async() -> Result<Vec<Todo>> {
     //在lazy_static中取得全局数据库连接
     let binding = crate::DB.lock().unwrap();
     let conn = &mut binding.as_ref().unwrap();
     let mut stmt = conn.prepare("SELECT * FROM todo").unwrap();
-    let mut result_list: Vec<Todo> = Vec::new();
+    let mut todo_list: Vec<Todo> = Vec::new();
     let todo_iter = stmt
         .query_map([], |row| {
             Ok(Todo {
@@ -29,7 +31,7 @@ pub fn get_todo_from_db() -> Result<Vec<Todo>> {
         })
         .unwrap();
     for todo in todo_iter {
-        result_list.push(todo.unwrap());
+        todo_list.push(todo.unwrap());
     }
-    return Ok(result_list);
+    return Ok(todo_list);
 }

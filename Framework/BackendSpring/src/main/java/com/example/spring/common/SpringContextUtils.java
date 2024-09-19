@@ -21,6 +21,7 @@ public class SpringContextUtils implements ApplicationContextAware {
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public void setApplicationContext(@Nonnull ApplicationContext applicationContext) throws BeansException {
 		SpringContextUtils.applicationContext = applicationContext;
 	}

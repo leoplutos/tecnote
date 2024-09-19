@@ -9,12 +9,15 @@ https://www.python.org/downloads/windows/
 解压至自定义位置，内容很简洁，一些自带库应该在python38.zip中。
 
 ## 安装pip
-在官方文档  
-https://pypi.org/project/pip/#description  
-中，提供了3种方法，这里介绍其中的2种方法
+- [官方文档](https://pip.pypa.io/en/stable/installation/) 
 
+### 使用 ensurepip
 
-### 安装pip方法1：采用get-pip.py
+```bash
+python -m ensurepip --upgrade
+```
+
+### 采用get-pip.py
 
 #### 下载get-pip.py
 右键点击  
@@ -63,7 +66,7 @@ pip安装是绝对路径，移动 python 文件夹后 pip 又会无法使用，�
 | 空格  | 20     |
 
 
-### 安装pip方法2：采用独立的pip.pyz程序
+### 独立 zip 应用程序
 
 pip.pyz应用程序目前处于试验阶段。只适合临时使用，不建议在生产环境中使用。  
 pip.pyz应用程序可以在任何受支持的 Python 版本运行

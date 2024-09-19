@@ -2,12 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import asyncio
 from faker import Faker
 
 
-def sub_fun1():
+# 异步函数
+async def sub_fun1_async() -> int:
     fake = Faker('zh-CN')
-    logging.debug("sub1 function is run.")
-    # 使用fake生成一组虚假消息
-    logging.info(fake.profile())
-    return 1
+    logging.info("使用fake生成一组虚假消息")
+    # logging.info(fake.profile())
+    job = fake.profile()['job']
+    logging.info(f"fake job: {job}")
+    # 异步睡眠2秒
+    await asyncio.sleep(2)
+    return 0
