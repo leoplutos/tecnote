@@ -1,0 +1,6 @@
+{
+	"editor.guides.indentation": true,
+	"zig.buildOnSave": true,
+	"zig.zls.enableBuildOnSave": true,
+	"zig.zls.buildOnSaveStep": "check"
+}

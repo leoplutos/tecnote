@@ -141,7 +141,7 @@ return {
           --vim.keymap.set('n', '<C-Down>', vim.lsp.buf.references, opts)
           vim.keymap.set('n', '<Space>fm', function()
             vim.lsp.buf.format { async = true }
-          end, opts('Format'))
+          end, opts('Lsp Format'))
           vim.keymap.set('n', '<Space>gD', vim.lsp.buf.declaration, opts('Declaration'))
           vim.keymap.set('n', '<Space>gh', vim.lsp.buf.signature_help, opts('Signature Help'))
           --vim.keymap.set('n', '<Space>ic', vim.lsp.buf.incoming_calls, opts)
@@ -159,13 +159,13 @@ return {
           end, opts('Toggle InlayHints'))
 
           --取得当前生效的LspClient对象
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          --local client = vim.lsp.get_client_by_id(args.data.client_id)
           --开启Inlay Hints
-          if vim.fn.has('nvim-0.10') == 1 then
-            if client.server_capabilities.inlayHintProvider then
-              vim.lsp.inlay_hint(args.buf, true)
-            end
-          end
+          --if vim.fn.has('nvim-0.10') == 1 then
+          --  if client.server_capabilities.inlayHintProvider then
+          --    vim.lsp.inlay_hint(args.buf, true)
+          --  end
+          --end
 
         --当前选中符号的高亮设定
         --需要设定updatetime为100毫秒

@@ -257,6 +257,10 @@
 			"profileName": "Win-Cmd"
 		}
 	},
+	{ // [VS Code Settings for Mac Windows and Linux插件]更新工程设定文件
+		"key": "shift+space ctrl+o",
+		"command": "vs-code-settings-os.updateSettings",
+	},
 	{ //alt+shift+w:打开浮动终端
 		"key": "alt+shift+w",
 		"command": "runCommands",

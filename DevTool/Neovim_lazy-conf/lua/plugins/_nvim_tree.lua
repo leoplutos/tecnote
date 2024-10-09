@@ -54,6 +54,27 @@ return {
         git = {
           enable = false,
         },
+        filesystem_watchers = {
+          enable = true,
+          debounce_delay = 50,
+          ignore_dirs = {
+            "/.git",
+            "/.svn",
+            "/bin",
+            "/obj",
+            "/target",
+            "/build",
+            "/.vs",
+            "/.settings",
+            "/.metadata",
+            "/.venv",
+            "/__pycache__",
+            "/node_modules",
+            "/dist",
+            "/.zig-cache",
+            "/zig-out",
+          },
+        },
         on_attach = function(bufnr)
           -- 创建nvim-tree缓冲区时运行的函数
           local api = require "nvim-tree.api"

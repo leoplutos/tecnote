@@ -577,6 +577,9 @@
 				"type:rust": {
 					"foreground": "#c586c0" //#ee5d43
 				},
+				"type:zig": {
+					"foreground": "#569cd6"
+				},
 				"type.defaultLibrary": {
 					"foreground": "#64afef"
 				},
@@ -637,6 +640,9 @@
 					"foreground": "#c586c0"
 				},
 				"struct:rust": {
+					"foreground": "#9CDCFE"
+				},
+				"struct:zig": {
 					"foreground": "#9CDCFE"
 				},
 				"generic": {
@@ -775,6 +781,19 @@
 			"color": "terminal.ansiYellow"
 		},
 	},
+	"terminal.integrated.profiles.linux": {
+		"bash": {
+			"path": "bash",
+			"args": [
+				"-i",
+				"--login"
+			],
+			"overrideName": true,
+			"env": {},
+			"icon": "terminal-debian",
+			"color": "terminal.ansiRed"
+		}
+	},
 	"terminal.integrated.env.windows": {
 		// 设定Windows下所有终端环境变量
 		// 设定FindItFaster插件所需工具
@@ -782,7 +801,7 @@
 	},
 	"terminal.integrated.env.osx": {},
 	"terminal.integrated.env.linux": {},
-	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端
+	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端-cmd
 	//"terminal.integrated.defaultProfile.windows": "Win-PowerShell", //设定默认终端-PowerShell
 	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
 	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
@@ -929,12 +948,18 @@
 	"[yaml]": {
 		"editor.defaultFormatter": "redhat.vscode-yaml"
 	},
+	"[lua]": {
+		"editor.detectIndentation": true, //自动检测tabsize
+		"editor.insertSpaces": true, //按下tab时替换为空格
+		"editor.guides.indentation": true, //启用缩进参考线
+		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
+	},
 	//-----------------------------------------------"
 	//               Remote-SSH设定                  "
 	//-----------------------------------------------"
 	"remote.SSH.localServerDownload": "always", //扩展将首先在客户端上安装 VS Code 服务器，然后通过 SCP 将其复制到服务器
 	"remote.SSH.remotePlatform": {
-		"WSL-SSH": "linux"
+		"WSL-SSH": "linux",
 	},
 	//-----------------------------------------------"
 	//           visible-whitespace插件设定          "

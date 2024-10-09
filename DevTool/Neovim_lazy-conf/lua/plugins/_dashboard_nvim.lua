@@ -5,12 +5,25 @@ return {
     version = "*",
     event = 'VimEnter',
     priority = 49,
+    --true:启用、false:禁用
+    enabled = false,
     config = function()
 
       --设定目录
       local dashboard_bookmarks = {}
-      dashboard_bookmarks[#dashboard_bookmarks + 1] = 'D:/WorkSpace/C/CSampleProject'
-      dashboard_bookmarks[#dashboard_bookmarks + 1] = 'D:/WorkSpace/Java/JavaMavenBatProject'
+      if (vim.g.os_flg == 'windows') then
+        dashboard_bookmarks[#dashboard_bookmarks + 1] = 'D:/WorkSpace/C/CSampleProject'
+        dashboard_bookmarks[#dashboard_bookmarks + 1] = 'D:/WorkSpace/Java/JavaMavenBatProject'
+      else
+        -- Docker环境
+        local docker_container = os.getenv('DOCKER_CONTAINER')
+        if docker_container then
+          dashboard_bookmarks[#dashboard_bookmarks + 1] = '/workspace'
+        else
+          -- 不在Docker容器内
+          dashboard_bookmarks[#dashboard_bookmarks + 1] = '~/workspace'
+        end
+      end
       local custom_center = {}
       for i = 1, #dashboard_bookmarks do
         table.insert(custom_center, i, {
@@ -32,12 +45,12 @@ return {
         config = {
           header = {
           '',
-          ' ██████╗  █████╗ ███████╗██╗  ██╗██████╗  ██████╗  █████╗ ██████╗ ██████╗  ',
-          ' ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗ ',
-          ' ██║  ██║███████║███████╗███████║██████╔╝██║   ██║███████║██████╔╝██║  ██║ ',
-          ' ██║  ██║██╔══██║╚════██║██╔══██║██╔══██╗██║   ██║██╔══██║██╔══██╗██║  ██║ ',
-          ' ██████╔╝██║  ██║███████║██║  ██║██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝ ',
-          ' ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ',
+          '            ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z',
+          '            ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    ',
+          '            ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       ',
+          '            ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         ',
+          '            ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           ',
+          '            ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           ',
           '',
           },
           week_header = {

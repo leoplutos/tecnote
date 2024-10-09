@@ -1,107 +1,69 @@
 {
 	"version": "2.0.0",
-	"options": { //tasks.json定义的所有内容都使用cmd运行
-		"shell": {
-			"executable": "cmd.exe",
-			"args": [
-				"/d",
-				"/c"
-			]
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				"CARGO_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+				"RUSTUP_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+				"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+				"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup",
+				// 启用不稳定的稀疏注册表功能
+				"CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
+				// 设定 CARGO_HOME 和 protoc 到PATH
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin;D:\\Tools\\WorkTool\\Build\\protoc-win64\\bin",
+			}
 		},
-		"env": { //在这里自定义环境变量
-			"CARGO_HOME": "${config:cargo.home}",
-			"RUSTUP_HOME": "${config:cargo.home}",
-			"PATH": "${env:path};${config:cargo.home}\\bin",
-		}
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+				"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+				"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup",
+				// 启用不稳定的稀疏注册表功能
+				"CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
 	},
 	"tasks": [
 		{
 			"label": "cargo_build",
 			"type": "shell",
-			"command": "cargo build",
-			"args": [],
+			"command": "cargo",
+			"args": [
+				"build",
+			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"problemMatcher": [
-				"$rustc"
-			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"problemMatcher": [],
 		},
 		{
 			"label": "cargo_run",
 			"type": "shell",
-			"command": "cargo run",
-			"args": [],
+			"command": "cargo",
+			"args": [
+				"run",
+			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"problemMatcher": [
-				"$rustc"
-			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-		},
-		{
-			"label": "cargo_check",
-			"type": "shell",
-			"command": "cargo check",
-			"args": [],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": [
-				"$rustc"
-			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-		},
-		{
-			"label": "cargo_test",
-			"type": "shell",
-			"command": "cargo test",
-			"args": [],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": [
-				"$rustc"
-			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
+			"problemMatcher": [],
 		},
 	]
 }

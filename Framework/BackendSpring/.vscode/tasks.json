@@ -1,7 +1,7 @@
 {
 	"version": "2.0.0",
 	"windows": {
-		"options": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
 			"shell": {
 				"executable": "cmd.exe",
 				"args": [
@@ -18,28 +18,35 @@
 			}
 		}
 	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+				"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational",
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
+	},
 	"tasks": [
 		{
 			"label": "start_springboot",
 			"type": "shell",
-			"command": "mvn",
-			"args": [
-				"spring-boot:run",
-			],
+			"command": "mvn spring-boot:run",
+			"windows": {
+				"command": "chcp 65001 && mvn spring-boot:run"
+			},
+			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
 		},
 		{
 			"label": "build_jar",
@@ -54,16 +61,6 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
 		},
 	]
 }

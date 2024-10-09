@@ -1,9 +1,6 @@
 {
-	"editor.guides.indentation": true, //缩进参考线
-	"go.goroot": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
-	"go.gopath": "D:\\Tools\\WorkTool\\Go\\go_global",
+	"editor.guides.indentation": true,
 	"gopls": {
-		//"formatting.gofumpt": true,
 		"analyses": {
 			"ST1000": false,
 			"ST1003": false,
@@ -66,6 +63,5 @@
 			"source.organizeImports": "never"
 		}
 	},
-	//yaml设定
 	"yaml.format.enable": true
 }

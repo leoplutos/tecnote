@@ -1,0 +1,16 @@
+{
+	"zig.path": "D:/Tools/WorkTool/Zig/zig-windows-x86_64-0.13.0/zig.exe",
+	"terminal.integrated.automationProfile.windows": {
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [
+			"/k",
+			"chcp",
+			"65001"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": {}
+}

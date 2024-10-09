@@ -12,7 +12,7 @@ WSL 的全称是 ``Windows Subsystem for Linux``，也就是 Windows 的 Linux �
 3. 启用了虚拟化功能  
 
 可以使用如下命令确认版本
-```
+```bash
 winver
 ```
 
@@ -21,14 +21,14 @@ winver
 ### 启用 WSL
 需要先启用“适用于 Linux 的 Windows 子系统”可选功能，然后才能在 Windows 上安装 Linux 分发。  
 以管理员身份打开 PowerShell（“开始”菜单 >“PowerShell” >单击右键 >“以管理员身份运行”），然后输入以下命令：
-```
+```bash
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
 ### 启用虚拟机功能
 安装 WSL2 之前，必须启用“虚拟机平台”可选功能  
 以管理员身份打开 PowerShell 并运行：
-```
+```bash
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
@@ -41,41 +41,43 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 ### 将 WSL2 设置为默认版本
 以管理员身份打开 PowerShell 并运行：
-```
+```bash
 wsl --set-default-version 2
 ```
 
 ### 更新 WSL 内核
-```
+```bash
 wsl --update
-或者
+# 或者
 wsl --update --web-download
 ```
 
 ### 查看Linux发行版并且安装Linux
 查看发行版
-```
+```bash
 wsl --list --online
 ```
 如果报错可以用这个url  
 https://raw.bgithub.xyz/microsoft/WSL/master/distributions/DistributionInfo.json  
 
 安装制定发行版，比如Ubuntu
-```
+```bash
 wsl --install -d Ubuntu-22.04
-或者
+# 或者
 wsl --install -d Debian
+# 卸载命令为
+wsl --uninstall Debian
 ```
 
 ### 第一次进入WSL
 运行安装命令后会提示正在安装系统  
 安装完毕会提示设定用户名和密码，设定好后即可进入子系统  
 另外，不要忘记设定root的密码
-```
+```bash
 sudo passwd root
 ```
 设定好后
-```
+```bash
 su
 ```
 当看到 ``$`` 变为 ``#`` 说明用户切换成功  
@@ -84,7 +86,7 @@ su
 
 ### 查看安装的WSL
 查看已安装的Linux子系统
-```
+```bash
 wsl --list -v
 ```
 
@@ -103,7 +105,7 @@ wsl --list -v
     图标：``https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png``  
 
 3. 打开命令行输入
-    ```
+    ```bash
     wsl -d Ubuntu-22.04
     ```
 
@@ -131,31 +133,31 @@ ws.run "wsl -d Ubuntu-22.04", 0
 内容如下
 ```
 [wsl2]
-memory=4GB 
+memory=4GB
 processors=2
 ```
 
 
 ## WSL2的一些常用命令
 查看帮助
-```
+```bash
 wsl --help
 ```
 检查版本
-```
+```bash
 wsl --version
 ```
 装载外部磁盘（比如块本地设备、网络块设备等）
-```
+```bash
 wsl --mount <Disk>
 ```
 关闭WSL
-```
+```bash
 wsl --shutdown
 ```
 
 ## WSL2重启
-```
+```bash
 wsl -l -v
 wsl --terminate Ubuntu-22.04
 ```
@@ -180,7 +182,7 @@ wsl --terminate Ubuntu-22.04
 ## WSL无法启动
 使用WSL过程中可能会因为一些问题导致WSL无法启动  
 使用管理员模式运行Power Shell或CMD并输入
-```
+```bash
 netsh winsock reset
 ```
 执行后重启电脑解决

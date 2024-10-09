@@ -16,6 +16,14 @@ https://www.microsoft.com/openjdk
 - [官方文档](https://help.eclipse.org/neon/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/JavaCore.html)  
 
 
+## 使用 JMH 进行基准测试
+JMH（Java Microbenchmark Harness）是由OpenJDK团队开发的一个用于Java微基准测试工具套件  
+https://github.com/openjdk/jmh  
+
+### 一个例子（这个例子也是一个多模块的例子）
+ - [JavaMavenModule](./JavaMavenModule)
+
+``jmh-test`` 子工程即为 JMH 测试工程
 
 ## 一.Wildfly
 

@@ -259,6 +259,9 @@ https://github.com/DaoCloud/public-image-mirror
 白名单列表  
 https://github.com/DaoCloud/public-image-mirror/issues/2328
 
+#### docker-mirror
+https://github.com/gebangfeng/docker-mirror
+
 #### AtomHub 可信镜像中心（镜像比较少）
 https://hub.atomgit.com/  
 

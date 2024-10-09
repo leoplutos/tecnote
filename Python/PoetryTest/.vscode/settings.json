@@ -44,4 +44,19 @@
 	"files.exclude": {
 		"**/__pycache__": true
 	},
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.linux": {
+		// 更改 Protocol Buffers 的 Python 实现, 用纯 Python 的解析器
+		"PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python"
+	}
 }

@@ -91,6 +91,9 @@ set PATH=%PATH%;%GRADLE_HOME%\bin
 ::Python
 set PYTHON_HOME=D:\Tools\WorkTool\Python\Python312
 set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
+::Zig
+set ZIG_HOME=D:\Tools\WorkTool\Zig\zig-windows-x86_64-0.13.0
+set PATH=%PATH%;%ZIG_HOME%
 ::Kotlin
 set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
 set PATH=%PATH%;%KOTLIN_HOME%\bin

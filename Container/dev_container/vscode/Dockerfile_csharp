@@ -1,0 +1,92 @@
+# 构建Dotnet开发环境
+# 使用VSCode编辑器SSH远程开发
+
+# 基础镜像-Deiban12 Bookworm
+FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
+
+# [参数传递]
+# 宿主机的用户和组
+ARG ARG_USER_ID=1000
+ARG ARG_USER_NAME="dotnet8_vscode_usr"
+ARG ARG_USER_PWD="123456"
+ARG ARG_GROUP_ID=1000
+ARG ARG_GROUP_NAME="dotnet8_vscode_grp"
+# Github下载地址
+ARG ARG_GITHUB_URL="https://bgithub.xyz"
+ARG ARG_CONTAINER_NAME="dotnet8_vscode"
+
+# 在nvim中判断用
+ENV DOCKER_CONTAINER="true"
+ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
+ENV DOCKER_CONTAINER_USER=$ARG_USER_NAME
+ENV DOCKER_CONTAINER_GROUP=$ARG_GROUP_NAME
+# Github下载地址
+ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_CONFIG_URL=$ARG_GITHUB_URL
+RUN echo "Dev User/Group ID is : ${ARG_USER_ID}/${ARG_GROUP_ID}"
+RUN echo "Dev User/Group NAME is : ${ARG_USER_NAME}/${ARG_GROUP_NAME}"
+RUN echo "Github URL is : ${GITHUB_URL}"
+RUN echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
+
+# 设定Debian12镜像仓库为国内源(DEB822格式)
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
+
+# 创建开发用户（避免数据卷为权限为root）
+RUN groupadd -r -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
+RUN useradd -r -g ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} -s /bin/bash -m ${DOCKER_CONTAINER_USER}
+# 设定用户密码
+RUN echo "${DOCKER_CONTAINER_USER}:${ARG_USER_PWD}" | chpasswd
+
+# 安装 所需内容
+RUN apt -qq update -y && apt -qq upgrade -y
+RUN apt install -qq gosu openssh-server zip unzip ripgrep fd-find -y
+# 在Debian中fd的二进制名为fdfind（因为fd已被另一个包使用），所以这里做一个软链接
+RUN ln -s $(which fdfind) /usr/local/bin/fd
+
+# 创建工作路径
+RUN mkdir /workspace
+# 设置工作目录
+WORKDIR /workspace
+
+# 配置 SSH 服务器
+RUN sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
+RUN sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+
+# 创建nuget路径
+RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.nuget/packages
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}
+# 添加nuget国内源
+RUN gosu ${DOCKER_CONTAINER_USER} dotnet nuget add source https://nuget.cdn.azure.cn/v3/index.json -n nuget_cn
+# 禁用默认源
+RUN gosu ${DOCKER_CONTAINER_USER} dotnet nuget disable source nuget.org
+
+# git设定
+RUN gosu ${DOCKER_CONTAINER_USER} git config --global gui.encoding utf-8
+RUN gosu ${DOCKER_CONTAINER_USER} git config --global color.ui true
+RUN gosu ${DOCKER_CONTAINER_USER} git config --global core.autoCRLF false
+RUN gosu ${DOCKER_CONTAINER_USER} git config --global core.sparseCheckout true
+
+WORKDIR /workspace
+
+# 个人习惯定制化
+RUN echo 'if [ -f "$HOME/.bashrc" ]; then source "$HOME/.bashrc"; fi' >> /home/${DOCKER_CONTAINER_USER}/.profile
+
+RUN echo 'export DOCKER_CONTAINER_NAME=dotnet8_vscode' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[${DOCKER_CONTAINER_NAME}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+
+# 修改权限
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}
+
+# 设置默认入口命令
+# ENTRYPOINT ["/bin/bash"]
+# 开启SSH服务 并 使用gosu切换到开发用户
+ENTRYPOINT ["sh", "-c", "service ssh restart && exec gosu ${DOCKER_CONTAINER_USER} /bin/bash"]

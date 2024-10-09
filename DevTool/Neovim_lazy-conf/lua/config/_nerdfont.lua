@@ -86,3 +86,7 @@ vim.g.statusTabLineSubseparatorRight = ""
 vim.g.statusTabLineSeparatorBubbleLeft = ""
 --\ue0b6
 vim.g.statusTabLineSeparatorBubbleRight = ""
+
+--telescope
+vim.g.telescope_prompt_prefix = "🔍 "
+vim.g.telescope_selection_caret = " "

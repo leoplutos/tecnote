@@ -1,0 +1,25 @@
+{
+	"editor.guides.indentation": true,
+	"rust-analyzer.lens.enable": false,
+	"rust-analyzer.check.command": "clippy",
+	"rust-analyzer.check.extraArgs": [
+		"--",
+		"-A",
+		"clippy::needless_return"
+	],
+	"rust-analyzer.cargo.buildScripts.enable": true,
+	"rust-analyzer.checkOnSave": false,
+	"rust-analyzer.debug.openDebugPane": true,
+	"rust-analyzer.inlayHints.bindingModeHints.enable": true,
+	"rust-analyzer.inlayHints.closureCaptureHints.enable": true,
+	"rust-analyzer.inlayHints.closureReturnTypeHints.enable": "always",
+	"rust-analyzer.inlayHints.discriminantHints.enable": "always",
+	"rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "always",
+	"rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
+	"rust-analyzer.inlayHints.typeHints.hideClosureInitialization": true,
+	"rust-analyzer.diagnostics.enable": true,
+	"rust-analyzer.diagnostics.experimental.enable": true,
+	"debug.allowBreakpointsEverywhere": true,
+	"rust-analyzer.showUnlinkedFileNotification": false,
+	"yaml.format.enable": true
+}

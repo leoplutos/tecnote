@@ -60,6 +60,8 @@ return {
       end
       --vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
       vim.keymap.set('n', '<leader>lg', '<cmd>lua _lazygit_toggle()<cr>', default_kb_opts('toggleterm: Open LazyGit'))
+      -- 打开/关闭所有终端
+      vim.keymap.set('n', '<leader>ta', '<cmd>ToggleTermToggleAll<cr>', default_kb_opts('toggleterm: Toggle All Terminal'))
     end,
   },
 }

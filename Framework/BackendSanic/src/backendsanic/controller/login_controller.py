@@ -39,9 +39,9 @@ async def login(request: Request, login_service: LoginService) -> JSONResponse:
         result = Result.fail(code=400, message="密码不能为空")
         return json(result.to_dict(), ensure_ascii=False)
     # 阻塞调用LoginService
-    user_info_list: tuple = await login_service.login(userId, password)
+    check_ret: bool = await login_service.login(userId, password)
     # if user_info_list is None:
-    if len(user_info_list) == 0:
+    if check_ret == False:
         result = Result.fail(code=401, message="用户名或密码错误！")
         return json(result.to_dict(), ensure_ascii=False)
 

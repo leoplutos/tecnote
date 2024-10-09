@@ -1,0 +1,24 @@
+{
+	"java.jdt.ls.java.home": "/opt/java/openjdk/bin/java",
+	"java.configuration.runtimes": [
+		{
+			"name": "JavaSE-21",
+			"path": "/opt/java/openjdk",
+			"default": true
+		}
+	],
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.linux": {
+		"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8"
+	}
+}

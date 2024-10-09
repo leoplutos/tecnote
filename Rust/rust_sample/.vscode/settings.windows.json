@@ -1,0 +1,31 @@
+{
+	"rust-analyzer.server.extraEnv": {
+		"RUSTUP_TOOLCHAIN": "stable",
+		"RA_LOG": "lsp_server=warn",
+		"CARGO_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+		"RUSTUP_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+		"RUST_SRC_PATH": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src",
+		"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+		"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup",
+		"CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
+		"PATH": "${env:path};D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin;D:\\Tools\\WorkTool\\Build\\protoc-win64\\bin"
+	},
+	"terminal.integrated.automationProfile.windows": {
+		"path": "${env:windir}\\System32\\cmd.exe",
+		"args": [
+			"/k",
+			"chcp",
+			"65001"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.windows": {
+		"CARGO_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+		"RUSTUP_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
+		"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+		"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup"
+	}
+}

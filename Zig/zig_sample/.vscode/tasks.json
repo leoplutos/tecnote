@@ -1,0 +1,86 @@
+{
+	"version": "2.0.0",
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Zig\\zig-windows-x86_64-0.13.0",
+			}
+		},
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
+	},
+	"tasks": [
+		{
+			"label": "zig_build_run",
+			"type": "shell",
+			"command": "zig build run",
+			"windows": {
+				"command": "chcp 65001 && zig build run",
+			},
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "zig_build_test",
+			"type": "shell",
+			"command": "zig build test",
+			"windows": {
+				"command": "chcp 65001 && zig build test",
+			},
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "zig_release",
+			"type": "shell",
+			"command": "zig",
+			"args": [
+				"build",
+				"-Doptimize=ReleaseFast",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "zig_run",
+			"type": "shell",
+			"command": "zig run src/main.zig",
+			"windows": {
+				"command": "chcp 65001 && zig run src/main.zig"
+			},
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+	]
+}

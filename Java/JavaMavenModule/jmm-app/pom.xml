@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 指定父工程 -->
+	<parent>
+		<groupId>smp.jmbp</groupId>
+		<artifactId>JavaMavenModule</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<packaging>jar</packaging>
+	<artifactId>jmm-app</artifactId>
+	<description>子工程-应用</description>
+
+	<!-- 依赖定义，在子工程不指定版本，统一由父工程指定 -->
+	<dependencies>
+		<!-- 子工程-jmm-core依赖 -->
+		<dependency>
+			<groupId>smp.jmbp</groupId>
+			<artifactId>jmm-core</artifactId>
+		</dependency>
+		<!--spring context依赖-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<!-- log4j2依赖 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<!-- log4j2依赖 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+		<!-- log4j2异步日志依赖 -->
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+		</dependency>
+		<!-- log4j2和slf4j桥接依赖-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -132,7 +132,7 @@ return {
               },
             },
             capabilities = capabilities,
-            root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', 'mvnw'}, { upward = true })[1]);
+            root_dir = require('lspconfig.util').root_pattern('pom.xml', 'gradlew', 'mvnw', '.git', '.vscode'),
           }
         end,
         -- Python
@@ -151,7 +151,7 @@ return {
               },
             },
             capabilities = capabilities,
-            root_dir = vim.fs.dirname(vim.fs.find({'.venv', 'pyproject.toml'}, { upward = true })[1]);
+            root_dir = require('lspconfig.util').root_pattern('.venv', 'pyproject.toml', '.git', '.vscode'),
           }
         end,
         -- Golang
@@ -213,7 +213,7 @@ return {
             },
             single_file_support = true,
             capabilities = capabilities,
-            root_dir = vim.fs.dirname(vim.fs.find({'go.mod', 'go.work'}, { upward = true })[1]);
+            root_dir = require('lspconfig.util').root_pattern('go.mod', 'go.work', '.git', '.vscode'),
           }
         end,
         -- Rust
@@ -227,6 +227,7 @@ return {
                     enable = true,
                   },
                 },
+                checkOnSave = false,
                 procMacro = {
                   enable = true,
                 },
@@ -246,7 +247,7 @@ return {
               },
             },
             capabilities = capabilities,
-            root_dir = vim.fs.dirname(vim.fs.find({'Cargo.toml'}, { upward = true })[1]);
+            root_dir = require('lspconfig.util').root_pattern('Cargo.toml', '.git', '.vscode'),
           }
         end,
         -- CSharp
@@ -254,7 +255,15 @@ return {
           local lspconfig = require("lspconfig")
           lspconfig.csharp_ls.setup {
             capabilities = capabilities,
-            root_dir = vim.fs.root(0, function(name, path) return name:match('%.sln$') ~= nil end);
+            root_dir = function ()
+              return vim.fs.root(0, function(name, path)return name:match('%.sln$') ~= nil end)
+            end,
+            --root_dir = function(startpath)
+            --  return require('lspconfig.util').root_pattern("*.sln")(startpath)
+            --      or require('lspconfig.util').root_pattern("*.csproj")(startpath)
+            --      or require('lspconfig.util').root_pattern("*.fsproj")(startpath)
+            --      or require('lspconfig.util').root_pattern(".git")(startpath)
+            --end,
           }
         end,
         -- Vue
@@ -269,16 +278,16 @@ return {
             --filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
             filetypes = { 'vue' },
             capabilities = capabilities,
-            root_dir = vim.fs.dirname(vim.fs.find({'package.json', 'tsconfig.json', 'jsconfig.json'}, { upward = true })[1]);
+            root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git', '.vscode'),
           }
         end,
         -- Javascript/Typescript
-        ["tsserver"] = function ()
+        ["ts_ls"] = function ()
           local lspconfig = require("lspconfig")
-          lspconfig.tsserver.setup {
+          lspconfig.ts_ls.setup {
             filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact'},
             capabilities = capabilities,
-            root_dir = vim.fs.dirname(vim.fs.find({'package.json', 'tsconfig.json', 'jsconfig.json'}, { upward = true })[1]);
+            root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git', '.vscode'),
           }
         end,
       }

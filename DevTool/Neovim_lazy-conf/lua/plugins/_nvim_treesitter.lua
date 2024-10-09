@@ -8,6 +8,10 @@ return {
     --true:启用、false:禁用
     enabled = true,
     config = function()
+      --设定国内镜像
+      for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
+        config.install_info.url = config.install_info.url:gsub("https://github.com/", vim.g.github_url.."/")
+      end
       --加载插件
       local configs = require("nvim-treesitter.configs")
       configs.setup({
@@ -36,6 +40,12 @@ return {
           enable = true
         },
       })
+      -- 设定json使用jsonc
+      vim.treesitter.language.register('jsonc', { 'jsonc', 'json', 'json5' })
+	  -- 设定app_dockerfile使用dockerfile
+      vim.treesitter.language.register('dockerfile', { 'Dockerfile', 'app_dockerfile' })
+	  -- 设定mustache使用html
+      vim.treesitter.language.register('html', { 'html', 'mustache' })
     end,
   }
 }

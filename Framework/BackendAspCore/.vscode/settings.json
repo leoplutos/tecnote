@@ -3,4 +3,15 @@
 	"editor.codeLens": false,
 	"terminal.integrated.env.windows": { //设定所有终端环境变量
 	},
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
 }

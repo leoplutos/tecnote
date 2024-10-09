@@ -1,0 +1,15 @@
+{
+	"go.goroot": "/usr/local/go",
+	"go.gopath": "/home/lch/go",
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	}
+}

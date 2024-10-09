@@ -1,20 +1,51 @@
 {
 	"version": "2.0.0",
-	"options": { //tasks.json定义的所有内容都使用cmd运行
-		"shell": {
-			"executable": "cmd.exe",
-			"args": [
-				"/d",
-				"/c"
-			]
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				// 更改 Protocol Buffers 的 Python 实现, 用纯 Python 的解析器
+				"PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python",
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python312\\Scripts",
+			}
 		},
-		"env": { //自定义环境变量
-			// 更改 Protocol Buffers 的 Python 实现, 用纯 Python 的解析器
-			"PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python",
-			"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python312\\Scripts",
-		}
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+				// 更改 Protocol Buffers 的 Python 实现, 用纯 Python 的解析器
+				"PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": "python",
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
 	},
 	"tasks": [
+		{
+			"label": "poetry_install",
+			"type": "shell",
+			"command": "poetry",
+			"args": [
+				"install",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
 		{
 			"label": "poetry_run_app",
 			"type": "shell",
@@ -22,18 +53,12 @@
 			"args": [
 				"run",
 				"python",
-				"src\\poetrytest\\app.py",
+				"src/poetrytest/app.py",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
 		},
 		{
 			"label": "poetry_run_etcd_client",
@@ -42,18 +67,12 @@
 			"args": [
 				"run",
 				"python",
-				"src\\poetrytest\\etcd_client_example.py",
+				"src/poetrytest/etcd_client_example.py",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
 		},
 		{
 			"label": "poetry_run_redis_client",
@@ -62,18 +81,12 @@
 			"args": [
 				"run",
 				"python",
-				"src\\poetrytest\\redis_client_example.py",
+				"src/poetrytest/redis_client_example.py",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
 		},
 	]
 }

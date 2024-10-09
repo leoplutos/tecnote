@@ -5,13 +5,13 @@
 https://maven.apache.org/download.cgi  
 
 2. 下载之后解压缩配置到Path
-```
+```bash
 set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.4
 set PATH=%PATH%;%MAVEN_HOME%\bin
 ```
 
 3. 命令确认
-```
+```bash
 mvn --version
 ```
 
@@ -30,7 +30,7 @@ Maven的配置文件分为 ``全局`` 和 ``用户``
 ## Maven配置
 
 1. (可选)创建本地仓库存放路径
-```
+```bash
 D:\Tools\WorkTool\Java\m2\repo
 ```
 
@@ -82,10 +82,13 @@ D:\Tools\WorkTool\Java\m2\repo
 </settings>
 ```
 
-##### 详细的设定例子
+### 详细的设定例子
  - [java工程](../Go/Grpc/java)
 
-#### Maven工程的 ``pom.xml`` 文件例子
+### 多模块的例子
+ - [JavaMavenModule](./JavaMavenModule)
+
+### Maven工程的 ``pom.xml`` 文件例子
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -122,37 +125,50 @@ D:\Tools\WorkTool\Java\m2\repo
 </project>
 ```
 
+### Maven导入本地jar包
+假设在工程的lib文件夹内有 ``jar-1.0.0.jar``
+
+```xml
+<dependency>
+    <groupId>aa.bb</groupId>
+    <artifactId>aa-bb-api</artifactId>
+    <version>1.0.0</version>
+    <scope>system</scope>
+    <systemPath>${basedir}/lib/jar-1.0.0.jar</systemPath>
+</dependency>
+```
+
 ## Maven命令
 
 #### 创建maven-batch项目
-```
+```bash
 cd D:\WorkSpace\Java
 mvn archetype:generate "-DgroupId=my.mavenbatsample" "-DartifactId=JavaMavenBatProject" "-DarchetypeArtifactId=maven-archetype-quickstart" "-DinteractiveMode=false"
 ```
 
 #### 创建maven-web项目
-```
+```bash
 cd D:\WorkSpace\Java
 mvn archetype:generate "-DgroupId=my.mavenwebsample" "-DartifactId=JavaMavenWebProject" "-DarchetypeArtifactId=maven-archetype-webapp" "-DinteractiveMode=false"
 ```
 
 #### 编译工程
-```
+```bash
 mvn compile
 ```
 
 #### 运行工程
-```
+```bash
 mvn exec:java -Dexec.mainClass="my.mavenbatsample.App" -Dexec.args="arg0 arg1 arg2"
 ```
 
 #### 运行测试
-```
+```bash
 mvn test
 ```
 默认情况下，运行测试后 surfire 插件将在 ``{base-dir}/target/surfire-reports`` 中创建 XML 和 txt 文件报告，并不会生成 ``html`` 报告  
 生成 HTML 报告，可以使用
-```
+```bash
 mvn surefire-report:report-only
 ```
 运行后即可在 ``{base-dir}/target/site`` 中看到 ``html`` 报告  
@@ -165,7 +181,7 @@ Maven打包时，如果有一些变量在多个地方使用，可以使用 ``-D`
 #### Properties属性
 
 使用命令行设置Properties属性 ``-D``的正确方法是
-```
+```bash
 mvn -DpropertyName=propertyValue clean package
 ```
 - 如果 ``propertyName`` 不存在 ``pom.xml`` 中，它将被设置
@@ -233,16 +249,16 @@ Maven的默认输出路径如下
 
 #### 使用Maven Wrapper
 安装Maven Wrapper最简单的方式是在项目的根目录（即 ``pom.xml`` 所在的目录）下运行安装命令：
-```
+```bash
 mvn -N wrapper:wrapper
 ```
 也可以指定 Maven 版本
-```
+```bash
 mvn -N wrapper:wrapper -Dmaven=3.9.5
 ```
 
 安装后发现多了 ``mvnw`` 、 ``mvnw.cmd`` 和 ``.mvn目录``，我们只需要把 mvn 命令改成 ``mvnw`` 就可以使用跟项目关联的 Maven。例如：
-```
+```bash
 ./mvnw clean package
 ```
 

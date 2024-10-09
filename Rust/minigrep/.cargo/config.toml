@@ -1,11 +1,16 @@
-# 设定源
+# 设定字节跳动源
 [source.crates-io]
-replace-with = 'aliyun'
-[source.aliyun]
-#registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
-registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
+replace-with = 'rsproxy-sparse'
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+[source.rsproxy-sparse]
+registry = "sparse+https://rsproxy.cn/index/"
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
 [http]
 check-revoke = false
+[net]
+git-fetch-with-cli = true
 
 [build]
 # 针对性CPU编译，动态链接到C运行

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 指定父工程 -->
+	<parent>
+		<groupId>smp.jmbp</groupId>
+		<artifactId>JavaMavenModule</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<packaging>jar</packaging>
+	<artifactId>jmm-redis</artifactId>
+	<description>子工程-redis</description>
+
+	<!-- 依赖定义，在子工程不指定版本，统一由父工程指定 -->
+	<dependencies>
+		<!-- 子工程-jmm-core依赖 -->
+		<dependency>
+			<groupId>smp.jmbp</groupId>
+			<artifactId>jmm-core</artifactId>
+		</dependency>
+		<!-- jedis依赖 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+	</dependencies>
+
+</project>

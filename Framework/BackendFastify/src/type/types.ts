@@ -11,4 +11,13 @@ declare module 'fastify' {
 		authenticate: any;
 		// authenticate: () => Promise<any>;
 	}
+
+	export interface FastifyBaseLogger {
+		trace: Function;
+		debug: Function;
+		info: Function;
+		warn: Function;
+		error: Function;
+		fatal: Function;
+	}
 }

@@ -1,21 +1,40 @@
 {
 	"version": "2.0.0",
-	"options": { //tasks.json定义的所有内容都使用cmd运行
-		"shell": {
-			"executable": "cmd.exe",
-			"args": [
-				"/d",
-				"/c"
-			]
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				// 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational] 查看GC信息 [-XX:+PrintGCDetails]
+				"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational",
+				"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
+				"MAVEN_HOME": "D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7",
+				"PATH": "${env:path};${env:JAVA_HOME}\\bin;D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7\\bin;",
+				"GRPC_SERVER_RESOLVE": "true",
+			}
 		},
-		"env": { //自定义环境变量
-			// 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational] 查看GC信息 [-XX:+PrintGCDetails]
-			"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational",
-			"JAVA_HOME": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
-			"MAVEN_HOME": "D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7",
-			"PATH": "${env:path};${env:JAVA_HOME}\\bin;D:\\Tools\\WorkTool\\Java\\apache-maven-3.9.7\\bin;",
-			"GRPC_SERVER_RESOLVE": "true",
-		}
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+				"JAVA_TOOL_OPTIONS": "-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational",
+				"GRPC_SERVER_RESOLVE": "true",
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
 	},
 	"tasks": [
 		{
@@ -30,16 +49,6 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
 		},
 		{
 			"label": "mvn_package",
@@ -53,96 +62,58 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
 		},
 		{
 			"label": "mvn_runServer",
 			"type": "shell",
-			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"command": "mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"windows": {
+				"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true"
+			},
 			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
 		},
 		{
 			"label": "mvn_runClient",
 			"type": "shell",
-			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"command": "mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"windows": {
+				"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true"
+			},
 			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
 		},
 		{
 			"label": "mvn_runClientAsync",
 			"type": "shell",
-			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientAsyncMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"command": "mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientAsyncMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"windows": {
+				"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ClientAsyncMain\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true"
+			},
 			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
 		},
 		{
 			"label": "mvn_runStopService",
 			"type": "shell",
-			"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerStopMain\" -Dexec.args=\"127.0.0.1 50051\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"command": "mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerStopMain\" -Dexec.args=\"127.0.0.1 50051\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true",
+			"windows": {
+				"command": "chcp 65001 && mvn exec:java -Dexec.mainClass=\"javagrpc.main.ServerStopMain\" -Dexec.args=\"127.0.0.1 50051\" -Dexec.cleanupDaemonThreads=false -Dprotoc.skip=true"
+			},
 			"args": [],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
 		},
 	]
 }

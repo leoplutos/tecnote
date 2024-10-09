@@ -1,19 +1,50 @@
 {
 	"version": "2.0.0",
-	"options": { //tasks.json定义的所有内容都使用cmd运行
-		"shell": {
-			"executable": "cmd.exe",
-			"args": [
-				"/d",
-				"/c"
-			]
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				"BUN_RUNTIME_TRANSPILER_CACHE_PATH": "0", //禁用运行时转换器缓存
+				// 添加 bun
+				"PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64;D:/Tools/WorkTool/Web/node-v20.15.1-win-x64;"
+			}
 		},
-		"env": { //自定义环境变量
-			// 添加 bun
-			"PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64;D:/Tools/WorkTool/Web/node-v20.15.1-win-x64;"
-		}
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+				"BUN_RUNTIME_TRANSPILER_CACHE_PATH": "0", //禁用运行时转换器缓存
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
 	},
 	"tasks": [
+		{
+			"label": "bun_install",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"install",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
 		{
 			"label": "buf_generate",
 			"type": "shell",
@@ -26,12 +57,6 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
 		},
 		{
 			"label": "bun_build",
@@ -48,12 +73,6 @@
 			"problemMatcher": [
 				"$tsc"
 			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
 		},
 		{
 			"label": "node_runServer",
@@ -66,15 +85,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"detail": "node dist/server.js",
-			"problemMatcher": [
-				"$tsc"
-			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
+			"problemMatcher": [],
 		},
 		{
 			"label": "node_runClient",
@@ -87,15 +98,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"detail": "node dist/client.js",
-			"problemMatcher": [
-				"$tsc"
-			],
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			}
+			"problemMatcher": [],
 		},
 	]
 }

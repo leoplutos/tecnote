@@ -111,6 +111,7 @@ hi Statement    term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 hi PreProc      term=none cterm=none ctermfg=75 gui=none guifg=#64afef
 "Type       : 变量类型，例如“int”
 hi Type         term=none cterm=none ctermfg=75 gui=none guifg=#64afef
+hi LightType         term=none cterm=none ctermfg=75 gui=none guifg=#4FC1FF
 "Underlined : 文本下划线。
 hi Underlined   term=underline cterm=underline ctermfg=33 gui=underline guifg=#3794ff
 hi Ignore       ctermfg=237 guifg=bg
@@ -134,6 +135,7 @@ hi ThinTitle    term=none cterm=none ctermfg=214 gui=none guifg=#f39c12
 hi Annotation   term=none cterm=none ctermfg=34 gui=none guifg=#4ec9b0
 hi clear SpecialComment
 hi! link SpecialComment Comment
+hi StringEscape term=none cterm=none ctermfg=108 gui=none guifg=#D7BA7D
 hi CommonTag    term=none cterm=none ctermfg=244 gui=none guifg=#808080
 hi Interface    term=none cterm=none ctermfg=170 gui=none guifg=#dd50dd
 hi Enum         term=none cterm=none ctermfg=39 gui=none guifg=#CC81BA
@@ -179,6 +181,10 @@ hi StartMenuShortCut term=none cterm=none ctermfg=65 gui=none guifg=#71926c
 hi WhichKeyShowKey       term=none cterm=none ctermfg=170 gui=none guifg=#d068c6
 hi WhichKeyShowSeperator term=none cterm=none ctermfg=34 gui=none guifg=#299f17
 hi WhichKeyShowGroup     term=bold cterm=bold ctermfg=32 gui=bold guifg=#1f97d9
+"Markdown
+hi! link markdownHeadingDelimiter Constant
+hi! markdownCode guifg=#CE9178
+hi! link markdownCodeBlock String
 
 "-----------------------------------------------"
 "               终端高亮                        "
@@ -282,26 +288,90 @@ if has('nvim')
   "TreeSitter区域
   hi clear @type
   hi! link @type Type
+  hi clear @type.builtin.java
+  hi! link @type.builtin.java Statement
+  hi clear @type.css
+  hi! link @type.css StringEscape
   hi clear @type.python
   hi! link @type.python Class
+  hi clear @type.toml
+  hi! link @type.toml ThinTitle
+  hi clear @type.ini
+  hi! link @type.ini ThinTitle
+  hi clear @type.builtin.typescript
+  hi! link @type.builtin.typescript LightType
+  hi clear @type.qualifier.rust
+  hi! link @type.qualifier.rust Constant
+  hi clear @type.qualifier.typescript
+  hi! link @type.qualifier.typescript Constant
+  hi clear @function
+  hi! link @function Function
+  hi clear @function.builtin
+  hi! link @function.builtin Function
+  hi clear @function.builtin.python
+  hi! link @function.builtin.python Function
+  hi clear @function.builtin.bash
+  hi! link @function.builtin.bash Function
+  hi clear @function.builtin.zig
+  hi! link @function.builtin.zig Function
   hi clear @parameter
   hi! link @parameter Parameter
   hi clear @field
   hi! link @field Property
+  hi clear @field.yaml
+  hi! link @field.yaml Constant
   hi clear @property
   hi! link @property Property
+  hi clear @property.properties
+  hi! link @property.properties Special
+  hi clear @property.css
+  hi! link @property.css Special
+  hi clear @property.toml
+  hi! link @property.toml Special
+  hi clear @property.ini
+  hi! link @property.ini Special
   hi clear @variable
   hi! link @variable @lsp
   hi clear @namespace
   hi! link @namespace NameSpace
   hi clear @include
   hi! link @include PreProc
+  hi clear @label
+  hi! link @label Special
   hi clear @method
   hi! link @method Function
   hi clear @repeat
   hi! link @repeat Statement
+  hi clear @repeat.java
+  hi! link @repeat.java Operator
   hi clear @attribute
   hi! link @attribute Annotation
+  hi clear @tag.xml
+  hi! link @tag.xml Constant
+  hi clear @tag.delimiter.xml
+  hi! link @tag.delimiter.xml CommonTag
+  hi clear @tag.attribute.xml
+  hi! link @tag.attribute.xml Constant
+  hi clear @tag.html
+  hi! link @tag.html Constant
+  hi clear @tag.delimiter.html
+  hi! link @tag.delimiter.html CommonTag
+  hi clear @string.escape.jsonc
+  hi! link @string.escape.jsonc StringEscape
+  hi clear @conditional
+  hi! link @conditional Statement
+  hi clear @conditional.java
+  hi! link @conditional.java Operator
+  hi clear @exception.java
+  hi! link @exception.java Statement
+  hi clear @keyword.rust
+  hi! link @keyword.rust Constant
+  hi clear @storageclass.rust
+  hi! link @storageclass.rust Constant
+  hi clear @operator.rust
+  hi! link @operator.rust Normal
+  hi clear @constructor.typescript
+  hi! link @constructor.typescript Statement
 
   "Lsp区域
   hi clear LspReferenceText
@@ -420,7 +490,7 @@ if has('nvim')
   hi clear @lsp.type.generic
   hi! link @lsp.type.generic Property
   hi clear @lsp.type.keyword
-  hi! link @lsp.type.keyword Statement
+  hi! link @lsp.type.keyword Constant
   hi clear @lsp.type.lifetime
   hi! link @lsp.type.lifetime Lifetime
   hi clear @lsp.type.operator
@@ -441,18 +511,26 @@ if has('nvim')
   hi! link @lsp.type.recordComponent Parameter
   hi clear @lsp.type.typeAlias
   hi! link @lsp.type.typeAlias Operator
+  hi clear @lsp.type.modifier.java
+  hi! link @lsp.type.modifier.java Constant
   hi clear @lsp.typemod.function
   hi! link @lsp.typemod.function Function
   hi clear @lsp.typemod.method
   hi! link @lsp.typemod.method Function
+  hi clear @lsp.typemod.enumMember.defaultLibrary.rust
+  hi! link @lsp.typemod.enumMember.defaultLibrary.rust EnumMember
   hi clear @lsp.typemod.typeAlias.defaultLibrary.rust
   hi! link @lsp.typemod.typeAlias.defaultLibrary.rust Operator
   hi clear @lsp.typemod.macro.library
   hi! link @lsp.typemod.macro.library Macro
+  hi clear @lsp.typemod.event.static.cs
+  hi! link @lsp.typemod.event.static.cs Struct
   hi clear @lsp.mod.defaultLibrary
   hi! link @lsp.mod.defaultLibrary Statement
   hi clear @lsp.mod.defaultLibrary.rust
-  hi! link @lsp.mod.defaultLibrary.rust Class
+  hi! link @lsp.mod.defaultLibrary.rust Enum
+  hi clear @lsp.typemod.enum.library.rust
+  hi! link @lsp.typemod.enum.library.rust Enum
   hi clear @lsp.typemod.function.defaultLibrary.go
   hi! link @lsp.typemod.function.defaultLibrary.go Function
   hi clear @lsp.typemod.namespace
@@ -461,6 +539,8 @@ if has('nvim')
   hi! link @lsp.mod.mutable.rust Mutable
   hi clear @lsp.type.member.typescript
   hi! link @lsp.type.member.typescript Function
+  hi clear @lsp.type.struct.zig
+  hi! link @lsp.type.struct.zig Class
 
   "ident_line区域
   hi IndentBlankLineBase cterm=nocombine ctermfg=237 gui=nocombine guifg=#333843

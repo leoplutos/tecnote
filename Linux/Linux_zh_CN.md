@@ -323,6 +323,12 @@ nproc -all
 getconf _NPROCESSORS_ONLN
 ```
 
+### 查看当前Shell
+```
+echo $0
+echo $SHELL
+```
+
 # 函数处理
 ``$0`` ： 脚本名称  
 

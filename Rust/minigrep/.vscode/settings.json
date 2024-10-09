@@ -7,8 +7,10 @@
 		"CARGO_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
 		"RUSTUP_HOME": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79",
 		"RUST_SRC_PATH": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src",
-		"RUSTUP_DIST_SERVER": "https://mirrors.ustc.edu.cn/rust-static",
-		"RUSTUP_UPDATE_ROOT": "https://mirrors.ustc.edu.cn/rust-static/rustup",
+		"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+		"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup",
+		// 启用不稳定的稀疏注册表功能
+		"CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
 		// 设定 CARGO_HOME 和 protoc 到PATH
 		"PATH": "${env:path};D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin;D:\\Tools\\WorkTool\\Build\\protoc-win64\\bin",
 		// "CARGO": "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\bin\\cargo.exe",

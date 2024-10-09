@@ -1,0 +1,98 @@
+# 构建Rust开发环境
+# 使用NeoVim编辑器
+
+# 基础镜像-alpine
+FROM rust:1.79.0-alpine3.20
+
+# [参数传递]
+# 宿主机的用户和组
+ARG ARG_USER_ID=1000
+ARG ARG_USER_NAME="rust_dev_usr"
+ARG ARG_GROUP_ID=1000
+ARG ARG_GROUP_NAME="rust_dev_grp"
+# Github下载地址
+ARG ARG_GITHUB_URL="https://bgithub.xyz"
+ARG ARG_CONTAINER_NAME="rust_dev"
+
+# 设定环境变量
+# 在nvim中判断用
+ENV DOCKER_CONTAINER="true"
+ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
+ENV DOCKER_CONTAINER_USER=$ARG_USER_NAME
+ENV DOCKER_CONTAINER_GROUP=$ARG_GROUP_NAME
+# Github下载地址
+ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_CONFIG_URL=$ARG_GITHUB_URL
+RUN echo "Dev User/Group ID is : ${ARG_USER_ID}/${ARG_GROUP_ID}"
+RUN echo "Dev User/Group NAME is : ${ARG_USER_NAME}/${ARG_GROUP_NAME}"
+RUN echo "Github URL is : ${GITHUB_URL}"
+RUN echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 创建开发用户（避免数据卷为权限为root）
+RUN addgroup -S -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
+RUN adduser -S -G ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} --shell /bin/bash ${DOCKER_CONTAINER_USER}
+
+# 安装 所需内容
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash curl neovim neovim-doc git python3 py3-pip zip wget gzip xsel xclip lazygit ripgrep fd build-base protobuf dpkg
+# 安装 gosu
+# gosu 是经常出现在官方Docker镜像中的一个小工具。它是"su"和"sudo"命令的轻量级替代品，并解决了它们在tty和信号传递中的一些问题
+RUN curl -sSL -o /usr/local/bin/gosu "${GITHUB_URL}/tianon/gosu/releases/download/1.17/gosu-$(dpkg --print-architecture | awk -F- '{ print $NF }')"
+RUN chmod +x /usr/local/bin/gosu
+
+# 创建应用路径
+RUN mkdir /workspace
+# 设置工作目录
+WORKDIR /workspace
+
+# Rust语言设定
+# 设定字节跳动源
+ENV RUSTUP_DIST_SERVER="https://rsproxy.cn"
+ENV RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+# 安装rustfmt
+RUN rustup component add rustfmt
+# 启用不稳定的稀疏注册表功能
+ENV CARGO_UNSTABLE_SPARSE_REGISTRY=true
+
+# git设定
+RUN git config --global gui.encoding utf-8
+RUN git config --global color.ui true
+RUN git config --global core.autoCRLF false
+RUN git config --global core.sparseCheckout true
+
+# neovim定制
+RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.config/nvim
+# 从Github获取设定文件（稀疏检出）
+RUN git clone -b master --depth 1 --filter=blob:none --no-checkout --sparse ${GITHUB_CONFIG_URL}/leoplutos/tecnote.git /workspace/github_config/
+WORKDIR /workspace/github_config/
+RUN git sparse-checkout set --no-cone "DevTool/Neovim_lazy-conf" "DevTool/Vim-conf"
+RUN git checkout
+# 复制到nvim设定目录
+RUN cp -afp /workspace/github_config/DevTool/Neovim_lazy-conf/* /home/${DOCKER_CONTAINER_USER}/.config/nvim
+RUN cp -afp /workspace/github_config/DevTool/Vim-conf/vimconf/colors/ /home/${DOCKER_CONTAINER_USER}/.config/nvim
+RUN rm -rf /workspace/github_config/
+
+WORKDIR /workspace
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[${DOCKER_CONTAINER_NAME}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias vi="nvim"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias vim="nvim"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+
+# 修改权限
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}
+
+# 设置默认入口命令
+# ENTRYPOINT ["/bin/bash"]
+# 使用gosu切换到开发用户
+ENTRYPOINT ["sh", "-c", "exec gosu ${DOCKER_CONTAINER_USER} /bin/bash"]

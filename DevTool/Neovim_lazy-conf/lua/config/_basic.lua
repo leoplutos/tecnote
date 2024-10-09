@@ -13,11 +13,14 @@ if (vim.g.os_flg == 'windows') then
   vim.opt.shellslash = true
   vim.g.terminal_shell = 'cmd.exe /k D:/Tools/WorkTool/Cmd/cmdautorun.cmd'
   vim.g.java_maven_conf_path = 'D:/Tools/WorkTool/Java/apache-maven-3.9.7/conf/settings.xml'
-  vim.g.vscode_snippets = vim.g.user_home .. "/AppData/Roaming/Code/User"
+  -- Windows %APPDATA%\Code\User\snippets
+  vim.g.vscode_snippets = vim.g.user_home .. "/AppData/Roaming/Code/User/snippets"
 else
-  vim.g.terminal_shell = '/bin/bash -l -i'
+  -- vim.g.terminal_shell = '/bin/bash -l -i'
+  vim.g.terminal_shell = '/bin/bash'
   vim.g.java_maven_conf_path = '/usr/share/maven/conf/settings.xml'
-  vim.g.vscode_snippets = vim.g.user_home .. "/AppData/Roaming/Code/User"
+  -- $HOME/.config/Code/User/snippets
+  vim.g.vscode_snippets = vim.g.user_home .. "/.config/Code/User/snippets"
 end
 
 vim.g.mapleader = "\\"
@@ -89,4 +92,23 @@ else
       ["*"] = my_paste("*"),
     },
   }
+end
+-- Docker环境
+local docker_container = os.getenv('DOCKER_CONTAINER')
+if docker_container then
+  -- 在Docker容器内
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      -- 小括号里面的内容可能是毫无意义的，但是保持原样可能看起来更好一点
+      ["+"] = my_paste("+"),
+      ["*"] = my_paste("*"),
+    },
+  }
+else
+  -- 不在Docker容器内
 end

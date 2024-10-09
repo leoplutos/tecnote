@@ -15,9 +15,12 @@ https://forge.rust-lang.org/infra/other-installation-methods.html
 set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 set PATH=%PATH%;%CARGO_HOME%\bin
+:: 国内源：字节跳动
+set RUSTUP_DIST_SERVER=https://rsproxy.cn
+set RUSTUP_UPDATE_ROOT=https://rsproxy.cn/rustup
 :: 国内源：中国科学技术大学
-set RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
-set RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+:: set RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+:: set RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 :: 国内源：清华大学
 :: RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 echo CARGO_HOME: %CARGO_HOME%
@@ -167,17 +170,8 @@ rustup self uninstall
 工程配置
  - ``$PROJECT_HOME/.cargo/config.toml``
 
-```toml
-[source.crates-io]
-replace-with = 'aliyun'
-
-[source.aliyun]
-#registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
-registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
-
-[http]
-check-revoke = false
-```
+推荐使用 [字节跳动源](https://rsproxy.cn/)
+设定例子可以看 [这里](./rust_sample/.cargo/config.toml)
 
 ## gcc安装
 在 Windows 平台下，如果使用 ``-gnu`` 的话，有时会需要 ``gcc.exe`` 在 PATH 中可用  

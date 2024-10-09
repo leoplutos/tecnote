@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>smp.jmbp</groupId>
+	<artifactId>JavaMavenModule</artifactId>
+	<version>1.0.0</version>
+	<name>JavaMavenModule</name>
+	<description>父工程</description>
+
+	<!-- 子工程定义 -->
+	<modules>
+		<module>jmm-core</module>
+		<module>jmm-app</module>
+		<module>jmm-etcd</module>
+		<module>jmm-redis</module>
+		<module>jmh-test</module>
+	</modules>
+	<packaging>pom</packaging>
+
+	<!-- 属性定义 -->
+	<properties>
+		<jmbp.version>1.0.0</jmbp.version>
+		<!-- required for JDK 8 - 21 -->
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jmhtestjar.name>benchmarks</jmhtestjar.name>
+	</properties>
+
+	<!-- 父项目统一管理依赖 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.1</version>
+				<scope>test</scope>
+			</dependency>
+			<!--spring context依赖-->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>6.1.10</version>
+			</dependency>
+			<!-- log4j2依赖 -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>2.23.1</version>
+			</dependency>
+			<!-- log4j2依赖 -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.23.1</version>
+			</dependency>
+			<!-- log4j2异步日志依赖 -->
+			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>3.4.4</version>
+			</dependency>
+			<!-- log4j2和slf4j桥接依赖-->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>2.23.1</version>
+			</dependency>
+			<!-- jedis依赖 -->
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>5.0.0</version>
+			</dependency>
+			<!-- jetcd依赖 -->
+			<dependency>
+				<groupId>io.etcd</groupId>
+				<artifactId>jetcd-core</artifactId>
+				<version>0.8.3</version>
+			</dependency>
+			<!-- JMH依赖 -->
+			<dependency>
+				<groupId>org.openjdk.jmh</groupId>
+				<artifactId>jmh-core</artifactId>
+				<version>1.37</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjdk.jmh</groupId>
+				<artifactId>jmh-generator-annprocess</artifactId>
+				<version>1.37</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- 子工程-jmm-core依赖 -->
+			<dependency>
+				<groupId>smp.jmbp</groupId>
+				<artifactId>jmm-core</artifactId>
+				<version>${jmbp.version}</version>
+			</dependency>
+			<!-- 子工程-jmm-app依赖 -->
+			<dependency>
+				<groupId>smp.jmbp</groupId>
+				<artifactId>jmm-app</artifactId>
+				<version>${jmbp.version}</version>
+			</dependency>
+			<!-- 子工程-jmm-etcd依赖 -->
+			<dependency>
+				<groupId>smp.jmbp</groupId>
+				<artifactId>jmm-etcd</artifactId>
+				<version>${jmbp.version}</version>
+			</dependency>
+			<!-- 子工程-jmm-redis依赖 -->
+			<dependency>
+				<groupId>smp.jmbp</groupId>
+				<artifactId>jmm-redis</artifactId>
+				<version>${jmbp.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+	</dependencies>
+
+	<!-- 配置国内源 -->
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>aliyun nexus</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<name>aliyun nexus</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

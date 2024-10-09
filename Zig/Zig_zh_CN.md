@@ -8,38 +8,18 @@
 - [Zig 语言圣经](https://course.ziglang.cc/)
 - [Zig 语言圣经 Github](https://github.com/zigcc/zig-course)
 
+## 下载
+- [Windows_0.13.0](https://ziglang.org/download/0.13.0/zig-windows-x86_64-0.13.0.zip)
+
 ## Docker
-暂时没有官方镜像，待补充，可以临时使用如下镜像
+暂时没有官方镜像，需要自己制作，详见笔者的 [dockerfile](../Container/dev_container/)
 
-拉取镜像，启动容器
-```bash
-# 此镜像为Wolfi
-docker pull chainguard/zig:latest-dev
-docker run -it --entrypoint /bin/bash --name zig chainguard/zig:latest-dev
-```
+## 常用命令
 
-Wolfi定制
-```bash
-echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
-echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
-echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
-echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
-echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
-echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
-echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
-. /root/.bashrc
-
-# Wolfi使用apk包，默认镜像源为 https://packages.wolfi.dev/os
-# Alpine apk 不能与 Wolfi apk 混合使用
-# cat /etc/apk/repositories
-# 安装nvim
-apk update --quiet
-apk add --no-cache --upgrade neovim
-```
-
-Zig确认
+确认
 ```bash
 zig version
+zig env
 ```
 
 创建Zig工程
@@ -56,12 +36,34 @@ zig build
 zig run src/main.zig
 ```
 
-再次进入容器
-```bash
-docker start zig
-docker attach zig
-```
-ssssong'song'song'song'song
-## 第三方库
+## 编译
+``zig cc``、``zig c++`` 是 ``C/C++`` 编译器  
+``zig build`` 适用于 ``Zig/C/C++`` 的构建系统
 
+## 依赖项管理
+Zig 管理依赖项为先在 ``build.zig.zon`` 添加包的元信息，然后在 ``build.zig`` 中引入包
+
+### zig fetch 命令
+
+获取包的 hash
+```bash
+zig fetch https://bgithub.xyz/JakubSzark/zig-string/archive/refs/heads/master.tar.gz
+122047e740a48165ed1cdd10b8c595cb5b37d2ae2128364957ba0a8de5c7dc396adf
+```
+
+将包直接添加到 zon 文件中
+```bash
+zig fetch --save https://bgithub.xyz/JakubSzark/zig-string/archive/refs/heads/master.tar.gz
+```
+
+## 示例工程
+ - [zig_sample](./zig_sample)
+
+## VSCode开发
+需要安装 [**Zig Language**](https://marketplace.visualstudio.com/items?itemName=ziglang.vscode-zig)  
+
+安装好后在VSCode里面按 ``F1`` → 输入 ``zig lang``  
+即可看到 ``Zig Language Server: Install Server``，选择安装即可
+
+## 第三方库
 - [awesome-zig](https://github.com/zigcc/awesome-zig)

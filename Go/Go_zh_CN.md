@@ -82,6 +82,19 @@ go get -u github.com/google/uuid
 go install my.sample/GoSampleProject@latest
 ```
 
+## Go 的多模块工作区（multi-module workspaces）
+首先，创建4个子模块
+- core
+- app
+- etcd
+- redis
+
+```bash
+cd D:\WorkSpace\Go\GoWorkspace
+
+go work init [moddirs]
+```
+
 ## 使用 VSCode
 使用插件为  [**Go**](https://marketplace.visualstudio.com/items?itemName=golang.go)  
 安装插件的时候如果没有设定环境变量 ``GOROOT`` 的话会报错。  

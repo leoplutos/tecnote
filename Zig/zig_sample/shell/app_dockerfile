@@ -1,0 +1,83 @@
+# 多阶段构建
+
+# 阶段1：编译，命名为builder
+FROM alpine:3.20 AS builder
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加curl和git
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade curl git
+
+# 安装Zig
+RUN curl -Lo zig-linux-x86_64-0.13.0.tar.xz "https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz"
+RUN tar -xvJf zig-linux-x86_64-0.13.0.tar.xz
+RUN mv zig-linux-x86_64-0.13.0 /usr/local/zig
+RUN rm zig-linux-x86_64-0.13.0.tar.xz
+RUN ln -s /usr/local/zig/zig /usr/bin/zig
+
+# 因为Zig的依赖关系中会有嵌套关系，为了解决Github访问问题，这里使用反向代理到 https://bgithub.xyz
+RUN git config --global http.proxy http://bgithub.xyz
+RUN git config --global https.proxy https://bgithub.xyz
+
+# Zig语言设定
+
+# 将本地文件复制到镜像中
+# 复制src文件夹
+COPY src /opt/app/zig_sample/src
+# 复制工程描述文件
+COPY build.zig /opt/app/zig_sample/
+COPY build.zig.zon /opt/app/zig_sample/
+
+# 设置工作目录
+WORKDIR /opt/app/zig_sample
+
+# 编译工程
+## -Doptimize=ReleaseFast：使用ReleaseFast模式构建
+RUN --mount=type=cache,target=/root/.cache/zig \
+    zig build -Doptimize=ReleaseFast
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+# 根据需要选择alpine
+FROM alpine:3.20
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 设置环境变量
+ENV ZIG_ENVIRONMENT=docker
+
+# 添加bash，curl
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash curl
+
+# 从阶段1复制编译结果
+COPY --from=builder /opt/app/zig_sample/zig-out/bin/zig_sample /opt/app/zig_sample/
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/zig_sample
+
+# 声明容器运行时监听的特定网络端口
+# EXPOSE 9501
+
+# 指定容器创建时的默认命令
+# CMD ["./zig_sample"]
+ENTRYPOINT ["/bin/bash"]

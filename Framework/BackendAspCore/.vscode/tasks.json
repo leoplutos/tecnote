@@ -1,45 +1,71 @@
 {
 	"version": "2.0.0",
-	"options": { //tasks.json定义的所有内容都使用cmd运行
-		"shell": {
-			"executable": "cmd.exe",
-			"args": [
-				"/d",
-				"/c"
-			]
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+			}
 		},
-		"env": { //自定义环境变量
-		}
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
 	},
 	"tasks": [
 		{
-			"label": "build",
-			"command": "dotnet",
+			"label": "dotnet_restore",
 			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"restore",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "dotnet_build",
+			"type": "process",
+			"command": "dotnet",
 			"args": [
 				"build",
 				"${workspaceFolder}/BackendAspCore.sln",
 				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary;ForceNoAlign"
+				"/consoleloggerparameters:NoSummary"
 			],
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "publish",
-			"command": "dotnet",
+			"label": "dotnet_publish",
 			"type": "process",
+			"command": "dotnet",
 			"args": [
 				"publish",
 				"${workspaceFolder}/BackendAspCore.sln",
 				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary;ForceNoAlign"
+				"/consoleloggerparameters:NoSummary"
 			],
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "watch",
-			"command": "dotnet",
+			"label": "dotnet_watch",
 			"type": "process",
+			"command": "dotnet",
 			"args": [
 				"watch",
 				"run",
@@ -61,12 +87,6 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "new"
-			},
 		},
 	]
 }

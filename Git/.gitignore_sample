@@ -10,6 +10,9 @@ go.sum
 *.tsbuildinfo
 
 # ignore ALL files in directory
+.git/
+.svn/
+.idea/
 bin/
 obj/
 target/
@@ -21,3 +24,5 @@ build/
 __pycache__/
 node_modules/
 dist/
+.zig-cache/
+zig-out/

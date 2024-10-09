@@ -1,0 +1,29 @@
+{
+	"rust-analyzer.server.extraEnv": {
+		"RUSTUP_TOOLCHAIN": "stable",
+		"RA_LOG": "lsp_server=warn",
+		"CARGO_HOME": "/usr/local/cargo",
+		"RUSTUP_HOME": "/usr/local/rustup",
+		"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+		"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup",
+		"CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
+		"PATH": "${env:path}:/usr/local/cargo/bin"
+	},
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+	"terminal.integrated.env.linux": {
+		"CARGO_HOME": "/usr/local/cargo",
+		"RUSTUP_HOME": "/usr/local/rustup",
+		"RUSTUP_DIST_SERVER": "https://rsproxy.cn",
+		"RUSTUP_UPDATE_ROOT": "https://rsproxy.cn/rustup"
+	}
+}

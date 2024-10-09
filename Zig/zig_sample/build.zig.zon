@@ -1,0 +1,30 @@
+.{
+    // 包名字
+    .name = "zig_sample",
+    // 包版本
+    .version = "0.1.0",
+    .minimum_zig_version = "0.12.0",
+    // 包依赖
+    .dependencies = .{
+        // 第三方库 JakubSzark/zig-string
+        .@"zig-string" = .{
+            .url = "https://bgithub.xyz/JakubSzark/zig-string/archive/refs/heads/master.tar.gz",
+            .hash = "122047e740a48165ed1cdd10b8c595cb5b37d2ae2128364957ba0a8de5c7dc396adf",
+        },
+        // 第三方库 karlseguin/log.zig
+        .logz = .{
+            .url = "https://bgithub.xyz/karlseguin/log.zig/archive/refs/heads/zig-0.13.tar.gz",
+            .hash = "122030cda8b80a813ed2d1c460b9d1138bbb0c325f4ccda74785810e7395d6154670",
+        },
+        // path 为本地包的路径
+        //.@"path-exporter" = .{
+        //    .path = "../package_management_exporter",
+        //},
+    },
+    // 包所包含的源文件
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

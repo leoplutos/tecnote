@@ -2,6 +2,37 @@
 
 ## Docker的常用镜像
 
+### 容器监控 cAdvisor
+[cAdvisor](https://github.com/google/cadvisor)（Container Advisor）是一个开源的容器监控工具，由Google开发并维护。它可以提供对容器的实时监控和性能分析，包括CPU、内存、磁盘、网络等方面的指标。
+
+https://github.com/google/cadvisor
+
+端口：
+ - 18080： HTTP端口
+
+使用命令
+```bash
+# 拉取镜像
+# docker pull gcr.io/cadvisor/cadvisor:v0.49.1
+# 使用南大加速镜像
+docker pull gcr.nju.edu.cn/cadvisor/cadvisor:v0.49.1
+
+docker run -itd \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=18080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --privileged \
+  --device=/dev/kmsg \
+  gcr.nju.edu.cn/cadvisor/cadvisor:v0.49.1
+```
+
+启动后用浏览器访问 http://localhost:18080
+
 ### HTTP测试服务器
 [httpbin.org](https://httpbin.org/) 可以测试 HTTP 请求和响应的各种信息，比如 cookie、ip、headers 和登录验证等，且支持 GET、POST 等多种方法。对 Web 开发和测试很有帮助
 

@@ -1,0 +1,130 @@
+# 构建Java开发环境
+# 使用NeoVim编辑器
+
+# 基础镜像-Ubuntu22.04 Jammy
+FROM maven:3.9.9-eclipse-temurin-21-jammy
+
+# [参数传递]
+# 宿主机的用户和组
+ARG ARG_USER_ID=1000
+ARG ARG_USER_NAME="java21_dev_usr"
+ARG ARG_GROUP_ID=1000
+ARG ARG_GROUP_NAME="java21_dev_grp"
+# Github下载地址
+ARG ARG_GITHUB_URL="https://bgithub.xyz"
+ARG ARG_CONTAINER_NAME="java21_dev"
+
+# 设定Java用环境变量
+# 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational"
+# 在nvim中判断用
+ENV DOCKER_CONTAINER="true"
+ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
+ENV DOCKER_CONTAINER_USER=$ARG_USER_NAME
+ENV DOCKER_CONTAINER_GROUP=$ARG_GROUP_NAME
+# Github下载地址
+ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_CONFIG_URL=$ARG_GITHUB_URL
+RUN echo "Dev User/Group ID is : ${ARG_USER_ID}/${ARG_GROUP_ID}"
+RUN echo "Dev User/Group NAME is : ${ARG_USER_NAME}/${ARG_GROUP_NAME}"
+RUN echo "Github URL is : ${GITHUB_URL}"
+RUN echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
+
+# 设定Ubuntu镜像仓库为国内源
+RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
+
+# 创建开发用户（避免数据卷为权限为root）
+RUN groupadd -r -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
+RUN useradd -r -g ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} -s /bin/bash -m ${DOCKER_CONTAINER_USER}
+
+# 安装 所需内容
+# 卸载git
+RUN apt remove git -y
+RUN apt -qq update -y && apt -qq upgrade -y
+RUN apt install -qq software-properties-common -y
+# 安装git ppa
+RUN add-apt-repository ppa:git-core/ppa -y
+# 安装neovim ppa
+RUN add-apt-repository ppa:neovim-ppa/unstable -y
+RUN apt -qq update -y && apt -qq upgrade -y
+# 安装git，neovim，gosu和其他工具
+RUN apt install -qq git neovim gosu zip unzip xsel xclip ripgrep fd-find python3-pip build-essential -y
+# 在Ubuntu中fd的二进制名为fdfind（因为fd已被另一个包使用），所以这里做一个软链接
+RUN ln -s $(which fdfind) /usr/local/bin/fd
+# python3 -m pip install --user --upgrade pynvim
+RUN python3 -m pip install --user --upgrade pynvim -i https://mirrors.aliyun.com/pypi/simple
+
+# 创建工作路径
+RUN mkdir /workspace
+# 设置工作目录
+WORKDIR /workspace
+
+# 安装lazygit
+#RUN LAZYGIT_VERSION=$(curl -s "https://api.kkgithub.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+RUN curl -Lo lazygit.tar.gz "${GITHUB_URL}/jesseduffield/lazygit/releases/latest/download/lazygit_0.44.1_Linux_x86_64.tar.gz"
+RUN tar xf lazygit.tar.gz lazygit
+RUN install lazygit /usr/local/bin
+RUN rm lazygit.tar.gz
+RUN rm lazygit
+
+# 创建Maven设定路径
+RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.m2/repository
+# 设定Maven国内源
+RUN echo '<?xml version="1.0" encoding="UTF-8"?> \
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" \
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"> \
+    <pluginGroups></pluginGroups> \
+    <proxies></proxies> \
+    <servers></servers> \
+    <mirrors> \
+        <!-- 2. 配置阿里云镜像仓库 --> \
+        <mirror> \
+            <id>alimaven</id> \
+            <name>aliyun maven</name> \
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url> \
+            <mirrorOf>central</mirrorOf> \
+        </mirror> \
+    </mirrors> \
+</settings> \
+' >> /home/${DOCKER_CONTAINER_USER}/.m2/settings.xml
+
+# git设定
+RUN git config --global gui.encoding utf-8
+RUN git config --global color.ui true
+RUN git config --global core.autoCRLF false
+RUN git config --global core.sparseCheckout true
+
+# neovim定制
+RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.config/nvim
+# 从Github获取设定文件（稀疏检出）
+RUN git clone -b master --depth 1 --filter=blob:none --no-checkout --sparse ${GITHUB_CONFIG_URL}/leoplutos/tecnote.git /workspace/github_config/
+WORKDIR /workspace/github_config/
+RUN git sparse-checkout set --no-cone "DevTool/Neovim_lazy-conf" "DevTool/Vim-conf"
+RUN git checkout
+# 复制到nvim设定目录
+RUN cp -afp /workspace/github_config/DevTool/Neovim_lazy-conf/* /home/${DOCKER_CONTAINER_USER}/.config/nvim
+RUN cp -afp /workspace/github_config/DevTool/Vim-conf/vimconf/colors/ /home/${DOCKER_CONTAINER_USER}/.config/nvim
+RUN rm -rf /workspace/github_config/
+
+WORKDIR /workspace
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[${DOCKER_CONTAINER_NAME}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias vi="nvim"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias vim="nvim"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+
+# 修改权限
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}
+
+# 设置默认入口命令
+# ENTRYPOINT ["/bin/bash"]
+# 使用gosu切换到开发用户
+ENTRYPOINT ["sh", "-c", "exec gosu ${DOCKER_CONTAINER_USER} /bin/bash"]
