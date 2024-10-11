@@ -104,6 +104,7 @@ alias dke='func_docker_exec() { docker exec -it $1 /bin/bash; }; func_docker_exe
 alias dkr='docker run -it --entrypoint /bin/bash'
 alias dka='docker attach'
 alias dc='docker compose'
+alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock lazyteam/lazydocker:latest'
 alias dcc='docker compose ps -a'
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'

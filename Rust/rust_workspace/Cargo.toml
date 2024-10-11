@@ -1,0 +1,17 @@
+[workspace]
+resolver="2"
+members = [
+    "rw_core",
+    "rw_app",
+    "rw_etcd",
+    "rw_redis"
+]
+
+# 共享的package配置项
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+# 共享的依赖项
+[workspace.dependencies]
+uuid = { version = "1.10.0", features = ["v4", "fast-rng", "macro-diagnostics"] }

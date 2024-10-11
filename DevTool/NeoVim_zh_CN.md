@@ -75,13 +75,19 @@ Neovim 新加了一个健康检查的命令
 └── init.lua
 ```
 
-主题使用以前的vim自定义主题
-```cmd
-::SET GITHUB_RAW_URL=https://raw.githubusercontent.com
-SET GITHUB_RAW_URL=https://raw.bgithub.xyz
-curl --create-dirs -o %LOCALAPPDATA%\nvim\colors\lch-dark.vim %GITHUB_RAW_URL%/leoplutos/tecnote/master/DevTool/Vim-conf/vimconf/colors/lch-dark.vim
-```
+### Windows 一键设定配置文件
+需要安装 ``git``
 
+使用 cmd 运行 [lazy_nvim_setting.cmd](../Windows/lazy_nvim_setting.cmd) 即可
+
+### Linux 一键设定配置文件
+需要安装 ``git`` 和 ``curl``
+
+```bash
+export GITHUB_RAW_URL=https://raw.bgithub.xyz
+# export GITHUB_RAW_URL=https://raw.githubusercontent.com
+curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash -
+```
 
 ## Python支持
 Neovim 的 ``Python`` 支持方式和 Vim 不一样

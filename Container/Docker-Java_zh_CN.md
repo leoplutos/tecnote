@@ -22,6 +22,7 @@ https://github.com/docker-library/docs/tree/master/eclipse-temurin#simple-tags
 因为做了编译环境和运行环境隔离，还使用到了  
 https://github.com/docker-library/docs/tree/master/maven  
 https://github.com/docker-library/docs/tree/master/alpine  
+https://github.com/docker-library/docs/tree/master/ubuntu  
 
 这里放一些tag的含义
  - jammy：Ubuntu 22.04 LTS

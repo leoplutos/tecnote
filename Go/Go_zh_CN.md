@@ -42,7 +42,7 @@ go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
-#### 
+####
 查看go的设定
 ```bash
 go env
@@ -83,16 +83,39 @@ go install my.sample/GoSampleProject@latest
 ```
 
 ## Go 的多模块工作区（multi-module workspaces）
-首先，创建4个子模块
-- core
-- app
-- etcd
-- redis
+需要 Go 版本 ``1.18 以上``
 
+工程示例
+ - [GoWorkspace](./GoWorkspace)
+
+创建命令
 ```bash
 cd D:\WorkSpace\Go\GoWorkspace
 
-go work init [moddirs]
+# 创建子模块的文件夹 core app etcd redis
+mkdir core app etcd redis
+
+# 分别创建各个子模块并添加依赖
+cd core
+go mod init goworkspace/core
+cd ..
+cd app
+go mod init goworkspace/app
+go get github.com/google/uuid
+cd ..
+cd etcd
+go mod init goworkspace/etcd
+go get github.com/google/uuid
+cd ..
+cd redis
+go mod init goworkspace/redis
+go get github.com/google/uuid
+cd ..
+
+# 创建工作区，并将各个子模块导入工作区
+go work init ./core ./app ./etcd ./redis
+# 添加子模块到工作区
+# go work use ./example
 ```
 
 ## 使用 VSCode

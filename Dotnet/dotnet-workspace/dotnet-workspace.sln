@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dw-core", "dw-core\dw-core.csproj", "{53319B76-9C6F-4EFC-BA05-C0BFD280E010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dw-app", "dw-app\dw-app.csproj", "{6DFFC38E-6374-4309-B14F-F677354C5E06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dw-etcd", "dw-etcd\dw-etcd.csproj", "{E042E38C-19BD-45B8-A090-91A588A6739A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dw-redis", "dw-redis\dw-redis.csproj", "{28BAD6C5-01FE-4FE3-8FC5-608FE22199A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53319B76-9C6F-4EFC-BA05-C0BFD280E010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53319B76-9C6F-4EFC-BA05-C0BFD280E010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53319B76-9C6F-4EFC-BA05-C0BFD280E010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53319B76-9C6F-4EFC-BA05-C0BFD280E010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DFFC38E-6374-4309-B14F-F677354C5E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DFFC38E-6374-4309-B14F-F677354C5E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DFFC38E-6374-4309-B14F-F677354C5E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DFFC38E-6374-4309-B14F-F677354C5E06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E042E38C-19BD-45B8-A090-91A588A6739A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E042E38C-19BD-45B8-A090-91A588A6739A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E042E38C-19BD-45B8-A090-91A588A6739A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E042E38C-19BD-45B8-A090-91A588A6739A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28BAD6C5-01FE-4FE3-8FC5-608FE22199A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BAD6C5-01FE-4FE3-8FC5-608FE22199A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BAD6C5-01FE-4FE3-8FC5-608FE22199A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BAD6C5-01FE-4FE3-8FC5-608FE22199A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

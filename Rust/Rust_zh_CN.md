@@ -1,5 +1,33 @@
 # Rust 相关
 
+## Rust 的多模块工作区（Workspace）
+
+工程示例
+ - [rust_workspace](./rust_workspace)
+
+创建命令
+```bash
+cd D:\WorkSpace\Rust\rust_workspace
+
+# 创建4个子模块 core app etcd redis
+cargo new --lib rw_core
+cargo new rw_app
+cargo new rw_etcd
+cargo new rw_redis
+```
+
+在工程根目录新建 ``Cargo.toml`` 内容如下
+```toml
+[workspace]
+resolver="2"
+members = [
+    "rw_core",
+    "rw_app",
+    "rw_etcd",
+    "rw_redis"
+]
+```
+
 ## 减小编译出的程序的文件大小
 随着引入的依赖包越来越多, 编译生成的 rust 程序二进制文件越来越大, 要花更久的 时间把它推送到线上服务器.
 通过使用以下手段, 可以显著减小生成的程序文件大小, 同时不破坏其完整性

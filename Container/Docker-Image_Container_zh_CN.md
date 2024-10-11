@@ -2,6 +2,29 @@
 
 ## Docker的常用镜像
 
+### LazyDocker
+
+[LazyDocker](https://github.com/jesseduffield/lazydocker) 是一个 Docker 管理的 TUI 程序（类似LazyGit）
+
+LazyDocker [快捷键](https://github.com/jesseduffield/lazydocker/blob/master/docs/keybindings/Keybindings_zh.md)
+
+使用命令
+```bash
+# 拉取镜像
+docker pull lazyteam/lazydocker:latest
+
+# 创建设定文件
+# mkdir -p ${HOME}/.config/lazydocker
+
+#docker run --rm -it  \
+#  -v /var/run/docker.sock:/var/run/docker.sock \
+#  -v ${HOME}/.config/lazydocker:/.config/jesseduffield/lazydocker \
+#  lazyteam/lazydocker:latest
+docker run --rm -it \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  lazyteam/lazydocker:latest
+```
+
 ### 容器监控 cAdvisor
 [cAdvisor](https://github.com/google/cadvisor)（Container Advisor）是一个开源的容器监控工具，由Google开发并维护。它可以提供对容器的实时监控和性能分析，包括CPU、内存、磁盘、网络等方面的指标。
 

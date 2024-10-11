@@ -1,0 +1,24 @@
+# 设定字节跳动源
+[source.crates-io]
+replace-with = 'rsproxy-sparse'
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+[source.rsproxy-sparse]
+registry = "sparse+https://rsproxy.cn/index/"
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+[http]
+check-revoke = false
+[net]
+git-fetch-with-cli = true
+
+[build]
+# 针对性CPU编译，动态链接到C运行
+rustflags = ["-C", "target-cpu=native", "-C", "target-feature=-crt-static"]
+
+# 编译优化
+[profile.release]
+# 删除调试信息
+strip = "debuginfo"
+# 设置链接时优化
+lto = true

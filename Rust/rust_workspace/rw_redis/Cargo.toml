@@ -1,0 +1,8 @@
+[package]
+name = "rw_redis"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+uuid.workspace = true
+rw_core = { path = "../rw_core" }

@@ -20,6 +20,10 @@ https://hub.docker.com/_/python/
 还可以找到官方镜像tag  
 https://github.com/docker-library/docs/tree/master/python#simple-tags
 
+因为做了编译环境和运行环境隔离，还使用到了  
+https://github.com/docker-library/docs/tree/master/alpine  
+https://github.com/docker-library/docs/tree/master/debian  
+
 这里放一些tag的含义
  - bookworm：Debian 12
  - bullseye：Debian 11

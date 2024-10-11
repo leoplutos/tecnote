@@ -1,0 +1,149 @@
+{
+	"version": "2.0.0",
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				"GOROOT": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
+				"GOPATH": "D:\\Tools\\WorkTool\\Go\\go_global",
+				"GO111MODULE": "on",
+				"PATH": "${env:path};${env:GOROOT}\\bin;${env:GOPATH};D:\\Tools\\WorkTool\\Build\\buf",
+			}
+		},
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+				"GO111MODULE": "on",
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
+	},
+	"tasks": [
+		{
+			"label": "go_run_app",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"run",
+				"./app",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "go_build_app",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"./bin/app",
+				"./app",
+			],
+			"windows": {
+				"command": "go",
+				"args": [
+					"build",
+					"-o",
+					"./bin/app.exe",
+					"./app",
+				],
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "go_run_etcd",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"run",
+				"./etcd",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "go_build_etcd",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"./bin/etcd",
+				"./etcd",
+			],
+			"windows": {
+				"command": "go",
+				"args": [
+					"build",
+					"-o",
+					"./bin/etcd.exe",
+					"./etcd",
+				],
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "go_run_redis",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"run",
+				"./redis",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "go_build_redis",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"./bin/redis",
+				"./redis",
+			],
+			"windows": {
+				"command": "go",
+				"args": [
+					"build",
+					"-o",
+					"./bin/redis.exe",
+					"./redis",
+				],
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+	]
+}

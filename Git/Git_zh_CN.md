@@ -4,66 +4,121 @@
 **如果你是Git初学者的话，强烈建议去下面网站把关卡全部完成。**  
 https://learngitbranching.js.org/?locale=zh_CN
 
-## 一.基础设置
+## 基础设置
 
-#### 设定用户名和邮箱
+### 必选设定
+
 ```bash
+# 用户名和邮箱
 git config --global user.name "yourname"
 git config --global user.email "your@email.com"
-```
-
-#### 设定用编码UTF-8
-```bash
+# 编码UTF-8
 git config --global gui.encoding utf-8
-```
-
-#### 打开所有终端颜色
-```bash
+# 打开终端颜色
 git config --global color.ui true
-```
-
-#### 设置取消git中的sslverify（任意）
-```bash
-git config --system http.sslverify false
-```
-
-#### 设置取消HTTP代理（任意）
-```bash
-git config --global --unset http.proxy
-git config --global --unset https.proxy
-```
-
-#### 设置取消换行符自动转换
-```bash
+# 取消换行符自动转换
 git config --global core.autoCRLF false
 ```
 
-#### 设置开启稀疏检出
+### 任选设置
+
 ```bash
+# 开启稀疏检出
 git config --global core.sparseCheckout true
+# 取消git中的sslverify
+git config --system http.sslverify false
+# 取消HTTP代理
+git config --global --unset http.proxy
+# 取消HTTPS代理
+git config --global --unset https.proxy
 ```
 
-#### 设置使用Windows 凭证管理器（Windows Credential Manager）管理账号密码
 ```bash
+# 设置合并策略（执行git pull不带参数时的默认策略）
+## 合并（缺省策略）
+git config --global pull.rebase false
+## 变基：执行 git pull 等于执行 git pull --rebase
+git config --global pull.rebase true
+## 仅快进合并
+git config --global pull.ff only
+```
+
+### 设置使用 Git 凭证管理器 （GCM） 管理账号密码
+
+``Git Credential Manage`` 的 [官方文档](https://git-scm.com/doc/credential-helpers) 和 [GitHub](https://github.com/git-ecosystem/git-credential-manager)
+
+Git 凭证管理器 （GCM） 是一个基于 .NET 构建的安全 Git 凭证帮助程序，可在 Windows、macOS 和 Linux 上运行。它旨在为每个主要的源代码控制托管服务和平台提供一致且安全的身份验证体验，包括多重身份验证。
+
+#### Windows平台
+
+已经包含在 ``Git for Windows`` 中  
+目录为 ``Git\mingw64\bin\git-credential-manager.exe``
+
+```bash
+# 确认gcm版本
+git credential-manager --version
+# 启用gcm
 git config --global credential.helper manager
+# 配置存储方式为使用[Windows 凭据管理器]
 git config --global credential.credentialStore wincredman
 ```
 
 如果想删除凭证的话，如下操作  
 打开 ``设置`` → 搜索 ``Windows 凭据`` → 选择 ``管理 Windows 凭据`` → 在普通凭据下面会看到，删除即可
 
-### 设置合并策略（执行git pull不带参数时的默认策略）
-以下3选1即可，推荐缺省策略
+#### Linux平台
+
+**Debian12 /Ubuntu22.04** 使用 ``gcm``
 ```bash
-# 合并（缺省策略）
-git config --global pull.rebase false
-# 变基：执行 git pull 等于执行 git pull --rebase
-git config --global pull.rebase true
-# 仅快进合并
-git config --global pull.ff only
+# 先安装git
+# sudo apt update
+# sudo apt install git
+
+# 安装gcm依赖库：libicu
+sudo apt install libicu72
+# for Ubuntu22.04
+# sudo apt install libicu70
+
+# 下载安装gcm
+export GITHUB_URL=https://bgithub.xyz
+# export GITHUB_URL=https://github.com
+curl -Lo gcm-linux_amd64.2.6.0.deb "${GITHUB_URL}/git-ecosystem/git-credential-manager/releases/download/v2.6.0/gcm-linux_amd64.2.6.0.deb"
+dpkg -i gcm-linux_amd64.2.6.0.deb
+rm gcm-linux_amd64.2.6.0.deb
+
+# 确认gcm版本
+git credential-manager --version
+# 启用gcm
+git config --global credential.helper manager
+# 配置存储方式为使用[纯文本文件 ~/.gcm/store]
+# 不推荐，安全的做法为使用GPG/pass
+# https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/credstores.md
+git config --global credential.credentialStore plaintext
 ```
 
-## 二.代码管理命令
+**Debian12 /Ubuntu22.04** 使用内置 ``store``
+```bash
+# 先安装git
+# sudo apt update
+# sudo apt install git
+
+# 配置存储方式为使用[纯文本文件 ~/.git-credentials]
+# 不推荐，安全的做法为使用gcm
+git config --global credential.helper store
+```
+
+**alpine** 使用内置 ``store``
+```bash
+# 先安装git
+apk update --quiet
+apk add --no-cache --upgrade git
+
+# 配置存储方式为使用[纯文本文件 ~/.git-credentials]
+# 不推荐，安全的做法为使用gcm
+git config --global credential.helper store
+```
+
+## 代码管理命令
 
 ### Clone仓库
 ```bash
@@ -110,42 +165,47 @@ git sparse-checkout set --no-cone "DevTool/Neovim_lazy-conf" "DevTool/Vim-conf"
 git checkout
 ```
 
-### 打开默认GUI画面
-笔者个人习惯在GUI里面进行add/commit/push/pull操作  
+### 打开默认 GUI 画面
+
+笔者个人习惯在 ``GUI`` 里面进行 ``add/commit/push/pull`` 操作
+
 ```bash
 git gui
 ```
-- 在GUI中执行pull操作需要自己添加一下：  
-Tools → Add... →  
-添加内容1：
-```bash
-Name：执行 pull
-Command：git pull
-选中[Add globally]Checkbox
-```
-添加内容2：
-```bash
-Name：执行 pull rebase
-Command：git pull --rebase
-选中[Add globally]Checkbox
-```
-- 查看log  
+
+#### GUI设定-添加内容1
+
+``Tools`` → ``Add...`` →
+ - Name：``执行 pull``
+ - Command：``git pull``
+ - 选中 ``Add globally`` Checkbox
+
+#### GUI设定-添加内容2
+
+``Tools`` → ``Add...`` →
+ - Name：``执行 pull rebase``
+ - Command：``git pull --rebase``
+ - 选中 ``Add globally`` Checkbox
+
+#### 查看log
 ``Repository`` → ``Visualize xxx's History``
 
-#### 关于git pull
-**git pull**  
-&nbsp;&nbsp;&nbsp;&nbsp;就是 fetch + merge 操作（适用于本地代码没有commit，单纯更新仓库，如果本地代码有commit，那么merge会产生一个叫做merge的commit）  
-**git pull --rebase**  
-&nbsp;&nbsp;&nbsp;&nbsp;就是 fetch + rebase 操作（适用于本地代码有commit，更新仓库并且合并过来，rebase不会产生commit）  
-**※**&nbsp;rebase使你的**提交树变得很干净**, 所有的提交都在一条线上，笔者个人更喜欢rebase
+### 关于git pull
 
-### 查看状态  
+#### ``git pull``
+就是 fetch + merge 操作（适用于本地代码没有commit，单纯更新仓库，如果本地代码有commit，那么merge会产生一个叫做merge的commit）
+
+#### ``git pull --rebase``
+就是 fetch + rebase 操作（适用于本地代码有commit，更新仓库并且合并过来，rebase不会产生commit）
+**※** ``rebase`` 使你的 ``提交树变得很干净``, 所有的提交都在一条线上，笔者个人更喜欢rebase
+
+### 查看状态
 ```bash
 git status
 ```
 
-### 取消本地修改从仓库重新取文件  
-笔者个人习惯为，比如本地的a.java想从仓库重新取。先把a.java重命名为a.java_bak，然后运行以下代码。  
+### 取消本地修改从仓库重新取文件
+比如本地的 ``a.java`` 想从仓库重新取。先把 ``a.java`` 重命名为 ``a.java_bak``，然后运行以下代码  
 旧版本:
 ```bash
 git status
@@ -158,8 +218,8 @@ git restore /src/a.java
 # 或者
 git restore .
 ```
-由于git checkout这个命令还可以用于切换分支，容易引起混淆。
-Git最新版本中将git checkout命令的两项功能分别赋予两个新的命令，一个是git restore，另一个是git switch。
+由于 ``git checkout`` 这个命令还可以用于切换分支，容易引起混淆。
+Git 最新版本中将 ``git checkout`` 命令的两项功能分别赋予两个新的命令，一个是 ``git restore``，另一个是 ``git switch``
 
 ### 发布版本(git tag)
 通常在软件发布的时候会打一个tag，用于标注这次发布的相关信息, 这样做的好处是，将来如果这个版本出现了问题，可以通过tag迅速定位到当前版本，进行错误修复。
@@ -208,7 +268,7 @@ git merge feature-bugfix-v1.3
 ```
 修改之后推送 master 即可
 
-## 三.查看配置文件  
+## 查看配置文件
 
 Git中有三层config文件：``系统``、``全局``、``本地``
 
@@ -236,39 +296,25 @@ git config --local --list
 
 **优先级别最高**，如果全局级别或系统级别的配置里出现了同一配置项，则以本地级别配置内容为准
 
-## 四.凭证存储模式
-使用Git 向远程仓库（例如：GitHub，gitee）提交代码 ，需要输入账号和密码。可能会遇到这样的情况密码输错一次，想修改，但是不知道去哪里修改。一直报错fatal: Authentication failed for 又不弹出用户名和密码输入框 。
-你需要了解Git是如何保存账号密码的，也就是凭据管理。
-
-**如果你习惯了以前``Windows凭据``的管理方式直接选择 ``wincred`` 即可**
+## 凭证存储模式
 
 ### Git凭据管理的三种方式
-Git的凭据存储有cache、store、manager三种方式  
-Git 中有三种级别system 、global 、local ，可以针对不同的级别设置不同的凭据存储方式
+
+Git的凭据存储有 ``cache``、``store``、``manager`` 三种方式  
+详细介绍可以看官方文档
+
 ### 查询当前凭证存储模式
+
 ```bash
 git config credential.helper
 ```
+
 global 、local 如果不设置，默认是没有的
+
 ### 修改指定级别的凭据管理方式
 ```bash
 git config --system credential.helper manager
 ```
-
-### 凭据管理模式
-相信你现在有几个疑问，我平时输入账号密码，用的是哪种？账号密码保存在哪里？如何进行修改？下面一一介绍
-#### 1.manager
-若安装Git时安装了GitGUI，自动会在system级别中设置credential.helper为manager。
-
-git-credential-manager.exe和 git-credential-wincred.exe 都是将凭据存储在系统的凭据管理器中，只不过前者是有图形界面，后者没有图形界面，需要在命令行中输入密码
-
-**凭据保存的位置**  
-在控制面板 → 用户账户 → 凭据管理器，可以看到对应的git账号凭据管理，可以修改或者删除。
-删除后，再次pull或者push，会重新输入密码
-#### 2.store
-如果你在输入账号密码的时候，关闭了manager 方式的输入框，就会要求你在命令行中输入账号
-#### 3.cache
-将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且默认在15分钟后从内存中清除。
 
 ## gitignore
 可以看这个示例文件 [.gitignore](.gitignore_sample)

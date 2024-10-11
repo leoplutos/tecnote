@@ -36,6 +36,7 @@ WindTerm虽然支持的功能很多，但是如果使用Vim等TUI程序的话显
 * [Github](https://github.com/wez/wezterm)
 
 #### 配置文件地址
+
 ```
 $HOME/.wezterm.lua
 ```
@@ -77,6 +78,17 @@ wezterm.log_error('hello')
 - Ctrl + Shift + Alt + % : 垂直分割窗口
 - Ctrl + Shift + Alt + " : 水平分割窗口
 - Ctrl + Shift + 方向键 : 切换窗口焦点
+
+#### Windows 一键设定配置文件
+需要 ``curl``，使用 cmd 运行
+```
+SET GITHUB_RAW_URL=https://raw.bgithub.xyz
+::SET GITHUB_RAW_URL=https://raw.githubusercontent.com
+curl --create-dirs -o %USERPROFILE%\.wezterm.lua %GITHUB_RAW_URL%/leoplutos/tecnote/refs/heads/master/DevTool/WezTerm_conf/wezterm.lua
+curl --create-dirs -o %USERPROFILE%\.bashrc-personal %GITHUB_RAW_URL%/leoplutos/tecnote/refs/heads/master/Linux/linux_rc/bashrc/.bashrc-personal
+```
+
+SSH 到目标服务器之后使用快捷键 ``Alt + s`` 即可 source 个性化设定
 
 ## Windows Terminal
 见 [这里](./Windows-Terminal_zh_CN.md)

@@ -1,0 +1,6 @@
+[package]
+name = "rw_core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

@@ -581,6 +581,12 @@ docker volume ls
 
 ## 其他
 
+### LazyDocker
+
+[LazyDocker](https://github.com/jesseduffield/lazydocker) 是一个 Docker 管理的 TUI 程序（类似LazyGit）
+
+LazyDocker [快捷键](https://github.com/jesseduffield/lazydocker/blob/master/docs/keybindings/Keybindings_zh.md)
+
 ### 宿主机和容器之间的文件复制
 
 需要注意的是，不管容器有没有启动，拷贝命令都会生效

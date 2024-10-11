@@ -304,6 +304,40 @@ Fody: No configuration entry found for the installed weaver Costura. This weaver
 ## C# 的异步例子
  - [AsyncExample.cs](./dotnet-core-sample/dotnet-console-sample/Async/AsyncExample.cs)
 
+## Dotnet 的多模块工作区（solution 解决方案）
+
+工程示例
+ - [dotnet-workspace](./dotnet-workspace)
+
+创建命令
+```bash
+cd D:\WorkSpace\DotNet\dotnet-workspace
+
+# 创建工作区（解决方案）
+dotnet new sln
+
+# 创建4个子模块 core app etcd redis
+dotnet new classlib -o dw-core
+dotnet new console -o dw-app
+dotnet new console -o dw-etcd
+dotnet new console -o dw-redis
+
+# 将各个子模块导入解决方案
+dotnet sln add dw-core/dw-core.csproj
+dotnet sln add dw-app/dw-app.csproj
+dotnet sln add dw-etcd/dw-etcd.csproj
+dotnet sln add dw-redis/dw-redis.csproj
+
+# 添加子模块之间依赖
+dotnet add dw-app/dw-app.csproj reference dw-core/dw-core.csproj
+dotnet add dw-etcd/dw-etcd.csproj reference dw-core/dw-core.csproj
+dotnet add dw-redis/dw-redis.csproj reference dw-core/dw-core.csproj
+
+# 单独为 dw-app 添加依赖
+cd dw-app
+dotnet add package Bogus
+```
+
 ## WCF 相关
 
 WCF 即 ``Windows Communication Foundation`` (Windows通信基础)的简称，是微软分布式应用程序开发的集大成者，是对现有 Windows 平台下所有分布式通信技术的整合，例如 .NET Remoting 、MSSQ 。以通信范围而论，它可以跨进程、跨机器、跨子网、企业网乃至于 Internet。WCF可以运行在 ASP.NET ， EXE ， WPF ， Windows Forms ， NT Service ， COM+ 上面。WCF支持的协议包括TCP，HTTP。
