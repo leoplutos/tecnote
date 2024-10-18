@@ -34,7 +34,7 @@ Content-Type: application/xml
 ###
 
 # 发送到 gRPC
-proto < D:\WorkSapce\Java\JavaGrpc\src\main\proto\ProductInfo.proto
+proto < D:\WorkSpace\Java\JavaGrpc\src\main\proto\ProductInfo.proto
 
 GRPC 127.0.0.1:50051/ProductInfo/addProduct
 {
@@ -45,7 +45,7 @@ GRPC 127.0.0.1:50051/ProductInfo/addProduct
 ###
 
 # 发送到 gRPC
-proto < D:\WorkSapce\Java\JavaGrpc\src\main\proto\ProductInfo.proto
+proto < D:\WorkSpace\Java\JavaGrpc\src\main\proto\ProductInfo.proto
 
 GRPC 127.0.0.1:50051/ProductInfo/getProduct
 {

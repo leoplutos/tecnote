@@ -26,13 +26,14 @@
 #PS_CLEAR="\[\033[0m\]"
 #export PS1="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
 
-# 显示错误信息的版本
-PROMPT_COMMAND=__prompt_command
+# 设定命令 提示符
+PROMPT_COMMAND=__prompt_command_nerdfont
+# 普通版本
 __prompt_command() {
-    local EXIT_STATUS="$?"
+    local STR_EXIT_STATUS="$?"
     PS1=""
-    local UBUNTU_ICON=' '
-    local PS_IP=$(hostname -I | awk '{print$1}')
+    local STR_UBUNTU_ICON=''
+    local STR_IP=$(hostname -I | awk '{print$1}')
     local PS_BLACK='\[\e[0;30m\]'
     local PS_RED='\[\e[0;31m\]'
     local PS_LIGHT_RED='\[\e[1;31m\]'
@@ -42,14 +43,60 @@ __prompt_command() {
     local PS_MAGENTA='\[\e[0;35m\]'
     local PS_CYAN='\[\e[0;36m\]'
     local PS_CLEAR='\[\e[0m\]'
-    if [ $EXIT_STATUS != 0 ]; then
-        PS1+="${PS_LIGHT_RED}[${EXIT_STATUS}] "
+    if [ $STR_EXIT_STATUS != 0 ]; then
+        PS1+="${PS_LIGHT_RED}[${STR_EXIT_STATUS}] "
     else
         PS1+=""
     fi
-    PS1+="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+    PS1+="${PS_YELLOW}${STR_UBUNTU_ICON} [bash]${PS_GREEN}[${STR_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
     # 亮色用
-    #PS1+="${PS_BLUE}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_BLACK}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+    #PS1+="${PS_BLUE}${STR_UBUNTU_ICON} [bash]${PS_GREEN}[${STR_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_BLACK}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
+}
+# NerdFont版本
+__prompt_command_nerdfont() {
+    local STR_EXIT_STATUS="$?"
+    PS1=""
+    local STR_LINE1_PRE='╭'
+    local STR_LINE2_PRE='╰'
+    local STR_LEFT_SEMICIRCLE=''
+    local STR_RIGHT_SEMICIRCLE=''
+    local STR_LEFT_ARROW=''
+    local STR_UBUNTU_ICON=''
+    local STR_DOCKER_ICON='󰡨'
+    local STR_ERROR_ICON=''
+    local STR_TIME_ICON=''
+    local STR_USER_ICON=''
+    local STR_IP_ICON='󰩠'
+    local STR_DIRECTORY_ICON=''
+    local STR_IP=$(hostname -I | awk '{print$1}')
+    local PS_BLACK='\[\e[0;30m\]'
+    local PS_RED='\[\e[0;31m\]'
+    local PS_GREEN='\[\e[0;32m\]'
+    local PS_YELLOW='\[\e[0;33m\]'
+    local PS_BLUE='\[\e[0;34m\]'
+    local PS_MAGENTA='\[\e[0;35m\]'
+    local PS_CYAN='\[\e[0;36m\]'
+    local PS_BRIGHTBLACK='\[\e[0;90m\]'
+    local PS_BRIGHTRED='\[\e[0;91m\]'
+    local PS_BRIGHTGREEN='\[\e[0;92m\]'
+    local PS_BRIGHTYELLOW='\[\e[0;93m\]'
+    local PS_BRIGHTBLUE='\[\e[0;94m\]'
+    local PS_BRIGHTMAGENTA='\[\e[0;95m\]'
+    local PS_BRIGHTCYAN='\[\e[0;96m\]'
+    local PS_CLEAR='\[\e[0m\]'
+    local PS_TIME='\[\e[96;100m\]'
+    local PS_SHELL='\[\e[90;43m\]'
+    local PS_HOST='\[\e[37;44m\]'
+    local PS_IPADDR='\[\e[90;106m\]'
+    local PS_PATH='\[\e[33;100m\]'
+    local PS_ERR_STATUS='\[\e[93;101m\]'
+    PS1+="${PS_MAGENTA}${STR_LINE1_PRE}"
+    if [ $STR_EXIT_STATUS != 0 ]; then
+        PS1+="${PS_BRIGHTRED}${STR_LEFT_SEMICIRCLE}${PS_ERR_STATUS}${STR_ERROR_ICON} ${STR_EXIT_STATUS} "
+    else
+        PS1+="${PS_BRIGHTBLACK}${STR_LEFT_SEMICIRCLE}"
+    fi
+    PS1+="${PS_TIME}${STR_TIME_ICON} \t ${PS_SHELL} ${STR_UBUNTU_ICON} bash ${PS_HOST} ${STR_USER_ICON} \u@\h ${PS_IPADDR} ${STR_IP_ICON} ${STR_IP} ${PS_PATH} ${STR_DIRECTORY_ICON}  \w ${PS_BRIGHTBLACK}${STR_LEFT_ARROW}${PS_CLEAR}\n${PS_MAGENTA}${STR_LINE2_PRE}${PS_BLUE}\$ ${PS_CLEAR}"
 }
 
 #export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"

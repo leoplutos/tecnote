@@ -65,15 +65,27 @@ RUN sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_conf
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 
+# 修改权限
+RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.bun
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}/.bun
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}/app
+
+# 切换用户
+USER ${DOCKER_CONTAINER_USER}
+
 # 设定
 # 为开发用户设定npm国内源
-RUN gosu ${DOCKER_CONTAINER_USER} npm config set registry https://registry.npmmirror.com/
+RUN npm config set registry https://registry.npmmirror.com/
 
 # git设定
-RUN gosu ${DOCKER_CONTAINER_USER} git config --global gui.encoding utf-8
-RUN gosu ${DOCKER_CONTAINER_USER} git config --global color.ui true
-RUN gosu ${DOCKER_CONTAINER_USER} git config --global core.autoCRLF false
-RUN gosu ${DOCKER_CONTAINER_USER} git config --global core.sparseCheckout true
+RUN git config --global user.name "yourname"
+RUN git config --global user.email "your@email.com"
+RUN git config --global gui.encoding utf-8
+RUN git config --global color.ui true
+RUN git config --global core.autoCRLF false
+RUN git config --global core.sparseCheckout true
+RUN git config --global credential.helper store
 
 # 个人习惯定制化
 RUN echo 'if [ -f "$HOME/.bashrc" ]; then source "$HOME/.bashrc"; fi' >> /home/${DOCKER_CONTAINER_USER}/.profile
@@ -87,9 +99,8 @@ RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'export PS1="${PS_GREEN}[${DOCKER_CONTAINER_NAME}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 
-# 修改权限
-RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
-RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}
+# 切换用户
+USER root
 
 # 设置默认入口命令
 # ENTRYPOINT ["/bin/bash"]

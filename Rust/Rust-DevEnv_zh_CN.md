@@ -163,6 +163,20 @@ rustup update
 rustup self uninstall
 ```
 
+## 解决 rust-analyzer 报错
+
+错误信息
+```
+error: the 'rustc' binary, normally provided by the 'rustc' component, is not applicable to the 'stable-x86_64-unknown-linux-gnu' toolchain
+```
+
+解决方式
+```bash
+rustup update
+rustup uninstall stable-x86_64-unknown-linux-gnu
+rustup install stable-x86_64-unknown-linux-gnu
+```
+
 ## Rust使用国内源
 全局配置
  - ``$USER_HOME/.cargo/config.toml``

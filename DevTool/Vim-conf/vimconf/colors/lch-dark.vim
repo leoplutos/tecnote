@@ -194,7 +194,7 @@ if has('terminal')
   let g:terminal_ansi_colors = [
   \ "#000000", "#cd3131", "#0dbc79", "#e5e510",
   \ "#2472c8", "#bc3fbc", "#11a8cd", "#e5e5e5",
-  \ "#666666", "#f14c4c", "#23d18b", "#f5f543",
+  \ "#243C4F", "#f14c4c", "#23d18b", "#f5f543",
   \ "#3b8eea", "#d670d6", "#29b8db", "#e5e5e5"
   \ ]
 endif
@@ -555,7 +555,7 @@ if has('nvim')
   let g:terminal_color_5  = '#bc3fbc'
   let g:terminal_color_6  = '#11a8cd'
   let g:terminal_color_7  = '#e5e5e5'
-  let g:terminal_color_8  = '#666666'
+  let g:terminal_color_8  = '#243C4F'
   let g:terminal_color_9  = '#f14c4c'
   let g:terminal_color_10 = '#23d18b'
   let g:terminal_color_11 = '#f5f543'

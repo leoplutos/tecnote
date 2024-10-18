@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>WebSocket 发送二进制数据示例</title>
+	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2.0.6/css/pico.min.css">
+	<style>
+	</style>
+</head>
+
+<body>
+	<main class="container">
+		<h3>WebSocket 示例</h3>
+		<p>连接状态：<span id="status">未连接</span></p>
+		<p>待发送的数据：<button id="sendButton" disabled>发送</button></p>
+		<textarea id="sendMessage" rows="5" cols="15" disabled></textarea>
+		<p>接收的数据：</p>
+		<textarea id="receivedMessage" rows="5" cols="15" disabled></textarea>
+	</main>
+	<script>
+		// 使用 httpbingo 的后端服务
+		const serverUrl = "wss://httpbingo.org/websocket/echo?max_fragment_size=2048&max_message_size=10240";
+		// WebSocket连接
+		const socket = new WebSocket(serverUrl);
+		// WebSocket连接成功
+		socket.addEventListener("open", function (event) {
+			document.getElementById("status").textContent = "已连接";
+			document.getElementById("sendButton").disabled = false;
+			document.getElementById("sendMessage").disabled = false;
+			console.log(`${serverUrl}  连接成功，可以开始通讯`);
+		});
+		// WebSocket收到消息
+		socket.addEventListener("message", async function (event) {
+			console.log(`收到消息: ${event.data}`);
+			const receivedMsgContainer = document.getElementById("receivedMessage");
+			const receivedData = event.data;
+			if (receivedData instanceof Blob) {
+				receivedMsgContainer.value = await receivedData.text();
+			} else {
+				receivedMsgContainer.value = receivedData;
+			}
+		});
+		// WebSocket异常
+		socket.onerror = event => {
+			console.log("连接异常");
+			console.error(event);
+		};
+		// WebSocket连接断开
+		socket.onclose = event => {
+			document.getElementById("status").textContent = "未连接";
+			document.getElementById("sendButton").disabled = true;
+			document.getElementById("sendMessage").disabled = true;
+			console.log(`连接关闭: code=${event.code}, reason=${event.reason}`);
+		};
+
+		// 按钮事件
+		const sendButton = document.getElementById("sendButton");
+		sendButton.addEventListener("click", function () {
+			if (socket.readyState !== WebSocket.OPEN) {
+				alert("连接未建立，还不能发送消息");
+				return;
+			}
+			const sendMsgContainer = document.getElementById("sendMessage");
+			const message = sendMsgContainer.value;
+			socket.send(message);
+			console.log(`未发送至服务器的字节数：${socket.bufferedAmount}`);
+		});
+	</script>
+</body>
+
+</html>

@@ -83,6 +83,14 @@
 		"key": "shift+space t",
 		"command": "workbench.action.tasks.runTask"
 	},
+	{ //shift+space -> p:git pull
+		"key": "shift+space p",
+		"command": "git.pull"
+	},
+	{ //shift+space -> ctrl+p:git push
+		"key": "shift+space ctrl+p",
+		"command": "git.push"
+	},
 	{ //shift+space -> q:最大化终端面板
 		"key": "shift+space q",
 		"command": "workbench.action.toggleMaximizedPanel"

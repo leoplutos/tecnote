@@ -88,13 +88,18 @@ unalias gdbx
 alias ll='ls -hl --full-time --time-style=long-iso --color=auto'
 ```
 
-### 非全局设置
-
-为了不污染服务器，笔者习惯加到自己的 ``.bashrc-personal`` 中，然后在 ``ttl`` 中 ``source`` 一下  
-[.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
-[user@192.168.0.3-8122-bashrc.ttl](../DevTool/user%40192.168.0.3-8122-bashrc.ttl)  
-
 # Linux自定义命令提示符
+
+
+笔者的设定文件 [.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
+
+为了不污染服务器，笔者习惯设定到到自己的 ``.bashrc-personal`` 中，然后 ``source`` 一下即可  
+
+灵感来自
+- [bash-prompt-generator.org](https://bash-prompt-generator.org/)
+- [my-new-bash-prompt.html](https://www.mikekasberg.com/blog/2021/06/28/my-new-bash-prompt.html)
+- [nerdps1](https://github.com/joknarf/nerdps1/)
+- [stackoverflow](https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command)
 
 ## PS1简介
 PS1是linux系统中的一个全局变量，用于定义用户命令行的字符显示。
@@ -172,14 +177,6 @@ __prompt_command() {
     PS1+="${PS_YELLOW}${UBUNTU_ICON}[bash]${PS_GREEN}[${PS_IP}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"
 }
 ```
-
-### 非全局设置
-
-为了不污染服务器，笔者习惯加到自己的 ``.bashrc-personal`` 中，然后在 ``ttl`` 中 ``source`` 一下  
-[.bashrc-personal](../Linux/linux_rc/bashrc/.bashrc-personal)  
-[user@192.168.0.3-8122-bashrc.ttl](../DevTool/user%40192.168.0.3-8122-bashrc.ttl)  
-
-在 [stackoverflow](https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command) 中有很好的讨论
 
 ## 格式控制详解
 ```bash

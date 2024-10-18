@@ -15,7 +15,7 @@
 ## 前端工程
 参考 [前后端分离工程](./Frontend_Backend_Separation_zh_CN.md)
 
-## 后端工程
+## 后端工程 Actix-Web
 新建一个 ``Rust 的 Actix-Web 工程``  
 ```bash
 cd D:\WorkSpace\FBS
@@ -23,6 +23,9 @@ cargo new backend-actix-web
 cd backend-actix-web
 ```
 然后下载笔者的工程 [backend-actix-web](./backend-actix-web) 覆盖即可
+
+## 后端工程 axum
+- [backend-axum](./backend-axum)
 
 ### 后端工程开发VSCode插件
  - [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)

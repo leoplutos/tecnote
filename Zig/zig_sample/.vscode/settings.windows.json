@@ -1,5 +1,6 @@
 {
 	"zig.path": "D:/Tools/WorkTool/Zig/zig-windows-x86_64-0.13.0/zig.exe",
+	"zig.zls.path": "C:\\Users\\Administrator\\AppData\\Roaming\\Code\\User\\globalStorage\\ziglang.vscode-zig\\zls_install\\zls.exe",
 	"terminal.integrated.automationProfile.windows": {
 		"path": "${env:windir}\\System32\\cmd.exe",
 		"args": [

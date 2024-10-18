@@ -56,7 +56,7 @@ docker run -itd \
 
 启动后用浏览器访问 http://localhost:18080
 
-### HTTP测试服务器
+### HTTP测试服务器 httpbin.org
 [httpbin.org](https://httpbin.org/) 可以测试 HTTP 请求和响应的各种信息，比如 cookie、ip、headers 和登录验证等，且支持 GET、POST 等多种方法。对 Web 开发和测试很有帮助
 
 https://httpbin.org/  
@@ -75,6 +75,34 @@ docker run -itd \
   -p 50080:80 \
   --name httpbin \
   kennethreitz/httpbin
+```
+可以添加的参数
+ - ``--restart=always \``
+
+启动后使用命令确认
+```
+curl -X POST "http://127.0.0.1:50080/delay/2" -H "accept: application/json"
+```
+
+### HTTP测试服务器 httpbingo
+一个 Golang 版本的 httpbin，并且多了 ``WebSocket``
+
+https://httpbingo.org/  
+https://github.com/mccutchen/go-httpbin  
+https://hub.docker.com/r/mccutchen/go-httpbin/  
+
+端口：
+ - 50080： HTTP端口
+
+使用命令
+```bash
+# 拉取镜像
+docker pull mccutchen/go-httpbin
+
+docker run -itd \
+  -p 50080:8080 \
+  --name httpbingo \
+  mccutchen/go-httpbin
 ```
 可以添加的参数
  - ``--restart=always \``

@@ -5,5 +5,5 @@
     "dotnet.unitTestDebuggingOptions": {
         "type": "clr"
     },
-    "dotnet.unitTests.runSettingsPath": "D:\\WorkSapce\\DotNet\\netframework\\UseX64Worker.runsettings"
+    "dotnet.unitTests.runSettingsPath": "D:\\WorkSpace\\DotNet\\netframework\\UseX64Worker.runsettings"
 }

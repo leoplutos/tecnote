@@ -364,6 +364,10 @@ https://github.com/serilog/serilog
  - nuget.org： https://www.nuget.org/api/v2/
  - NuGet国内镜像： https://nuget.cdn.azure.cn/v3/index.json
 
+NuGet源设定文件位置
+ - Windows ： ``%APPDATA%\NuGet\NuGet.Config``
+ - Linux ： ``~/.nuget/NuGet/NuGet.Config``
+
 ### Visual Studio Express 2013 无法访问 NuGet
 
 **解决办法**

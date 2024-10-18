@@ -14,6 +14,22 @@ https://www.techempower.com/benchmarks/#section=data-r22&hw=ph&test=composite
 
 **NOTE**: ``Sanic``（Python）没有上榜，估计是没有提交测试，在 [这里](https://klen.github.io/py-frameworks-bench/) 的对比中可以看到是比fastapi快的
 
+## WebSocket
+
+WebSocket 使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端推送数据。在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就可以创建持久性的连接，并进行双向数据传输
+
+Websocket 使用 ``ws`` 或 ``wss`` 的统一资源标志符（URI），其中 ``wss`` 表示使用了 ``TLS`` 的 Websocket。
+
+```
+ws://echo.websocket.org
+wss://echo.websocket.org
+```
+
+WebSocket 与 ``HTTP`` 和 ``HTTPS`` 使用相同的 ``TCP`` 端口（即 ``80`` 和 ``443``），可以绕过大多数防火墙的限制
+
+一个 WebSocket 客户端示例
+ - [WebSocketClient.html](WebSocketClient.html)
+
 ## CSS 开源 UI 框架 - Pico.css
 
 #### Pico.css 框架的特点

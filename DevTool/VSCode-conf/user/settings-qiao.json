@@ -264,7 +264,7 @@
 		},
 		"terminal.ansiBlack": "#1E1E1E",
 		"terminal.ansiBlue": "#4040FF", //备用：#2472c8
-		"terminal.ansiBrightBlack": "#666666",
+		"terminal.ansiBrightBlack": "#243C4F",
 		"terminal.ansiBrightBlue": "#8080FF",
 		"terminal.ansiBrightCyan": "#00DCDC",
 		"terminal.ansiBrightGreen": "#16C60C",

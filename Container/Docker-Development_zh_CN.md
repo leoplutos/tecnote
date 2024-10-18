@@ -40,7 +40,7 @@ docker build \
   --build-arg ARG_USER_PWD="123456" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t java21_vscode_image:latest \
+  -t java21_vsc_image:latest \
   -f Dockerfile_java .
 ```
 
@@ -56,8 +56,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name java21_vscode \
-  java21_vscode_image:latest
+  --name java21_vsc \
+  java21_vsc_image:latest
 ```
 
 ### .NET Core 环境
@@ -78,7 +78,7 @@ docker build \
   --build-arg ARG_USER_PWD="123456" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t dotnet8_dev_image:latest \
+  -t dotnet8_vsc_image:latest \
   -f Dockerfile_csharp .
 ```
 
@@ -94,8 +94,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name dotnet8_dev \
-  dotnet8_dev_image:latest
+  --name dotnet8_vsc \
+  dotnet8_vsc_image:latest
 ```
 
 ### Golang 环境
@@ -114,7 +114,7 @@ docker build \
   --build-arg ARG_USER_PWD="123456" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t golang_dev_image:latest \
+  -t golang_vsc_image:latest \
   -f Dockerfile_golang .
 ```
 
@@ -130,8 +130,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name golang_dev \
-  golang_dev_image:latest
+  --name golang_vsc \
+  golang_vsc_image:latest
 ```
 
 ### Rust 环境
@@ -150,7 +150,7 @@ docker build \
   --build-arg ARG_USER_PWD="123456" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t rust_dev_image:latest \
+  -t rust_vsc_image:latest \
   -f Dockerfile_rust .
 ```
 
@@ -166,8 +166,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name rust_dev \
-  rust_dev_image:latest
+  --name rust_vsc \
+  rust_vsc_image:latest
 ```
 
 ### Python 环境
@@ -186,7 +186,7 @@ docker build \
   --build-arg ARG_USER_PWD="123456" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t python_dev_image:latest \
+  -t python_vsc_image:latest \
   -f Dockerfile_python .
 ```
 
@@ -202,8 +202,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name python_dev \
-  python_dev_image:latest
+  --name python_vsc \
+  python_vsc_image:latest
 ```
 
 ### Node.js 环境
@@ -221,7 +221,7 @@ cd ~/workspace/dev_container/vscode
 docker build \
   --add-host=host.docker.internal:host-gateway \
   --build-arg ARG_USER_PWD="123456" \
-  -t node_dev_image:latest \
+  -t node_vsc_image:latest \
   -f Dockerfile_node .
 ```
 
@@ -239,8 +239,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name node_dev \
-  node_dev_image:latest
+  --name node_vsc \
+  node_vsc_image:latest
 ```
 
 ### Zig 环境
@@ -261,7 +261,7 @@ docker build \
   --build-arg ARG_USER_PWD="123456" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t zig_dev_image:latest \
+  -t zig_vsc_image:latest \
   -f Dockerfile_zig .
 ```
 
@@ -277,8 +277,8 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name zig_dev \
-  zig_dev_image:latest
+  --name zig_vsc \
+  zig_vsc_image:latest
 ```
 
 ## 使用 Neovim 开发
@@ -307,7 +307,7 @@ docker build \
   --build-arg ARG_USER_NAME="$(id -un)" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t java21_dev_image:latest \
+  -t java21_nvim_image:latest \
   -f Dockerfile_java .
 # -f Dockerfile_java_alpine .
 ```
@@ -321,8 +321,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name java21_dev \
-  java21_dev_image:latest
+  --name java21_nvim \
+  java21_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
@@ -352,7 +352,7 @@ docker build \
   --build-arg ARG_USER_NAME="$(id -un)" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t dotnet8_dev_image:latest \
+  -t dotnet8_nvim_image:latest \
   -f Dockerfile_csharp .
 # -f Dockerfile_csharp_alpine .
 ```
@@ -366,8 +366,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name dotnet8_dev \
-  dotnet8_dev_image:latest
+  --name dotnet8_nvim \
+  dotnet8_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
@@ -394,7 +394,7 @@ docker build \
   --build-arg ARG_USER_NAME="$(id -un)" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t golang_dev_image:latest \
+  -t golang_nvim_image:latest \
   -f Dockerfile_golang .
 ```
 
@@ -407,8 +407,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name golang_dev \
-  golang_dev_image:latest
+  --name golang_nvim \
+  golang_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
@@ -435,7 +435,7 @@ docker build \
   --build-arg ARG_USER_NAME="$(id -un)" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t rust_dev_image:latest \
+  -t rust_nvim_image:latest \
   -f Dockerfile_rust .
 ```
 
@@ -448,8 +448,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name rust_dev \
-  rust_dev_image:latest
+  --name rust_nvim \
+  rust_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
@@ -476,7 +476,7 @@ docker build \
   --build-arg ARG_USER_NAME="$(id -un)" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t python_dev_image:latest \
+  -t python_nvim_image:latest \
   -f Dockerfile_python .
 # -f Dockerfile_python_alpine .
 ```
@@ -490,8 +490,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name python_dev \
-  python_dev_image:latest
+  --name python_nvim \
+  python_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
@@ -517,7 +517,7 @@ cd ~/workspace/dev_container/neovim
 docker build \
   --add-host=host.docker.internal:host-gateway \
   --build-arg ARG_GITHUB_URL="http://host.docker.internal:13000" \
-  -t node_dev_image:latest \
+  -t node_nvim_image:latest \
   -f Dockerfile_node .
 ```
 
@@ -532,8 +532,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name node_dev \
-  node_dev_image:latest
+  --name node_nvim \
+  node_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
@@ -562,7 +562,7 @@ docker build \
   --build-arg ARG_USER_NAME="$(id -un)" \
   --build-arg ARG_GROUP_ID="$(id -g)" \
   --build-arg ARG_GROUP_NAME="$(id -gn)" \
-  -t zig_dev_image:latest \
+  -t zig_nvim_image:latest \
   -f Dockerfile_zig .
 ```
 
@@ -575,8 +575,8 @@ docker run -it \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --add-host=host.docker.internal:host-gateway \
-  --name zig_dev \
-  zig_dev_image:latest
+  --name zig_nvim \
+  zig_nvim_image:latest
 ```
 
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮

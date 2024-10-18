@@ -18,7 +18,7 @@ return {
     keys = {
       --快捷键绑定
       { "<leader>e", "<cmd>Neotree toggle<cr>", noremap = true, silent = true, nowait = true, desc = "neo-tree: Toggle NeoTree" },
-      --{ "<leader>ew", "<cmd>Neotree D:/WorkSapce<cr>", noremap = true, silent = true, nowait = true, desc = "neo-tree: Toggle NeoTree" },
+      --{ "<leader>ew", "<cmd>Neotree D:/WorkSpace<cr>", noremap = true, silent = true, nowait = true, desc = "neo-tree: Toggle NeoTree" },
     },
   }
 }

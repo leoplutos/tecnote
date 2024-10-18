@@ -50,7 +50,7 @@ https://github.com/microsoft/terminal/releases
             "background": "#1D1F21",
             "black": "#000000",
             "blue": "#2472C8",
-            "brightBlack": "#666666",
+            "brightBlack": "#243C4F",
             "brightBlue": "#3B8EEA",
             "brightCyan": "#29B8DB",
             "brightGreen": "#23D18B",
@@ -83,7 +83,7 @@ https://github.com/microsoft/terminal/releases
             "background": "#FCF4DC",
             "black": "#1E1E1E",
             "blue": "#4040FF",
-            "brightBlack": "#666666",
+            "brightBlack": "#243C4F",
             "brightBlue": "#8080FF",
             "brightCyan": "#00DCDC",
             "brightGreen": "#16C60C",
@@ -135,6 +135,11 @@ https://github.com/microsoft/terminal/releases
             "keys": "alt+s"
         }
     ],
+```
+## Windows Terminal 配置 Cmd
+打开设定，在 ``命令行处`` 处按如下设置即可
+```
+%SystemRoot%\System32\cmd.exe /k "D:/Tools/WorkTool/Cmd/cmdautorun.cmd" 1
 ```
 
 ## Windows Terminal 配置 Git bash

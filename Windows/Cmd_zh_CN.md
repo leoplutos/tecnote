@@ -53,6 +53,13 @@ set PROMPT=[%computername%] $d$s$t$_$p$_$_$+$g
 PROMPT /?
 ```
 
+笔者的设定文件 [cmdautorun.cmd](cmdautorun.cmd)
+
+灵感来自
+- [prompt](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/prompt)
+- [bash-prompt-generator.org](https://bash-prompt-generator.org/)
+- [my-new-bash-prompt.html](https://www.mikekasberg.com/blog/2021/06/28/my-new-bash-prompt.html)
+- [nerdps1](https://github.com/joknarf/nerdps1/)
 
 # 设定启动cmd的默认命令
 

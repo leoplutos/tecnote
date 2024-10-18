@@ -5,12 +5,12 @@
 # slim 镜像一般都基于 Debian 和 glibc，删除了许多非必需的软件包，优化了体积
 FROM node:20-bookworm-slim AS builder
 
-# 设定debian12镜像仓库为国内源
-RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+# 设定Debian12镜像仓库为国内源(DEB822格式)
+RUN set -eux && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 
 # 构建时变量，仅在构建Docker映像期间可用
 ARG NODE_ENV=production
-ARG registry=https://npmreg.proxy.ustclug.org/
+ARG registry=https://registry.npmmirror.com/
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -49,7 +49,7 @@ RUN npm run build
 FROM nginx:1.26-alpine3.19-slim
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 当前时间
 ARG TIMENOW

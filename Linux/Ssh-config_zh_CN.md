@@ -5,19 +5,27 @@ SSH Config 是 Linux 系统下针对 SSH 客户端的一个参数配置方案，
 SSH 参数配置有3个层次：
 
 #### 命令行参数
-如-p 10086, -i /path/to/identity_file 等选项来设置SSH的端口号或认证证书位置
+如 ``-p 10086``, ``-i /path/to/identity_file`` 等选项来设置SSH的端口号或认证证书位置
 
 #### 用户配置文件
-所在路径为~/.ssh/config，默认是不存在的，需要手动创建
+所在路径为 ``~/.ssh/config``，默认是不存在的，需要手动创建
 
 #### 系统配置文件
-所在路径为/etc/ssh/ssh_config  
+所在路径为 ``/etc/ssh/ssh_config``
 
-参数重要性的顺序也是1>2>3，即越近的配置重要性越高。前者的设置会覆盖后者。  
-笔者这里主要讲述第2种情况下的配置方式，即针对~/.ssh/config文件的写法进行说明。
+参数重要性的顺序也是 1 > 2 > 3，即越近的配置重要性越高。前者的设置会覆盖后者。  
+笔者这里主要讲述第2种情况下的配置方式，即针对 ``~/.ssh/config`` 文件的写法进行说明。
 
 ## 笔者的设定文件
 * [config](config)
+
+在设定文件最上面添加
+```
+Host *
+	UserKnownHostsFile=/dev/null
+	StrictHostKeyChecking=no
+```
+以不启用 ``~/.ssh/known_hosts`` 文件，但是会产生中间人攻击，生产环境不要这样设定
 
 ## 示例
 ```

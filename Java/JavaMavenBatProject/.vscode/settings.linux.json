@@ -1,5 +1,5 @@
 {
-	"java.jdt.ls.java.home": "/opt/java/openjdk/bin/java",
+	"java.jdt.ls.java.home": "/opt/java/openjdk",
 	"java.configuration.runtimes": [
 		{
 			"name": "JavaSE-21",

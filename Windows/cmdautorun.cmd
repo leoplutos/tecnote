@@ -28,10 +28,19 @@ if defined USE_NERD_FONT_FLG (
 )
 
 :SetPromptNerdFont
-::设定WIN_ICON=NerdFont的Windows图标（需要chcp 65001），最后面加了一个无法看见的空格（No-Break SpaceU+00A0）占位，实际命令：echo {e70f}{00A0}
-for /f "delims=" %%i in ('echo  ') do (set WIN_ICON=%%i)
-::for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
-for /f "tokens=3" %%a in ('"netsh interface ip show address "以太网" | findstr "IP Address""') do (set PS_IP=%%a)
+::设定NerdFont的图标（需要chcp 65001）
+echo SetPromptNerdFont
+for /f "delims=" %%i in ('echo ╭') do (set STR_LINE1_PRE=%%i)
+for /f "delims=" %%i in ('echo ╰') do (set STR_LINE2_PRE=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_LEFT_SEMICIRCLE=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_RIGHT_SEMICIRCLE=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_LEFT_ARROW=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_WIN_ICON=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_TIME_ICON=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_USER_ICON=%%i)
+for /f "delims=" %%i in ('echo 󰩠') do (set STR_IP_ICON=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_DIRECTORY_ICON=%%i)
+for /f "tokens=3" %%a in ('"netsh interface ip show address "以太网" | findstr "IP Address""') do (set STR_IP=%%a)
 set PS_BLACK=$E[30m
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
@@ -39,17 +48,63 @@ set PS_YELLOW=$E[33m
 set PS_BLUE=$E[34m
 set PS_MAGENTA=$E[35m
 set PS_CYAN=$E[36m
+set PS_BRIGHTBLACK=$E[90m
+set PS_BRIGHTRED=$E[91m
+set PS_BRIGHTGREEN=$E[92m
+set PS_BRIGHTYELLOW=$E[93m
+set PS_BRIGHTBLUE=$E[94m
+set PS_BRIGHTMAGENTA=$E[95m
+set PS_BRIGHTCYAN=$E[96m
 set PS_CLEAR=$E[0m
-set PROMPT=%PS_YELLOW%%WIN_ICON%[cmd]%PS_CLEAR%%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
-::亮色用
-::set PROMPT=%PS_BLUE%%WIN_ICON%[cmd]%PS_CLEAR%%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
+set PS_TIME=$E[96;100m
+set PS_SHELL=$E[90;43m
+set PS_HOST=$E[37;44m
+set PS_IPADDR=$E[90;106m
+set PS_PATH=$E[33;100m
+::暗色用
+set PROMPT=%PS_MAGENTA%%STR_LINE1_PRE%%PS_BRIGHTBLACK%%STR_LEFT_SEMICIRCLE%%PS_TIME%%STR_TIME_ICON%$s$t$s%PS_SHELL%$s%STR_WIN_ICON%$scmd$s%PS_HOST%$s%STR_USER_ICON%$s%USERNAME%@%ComputerName%$s%PS_IPADDR%$s%STR_IP_ICON%$s%STR_IP%$s%PS_PATH%$s%STR_DIRECTORY_ICON%$s$s$P$s%PS_CLEAR%%PS_BRIGHTBLACK%%STR_LEFT_ARROW%%PS_CLEAR%$_%PS_MAGENTA%%STR_LINE2_PRE%%PS_BLUE%#%PS_CLEAR%$s
+::set PROMPT=%PS_MAGENTA%%STR_LINE1_PRE%%PS_YELLOW%%STR_WIN_ICON%$s[cmd]%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P$_%PS_MAGENTA%%STR_LINE2_PRE%%PS_BLUE%#%PS_CLEAR%$s
+::亮色用(qiao)
+::set PROMPT=%PS_BLUE%%STR_WIN_ICON%$s[cmd]%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P$_%PS_BLUE%#%PS_CLEAR%$s
+set STR_LINE1_PRE=
+set STR_LINE2_PRE=
+set STR_LEFT_SEMICIRCLE=
+set STR_RIGHT_SEMICIRCLE=
+set STR_LEFT_ARROW=
+set STR_WIN_ICON=
+set STR_TIME_ICON=
+set STR_USER_ICON=
+set STR_IP_ICON=
+set STR_DIRECTORY_ICON=
+set STR_IP=
+set PS_BLACK=
+set PS_RED=
+set PS_GREEN=
+set PS_YELLOW=
+set PS_BLUE=
+set PS_MAGENTA=
+set PS_CYAN=
+set PS_BRIGHTBLACK=
+set PS_BRIGHTRED=
+set PS_BRIGHTGREEN=
+set PS_BRIGHTYELLOW=
+set PS_BRIGHTBLUE=
+set PS_BRIGHTMAGENTA=
+set PS_BRIGHTCYAN=
+set PS_CLEAR=
+set PS_TIME=
+set PS_SHELL=
+set PS_HOST=
+set PS_IPADDR=
+set PS_PATH=
 echo Prompt Setting Complited
 ::进入用户文件夹
 cd /d %USERPROFILE%
 goto GoOn
 
 :SetPromptWithOutNerdFont
-for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set PS_IP=%%a)
+echo SetPromptWithOutNerdFont
+for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do (set STR_IP=%%a)
 set PS_BLACK=$E[30m
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
@@ -58,9 +113,19 @@ set PS_BLUE=$E[34m
 set PS_MAGENTA=$E[35m
 set PS_CYAN=$E[36m
 set PS_CLEAR=$E[0m
-set PROMPT=%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
-::亮色用
-::set PROMPT=%PS_GREEN%[%PS_IP%]%PS_CLEAR%%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P%PS_CLEAR%$_%PS_BLUE%#%PS_CLEAR%$s
+::暗色用
+set PROMPT=%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P$_%PS_BLUE%#%PS_CLEAR%$s
+::亮色用(qiao)
+::set PROMPT=%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P$_%PS_BLUE%#%PS_CLEAR%$s
+set STR_IP=
+set PS_BLACK=
+set PS_RED=
+set PS_GREEN=
+set PS_YELLOW=
+set PS_BLUE=
+set PS_MAGENTA=
+set PS_CYAN=
+set PS_CLEAR=
 echo Prompt Setting Complited
 goto GoOn
 
@@ -214,5 +279,3 @@ doskey nvimv=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_
 echo Alias Setting Complited
 
 @echo on
-
-::@cmd /k

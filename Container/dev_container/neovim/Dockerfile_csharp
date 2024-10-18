@@ -56,9 +56,16 @@ RUN install lazygit /usr/local/bin
 RUN rm lazygit.tar.gz
 RUN rm lazygit
 # 安装其他工具
-RUN apt install -qq gosu zip unzip xsel xclip ripgrep fd-find python3 python3-pip build-essential -y
+# RUN apt install -qq gosu zip unzip xsel xclip ripgrep fd-find python3 python3-pip build-essential -y
+RUN apt install -qq gosu zip unzip xsel xclip ripgrep fd-find build-essential -y
 # 在Debian中fd的二进制名为fdfind（因为fd已被另一个包使用），所以这里做一个软链接
 RUN ln -s $(which fdfind) /usr/local/bin/fd
+
+# 修改权限
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
+
+# 切换用户
+USER ${DOCKER_CONTAINER_USER}
 
 # 创建nuget路径
 RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.nuget/packages
@@ -68,22 +75,18 @@ RUN dotnet nuget add source https://nuget.cdn.azure.cn/v3/index.json -n nuget_cn
 RUN dotnet nuget disable source nuget.org
 
 # git设定
+RUN git config --global user.name "yourname"
+RUN git config --global user.email "your@email.com"
 RUN git config --global gui.encoding utf-8
 RUN git config --global color.ui true
 RUN git config --global core.autoCRLF false
 RUN git config --global core.sparseCheckout true
+RUN git config --global credential.helper store
 
-# neovim定制
-RUN mkdir -p /home/${DOCKER_CONTAINER_USER}/.config/nvim
-# 从Github获取设定文件（稀疏检出）
-RUN git clone -b master --depth 1 --filter=blob:none --no-checkout --sparse ${GITHUB_CONFIG_URL}/leoplutos/tecnote.git /workspace/github_config/
-WORKDIR /workspace/github_config/
-RUN git sparse-checkout set --no-cone "DevTool/Neovim_lazy-conf" "DevTool/Vim-conf"
-RUN git checkout
-# 复制到nvim设定目录
-RUN cp -afp /workspace/github_config/DevTool/Neovim_lazy-conf/* /home/${DOCKER_CONTAINER_USER}/.config/nvim
-RUN cp -afp /workspace/github_config/DevTool/Vim-conf/vimconf/colors/ /home/${DOCKER_CONTAINER_USER}/.config/nvim
-RUN rm -rf /workspace/github_config/
+# neovim配置一键安装
+ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
+# ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
+RUN curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash -
 
 WORKDIR /workspace
 
@@ -95,12 +98,12 @@ RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'export PS1="${PS_GREEN}[${DOCKER_CONTAINER_NAME}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
+RUN echo 'alias lg="lazygit"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'alias vi="nvim"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 RUN echo 'alias vim="nvim"' >> /home/${DOCKER_CONTAINER_USER}/.bashrc
 
-# 修改权限
-RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
-RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /home/${DOCKER_CONTAINER_USER}
+# 切换用户
+USER root
 
 # 设置默认入口命令
 # ENTRYPOINT ["/bin/bash"]
