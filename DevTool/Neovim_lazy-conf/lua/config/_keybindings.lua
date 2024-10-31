@@ -14,3 +14,5 @@ vim.keymap.set('i', '<C-h>', '<left>', default_kb_opts('Left'))
 vim.keymap.set({ 'i', 'c' }, '<C-a>', '<home>', default_kb_opts('Home'))
 vim.keymap.set({ 'i', 'c' }, '<C-e>', '<end>', default_kb_opts('End'))
 vim.keymap.set('n', '<TAB>w', '<C-w>w', default_kb_opts('Move to next Window'))
+--在只读和可写之间切换
+vim.keymap.set('n', '<leader>rd', '<cmd>setl ma! ma?<cr>', default_kb_opts('Toggle Buffer Readonly'))

@@ -8,6 +8,7 @@
 ### github镜像站
 https://bgithub.xyz/  
 https://kkgithub.com/  
+https://git.homegu.com  
 ~~https://ggithub.xyz/~~  
 ~~https://hub.njuu.cf/~~  
 ~~https://hub.yzuu.cf/~~  

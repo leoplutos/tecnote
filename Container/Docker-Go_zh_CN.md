@@ -30,6 +30,16 @@ https://github.com/docker-library/docs/tree/master/alpine
  - slim：是完整镜像的配对版本。这个镜像通常只安装运行特定工具所需的最小包
  - alpine：基于alpine linux项目，这是一个专门为容器内部使用而构建的操作系统。在很长一段时间里，这些是最受欢迎的镜像变体，因为它们的尺寸很小
 
+## 关于Golang使用scratch镜像
+因为scratch镜像里面不包含任何额外的组件或库，所以编译的时候需要``静态链接编译``，需要如下设定
+
+### 设定 ``CGO_ENABLED=0``
+```
+ENV CGO_ENABLED=0
+```
+- 当 ``CGO_ENABLED=1``， 进行编译时， 会将文件中引用libc的库（比如常用的net包），以动态链接的方式生成目标文件
+- 当 ``CGO_ENABLED=0``， 进行编译时， 则会把在目标文件中未定义的符号（外部函数）一起链接到可执行文件中
+
 ## 基于Golang镜像部署Gin应用的实现示例
 
 ### 示例工程

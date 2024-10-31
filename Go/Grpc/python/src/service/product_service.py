@@ -1,5 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import uuid
-import logging
+from loguru import logger
 import grpc
 from stub.ProductInfo_pb2 import Product, ProductId
 import stub.ProductInfo_pb2_grpc as gpb
@@ -19,8 +22,11 @@ class ProductServiceImpl(gpb.ProductInfoServicer):
         pid: str = f"{uuid.uuid4().hex} | ServerPort: {self.port}"
         request.id = pid
         self.productDict[request.id] = request
-        logging.info(
-            f"[Python][Server] AddProduct success. id={request.id}, name={request.name}, description={request.description}"
+        logger.info(
+            "[Python][Server] AddProduct success. id={}, name={}, description={}",
+            request.id,
+            request.name,
+            request.description,
         )
         response: ProductId = ProductId(value=request.id)
         return response
@@ -32,5 +38,5 @@ class ProductServiceImpl(gpb.ProductInfoServicer):
             id='None Id', name='None Name', description='Python gRPC Server'
         )
         productInfo: Product = self.productDict.get(request.value, default)
-        logging.info(f"[Python][Server] GetProduct success. id={productInfo.id}")
+        logger.info("[Python][Server] GetProduct success. id={}", productInfo.id)
         return productInfo

@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"flag"
+	"gogrpc/product/log"
 	stub "gogrpc/stub"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"log"
 	"time"
 )
 
@@ -27,13 +27,13 @@ func main() {
 	// 连接服务器
 	conn, err := grpc.NewClient(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatalf("[Golang][Client] 无法连接服务器: %v", err)
+		log.Logger.Fatal().Stack().Err(err).Msg("[Golang][Client] 无法连接服务器")
 		return
 	}
 	// 程序关闭前，释放连接
 	defer func() {
 		conn.Close()
-		log.Println("[Golang][Client] 已关闭gRPC连接")
+		log.Logger.Info().Msgf("[Golang][Client] 已关闭gRPC连接")
 	}()
 
 	// 创建创建超时Context
@@ -55,10 +55,10 @@ func AddProduct(ctx context.Context, client stub.ProductInfoClient) (id string) 
 	// 远程调用
 	response, err := client.AddProduct(ctx, aMac)
 	if err != nil {
-		log.Fatalf("[Golang][Client] Add product fail: %v", err)
+		log.Logger.Fatal().Stack().Err(err).Msg("[Golang][Client] Add product fail")
 		return
 	}
-	log.Printf("[Golang][Client] Add product success. id=%s\n", response.Value)
+	log.Logger.Info().Msgf("[Golang][Client] Add product success. id=%s", response.Value)
 	return response.Value
 }
 
@@ -67,8 +67,8 @@ func GetProduct(ctx context.Context, client stub.ProductInfoClient, id string) {
 	// 远程调用
 	response, err := client.GetProduct(ctx, &stub.ProductId{Value: id})
 	if err != nil {
-		log.Fatalf("[Golang][Client] Get product fail: %v", err)
+		log.Logger.Fatal().Stack().Err(err).Msg("[Golang][Client] Get product fail")
 		return
 	}
-	log.Printf("[Golang][Client] Get product success.  %+v\n", response)
+	log.Logger.Info().Msgf("[Golang][Client] Get product success.  %+v", response)
 }

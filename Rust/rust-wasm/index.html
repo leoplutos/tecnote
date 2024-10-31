@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>使用Rust和WebAssembly示例</title>
+	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2.0.6/css/pico.min.css">
+	<style>
+	</style>
+</head>
+
+<body>
+	<main class="container">
+		<h3>Rust WebAssembly 示例</h3>
+		<p><button id="wasmAddButton">调用wasm的add函数计算加法</button></p>
+		<div class="grid">
+			<div><input type="number" name="inputA" id="inputA" placeholder="inputA" aria-label="inputA" value="3" /></div>
+			<div><input type="number" name="inputB" id="inputB" placeholder="inputB" aria-label="inputB" value="12" /></div>
+			<div><input type="number" name="result" id="result" placeholder="result" aria-label="result" readonly />
+			</div>
+		</div>
+		<p><button id="wasmGreetButton">调用wasm的greet函数</button></p>
+	</main>
+</body>
+<script type="module">
+	import init, { add, greet } from './pkg/rust_wasm.js';
+	// 按钮事件
+	const wasmAddButton = document.getElementById("wasmAddButton");
+	wasmAddButton.addEventListener("click", async function () {
+		// 初始化wasm
+		await init();
+		const inputA = document.getElementById("inputA").value;
+		const inputB = document.getElementById("inputB").value;
+		// 调用wasm中的add函数
+		const result = add(inputA, inputB);
+		console.log(`计算结果为: ${result}`);
+		document.getElementById("result").value = result;
+	});
+	// 按钮事件
+	const wasmGreetButton = document.getElementById("wasmGreetButton");
+	wasmGreetButton.addEventListener("click", async function () {
+		// 初始化wasm
+		await init();
+		greet("WebAssembly");
+	});
+</script>
+
+</html>

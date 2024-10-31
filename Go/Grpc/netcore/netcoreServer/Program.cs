@@ -8,26 +8,32 @@ using netcoreServer.Register;
 // gRPC服务启动主入口
 //######################################
 
-// 初始化Serilog日志
-Log.Logger = new LoggerConfiguration()
-	.Enrich.WithThreadId()
-	.MinimumLevel.Information()
-	// 对其他日志进行重写
-	.MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
-	.MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Warning)
-	.MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
-	//.WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}][{SourceContext:l}] - {Message:lj}{NewLine}{Exception}")
-	//.WriteTo.File("D:/logs/myapp.txt", rollingInterval: RollingInterval.Day)
-	.WriteTo.Async(a => a.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}"))
-	//.WriteTo.Async(a => a.File("D:/logs/myapp.log", outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}", rollingInterval: RollingInterval.Day))
-	.CreateLogger();
-
 try
 {
-	Log.Information("开始启动gRPC服务");
-
 	// gPRC应用对象
 	var builder = WebApplication.CreateBuilder(args);
+
+	// 获取当前环境
+	var env = builder.Environment;
+	if (env.IsDevelopment())
+	{
+		Console.WriteLine("当前环境是 Development 采用漂亮打印");
+		// 采用漂亮打印
+		SerilogLoader.InitPrettyConsole();
+	}
+	else if (env.EnvironmentName.Equals("Docker"))
+	{
+		Console.WriteLine($"当前环境是 Docker 采用Json日志");
+		// 采用Json日志
+		SerilogLoader.InitJsonConsole();
+	}
+	else
+	{
+		Console.WriteLine($"当前环境是 {env.EnvironmentName} 采用漂亮打印");
+		// 采用漂亮打印
+		SerilogLoader.InitPrettyConsole();
+	}
+	Log.Information("开始启动gRPC服务");
 
 	// 注册日志
 	builder.Services.AddSerilog();
@@ -50,6 +56,7 @@ try
 	});
 	// 单例模式注册Configuration
 	var configuration = builder.Configuration;
+
 	builder.Services.AddSingleton<IConfiguration>(configuration);
 
 	var app = builder.Build();
@@ -98,4 +105,46 @@ finally
 	Log.Information("gRPC服务停止");
 	// 刷新异步日志
 	Log.CloseAndFlush();
+}
+
+
+public class SerilogLoader
+{
+	// 采用漂亮打印
+	public static void InitPrettyConsole()
+	{
+		// 初始化Serilog日志
+		Log.Logger = new LoggerConfiguration()
+			.Enrich.WithThreadId()
+			.MinimumLevel.Information()
+			// 对其他日志进行重写
+			.MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
+			.MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Warning)
+			.MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
+			//.WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}][{SourceContext:l}] - {Message:lj}{NewLine}{Exception}")
+			//.WriteTo.File("D:/logs/myapp.txt", rollingInterval: RollingInterval.Day)
+			.WriteTo.Async(a => a.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}"))
+			//.WriteTo.Async(a => a.File("D:/logs/myapp.log", outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}", rollingInterval: RollingInterval.Day))
+			.CreateLogger();
+	}
+
+	// 采用Json日志
+	public static void InitJsonConsole()
+	{
+		// 初始化Serilog日志
+		Log.Logger = new LoggerConfiguration()
+			.Enrich.WithThreadId()
+			// 添加自定义字段
+			.Enrich.WithProperty("service_name", "NETCoreGrpcService")
+			.MinimumLevel.Information()
+			// 对其他日志进行重写
+			.MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
+			.MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Warning)
+			.MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
+			//.WriteTo.Console(new Serilog.Formatting.Json.JsonFormatter())
+			//.WriteTo.File("D:/logs/myapp.txt", rollingInterval: RollingInterval.Day)
+			.WriteTo.Async(a => a.Console(new Serilog.Templates.ExpressionTemplate("{ {time: @t, message: @mt, level: @l, Exception: @x, ..@p} }\n")))
+			//.WriteTo.Async(a => a.File("D:/logs/myapp.log", outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}", rollingInterval: RollingInterval.Day))
+			.CreateLogger();
+	}
 }

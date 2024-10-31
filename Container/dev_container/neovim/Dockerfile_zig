@@ -8,6 +8,7 @@ FROM debian:bookworm-slim
 # 宿主机的用户和组
 ARG ARG_USER_ID=1000
 ARG ARG_USER_NAME="zig_dev_usr"
+ARG ARG_USER_PWD="123456"
 ARG ARG_GROUP_ID=1000
 ARG ARG_GROUP_NAME="zig_dev_grp"
 # Github下载地址
@@ -29,15 +30,17 @@ RUN echo "Github URL is : ${GITHUB_URL}"
 RUN echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
 
 # 设定Debian12镜像仓库为国内源(DEB822格式)
-RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
+RUN set -eux && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 
 # 创建开发用户（避免数据卷为权限为root）
 RUN groupadd -r -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
 RUN useradd -r -g ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} -s /bin/bash -m ${DOCKER_CONTAINER_USER}
+# 设定用户密码
+RUN echo "${DOCKER_CONTAINER_USER}:${ARG_USER_PWD}" | chpasswd
 
 # 安装 所需内容
 RUN apt -qq update -y && apt -qq upgrade -y
-RUN apt install -qq curl git gosu zip unzip xsel xclip ripgrep fd-find protobuf-compiler xz-utils build-essential -y
+RUN apt install -qq sudo curl git gosu zip unzip xsel xclip ripgrep fd-find protobuf-compiler xz-utils build-essential -y
 # 在Debian中fd的二进制名为fdfind（因为fd已被另一个包使用），所以这里做一个软链接
 RUN ln -s $(which fdfind) /usr/local/bin/fd
 # 安装neovim
@@ -64,6 +67,9 @@ RUN mv zig-linux-x86_64-0.13.0 /usr/local/zig
 RUN rm zig-linux-x86_64-0.13.0.tar.xz
 RUN ln -s /usr/local/zig/zig /usr/bin/zig
 
+# 将用户添加到 sudo 组以便可以运行 sudo 命令
+RUN usermod -aG sudo ${DOCKER_CONTAINER_USER}
+
 # 创建工作路径
 RUN mkdir /workspace
 # 设置工作目录
@@ -84,13 +90,14 @@ RUN git config --global user.email "your@email.com"
 RUN git config --global gui.encoding utf-8
 RUN git config --global color.ui true
 RUN git config --global core.autoCRLF false
+RUN git config --global core.ignorecase false
 RUN git config --global core.sparseCheckout true
 RUN git config --global credential.helper store
 
 # neovim配置一键安装
 ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
 # ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
-RUN curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash -
+RUN set -eux && curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
 
 WORKDIR /workspace
 

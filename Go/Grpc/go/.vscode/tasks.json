@@ -13,7 +13,7 @@
 				"GOROOT": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
 				"GOPATH": "D:\\Tools\\WorkTool\\Go\\go_global",
 				"GO111MODULE": "on",
-				"PATH": "${env:path};${env:GOROOT}\\bin;${env:GOPATH};D:\\Tools\\WorkTool\\Build\\buf",
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64\\bin;D:\\Tools\\WorkTool\\Go\\go_global;D:\\Tools\\WorkTool\\Build\\buf",
 			}
 		},
 	},

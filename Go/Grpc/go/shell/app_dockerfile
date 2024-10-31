@@ -25,7 +25,7 @@ RUN buf generate
 FROM golang:1.22.5-alpine3.20 AS builder
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -55,38 +55,44 @@ RUN --mount=type=cache,target=/go/pkg \
 #---------------------------------------------------------------------
 
 # 阶段3：运行
-# 根据需要选择alpine
-FROM alpine:3.20
+# 根据需要选择 alpine 或者 scratch
 
-# 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+## alpine
+#FROM alpine:3.20
+## 设定alpine镜像仓库为国内源
+#RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+## 创建应用路径
+#RUN mkdir /opt/app
+## 设置环境变量
+## 添加bash，curl
+#RUN apk update --quiet
+#RUN apk add --no-cache --upgrade bash curl
+## 从阶段2复制编译结果
+#COPY --from=builder /opt/app/GoGrpc/bin/gogrpc_server /opt/app/GoGrpc/
+## 个人习惯定制化
+#RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+#RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+#RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+#RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+#RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+#RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+#RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+## 设置工作目录
+#WORKDIR /opt/app/GoGrpc
+## 声明容器运行时监听的特定网络端口
+#EXPOSE 50051
+## 指定容器创建时的默认命令
+#CMD ["./gogrpc_server"]
 
-# 创建应用路径
-RUN mkdir /opt/app
-
+# scratch
+FROM scratch
 # 设置环境变量
-
-# 添加bash，curl
-RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash curl
-
-# 从阶段1复制编译结果
+ENV GO_ENVIRONMENT=docker
+# 从阶段2复制编译结果
 COPY --from=builder /opt/app/GoGrpc/bin/gogrpc_server /opt/app/GoGrpc/
-
-# 个人习惯定制化
-RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
-RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
-RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
-RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
-RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
-RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
-RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
-
 # 设置工作目录
 WORKDIR /opt/app/GoGrpc
-
 # 声明容器运行时监听的特定网络端口
 EXPOSE 50051
-
 # 指定容器创建时的默认命令
 CMD ["./gogrpc_server"]

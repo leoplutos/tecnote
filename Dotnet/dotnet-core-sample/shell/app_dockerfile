@@ -5,14 +5,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS builder
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 创建应用路径
 RUN mkdir /opt/app
-
-# 添加bash，curl
-# RUN apk update --quiet
-# RUN apk add --no-cache --upgrade bash curl
 
 # 将本地文件复制到镜像中
 # 复制所有
@@ -29,24 +25,30 @@ WORKDIR /opt/app/dotnet-core-sample
 # 安装依赖
 RUN dotnet clean
 # 编译工程（在/opt/app/dotnet-core-sample/target下会编译出结果）
+# 开启单文件发布，将运行时包含在发布文件内，不生成pdb文件
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet publish -c Release -o target
+    dotnet publish -c Release -o target -p:PublishSingleFile=true -p:DebugType=none -p:DebugSymbols=false --self-contained true
 
 #---------------------------------------------------------------------
 
 # 阶段2：运行
 # 根据需要选择运行时
-FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine
+## 发布时未包含运行时的话需要选择带运行时的镜像
+## FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine
+FROM alpine:3.20
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash，curl
+# 添加bash，curl和dotnet8的依赖项
+# https://github.com/dotnet/core/blob/main/release-notes/8.0/linux-packages.md
+# https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps
+# https://github.com/dotnet/dotnet-docker/blob/main/src/runtime-deps/8.0/alpine3.20-extra/amd64/Dockerfile
 RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash curl
+RUN apk add --no-cache --upgrade bash curl ca-certificates-bundle icu-data-full icu-libs libgcc libssl3 libstdc++ tzdata zlib
 
 # 从阶段1复制编译结果
 COPY --from=builder /opt/app/dotnet-core-sample/target /opt/app/dotnet-core-sample/
@@ -69,11 +71,8 @@ WORKDIR /opt/app/dotnet-core-sample/
 # 声明容器运行时监听的特定网络端口
 # EXPOSE 9501
 
-# 指定容器创建时的默认命令
-## 方式1
-# CMD ["dotnet", "dotnet-console-sample.dll", "Async"]
-## 方式2
-# CMD ["./dotnet-console-sample", "Async"]
+# 设置默认入口命令
+ENTRYPOINT ["/bin/bash"]
 
 # 启动容器运行此命令即可
-# docker run -itd --name dotnet-console-app dotnet-console-app:1.0.0
+# docker run -it --name dotnet-console-app dotnet-console-app:1.0.0

@@ -12,8 +12,45 @@ Dotnet 平台主要分为三个部分
 - Window桌面程序：WinForm、UWP、WPF等
 - Web应用程序：Asp.Net Webform、Asp.Net MVC
 
+**包管理**  
+使用 ``nuget.exe`` 或 ``包管理器控制台（需要安装 VS）`` 管理 NuGet 包  
+工程目录示例  
+```text
+📂 solution_root
+├── 📁 project_a
+│    ├──  project_a.csproj
+│    └──  packages.config
+├── 📁 project_b
+├── 📁 packages
+└─── project_root.sln
+```
+包定义在 ``packages.config`` 文件中  
+下载的包在 ``packages`` 文件夹中  
+
+``packages.config`` 文件示例  
+[packages.config](../Go/Grpc/netframework/netframeworkServer/packages.config)
+
+[使用 NuGet CLI 管理 NuGet 包](https://learn.microsoft.com/zh-cn/nuget/consume-packages/install-use-packages-nuget-cli)
+
 ### .NET Core
 2016年6月27号发布，是微软最新退出开源的、跨平台的平台，可以用来创建运行在Windows、Mac、Linux上的应用程序
+
+
+**包管理**  
+使用 ``dotnet.exe`` 管理 NuGet 包
+工程目录示例  
+```text
+📂 solution_root
+├── 📁 project_a
+│    └──  project_a.csproj
+├── 📁 project_b
+└─── project_root.sln
+```
+包定义在 ``project_a.csproj`` 文件中  
+下载的包在 ``$HOME/.nuget/packages`` 文件夹中  
+
+``project_a.csproj`` 文件示例  
+[project_a.csproj](../Go/Grpc/netcore/netcoreServer/netcoreServer.csproj)
 
 ### xamarin
 主要用来构建手机APP，主要使用的语言是C#语言（但是因为使用人数不多，所以可参考的案例较少）
@@ -303,6 +340,7 @@ Fody: No configuration entry found for the installed weaver Costura. This weaver
 
 ## C# 的异步例子
  - [AsyncExample.cs](./dotnet-core-sample/dotnet-console-sample/Async/AsyncExample.cs)
+ - [App.cs](./dotnet-workspace/dw-app/App.cs)
 
 ## Dotnet 的多模块工作区（solution 解决方案）
 
@@ -321,17 +359,22 @@ dotnet new classlib -o dw-core
 dotnet new console -o dw-app
 dotnet new console -o dw-etcd
 dotnet new console -o dw-redis
+dotnet new console -o dw-test
 
 # 将各个子模块导入解决方案
 dotnet sln add dw-core/dw-core.csproj
 dotnet sln add dw-app/dw-app.csproj
 dotnet sln add dw-etcd/dw-etcd.csproj
 dotnet sln add dw-redis/dw-redis.csproj
+dotnet sln add dw-test/dw-test.csproj
 
 # 添加子模块之间依赖
 dotnet add dw-app/dw-app.csproj reference dw-core/dw-core.csproj
 dotnet add dw-etcd/dw-etcd.csproj reference dw-core/dw-core.csproj
 dotnet add dw-redis/dw-redis.csproj reference dw-core/dw-core.csproj
+dotnet add dw-test/dw-test.csproj reference dw-app/dw-app.csproj
+dotnet add dw-test/dw-test.csproj reference dw-etcd/dw-etcd.csproj
+dotnet add dw-test/dw-test.csproj reference dw-redis/dw-redis.csproj
 
 # 单独为 dw-app 添加依赖
 cd dw-app
@@ -363,6 +406,7 @@ https://github.com/serilog/serilog
 ### NuGet源
  - nuget.org： https://www.nuget.org/api/v2/
  - NuGet国内镜像： https://nuget.cdn.azure.cn/v3/index.json
+ - 腾讯镜像： https://mirrors.cloud.tencent.com/nuget/
 
 NuGet源设定文件位置
  - Windows ： ``%APPDATA%\NuGet\NuGet.Config``

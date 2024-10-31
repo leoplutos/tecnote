@@ -51,6 +51,11 @@
 			"problemMatcher": "$msCompile"
 		},
 		{
+			// -p:PublishSingleFile=true 单文件发布
+			// --self-contained true 将运行时包含在发布文件内
+			// -p:DebugType=none -p:DebugSymbols=false 不生成pdb文件
+			// -p:PublishTrimmed=true 剪裁
+			// -p:EnableCompressionInSingleFile=true 启用压缩
 			"label": "dotnet_publish",
 			"type": "process",
 			"command": "dotnet",
@@ -58,7 +63,12 @@
 				"publish",
 				"${workspaceFolder}/dotnet-core-sample.sln",
 				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary"
+				"/consoleloggerparameters:NoSummary",
+				"-p:PublishSingleFile=true",
+				"-p:DebugType=none",
+				"-p:DebugSymbols=false",
+				"--self-contained",
+				"true"
 			],
 			"problemMatcher": "$msCompile"
 		},

@@ -16,7 +16,8 @@ ARG ARG_GITHUB_URL="https://bgithub.xyz"
 ARG ARG_CONTAINER_NAME="java21_vscode"
 
 # 设定Java用环境变量
-ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8"
+# 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
 # 在nvim中判断用
 ENV DOCKER_CONTAINER="true"
 ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
@@ -31,7 +32,7 @@ RUN echo "Github URL is : ${GITHUB_URL}"
 RUN echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
 
 # 设定Ubuntu镜像仓库为国内源
-RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
+RUN set -eux && sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
 
 # 创建开发用户（避免数据卷为权限为root）
 RUN groupadd -r -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
@@ -48,9 +49,12 @@ RUN apt install -qq software-properties-common -y
 RUN add-apt-repository ppa:git-core/ppa -y
 RUN apt -qq update -y && apt -qq upgrade -y
 # 安装git，gosu和其他工具
-RUN apt install -qq git gosu openssh-server zip unzip ripgrep fd-find -y
+RUN apt install -qq sudo git gosu openssh-server zip unzip ripgrep fd-find -y
 # 在Ubuntu中fd的二进制名为fdfind（因为fd已被另一个包使用），所以这里做一个软链接
 RUN ln -s $(which fdfind) /usr/local/bin/fd
+
+# 将用户添加到 sudo 组以便可以运行 sudo 命令
+RUN usermod -aG sudo ${DOCKER_CONTAINER_USER}
 
 # 创建工作路径
 RUN mkdir /workspace
@@ -97,6 +101,7 @@ RUN git config --global user.email "your@email.com"
 RUN git config --global gui.encoding utf-8
 RUN git config --global color.ui true
 RUN git config --global core.autoCRLF false
+RUN git config --global core.ignorecase false
 RUN git config --global core.sparseCheckout true
 RUN git config --global credential.helper store
 

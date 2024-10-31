@@ -1,0 +1,53 @@
+# .bashrc for personal
+
+# 设定命令 提示符
+PROMPT_COMMAND=__prompt_command_nerdfont
+# NerdFont版本
+__prompt_command_nerdfont() {
+    local STR_EXIT_STATUS="$?"
+    PS1=""
+    local STR_LINE1_PRE='╭'
+    local STR_LINE2_PRE='╰'
+    local STR_LEFT_SEMICIRCLE=''
+    local STR_RIGHT_SEMICIRCLE=''
+    local STR_LEFT_ARROW=''
+    local STR_UBUNTU_ICON=''
+    local STR_DOCKER_ICON='󰡨'
+    local STR_ERROR_ICON=''
+    local STR_TIME_ICON=''
+    local STR_USER_ICON=''
+    local STR_IP_ICON='󰩠'
+    local STR_DIRECTORY_ICON=''
+    local STR_OS=$(cat /etc/os-release | grep ^ID= | awk -F'=' '{print $2}')
+    local PS_BLACK='\[\e[0;30m\]'
+    local PS_RED='\[\e[0;31m\]'
+    local PS_GREEN='\[\e[0;32m\]'
+    local PS_YELLOW='\[\e[0;33m\]'
+    local PS_BLUE='\[\e[0;34m\]'
+    local PS_MAGENTA='\[\e[0;35m\]'
+    local PS_CYAN='\[\e[0;36m\]'
+    local PS_BRIGHTBLACK='\[\e[0;90m\]'
+    local PS_BRIGHTRED='\[\e[0;91m\]'
+    local PS_BRIGHTGREEN='\[\e[0;92m\]'
+    local PS_BRIGHTYELLOW='\[\e[0;93m\]'
+    local PS_BRIGHTBLUE='\[\e[0;94m\]'
+    local PS_BRIGHTMAGENTA='\[\e[0;95m\]'
+    local PS_BRIGHTCYAN='\[\e[0;96m\]'
+    local PS_CLEAR='\[\e[0m\]'
+    local PS_TIME='\[\e[96;100m\]'
+    local PS_SHELL='\[\e[90;43m\]'
+    local PS_HOST='\[\e[37;44m\]'
+    local PS_IPADDR='\[\e[90;106m\]'
+    local PS_PATH='\[\e[33;100m\]'
+    local PS_ERR_STATUS='\[\e[93;101m\]'
+    PS1+="${PS_MAGENTA}${STR_LINE1_PRE}"
+    if [ $STR_EXIT_STATUS != 0 ]; then
+        PS1+="${PS_BRIGHTRED}${STR_LEFT_SEMICIRCLE}${PS_ERR_STATUS}${STR_ERROR_ICON} ${STR_EXIT_STATUS} "
+    else
+        PS1+="${PS_BRIGHTBLACK}${STR_LEFT_SEMICIRCLE}"
+    fi
+    PS1+="${PS_TIME}${STR_TIME_ICON} \t ${PS_SHELL} ${STR_DOCKER_ICON} ${STR_OS} ${PS_HOST} ${STR_USER_ICON} \u@\h ${PS_PATH} ${STR_DIRECTORY_ICON}  \w ${PS_BRIGHTBLACK}${STR_LEFT_ARROW}${PS_CLEAR}\n${PS_MAGENTA}${STR_LINE2_PRE}${PS_BLUE}\$ ${PS_CLEAR}"
+}
+
+export TERM="xterm-256color"
+export COLORTERM=truecolor

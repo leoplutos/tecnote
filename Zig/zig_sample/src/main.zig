@@ -76,9 +76,9 @@ pub fn main() !void {
 
     // 打印日志
     logz.debug()
-        .string("context", "divide")
-        .float("a", 1)
-        .float("b", 2).log();
+        .string("context", "这是一个使用logz打印的日志")
+        .float("浮点1", 3.14)
+        .float("浮点2", 6.28).log();
 
     // 申请内存
     const username = try allocator.alloc(u8, 20);

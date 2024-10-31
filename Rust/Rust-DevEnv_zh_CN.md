@@ -179,7 +179,9 @@ rustup install stable-x86_64-unknown-linux-gnu
 
 ## Rust使用国内源
 全局配置
- - ``$USER_HOME/.cargo/config.toml``
+ - ``$CARGO_HOME/config.toml``
+     - 如果没有``CARGO_HOME``环境变量时 Windows默认: ``%USERPROFILE%\.cargo\config.toml``
+     - 如果没有``CARGO_HOME``环境变量时 Unix默认: ``$HOME/.cargo/config.toml``
 
 工程配置
  - ``$PROJECT_HOME/.cargo/config.toml``

@@ -8,6 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine
 # 宿主机的用户和组
 ARG ARG_USER_ID=1000
 ARG ARG_USER_NAME="dotnet8_dev_usr"
+ARG ARG_USER_PWD="123456"
 ARG ARG_GROUP_ID=1000
 ARG ARG_GROUP_NAME="dotnet8_dev_grp"
 ARG ARG_GITHUB_URL="https://bgithub.xyz"
@@ -38,16 +39,22 @@ WORKDIR /workspace
 # 创建开发用户（避免数据卷为权限为root）
 RUN addgroup -S -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
 RUN adduser -S -G ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} --shell /bin/bash ${DOCKER_CONTAINER_USER}
+# 设定用户密码
+RUN echo "${DOCKER_CONTAINER_USER}:${ARG_USER_PWD}" | chpasswd
 
 # 安装 所需内容
 RUN apk update --quiet
 # RUN apk add --no-cache --upgrade bash curl neovim neovim-doc git python3 py3-pip zip wget gzip xsel xclip lazygit ripgrep fd build-base dpkg py3-pynvim
-RUN apk add --no-cache --upgrade bash curl neovim neovim-doc git zip wget gzip xsel xclip lazygit ripgrep fd build-base dpkg
+RUN apk add --no-cache --upgrade sudo bash curl neovim neovim-doc git zip wget gzip xsel xclip lazygit ripgrep fd build-base dpkg
 
 # 安装 gosu
 # gosu 是经常出现在官方Docker镜像中的一个小工具。它是"su"和"sudo"命令的轻量级替代品，并解决了它们在tty和信号传递中的一些问题
 RUN curl -sSL -o /usr/local/bin/gosu "${GITHUB_URL}/tianon/gosu/releases/download/1.17/gosu-$(dpkg --print-architecture | awk -F- '{ print $NF }')"
 RUN chmod +x /usr/local/bin/gosu
+
+# 将用户添加到 wheel 组以便可以运行 sudo 命令（wheel group 类似于基于 Debian 的系统中的 sudo group）
+RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+RUN adduser ${DOCKER_CONTAINER_USER} wheel
 
 # 修改权限
 RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
@@ -68,13 +75,14 @@ RUN git config --global user.email "your@email.com"
 RUN git config --global gui.encoding utf-8
 RUN git config --global color.ui true
 RUN git config --global core.autoCRLF false
+RUN git config --global core.ignorecase false
 RUN git config --global core.sparseCheckout true
 RUN git config --global credential.helper store
 
 # neovim配置一键安装
 ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
 # ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
-RUN curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash -
+RUN set -eux && curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
 
 WORKDIR /workspace
 

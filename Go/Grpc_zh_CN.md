@@ -113,7 +113,9 @@ protoc --version
 
 ## Go语言示例
 
-官方 [Github](https://github.com/grpc/grpc-go) 仓库
+官方 [Github](https://github.com/grpc/grpc-go) 仓库  
+官方示例 [Github](https://github.com/grpc/grpc-go/tree/master/examples) 仓库  
+OpenTelemetry监测实现 [Github](https://github.com/grpc/grpc-go/tree/master/examples/features/opentelemetry) 仓库
 
 首先先确认 ``%GOPATH%`` 在 ``%PAH%`` 中
 
@@ -177,7 +179,9 @@ go build -o ./bin/client.exe ./product/client/main.go
 
 ## Python语言示例
 
-官方 [Github](https://github.com/grpc/grpc/tree/master/src/python/grpcio) 仓库
+官方 [Github](https://github.com/grpc/grpc/tree/master/src/python/grpcio) 仓库  
+官方示例 [Github](https://github.com/grpc/grpc/tree/master/examples/python) 仓库  
+OpenTelemetry监测实现 [Github](https://github.com/grpc/grpc/tree/master/examples/python/observability) 仓库
 
 ### 方式1：使用 ``Buf`` 工具链
 
@@ -244,7 +248,11 @@ https://github.com/flagman/grpc-load-balancer
 
 ## Java语言示例（已实现客户端负载均衡）
 
-官方 [Github](https://github.com/grpc/grpc-java) 仓库
+官方 [Github](https://github.com/grpc/grpc-java) 仓库  
+官方示例 [Github](https://github.com/grpc/grpc-java/tree/master/examples) 仓库  
+OpenTelemetry监测实现 [Github](https://github.com/grpc/grpc-java/tree/master/examples/example-opentelemetry) 仓库  
+OpenTelemetry的零代码实现 [Github](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/grpc-1.6/library) 仓库
+
 
 ### Java实现的存根(Stub)
 在 Java 的实现中 gRPC 默认提供了三种 ``stub``，``stub`` 有点类似 http 的 client，grpc 默认提供了几种 stub 实现
@@ -318,7 +326,9 @@ https://github.com/saturnism/grpc-by-example-java
 
 需要Rust版本大于 ``1.71``  
 这里主要使用 ``tonic`` 库 [Github地址](https://github.com/hyperium/tonic)&nbsp;&nbsp;[Crate地址](https://docs.rs/tonic/latest/tonic/)  
-通过 ``tonic_build`` 来自动生成存根的功能，详见 [这里](https://docs.rs/tonic-build/latest/tonic_build) 
+通过 ``tonic_build`` 来自动生成存根的功能，详见 [这里](https://docs.rs/tonic-build/latest/tonic_build)  
+官方示例 [Github](https://github.com/hyperium/tonic/tree/master/examples) 仓库  
+
 
 创建工程 → 下载第三方库并且编译
 ```bash
@@ -340,12 +350,12 @@ cargo run --bin rustclient
 ```
 
 ### 一些 Rust 的例子
-https://github.com/hyperium/tonic/tree/master/examples/  
 https://github.com/rthomas/rust-tonic-jaeger-example  
 
 ## TypScript语言+Node.js示例
 
-官方 [Github](https://github.com/grpc/grpc-node) 仓库
+官方 [Github](https://github.com/grpc/grpc-node) 仓库  
+官方示例 [Github](https://github.com/grpc/grpc-node/tree/master/examples) 仓库  
 
 ### 官方实现
 在 Node.js 中有如下几个实现
@@ -441,6 +451,9 @@ npm run client
 如果是新项目，推荐用后者；如果是老项目（比如还在用.netframework的老项目），可以考虑用前者。在 Grpc.Examples 文件夹下可以找到示例
 
 ### 新版 .NET Core 示例
+官方 [Github](https://github.com/grpc/grpc-dotnet) 仓库  
+官方示例 [Github](https://github.com/grpc/grpc-dotnet/tree/master/examples) 仓库  
+微软官方 [示例](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio)  
 
 #### 项目说明
 - netcore - 主工程（.NET Core 8）
@@ -484,13 +497,6 @@ dotnet run --project netcoreServer
 dotnet run --project netcoreClient -- Sync
 dotnet run --project netcoreClient -- Async
 ```
-
-#### 微软官方的教程
-微软官方的示例写的很好，直接看 [这里](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio) 即可
-
-#### 官方例子
-这里也有例子  
-https://github.com/grpc/grpc-dotnet/tree/master/examples
 
 ### 旧版 .NET Framework 示例（已实现客户端负载均衡）
 

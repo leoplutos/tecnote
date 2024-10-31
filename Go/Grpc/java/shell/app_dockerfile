@@ -4,10 +4,12 @@
 # 使用Maven镜像
 # 因为protoc-gen-grpc-java二进制文件在Linux上使用glibc，所以使用alpine有一些问题
 # FROM maven:3.9.8-eclipse-temurin-21-alpine AS builder
-FROM maven:3.9.8-eclipse-temurin-21-jammy AS builder
+FROM maven:3.9.9-eclipse-temurin-21-jammy AS builder
 
 # 设定alpine镜像仓库为国内源
-# RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# 设定Ubuntu镜像仓库为国内源
+RUN set -eux && sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -17,7 +19,7 @@ RUN mkdir /root/.m2/repository
 
 # 设定Java用环境变量
 # 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
-ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational"
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
 
 # 将本地文件复制到镜像中
 # 复制src文件夹
@@ -34,8 +36,10 @@ WORKDIR /opt/app/JavaGrpc
 # 编译工程
 # RUN mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
 # --mount=type=cache 用于指定一个挂载点。这个挂载点不是挂载宿主机上的文件系统到容器中，而是利用 Docker 的构建缓存来优化构建过程
+#RUN --mount=type=cache,target=/root/.m2/repository \
+#    mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
 RUN --mount=type=cache,target=/root/.m2/repository \
-    mvn -f pom_docker.xml clean compile assembly:single -P docker -Dmaven.test.skip=true
+    mvn -f pom_docker.xml clean package spring-boot:repackage -P docker -Dmaven.test.skip=true
 
 #---------------------------------------------------------------------
 
@@ -44,7 +48,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 FROM eclipse-temurin:21.0.3_9-jre-alpine
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -58,7 +62,7 @@ COPY --from=builder /opt/app/JavaGrpc/build/javagrpc-1.0.jar /opt/app/JavaGrpc/j
 
 # 设定Java用环境变量
 # 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
-ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -Dlog4j2.asyncQueueFullPolicy=Discard -Dlog4j2.discardThreshold=ERROR -XX:+UseZGC -XX:+ZGenerational"
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
 ENV JAVA_ENVIRONMENT="docker"
 ENV GRPC_SERVER_RESOLVE="true"
 ENV GRPC_SERVER_HTTP_PORTS="50051"

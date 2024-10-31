@@ -16,7 +16,37 @@ public class AsyncExample {
 	// log4j2日志
 	protected static final Logger log = LogManager.getLogger();
 
-	// 异步函数
+	// 异步函数-无返回值
+	public static CompletableFuture<Void> showVoidAsync(int value) {
+		// runAsync 接受一个Runnable函数接口，不返回任何结果
+		return CompletableFuture.runAsync(() -> {
+			log.debug("showVoidAsync -> {}", value);
+		});
+	}
+
+	// 异步函数-有返回值
+	public static CompletableFuture<String> showStringAsync(int value) {
+		// supplyAsync需要一个Supplier函数接口，通常用于执行异步计算
+		return CompletableFuture.supplyAsync(() -> {
+			String result = String.valueOf(value);
+			log.debug("showStringAsync -> {}", result);
+			return result;
+		});
+	}
+
+	// 异步函数-发生异常
+	public static CompletableFuture<Integer> showExceptionAsync(int value) {
+		// runAsync 接受一个Runnable函数接口，不返回任何结果
+		return CompletableFuture.supplyAsync(() -> {
+			int zero = 0;
+			int result = value / zero;
+			// return Integer.valueOf(result);
+			log.debug("showExceptionAsync -> {}", result);
+			return result;
+		});
+	}
+
+	// 异步函数-指定执行器
 	public static CompletableFuture<String> doSomethingAsync(int value, ExecutorService executor) {
 		// 创建一个无消耗值(无输入值)、无返回值的异步子任务
 		// CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {});
@@ -30,6 +60,24 @@ public class AsyncExample {
 	}
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
+
+		// 堵塞调用异步函数
+		showVoidAsync(10).get();
+		log.info("调用showVoidAsync完成");
+		String resultStr = showStringAsync(10).get();
+		log.info("调用showStringAsync完成, 返回值:{}", resultStr);
+		// 外部的try catch会捕获异步函数内的异常，如何希望捕获异常后设定默认值，可以使用exceptionally的方式
+		try {
+			int resultInt = showExceptionAsync(10)
+			//.exceptionally((e) -> {
+			//	log.error(e);
+			//	return 0;
+			//})
+			.get();
+			log.info("调用showExceptionAsync完成, 返回值:{}", resultInt);
+		} catch (Exception e) {
+			log.error(e);
+		}
 
 		// 定长10线程池
 		// 默认情况下，通过静态方法runAsync()、supplyAsync()创建的CompletableFuture任务会使用公共的ForkJoinPool线程池，默认的线程数是CPU的核数。

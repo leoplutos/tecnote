@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.slf4j.MDC;
 import com.google.protobuf.Empty;
 import com.google.protobuf.Int32Value;
 
@@ -159,6 +160,9 @@ public class ServerMain {
 	// 程序主入口
 	public static void main(String[] args) throws Exception {
 		try {
+			// json结构化日志设置MDC上下文
+			MDC.put("service_name", "JavaGrpcService");
+
 			// 读取 properties 和 环境变量
 			Configuration config = Config.getInstance();
 			int defaultPort = config.getInt("grpc.server.default.port", 50051);

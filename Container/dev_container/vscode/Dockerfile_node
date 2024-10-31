@@ -31,7 +31,7 @@ RUN echo "Github URL is : ${GITHUB_URL}"
 RUN echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
 
 # 设定Debian11镜像仓库为国内源
-RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+RUN set -eux && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 # 创建开发用户（避免数据卷为权限为root）
 # 在官方镜像里面，已经存在了1000/1000(bun/bun)，所以直接使用这个用户
@@ -44,7 +44,7 @@ RUN chsh -s /bin/bash ${DOCKER_CONTAINER_USER}
 
 # 安装 所需内容
 RUN apt -qq update -y && apt -qq upgrade -y
-RUN apt install -qq curl git gosu openssh-server zip unzip ripgrep fd-find protobuf-compiler -y
+RUN apt install -qq sudo curl git gosu openssh-server zip unzip ripgrep fd-find protobuf-compiler -y
 # 在Debian中fd的二进制名为fdfind（因为fd已被另一个包使用），所以这里做一个软链接
 RUN ln -s $(which fdfind) /usr/local/bin/fd
 # 安装Node.js 20 和 npm
@@ -53,6 +53,9 @@ RUN apt-get install -y nodejs
 # 安装 Buf
 RUN curl -sSL "${GITHUB_URL}/bufbuild/buf/releases/download/v1.42.0/buf-$(uname -s)-$(uname -m)" -o "/usr/local/bin/buf"
 RUN chmod +x "/usr/local/bin/buf"
+
+# 将用户添加到 sudo 组以便可以运行 sudo 命令
+RUN usermod -aG sudo ${DOCKER_CONTAINER_USER}
 
 # 创建应用路径
 RUN mkdir /workspace
@@ -84,6 +87,7 @@ RUN git config --global user.email "your@email.com"
 RUN git config --global gui.encoding utf-8
 RUN git config --global color.ui true
 RUN git config --global core.autoCRLF false
+RUN git config --global core.ignorecase false
 RUN git config --global core.sparseCheckout true
 RUN git config --global credential.helper store
 

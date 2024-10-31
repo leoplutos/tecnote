@@ -1,7 +1,10 @@
 import { Server, ServerCredentials, } from "@grpc/grpc-js";
 import { ProductServiceImpl } from "./service/ProductService.js";
 import { ProductInfoService } from './stub/ProductInfo.js';
+import { getLogger } from './log/log.js';
 
+// 日志
+const log = getLogger();
 
 // 异步开始函数
 async function startServerAsync(): Promise<void> {
@@ -18,10 +21,11 @@ async function startServerAsync(): Promise<void> {
 	server.bindAsync(address, ServerCredentials.createInsecure(),
 		(error, port) => {
 			if (error) {
-				console.error("[Node-TS][Server] gRPC 服务端启动失败: ", error);
+				log.error("[Node-TS][Server] gRPC 服务端启动失败:");
+				log.error(error);
 				return;
 			}
-			console.log(`[Node-TS][Server] gRPC 服务端已开启，端口为:${port}`);
+			log.info(`[Node-TS][Server] gRPC 服务端已开启，端口为:${port}`);
 		}
 	);
 }
@@ -31,7 +35,7 @@ async function startServerAsync(): Promise<void> {
 	try {
 		await startServerAsync();
 	} catch (e) {
-		console.error(e);
+		log.error(e);
 	} finally {
 	}
 })();

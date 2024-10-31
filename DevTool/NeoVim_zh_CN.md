@@ -86,7 +86,7 @@ Neovim 新加了一个健康检查的命令
 ```bash
 export GITHUB_RAW_URL=https://raw.bgithub.xyz
 # export GITHUB_RAW_URL=https://raw.githubusercontent.com
-curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash -
+curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
 ```
 
 ## Python支持

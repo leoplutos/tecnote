@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace dotnet_console_sample.Async
 {
+	// https://learn.microsoft.com/zh-cn/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model
 	class AsyncExample
 	{
 		// appsettings.json 和 环境变量
@@ -13,8 +14,34 @@ namespace dotnet_console_sample.Async
 			_config = config;
 		}
 
-		// 异步函数
-		async Task<string> DoSomethingAsync(int value)
+		// 异步函数-无返回值
+		public async Task ShowVoidAsync(int value)
+		{
+			await Task.Delay(0);
+			Log.Debug("ShowVoidAsync -> {value}", value);
+		}
+
+		// 异步函数-有返回值
+		public async Task<string> ShowStringAsync(int value)
+		{
+			await Task.Delay(0);
+			string result = value.ToString();
+			Log.Debug("ShowStringAsync -> {result}", result);
+			return result;
+		}
+
+		// 异步函数-发生异常
+		public async Task<int> ShowExceptionAsync(int value)
+		{
+			await Task.Delay(0);
+			int zero = 0;
+			int result = value / zero;
+			Log.Debug("ShowExceptionAsync -> {result}", result);
+			return result;
+		}
+
+		// 异步函数-测试用
+		public async Task<string> DoSomethingAsync(int value)
 		{
 			// 模拟长时间运行的任务，例如网络请求或数据库查询
 			await Task.Delay(2000); // 延迟2秒（2000毫秒）
@@ -22,7 +49,7 @@ namespace dotnet_console_sample.Async
 		}
 
 		// 异步操作完成时调用的回调方法
-		async void CompletionCallbackAsync(Task<string> task)
+		public async void CompletionCallbackAsync(Task<string> task)
 		{
 			// 等待异步操作完成
 			string result = await task;
@@ -33,6 +60,22 @@ namespace dotnet_console_sample.Async
 		// 程序入口
 		public async Task AsyncExampleStart()
 		{
+			// 堵塞调用异步函数
+			await ShowVoidAsync(10);
+			Log.Information("调用ShowVoidAsync完成");
+			string resultStr = await ShowStringAsync(10);
+			Log.Information("调用ShowStringAsync完成, 返回值:{resultStr}", resultStr);
+			try
+			{
+				int resultInt = await ShowExceptionAsync(10);
+				Log.Information("调用ShowExceptionAsync完成, 返回值:{resultInt}", resultInt);
+			}
+			catch (Exception ex)
+			{
+				Log.Error("捕获到异常: {ex}", ex);
+			}
+
+
 			Log.Information("AsyncExampleStart开始!!!");
 			// 从 appsettings.json 中读取内容
 			int threadCount = 5;

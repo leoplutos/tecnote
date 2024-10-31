@@ -1,5 +1,26 @@
 # Docker的常用镜像以及镜像和容器的区别
 
+## Docker的基础镜像
+
+#### scratch
+该镜像是一个极简的``空的镜像``，它仅包含了容器运行所必需的最小文件系统和执行环境。这使得它非常适合用于构建微服务应用程序和轻量级容器化应用程序  
+scratch 无法被 ``pull``，只能用于 ``Dockerfile`` 中  
+``Golang``，``Rust`` 以及 ``Zig`` 语言，开启了静态链接编译后都可以放在 scratch 内运行  
+官方仓库 : [scratch](https://github.com/docker-library/docs/tree/master/scratch)
+
+#### alpine
+常用tag : ``alpine:3.20`` (7.8MB)  
+官方仓库 : [alpine](https://github.com/docker-library/docs/tree/master/alpine)
+
+#### debian
+常用tag : ``debian:bookworm-slim`` (74.8MB) (Deiban12 Bookworm)  
+官方仓库 : [debian](https://github.com/docker-library/docs/tree/master/debian)
+
+#### ubuntu
+常用tag : ``ubuntu:jammy`` (77.9MB) (Ubuntu22.04 Jammy)  
+官方仓库 : [ubuntu](https://github.com/docker-library/docs/tree/master/ubuntu)
+
+
 ## Docker的常用镜像
 
 ### LazyDocker

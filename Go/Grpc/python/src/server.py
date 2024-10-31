@@ -1,7 +1,12 @@
-import logging
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from loguru import logger
+import asyncio
 import argparse
 import grpc
 from service.product_service import ProductServiceImpl
+from log.log import init_logger_async
 from concurrent import futures
 import stub.ProductInfo_pb2_grpc as gpb
 
@@ -11,12 +16,9 @@ server_host: str = "0.0.0.0"
 server_port: int = 50051
 
 
-def start_server():
-    # 控制台
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="[%(asctime)s] %(levelname)s [%(thread)s][%(filename)s:%(lineno)d] - %(message)s",
-    )
+async def start_server():
+    # 日志初始化
+    await init_logger_async()
 
     global server_host
     global server_port
@@ -39,10 +41,13 @@ def start_server():
     # 启动服务
     server.start()
 
-    logging.info(f"[Python][Server] gRPC 服务端已开启，端口为:{server_address}")
+    logger.info("[Python][Server] gRPC 服务端已开启，端口为:{}", server_address)
     server.wait_for_termination()
 
 
 # 程序主入口
 if __name__ == '__main__':
-    start_server()
+    try:
+        asyncio.run(start_server())
+    except KeyboardInterrupt:
+        logger.info("[Python][Server] gRPC 服务端已关闭.")

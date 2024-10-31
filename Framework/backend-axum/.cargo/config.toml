@@ -12,9 +12,18 @@ check-revoke = false
 [net]
 git-fetch-with-cli = true
 
-[build]
-# 针对性CPU编译，动态链接到C运行
-rustflags = ["-C", "target-cpu=native", "-C", "target-feature=-crt-static"]
+# 在 Windows MSVC 上，静态链接 C 库，以便编译结果不依赖于 vcruntime DLL
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+[target.i686-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+# 在 linux musl 上，静态链接 C 库，以便编译结果不依赖于其他动态库
+[target.x86_64-unknown-linux-musl]
+rustflags = [
+  "-C", "target-feature=+crt-static",
+  "-C", "link-self-contained=yes",
+]
 
 # 编译优化
 [profile.release]

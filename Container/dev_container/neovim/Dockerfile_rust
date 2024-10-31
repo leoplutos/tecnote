@@ -8,6 +8,7 @@ FROM rust:1.79.0-alpine3.20
 # 宿主机的用户和组
 ARG ARG_USER_ID=1000
 ARG ARG_USER_NAME="rust_dev_usr"
+ARG ARG_USER_PWD="123456"
 ARG ARG_GROUP_ID=1000
 ARG ARG_GROUP_NAME="rust_dev_grp"
 # Github下载地址
@@ -34,15 +35,21 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/
 # 创建开发用户（避免数据卷为权限为root）
 RUN addgroup -S -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP}
 RUN adduser -S -G ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} --shell /bin/bash ${DOCKER_CONTAINER_USER}
+# 设定用户密码
+RUN echo "${DOCKER_CONTAINER_USER}:${ARG_USER_PWD}" | chpasswd
 
-# 安装 所需内容
+# 安装 所需内容(binaryen为WebAssembly开发使用)
 RUN apk update --quiet
 # RUN apk add --no-cache --upgrade bash curl neovim neovim-doc git python3 py3-pip zip wget gzip xsel xclip lazygit ripgrep fd build-base protobuf dpkg
-RUN apk add --no-cache --upgrade bash curl neovim neovim-doc git zip wget gzip xsel xclip lazygit ripgrep fd build-base protobuf dpkg
+RUN apk add --no-cache --upgrade sudo bash curl neovim neovim-doc git zip wget gzip xsel xclip lazygit ripgrep fd build-base protobuf dpkg binaryen
 # 安装 gosu
 # gosu 是经常出现在官方Docker镜像中的一个小工具。它是"su"和"sudo"命令的轻量级替代品，并解决了它们在tty和信号传递中的一些问题
 RUN curl -sSL -o /usr/local/bin/gosu "${GITHUB_URL}/tianon/gosu/releases/download/1.17/gosu-$(dpkg --print-architecture | awk -F- '{ print $NF }')"
 RUN chmod +x /usr/local/bin/gosu
+
+# 将用户添加到 wheel 组以便可以运行 sudo 命令（wheel group 类似于基于 Debian 的系统中的 sudo group）
+RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+RUN adduser ${DOCKER_CONTAINER_USER} wheel
 
 # 创建应用路径
 RUN mkdir /workspace
@@ -57,6 +64,7 @@ USER ${DOCKER_CONTAINER_USER}
 
 # Rust语言设定
 # 设定字节跳动源
+RUN echo -e '[source.crates-io]\nreplace-with = "rsproxy-sparse"\n[source.rsproxy]\nregistry = "https://rsproxy.cn/crates.io-index"\n[source.rsproxy-sparse]\nregistry = "sparse+https://rsproxy.cn/index/"\n[registries.rsproxy]\nindex = "https://rsproxy.cn/crates.io-index"\n[http]\ncheck-revoke = false\n[net]\ngit-fetch-with-cli = true\n' >> /usr/local/cargo/config.toml
 ENV RUSTUP_DIST_SERVER="https://rsproxy.cn"
 ENV RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 # 安装rustfmt
@@ -70,13 +78,14 @@ RUN git config --global user.email "your@email.com"
 RUN git config --global gui.encoding utf-8
 RUN git config --global color.ui true
 RUN git config --global core.autoCRLF false
+RUN git config --global core.ignorecase false
 RUN git config --global core.sparseCheckout true
 RUN git config --global credential.helper store
 
 # neovim配置一键安装
 ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
 # ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
-RUN curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash -
+RUN set -eux && curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
 
 WORKDIR /workspace
 

@@ -139,6 +139,10 @@ set CARGO_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 set RUSTUP_HOME=D:\Tools\WorkTool\Rust\Rust_gnu_1.79
 set RUST_SRC_PATH=D:\Tools\WorkTool\Rust\Rust_gnu_1.79\toolchains\stable-x86_64-pc-windows-gnu\lib\rustlib\src\rust\src
 set PATH=%PATH%;%CARGO_HOME%\bin
+set RUSTUP_DIST_SERVER=https://rsproxy.cn
+set RUSTUP_UPDATE_ROOT=https://rsproxy.cn/rustup
+set BINARYEN_HOME=D:\Tools\WorkTool\Rust\binaryen
+set PATH=%PATH%;%BINARYEN_HOME%\bin
 ::Golang
 set GO111MODULE=on
 set GOROOT=D:\Tools\WorkTool\Go\go1.22.5.windows-amd64

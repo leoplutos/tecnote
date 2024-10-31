@@ -1,6 +1,9 @@
 import { credentials, type ServiceError } from '@grpc/grpc-js';
 import { Product, ProductId, ProductInfoClient } from './stub/ProductInfo.js';
+import { getLogger } from './log/log.js';
 
+// 日志
+const log = getLogger();
 
 // 调用添加商品
 const addProductAsync = async (client: ProductInfoClient): Promise<ProductId> => {
@@ -8,13 +11,14 @@ const addProductAsync = async (client: ProductInfoClient): Promise<ProductId> =>
 	const response: ProductId = await new Promise<ProductId>((resolve, reject) => {
 		client.addProduct(request, (error: ServiceError | null, response: ProductId) => {
 			if (error) {
-				console.error("[Node-TS][Client] Error : ", error);
+				log.error("[Node-TS][Client] Error :");
+				log.error(error);
 				reject(error);
 			}
 			resolve(response);
 		});
 	});
-	console.log(`[Node-TS][Client] Add product success. id=${response.value}`);
+	log.info(`[Node-TS][Client] Add product success. id=${response.value}`);
 	return response;
 };
 
@@ -23,13 +27,14 @@ const getProductAsync = async (client: ProductInfoClient, productId: ProductId):
 	const response: Product = await new Promise<Product>((resolve, reject) => {
 		client.getProduct(productId, (error: ServiceError | null, response: Product) => {
 			if (error) {
-				console.error("[Node-TS][Client] Error : ", error);
+				log.error("[Node-TS][Client] Error :");
+				log.error(error);
 				reject(error);
 			}
 			resolve(response);
 		});
 	});
-	console.log(`[Node-TS][Client] Get product success. id=${response.id} name=${response.name} description=${response.description}`);
+	log.info(`[Node-TS][Client] Get product success. id=${response.id} name=${response.name} description=${response.description}`);
 	return response;
 };
 
@@ -55,7 +60,7 @@ async function startClientAsync(): Promise<void> {
 	try {
 		await startClientAsync();
 	} catch (e) {
-		console.error(e);
+		log.error(e);
 	} finally {
 	}
 })();

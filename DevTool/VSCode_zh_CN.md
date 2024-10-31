@@ -93,6 +93,7 @@ Java所需插件比较多。有2套方案：
 
 ### 其他插件
 
+- [Lines of Code (LOC)](https://marketplace.visualstudio.com/items?itemName=lyzerk.linecounter)   &nbsp;&nbsp;统计代码行数
 - [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：使用正则表达式，来高亮代码中所有用户想要的文本
 - [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：运行多种语言的代码片段或代码文件，省掉保存的环节，直接可以运行
 - [Blockman](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：突出显示代码块来提高代码可读性

@@ -17,43 +17,16 @@
 	</properties>
 	<profiles>
 		<profile>
-			<!-- 本地开发环境 -->
-			<id>dev</id>
-			<properties>
-				<profiles.active>dev</profiles.active>
-				<!--dev环境使用默认的target-->
-				<profiles.buildDirectory>target</profiles.buildDirectory>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-		<profile>
-			<!-- 测试环境 -->
-			<id>it</id>
-			<properties>
-				<profiles.active>it</profiles.active>
-				<!--修改编译结果路径为build-->
-				<profiles.buildDirectory>build</profiles.buildDirectory>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 商用环境 -->
-			<id>prd</id>
-			<properties>
-				<profiles.active>prd</profiles.active>
-				<!--修改编译结果路径为build-->
-				<profiles.buildDirectory>build</profiles.buildDirectory>
-			</properties>
-		</profile>
-		<profile>
-			<!-- Docker用 -->
+			<!-- Docker环境用 -->
 			<id>docker</id>
 			<properties>
 				<profiles.active>docker</profiles.active>
 				<!--修改编译结果路径为build-->
 				<profiles.buildDirectory>build</profiles.buildDirectory>
 			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 	</profiles>
 	<build>
@@ -89,7 +62,7 @@
 				<artifactId>protobuf-maven-plugin</artifactId>
 				<version>0.6.1</version>
 				<configuration>
-					<protocArtifact>com.google.protobuf:protoc:3.25.1:exe:${os.detected.classifier}</protocArtifact>
+					<protocArtifact>com.google.protobuf:protoc:3.25.3:exe:${os.detected.classifier}</protocArtifact>
 					<outputDirectory>${basedir}/src/main/java</outputDirectory>
 					<clearOutputDirectory>false</clearOutputDirectory>
 					<pluginId>grpc-java</pluginId>
@@ -107,6 +80,7 @@
 				</executions>
 			</plugin>
 			<!--捆绑grpc jars-->
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -125,6 +99,23 @@
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 				</configuration>
+			</plugin>
+			-->
+			<!--使用Spring Boot Maven Plugin打包,将所有依赖打包到单一jar文件中-->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.3.5</version>
+				<configuration>
+					<mainClass>javagrpc.main.ServerMain</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -186,6 +177,23 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>2.23.1</version>
+		</dependency>
+		<!-- json结构化日志-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-layout-template-json</artifactId>
+			<version>2.23.1</version>
+		</dependency>
+		<!-- json结构化日志需要Jackson-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.17.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.17.2</version>
 		</dependency>
 		<!-- jetcd依赖 -->
 		<dependency>

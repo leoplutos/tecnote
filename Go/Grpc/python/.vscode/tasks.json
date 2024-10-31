@@ -10,7 +10,7 @@
 				]
 			},
 			"env": { //自定义环境变量
-				"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python312\\Scripts;D:\\Tools\\WorkTool\\Build\\buf",
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python312;D:\\Tools\\WorkTool\\Python\\Python312\\Scripts;D:\\Tools\\WorkTool\\Build\\buf",
 			}
 		},
 	},
@@ -31,6 +31,19 @@
 	},
 	"tasks": [
 		{
+			// uv sync 显式创建项目环境并安装依赖包
+			"label": "uv_sync",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"sync",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
+		{
 			"label": "buf_generate",
 			"type": "shell",
 			"command": "buf",
@@ -43,24 +56,11 @@
 			"problemMatcher": [],
 		},
 		{
-			"label": "poetry_install",
+			"label": "uv_run_server",
 			"type": "shell",
-			"command": "poetry",
-			"args": [
-				"install",
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": [],
-		},
-		{
-			"label": "poetry_run_server",
-			"type": "shell",
-			"command": "poetry",
+			"command": "uv",
 			"args": [
 				"run",
-				"python",
 				"src/server.py",
 			],
 			"options": {
@@ -69,12 +69,11 @@
 			"problemMatcher": [],
 		},
 		{
-			"label": "poetry_run_client",
+			"label": "uv_run_client",
 			"type": "shell",
-			"command": "poetry",
+			"command": "uv",
 			"args": [
 				"run",
-				"python",
 				"src/client.py",
 			],
 			"options": {

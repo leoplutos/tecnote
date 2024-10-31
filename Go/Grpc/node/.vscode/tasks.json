@@ -77,10 +77,10 @@
 		{
 			"label": "node_runServer",
 			"type": "shell",
-			"command": "node",
-			"args": [
-				"dist/server.js",
-			],
+			"command": "node dist/server.js",
+			"windows": {
+				"command": "chcp 65001 && node dist/server.js"
+			},
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -90,10 +90,10 @@
 		{
 			"label": "node_runClient",
 			"type": "shell",
-			"command": "node",
-			"args": [
-				"dist/client.js",
-			],
+			"command": "node dist/client.js",
+			"windows": {
+				"command": "chcp 65001 && node dist/client.js"
+			},
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},

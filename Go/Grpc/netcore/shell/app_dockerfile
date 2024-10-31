@@ -3,17 +3,14 @@
 # 阶段1：编译，命名为builder
 # 使用alpine镜像
 # FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS builder
+# 使用Deiban12 Bookworm
 FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim AS builder
 
-# 设定debian12镜像仓库为国内源
-RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+# 设定Debian12镜像仓库为国内源(DEB822格式)
+RUN set -eux && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 
 # 创建应用路径
 RUN mkdir /opt/app
-
-# 添加bash，curl
-# RUN apk update --quiet
-# RUN apk add --no-cache --upgrade bash curl
 
 # 将本地文件复制到镜像中
 # 复制所有
@@ -30,30 +27,46 @@ WORKDIR /opt/app/netcore
 # 安装依赖
 RUN dotnet clean
 # 编译工程（在./target下会编译出结果）
+# 开启单文件发布，将运行时包含在发布文件内，不生成pdb文件
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet publish -c Release -o target netcoreServer/netcoreServer.csproj
+    dotnet publish -c Release -o target netcoreServer/netcoreServer.csproj -p:PublishSingleFile=true -p:DebugType=none -p:DebugSymbols=false --self-contained true
 
 #---------------------------------------------------------------------
 
 # 阶段2：运行
-# 根据需要选择运行时
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+## 发布时未包含运行时的话需要选择带运行时的镜像
+## FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+FROM debian:bookworm-slim
 
-# 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# 设定Debian12镜像仓库为国内源(DEB822格式)
+RUN set -eux && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash，curl
-RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash curl
+# 添加curl和dotnet8的依赖项
+# https://github.com/dotnet/core/blob/main/release-notes/8.0/linux-packages.md
+# https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps
+# https://github.com/dotnet/dotnet-docker/blob/main/src/runtime-deps/8.0/bookworm-slim/amd64/Dockerfile
+RUN apt -qq update -y && apt -qq upgrade -y
+RUN apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates \
+        libc6 \
+        libgcc-s1 \
+        libicu72 \
+        libssl3 \
+        libstdc++6 \
+        tzdata \
+        zlib1g
 
 # 从阶段1复制编译结果
 COPY --from=builder /opt/app/netcore/target /opt/app/netcoreServer/
 
 # 设定环境变量
-# ENV DOTNET_EnableDiagnostics="0"
+ENV ASPNETCORE_ENVIRONMENT=Docker
+ENV ASPNETCORE_HTTP_PORTS=50051
+ENV GRPC_SERVER_RESOLVE=false
 
 # 个人习惯定制化
 RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
@@ -71,14 +84,15 @@ WORKDIR /opt/app/netcoreServer/
 EXPOSE 50051
 
 # 指定容器创建时的默认命令
-CMD ["dotnet", "netcoreServer.dll"]
+# CMD ["dotnet", "netcoreServer.dll"]
+CMD ["./netcoreServer"]
 
 # 启动命令
 #docker run -itd \
-#  -p 50053:50053 \
+#  -p 50051:50051 \
 #  -e ASPNETCORE_ENVIRONMENT=Docker \
-#  -e ASPNETCORE_HTTP_PORTS=50053 \
+#  -e ASPNETCORE_HTTP_PORTS=50051 \
 #  -e GRPC_SERVER_RESOLVE=true \
 #  --add-host=host.docker.internal:host-gateway \
-#  --name grpc_50053 \
+#  --name grpc_50051 \
 #  dotnet_grpc:1.0.0

@@ -18,6 +18,8 @@ git config --global gui.encoding utf-8
 git config --global color.ui true
 # 取消换行符自动转换
 git config --global core.autoCRLF false
+# 取消忽略大小写
+git config --global core.ignorecase false
 ```
 
 ### 任选设置

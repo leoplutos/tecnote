@@ -58,3 +58,92 @@ WebAssembly 于 2019 年 12 月 5 日成为万维网联盟（W3C）的推荐标�
  - 区块链方向
  - 沙箱方向
  - 跨端方向：如 WebAssembly 可以作为 JS 执行环节，作为小程序的逻辑线程
+
+## Rust 开发 WebAssembly 示例工程
+
+示例工程 [rust-wasm](../Rust/rust-wasm/)
+
+## 环境构建
+
+### 安装Rust
+参考 [这里](../Rust/Rust-DevEnv_zh_CN.md) 安装Rust  
+在 ``$CARGO_HOME/config.toml`` 设定好国内源
+
+### 安装 wasm-pack 工具链
+
+```bash
+# 安装 wasm-pack CLI 工具
+cargo install wasm-pack
+
+# 由于 wasm-pack 会在运行时安装 wasm-bindgen，由于国内的网络环境很慢，可以提前手动安装
+cargo install wasm-bindgen-cli
+
+# wasm-pack 使用 wasm32-unknown-unknown 目标编译代码，提前安装编译目标
+rustup target add wasm32-unknown-unknown
+```
+
+wasm-pack 默认会使用 ``wasm-opt`` 工具进行大小优化，而这个工具也是运行时下载安装的，提前在 [这里](https://bgithub.xyz/WebAssembly/binaryen/releases/download/version_117/binaryen-version_117-x86_64-windows.tar.gz) 下载
+
+下载后解压缩到 ``D:\Tools\WorkTool\Rust\binaryen`` 并添加到 ``PATH`` 环境变量
+
+### 确认
+
+``$CARGO_HOME/bin`` 目录确认
+```text
+📂 $CARGO_HOME/bin
+├──── 🌑 wasm-pack.exe
+├──── 🌑 wasm-bindgen.exe
+├──── 🌑 wasm-bindgen-test-runner.exe
+└──── 🌑 wasm2es6js.exe
+```
+
+``sysroot`` 目录确认
+```bash
+rustc --print sysroot
+```
+```text
+📂 sysroot
+├── 📂 lib
+│    └── 📂 rustlib
+│         └── 📂 wasm32-unknown-unknown
+```
+
+``binaryen`` 目录确认
+```text
+📂 binaryen
+├── 📂 bin
+└────── 🌑 wasm-opt.exe
+```
+
+### 示例工程
+
+#### 编译
+```bash
+cd D:\WorkSpace\Rust\rust-wasm
+wasm-pack build --target web
+```
+
+参数 ``--target`` 为指定编译结果目标
+- ``bundler``：编译成给webpack之类的脚手架使用
+- ``nodejs``：编译成CommonJS模块的JS，可通过require来加载的node模块
+- ``web``：编译成web可直接使用，但必须手动实例化和加载 WebAssembly
+- ``deno``：编译成可通过import加载的deno模块
+- ``no-modules``：跟web类似，但是更旧，且不能使用es模块
+
+#### 运行
+
+```bash
+# 安装http服务器
+# https://github.com/TheWaWaR/simple-http-server
+cargo install simple-http-server
+# alpine下安装命令
+# curl -sSL -o /usr/local/cargo/bin/simple-http-server https://bgithub.xyz/TheWaWaR/simple-http-server/releases/download/v0.6.9/x86_64-unknown-linux-musl-simple-http-server
+# chmod +x /usr/local/cargo/bin/simple-http-server
+
+cd D:\WorkSpace\Rust\rust-wasm
+# 启动http服务
+simple-http-server -i -p 18080
+```
+
+访问 http://localhost:18080 即可看到结果
+

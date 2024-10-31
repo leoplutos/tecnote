@@ -81,13 +81,22 @@ impl ProductInfo for ProductServiceImpl {
         let get_id: String = request.into_inner().value;
         // 从全局静态变量中取得
         let get_product: Product = match PRODUCT_MAP.try_read().unwrap().get(&get_id) {
-            Some(product) => product.clone(),
+            Some(product) => {
+                // 取得时返回的内容
+                log::info!("[Rust][Server] GetProduct success. id={}", &get_id);
+                product.clone()
+            }
             _ => {
-                log::error!("[Rust][Server] GetProduct error. id={}", &get_id);
-                panic!()
+                // 未取得时返回的内容
+                log::warn!("[Rust][Server] GetProduct error. id={}", &get_id);
+                // panic!()
+                Product {
+                    id: String::from("None Id"),
+                    name: String::from("None Name"),
+                    description: String::from("Rust gRPC Server"),
+                }
             }
         };
-        log::info!("[Rust][Server] GetProduct success. id={}", &get_id);
         Ok(Response::new(get_product))
     }
 }

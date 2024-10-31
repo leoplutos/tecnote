@@ -1,9 +1,76 @@
-# Poetry相关
+# UV相关（推荐使用UV）
+``uv`` 是一个非常快速的 Python 依赖安装程序和分解器，使用 Rust 编写，旨在替代 pip 和pip-tools 工作流，速度比他们快 8～10 倍，当前可用于替代 pip, pip-tools, virtualenv，根据路线图，它会向着 “Cargo for Python” 方向前行 —— 一个极其快速、可靠且易于使用的综合项目和包管理器
+
+## 官网
+ - [官网](https://docs.astral.sh/uv/)
+ - [Github](https://github.com/astral-sh/uv)
+
+## 安装
+```bash
+pip install uv
+
+uv --version
+```
+
+## 使用方法
+
+创建工程
+```bash
+cd D:\WorkSpace\Python
+uv init PythonGrpc
+```
+会生成如下结构的目录
+```text
+.
+├── .python-version
+├── README.md
+├── hello.py
+└── pyproject.toml
+```
+运行
+```bash
+# 在 .venv 文件夹创建虚拟环境
+uv venv
+# 运行 hello.py
+uv run hello.py
+```
+
+## 常用命令
+环境管理
+```bash
+# 显式创建项目环境并安装依赖包
+uv sync
+```
+
+依赖管理
+```bash
+# 添加依赖
+uv add faker
+uv add 'requests==2.31.0'
+# 删除依赖
+uv remove faker
+# 查看依赖数
+uv tree
+# 锁定依赖项
+uv pip compile pyproject.toml -o requirements.txt
+# 从 pyproject.toml 文件安装依赖
+uv pip install -r pyproject.toml
+# 从 requirements.txt 文件安装依赖
+uv pip install -r requirements.txt
+```
+工具管理
+```bash
+# 命令行工具(如Ruff)安装到本地
+# uv tool install ruff -i https://mirrors.aliyun.com/pypi/simple/
+# 临时运行工具（不需要安装）
+uvx ruff --version
+```
+
+# Poetry相关（不推荐使用）
 
 ## 简介
 Poetry 是一个包管理和打包的工具。  
 Poetry 使用 pyproject.toml 和 poetry.lock 文件来管理依赖，类似于 JavaScript/Node.js 的 Npm 和 Rust 的 Cargo
-
 
 ## 官网
  - [官网](https://python-poetry.org/)

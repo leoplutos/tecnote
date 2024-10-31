@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/uuid"
+	"gogrpc/product/log"
 	stub "gogrpc/stub"
-	"log"
 )
 
 // ######################################
@@ -42,7 +42,7 @@ func (s *ProductService) AddProduct(_ context.Context, request *stub.Product) (r
 	// 设定返回值
 	response.Value = request.Id
 
-	log.Printf("[Golang][Server] AddProduct success. id=%s, name=%s, description=%s\n", request.Id, request.Name, request.Description)
+	log.Logger.Info().Msgf("[Golang][Server] AddProduct success. id=%s, name=%s, description=%s", request.Id, request.Name, request.Description)
 	return
 }
 
@@ -51,8 +51,16 @@ func (s *ProductService) GetProduct(_ context.Context, request *stub.ProductId) 
 	if s.productMap == nil {
 		s.productMap = make(map[string]*stub.Product)
 	}
-
+	// 从Product的全局词典中取得
 	response = s.productMap[request.Value]
-	log.Printf("[Golang][Server] GetProduct success. id=%s\n", request.Value)
+	if response == nil {
+		// 未取得时
+		// 使用 & 符号可以将一个结构体的实例转换为指针
+		response = &stub.Product{Id: "None Id", Name: "None Name", Description: "Golang gRPC Server"}
+		log.Logger.Error().Msgf("[Golang][Server] GetProduct error. id=%s", request.Value)
+	} else {
+		// 取得时
+		log.Logger.Info().Msgf("[Golang][Server] GetProduct success. id=%s", request.Value)
+	}
 	return
 }

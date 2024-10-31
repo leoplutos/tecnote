@@ -55,8 +55,8 @@
 
 ## Python相关
 * [Python相关](Python/Python_zh_CN.md)
-* [Python-构建工具-Poetry](Python/Python-Poetry_zh_CN.md) ※推荐
-* [Python-构建工具-PyBuilder](Python/Python-PyBuilder_zh_CN.md)
+* [Python-构建工具-uv和Poetry](Python/Python-Poetry_zh_CN.md) ※推荐
+* [Python-构建工具-PyBuilder](Python/Python-PyBuilder_zh_CN.md) ※不推荐
 * [Python-Web框架-Sanic](Python/Python-Sanic_zh_CN.md)
 * [制作Python绿色版](Python/Python-portable_zh_CN.md)
 * [pdb相关](Python/Pdb_zh_CN.md)
@@ -143,7 +143,11 @@
 * [Sqlite3](DB/Sqlite3_zh_CN.md)
 * [OpenSearch](DB/OpenSearch_zh_CN.md)
 
-## 分布式协调服务相关
+## 微服务和分布式协调服务相关
+* [微服务](Distributed/MicroService_zh_CN.md)
+* [OpenTelemetry 监控](Distributed/OpenTelemetry_zh_CN.md)
+* [Fluent-Bit 日志采集](Distributed/Fluent_Bit_zh_CN.md)
+* [DTM 分布式事务管理](Distributed/DTM_zh_CN.md)
 * [Redis](Distributed/Redis_zh_CN.md)
 * [Etcd](Distributed/Etcd_zh_CN.md.md)
 
@@ -157,6 +161,7 @@
 * [Cobol](Other/Cobol_zh_CN.md)
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [ripgrep-文本搜索工具](Other/Ripgrep_zh_CN.md)
+* [Reqable-代理调试+请求测试+网络抓包](Other/Reqable_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 * [USB启动](Other/Usbboot_zh_CN.md)
 * [免费的编程中文书籍索引](Other/Book_zh_CN.md)

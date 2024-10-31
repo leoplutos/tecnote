@@ -30,6 +30,18 @@ https://github.com/docker-library/docs/tree/master/alpine
  - slim：是完整镜像的配对版本。这个镜像通常只安装运行特定工具所需的最小包
  - alpine：基于alpine linux项目，这是一个专门为容器内部使用而构建的操作系统。在很长一段时间里，这些是最受欢迎的镜像变体，因为它们的尺寸很小
 
+## 关于Rust使用scratch镜像
+因为scratch镜像里面不包含任何额外的组件或库，所以编译的时候需要``静态链接编译``，需要如下设定
+
+### 设定 ``musl`` 目标
+```bash
+rustup target add x86_64-unknown-linux-musl
+cargo build --release --target x86_64-unknown-linux-musl
+```
+Rust在glibc环境（比如：Ubuntu、Debian、RedHat）编译时，``glibc默认不会被打包进去``  
+而使用musl的libc，可支持``静态链接到 musl libc``，知名的 [ripgrep](https://github.com/BurntSushi/ripgrep) 就是这样做的
+
+
 ## 基于Rust镜像部署actix-web应用的实现示例
 
 不同于其他实战篇的是，这次笔者要使用多阶段构建，将编译环境和运行环境分离

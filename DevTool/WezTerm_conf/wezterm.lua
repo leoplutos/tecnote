@@ -66,11 +66,11 @@ config.tab_max_width = 25
 config.show_tab_index_in_tab_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
 
---取得本地的bashrc内容
-local function get_local_bashrc()
+--取得home_dir的bashrc内容
+local function get_local_bashrc(filename)
   local file_content = ""
-  --打开 %USERPROFILE% 下的 .bashrc-personal 文件
-  local bashrc_path = wezterm.home_dir .. "/.bashrc-personal"
+  --打开 %USERPROFILE% 下的文件
+  local bashrc_path = wezterm.home_dir .. filename
   -- wezterm.log_error(bashrc_path)
   local bashrc_file = io.open(bashrc_path, "r")
   if bashrc_file then
@@ -109,7 +109,28 @@ config.keys = {
         function(window, pane)
           --取得本地的bashrc内容，然后使用eval命令运行
           --eval命令会读取它的参数，把它们作为bash命令来执行
-          local local_bashrc_content = 'eval ' .. get_local_bashrc() .. '\n'
+          local local_bashrc_content = 'eval ' .. get_local_bashrc('/.bashrc-personal') .. '\n'
+          --临时禁用命令历史
+          window:perform_action(wezterm.action.SendString('HISTFILE=\n'), pane)
+          window:perform_action(wezterm.action.SendString('HISTSIZE=0\n'), pane)
+          window:perform_action(wezterm.action.SendString('HISTFILESIZE=0\n'), pane)
+          --运行本地bashrc
+          window:perform_action(wezterm.action.SendString(local_bashrc_content), pane)
+          --临时启用命令历史
+          window:perform_action(wezterm.action.SendString('export HISTFILE=~/.bash_history\n'), pane)
+          window:perform_action(wezterm.action.SendString('export HISTFILESIZE=2000\n'), pane)
+          window:perform_action(wezterm.action.SendString('export HISTSIZE=1000\n'), pane)
+          window:perform_action(wezterm.action.SendString('history -r\n'), pane)
+          window:perform_action(wezterm.action.SendString('clear\n'), pane)
+        end
+      ),
+    },
+    --ALT+d:source容易用rc
+    { key = 'd', mods = 'ALT', action = wezterm.action_callback(
+        function(window, pane)
+          --取得本地的bashrc内容，然后使用eval命令运行
+          --eval命令会读取它的参数，把它们作为bash命令来执行
+          local local_bashrc_content = 'eval ' .. get_local_bashrc('/.bashrc-docker') .. '\n'
           --临时禁用命令历史
           window:perform_action(wezterm.action.SendString('HISTFILE=\n'), pane)
           window:perform_action(wezterm.action.SendString('HISTSIZE=0\n'), pane)
