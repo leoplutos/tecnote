@@ -1,6 +1,5 @@
 package javagrpc.main;
 
-import io.grpc.ClientInterceptor;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
@@ -11,7 +10,6 @@ import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.health.v1.HealthCheckResponse;
 import io.grpc.health.v1.HealthGrpc;
 import io.grpc.stub.StreamObserver;
-import io.opentelemetry.api.OpenTelemetry;
 import javagrpc.common.Const;
 import javagrpc.grpc.lb.EtcdNameResolverProvider;
 import javagrpc.grpc.lb.MultiAddressNameResolverFactory;
@@ -19,7 +17,6 @@ import javagrpc.grpc.stub.ProductInfoGrpc;
 import javagrpc.grpc.stub.ProductInfoPb;
 import javagrpc.grpc.stub.ProductInfoPb.Product;
 import javagrpc.grpc.stub.ProductInfoPb.ProductId;
-import javagrpc.opentelemetry.OpentelemetryConfig;
 import javagrpc.util.Config;
 import java.net.InetSocketAddress;
 import java.util.Map;
@@ -60,8 +57,9 @@ public class ClientAsyncMain {
 	@SuppressWarnings("deprecation")
 	public ClientAsyncMain(boolean isWithEtcd) {
 		// OpenTelemetry监测的拦截器
-		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
-		ClientInterceptor otelClientInterceptor = OpentelemetryConfig.getClientInterceptor(openTelemetry);
+		// OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
+		// ClientInterceptor otelClientInterceptor =
+		// OpentelemetryConfig.getClientInterceptor(openTelemetry);
 		// 虚拟线程的执行器，这个执行器在每次提交一个新任务时，都会为这个任务创建一个新的虚拟线程来执行它
 		// 虚拟线程属于非常轻量级的资源，因此，用时创建，用完就扔，不要池化虚拟线程
 		executorService = Executors.newVirtualThreadPerTaskExecutor();
@@ -79,7 +77,7 @@ public class ClientAsyncMain {
 			channel = Grpc.newChannelBuilder(channelTarget, InsecureChannelCredentials.create())
 					.defaultLoadBalancingPolicy("round_robin")
 					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
-					.intercept(otelClientInterceptor) // 添加otel拦截器
+					// .intercept(otelClientInterceptor) // 添加otel拦截器
 					.executor(executorService)
 					// .usePlaintext()
 					.build();
@@ -94,7 +92,7 @@ public class ClientAsyncMain {
 					.nameResolverFactory(nameResolverFactory) // 此方法已废弃
 					.defaultLoadBalancingPolicy("round_robin")
 					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
-					.intercept(otelClientInterceptor) // 添加otel拦截器
+					// .intercept(otelClientInterceptor) // 添加otel拦截器
 					.executor(executorService)
 					.usePlaintext()
 					.build();

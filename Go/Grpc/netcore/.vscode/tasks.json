@@ -10,6 +10,22 @@
 				]
 			},
 			"env": { //自定义环境变量
+				// 是否启用服务发现
+				"GRPC_SERVER_RESOLVE": "false",
+				// 是否启用OpenTelemetry遥测
+				"GRPC_SERVER_OTEL": "false",
+				// Traces（追踪）的导出器
+				"OTEL_TRACES_EXPORTER": "otlp",
+				// Metrics（指标/度量）的导出器
+				"OTEL_METRICS_EXPORTER": "otlp",
+				//  Logs（日志）的导出器
+				"OTEL_LOGS_EXPORTER": "none",
+				// 所有遥测数据的 OTLP 传输协议
+				"OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
+				// OpenTelemetry Collector的URL
+				"OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317",
+				// OpenTelemetry 打开对 gRPC 请求的实验性支持
+				"OTEL_DOTNET_EXPERIMENTAL_ASPNETCORE_ENABLE_GRPC_INSTRUMENTATION": "true",
 			}
 		},
 	},
@@ -19,6 +35,22 @@
 				"executable": "bash",
 			},
 			"env": { //自定义环境变量
+				// 是否启用服务发现
+				"GRPC_SERVER_RESOLVE": "false",
+				// 是否启用OpenTelemetry遥测
+				"GRPC_SERVER_OTEL": "false",
+				// Traces（追踪）的导出器
+				"OTEL_TRACES_EXPORTER": "otlp",
+				// Metrics（指标/度量）的导出器
+				"OTEL_METRICS_EXPORTER": "otlp",
+				//  Logs（日志）的导出器
+				"OTEL_LOGS_EXPORTER": "none",
+				// 所有遥测数据的 OTLP 传输协议
+				"OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
+				// OpenTelemetry Collector的URL
+				"OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317",
+				// OpenTelemetry 打开对 gRPC 请求的实验性支持
+				"OTEL_DOTNET_EXPERIMENTAL_ASPNETCORE_ENABLE_GRPC_INSTRUMENTATION": "true",
 			}
 		},
 	},
@@ -58,6 +90,7 @@
 				"run",
 				"--project",
 				"netcoreServer",
+				//"--no-launch-profile",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -90,6 +123,22 @@
 				"netcoreClient",
 				"--",
 				"Async",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": "$msCompile",
+		},
+		{
+			"label": "run_dtm_Client",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"run",
+				"--project",
+				"netcoreClient",
+				"--",
+				"Dtm",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

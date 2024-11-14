@@ -1,9 +1,9 @@
 # bash设定文件载入顺序
-/etc/profile ： 系统全局设定（对所有用户生效）  
+``/etc/profile`` ： 系统全局设定（对所有用户生效）  
 ↓  
-~/.bash_profile ： 个别用户，只有在login的时候被读取  
+``~/.bash_profile`` ： 个别用户，只有在login的时候被读取  
 ↓  
-~/.bashrc ： 个别用户，在login或者shell切换的时候被读取（比如zsh切换到bash）  
+``~/.bashrc`` ： 个别用户，在login或者shell切换的时候被读取（比如zsh切换到bash）  
 
 
 # Linux命令行常用快捷键
@@ -34,18 +34,18 @@
    | Esc+b      | 移动到当前单词的开头                         |
    | Esc+f      | 移动到当前单词的结尾                         |
 
-# \$CDPATH变量
-假设你希望仅通过输入 cd html 就可以移至 /var/www/html 目录，并仅使用 cd 和简单目录名即可移至 /var/log 中的子目录。在这种情况下，此 \$CDPATH 就可以起作用：
+# ``$CDPATH``变量
+假设你希望仅通过输入 cd html 就可以移至 /var/www/html 目录，并仅使用 cd 和简单目录名即可移至 /var/log 中的子目录。在这种情况下，``$CDPATH`` 就可以起作用：
 ```bash
 export CDPATH=.:/var/log:/var/www
 ```
-当你输入的不是完整路径时，\$CDPATH 就会生效。它向下查看其目录列表，以查看指定的目录是否存在于其中一个目录中。找到匹配项后，它将带你到那里。  
-在 \$CDPATH 开头保持 . 意味着你可以进入本地目录，而不必在 $CDPATH 中定义它们。
+当你输入的不是完整路径时，``$CDPATH`` 就会生效。它向下查看其目录列表，以查看指定的目录是否存在于其中一个目录中。找到匹配项后，它将带你到那里。  
+在 ``$CDPATH`` 开头保持 . 意味着你可以进入本地目录，而不必在 ``$CDPATH`` 中定义它们。
 
 # Shebang
 在Linux系统下文件的第一行注释叫做  ``Shebang``
 一般推荐如下写法
-```
+```text
 #!/usr/bin/env bash
 ```
 
@@ -54,22 +54,22 @@ export CDPATH=.:/var/log:/var/www
 他们是将 r、w 和 x 表示的二进制值相加来计算的
  - r = 100b = 4
  - w = 010b = 2
- - x = 001b = 1  
+ - x = 001b = 1
 
 举例，如果一个文件的权限是 ``-rw-r--r--``  
 那么
  - 6(r+w=4+2)
  - 4(r=4)
- - 4(r=4)  
+ - 4(r=4)
 
-所以权限为 ``644``  
+所以权限为 ``644``
 
 也可以用命令来确认文件权限
-```
+```bash
 stat /path/to/filename
 ```
 命令结果为
-```
+```text
 Access: (0644/-rw-r--r--)
 ```
 
@@ -120,7 +120,7 @@ netstat -antlp
 
 ### 7.Shell调试Debug
 * 方法1：在sh文件第一行加上
-```
+```text
 #!/bin/sh -xv
 ```
 * 方法2：在启动shell的时候加上参数
@@ -159,19 +159,35 @@ which ll
 echo -e "\e[1;31m发生错误。\e[0m提示：参数错误。"
 ```
 
-### 13.查找文件
+### 13.查找文件和查找内容
+
+查找文件
 ```bash
+# 使用find
 find / -name "a.txt"
+# 使用fd 需要
+# sudo apt install fd-find
+# sudo ln -s $(which fdfind) /usr/bin/fd
+fd README.md
+```
+
+查找内容
+```bash
+# 使用ripgrep 需要
+# sudo apt install ripgrep
+rg 'abc'
 ```
 
 ### 14.source命令
-source命令也称为“点命令”，也就是一个点符号（.），是bash的内部命令。  
+source命令也称为 ``点命令``，也就是一个点符号 ``.`` ，是bash的内部命令。  
 source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。因为linux所有的操作都会变成文件的格式存在。  
 source 命令可用于：  
 **1.刷新当前shell环境**
 ```bash
-[root@localhost ~]# echo "alias ll='ls -al'" >> ~/.bashrc
-[root@localhost ~]# source ~/.bashrc
+echo "alias ll='ls -al'" >> ~/.bashrc
+source ~/.bashrc
+# 或者
+. ~/.bashrc
 ```
 **2.当前环境下执行shell脚本**
 ```bash
@@ -208,12 +224,12 @@ echo $b
 echo $c
 ```
 
-### 15.输出重定向“>”和“>>”
-**\>**  会覆盖目标的原有内容，当文件存在时，会先删除原文件，再重新创建文件，然后把内容写入该文件，否则直接创建文件。  
+### 15.输出重定向 ``>`` 和 ``>>``
+- ``>``: 会覆盖目标的原有内容，当文件存在时，会先删除原文件，再重新创建文件，然后把内容写入该文件，否则直接创建文件。  
 ```bash
 systemctl status wildfly-01 > /temp/status.log
 ```
-**\>>**  会在目标原有内容后追加内容，当文件存在时直接在文件末尾进行内容追加，不会删除原文件，否则直接创建文件。
+- ``>>``: 会在目标原有内容后追加内容，当文件存在时直接在文件末尾进行内容追加，不会删除原文件，否则直接创建文件。
 ```bash
 systemctl status wildfly-01 >> /temp/status.log
 ```
@@ -228,15 +244,15 @@ tty
 ```bash
 nano -l 文件名
 ```
--l 参数为显示行号  
+``-l`` 参数为显示行号  
 
 **常用快捷键**  
-CTRL+o 回车 保存  
-CTRL+x 退出  
-SHIFT+方向 选择  
-ALT+6 复制  
-CTRL+u 粘贴  
-CTRL+k 删除当前行（选择多行的时候为删除选择的内容）  
+- ``CTRL+o`` : 回车 保存  
+- ``CTRL+x`` : 退出  
+- ``SHIFT+方向`` : 选择  
+- ``ALT+6`` : 复制  
+- ``CTRL+u`` : 粘贴  
+- ``CTRL+k`` : 删除当前行（选择多行的时候为删除选择的内容）  
 更多请参照  
 https://zhuanlan.zhihu.com/p/47794948
 
@@ -255,9 +271,9 @@ rm -rf dir-name
 ```bash
 ls -ltr
 ```
-* -l 表示列表
-* -t 按时间排序
-* -r 顺序倒序
+- ``-l`` : 表示列表
+- ``-t`` : 按时间排序
+- ``-r`` : 顺序倒序
 
 ### 21.shell的启动方式
 shell有2种常用的启动方式。
@@ -272,12 +288,8 @@ bash test.sh
 ```
 
 ### 22.单引号与双引号
-```bash
-""双引用, 除了$\`的其他符号都变成纯文本符号
-```
-```bash
-''单引用, 所有符号都变成纯文本符号
-```
+- ``""`` : 双引用, 除了 ``$`` 的其他符号都变成纯文本符号
+- ``''`` : 单引用, 所有符号都变成纯文本符号
 
 ### 23.保持权限压缩与解压缩
 压缩
@@ -305,26 +317,76 @@ w
 time sleep 0.7
 ```
 
-### 运行程序并且取得pid
+### Here Document （HereDoc）
+HereDoc 是 ``Here Document`` 的缩写，是一种在 Bash 脚本中包含文本块的方法。该文本块可以包含您想要的任何内容，包括命令、变量和其他特殊字符。 HereDocs 很有用，因为它们允许您包含大块文本，而不必担心转义特殊字符或处理复杂的引用规则
+
+例子1: 输出内容
+```bash
+cat << EOF
+这是一个 Here Document 例子
+它可以包含多行文本
+EOF
 ```
+
+例子2: 统计行数
+```bash
+wc -l << EOF
+第一行
+第二行
+第三行
+EOF
+```
+
+例子3: 生成配置文件
+```bash
+cat << EOF > config.ini
+[server]
+host = example.com
+port = 80
+user = $USER
+EOF
+```
+
+例子4: 生成root权限的配置文件
+```bash
+sudo tee config.ini << EOF
+[server]
+host = example.com
+port = 80
+user = $USER
+EOF
+```
+
+例子5: 生成root权限的配置文件，并且使用单引号防止 Bash 解释块中的任何变量或特殊字符
+```bash
+sudo tee config.ini << 'EOF'
+[server]
+host = example.com
+port = 80
+user = $USER
+EOF
+```
+
+### 运行程序并且取得pid
+```bash
 应用程序 & top -p $! -b > top_result.txt
 ```
 比如运行sleep命令
-```
+```bash
 sleep 10 & top -p $! -b > top_result.txt
 ```
 如果想要将top的结果生成报表的话，可以使用这个库  
 [linux-top-parser-graph-maker](https://github.com/kaushikvelusamy/linux-top-parser-graph-maker)
 
 ### CPU核心数确认命令
-```
+```bash
 lscpu
 nproc -all
 getconf _NPROCESSORS_ONLN
 ```
 
 ### 查看当前Shell
-```
+```bash
 echo $0
 echo $SHELL
 ```
@@ -368,28 +430,28 @@ musl 在嵌入式系统、容器化应用和轻量级发行版中表现出色
 
 # 其他
 
-### 使用7-Zip归档tar
+### 使用 7-Zip 归档 tar
 
-**Windows归档：**
-```
+**Windows 归档：**
+```bash
 7z.exe a result_file target_folder
 "D:\Tools\7-Zip\7z.exe" a ziptest.tar ziptest
 ```
-**Linux解档：**
-```
+**Linux 解档：**
+```bash
 tar -xvf file_name
 tar -xvf ziptest.tar
 ```
 
-### 使用7-Zip压缩gz
-需要2次命令，第一次归档，第二次压缩  
-**Windows压缩：**
-```
+### 使用 7-Zip 压缩 gz
+需要 2 次命令，第一次归档，第二次压缩  
+**Windows 压缩：**
+```bash
 7z.exe a result_file target_tar_file_name
 "D:\Tools\7-Zip\7z.exe" a ziptest.tar.gz ziptest.tar
 ```
-**Linux解档解压缩：**
-```
+**Linux 解档解压缩：**
+```bash
 tar -zxvf file_name
 tar -zxvf ziptest.tar.gz
 ```

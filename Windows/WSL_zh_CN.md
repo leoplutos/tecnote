@@ -46,9 +46,20 @@ wsl --set-default-version 2
 ```
 
 ### 更新 WSL 内核
+
+#### 从 Microsoft Store 获取最新版本
 ```bash
 wsl --update
-# 或者
+```
+这个命令最好多执行几次，直到显示当前已是最新，比如
+```bash
+$ wsl --update
+正在检查更新。
+已安装最新版本的适用于 Linux 的 Windows 子系统。
+```
+
+#### 从 GitHub 获取最新版本
+```bash
 wsl --update --web-download
 ```
 
@@ -58,15 +69,25 @@ wsl --update --web-download
 wsl --list --online
 ```
 如果报错可以用这个url  
-https://raw.bgithub.xyz/microsoft/WSL/master/distributions/DistributionInfo.json  
+https://raw.bgithub.xyz/microsoft/WSL/master/distributions/DistributionInfo.json
 
-安装制定发行版，比如Ubuntu
+查看已安装的Linux子系统
 ```bash
+wsl --list -v
+```
+
+安装制定发行版
+```bash
+# 安装 Ubuntu-22.04
 wsl --install -d Ubuntu-22.04
-# 或者
+# 安装 Debian
 wsl --install -d Debian
-# 卸载命令为
-wsl --uninstall Debian
+```
+
+卸载命令为
+```bash
+wsl --uninstall Ubuntu-22.04
+wsl --unregister Ubuntu-22.04
 ```
 
 ### 第一次进入WSL
@@ -83,12 +104,38 @@ su
 当看到 ``$`` 变为 ``#`` 说明用户切换成功  
 安装完成后，在Windows开始页面也会出现小图标
 
+### 启用 systemd
 
-### 查看安装的WSL
-查看已安装的Linux子系统
+确认 systemd 是否启用
 ```bash
-wsl --list -v
+cat /etc/wsl.conf
 ```
+内容如下
+```text
+[boot]
+systemd=true
+```
+如果没有这个文件，需要新建
+```bash
+# 使用普通用户运行
+sudo tee /etc/wsl.conf << 'EOF'
+[boot]
+systemd=true
+EOF
+```
+
+然后重启一次 WSL 实例
+```bash
+wsl --shutdown
+wsl
+```
+
+进入 WSL 实例后运行
+```bash
+sudo systemctl list-unit-files --type=service
+```
+确认 systemd 是否可用
+
 
 ### 使用WSL
 
@@ -117,7 +164,7 @@ WSL2 会默认关闭不使用的实例，当你关闭了 WSL 的 Console 后，�
 
 **方法如下**：
 
-WIN+R 运行 ``shell:startup`` 打开启动目录  
+``Win + r`` 运行 ``shell:startup`` 打开启动目录  
 在此目录中创建文件 ``wsl-startup.vbs`` 内容如下
 ```vb
 set ws=wscript.CreateObject("wscript.shell")
@@ -137,6 +184,95 @@ memory=4GB
 processors=2
 ```
 
+## WSL2下Ubuntu-22.04的初始配置
+```bash
+# 备份apt源
+mkdir -p $HOME/config_bak
+sudo cp -afp /etc/apt/sources.list $HOME/config_bak/sources.list
+set -eux
+# 修改apt为阿里云源
+sudo sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
+
+sudo apt update
+sudo apt upgrade
+
+# 安装所需软件
+sudo apt install openssh-server zip unzip xsel xclip ripgrep fd-find -y
+sudo ln -s $(which fdfind) /usr/bin/fd
+
+# 配置 SSH 服务器
+sudo cp -afp /etc/ssh/sshd_config $HOME/config_bak/sshd_config
+sudo sed -i 's/#Port 22/Port 8122/g' /etc/ssh/sshd_config
+sudo sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+# 重启ssh
+sudo service ssh restart
+sudo service ssh status
+
+# neovim配置一键安装
+export GITHUB_RAW_URL=https://raw.bgithub.xyz
+curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+
+# 安装neovim
+export GITHUB_URL=https://bgithub.xyz
+curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz"
+tar xzvf nvim-linux64.tar.gz
+sudo mv nvim-linux64 /usr/local/nvim
+sudo chown -R root:root /usr/local/nvim
+rm nvim-linux64.tar.gz
+sudo ln -s /usr/local/nvim/bin/nvim /usr/bin/nvim
+```
+
+## WSL2下Debian的初始配置
+```bash
+# 备份apt源
+mkdir -p $HOME/config_bak
+sudo cp -afp /etc/apt/sources.list $HOME/config_bak/sources.list
+set -eux
+# 修改apt为阿里云源
+sudo sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+
+sudo apt update
+sudo apt upgrade
+
+# 安装所需软件
+sudo apt install git curl openssh-server zip unzip xsel xclip ripgrep fd-find -y
+sudo ln -s $(which fdfind) /usr/bin/fd
+
+# 配置 SSH 服务器
+sudo cp -afp /etc/ssh/sshd_config $HOME/config_bak/sshd_config
+sudo sed -i 's/#Port 22/Port 8122/g' /etc/ssh/sshd_config
+sudo sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+# 重启ssh
+sudo service ssh restart
+sudo service ssh status
+
+# neovim配置一键安装
+export GITHUB_RAW_URL=https://raw.bgithub.xyz
+curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+
+# 安装neovim
+export GITHUB_URL=https://bgithub.xyz
+curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz"
+tar xzvf nvim-linux64.tar.gz
+sudo mv nvim-linux64 /usr/local/nvim
+sudo chown -R root:root /usr/local/nvim
+rm nvim-linux64.tar.gz
+sudo ln -s /usr/local/nvim/bin/nvim /usr/bin/nvim
+
+# debian默认没有安装vim，制作neovim的别名为vim
+sudo tee /usr/local/bin/vim << 'EOF'
+#!/bin/bash
+/usr/bin/nvim $@
+EOF
+# 修改权限
+sudo chmod +x /usr/local/bin/vim
+# 确认
+vim -V1 -v
+```
 
 ## WSL2的一些常用命令
 查看帮助
@@ -186,3 +322,4 @@ wsl --terminate Ubuntu-22.04
 netsh winsock reset
 ```
 执行后重启电脑解决
+

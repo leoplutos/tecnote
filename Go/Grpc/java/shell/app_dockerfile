@@ -9,7 +9,7 @@ FROM maven:3.9.9-eclipse-temurin-21-jammy AS builder
 # 设定alpine镜像仓库为国内源
 # RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # 设定Ubuntu镜像仓库为国内源
-RUN set -eux && sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
+RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -41,6 +41,11 @@ WORKDIR /opt/app/JavaGrpc
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn -f pom_docker.xml clean package spring-boot:repackage -P docker -Dmaven.test.skip=true
 
+WORKDIR /opt/app/JavaGrpc/build
+# 下载 OpenTelemetry Java Agent 零代码插桩
+ENV GITHUB_URL="https://bgithub.xyz"
+RUN curl -Lo opentelemetry-javaagent.jar "${GITHUB_URL}/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.9.0/opentelemetry-javaagent.jar"
+
 #---------------------------------------------------------------------
 
 # 阶段2：运行
@@ -53,19 +58,41 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash，curl
+# 添加bash
 RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash curl
+RUN apk add --no-cache --upgrade bash
 
 # 从阶段1复制编译结果
 COPY --from=builder /opt/app/JavaGrpc/build/javagrpc-1.0.jar /opt/app/JavaGrpc/javagrpc-1.0.jar
+COPY --from=builder /opt/app/JavaGrpc/build/opentelemetry-javaagent.jar /opt/app/JavaGrpc/opentelemetry-javaagent.jar
 
 # 设定Java用环境变量
 # 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
 ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
 ENV JAVA_ENVIRONMENT="docker"
-ENV GRPC_SERVER_RESOLVE="true"
+# 是否启用服务发现
+ENV GRPC_SERVER_RESOLVE="false"
+# gRPC服务绑定端口
 ENV GRPC_SERVER_HTTP_PORTS="50051"
+# gRPC服务名
+ENV APP_SERVICE_NAME="JavaGrpcService"
+# 是否启用OpenTelemetry遥测
+ENV GRPC_SERVER_OTEL="false"
+ENV OTEL_SERVICE_NAME="JavaGrpcService"
+# Traces（追踪）的导出器
+ENV OTEL_TRACES_EXPORTER="otlp"
+# Metrics（指标/度量）的导出器
+ENV OTEL_METRICS_EXPORTER="otlp"
+# Logs（日志）的导出器
+ENV OTEL_LOGS_EXPORTER="none"
+# 所有遥测数据的 OTLP 传输协议
+ENV OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
+# OpenTelemetry Collector的URL
+ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317"
+# 零代码插桩-禁用所有
+ENV OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED="false"
+# 零代码插桩-启用JVM指标检测
+ENV OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_ENABLED="true"
 
 # 个人习惯定制化
 RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
@@ -83,4 +110,5 @@ WORKDIR /opt/app/JavaGrpc
 EXPOSE 50051
 
 # 指定容器创建时的默认命令
-CMD ["java", "-jar", "/opt/app/JavaGrpc/javagrpc-1.0.jar"]
+# CMD ["java", "-jar", "/opt/app/JavaGrpc/javagrpc-1.0.jar"]
+CMD ["java", "-javaagent:/opt/app/JavaGrpc/opentelemetry-javaagent.jar", "-jar", "/opt/app/JavaGrpc/javagrpc-1.0.jar"]

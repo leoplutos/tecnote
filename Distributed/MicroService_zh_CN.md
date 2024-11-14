@@ -35,15 +35,14 @@
 - go-zero
 
 #### 服务注册、服务发现
-- [etcd](./Etcd_zh_CN.md.md)
+- [基于K8S的服务发现](./Kubernetes_zh_CN.md)
+- [基于etcd自定制](./Etcd_zh_CN.md.md)
 
 #### 服务监控
 
 - 日志收集(Log)
-    - [Fluent Bit](./Fluent_Bit_zh_CN.md) + Loki + Grafana
-    - Promtail + Loki + Grafana
-    - ELK (ElasticSearch + Logstash + Kibana)
-    - 或者使用基于 [OpenTelemetry](./OpenTelemetry_zh_CN.md) 的方案
+    - Docker(containerd) + [Fluent Bit](./Fluent_Bit_zh_CN.md) + Loki + Grafana
+    - [OpenTelemetry](./OpenTelemetry_zh_CN.md)
 
 - 链路追踪(Tracing)
     - [OpenTelemetry](./OpenTelemetry_zh_CN.md)  
@@ -57,8 +56,12 @@
         - 以事件发生时间以及当前数值的角度来记录的监控信息
         - 这类监控主要不是用来查问题的，主要是用来看趋势的
 
+#### 容器编排与自动扩容
+- [K8S](./Kubernetes_zh_CN.md)
+
 #### 分布式事务
 - [DTM](./DTM_zh_CN.md)
+- Seata
 
 #### 容错隔离
 

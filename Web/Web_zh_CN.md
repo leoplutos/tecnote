@@ -50,6 +50,15 @@ WebSocket 与 ``HTTP`` 和 ``HTTPS`` 使用相同的 ``TCP`` 端口（即 ``80``
 - [官网](https://picocss.com/)
 - [笔者的一个例子](./Picocss/picocss.html)
 
+## 前后端流式传输内容
+- [FetchDemo](./FetchDemo/)
+
+此示例翻译自 [fetch-demonstration](https://github.com/tom-on-the-internet/fetch-demonstration)  
+用于演示类似 ``ChatGPT`` 流式传输内容  
+启动服务端  
+```bash
+node server.js
+```
 
 ## 公共API速查表
 https://github.com/public-apis/public-apis

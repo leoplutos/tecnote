@@ -111,14 +111,19 @@ SSH 到目标服务器之后使用快捷键 ``Alt + s`` 即可 source 个性化�
 速度很快，但是不支持连字
 
 #### 配置文件地址
+
+~~alacritty.yml~~  已被废弃
+
 Windows
 ```
-%APPDATA%\alacritty\alacritty.yml
+%APPDATA%\alacritty\alacritty.toml
 ```
+
 Linux
 ```
-$HOME/.config/alacritty/alacritty.yml
+$HOME/.config/alacritty/alacritty.toml
 ```
 
 #### 配置文件例子
-[alacritty.yml](./alacritty_conf/alacritty.yml)
+[alacritty.toml](./alacritty_conf/alacritty.toml)  
+~~[alacritty.yml](./alacritty_conf/alacritty.yml)~~

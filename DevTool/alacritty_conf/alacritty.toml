@@ -1,0 +1,173 @@
+[general]
+# 实时配置重新加载
+live_config_reload = true
+
+[env]
+# 环境变量
+TERM = "xterm-256color"
+
+[window]
+# 边框和标题栏
+decorations = "full"
+# 窗口标题
+title = "Alacritty"
+# 允许终端应用程序更改 Alacritty 的窗口标题
+dynamic_title = true
+# 启动模式 - 常规窗口
+startup_mode = "Windowed"
+# 主题样式
+decorations_theme_variant = "Dark"
+# 在终端内容周围均匀分布额外的填充
+dynamic_padding = false
+
+[window.dimensions]
+# 窗口尺寸
+columns = 145
+lines = 40
+
+[window.padding]
+# 填充
+x = 10
+y = 10
+
+[window.position]
+# 窗口启动位置
+x = 100
+y = 40
+
+[scrolling]
+# 回滚缓冲区中的最大行数
+history = 2000
+# 每个输入滚动增量的滚动行数
+multiplier = 5
+
+[font]
+# 字体大小
+size = 12.0
+
+[font.bold]
+family = "等距更纱黑体 SC Nerd Font"
+style = "Regular"
+
+[font.bold_italic]
+family = "等距更纱黑体 SC Nerd Font"
+style = "Regular"
+
+[font.italic]
+family = "等距更纱黑体 SC Nerd Font"
+style = "Regular"
+
+[font.normal]
+family = "等距更纱黑体 SC Nerd Font"
+style = "Regular"
+
+[colors.primary]
+background = "#1d1f21"
+foreground = "#DADADA"
+
+[colors.normal]
+black = "#000000"
+blue = "#2472C8"
+cyan = "#11A8CD"
+green = "#0DBC79"
+magenta = "#BC3FBC"
+red = "#CD3131"
+white = "#E5E5E5"
+yellow = "#E5E510"
+
+[colors.bright]
+black = "#243C4F"
+blue = "#3B8EEA"
+cyan = "#29B8DB"
+green = "#23D18B"
+magenta = "#D670D6"
+red = "#F14C4C"
+white = "#E5E5E5"
+yellow = "#F5F543"
+
+[colors.cursor]
+cursor = "#afffff"
+text = "CellBackground"
+
+[colors.footer_bar]
+background = "#2c2c2c"
+foreground = "#80d6ff"
+
+[colors.hints.end]
+foreground = "#e9ff5e"
+
+[colors.hints.start]
+background = "#e9ff5e"
+foreground = "#1d1f21"
+
+[colors.line_indicator]
+background = "None"
+foreground = "None"
+
+[colors.search.focused_match]
+background = "#00d700"
+foreground = "#00005f"
+
+[colors.search.matches]
+background = "#ffff00"
+foreground = "#00005f"
+
+[colors.selection]
+background = "#2e3c64"
+text = "CellForeground"
+
+[colors.vi_mode_cursor]
+cursor = "#ffff00"
+text = "CellBackground"
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ''',│`|:"' ()[]{}<>	'''
+
+[cursor]
+blink_interval = 750
+blink_timeout = 5
+thickness = 0.15
+unfocused_hollow = true
+vi_mode_style = "Beam"
+
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+[terminal]
+
+[terminal.shell]
+args = ["/k D:/Tools/WorkTool/Cmd/cmdautorun.cmd 1"]
+program = "cmd.exe"
+
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+action = "Paste"
+mouse = "Right"
+
+[keyboard]
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "V"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "clear\r"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "ssh -t lchuser@172.24.96.25 -p 8122\r"
+key = "F1"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = """
+source ~/work/lch/rc/bashrc/.bashrc-personal
+"""
+key = "S"
+mods = "Alt"

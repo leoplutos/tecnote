@@ -9,14 +9,16 @@
 
 	<ItemGroup>
 		<Protobuf Include="Protos\ProductInfo.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\DisTrans.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="dotnet-etcd" Version="7.1.1" />
-		<PackageReference Include="Google.Protobuf" Version="3.28.0" />
+		<PackageReference Include="Dtmgrpc" Version="1.4.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.28.3" />
 		<PackageReference Include="Grpc.HealthCheck" Version="2.65.0" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.65.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.66.0">
+		<PackageReference Include="Grpc.Net.Client" Version="2.66.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.67.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>

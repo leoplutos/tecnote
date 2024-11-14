@@ -86,6 +86,8 @@ dotnet sln add dotnet-console-sample/dotnet-console-sample.csproj
 
 # 运行
 dotnet run --project dotnet-console-sample
+# 不加载 launchSettings.json 文件
+# dotnet run --project dotnet-console-sample --no-launch-profile
 ```
 
 笔者的例子工程 [dotnet-core-sample](./dotnet-core-sample/)
@@ -94,7 +96,7 @@ dotnet run --project dotnet-console-sample
 
  - 创建项目：``dotnet new [template]``  &nbsp;&nbsp;  查看可用template ``dotnet new list``
  - 编译项目：``dotnet build``
- - 运行项目：``dotnet run``
+ - 运行项目：``dotnet run`` &nbsp;&nbsp; 使用 ``--no-launch-profile`` 参数可以不加载 launchSettings.json 文件
  - 运行项目（DLL）：``dotnet filename.dll``
  - 清理项目的生成输出：``dotnet clean``
  - 运行单元测试：``dotnet test``

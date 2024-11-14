@@ -62,11 +62,11 @@
 				<artifactId>protobuf-maven-plugin</artifactId>
 				<version>0.6.1</version>
 				<configuration>
-					<protocArtifact>com.google.protobuf:protoc:3.25.3:exe:${os.detected.classifier}</protocArtifact>
+					<protocArtifact>com.google.protobuf:protoc:3.25.5:exe:${os.detected.classifier}</protocArtifact>
 					<outputDirectory>${basedir}/src/main/java</outputDirectory>
 					<clearOutputDirectory>false</clearOutputDirectory>
 					<pluginId>grpc-java</pluginId>
-					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.64.0:exe:${os.detected.classifier}</pluginArtifact>
+					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.68.1:exe:${os.detected.classifier}</pluginArtifact>
 					<outputDirectory>${basedir}/src/main/java</outputDirectory>
 					<clearOutputDirectory>false</clearOutputDirectory>
 				</configuration>
@@ -121,31 +121,40 @@
 	</build>
 	<dependencies>
 		<!-- gRPC依赖 -->
+		<!--
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
-			<version>3.25.3</version>
+			<version>3.25.5</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-netty-shaded</artifactId>
-			<version>1.64.0</version>
+			<version>1.68.1</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-protobuf</artifactId>
-			<version>1.64.0</version>
+			<version>1.68.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-stub</artifactId>
-			<version>1.64.0</version>
+			<version>1.68.1</version>
 		</dependency>
+		<!-- gRPC healthcheck -->
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-services</artifactId>
-			<version>1.64.0</version>
+			<version>1.68.1</version>
+		</dependency>
+		<!-- gRPC opentelemetry -->
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-opentelemetry</artifactId>
+			<version>1.68.1</version>
 		</dependency>
 		<dependency>
 			<!-- necessary for Java 9+ -->
@@ -212,16 +221,33 @@
 			<artifactId>commons-configuration2</artifactId>
 			<version>2.11.0</version>
 		</dependency>
-		<!-- OpenTelemetry监测依赖 opentelemetry-javaagent给启动程序命令行用，opentelemetry-grpc-1.6为程序用-->
+		<!-- OpenTelemetry -->
 		<dependency>
-			<groupId>io.opentelemetry.javaagent</groupId>
-			<artifactId>opentelemetry-javaagent</artifactId>
-			<version>2.5.0</version>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-api</artifactId>
+			<version>1.43.0</version>
 		</dependency>
 		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-sdk</artifactId>
+			<version>1.43.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-exporter-otlp</artifactId>
+			<version>1.43.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentelemetry.semconv</groupId>
+			<artifactId>opentelemetry-semconv</artifactId>
+			<version>1.28.0-alpha</version>
+		</dependency>
+		<!-- OpenTelemetry log4j（打印trace_id和span_id） -->
+		<dependency>
 			<groupId>io.opentelemetry.instrumentation</groupId>
-			<artifactId>opentelemetry-grpc-1.6</artifactId>
-			<version>2.3.0-alpha</version>
+			<artifactId>opentelemetry-log4j-context-data-2.17-autoconfigure</artifactId>
+			<version>2.9.0-alpha</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 </project>

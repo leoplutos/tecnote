@@ -12,10 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // Apache Commons Config2的加载类
-public final class Config {
+public  class Config {
 
 	// log4j2日志
-	protected static final Logger log = LogManager.getLogger();
+	protected static  Logger log = LogManager.getLogger();
 
 	// 单例对象 volatile + 双重检测机制来禁止指令重排
 	private volatile static Configuration instance = null;

@@ -133,5 +133,18 @@
 			},
 			"problemMatcher": [],
 		},
+		{
+			"label": "go_run_dtmClient",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"run",
+				"./product/dtm/main.go",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+		},
 	]
 }

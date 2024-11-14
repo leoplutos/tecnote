@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+//proto文件的命名空间-dtm_demo
+package dtm_demo;
+
+//导入空定义
+import "google/protobuf/empty.proto";
+
+//Go代码生成的包空间-product
+option go_package = "go/product";
+//Java代码类的包名
+option java_package = "javagrpc.grpc.stub";
+//Java代码类的文件名，否则默认生成的类名为proto文件名的驼峰命名
+option java_outer_classname = "DisTransPb";
+// 定义的所有消息、枚举和服务生成对应的多个类文件，而不是以内部类的形式出现
+option java_multiple_files = false;
+
+// 定义服务 DistributedTransaction(分布式事务)
+service DisTrans {
+    // 资金转出
+    rpc transferOut(DisTransReq) returns (google.protobuf.Empty);
+    // 资金转出回滚
+    rpc transferOutRollback(DisTransReq) returns (google.protobuf.Empty);
+    // 资金转入
+    rpc transferIn(DisTransReq) returns (google.protobuf.Empty);
+    // 资金转入回滚
+    rpc transferInRollback(DisTransReq) returns (google.protobuf.Empty);
+}
+
+// 定义服务参数
+message DisTransReq {
+	// 转账资金
+	int64 amount = 1;
+	// 为了模拟失败设定的字段（空:成功，FAILURE:失败）
+	string transOutResult = 2;
+	// 为了模拟失败设定的字段（空:成功，FAILURE:失败）
+	string transInResult = 3;
+}

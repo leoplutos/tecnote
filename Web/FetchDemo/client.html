@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤽</text></svg>" />
+	<title>为什么我们必须等待json</title>
+	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2.0.6/css/pico.min.css">
+	<style>
+		:root {
+			--pico-font-size: 100%;
+		}
+
+		.div-result {
+			font-size: 14px;
+			margin: 1rem auto;
+			padding: 1rem;
+			color: #5d6baa;
+			background: linear-gradient(to right, #f6f8fa, #f6f8fa);
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+	</style>
+</head>
+
+<body>
+	<main class="container">
+		<section id="section1">
+			<h2>等待 HTTP消息头 + HTTP消息体</h2>
+			<p>单击按钮将运行下面的函数, 需要在浏览器控制台才能看到结果</p>
+			<button id="fetchJsonBtn">FETCH JSON</button><br /><br />
+			<pre><code>async function () {
+	const fetchResult = document.getElementById("fetchResult");
+	fetchResult.textContent = "处理中...";
+	console.log("fetchJson HTTP请求开始");
+	let response = await fetch("/json");
+	console.log("fetchJson 已获取HTTP响应消息头, 等待HTTP消息体");
+	let resultJson = await response.json();
+	console.log("fetchJson 已获取HTTP消息体, 将结果转换为对象");
+	console.log(resultJson);
+	fetchResult.textContent = (JSON.stringify(resultJson));
+}</code></pre>
+			<div id="fetchResult" class="div-result">...结果将在此处表示...</div>
+		</section>
+		<hr />
+		<section id="section2">
+			<h2>等待 HTTP消息头 + 分块取得HTTP消息体</h2>
+			<p>单击按钮将运行下面的函数, 需要在浏览器控制台才能看到结果</p>
+			<button id="streamJsonBtn">STREAM JSON</button><br /><br />
+<pre><code>async function () {
+	const streamResult = document.getElementById("streamResult");
+	streamResult.textContent = "处理中...";
+	console.log("fetchStream HTTP请求开始");
+	let response = await fetch("/json");
+	console.log("fetchStream 已获取HTTP响应消息头, 流式传输HTTP消息体");
+	const decoder = new TextDecoder("utf-8");
+	streamResult.textContent = "";
+	for await (const value of response.body) {
+		const chunk = decoder.decode(value);
+		streamResult.textContent += chunk;
+	}
+	console.log("fetchStream 已获取HTTP消息体");
+}</code></pre>
+			<div id="streamResult" class="div-result">...结果将在此处流式传输...</div>
+		</section>
+	</main>
+	<script>
+		const fetchJson = async function () {
+			const fetchResult = document.getElementById("fetchResult");
+			fetchResult.textContent = "处理中...";
+			console.log("fetchJson HTTP请求开始");
+			let response = await fetch("/json");
+			console.log("fetchJson 已获取HTTP响应消息头, 等待HTTP消息体");
+			let resultJson = await response.json();
+			console.log("fetchJson 已获取HTTP消息体, 将结果转换为对象");
+			console.log(resultJson);
+			fetchResult.textContent = (JSON.stringify(resultJson));
+		};
+
+		const fetchStream = async function () {
+			const streamResult = document.getElementById("streamResult");
+			streamResult.textContent = "处理中...";
+			console.log("fetchStream HTTP请求开始");
+			let response = await fetch("/json");
+			console.log("fetchStream 已获取HTTP响应消息头, 流式传输HTTP消息体");
+			const decoder = new TextDecoder("utf-8");
+			streamResult.textContent = "";
+			for await (const value of response.body) {
+				const chunk = decoder.decode(value);
+				streamResult.textContent += chunk;
+			}
+			console.log("fetchStream 已获取HTTP消息体");
+		};
+		// 按钮事件
+		const fetchJsonBtn = document.getElementById("fetchJsonBtn");
+		const streamJsonBtn = document.getElementById("streamJsonBtn");
+		fetchJsonBtn.addEventListener("click", fetchJson);
+		streamJsonBtn.addEventListener("click", fetchStream)
+	</script>
+</body>
+
+</html>

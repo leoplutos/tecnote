@@ -3,6 +3,9 @@ using Serilog.Events;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using netcoreServer.Services;
 using netcoreServer.Register;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Metrics;
 
 //######################################
 // gRPC服务启动主入口
@@ -56,8 +59,96 @@ try
 	});
 	// 单例模式注册Configuration
 	var configuration = builder.Configuration;
-
 	builder.Services.AddSingleton<IConfiguration>(configuration);
+	// 读取环境变量
+	// 获取绑定的port
+	var http_ports = configuration["http_ports"];
+	//var http_ports = configuration["ASPNETCORE_HTTP_PORTS"];
+	if (string.IsNullOrEmpty(http_ports))
+	{
+		http_ports = "unknownport";
+	}
+	Log.Information("[.NET Core(C#)][Server] 环境变量设定端口: {http_ports}", http_ports);
+	// 获取OpenTelemetry Collector的URL
+	// 默认值 gRPC: "http://localhost:4317" HTTP:"http://localhost:4318"
+	var otlp_endpoint = configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
+	if (string.IsNullOrEmpty(otlp_endpoint))
+	{
+		otlp_endpoint = "http://localhost:4317";
+	}
+	Log.Information("[.NET Core(C#)][Server] OpenTelemetry Collector EndPoint : {otlp_endpoint}", otlp_endpoint);
+	// 判断是否启用Otel检测
+	string? otel = configuration["GRPC_SERVER_OTEL"];
+	bool isWithOtel = false;
+	if (!string.IsNullOrEmpty(otel))
+	{
+		if (otel.Equals("true"))
+		{
+			isWithOtel = true;
+		}
+	}
+	Log.Information("[.NET Core(C#)][Server] 是否启用Otel检测: {isWithOtel}", isWithOtel);
+	// 需要 dotnet add package OpenTelemetry.Extensions.Hosting
+	builder.Services.AddOpenTelemetry()
+		.ConfigureResource(resource => resource.AddService(serviceName: "NetcoreGrpc:" + http_ports))
+		.WithTracing(tracing =>
+		{
+			// 对于 gRPC 服务端: 需要 OpenTelemetry.Instrumentation.AspNetCore 插桩
+			//  https://github.com/open-telemetry/opentelemetry-dotnet-contrib/blob/main/src/OpenTelemetry.Instrumentation.AspNetCore/README.md
+			// 对于 gRPC 客户端: 需要 OpenTelemetry.Instrumentation.GrpcNetClient 和 OpenTelemetry.Instrumentation.Http 插桩
+			//  https://github.com/open-telemetry/opentelemetry-dotnet-contrib/blob/main/src/OpenTelemetry.Instrumentation.GrpcNetClient/README.md
+			//   dotnet add package --prerelease OpenTelemetry.Instrumentation.GrpcNetClient
+
+			// [Trace] 启用 gPRC 服务端插桩
+			tracing.AddAspNetCoreInstrumentation();
+			// [Trace] 启用 gRPC 客户端插桩
+			//tracing.AddGrpcClientInstrumentation();
+			//tracing.AddHttpClientInstrumentation();
+			// [Trace] 添加 Tracer
+			// 在 .NET 中，“ActivitySource”是 Tracer 的实现，而 Activity 则是“Span”的实现
+			tracing.AddSource(GlobalData.ProductServiceActivitySource.Name);
+			if (isWithOtel)
+			{
+				// OTLP导出器
+				tracing.AddOtlpExporter(otlpOptions =>
+				{
+					otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+					otlpOptions.Endpoint = new Uri(otlp_endpoint);
+				});
+			}
+			else
+			{
+				// 控制台导出器
+				tracing.AddConsoleExporter();
+			}
+		})
+		.WithMetrics(metrics =>
+		{
+			// 对于 gRPC 服务端: 需要 OpenTelemetry.Instrumentation.AspNetCore 插桩
+			//  https://github.com/open-telemetry/opentelemetry-dotnet-contrib/blob/main/src/OpenTelemetry.Instrumentation.AspNetCore/README.md
+			// 对于 gRPC 客户端: 需要 OpenTelemetry.Instrumentation.GrpcNetClient 和 OpenTelemetry.Instrumentation.Http 插桩
+			//  https://github.com/open-telemetry/opentelemetry-dotnet-contrib/blob/main/src/OpenTelemetry.Instrumentation.GrpcNetClient/README.md
+			//   dotnet add package --prerelease OpenTelemetry.Instrumentation.GrpcNetClient
+
+			// [Metrics] 启用 gPRC 服务端插桩
+			metrics.AddAspNetCoreInstrumentation();
+			// [Metrics] 添加Meter 在 .NET 中
+			metrics.AddMeter(GlobalData.ProductServiceMeter.Name);
+			if (isWithOtel)
+			{
+				// OTLP导出器
+				metrics.AddOtlpExporter(otlpOptions =>
+				{
+					otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+					otlpOptions.Endpoint = new Uri(otlp_endpoint);
+				});
+			}
+			else
+			{
+				// 控制台导出器
+				metrics.AddConsoleExporter();
+			}
+		});
 
 	var app = builder.Build();
 
@@ -65,9 +156,10 @@ try
 	app.UseSerilogRequestLogging();
 
 	// 注册gPRC服务ProductService
-	//app.MapGrpcService<GreeterService>();
 	app.MapGrpcService<ProductService>();
 	Log.Information("已加载gPRC服务:ProductService");
+	app.MapGrpcService<TransferOutService>();
+	Log.Information("已加载gPRC服务:TransferOutService");
 	// 注册gPRC健康检查
 	app.MapGrpcHealthChecksService();
 	Log.Information("已加载gPRC健康检查");
@@ -121,10 +213,10 @@ public class SerilogLoader
 			.MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
 			.MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Warning)
 			.MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
-			//.WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}][{SourceContext:l}] - {Message:lj}{NewLine}{Exception}")
+			//.WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}][{TraceId}][{SpanId}] - {Message:lj}{NewLine}{Exception}")
 			//.WriteTo.File("D:/logs/myapp.txt", rollingInterval: RollingInterval.Day)
-			.WriteTo.Async(a => a.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}"))
-			//.WriteTo.Async(a => a.File("D:/logs/myapp.log", outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}", rollingInterval: RollingInterval.Day))
+			.WriteTo.Async(a => a.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}][{TraceId}][{SpanId}] - {Message:lj}{NewLine}{Exception}"))
+			//.WriteTo.Async(a => a.File("D:/logs/myapp.log", outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}][{TraceId}][{SpanId}] - {Message:lj}{NewLine}{Exception}", rollingInterval: RollingInterval.Day))
 			.CreateLogger();
 	}
 
@@ -143,7 +235,7 @@ public class SerilogLoader
 			.MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
 			//.WriteTo.Console(new Serilog.Formatting.Json.JsonFormatter())
 			//.WriteTo.File("D:/logs/myapp.txt", rollingInterval: RollingInterval.Day)
-			.WriteTo.Async(a => a.Console(new Serilog.Templates.ExpressionTemplate("{ {time: @t, message: @mt, level: @l, Exception: @x, ..@p} }\n")))
+			.WriteTo.Async(a => a.Console(new Serilog.Templates.ExpressionTemplate("{ {time: @t, message: @mt, trace_id: @tr, span_id: @sp, level: @l, Exception: @x, ..@p} }\n")))
 			//.WriteTo.Async(a => a.File("D:/logs/myapp.log", outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level:u5} [{ThreadId}] - {Message:lj}{NewLine}{Exception}", rollingInterval: RollingInterval.Day))
 			.CreateLogger();
 	}

@@ -130,6 +130,8 @@ Java所需插件比较多。有2套方案：
 
 ## 主题插件
 - [主题流行趋势](https://vscodethemes.com/)
+- [Material Icon Theme Material（文件图标主题）](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
+- [Fluent Icons（工具栏的图标主题）](https://marketplace.visualstudio.com/items?itemName=miguelsolorio.fluent-icons)
 - [一款不错的C/C++主题](https://marketplace.visualstudio.com/items?itemName=Xen.ccpp-theme)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[github](https://github.com/xenkuo/ccpp_theme)
 - [Tomorrow and Tomorrow Night Theme Kit（暗色系）](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Theme-TomorrowKit)&nbsp;&nbsp;&nbsp;&nbsp;笔者比较喜欢这个主题
 - [Winter is Coming Theme（亮色系）](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)

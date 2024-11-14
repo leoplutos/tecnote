@@ -100,37 +100,12 @@ __prompt_command_nerdfont() {
     PS1+="${PS_TIME}${STR_TIME_ICON} \t ${PS_SHELL} ${STR_UBUNTU_ICON} ${STR_OS} ${PS_HOST} ${STR_USER_ICON} \u@\h ${PS_IPADDR} ${STR_IP_ICON} ${STR_IP} ${PS_PATH} ${STR_DIRECTORY_ICON}  \w ${PS_BRIGHTBLACK}${STR_LEFT_ARROW}${PS_CLEAR}\n${PS_MAGENTA}${STR_LINE2_PRE}${PS_BLUE}\$ ${PS_CLEAR}"
 }
 
-#export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
-export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
-export INPUTRC='~/work/lch/rc/inputrc/inputrc'
-export personal_workspace=~/work/lch/workspace
-export personal_rc=~/work/lch/rc
-export personal_tmp=~/work/lch/tmp
-export personal_tool=~/work/lch/tool
-export personal_log=~/work/lch/log
 export TERM="xterm-256color"
 export COLORTERM=truecolor
-#export DOCKER_HOST="tcp://localhost:3102"
-
-#环境变量加入pip3下载的内容
-export PATH=$PATH:~/.local/bin
-#环境变量加入go
-export GOROOT=/usr/local/go
-export GOPATH=~/work/lch/tool/go_global
-export GO111MODULE=on
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export KOTLIN_HOME=/usr/local/kotlin/kotlinc
-export PATH=$PATH:$KOTLIN_HOME/bin
-#export PATH=$PATH:'/home/lchuser/work/lch/tool/lsp/kotlin-language-server/bin'
 
 alias ll='ls -hl --full-time --time-style=long-iso --color=auto'
 alias lla='ls -hal --full-time --time-style=long-iso --color=auto'
 alias llt='ls -htl --full-time --time-style=long-iso --color=auto'
-alias cdw='cd $personal_workspace'
-alias cdr='cd $personal_rc'
-alias cdt='cd $personal_tmp'
-alias cdto='cd $personal_tool'
-alias cdl='cd $personal_log'
 # alias vim='vim -u ~/work/lch/rc/vimrc/.vimrc'
 #因为alias无法传递参数，所以用定义函数，然后调用函数的方式，导入参数
 # alias vimf='func_vimf() { vim -u ~/work/lch/rc/vimrc/.vimrc $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_vimf'
@@ -140,8 +115,8 @@ alias cdl='cd $personal_log'
 # alias nvimf='func_nvimf() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"; }; func_nvimf'
 # alias nvimc='func_nvimc() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"; }; func_nvimc'
 # alias nvimv='func_nvimv() { env TERM=wezterm nvim -u ~/work/lch/rc/nvimrc/init.lua $1 --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"; }; func_nvimv'
-alias vi='vim'
-alias vim='nvim'
+# alias vi='vim'
+# alias vim='nvim'
 alias lg='lazygit'
 alias gu='gitui'
 alias dk='docker'
@@ -157,8 +132,21 @@ alias dcc='docker compose ps -a'
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
 alias dcl='docker compose logs'
+alias sd='sudo docker'
+alias sdi='sudo docker images'
+alias sdc='sudo docker ps -a'
+alias snk='sudo nerdctl --address=/run/k3s/containerd/containerd.sock --namespace=k8s.io'
+alias k='kubectl'
+alias kgn='kubectl get nodes'
+alias kgd='kubectl get deployments'
+alias kgp='kubectl get pods'
+alias kgs='kubectl get services'
+alias sk='sudo kubectl'
+alias skn='sudo kubectl get nodes'
+alias skd='sudo kubectl get deployments'
+alias skp='sudo kubectl get pods'
+alias sks='sudo kubectl get services'
 alias gdbx='gdb -x ~/work/lch/rc/gdbrc/.gdbinit'
 alias tmuxn='tmux -2u -f ~/work/lch/rc/tmuxrc/tmux3.2.conf new-session -s lch_session -n lch_window'
 alias tmuxa='tmux -2u a -t lch_session'
-
 alias clearb='echo -e "\ec\e[3J"'

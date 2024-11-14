@@ -1,7 +1,6 @@
 
 package javagrpc.main;
 
-import io.grpc.ClientInterceptor;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
@@ -12,14 +11,12 @@ import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.health.v1.HealthCheckResponse;
 import io.grpc.health.v1.HealthCheckResponse.ServingStatus;
 import io.grpc.health.v1.HealthGrpc;
-import io.opentelemetry.api.OpenTelemetry;
 import javagrpc.common.Const;
 import javagrpc.grpc.lb.EtcdNameResolverProvider;
 import javagrpc.grpc.lb.MultiAddressNameResolverFactory;
 import javagrpc.grpc.stub.ProductInfoGrpc;
 import javagrpc.grpc.stub.ProductInfoPb.Product;
 import javagrpc.grpc.stub.ProductInfoPb.ProductId;
-import javagrpc.opentelemetry.OpentelemetryConfig;
 import javagrpc.util.Config;
 import java.net.InetSocketAddress;
 import java.util.Map;
@@ -55,8 +52,9 @@ public class ClientMain {
 	public ClientMain(boolean isWithEtcd) {
 
 		// OpenTelemetry监测的拦截器
-		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
-		ClientInterceptor otelClientInterceptor = OpentelemetryConfig.getClientInterceptor(openTelemetry);
+		// OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
+		// ClientInterceptor otelClientInterceptor =
+		// OpentelemetryConfig.getClientInterceptor(openTelemetry);
 
 		if (isWithEtcd) {
 			// 使用Etcd的服务注册
@@ -71,7 +69,7 @@ public class ClientMain {
 			channel = Grpc.newChannelBuilder(channelTarget, InsecureChannelCredentials.create())
 					.defaultLoadBalancingPolicy("round_robin")
 					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
-					.intercept(otelClientInterceptor) // 添加otel拦截器
+					// .intercept(otelClientInterceptor) // 添加otel拦截器
 					// .usePlaintext()
 					.build();
 		} else {
@@ -85,7 +83,7 @@ public class ClientMain {
 					.nameResolverFactory(nameResolverFactory) // 此方法已废弃
 					.defaultLoadBalancingPolicy("round_robin")
 					.defaultServiceConfig(generateHealthConfig("")) // HealthCheck检查的服务名为空
-					.intercept(otelClientInterceptor) // 添加otel拦截器
+					// .intercept(otelClientInterceptor) // 添加otel拦截器
 					.usePlaintext()
 					.build();
 		}

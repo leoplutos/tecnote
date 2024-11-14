@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +22,8 @@ public class App {
 	protected static final Logger log = LogManager.getLogger();
 
 	// say hello
-	private void hello() {
+	// 使用 java.util.Optional 返回多个值
+	private MultipleOptionalValues hello() {
 		System.out.println("Hello World - 日本語!");
 		String str1 = "Hello!こんにちは!你好!안녕하세요!";
 		String str2 = "日本語テストです";
@@ -29,6 +31,8 @@ public class App {
 		log.debug(str1);
 		log.debug(str2);
 		log.debug(str3);
+		MultipleOptionalValues result = new MultipleOptionalValues(Optional.of(15), Optional.of("韩梅梅"));
+		return result;
 	}
 
 	// Streams API (流式API) 示例
@@ -145,7 +149,10 @@ public class App {
 		App app = new App();
 		try {
 			// say hello
-			app.hello();
+			MultipleOptionalValues result = app.hello();
+			// 只在有值的时候进行日志打印
+			result.age.ifPresent(age -> log.info("hello返回值-age : {}", age));
+			result.name.ifPresent(name -> log.info("hello返回值-name : {}", name));
 			// Streams API (流式API) 示例
 			app.streamsApi();
 			// 虚拟线程示例
@@ -189,5 +196,15 @@ public class App {
 		public String toString() {
 			return "{ age=" + age + ", name=" + name + "}";
 		}
+	}
+}
+
+class MultipleOptionalValues {
+	Optional<Integer> age;
+	Optional<String> name;
+
+	public MultipleOptionalValues(Optional<Integer> age, Optional<String> name) {
+		this.age = age;
+		this.name = name;
 	}
 }

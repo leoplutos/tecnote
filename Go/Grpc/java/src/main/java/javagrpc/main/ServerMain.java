@@ -9,26 +9,25 @@ import io.etcd.jetcd.options.PutOption;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
 import io.grpc.Server;
+import io.grpc.ServerInterceptors;
 import io.grpc.protobuf.services.HealthStatusManager;
 import io.grpc.stub.StreamObserver;
 import io.opentelemetry.api.OpenTelemetry;
 import javagrpc.common.Const;
-import javagrpc.grpc.stub.ProductInfoPb.Product;
+import javagrpc.grpc.interceptor.OtelTraceInterceptor;
 import javagrpc.grpc.stub.StopServiceGrpc.StopServiceImplBase;
-import javagrpc.opentelemetry.OpentelemetryConfig;
+import javagrpc.opentelemetry.OpentelemetryUtil;
 import javagrpc.util.Config;
 import javagrpc.service.ProductServiceImpl;
+import javagrpc.service.TransferInServiceImpl;
 import java.net.InetAddress;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.slf4j.MDC;
 import com.google.protobuf.Empty;
 import com.google.protobuf.Int32Value;
 
@@ -47,24 +46,29 @@ public class ServerMain {
 	// Etcd客户端
 	private Client etcd;
 
-	// 储存Product的词典
-	public static Map<String, Product> productMap;
-
 	// 启动gRPC服务
-	private void start(int port, boolean isWithEtcd) throws Exception {
-
-		productMap = new ConcurrentHashMap<String, Product>();
+	private void start(int port, boolean isWithEtcd, boolean isWithOtel) throws Exception {
+		// 初始化OpenTelemetry
+		OpenTelemetry openTelemetry = null;
+		if (isWithOtel) {
+			// 初始化OpenTelemetry
+			openTelemetry = OpentelemetryUtil.initOpenTelemetry("JavaGrpc:" + port);
+		}
 		health = new HealthStatusManager();
 		// 虚拟线程的执行器，这个执行器在每次提交一个新任务时，都会为这个任务创建一个新的虚拟线程来执行它
 		// 虚拟线程属于非常轻量级的资源，因此，用时创建，用完就扔，不要池化虚拟线程
 		executorService = Executors.newVirtualThreadPerTaskExecutor();
-		// OpenTelemetry监测的拦截器
-		OpenTelemetry openTelemetry = OpentelemetryConfig.initializeOpenTelemetry();
 		// gRPC服务
 		server = Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create())
-				.addService(OpentelemetryConfig.configureServerInterceptor(openTelemetry, new ProductServiceImpl(port))) // 添加业务服务和otel拦截器
-				.addService(new StopServiceImpl())// 添加业务服务
-				.addService(health.getHealthService())// 添加HealthCheck服务
+				// 添加Product业务服务和otel拦截器
+				.addService(ServerInterceptors.intercept(new ProductServiceImpl(port, isWithOtel, openTelemetry),
+						new OtelTraceInterceptor()))
+				// 添加资金转出服务
+				.addService(new TransferInServiceImpl())
+				// 添加停止服务监控
+				.addService(new StopServiceImpl())
+				// 添加HealthCheck服务
+				.addService(health.getHealthService())
 				.executor(executorService)
 				.build()
 				.start();
@@ -160,9 +164,6 @@ public class ServerMain {
 	// 程序主入口
 	public static void main(String[] args) throws Exception {
 		try {
-			// json结构化日志设置MDC上下文
-			MDC.put("service_name", "JavaGrpcService");
-
 			// 读取 properties 和 环境变量
 			Configuration config = Config.getInstance();
 			int defaultPort = config.getInt("grpc.server.default.port", 50051);
@@ -177,10 +178,17 @@ public class ServerMain {
 				isWithEtcd = true;
 			}
 			log.info("[Java][Server] 是否启用Etcd服务发现: {}", isWithEtcd);
+			// 读取环境变量[GRPC_SERVER_OTEL]的设定值
+			String otel = config.getString("GRPC_SERVER_OTEL", "false");
+			boolean isWithOtel = false;
+			if ("true".equals(otel)) {
+				isWithOtel = true;
+			}
+			log.info("[Java][Server] 是否启用Otel检测: {}", isWithOtel);
 
 			final ServerMain server = new ServerMain();
 			// 启动gRPC服务
-			server.start(port, isWithEtcd);
+			server.start(port, isWithEtcd, isWithOtel);
 			server.blockUntilShutdown();
 		} catch (Exception e) {
 			log.error(e);

@@ -4,8 +4,11 @@
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<JsonLayout compact="true" locationInfo="true" complete="false" eventEol="true">
-				<!-- 自定义json项目 -->
-				<KeyValuePair key="service_name" value="${ctx:service_name}"/>
+				<!-- 自定义json项目 需要在环境变量APP_SERVICE_NAME设定 -->
+				<KeyValuePair key="service_name" value="${env:APP_SERVICE_NAME}"/>
+				<!-- trace_id=%X{trace_id} span_id=%X{span_id} 需要 opentelemetry-log4j-context-data-2.17-autoconfigure 库 -->
+				<KeyValuePair key="trace_id" value="${ctx:trace_id}"/>
+				<KeyValuePair key="span_id" value="${ctx:span_id}"/>
 			</JsonLayout>
 		</Console>
 	</Appenders>

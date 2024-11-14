@@ -15,7 +15,9 @@
 		<!-- 控制台输出 appender，SYSTEM_OUT输出黑色，SYSTEM_ERR输出红色 -->
 		<Console name="Console" target="SYSTEM_OUT">
 			<!-- 启用ANSI 颜色 highlight{pattern}{style}，在Windows平台还需要设定disableAnsi="false" -->
-			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}]%highlight{ %level }[%tid][%c{1}:%line] - %m%n" disableAnsi="false" />
+			<!-- trace_id=%X{trace_id} span_id=%X{span_id} 需要 opentelemetry-log4j-context-data-2.17-autoconfigure 库 -->
+			<!-- <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}]%highlight{ %level }[%tid][%c{1}:%line] - %m%n" disableAnsi="false" /> -->
+			<PatternLayout pattern="%style{[%d{yyyy-MM-dd HH:mm:ss.SSS}]}{black}%highlight{ %level }[%tid][%c{1}:%line][%X{trace_id}][%X{span_id}] - %m%n" disableAnsi="false" />
 		</Console>
 
 		<!-- 日志文件输出 appender -->

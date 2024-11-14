@@ -6,7 +6,7 @@ using netcoreClient.Clients;
 // args是隐式地通过编译器生成的Main方法传递给程序的命令行参数
 if (args.Length == 0)
 {
-	Console.WriteLine("请输入一个参数[Sync|Async]");
+	Console.WriteLine("请输入一个参数[Sync|Async|Dtm]");
 	Console.WriteLine("比如: dotnet run --project netcoreClient -- Async");
 	Environment.Exit(1);
 }
@@ -68,6 +68,14 @@ try
 		ProductClient client = new(config);
 		client.SyncClient(isWithEtcd);
 		Log.Information("同步例子结束");
+	}
+	else if (firstArgument.Equals("Dtm"))
+	{
+		Log.Information("Dtm例子开始");
+		// 同步例子
+		DtmClientAsync clientAsync = new(config);
+		await clientAsync.DtmClient();
+		Log.Information("Dtm例子结束");
 	}
 	else
 	{
