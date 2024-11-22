@@ -1,5 +1,6 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
 	// 使用 rust-analyzer.server.extraEnv 覆盖 rust-analyzer 的环境变量
 	"rust-analyzer.server.extraEnv": {
 		"RUSTUP_TOOLCHAIN": "stable",

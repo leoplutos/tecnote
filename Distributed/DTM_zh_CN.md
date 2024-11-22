@@ -84,7 +84,7 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --name java_grpc_50051 \
-  java_grpc:1.0.0
+  java_grpc:latest
 ```
 
 - ``资金转入`` 微服务 [NetcoreGrpc](../Go/Grpc/netcore/)  
@@ -97,7 +97,7 @@ docker run -itd \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --name dotnet_grpc_50052 \
-  dotnet_grpc:1.0.0
+  dotnet_grpc:latest
 ```
 
 ### Dtm调用示例

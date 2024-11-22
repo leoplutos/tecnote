@@ -45,6 +45,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "Bun解决依赖",
 		},
 		{
 			"label": "bun_build",
@@ -57,10 +58,10 @@
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun x tsc -p tsconfig.json",
 			"problemMatcher": [
 				"$tsc"
 			],
+			"detail": "编译: bun x tsc -p tsconfig.json",
 		},
 		{
 			"label": "bun_dev",
@@ -73,8 +74,8 @@
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun run src/index.ts",
 			"problemMatcher": [],
+			"detail": "运行index.ts",
 		},
 		{
 			"label": "bun_runRedisClientExample",
@@ -86,8 +87,8 @@
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun run src/RedisClientExample.ts",
 			"problemMatcher": [],
+			"detail": "运行Redis客户端示例",
 		},
 		{
 			"label": "bun_runEtcdClientExample.ts",
@@ -99,8 +100,8 @@
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun run src/EtcdClientExample.ts",
 			"problemMatcher": [],
+			"detail": "运行Etcd客户端示例",
 		},
 	]
 }

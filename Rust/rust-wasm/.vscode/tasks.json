@@ -52,6 +52,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "WebAssembly编译-目标为web直接可用",
 		},
 	]
 }

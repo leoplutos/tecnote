@@ -1,7 +1,7 @@
 services:
   vue_9500:
     restart: always
-    image: frontend_vue:1.0.0
+    image: frontend_vue:latest
     container_name: vue_9500
     privileged: true
     ports:
@@ -24,7 +24,7 @@ services:
     #  - redis
   gin_9501:
     restart: always
-    image: backend_gin:1.0.0
+    image: backend_gin:latest
     container_name: gin_9501
     privileged: true
     ports:

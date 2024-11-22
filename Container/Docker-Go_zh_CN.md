@@ -79,7 +79,7 @@ docker images
 ### 通过镜像启动容器
 启动容器（将容器内的9501端口映射到宿主机的9502）
 ```bash
-docker run -itd -p 9502:9501 --name gin_9502 backend_gin:1.0.0
+docker run -itd -p 9502:9501 --name gin_9502 backend_gin:latest
 ```
 默认端口 ``9501``，可以用环境变量 ``GIN_HTTP_PORT`` 指定端口
 
@@ -118,5 +118,5 @@ bash docker_build.sh
 
 启动容器
 ```bash
-docker run -itd -p 50051:50051 --name grpc_50051 go_grpc:1.0.0
+docker run -itd -p 50051:50051 --name grpc_50051 go_grpc:latest
 ```

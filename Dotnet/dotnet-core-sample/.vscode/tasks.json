@@ -36,7 +36,8 @@
 			"args": [
 				"restore",
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "解决依赖",
 		},
 		{
 			"label": "dotnet_build",
@@ -48,7 +49,8 @@
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "编译工程",
 		},
 		{
 			// -p:PublishSingleFile=true 单文件发布
@@ -70,7 +72,8 @@
 				"--self-contained",
 				"true"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "发布单文件工程",
 		},
 		{
 			"label": "dotnet_watch",
@@ -82,7 +85,8 @@
 				"--project",
 				"${workspaceFolder}/dotnet-core-sample.sln"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "监视运行",
 		},
 		{
 			"label": "run_App_Async",
@@ -99,6 +103,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行AsyncExample示例",
 		},
 		{
 			"label": "run_App_Redis",
@@ -115,6 +120,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行Redis示例",
 		},
 		{
 			"label": "run_App_Etcd",
@@ -131,6 +137,24 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行Etcd示例",
+		},
+		{
+			"label": "run_App_Postgre",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"run",
+				"--project",
+				"dotnet-console-sample",
+				"--",
+				"Postgre",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": "$msCompile",
+			"detail": "运行Postgre示例",
 		},
 	]
 }

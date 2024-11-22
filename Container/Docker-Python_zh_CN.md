@@ -79,10 +79,10 @@ docker images
 ### 通过镜像启动容器
 启动容器（将容器内的9501端口映射到宿主机的9501）
 ```bash
-docker run -itd -p 9501:9501 --name sanic_9501 backend_sanic:1.0.0
+docker run -itd -p 9501:9501 --name sanic_9501 backend_sanic:latest
 
 # 启动失败时调试用
-# docker run -it -p 9501:9501 --entrypoint /bin/bash backend_sanic:1.0.0
+# docker run -it -p 9501:9501 --entrypoint /bin/bash backend_sanic:latest
 ```
 
 默认端口 ``9501``，可以用环境变量 ``SANIC_HTTP_PORT`` 指定端口

@@ -1,0 +1,91 @@
+{
+	"version": "2.0.0",
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				// 添加 deno
+				"PATH": "${env:path};D:/Tools/WorkTool/Web/deno"
+			}
+		}
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash"
+			},
+			"env": { //自定义环境变量
+			}
+		}
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
+	},
+	"tasks": [
+		{
+			"label": "deno_task_cache",
+			"type": "shell",
+			"command": "deno",
+			"args": [
+				"task",
+				"cache"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "下载依赖",
+			"problemMatcher": []
+		},
+		{
+			"label": "deno_task_dev",
+			"type": "shell",
+			"command": "deno",
+			"args": [
+				"task",
+				"dev"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "本地运行",
+			"problemMatcher": []
+		},
+		{
+			"label": "deno_task_watch",
+			"type": "shell",
+			"command": "deno",
+			"args": [
+				"task",
+				"watch"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "本地监视运行",
+			"problemMatcher": []
+		},
+		{
+			"label": "deno_task_debug",
+			"type": "shell",
+			"command": "deno",
+			"args": [
+				"task",
+				"debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"detail": "本地调试运行",
+			"problemMatcher": []
+		}
+	]
+}

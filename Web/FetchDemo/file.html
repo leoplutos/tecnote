@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>" />
+	<title>文件上传示例</title>
+	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2.0.6/css/pico.min.css">
+	<style>
+		:root {
+			--pico-font-size: 100%;
+		}
+
+		.drag-input {
+			display: none;
+		}
+
+		#dropzone {
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			line-height: 300px;
+			color: #aaaaaa;
+			background-color: #fffbf0;
+			outline: 2px dashed #92b0b3;
+			outline-offset: -1px;
+			/*border: 4px dashed #92b0b3;*/
+		}
+
+		/* 当有文件悬停在放置区域上方时的样式 */
+		#dropzone.dragover {
+			background-color: #d8eaef;
+			outline-color: #92b0f3;
+			outline-offset: -15px;
+		}
+
+		.drag-label {
+			color: #aaaaaa;
+			/*display: inline-block;*/
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.drag-label div {
+			line-height: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<main class="container">
+		<section id="section1">
+			<h2>文件上传示例</h2>
+			<div>最多上传10个文件, 后端是 ASP.NET Core 默认上传最大为 28.6 MB</div>
+			<div>更多看<a
+					href="https://learn.microsoft.com/zh-cn/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0">这里</a>
+			</div>
+			<br />
+			<div id="dropzone">
+				<!--因为后端使用的ASP.NET Core, 所以name属性要和后端一致-->
+				<input type="file" id="fileInput" name="uploadFiles" class="drag-input" multiple>
+				<label for="fileInput" id="fileList" class="drag-label">点击上传或将文件拖至此处（全格式）</label>
+			</div>
+			<br />
+			<progress id="uploadProgress" value="0" max="100"></progress>
+			<br />
+			<button id="uploadBtn">上传文件</button>
+			<button id="reUploadBtn">重新上传</button>
+		</section>
+	</main>
+	<script>
+		// 要进行上传的文件
+		var allFiles = [];
+
+		// 获取相关元素
+		const dropzone = document.getElementById('dropzone');
+		const fileInput = document.getElementById('fileInput');
+		const fileList = document.getElementById('fileList');
+		const uploadBtn = document.getElementById('uploadBtn');
+		const reUploadBtn = document.getElementById('reUploadBtn');
+		const uploadProgress = document.getElementById('uploadProgress');
+
+		// 处理文件拖拽进入放置区域的事件
+		dropzone.addEventListener('dragover', function (e) {
+			// 阻止事件冒泡
+			e.stopPropagation();
+			// 阻止默认事件（与drop事件结合，阻止拖拽文件在浏览器打开的默认行为）
+			e.preventDefault();
+			dropzone.classList.add('dragover');
+		});
+
+		// 处理文件拖拽离开放置区域的事件
+		dropzone.addEventListener('dragleave', function (e) {
+			// 阻止事件冒泡
+			e.stopPropagation();
+			// 阻止默认事件（与drop事件结合，阻止拖拽文件在浏览器打开的默认行为）
+			e.preventDefault();
+			dropzone.classList.remove('dragover');
+		});
+
+		// 处理文件在放置区域内释放的事件
+		dropzone.addEventListener('drop', function (e) {
+			// 阻止事件冒泡
+			e.stopPropagation();
+			// 阻止默认事件（与drop事件结合，阻止拖拽文件在浏览器打开的默认行为）
+			e.preventDefault();
+			dropzone.classList.remove('dragover');
+
+			// 拖拽选择的文件
+			const files = e.dataTransfer.files;
+			// 添加所选文件
+			addFile(files);
+			// 显示文件信息
+			displayFileInfo();
+		});
+
+		// 处理文件输入框值改变的事件，当通过点击选择文件时也能显示文件信息
+		fileInput.addEventListener('change', function (event) {
+			// 输入框选择的文件
+			const files = event.target.files;
+			// 添加所选文件
+			addFile(files);
+			// 显示文件信息
+			displayFileInfo();
+		});
+
+		// 添加所选文件
+		function addFile(files) {
+			if ((allFiles.length + files.length) > 10) {
+				alert("无法上传超过10个文件");
+				return;
+			}
+			for (let i = 0; i < files.length; i++) {
+				// 向列表中添加元素
+				allFiles.push(files[i]);
+			}
+		}
+
+		// 显示文件信息
+		function displayFileInfo() {
+			fileList.innerHTML = '';
+			allFiles.forEach(function (element, index, array) {
+				// console.log(`索引 ${index} 的元素是：${element}`);
+				const listItem = document.createElement('div');
+				listItem.textContent = `文件名：${element.name}，大小：${element.size} 字节`;
+				fileList.appendChild(listItem);
+			});
+		}
+
+		// 文件上传
+		// 这里调用 ASP.NET Core 的后端
+		uploadBtn.addEventListener('click', function () {
+			uploadProgress.value = 0;
+			if (allFiles.length === 0) {
+				alert("请至少选择一个文件");
+				return;
+			}
+			const confirmReuslt = confirm("确定上传？");
+			if (!confirmReuslt) {
+				return;
+			}
+			// 将文件信息放到FormData中，然后进行传输
+			let formData = new FormData();
+			for (let i = 0; i < allFiles.length; i++) {
+				const file = allFiles[i];
+				// 因为后端使用的ASP.NET Core, 第一个参数uploadFiles要和后端一致
+				formData.append("uploadFiles", file, file.name);
+				// console.log(formData.getAll("uploadFiles"));
+			}
+			// 使用ajax发送请求
+			// 需要后端开启允许跨域
+			const xhr = new XMLHttpRequest();
+			const backendUrl = "http://localhost:9501/upload";
+			// 监听上传进度progress事件，需要在open之前
+			xhr.upload.addEventListener("progress", function (event) {
+				if (event.lengthComputable) {
+					// event.loaded 表示已经上传的进度
+					// event.total 表示总进度
+					const percentComplete = Math.round((event.loaded / event.total) * 100);
+					uploadProgress.value = percentComplete;
+				}
+			});
+			xhr.upload.addEventListener("loadend", function (event) {
+				console.log("传输完成,尽管我们不知道它是否成功");
+			});
+			// 监听下载进度，需要在open之前
+			xhr.addEventListener("progress", function (event) {
+			});
+			// xhr.setRequestHeader("Content-Type", "multipart/form-data");
+			xhr.open('POST', backendUrl, true);
+			xhr.onreadystatechange = function () {
+				// 判断ajax状态
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					// 判断http通信码
+					if (xhr.status === 200) {
+						// 响应的结果是JSON字符串，所以解析成原来的样子
+						//const resultJson = JSON.parse(xhr.response);
+						const resultJson = JSON.parse(xhr.responseText);
+						// 判断业务状态码
+						if (resultJson.code !== 200) {
+							console.log(`上传失败, responseText:${xhr.responseText}`);
+						} else {
+							allFiles = [];
+							fileList.innerHTML = '点击上传或将文件拖至此处（全格式）';
+							console.log("上传成功");
+						}
+					} else {
+						console.log(`上传失败, responseText:${xhr.responseText}, status:${xhr.status}`);
+					}
+				}
+			};
+			xhr.send(formData);
+		});
+
+		// 重新上传
+		reUploadBtn.addEventListener('click', function () {
+			allFiles = [];
+			fileList.innerHTML = '点击上传或将文件拖至此处（全格式）';
+			uploadProgress.value = 0;
+		});
+	</script>
+</body>
+
+</html>

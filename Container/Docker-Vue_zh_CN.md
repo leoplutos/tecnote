@@ -42,7 +42,7 @@ https://github.com/docker-library/docs/tree/master/nginx
      - /shell/app_dockerfile：docker脚本
 
 工程创建命令为
-```
+```bash
 npm create vue@latest
 ```
 
@@ -51,23 +51,23 @@ npm create vue@latest
 将工程放到 ``~/workspace/`` 下
 
 制作docker镜像
-```
+```bash
 cd ~/workspace/FrontendVue/shell
 bash docker_build.sh
 ```
 镜像制作完毕可以用下的命令查看（``docker images`` 看的是镜像）
-```
+```bash
 docker images
 ```
 
 ### 通过镜像启动容器
 启动容器（将容器内的80端口映射到宿主机9500端口）
-```
-docker run -itd -p 9500:80 --name vue_9500 frontend_vue:1.0.0
+```bash
+docker run -itd -p 9500:80 --name vue_9500 frontend_vue:latest
 
 # 启动失败时调试用
-# docker run -itd -p 9500:9500 -p 4173:4173 --name vue_9500 frontend_vue:1.0.0
-# docker run -it --entrypoint /bin/bash vue_9500:1.0.0
+# docker run -itd -p 9500:9500 -p 4173:4173 --name vue_9500 frontend_vue:latest
+# docker run -it --entrypoint /bin/bash vue_9500:latest
 ```
 
 启动后可以访问  
@@ -76,7 +76,7 @@ http://localhost:9500/
 
 ### Nginx重启命令
 如果 nginx 设定修改需要重启时，用如下命令即可
-```
+```bash
 nginx -s reload
 ```
 
@@ -93,23 +93,23 @@ nginx -s reload
 另外，需要容器之间的通信，所以启动命令采用了使用 ``host.docker.internal`` 的方式，
 
 前端容器启动命令
-```
+```bash
 docker run -itd \
   --add-host=host.docker.internal:host-gateway \
   -p 9500:80 \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --name vue_9500 \
-  frontend_vue:1.0.0
+  frontend_vue:latest
 ```
 
 后端容器启动命令
-```
+```bash
 docker run -itd \
   --add-host=host.docker.internal:host-gateway \
   -p 9501:9501 \
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
   --name spring_9501 \
-  backend_spring:1.0.0
+  backend_spring:latest
 ```

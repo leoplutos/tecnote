@@ -45,6 +45,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "buf自动生成protobuf存根",
 		},
 		{
 			"label": "go_mod_tidy",
@@ -58,6 +59,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "保持依赖整洁",
 		},
 		{
 			"label": "go_build_server",
@@ -82,6 +84,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译gRPC服务端",
 		},
 		{
 			"label": "go_run_server",
@@ -95,6 +98,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC服务端",
 		},
 		{
 			"label": "go_build_client",
@@ -119,6 +123,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译gRPC客户端",
 		},
 		{
 			"label": "go_run_client",
@@ -132,6 +137,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC客户端",
 		},
 		{
 			"label": "go_run_dtmClient",
@@ -145,6 +151,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行DTM客户端",
 		},
 	]
 }

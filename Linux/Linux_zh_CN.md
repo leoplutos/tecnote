@@ -367,6 +367,25 @@ user = $USER
 EOF
 ```
 
+### 测试网络端口
+
+安装 ``netcat``
+```bash
+sudo apt install netcat-traditional -y
+```
+
+比如想测试 IP ``172.30.8.172`` 的端口 ``9500`` 是否可用
+
+TCP
+```bash
+nc -vz 172.30.8.172 9500
+```
+
+UPD
+```bash
+nc -vzu 172.30.8.172 9500
+```
+
 ### 运行程序并且取得pid
 ```bash
 应用程序 & top -p $! -b > top_result.txt

@@ -18,10 +18,7 @@ namespace dotnet_console_sample.Etcd
 		public EtcdClientExample(IConfiguration config)
 		{
 			_config = config;
-		}
 
-		public void EtcdClient()
-		{
 			// 从 appsettings.json 中读取内容
 			string? host = _config["EtcdSettings:Host"];
 			string? portStr = _config["EtcdSettings:Port"];
@@ -38,6 +35,10 @@ namespace dotnet_console_sample.Etcd
 			{
 				options.Credentials = ChannelCredentials.Insecure;
 			}));
+		}
+
+		public void EtcdClient()
+		{
 			try
 			{
 				client.Status(new StatusRequest { });

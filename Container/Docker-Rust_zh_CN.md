@@ -79,10 +79,10 @@ docker images
 ### 通过镜像启动容器
 启动容器（将容器内的9501端口映射到宿主机的9503）
 ```bash
-docker run -itd -p 9503:9501 --name actix_web_9503 backend_actix_web:1.0.0
+docker run -itd -p 9503:9501 --name actix_web_9503 backend_actix_web:latest
 
 # 启动失败时调试用
-# docker run -it --entrypoint /bin/bash backend_actix_web:1.0.0
+# docker run -it --entrypoint /bin/bash backend_actix_web:latest
 ```
 
 默认端口 ``9501``，可以用环境变量 ``RUST_HTTP_PORT`` 指定端口

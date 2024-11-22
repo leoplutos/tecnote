@@ -1,0 +1,17 @@
+{
+	"tasks": {
+		"cache": "deno cache src/main.ts",
+		"dev": "deno run --allow-read --allow-env --allow-net src/main.ts",
+		"watch": "deno run --watch --allow-read --allow-env --allow-net src/main.ts",
+		"debug": "deno run --inspect-brk --allow-read --allow-env --allow-net src/main.ts",
+		"compile": "deno compile --allow-read --allow-env --allow-net --output bin/BackendExpress src/main.ts"
+		//"dev": "vite dev",
+		//"build": "vite build"
+	},
+	"imports": {
+		"@std/assert": "jsr:@std/assert@1"
+	},
+	"exclude": [
+		"dist/"
+	]
+}

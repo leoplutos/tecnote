@@ -47,6 +47,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程",
 		},
 		{
 			"label": "mvn_Package",
@@ -61,6 +62,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "打包工程",
 		},
 		{
 			"label": "start_springboot",
@@ -74,6 +76,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "启动SpringBoot",
 		},
 		{
 			"label": "mvn_Report",
@@ -86,6 +89,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "Junit结果导出",
 		},
 	]
 }

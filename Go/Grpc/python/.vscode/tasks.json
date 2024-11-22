@@ -31,7 +31,6 @@
 	},
 	"tasks": [
 		{
-			// uv sync 显式创建项目环境并安装依赖包
 			"label": "uv_sync",
 			"type": "shell",
 			"command": "uv",
@@ -42,6 +41,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "UV显式创建项目环境并安装依赖包",
 		},
 		{
 			"label": "buf_generate",
@@ -54,6 +54,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "buf自动生成protobuf存根",
 		},
 		{
 			"label": "uv_run_server",
@@ -67,6 +68,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC服务端",
 		},
 		{
 			"label": "uv_run_client",
@@ -80,6 +82,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC客户端",
 		},
 	]
 }

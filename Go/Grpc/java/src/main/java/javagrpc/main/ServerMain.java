@@ -1,5 +1,6 @@
 package javagrpc.main;
 
+import com.fasterxml.uuid.Generators;
 import io.etcd.jetcd.ByteSequence;
 import io.etcd.jetcd.Client;
 import io.etcd.jetcd.KV;
@@ -21,7 +22,6 @@ import javagrpc.util.Config;
 import javagrpc.service.ProductServiceImpl;
 import javagrpc.service.TransferInServiceImpl;
 import java.net.InetAddress;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -95,7 +95,8 @@ public class ServerMain {
 			long ttl = 5;
 			long leaseId = lease.grant(ttl).get().getID();
 			// /service/grpc/uuid
-			String leaseKey = String.format("%s/%s", Const.ETCD_SERVICENAME, UUID.randomUUID().toString());
+			String uuidv7 = Generators.timeBasedEpochGenerator().generate().toString();
+			String leaseKey = String.format("%s/%s", Const.ETCD_SERVICENAME, uuidv7);
 			// http://192.128.0.1:50051
 			String leaseValue = String.format("http://%s:%d", registIPaddr, port);
 			// 写入key-value值时绑定一个租约，租约到期后，key会被删除

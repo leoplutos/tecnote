@@ -47,6 +47,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程",
 		},
 		{
 			"label": "mvn_runApp",
@@ -60,6 +61,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行App",
 		},
 		{
 			"label": "mvn_runAsyncExample",
@@ -73,6 +75,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Async异步示例",
 		},
 		{
 			"label": "mvn_runFactoryMode",
@@ -86,6 +89,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行工厂模式示例",
 		},
 		{
 			"label": "mvn_runRedisClientExample",
@@ -99,6 +103,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Redis客户端示例",
 		},
 		{
 			"label": "mvn_runEtcdClientExample",
@@ -112,6 +117,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Etcd客户端示例",
 		},
 	]
 }

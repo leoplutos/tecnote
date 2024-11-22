@@ -43,6 +43,9 @@ shell:startup
 curl -L -O https://download.url/a.zip  -C -
 ```
 
+### 测试TCP网络端口
+详见 [这里](./Powershell_zh_CN.md)
+
 ### 添加双拼
 
 添加小鹤的方法有两种

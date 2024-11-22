@@ -47,6 +47,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "启动SpringBoot",
 		},
 		{
 			"label": "build_jar",
@@ -61,6 +62,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译jar包",
 		},
 	]
 }

@@ -13,7 +13,7 @@
 				"GOROOT": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
 				"GOPATH": "D:\\Tools\\WorkTool\\Go\\go_global",
 				"GO111MODULE": "on",
-				"PATH": "${env:path};${env:GOROOT}\\bin;${env:GOPATH};D:\\Tools\\WorkTool\\Build\\buf",
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64\\bin;D:\\Tools\\WorkTool\\Go\\go_global;D:\\Tools\\WorkTool\\Build\\buf",
 			}
 		},
 	},
@@ -46,6 +46,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行app",
 		},
 		{
 			"label": "go_build_app",
@@ -70,6 +71,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译app",
 		},
 		{
 			"label": "go_run_etcd",
@@ -83,6 +85,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行etcd",
 		},
 		{
 			"label": "go_build_etcd",
@@ -107,6 +110,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译etcd",
 		},
 		{
 			"label": "go_run_redis",
@@ -120,6 +124,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行redis",
 		},
 		{
 			"label": "go_build_redis",
@@ -144,6 +149,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译redis",
 		},
 	]
 }

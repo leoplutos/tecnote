@@ -90,6 +90,7 @@
 * [TypeScript相关](Web/TypeScript_zh_CN.md)
 * [NodeJs相关](Web/NodeJs_zh_CN.md)
 * [BunJs相关](Web/BunJs_zh_CN.md)
+* [Deno相关](Web/Deno_zh_CN.md)
 * [WebAssembly相关](Web/WebAssembly_zh_CN.md)
 * [Vue相关](Web/Vue_zh_CN.md)
 * [AngularJS相关](Web/AngularJS_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本1.x
@@ -145,6 +146,7 @@
 
 ## 微服务和分布式协调服务相关
 * [微服务](Distributed/MicroService_zh_CN.md)
+* [Kubernetes(K8s)](Distributed/Kubernetes_zh_CN.md)
 * [OpenTelemetry 监控](Distributed/OpenTelemetry_zh_CN.md)
 * [Fluent-Bit 日志采集](Distributed/Fluent_Bit_zh_CN.md)
 * [DTM 分布式事务管理](Distributed/DTM_zh_CN.md)
@@ -158,6 +160,7 @@
 * [其他](Other/Other_zh_CN.md)
 * [字体](Other/Font_zh_CN.md)
 * [Chrome](Other/Chrome_zh_CN.md)
+* [编程相关术语](Other/Terminology_zh_CN.md)
 * [Cobol](Other/Cobol_zh_CN.md)
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [ripgrep-文本搜索工具](Other/Ripgrep_zh_CN.md)

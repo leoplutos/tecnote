@@ -1,5 +1,6 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
 	//"python.analysis.typeCheckingMode": "basic",
 	"python.analysis.completeFunctionParens": true, // 添加括号以完成函数
 	"python.analysis.inlayHints.variableTypes": true, //变量类型的嵌入提示

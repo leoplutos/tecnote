@@ -30,7 +30,9 @@ func (s *ProductService) AddProduct(_ context.Context, request *stub.Product) (r
 	// 返回值
 	response = &stub.ProductId{}
 
-	pid := fmt.Sprintf("%s | ServerPort: %d", uuid.NewString(), s.serverPort)
+	// 对数据库友好的 UUID v7
+	uuidv7, _ := uuid.NewV7()
+	pid := fmt.Sprintf("%s | ServerPort: %d", uuidv7.String(), s.serverPort)
 	request.Id = pid
 
 	// 将请求放入词典

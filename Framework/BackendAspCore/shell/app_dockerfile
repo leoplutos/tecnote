@@ -90,4 +90,4 @@ CMD ["./AspWebapi"]
 #  -p 9501:9501 \
 #  -e ASPNETCORE_HTTP_PORTS=9501 \
 #  --name aspcore_9501 \
-#  backend_aspwebapi:1.0.0
+#  backend_aspwebapi:latest

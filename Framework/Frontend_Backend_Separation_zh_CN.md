@@ -21,6 +21,29 @@
 - 即使后端服务暂时超时或者宕机了，前端页面也会正常访问，但无法提供数据
 - 可以使后台能更好的追求高并发、高可用、高性能，使前端能更好的追求页面表现、速度流畅、兼容性、用户体验等
 
+## 跨域
+在现代的浏览器中, 都会启用 ``同源策略``, 它能帮助阻隔恶意文档，减少可能被攻击的媒介。  
+[跨源域资源共享（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS) 机制允许 Web 应用服务器进行跨源访问控制，从而使跨源数据传输得以安全进行  
+
+解决跨域问题，大方向就 2 种方案
+
+### 方案1: 反向代理
+在笔者的示例工程 [FrontendVue](./FrontendVue/) 中, 安装环境进行的反向代理
+- 开发环境(本地): 在 [vite.config.ts](./FrontendVue/vite.config.ts) 中定义了反向代理
+- 生成环境(容器): 在 nginx 配置文件 [default.conf](./FrontendVue/shell/default.conf) 中定义了反向代理
+
+### 方案2: 后端解决
+在返回 Response 的 Header 中添加
+- [Access-Control-Allow-Origin](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+- [Access-Control-Allow-Methods](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Methods)
+- [Access-Control-Allow-Headers](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Headers)
+- [Access-Control-Allow-Credentials](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+
+一个支持 ``简单请求`` 的 Response 的 Header 例子
+```text
+Access-Control-Allow-Origin: *
+```
+
 ## 示例工程
 
 ### 技术选型

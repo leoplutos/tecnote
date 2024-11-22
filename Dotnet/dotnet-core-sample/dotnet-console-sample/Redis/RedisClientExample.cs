@@ -44,7 +44,7 @@ namespace dotnet_console_sample.Redis
 			// 建立连接
 			// ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
 			// ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("server1:6379,server2:6379");
-			ConnectionMultiplexer redisConn = null;
+			ConnectionMultiplexer? redisConn = null;
 			try
 			{
 				redisConn = ConnectionMultiplexer.Connect(config);
@@ -69,7 +69,7 @@ namespace dotnet_console_sample.Redis
 
 			// 取得Key
 			//string value = await redisCache.StringGetAsync(key);
-			string getValue = redisCache.StringGet(key);
+			string? getValue = redisCache.StringGet(key);
 			Log.Information("取得Key成功    key={key}    value={value}", key, getValue);
 
 			// 判断Key是否存在

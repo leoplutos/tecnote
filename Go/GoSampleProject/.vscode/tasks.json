@@ -46,6 +46,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "保持依赖整洁",
 		},
 		{
 			"label": "go_run_hello",
@@ -59,6 +60,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行hello示例",
 		},
 		{
 			"label": "go_run_redis",
@@ -73,6 +75,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Redis示例",
 		},
 		{
 			"label": "go_run_etcd",
@@ -87,6 +90,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Etcd示例",
 		},
 	]
 }

@@ -92,7 +92,7 @@ docker run -itd \
   -e "GRPC_SERVER_HTTP_PORTS=50051" \
   --add-host=host.docker.internal:host-gateway \
   --name grpc_50051 \
-  java_grpc:1.0.0
+  java_grpc:latest
 ```
 
 ```bash
@@ -103,7 +103,7 @@ docker run -itd \
   -e "GRPC_SERVER_HTTP_PORTS=50052" \
   --add-host=host.docker.internal:host-gateway \
   --name grpc_50052 \
-  java_grpc:1.0.0
+  java_grpc:latest
 ```
 
 ### .NET Core 服务端 部署到 Docker 容器内
@@ -118,7 +118,7 @@ docker run -itd \
   -e GRPC_SERVER_RESOLVE=true \
   --add-host=host.docker.internal:host-gateway \
   --name grpc_50053 \
-  dotnet_grpc:1.0.0
+  dotnet_grpc:latest
 ```
 
 ```bash
@@ -129,7 +129,7 @@ docker run -itd \
   -e GRPC_SERVER_RESOLVE=true \
   --add-host=host.docker.internal:host-gateway \
   --name grpc_50054 \
-  dotnet_grpc:1.0.0
+  dotnet_grpc:latest
 ```
 
 ### 启动 Java 客户端

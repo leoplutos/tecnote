@@ -72,14 +72,14 @@ steps:
         # 删除当前容器
         - docker rm spring_8082
         # 删除当前镜像
-        - docker rmi spring_boot_undertow:1.0.0
+        - docker rmi spring_boot_undertow:latest
         # 制作新的镜像
         - rm /home/lch/workspace/SpringBootUndertow/target/SpringBootUndertow-1.0.0.jar
         - cp -afp /home/lch/workspace/drone_deploy/target/SpringBootUndertow-1.0.0.jar /home/lch/workspace/SpringBootUndertow/target/SpringBootUndertow-1.0.0.jar
         - cd /home/lch/workspace/SpringBootUndertow/shell
         - bash docker_build.sh
         # 启动新的容器
-        - docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
+        - docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:latest
         - echo ====部署成功=======
 
 # 挂载宿主机目录

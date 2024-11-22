@@ -1,6 +1,6 @@
 package javagrpc.service;
 
-import java.util.UUID;
+import com.fasterxml.uuid.Generators;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import io.grpc.stub.StreamObserver;
@@ -61,8 +61,8 @@ public class ProductServiceImpl extends ProductInfoImplBase {
 	// 添加商品实际处理
 	private ProductId addProductLogic(String name, String description) {
 		boolean isVirtual = Thread.currentThread().isVirtual();
-		UUID uuid = UUID.randomUUID();
-		String pid = uuid.toString() + " | ServerPort: " + String.valueOf(this.port);
+		String uuidv7 = Generators.timeBasedEpochGenerator().generate().toString();
+		String pid = String.format("%s | ServerPort: %d", uuidv7, this.port);
 		Product product = Product.newBuilder()
 				.setId(pid)
 				.setName(name)

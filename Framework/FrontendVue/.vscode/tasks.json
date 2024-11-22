@@ -44,6 +44,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "npm解决依赖",
 		},
 		{
 			"label": "npm_build",
@@ -59,6 +60,7 @@
 			"problemMatcher": [
 				"$tsc"
 			],
+			"detail": "编译: vite build",
 		},
 		{
 			"label": "npm_dev",
@@ -72,6 +74,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行vue服务",
 		},
 	]
 }

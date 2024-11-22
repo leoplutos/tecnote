@@ -1,6 +1,21 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
 	"files.exclude": {
 		"node_modules": true
+	},
+	"files.associations": {
+		"*.json5": "jsonc",
+	},
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
 	},
 }

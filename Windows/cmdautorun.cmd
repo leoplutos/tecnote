@@ -174,6 +174,9 @@ set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
 ::BunJs
 set BUNJS_HOME=D:\Tools\WorkTool\Web\bun-windows-x64
 set PATH=%PATH%;%BUNJS_HOME%
+::Deno
+set DENO_HOME=D:\Tools\WorkTool\Web\deno
+set PATH=%PATH%;%DENO_HOME%
 ::Git
 set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
 set PATH=%PATH%;%GIT_HOME%

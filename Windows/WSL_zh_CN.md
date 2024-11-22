@@ -184,6 +184,8 @@ memory=4GB
 processors=2
 ```
 
+更多看 [这里](https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config)
+
 ## WSL2下Ubuntu-22.04的初始配置
 ```bash
 # 备份apt源
@@ -296,6 +298,49 @@ wsl --shutdown
 ```bash
 wsl -l -v
 wsl --terminate Ubuntu-22.04
+```
+
+## 如何将WSL下的服务公开到内网
+在 [issues 4150](https://github.com/microsoft/WSL/issues/4150) 有相关讨论
+
+### WSL2 下 Debian 实例的 ``ip -4 addr show | grep eth0`` 结果
+
+在 ``Debian`` 运行命令
+```text
+eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    inet 172.30.8.xxx/20 brd 172.30.15.255 scope global eth0
+```
+
+这里的 ``172.30.8.xxx`` 即为 WSL2 实例的 IP 地址，比如要开启端口 ``9500`` 的转发
+
+### Windows开启端口转发
+
+在 ``Windows`` 运行命令
+
+```bash
+netsh interface portproxy add v4tov4 listenport=9500 listenaddress=0.0.0.0 connectport=9500 connectaddress=172.30.8.xxx
+```
+
+查看转发内容
+```bash
+netsh interface portproxy show all
+# 或者
+netsh interface portproxy show v4tov4
+```
+
+### 防火墙设定
+接下来，允许防火墙中端口 9500 端口上的访问
+
+``Windows + R``，输入 ``control`` 回车  
+然后 ``系统和安全`` → ``Windows Defender 防火墙`` → ``高级设置``
+
+#### 入站规则
+点击左侧的 ``入站规则`` → ``新建规则`` → ``端口`` → ``TCP`` → ``特定本地端口`` 输入 ``9500`` → ``允许连接`` → ``域/专用/公用`` 都选择 → 输入一个规则名，比如 ``9500端口公开``
+
+### 注意事项
+Windows 重启以后 WSL2 实例的 IP 地址可能会变更，记得使用命令删除转发
+```bash
+netsh interface portproxy delete v4tov4 listenport=9500 listenaddress=0.0.0.0"
 ```
 
 ## Windows与WSL之间的文件访问

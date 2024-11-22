@@ -15,7 +15,8 @@ func remittance(amount int64, transOutResult string, transInResult string) {
 	dtmGprcUrl := "localhost:36790"
 
 	// dtm 的 Global ID
-	gid := uuid.NewString()
+	uuidv7, _ := uuid.NewV7()
+	gid := uuidv7.String()
 	log.Logger.Info().Msgf("Dtm 汇款 开始, gid: %v", gid)
 	log.Logger.Info().Msgf("amount: %v, transOutResult: %v, transInResult: %v", amount, transOutResult, transInResult)
 

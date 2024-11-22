@@ -50,6 +50,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程",
 		},
 		{
 			"label": "cargo_runServer",
@@ -64,6 +65,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC服务端",
 		},
 		{
 			"label": "cargo_runClient",
@@ -78,6 +80,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC客户端",
 		},
 	]
 }

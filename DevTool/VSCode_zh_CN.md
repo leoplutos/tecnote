@@ -87,6 +87,7 @@ Java所需插件比较多。有2套方案：
 
 ### 其他语言
 
+- [Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
 - [COBOL语言支持](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.cobol-language-support)
 - [RPG语言支持](https://marketplace.visualstudio.com/items?itemName=NielsLiisberg.RPG)
 

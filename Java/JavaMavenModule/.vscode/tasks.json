@@ -51,6 +51,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程并打包到本地仓库",
 		},
 		{
 			"label": "mvn_runApp",
@@ -64,6 +65,7 @@
 				"cwd": "${workspaceFolder}/jmm-app"
 			},
 			"problemMatcher": [],
+			"detail": "运行App",
 		},
 		{
 			"label": "mvn_runEtcd",
@@ -77,6 +79,7 @@
 				"cwd": "${workspaceFolder}/jmm-etcd"
 			},
 			"problemMatcher": [],
+			"detail": "运行Etcd客户端示例",
 		},
 		{
 			"label": "mvn_runRedis",
@@ -90,6 +93,7 @@
 				"cwd": "${workspaceFolder}/jmm-redis"
 			},
 			"problemMatcher": [],
+			"detail": "运行Redis客户端示例",
 		},
 		{
 			"label": "mvn_buildBenchmark",
@@ -103,6 +107,7 @@
 				"cwd": "${workspaceFolder}/jmh-test"
 			},
 			"problemMatcher": [],
+			"detail": "编译Benchmark",
 		},
 		{
 			"label": "mvn_runBenchmark",
@@ -116,6 +121,7 @@
 				"cwd": "${workspaceFolder}/jmh-test"
 			},
 			"problemMatcher": [],
+			"detail": "运行Benchmark",
 		},
 	]
 }

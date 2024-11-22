@@ -1,5 +1,6 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
 	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
 	"java.jdt.ls.vmargs": "-Dfile.encoding=UTF-8",
 	"java.configuration.runtimes": [

@@ -231,9 +231,9 @@ docker run --rm -d \
 9090 为 Prometheus UI 端口  
 访问 [Prometheus](http://localhost:9090/) 确认
 
-### 使用程序采集 Traces（追踪）和 Metrics（指标/度量）
+### 使用程序采集 Traces（追踪）, Metrics（指标/度量）和 Logs（日志）
 
-#### 如何采集调用链
+#### 如何采集Traces（调用链）
 
 在调用链中记录 ``Trace ID`` 和 ``Span ID``  
 调用链维持方式：
@@ -277,6 +277,10 @@ docker run --rm -d \
 - Dotnet : [NetcoreGrpc](../Go/Grpc/netcore/) 的服务端
     - 使用 ``Counter<long>（计数器）`` 进行自定义采集  
     - 参考 [OpenTelemetry.Instrumentation.AspNetCore](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/blob/main/src/OpenTelemetry.Instrumentation.AspNetCore/README.md) 进行 ``gRPC 指标`` 的采集  
+
+#### 如何采集Logs（日志）
+与 Traces 和 Metrics 不同，没有等效的日志API，只有一个SDK  
+OTel SDK 将 OTLP 处理程序附加到根记录器
 
 ### 可视化
 
@@ -337,7 +341,7 @@ docker run --rm -d \
   -v /etc/localtime:/etc/localtime:ro \
   --name java_grpc_50051 \
   --add-host=host.docker.internal:host-gateway \
-  java_grpc:1.0.0
+  java_grpc:latest
 ```
 
 - .NET Core : [NetcoreGrpc](../Go/Grpc/netcore/) 的服务端
@@ -351,7 +355,7 @@ docker run --rm -d \
   -v /etc/localtime:/etc/localtime:ro \
   --name dotnet_grpc_50052 \
   --add-host=host.docker.internal:host-gateway \
-  dotnet_grpc:1.0.0
+  dotnet_grpc:latest
 ```
 
 #### 启动 gRPC 客户端

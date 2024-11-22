@@ -1,5 +1,6 @@
 {
 	"editor.guides.indentation": true,
+	"files.eol": "\n",
 	"gopls": {
 		"analyses": {
 			"ST1000": false,

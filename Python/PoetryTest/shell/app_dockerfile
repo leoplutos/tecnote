@@ -2,7 +2,7 @@
 FROM python:3.12.5-alpine3.20
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 构建时变量，仅在构建Docker映像期间可用
 ARG registry=https://mirrors.aliyun.com/pypi/simple/
@@ -49,3 +49,5 @@ RUN poetry install
 
 # 指定容器创建时的默认命令
 # CMD ["poetry", "run", "python", "src/poetrytest/app.py"]
+# 设置默认入口命令
+ENTRYPOINT ["/bin/bash"]

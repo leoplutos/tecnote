@@ -1,9 +1,10 @@
-using Serilog;
 using dotnet_etcd;
-using Grpc.Core;
-using Google.Protobuf;
 using Etcdserverpb;
+using Google.Protobuf;
+using Grpc.Core;
 using netcoreServer.Common;
+using Serilog;
+using UUIDNext;
 
 namespace netcoreServer.Register;
 
@@ -82,7 +83,8 @@ public class EtcdRegister
 			TTL = ttl
 		}).ID;
 		// /service/grpc/uuid
-		string leaseKey = Const.ETCD_SERVICENAME + "/" + Guid.NewGuid().ToString();
+		string uuidv7 = Uuid.NewDatabaseFriendly(Database.PostgreSql).ToString();
+		string leaseKey = $"{Const.ETCD_SERVICENAME}/{uuidv7}";
 		// http://192.128.0.1:50051
 		string leaseValue = "http://" + registIPaddr + ":" + registPort;
 		client.Put(new PutRequest

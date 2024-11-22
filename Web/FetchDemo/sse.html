@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐲</text></svg>" />
+	<title>SSE示例</title>
+	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2.0.6/css/pico.min.css">
+	<style>
+		:root {
+			--pico-font-size: 100%;
+		}
+
+		.div-result {
+			font-size: 14px;
+			margin: 1rem auto;
+			padding: 1rem;
+			color: #5d6baa;
+			background: linear-gradient(to right, #f6f8fa, #f6f8fa);
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+	</style>
+</head>
+
+<body>
+	<main class="container">
+		<section id="section1">
+			<h2>SSE</h2>
+			<p>单击按钮将运行下面的函数, 在浏览器控制台可以看到日志</p>
+			<button id="sseBtn">SSE请求</button><br /><br />
+			<pre><code>async function () {
+	var eventSource = new EventSource('/stream');
+	const sseResult = document.getElementById("sseResult");
+	sseResult.textContent = "";
+	eventSource.onopen = function (event) {
+		console.log(`SSE连接成功, 状态:${eventSource.readyState}`);
+	};
+	eventSource.onerror = function (event) {
+		if (eventSource.readyState === EventSource.CLOSED) {
+			console.log(`SSE连接关闭, 状态:${eventSource.readyState}`);
+		} else {
+			console.error(`SSE连接错误, 状态:${eventSource.readyState}, event:${event}`);
+		}
+	};
+	eventSource.onmessage = function (event) {
+		sseResult.textContent += event.data;
+	};
+	eventSource.addEventListener('close', function (event) {
+		console.log(`自定义事件close已经运行, 准备关闭SSE连接, event.data:${event.data}`);
+		eventSource.close();
+	}, false);
+}</code></pre>
+			<div id="sseResult" class="div-result">...结果将在此处表示...</div>
+		</section>
+	</main>
+	<script>
+		const sseRequest = async function () {
+			//var eventSource = new EventSource('http://127.0.0.1:9500/stream');
+			var eventSource = new EventSource('/stream');
+			const sseResult = document.getElementById("sseResult");
+			sseResult.textContent = "";
+			// 连接一旦建立，就会触发open事件
+			eventSource.onopen = function (event) {
+				console.log(`SSE连接成功, 状态:${eventSource.readyState}`);
+			};
+			// 发生通信错误（比如连接中断），就会触发error事件
+			eventSource.onerror = function (event) {
+				if (eventSource.readyState === EventSource.CLOSED) {
+					console.log(`SSE连接关闭, 状态:${eventSource.readyState}`);
+				} else {
+					console.error(`SSE连接错误, 状态:${eventSource.readyState}, event:${event}`);
+				}
+			};
+			// 客户端收到服务器发来的数据，就会触发message事件
+			eventSource.onmessage = function (event) {
+				sseResult.textContent += event.data;
+			};
+			// 添加自定义事件close
+			eventSource.addEventListener('close', function (event) {
+				console.log(`自定义事件close已经运行, 准备关闭SSE连接, event.data:${event.data}`);
+				eventSource.close();
+			}, false);
+		};
+
+		// 按钮事件
+		const sseBtn = document.getElementById("sseBtn");
+		sseBtn.addEventListener("click", sseRequest);
+	</script>
+</body>
+
+</html>

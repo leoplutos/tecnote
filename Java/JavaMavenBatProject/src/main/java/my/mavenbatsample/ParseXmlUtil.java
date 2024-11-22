@@ -121,6 +121,7 @@ public class ParseXmlUtil {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void processParseXmlWithXpathExpress(Document document, String xPathExpression) throws Exception {
 		// 创建XPathFactory:
 		XPathFactory xPathFactory = XPathFactory.newInstance();

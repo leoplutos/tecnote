@@ -5,7 +5,7 @@
 FROM oven/bun:alpine AS builder
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 创建应用路径
 RUN mkdir /opt/app
@@ -33,7 +33,7 @@ RUN bun run build
 FROM node:20.16-alpine3.20
 
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 创建应用路径
 RUN mkdir /opt/app

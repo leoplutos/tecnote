@@ -36,7 +36,8 @@
 			"args": [
 				"restore",
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "下载依赖",
 		},
 		{
 			"label": "dotnet_build",
@@ -48,7 +49,8 @@
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "编译工程",
 		},
 		{
 			// -p:PublishSingleFile=true 单文件发布
@@ -70,7 +72,8 @@
 				"--self-contained",
 				"true"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "发布单文件工程",
 		},
 		{
 			"label": "dotnet_watch",
@@ -82,7 +85,8 @@
 				"--project",
 				"${workspaceFolder}/BackendAspCore.sln"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "监视运行",
 		},
 		{
 			"label": "run_Server",
@@ -97,6 +101,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行服务端",
 		},
 	]
 }

@@ -7,6 +7,7 @@ https://www.techempower.com/benchmarks/#section=data-r22&hw=ph&test=composite
 - 10.axum（Rust）
 - 13.actix（Rust）
 - 15.asp.net core（C#）
+- 27.fiber（Golang）
 - 78.gin（Golang）
 - 86.fastapi（Python）
 - 88.spring（Java）
@@ -51,13 +52,36 @@ WebSocket 与 ``HTTP`` 和 ``HTTPS`` 使用相同的 ``TCP`` 端口（即 ``80``
 - [笔者的一个例子](./Picocss/picocss.html)
 
 ## 前后端流式传输内容
-- [FetchDemo](./FetchDemo/)
 
-此示例翻译自 [fetch-demonstration](https://github.com/tom-on-the-internet/fetch-demonstration)  
-用于演示类似 ``ChatGPT`` 流式传输内容  
+例子 [FetchDemo](./FetchDemo/)
+
 启动服务端  
 ```bash
 node server.js
+```
+
+主要有 2 种实现方式
+
+### 方式1: ``fetch`` API
+使用 ``fetch`` API
+
+### 方式2: ``SSE`` (Server Sent Events)
+``ChatGPT`` 就是基于 ``SSE`` 实现的
+
+## 多文件上传例子
+
+### 前端
+例子 [file.html](./FetchDemo/file.html)  
+启动前端  
+```bash
+node server.js
+```
+
+### 后端
+例子 [FileUploadController.cs](../Framework/BackendAspCore/AspWebapi/Controllers/FileUploadController.cs)  
+启动后端  
+```bash
+dotnet run --project AspWebapi
 ```
 
 ## 公共API速查表

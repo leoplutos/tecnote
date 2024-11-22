@@ -3,10 +3,10 @@
 # FROM python:3.12.4-slim-bookworm
 FROM python:3.12.5-alpine3.20
 
-# 设定debian12镜像仓库为国内源
-# RUN set -eux && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+# 设定Debian12镜像仓库为国内源(DEB822格式)
+# RUN set -eux && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 # 设定alpine镜像仓库为国内源
-RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 构建时变量，仅在构建Docker映像期间可用
 ARG registry=https://mirrors.aliyun.com/pypi/simple/

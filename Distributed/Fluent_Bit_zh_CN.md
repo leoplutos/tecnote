@@ -269,7 +269,7 @@ docker run -itd \
   -v /etc/localtime:/etc/localtime:ro \
   --name java_grpc_50056 \
   --log-driver=fluentd \
-  java_grpc:1.0.0
+  java_grpc:latest
 ```
 
 - .NET Core : [NetcoreGrpc](../Go/Grpc/netcore/) 的服务端，使用 ``Serilog``
@@ -283,7 +283,7 @@ docker run -itd \
   -v /etc/localtime:/etc/localtime:ro \
   --name dotnet_grpc_50055 \
   --log-driver=fluentd \
-  dotnet_grpc:1.0.0
+  dotnet_grpc:latest
 ```
 
 - Golang : [GoGrpc](../Go/Grpc/go/) 的服务端，使用 ``zerolog``
@@ -294,7 +294,7 @@ docker run -itd \
   -v /etc/localtime:/etc/localtime:ro \
   --name go_grpc_50054 \
   --log-driver=fluentd \
-  go_grpc:1.0.0
+  go_grpc:latest
 ```
 
 - Rust : [rust_grpc](../Go/Grpc/rust/) 的服务端，使用 ``tracing``
@@ -305,7 +305,7 @@ docker run -itd \
   -v /etc/localtime:/etc/localtime:ro \
   --name rust_grpc_50053 \
   --log-driver=fluentd \
-  rust_grpc:1.0.0
+  rust_grpc:latest
 ```
 
 - Node.js : [node_grpc](../Go/Grpc/node/) 的服务端，使用 ``pino``
@@ -316,7 +316,7 @@ docker run -itd \
   -v /etc/localtime:/etc/localtime:ro \
   --name node_grpc_50052 \
   --log-driver=fluentd \
-  node_grpc:1.0.0
+  node_grpc:latest
 ```
 
 - Python : [PythonGrpc](../Go/Grpc/python/) 的服务端，使用 ``loguru``
@@ -327,5 +327,5 @@ docker run -itd \
   -v /etc/localtime:/etc/localtime:ro \
   --name python_grpc_50051 \
   --log-driver=fluentd \
-  python_grpc:1.0.0
+  python_grpc:latest
 ```

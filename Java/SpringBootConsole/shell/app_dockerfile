@@ -1,0 +1,101 @@
+# 多阶段构建
+
+# 阶段1：编译，命名为builder
+# 使用Maven镜像
+FROM maven:3.9.9-eclipse-temurin-21-jammy AS builder
+
+# 设定Ubuntu镜像仓库为国内源
+RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list
+
+# 创建应用路径
+RUN mkdir /opt/app
+# 创建Maven设定路径
+RUN mkdir -p /root/.m2/repository
+# 设定Maven国内源
+RUN echo '<?xml version="1.0" encoding="UTF-8"?> \
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" \
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"> \
+    <pluginGroups></pluginGroups> \
+    <proxies></proxies> \
+    <servers></servers> \
+    <mirrors> \
+        <!-- 2. 配置阿里云镜像仓库 --> \
+        <mirror> \
+            <id>alimaven</id> \
+            <name>aliyun maven</name> \
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url> \
+            <mirrorOf>central</mirrorOf> \
+        </mirror> \
+    </mirrors> \
+</settings> \
+' >> /root/.m2/settings.xml
+
+# 设定Java用环境变量
+# 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
+
+# 复制src文件夹
+COPY src /opt/app/SpringBootConsole/src
+# 复制pom.xml文件
+COPY pom.xml /opt/app/SpringBootConsole/pom.xml
+
+# 设置工作目录
+WORKDIR /opt/app/SpringBootConsole
+
+# 编译工程
+RUN --mount=type=cache,target=/root/.m2/repository \
+    mvn clean package spring-boot:repackage -Dmaven.test.skip=true
+
+#---------------------------------------------------------------------
+
+# 阶段2：运行
+# 根据需要选择eclipse-temurin的基于alpine的jre环境
+FROM eclipse-temurin:21.0.3_9-jre-alpine
+
+# 设定alpine镜像仓库为国内源
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 创建应用路径
+RUN mkdir /opt/app
+
+# 添加bash
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade bash
+
+# 从阶段1复制编译结果
+COPY --from=builder /opt/app/SpringBootConsole/target/SpringBootConsole-1.0.0.jar /opt/app/SpringBootConsole/SpringBootConsole-1.0.0.jar
+
+# 设定Java用环境变量
+# 开启Java21 分代ZGC [-XX:+UseZGC -XX:+ZGenerational]
+ENV JAVA_TOOL_OPTIONS="-Duser.language=en -Dfile.encoding=UTF-8 -XX:+UseZGC -XX:+ZGenerational"
+# 数据库 DataSource 配置
+ENV SPRING_DATASOURCE_URL="jdbc:postgresql://172.30.8.172:5432/postgres"
+ENV SPRING_DATASOURCE_USERNAME="postgres"
+ENV SPRING_DATASOURCE_PASSWORD="123456"
+
+# 个人习惯定制化
+RUN echo 'PS_GREEN="\[\033[0;32m\]"' >> /root/.bashrc
+RUN echo 'PS_YELLOW="\[\033[0;33m\]"' >> /root/.bashrc
+RUN echo 'PS_BLUE="\[\033[0;34m\]"' >> /root/.bashrc
+RUN echo 'PS_MAGENTA="\[\033[0;35m\]"' >> /root/.bashrc
+RUN echo 'PS_CLEAR="\[\033[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="${PS_GREEN}[Container]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"' >> /root/.bashrc
+RUN echo 'alias ll="ls -hl --full-time --color=auto"' >> /root/.bashrc
+
+# 设置工作目录
+WORKDIR /opt/app/SpringBootConsole
+
+# 声明容器运行时监听的特定网络端口
+# EXPOSE 50051
+
+# 指定容器创建时的默认命令
+CMD ["java", "-jar", "/opt/app/SpringBootConsole/SpringBootConsole-1.0.0.jar"]
+
+# 启动命令(需要docker先启动postgres)
+# docker run --rm \
+# -e "SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/postgres" \
+# -e "SPRING_DATASOURCE_USERNAME=postgres" \
+# -e "SPRING_DATASOURCE_PASSWORD=123456" \
+# --add-host=host.docker.internal:host-gateway \
+# --name spring_console spring_console:latest

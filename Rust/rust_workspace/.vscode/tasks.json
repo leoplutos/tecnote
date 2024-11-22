@@ -52,6 +52,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程",
 		},
 		{
 			"label": "cargo_run_app",
@@ -66,6 +67,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行App示例",
 		},
 		{
 			"label": "cargo_run_etcd",
@@ -80,6 +82,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Etcd示例",
 		},
 		{
 			"label": "cargo_run_redis",
@@ -94,6 +97,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行Redis示例",
 		},
 	]
 }

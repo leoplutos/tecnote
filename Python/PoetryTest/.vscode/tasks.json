@@ -45,6 +45,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "Poetry下载依赖",
 		},
 		{
 			"label": "poetry_run_app",
@@ -59,6 +60,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行App示例",
 		},
 		{
 			"label": "poetry_run_etcd_client",
@@ -73,6 +75,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行etcd客户端示例",
 		},
 		{
 			"label": "poetry_run_redis_client",
@@ -87,6 +90,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行redis客户端示例",
 		},
 	]
 }

@@ -3,6 +3,7 @@ using GrpcDemo;
 using Serilog;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using UUIDNext;
 
 namespace netcoreServer.Services;
 
@@ -75,7 +76,9 @@ public class ProductService : ProductInfo.ProductInfoBase
 	// 添加商品实际逻辑
 	private ProductId addProductLogic(Product request, int port)
 	{
-		string pid = Guid.NewGuid().ToString() + " | ServerPort: " + port.ToString();
+		// 对数据库友好的 UUID v7
+		string uuidv7 = Uuid.NewDatabaseFriendly(Database.PostgreSql).ToString();
+		string pid = $"{uuidv7} | ServerPort: {port}";
 		request.Id = pid;
 		// 使用读写锁写入全局Product的词典
 		GlobalData.WriteProductMap(request.Id, request);

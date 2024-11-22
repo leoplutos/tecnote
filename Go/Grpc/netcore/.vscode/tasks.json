@@ -68,7 +68,8 @@
 			"args": [
 				"restore",
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "下载依赖",
 		},
 		{
 			"label": "dotnet_build",
@@ -80,7 +81,8 @@
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "编译工程",
 		},
 		{
 			"label": "run_grpc_Server",
@@ -96,6 +98,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行gRPC服务端",
 		},
 		{
 			"label": "run_grpc_Client",
@@ -112,6 +115,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行gRPC客户端",
 		},
 		{
 			"label": "run_grpc_ClientAsync",
@@ -128,6 +132,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行gRPC客户端(异步)",
 		},
 		{
 			"label": "run_dtm_Client",
@@ -144,6 +149,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行DTM客户端",
 		},
 		{
 			// -p:PublishSingleFile=true 单文件发布
@@ -165,7 +171,8 @@
 				"--self-contained",
 				"true"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "发布单文件工程",
 		},
 	]
 }

@@ -185,7 +185,7 @@ NOTE：nanoserver是基于 Windows 上的虚拟化实践。
 
 ### 在WSL2下安装Docker
 首先卸载冲突包
-```
+```bash
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
@@ -249,18 +249,21 @@ https://github.com/tech-shrimp/docker_installer
 
 ### 替换 DockerHub 国内镜像源
 
-#### 南大源
-https://sci.nju.edu.cn/9e/05/c30384a564741/page.htm
-
-#### DaoCloud源
+#### DaoCloud源（推荐）
 现在这个镜像比较稳定，但是有白名单限制  
 https://github.com/DaoCloud/public-image-mirror
 
 白名单列表  
 https://github.com/DaoCloud/public-image-mirror/issues/2328
 
+#### dockerpull.org（推荐）
+https://dockerpull.org
+
 #### docker-mirror
 https://github.com/gebangfeng/docker-mirror
+
+#### 南大源
+https://sci.nju.edu.cn/9e/05/c30384a564741/page.htm
 
 #### AtomHub 可信镜像中心（镜像比较少）
 https://hub.atomgit.com/  
@@ -280,6 +283,7 @@ sudo vim /etc/docker/daemon.json
 ```json
 {
     "registry-mirrors": [
+        "https://dockerpull.org",
         "https://docker.nju.edu.cn",
         "https://docker.m.daocloud.io",
         "https://dockerhub.icu",

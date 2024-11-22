@@ -36,7 +36,8 @@
 			"args": [
 				"restore",
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "下载依赖",
 		},
 		{
 			"label": "dotnet_build",
@@ -48,7 +49,8 @@
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "编译工程",
 		},
 		{
 			"label": "dotnet_publish",
@@ -60,7 +62,8 @@
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "发布工程",
 		},
 		{
 			"label": "dotnet_watch",
@@ -72,7 +75,8 @@
 				"--project",
 				"${workspaceFolder}/dotnet-workspace.sln"
 			],
-			"problemMatcher": "$msCompile"
+			"problemMatcher": "$msCompile",
+			"detail": "监视运行",
 		},
 		{
 			"label": "dotnet_run_app",
@@ -87,6 +91,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行App",
 		},
 		{
 			"label": "dotnet_run_etcd",
@@ -101,6 +106,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行Etcd",
 		},
 		{
 			"label": "dotnet_run_redis",
@@ -115,6 +121,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": "$msCompile",
+			"detail": "运行Redis",
 		},
 	]
 }

@@ -11,8 +11,9 @@
 			},
 			"env": { //自定义环境变量
 				"BUN_RUNTIME_TRANSPILER_CACHE_PATH": "0", //禁用运行时转换器缓存
-				// 添加 bun
-				"PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64;D:/Tools/WorkTool/Web/node-v20.15.1-win-x64;"
+				// 添加 bun (需要bun的版本大于1.1.31才支持http2和grpc)
+				"PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64"
+				// "PATH": "${env:path};D:/Tools/WorkTool/Web/bun-windows-x64;D:/Tools/WorkTool/Web/node-v20.15.1-win-x64;"
 			}
 		},
 	},
@@ -44,6 +45,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "Bun解决依赖",
 		},
 		{
 			"label": "buf_generate",
@@ -57,48 +59,27 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "buf自动生成protobuf存根",
 		},
 		{
-			"label": "bun_build",
+			"label": "bun_runServer",
 			"type": "shell",
-			"command": "bun",
-			"args": [
-				"run",
-				"build",
-			],
+			"command": "bun src/server.ts",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "bun x tsc -p tsconfig.json",
-			"problemMatcher": [
-				"$tsc"
-			],
-		},
-		{
-			"label": "node_runServer",
-			"type": "shell",
-			"command": "node dist/server.js",
-			"windows": {
-				"command": "chcp 65001 && node dist/server.js"
-			},
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"detail": "node dist/server.js",
 			"problemMatcher": [],
+			"detail": "运行gRPC服务端",
 		},
 		{
-			"label": "node_runClient",
+			"label": "bun_runClient",
 			"type": "shell",
-			"command": "node dist/client.js",
-			"windows": {
-				"command": "chcp 65001 && node dist/client.js"
-			},
+			"command": "bun src/client.ts",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			"detail": "node dist/client.js",
 			"problemMatcher": [],
+			"detail": "运行gRPC客户端",
 		},
 	]
 }

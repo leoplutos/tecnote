@@ -43,8 +43,10 @@ impl ProductInfo for ProductServiceImpl {
     // 添加 #[instrument] 会打印 self 信息，导致日志庞大
     // #[instrument]
     async fn add_product(&self, request: Request<Product>) -> Result<Response<ProductId>, Status> {
+        // 对数据库友好的 UUID v7
+        let uuidv7 = Uuid::now_v7().to_string();
         // 创建请求id
-        let pid = format!("{} | ServerPort: {}", Uuid::new_v4().to_string(), self.port);
+        let pid = format!("{} | ServerPort: {}", uuidv7, self.port);
         // 请求的结构体
         let request_product: Product = request.into_inner();
         // 复制一个请求内容，并且赋予新的uuid

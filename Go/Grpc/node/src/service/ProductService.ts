@@ -1,4 +1,4 @@
-import { v4 } from 'uuid';
+import { v7 as UUIDv7 } from 'uuid';
 import { ServerUnaryCall, sendUnaryData, UntypedHandleCall } from '@grpc/grpc-js';
 import { Product, ProductId, ProductInfoServer } from '../stub/ProductInfo.js';
 import { getLogger } from '../log/log.js';
@@ -29,10 +29,10 @@ class ProductServiceImpl implements ProductInfoServer {
 
 	// 实现添加商品
 	addProduct(call: ServerUnaryCall<Product, ProductId>, callback: sendUnaryData<ProductId>): void {
-		// 取得uuid
-		const uuidv4: string = v4();
+		// 对数据库友好的 UUID v7
+		const uuidv7: string = UUIDv7();
 		const port = this.getPort();
-		const pid: string = `${uuidv4} | ServerPort: ${port}`;
+		const pid: string = `${uuidv7} | ServerPort: ${port}`;
 		//设定到请求的对象中
 		call.request.id = pid;
 		//将商品信息添加到全局变量

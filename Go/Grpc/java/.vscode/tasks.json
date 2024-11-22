@@ -89,6 +89,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程",
 		},
 		{
 			"label": "mvn_package",
@@ -102,6 +103,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "打包工程",
 		},
 		{
 			"label": "mvn_runServer",
@@ -115,6 +117,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC服务端",
 		},
 		{
 			"label": "mvn_runClient",
@@ -128,6 +131,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC客户端",
 		},
 		{
 			"label": "mvn_runClientAsync",
@@ -141,6 +145,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行gRPC客户端(异步)",
 		},
 		{
 			"label": "mvn_runOpenTelemetry",
@@ -154,6 +159,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行OpenTelemetry示例",
 		},
 		{
 			"label": "mvn_runStopService",
@@ -167,6 +173,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "停止gRPC服务端",
 		},
 	]
 }

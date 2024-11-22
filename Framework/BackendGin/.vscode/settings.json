@@ -1,5 +1,6 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
 	"go.goroot": "D:\\Tools\\WorkTool\\Go\\go1.22.5.windows-amd64",
 	"go.gopath": "D:\\Tools\\WorkTool\\Go\\go_global",
 	"gopls": {

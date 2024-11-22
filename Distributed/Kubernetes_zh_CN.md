@@ -207,18 +207,24 @@ experimental   = true
 
 创建目录
 ```bash
+# _default为适用所有
 sudo mkdir -p /etc/containerd/certs.d/_default
+# docker.io为docker hub
+# sudo mkdir -p /etc/containerd/certs.d/docker.io
 ```
 
 创建配置文件 config.toml
+
+**注意：**
+- 在 containerd 2.x 中 配置值为 ``io.containerd.cri.v1.images``
+- 在 containerd 1.x 中 配置值为 ``io.containerd.grpc.v1.cri``
+
 ```bash
 sudo tee /etc/containerd/config.toml << 'EOF'
 version = 3
 
 [plugins]
-  [plugins."io.containerd.grpc.v1.cri"]
-    disable_tcp_service = true
-  [plugins."io.containerd.grpc.v1.cri".registry]
+  [plugins."io.containerd.cri.v1.images".registry]
     config_path = "/etc/containerd/certs.d"
 EOF
 ```
@@ -226,10 +232,10 @@ EOF
 创建配置文件 hosts.toml
 ```bash
 sudo tee /etc/containerd/certs.d/_default/hosts.toml << 'EOF'
-[host."https://docker.m.daocloud.io"]
+[host."https://dockerpull.org"]
   capabilities = ["pull", "resolve"]
 
-[host."https://docker.nju.edu.cn"]
+[host."https://docker.m.daocloud.io"]
   capabilities = ["pull", "resolve"]
 EOF
 ```
@@ -259,7 +265,7 @@ sudo mkdir -p /etc/buildkit
 ```bash
 sudo tee /etc/buildkit/buildkitd.toml << 'EOF'
 [registry."docker.io"]
-  mirrors = ["https://docker.m.daocloud.io", "https://docker.nju.edu.cn"]
+  mirrors = ["https://dockerpull.org", "https://docker.m.daocloud.io"]
   http = true
   insecure = true
 EOF
@@ -305,7 +311,8 @@ nerdctl -v
 
 ### 安装 K3s
 ```bash
-sudo curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 666 --disable traefik
+# sudo curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 666 --disable traefik
+sudo curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 666
 ```
 
 运行此安装后即安装好了``单节点 Server``，它是一个功能齐全的 Kubernetes 集群，包括了托管工作负载 pod 所需的所有数据存储、control plane、kubelet 和容器运行时组件
@@ -340,6 +347,7 @@ sudo vim /etc/rancher/k3s/registries.yaml
 mirrors:
   docker.io:
     endpoint:
+      - "https://dockerpull.org"
       - "https://docker.m.daocloud.io"
       - "https://docker.nju.edu.cn"
       - "https://dockerhub.icu"

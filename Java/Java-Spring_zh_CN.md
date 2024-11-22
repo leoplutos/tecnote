@@ -426,6 +426,9 @@ http://localhost:8081/SpringBootKotlin/hello?message=mytest
 spring.threads.virtual.enabled=true
 ```
 
+## Spring Boot 控制台程序
+示例在 [SpringBootConsole](./SpringBootConsole/)
+
 ## 创建Java-Maven-Batch工程
 
 ### Spring Batch 简介

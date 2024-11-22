@@ -46,6 +46,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "保持依赖整洁",
 		},
 		{
 			"label": "go_build",
@@ -70,6 +71,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译工程",
 		},
 		{
 			"label": "go_run",
@@ -83,6 +85,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行工程",
 		},
 	]
 }

@@ -1,0 +1,9 @@
+{
+	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
+	"deno.enable": true,
+	"deno.path": "D:\\Tools\\WorkTool\\Web\\deno\\deno.exe",
+	"[jsonc]": {
+		"editor.defaultFormatter": "denoland.vscode-deno"
+	}
+}

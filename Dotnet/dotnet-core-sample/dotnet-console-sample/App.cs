@@ -1,8 +1,9 @@
 ﻿using Serilog;
 using Microsoft.Extensions.Configuration;
 using dotnet_console_sample.Async;
-using dotnet_console_sample.Redis;
 using dotnet_console_sample.Etcd;
+using dotnet_console_sample.Postgre;
+using dotnet_console_sample.Redis;
 
 namespace dotnet_console_sample;
 
@@ -13,7 +14,7 @@ class App
 		// 参数判断
 		if (args.Length == 0)
 		{
-			Console.WriteLine("请输入一个参数[Async|Redis|Etcd]");
+			Console.WriteLine("请输入一个参数[Async|Redis|Etcd|Postgre]");
 			Console.WriteLine("比如: dotnet run --project dotnet-console-sample -- Async");
 			return 1;
 		}
@@ -56,15 +57,27 @@ class App
 			}
 			else if (firstArgument.Equals("Redis"))
 			{
+				Log.Information("开始运行RedisExample");
 				// Redis例子
 				RedisClientExample redis = new(config);
 				redis.RedisClient();
 			}
 			else if (firstArgument.Equals("Etcd"))
 			{
+				Log.Information("开始运行EtcdExample");
 				// Etcd例子
 				EtcdClientExample etcd = new(config);
 				etcd.EtcdClient();
+			}
+			else if (firstArgument.Equals("Postgre"))
+			{
+				Log.Information("开始运行PostgreBase");
+				PostgreBase pgbase = new(config);
+				await pgbase.PostgreBaseStart();
+				Log.Information("===================");
+				Log.Information("开始运行PostgreEFCore");
+				PostgreEFCore pgEFCore = new(config);
+				await pgEFCore.PostgreEFCoreStart();
 			}
 			else
 			{
@@ -74,12 +87,12 @@ class App
 		}
 		catch (Exception ex)
 		{
-			Log.Error(ex, "客户端意外终止");
+			Log.Error(ex, "程序意外终止");
 			return 1;
 		}
 		finally
 		{
-			Log.Information("客户端停止");
+			Log.Information("程序停止");
 			// 刷新异步日志
 			Log.CloseAndFlush();
 		}

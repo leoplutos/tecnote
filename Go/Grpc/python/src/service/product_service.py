@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import uuid
+import uuid_utils as uuid
 from loguru import logger
 import grpc
 from stub.ProductInfo_pb2 import Product, ProductId
@@ -19,7 +19,9 @@ class ProductServiceImpl(gpb.ProductInfoServicer):
     # 添加Product
     def addProduct(self, request: Product, context: grpc.ServicerContext) -> ProductId:
         # request的类型为ProductInfo_pb2.Product
-        pid: str = f"{uuid.uuid4().hex} | ServerPort: {self.port}"
+        # 对数据库友好的 UUID v7
+        uuidv7: str = str(uuid.uuid7())
+        pid: str = f"{uuidv7} | ServerPort: {self.port}"
         request.id = pid
         self.productDict[request.id] = request
         logger.info(

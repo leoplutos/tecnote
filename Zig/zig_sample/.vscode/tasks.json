@@ -42,6 +42,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译运行工程",
 		},
 		{
 			"label": "zig_build_test",
@@ -55,6 +56,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "编译测试工程",
 		},
 		{
 			"label": "zig_release",
@@ -68,6 +70,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "发布工程",
 		},
 		{
 			"label": "zig_run",
@@ -81,6 +84,7 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
+			"detail": "运行工程",
 		},
 	]
 }

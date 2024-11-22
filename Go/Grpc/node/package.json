@@ -12,14 +12,14 @@
 	},
 	"dependencies": {
 		"@grpc/grpc-js": "^1.11.3",
-		"uuid": "^9.0.1",
+		"uuid": "^11.0.3",
 		"pino": "^9.3.2"
 	},
 	"devDependencies": {
 		"@bufbuild/buf": "^1.42.0",
 		"@types/node": "^20.16.5",
 		"@types/node-uuid": "^0.0.32",
-		"@types/uuid": "^9.0.8",
+		"@types/uuid": "^10.0.0",
 		"pino-pretty": "^11.2.2"
 	},
 	"peerDependencies": {

@@ -11,10 +11,12 @@ RUN mkdir /opt/app
 RUN apk update --quiet
 RUN apk add --no-cache --upgrade bash
 
-# 复制内容
-COPY client.html /opt/app/FetchDemo/client.html
-COPY data.json /opt/app/FetchDemo/data.json
-COPY server.js /opt/app/FetchDemo/server.js
+# 复制所有html文件
+COPY *.html /opt/app/FetchDemo/
+# 复制所有json文件
+COPY *.json /opt/app/FetchDemo/
+# 复制所有js文件
+COPY *.js /opt/app/FetchDemo/
 
 # 设定环境变量
 ENV NODE_ENV="production"

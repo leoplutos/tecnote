@@ -63,9 +63,9 @@ docker images
 ```
 
 ### 通过镜像启动容器
-启动容器（将容器内的8090端口映射到宿主机的8082）
+启动容器（将容器内的8090端口映射到宿主机的9500）
 ```bash
-docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
+docker run -itd -p 9500:8090 --name spring_9500 spring_boot_undertow:latest
 ```
 默认端口 ``8090``，可以用环境变量 ``SPRING_HTTP_PORT`` 指定端口
 
@@ -77,7 +77,7 @@ docker run -itd -p 8082:8090 --name spring_8082 spring_boot_undertow:1.0.0
 - ``--name``：容器名
 
 启动后可以访问  
-http://localhost:8082/hello  
+http://localhost:9500/hello  
 查看
 
 
@@ -130,7 +130,7 @@ docker run -itd \
   -e "GRPC_SERVER_RESOLVE=false" \
   -e "GRPC_SERVER_HTTP_PORTS=50051" \
   --name grpc_50051 \
-  java_grpc:1.0.0
+  java_grpc:latest
 ```
 
 默认端口 ``50051``，可以用环境变量 ``GRPC_SERVER_HTTP_PORTS`` 指定端口

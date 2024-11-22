@@ -1,9 +1,10 @@
-using Serilog;
+using DtmDemo;
+using Dtmgrpc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Dtmgrpc;
-using DtmDemo;
+using Serilog;
+using UUIDNext;
 
 namespace netcoreClient.Clients;
 
@@ -89,7 +90,7 @@ class DisTransLogic : IDisTransLogic
 		try
 		{
 			// dtm 的 Global ID
-			var gid = Guid.NewGuid().ToString();
+			string gid = Uuid.NewDatabaseFriendly(Database.PostgreSql).ToString();
 			Log.Information("Dtm 汇款 开始, gid: {gid}", gid);
 			Log.Information("amount: {amount}, transOutResult: {transOutResult}, transInResult: {transInResult}", amount, transOutResult, transInResult);
 			// 汇款金额

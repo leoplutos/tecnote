@@ -53,7 +53,7 @@ bash docker_build.sh
 
 ### 启动容器
 ```bash
-docker run -itd --name dotnet-console-app dotnet-console-app:1.0.0
+docker run -itd --name dotnet-console-app dotnet-console-app:latest
 ```
 
 ## Asp.NET 程序部署到Docker
@@ -78,7 +78,7 @@ docker run -itd \
   -p 9501:9501 \
   -e ASPNETCORE_HTTP_PORTS=9501 \
   --name aspcore_9501 \
-  backend_aspwebapi:1.0.0
+  backend_aspwebapi:latest
 ```
 
 默认端口 ``9501``，可以用环境变量 ``ASPNETCORE_HTTP_PORTS`` 指定端口
@@ -116,7 +116,7 @@ docker run -itd \
   -e ASPNETCORE_HTTP_PORTS=50051 \
   -e GRPC_SERVER_RESOLVE=false \
   --name grpc_50051 \
-  dotnet_grpc:1.0.0
+  dotnet_grpc:latest
 ```
 
 默认端口 ``50051``，可以用环境变量 ``ASPNETCORE_HTTP_PORTS`` 指定端口

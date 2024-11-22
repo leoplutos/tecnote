@@ -2,13 +2,13 @@
 
 ## ps1 文件
 ps1 文件类似 linux 的 ``~/.profile`` 文件，在 shell 初始化时会预先执行。在 PowerShell 中， ps1 文件的路径保存在 ``$Profile`` 变量中，输入
-```
+```bash
 echo $Profile
 ```
 能看到它的绝对路径，文件不存在则需要新建  
 修改好内容保存后，每次启动PowerShell它都会自动载入。  
 想手动载入可以使用点命令
-```
+```bash
 . $Profile
 ```
 #### 笔者的默认ps1文件
@@ -24,17 +24,17 @@ echo $Profile
 
 #### 解决办法1：运行时加上参数 ``-ExecutionPolicy``（推荐）  
 启动PowerShell时跟上参数，命令为
-```
+```bash
 powershell -ExecutionPolicy RemoteSigned
 ```
 或直接启动时跟上设定文件
-```
+```bash
 powershell -ExecutionPolicy RemoteSigned -File "C:\Script\Test.ps1"
 ```
 
 #### 解决办法2：使用命令 ``-Scope`` 参数  
 启动PowerShell后
-```
+```bash
 Set-ExecutionPolicy RemoteSigned -Scope Process -Force
 ```
 指定范围时Process时，只有当前的session生效。
@@ -42,31 +42,45 @@ Set-ExecutionPolicy RemoteSigned -Scope Process -Force
 #### 解决办法3：全局修改，需要管理员权限（不推荐）  
 1. ``Win + X`` 键，使用管理员身份运行power shell  
 2. 修改当前用户
-```
+```bash
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 确认
-```
+```bash
 Get-ExecutionPolicy -List
 ```
 删除当前用户
-```
+```bash
 Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser
 ```
 
 ## 提示 无法加载文件 xxx.ps1，未对文件 xxx.ps1 进行数字签名。无法在当前系统上运行该脚本
 右键需要运行的 ps1脚本文件 → 属性 → 选择 ``解除锁定`` 后即可
 
+## 在PowerShell测试TCP网络端口
+
+比如想测试 IP ``172.30.8.172`` 的TCP端口 ``9500`` 是否可用
+
+### 方法1（推荐）
+```bash
+(New-Object System.Net.Sockets.TcpClient).ConnectAsync("172.30.8.172", 9500).Wait(100)
+```
+
+### 方法2
+```bash
+Test-NetConnection -ComputerName 172.30.8.172 -Port 9500
+```
+
 ## 关于转义字符
 以下转义字符为 PowerShell 6.0 中新加的，旧版不可用
-```
+```bash
 `e
 `u{x}
 ```
 
 ## 在PowerShell使用doskey
 doskey是一个主要设计用于cmd.exe的程序，而不是 PowerShell。PowerShell 以别名和函数的形式内置了更好的功能，在 Windows 10 中，您甚至必须停用 PowerShell 自己的命令行编辑才能开始让doskey工作
-```
+```bash
 Remove-Module PSReadLine
 doskey /exename=powershell.exe ll=ls $*
 ```
@@ -75,7 +89,7 @@ doskey /exename=powershell.exe ll=ls $*
 
 ## PowerShell的输出内容颜色
 使用以下代码可以输出颜色
-```
+```bash
 $colors = @'
 Black DarkBlue DarkGreen DarkCyan DarkRed DarkMagenta DarkYellow Gray
 DarkGray Blue Green Cyan Red Magenta Yellow White
