@@ -23,11 +23,13 @@ namespace dotnet_console_sample.Postgre
 			// 需要2: docker run -p 5432:5432 --name postgre -v $HOME/workspace/postgre_data/data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 -d postgres:17.1-alpine3.20
 			// 需要3: 建表
 			/*
-			CREATE TABLE t_login (
-				tl_pk UUID NOT NULL UNIQUE,
-				login_id TEXT NOT NULL,
-				login_pwd TEXT NOT NULL,
-				PRIMARY KEY(tl_pk)
+			CREATE TABLE t_employee (
+				te_pk UUID NOT NULL UNIQUE,
+				employee_id TEXT NOT NULL,
+				employe_name TEXT,
+				employe_email TEXT,
+				employe_status SMALLINT,
+				PRIMARY KEY(te_pk)
 			);
 			*/
 			// 更多看这里: https://www.npgsql.org/doc/index.html
@@ -41,55 +43,69 @@ namespace dotnet_console_sample.Postgre
 			Log.Information("Postgre连接URL: {connString}", connString);
 
 			// 连接数据库
+			// 默认情况下，Npgsql 连接是池化的：关闭或处置连接不会关闭底层物理连接，而是将其返回到由 Npgsql 管理的内部池
 			var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
 			var dataSource = dataSourceBuilder.Build();
 			await using var connection = await dataSource.OpenConnectionAsync();
 			Log.Information("Postgre连接成功");
 
-			// 插入3条t_login数据
+			// 插入3条t_employee数据
 			for (int i = 0; i < 3; i++)
 			{
-				// 插入t_login数据
-				await using (var cmd = new NpgsqlCommand("INSERT INTO t_login (tl_pk, login_id, login_pwd) VALUES (@tl_pk, @login_id, @login_pwd)", connection))
+				// 插入t_employee数据
+				await using (var cmd = new NpgsqlCommand("INSERT INTO t_employee (te_pk, employee_id, employe_name, employe_status) VALUES (@te_pk, @employee_id, @employe_name, @employe_status)", connection))
 				{
 					// 创建UUID v7版本的主键
 					string uuidv7 = Uuid.NewDatabaseFriendly(Database.PostgreSql).ToString();
-					Guid tl_pk = Guid.Parse(uuidv7);
+					Guid te_pk = Guid.Parse(uuidv7);
 					// 取得1到99的随机数
 					int randomNumber = new Random().Next(1, 100);
-					string login_id = "admin" + randomNumber;
-					string login_pwd = "pwd" + randomNumber;
-					cmd.Parameters.AddWithValue("tl_pk", NpgsqlDbType.Uuid, tl_pk);
-					cmd.Parameters.AddWithValue("login_id", login_id);
-					cmd.Parameters.AddWithValue("login_pwd", login_pwd);
+					string employee_id = "dotnet_base_id_" + randomNumber;
+					string employe_name = "dotnet_张三_" + randomNumber;
+					int employe_status = 1;
+					cmd.Parameters.AddWithValue("te_pk", NpgsqlDbType.Uuid, te_pk);
+					cmd.Parameters.AddWithValue("employee_id", employee_id);
+					cmd.Parameters.AddWithValue("employe_name", employe_name);
+					cmd.Parameters.AddWithValue("employe_status", employe_status);
 					await cmd.ExecuteNonQueryAsync();
-					Log.Information("t_login表插入成功, {tl_pk}, {login_id}, {login_pwd}", uuidv7, login_id, login_pwd);
+					Log.Information("t_employee表插入成功, {te_pk}, {employee_id}, {employe_name}, {employe_status}", uuidv7, employee_id, employe_name, employe_status);
 				}
 			}
 
-			// 查询t_login所有数据
+			// 查询t_employee所有数据
 			// 创建一个List，其中每个元素都是Dictionary<string, string>类型
 			List<Dictionary<string, string>> results = [];
-			await using (var cmd = new NpgsqlCommand("SELECT * FROM t_login", connection))
+			await using (var cmd = new NpgsqlCommand("SELECT * FROM t_employee", connection))
 			await using (var reader = await cmd.ExecuteReaderAsync())
 			{
 				while (await reader.ReadAsync())
 				{
-					string tl_pk = reader.GetFieldValue<Guid>(0).ToString();
-					string login_id = reader.GetString(1);
-					string login_pwd = reader.GetString(2);
+					string te_pk = reader.GetFieldValue<Guid>(0).ToString();
+					string employee_id = reader.GetString(1);
+					string employe_name = reader.GetString(2);
+					string? employe_email = reader.IsDBNull(reader.GetOrdinal("employe_email")) ? null : reader.GetString(reader.GetOrdinal("employe_email"));
+					if (string.IsNullOrEmpty(employe_email))
+					{
+						employe_email = "N/A";
+					}
+					int employe_status = reader.GetInt16(4);
 					// 创建字典并添加到List中
 					Dictionary<string, string> record = new()
 					{
-						{ "tl_pk", tl_pk },
-						{ "login_id", login_id },
-						{ "login_pwd", login_pwd }
+						{ "te_pk", te_pk },
+						{ "employee_id", employee_id },
+						{ "employe_name", employe_name },
+						{ "employe_email", employe_email },
+						{ "employe_status", employe_status.ToString() },
 					};
 					results.Add(record);
 				}
 			}
-			Log.Information("t_login表查询成功");
+			Log.Information("t_employee表全部数据查询成功");
 			Log.Information("{results}", results);
+
+			// 关闭数据库连接
+			connection.Close();
 		}
 	}
 }

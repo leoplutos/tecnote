@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.dao.Login;
-import com.example.dao.LoginRepository;
+import com.example.dao.Employee;
+import com.example.dao.EmployeeRepository;
 import com.fasterxml.uuid.Generators;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -26,11 +26,13 @@ public class PostgreJpaService {
 	// -e POSTGRES_PASSWORD=123456 -d postgres:17.1-alpine3.20
 	// 需要3: 建表
 	/*
-	 * CREATE TABLE t_login (
-	 * tl_pk UUID NOT NULL UNIQUE,
-	 * login_id TEXT NOT NULL,
-	 * login_pwd TEXT NOT NULL,
-	 * PRIMARY KEY(tl_pk)
+	 * CREATE TABLE t_employee (
+	 * te_pk UUID NOT NULL UNIQUE,
+	 * employee_id TEXT NOT NULL,
+	 * employe_name TEXT,
+	 * employe_email TEXT,
+	 * employe_status SMALLINT,
+	 * PRIMARY KEY(te_pk)
 	 * );
 	 */
 	// 更多看这里:
@@ -42,27 +44,29 @@ public class PostgreJpaService {
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private LoginRepository repository;
+	private EmployeeRepository repository;
 
 	public void run() throws InterruptedException {
 
-		// 插入t_login数据
+		// 插入t_employee数据
 		// 创建UUID v7版本的主键
 		String uuidv7 = Generators.timeBasedEpochGenerator().generate().toString();
-		UUID tl_pk = UUID.fromString(uuidv7);
+		UUID te_pk = UUID.fromString(uuidv7);
 		// 取得1到99的随机数
 		int randomNumber = ThreadLocalRandom.current().nextInt(1, 100);
-		String login_id = "jdbc" + randomNumber;
-		String login_pwd = "pwd" + randomNumber;
-		Login login = new Login();
-		login.setTlpk(tl_pk);
-		login.setLoginId(login_id);
-		login.setLoginPwd(login_pwd);
-		repository.save(login);
-		log.info("t_login表插入成功, {}, {}, {}", uuidv7, login_id, login_pwd);
+		String employee_id = "java_jpa_id_" + randomNumber;
+		String employe_name = "java_张大_" + randomNumber;
+		int employe_status = 2;
+		Employee employee = new Employee();
+		employee.setTepk(te_pk);
+		employee.setEmployeeId(employee_id);
+		employee.setEmployeName(employe_name);
+		employee.setEmployeStatus(employe_status);
+		repository.save(employee);
+		log.info("t_employee表插入成功, {}", employee);
 
-		// 查询t_login数据
-		Login saved = repository.findByLoginId(login_id).orElseThrow(NoSuchElementException::new);
-		log.info("t_login表查询成功, {}, {}, {}", saved.getTlpk().toString(), saved.getLoginId(), saved.getLoginPwd());
+		// 查询t_employee数据
+		Employee saved = repository.findByEmployeeId(employee_id).orElseThrow(NoSuchElementException::new);
+		log.info("t_employee表查询成功, {}", saved);
 	}
 }

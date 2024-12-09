@@ -376,6 +376,7 @@ sudo rm -rf /var/lib/containerd
     + ``-q`` 只显示容器的编号
     + ``--no-trunc`` 不省略，示列的完整信息
  - 启动容器：``docker start {容器id}``
+ - 启动容器并且使用交互式方式进入容器内部：``docker start -a {容器id}``
  - 停止容器：``docker stop {容器id}``
  - 强制停止容器：``docker kill {容器id}``
  - 重启容器：``docker restart {容器id}``

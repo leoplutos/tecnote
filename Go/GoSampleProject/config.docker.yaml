@@ -17,3 +17,8 @@ lumberjack:
   maxage: 90
   # 是否压缩/归档旧文件
   compress: true
+
+# DataSource 配置
+datasource:
+  url: postgres://postgres:123456@host.docker.internal:5432/postgres
+  dsn: host=host.docker.internal port=5432 dbname=postgres user=postgres password=123456 sslmode=disable TimeZone=Asia/Shanghai

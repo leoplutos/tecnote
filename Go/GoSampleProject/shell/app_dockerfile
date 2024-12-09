@@ -80,3 +80,8 @@ COPY --from=builder /opt/app/GoSampleProject/config*.yaml /opt/app/GoSampleProje
 WORKDIR /opt/app/GoSampleProject
 # 指定容器创建时的默认命令
 CMD ["./gosample"]
+
+# 启动命令(需要docker先启动postgres)
+# docker run --rm \
+# --add-host=host.docker.internal:host-gateway \
+# --name gosample gosample:latest ./gosample Postgre

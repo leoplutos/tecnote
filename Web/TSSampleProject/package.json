@@ -5,22 +5,26 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bun run src/index.ts",
-		"build": "bun x tsc -p tsconfig.json",
+		"build": "bun x prisma generate && bun x tsc -p tsconfig.json",
 		"start": "NODE_ENV=production node dist/index.js",
 		"test": "jest"
 	},
 	"dependencies": {
+		"@prisma/client": "6.0.0",
 		"config": "^3.3.12",
 		"etcd3": "^1.1.2",
+		"pg": "^8.13.1",
 		"pino": "^9.3.2",
 		"pino-pretty": "^11.2.2",
 		"redis": "^4.7.0",
-		"uuid": "^10.0.0"
+		"uuid": "^11.0.3"
 	},
 	"devDependencies": {
+		"@types/config": "^3.3.5",
 		"@types/node": "^22.3.0",
+		"@types/pg": "^8.11.10",
 		"@types/uuid": "^10.0.0",
-		"@types/config": "^3.3.5"
+		"prisma": "^6.0.0"
 	},
 	"peerDependencies": {
 		"typescript": "^5.5.4"

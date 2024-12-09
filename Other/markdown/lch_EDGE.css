@@ -1,5 +1,6 @@
 body {
-    font-family: Meiryo, "ＭＳ ゴシック", "MS Gothic", "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+	/* font-family: Meiryo, "ＭＳ ゴシック", "MS Gothic", "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif; */
+    font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft YaHei";
     font-size: 16px;
     background-color: #F8F8F8;
     margin: 10px 10px 10px 10px;
@@ -51,11 +52,14 @@ blockquote {
     padding: .25rem 0 .25rem 1rem;
 }
 code, pre {
-    font-family: monospace, Consolas, Monaco, Andale Mono, Courier New;
+	/* font-family: monospace, Consolas, Monaco, Andale Mono, Courier New; */
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace, "Cascadia Code";
 }
 code {
-    background-color: #fee9cc;
-    color: #671ddf;
+	/* background-color: #fee9cc; */
+	/* color: #671ddf; */
+    background-color: #e2e2e2;
+    color: #333333;
     padding: 1px 3px;
     font-size: 16px;
     -webkit-border-radius: 3px;

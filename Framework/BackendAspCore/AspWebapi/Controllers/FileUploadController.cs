@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using AspWebapi.Common;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 namespace AspWebapi.Controllers;
@@ -20,27 +21,20 @@ public class FileUploadController : ApiControllerBase
 	{
 		_hostingEnvironment = hostingEnvironment;
 	}
-	// 添加OPTIONS用来启用跨域支持
-	[HttpOptions("/upload")]
-	public async Task<Result<string>> Option()
-	{
-		await Task.Delay(0);
-		Log.Information("跨域验证OK");
-		// 允许跨域
-		HttpContext.Response.Headers.Append("Access-Control-Allow-Origin", "*");
-		return SuccessResult<string>("");
-	}
+
 
 	// upload: 文件上传
+	[HttpPost("/upload")]
 	// [Authorize] 标注为需要JWT认证，这里设置不需要
 	// [Authorize]
-	[HttpPost("/upload")]
+	// 添加跨域支持
+	[EnableCors("_allowOrigins")]
 	// 这里的uploadFiles名字，必须与前端的name匹配
 	public async Task<Result<string>> Post(List<IFormFile> uploadFiles)
 	{
 		Log.Information("文件上传upload开始");
 		// 允许跨域
-		HttpContext.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+		//HttpContext.Response.Headers.Append("Access-Control-Allow-Origin", "*");
 		// 总文件大小
 		long size = uploadFiles.Sum(file => file.Length);
 		Log.Information("上传文件总大小: {size} 字节", size);

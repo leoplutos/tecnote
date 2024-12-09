@@ -34,11 +34,13 @@ public class PostgreBaseService {
 	// -e POSTGRES_PASSWORD=123456 -d postgres:17.1-alpine3.20
 	// 需要3: 建表
 	/*
-	 * CREATE TABLE t_login (
-	 * tl_pk UUID NOT NULL UNIQUE,
-	 * login_id TEXT NOT NULL,
-	 * login_pwd TEXT NOT NULL,
-	 * PRIMARY KEY(tl_pk)
+	 * CREATE TABLE t_employee (
+	 * te_pk UUID NOT NULL UNIQUE,
+	 * employee_id TEXT NOT NULL,
+	 * employe_name TEXT,
+	 * employe_email TEXT,
+	 * employe_status SMALLINT,
+	 * PRIMARY KEY(te_pk)
 	 * );
 	 */
 	// 更多看这里: https://jdbc.postgresql.org/documentation/use/
@@ -70,39 +72,48 @@ public class PostgreBaseService {
 			conn = DriverManager.getConnection(postgreUrl, props);
 			log.info("Postgre连接成功");
 
-			// 插入t_login数据
+			// 插入t_employee数据
 			PreparedStatement insertSt = conn
-					.prepareStatement("INSERT INTO t_login (tl_pk, login_id, login_pwd) VALUES (?, ?, ?)");
+					.prepareStatement(
+							"INSERT INTO t_employee (te_pk, employee_id, employe_name, employe_status) VALUES (?, ?, ?, ?)");
 			// 创建UUID v7版本的主键
 			String uuidv7 = Generators.timeBasedEpochGenerator().generate().toString();
-			UUID tl_pk = UUID.fromString(uuidv7);
+			UUID te_pk = UUID.fromString(uuidv7);
 			// 取得1到99的随机数
 			int randomNumber = ThreadLocalRandom.current().nextInt(1, 100);
-			String login_id = "jdbc" + randomNumber;
-			String login_pwd = "pwd" + randomNumber;
-			insertSt.setObject(1, tl_pk);
-			insertSt.setObject(2, login_id);
-			insertSt.setObject(3, login_pwd);
+			String employee_id = "java_base_id_" + randomNumber;
+			String employe_name = "java_张大_" + randomNumber;
+			int employe_status = 2;
+			insertSt.setObject(1, te_pk);
+			insertSt.setObject(2, employee_id);
+			insertSt.setObject(3, employe_name);
+			insertSt.setObject(4, employe_status);
 			insertSt.executeUpdate();
 			insertSt.close();
-			log.info("t_login表插入成功, {}, {}, {}", uuidv7, login_id, login_pwd);
+			log.info("t_employee表插入成功, {}, {}, {}, {}", uuidv7, employee_id, employe_name, employe_status);
 
-			// 查询t_login所有数据
+			// 查询t_employee所有数据
 			// 创建一个List，其中每个元素都是Map<String, String>类型
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM t_login");
+			ResultSet rs = st.executeQuery("SELECT * FROM t_employee");
 			List<Map<String, String>> results = new CopyOnWriteArrayList<>();
 			while (rs.next()) {
 				// 创建Map并添加到List中
 				Map<String, String> record = new ConcurrentHashMap<>();
-				record.put("tl_pk", rs.getString(1));
-				record.put("login_id", rs.getString(2));
-				record.put("login_pwd", rs.getString(3));
+				record.put("te_pk", rs.getString(1));
+				record.put("employee_id", rs.getString(2));
+				record.put("employe_name", rs.getString(3));
+				String employe_email = rs.getString("employe_email");
+				if (rs.wasNull()) {
+					employe_email = "N/A";
+				}
+				record.put("employe_email", employe_email);
+				record.put("employe_status", String.valueOf(rs.getInt(5)));
 				results.add(record);
 			}
 			rs.close();
 			st.close();
-			log.info("t_login表查询成功");
+			log.info("t_employee表查询成功");
 			log.info("{}", results);
 		} finally {
 			if (conn != null) {

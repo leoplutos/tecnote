@@ -280,6 +280,37 @@ docker run -itd \
   --name zig_vsc \
   zig_vsc_image:latest
 ```
+### CentOS Stream 环境
+
+将 ``Dockerfile`` 放到 ``cd ~/workspace/dev_container/vscode`` 内
+
+构建镜像
+```bash
+cd ~/workspace/dev_container/vscode
+
+# 指定Github设定的下载地址，用户和组
+docker build \
+  --build-arg ARG_USER_ID="$(id -u)" \
+  --build-arg ARG_USER_NAME="$(id -un)" \
+  --build-arg ARG_GROUP_ID="$(id -g)" \
+  --build-arg ARG_GROUP_NAME="$(id -gn)" \
+  -t centos_vsc_image:latest \
+  -f Dockerfile_centos_stream .
+```
+
+启动容器
+```bash
+mkdir -p /home/$USER/.vscode-server
+docker run -d \
+  -p 50022:22 \
+  -v /home/$USER/workspace:/workspace \
+  -v /home/$USER/.vscode-server:/home/$(id -un)/.vscode-server \
+  -v /etc/timezone:/etc/timezone:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  --add-host=host.docker.internal:host-gateway \
+  --name centos_vsc \
+  centos_vsc_image:latest
+```
 
 ## 使用 Neovim 开发
 
@@ -582,4 +613,33 @@ docker run -it \
 启动 ``nvim`` 后，安装 ``treesitter`` 高亮
 ```bash
 :TSInstall zig toml jsonc yaml html javascript css scss sql dockerfile bash proto markdown markdown_inline lua query vim vimdoc
+```
+
+### CentOS Stream 环境
+
+将 ``Dockerfile`` 放到 ``cd ~/workspace/dev_container/neovim`` 内
+
+构建镜像
+```bash
+cd ~/workspace/dev_container/neovim
+
+# 指定Github设定的下载地址，用户和组
+docker build \
+  --build-arg ARG_USER_ID="$(id -u)" \
+  --build-arg ARG_USER_NAME="$(id -un)" \
+  --build-arg ARG_GROUP_ID="$(id -g)" \
+  --build-arg ARG_GROUP_NAME="$(id -gn)" \
+  -t centos_nvim_image:latest \
+  -f Dockerfile_centos_stream .
+```
+
+启动容器
+```bash
+docker run -it \
+  -v /home/$USER/workspace:/workspace \
+  -v /etc/timezone:/etc/timezone:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  --add-host=host.docker.internal:host-gateway \
+  --name centos_nvim \
+  centos_nvim_image:latest
 ```

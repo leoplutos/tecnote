@@ -7,6 +7,10 @@ FROM oven/bun:alpine AS builder
 # 设定alpine镜像仓库为国内源
 RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
+# 目前 Prisma 需要安装 Node.js 才能运行某些生成代码, 所以这里安装一下 Node.js, 如果不用 Prisma 则不需要此步骤
+RUN apk update --quiet
+RUN apk add --no-cache --upgrade nodejs
+
 # 创建应用路径
 RUN mkdir /opt/app
 
@@ -18,6 +22,9 @@ COPY config /opt/app/TSSampleProject/config
 COPY package.json /opt/app/TSSampleProject/package.json
 COPY tsconfig.json /opt/app/TSSampleProject/tsconfig.json
 COPY bunfig.toml /opt/app/TSSampleProject/bunfig.toml
+# 复制prisma相关文件
+COPY prisma /opt/app/TSSampleProject/prisma
+COPY .env /opt/app/TSSampleProject/.env
 
 # 设置工作目录
 WORKDIR /opt/app/TSSampleProject
@@ -39,9 +46,10 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash
+# 添加bash和libc6-compat
+# https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine
 RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash
+RUN apk add --no-cache --upgrade bash libc6-compat
 
 # 从阶段1复制编译结果
 COPY --from=builder /opt/app/TSSampleProject/package.json /opt/app/TSSampleProject/package.json
@@ -71,3 +79,10 @@ WORKDIR /opt/app/TSSampleProject
 # CMD ["node", "dist/index.js"]
 # 设置默认入口命令
 ENTRYPOINT ["/bin/bash"]
+
+# 启动命令(需要docker先启动postgres)
+# docker run -it --rm \
+# --add-host=host.docker.internal:host-gateway \
+# --name tssample tssample:latest
+# 进入容器后
+# node dist/PostgreClientExample.js

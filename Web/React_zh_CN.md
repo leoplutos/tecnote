@@ -51,7 +51,7 @@ VSCode内置支持，不需要用专有插件，只要按需选择一些辅助�
 ## 使用Vim/NeoVim开发
 直接使用 LSP 即可，具体请看笔者的 Vim配置文件  
 LSP 安装
-```
+```bash
 npm install -g typescript typescript-language-server
 ```
 
@@ -62,22 +62,22 @@ npm install -g typescript typescript-language-server
  - Remix
  - Gatsby
  - Expo
- - Vite (笔者推荐)
+ - Vite
 
 ### 使用 Vite 构建的示例
 打开命令行，依次输入如下命令
 1. 进入你要创建工程的 **父** 目录
-```
+```bash
 cd D:\WorkSpace\React
 ```
 2. 创建工程  
-```
+```bash
 npm --registry https://npmreg.proxy.ustclug.org/ create vite@latest ReactFileComponent
 ```
 出现提示框后依次 选择 ``React`` → ``JavaScript``或者``TypeScript``
 
 3. 启动工程
-```
+```bash
 cd ReactFileComponent
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
@@ -94,6 +94,75 @@ npm run dev
 ```
 更多可以看 [这里](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#jsx-factories)
 
+## Next.js
+
+``Next.js`` 是一个 ``Vercel`` 开发的用于构建 ``全栈`` Web 应用的 React 框架。它支持``服务端渲染（SSR）`` 。你可以使用 React Components 来构建用户界面，并使用 Next.js 来实现附加功能和优化
+
+Next.js 特别适合个人项目, 一套代码前后端全部搞定
+
+### 使用 Next.js 构建的示例
+
+#### 创建 Next.js 工程
+参考 [官方文档](https://nextjs.org/docs/app/getting-started/installation) 创建 Next.js 工程, 项目结构和组织的说明在 [这里](https://nextjs.org/docs/app/getting-started/project-structure)
+
+```bash
+cd D:\WorkSpace\Web
+# npx create-next-app@latest
+bun create next-app@latest
+```
+
+下面是笔者选择的内容
+- 创建工程名字 ... fullstacknext
+- 使用 TypeScript ... Yes
+- 使用 ESLint ... No
+- 使用 Tailwind CSS ... Yes
+- 是否将代码放到 src 文件夹 ... Yes
+- 使用 App Router ... Yes
+- 使用 Turbopack ... Yes
+- 导入重命名``(@/* by default)`` ... Yes
+- 使用重命名 ... 直接回车(默认)
+
+#### 安装 Shadcn UI
+``Shadcn UI`` 是一个用于构建用户界面的组件库。它是基于 ``Tailwind CSS`` 构建的，提供了一系列可复用的 UI 组件，这些组件具有良好的样式和交互设计
+
+参考 [官方文档](https://ui.shadcn.com/docs/installation/next) 安装 Shadcn UI
+
+```bash
+cd fullstacknext
+# npx shadcn@latest init
+bun x --bun shadcn@latest init
+```
+
+下面是笔者选择的内容
+- 使用样式 ... New York
+- 基础颜色 ... Neutral
+- 是否要将 CSS 变量用于主题 ... yes
+
+然后安装组件
+
+```bash
+# npx shadcn@latest add button input label table tabs scroll-area dropdown-menu avatar
+bun x --bun shadcn@latest add button input label table tabs scroll-area dropdown-menu avatar
+```
+
+#### 安装 Auth.js
+``Auth.js`` 是一个基于标准 Web API 的身份验证库
+
+参考 [官方文档](https://authjs.dev/getting-started/installation) 安装 Auth.js
+
+```bash
+# npm install next-auth@beta
+bun add next-auth@beta
+```
+
+#### 复制示例工程
+将笔者的工程 [fullstacknext](../Framework/fullstacknext/) 复制到文件夹 ``fullstacknext`` 即可
+
+#### 运行
+```bash
+bun run dev
+```
+
 ## 笔者做的几个示例工程
 
 ### 学习清单 - 单页应用版
@@ -107,7 +176,7 @@ npm run dev
  - [ReactFileComponent](./ReactFileComponent)
 
 运行方式
-```
+```bash
 cd D:\WorkSpace\React\ReactFileComponent
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
@@ -118,7 +187,7 @@ npm run dev
  - [ReactTS](./ReactTS)
 
 运行方式
-```
+```bash
 cd D:\WorkSpace\React\ReactTS
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev

@@ -9,5 +9,16 @@
 		"output": "console",
 		//日志文件的位置
 		"filename": "D:\\log\\app.log"
+	},
+	// DataSource 配置
+	"datasource": {
+		"postgre": {
+			// "host": "host.docker.internal",
+			// "port": 5432,
+			// "database": "postgres",
+			// "user": "postgres",
+			// "password": "123456"
+			"url": "postgres://postgres:123456@host.docker.internal:5432/postgres"
+		}
 	}
 }

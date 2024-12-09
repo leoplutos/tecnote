@@ -265,6 +265,9 @@ web-frameworks
  - https://tw.chatgpt-free.ai/
  - https://www.askchat.ai/?r=317161
 
+## 前端ChatGPT
+ - https://v0.dev/
+
 ## StackOverFlow的搜索
 https://yandex.com/
 
@@ -287,9 +290,6 @@ https://github.com/GrowingGit/GitHub-Chinese-Top-Charts
 ## 网络障碍模拟工具 Clumsy
 https://github.com/jagt/clumsy
 
-## 网络障碍模拟工具 Clumsy
-https://github.com/jagt/clumsy
-
 ## 端口扫描工具 RustScan
 https://github.com/RustScan/rustscan
 
@@ -299,14 +299,14 @@ https://github.com/mbrlabs/Lorien
 ## 其他软件
 
 - TVBox
+    - [**影视仓**(推荐) 聚玩盒子](https://www.juwanhezi.com/item/246)
     - [github](https://github.com/liu673cn/box)
     - [github-page](https://raw.liucn.cc/box/)&nbsp;&nbsp;&nbsp;&nbsp;这里也有一些源
     - [俊版 github](https://github.com/roacn/TVBoxOSC)
-    - [影视仓 聚玩盒子](https://www.juwanhezi.com/item/246)
 - TVBox视频源
     - TVBox俊版用 https://raw.liucn.cc/box/m.json
     - 影视仓用1 https://raw.liucn.cc/box/dc.txt
-    - 影视仓用2 http://www.饭太硬.com/tv/
+    - **影视仓用2**(推荐) http://www.饭太硬.com/tv/
 - TVBox直播源
     - IPTV-github https://github.com/leyan1987/iptv
     - 可以直接用的地址 https://mirror.ghproxy.com/https://raw.githubusercontent.com/leyan1987/iptv/main/iptv.txt

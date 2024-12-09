@@ -33,6 +33,23 @@ try
 	// Web应用对象
 	var builder = WebApplication.CreateBuilder(args);
 
+	// 密钥将保存到 %LOCALAPPDATA%\ASP.NET\DataProtection-Keys 文件夹中
+	// 更多: https://learn.microsoft.com/zh-cn/aspnet/core/security/data-protection/configuration/default-settings?view=aspnetcore-8.0
+
+	// 配置
+	var configuration = builder.Configuration;
+	// 判断是否启用Postgre数据库
+	string? usePostgre = configuration["ASPNETCORE_IS_USE_POSTGRE"];
+	bool isUsePostgre = false;
+	if (!string.IsNullOrEmpty(usePostgre))
+	{
+		if (usePostgre.Equals("true"))
+		{
+			isUsePostgre = true;
+		}
+	}
+	Log.Information("是否启用Postgre数据库连接: {isUsePostgre}", isUsePostgre);
+
 	// 注册日志
 	builder.Services.AddSerilog();
 	// 注册控制器
@@ -44,6 +61,35 @@ try
 	// 注册Sqlite数据库
 	// string? connectionString = builder.Configuration.GetConnectionString("todo") ?? "Data Source=todo.db";
 	// builder.Services.AddSqlite<TodoDbContext>(connectionString);
+	if (isUsePostgre)
+	{
+		// 注册Postgre数据库(EF Core)
+		var postgreConStr = configuration["DataSource:Postgre:ConnectionString"];
+		// 这里使用了明文报错数据库信息, 如果为了安全请参考官方文档
+		// https://learn.microsoft.com/zh-cn/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows
+		Log.Information("Postgre连接URL: {connString}", postgreConStr);
+		builder.Services.AddDbContextPool<PostgreDbContext>(options => options.UseNpgsql(postgreConStr)
+		//	,
+		// option => option
+		// 	.SetPostgresVersion(17, 0)
+		// 	.UseNodaTime()
+		// 	.MapEnum<Mood>("mood"));
+		);
+		Log.Information("Postgre数据库池化结束");
+	}
+
+	// 开启跨域支持
+	var allowOrigins = "_allowOrigins";
+	builder.Services.AddCors(options =>
+	{
+		options.AddPolicy(name: allowOrigins,
+							policy =>
+							{
+								// policy.WithOrigins("http://example.com",
+								// 					"http://www.contoso.com");
+								policy.WithOrigins("*");
+							});
+	});
 
 	// 注册Swagger
 	// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -53,9 +99,12 @@ try
 	// https://learn.microsoft.com/zh-cn/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0
 	builder.Services.AddScoped<ITodoListService, TodoListService>();
 	builder.Services.AddScoped<ILoginService, LoginService>();
+	if (isUsePostgre)
+	{
+		builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+	}
 
 	//注册Jwt服务
-	var configuration = builder.Configuration;
 	_ = builder.Services.AddAuthentication(options =>
 	{
 		options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,15 +150,14 @@ try
 		app.UseSwaggerUI();
 	}
 
-	// appsettings.json设定确认
-	var custSetting = configuration["App:CustSetting"];
-	Log.Information("custSetting: {CustSetting}", custSetting);
-
 	// 注册请求日志
 	app.UseSerilogRequestLogging();
 
-	// 禁用HTTPS（生成环境要打开）
+	// 禁用HTTPS（生产环境要打开）
 	// app.UseHttpsRedirection();
+
+	// 开启跨域
+	app.UseCors(allowOrigins);
 
 	// 注册 UseAuthentication（认证） 必须在前面调用
 	app.UseAuthentication();

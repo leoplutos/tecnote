@@ -103,5 +103,18 @@
 			"problemMatcher": [],
 			"detail": "运行Etcd客户端示例",
 		},
+		{
+			"label": "bun_runPostgreClientExample",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"src/PostgreClientExample.ts",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "运行Postgre客户端示例",
+		},
 	]
 }

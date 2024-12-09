@@ -26,9 +26,7 @@ public class ConsoleMain implements CommandLineRunner {
 	private PostgreJdbcClientService jdbcClientService;
 
 	public static void main(String[] args) {
-		log.info("SpringBoot的控制台程序开始");
 		SpringApplication.run(ConsoleMain.class, args);
-		log.info("SpringBoot的控制台程序结束");
 	}
 
 	@Override
@@ -39,7 +37,7 @@ public class ConsoleMain implements CommandLineRunner {
 		log.info("开始运行PostgreJpaService, 基于Spring Data JPA");
 		jpaService.run();
 		log.info("===================");
-		log.info("开始运行PostgreJdbcClientService, 基于Spring Boot JdbcClient");
+		log.info("开始运行PostgreJdbcClientService, 基于Spring JdbcClient");
 		jdbcClientService.run();
 	}
 }

@@ -20,6 +20,33 @@ scratch 无法被 ``pull``，只能用于 ``Dockerfile`` 中
 常用tag : ``ubuntu:jammy`` (77.9MB) (Ubuntu22.04 Jammy)  
 官方仓库 : [ubuntu](https://github.com/docker-library/docs/tree/master/ubuntu)
 
+## Docker的常用仓库
+
+### 默认仓库（docker.io）
+https://hub.docker.com/
+
+```bash
+docker pull rockylinux/rockylinux:9
+```
+
+### 红帽子仓库
+quay.io  
+
+[CentOS Stream镜像](https://quay.io/repository/centos/centos?tab=tags)  
+```bash
+docker pull quay.io/centos/centos:stream9
+docker pull quay.io/centos/centos:stream10
+```
+
+### 谷歌仓库
+gcr.io  
+k8s.gcr.io
+
+### GitHub仓库
+ghcr.io
+
+### 微软仓库
+mcr.microsoft.com
 
 ## Docker的常用镜像
 

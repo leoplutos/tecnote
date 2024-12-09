@@ -74,8 +74,14 @@ FROM scratch
 ENV RUST_ENVIRONMENT=prd
 # 从阶段1复制编译结果
 COPY --from=builder /opt/app/rust_sample/target/x86_64-unknown-linux-musl/release/rust_sample /opt/app/rust_sample/
+COPY --from=builder /opt/app/rust_sample/target/x86_64-unknown-linux-musl/release/postgre /opt/app/rust_sample/
 COPY --from=builder /opt/app/rust_sample/config*.toml /opt/app/rust_sample/
 # 设置工作目录
 WORKDIR /opt/app/rust_sample
 # 指定容器创建时的默认命令
 CMD ["./rust_sample"]
+
+# 启动命令(需要docker先启动postgres)
+# docker run --rm \
+# --add-host=host.docker.internal:host-gateway \
+# --name rust_sample rust_sample:latest ./postgre

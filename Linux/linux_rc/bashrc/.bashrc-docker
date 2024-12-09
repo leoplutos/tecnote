@@ -18,7 +18,7 @@ __prompt_command_nerdfont() {
     local STR_USER_ICON=''
     local STR_IP_ICON='󰩠'
     local STR_DIRECTORY_ICON=''
-    local STR_OS=$(cat /etc/os-release | grep ^ID= | awk -F'=' '{print $2}')
+    local STR_OS=$(cat /etc/os-release | grep ^ID= | awk -F'=' '{print $2}' | tr -d '"')
     local PS_BLACK='\[\e[0;30m\]'
     local PS_RED='\[\e[0;31m\]'
     local PS_GREEN='\[\e[0;32m\]'

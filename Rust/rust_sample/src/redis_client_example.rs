@@ -3,9 +3,14 @@ use redis::Commands;
 use std::error::Error;
 use std::time::Duration;
 use tracing as log;
+use tracing::instrument;
 use uuid::Uuid;
 
-fn redis_client() -> Result<(), Box<dyn Error>> {
+// 导入utils模块（utils.rs）
+mod utils;
+
+#[instrument]
+async fn redis_client() -> Result<(), Box<dyn Error>> {
     // 连接参数
     let conn_timeout: u64 = 1000;
     let client = redis::Client::open("redis://localhost:6379/")?;
@@ -45,9 +50,17 @@ fn redis_client() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn main() {
-    // install global collector configured based on RUST_LOG env var.
-    tracing_subscriber::fmt::init();
-
-    let _ = redis_client();
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    // 初始化日志
+    utils::log::init_log_async().await?;
+    // 调用开始
+    let ret = redis_client().await;
+    match ret {
+        Ok(()) => log::info!("Redis示例运行结束"),
+        Err(e) => {
+            log::error!("Redis示例运行失败: {}", e)
+        }
+    }
+    Ok(())
 }

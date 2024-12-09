@@ -4,6 +4,7 @@ import (
 	"my.sample/GoSampleProject/src/config"
 	"my.sample/GoSampleProject/src/etcd"
 	"my.sample/GoSampleProject/src/log"
+	postgre "my.sample/GoSampleProject/src/postgre"
 	"my.sample/GoSampleProject/src/redis"
 	"my.sample/GoSampleProject/src/sub"
 	"os"
@@ -16,7 +17,8 @@ func main() {
 
 	// 参数1为程序名
 	if len(os.Args) == 1 {
-		log.Logger.Info().Msg("没有命令行参数,运行 Hello World")
+		log.Logger.Info().Msg("请输入一个参数[Redis|Etcd|Postgre]")
+		log.Logger.Info().Msg("本次运行没有命令行参数,运行 Hello World")
 
 		// 从config.yaml读取内容
 		log.Logger.Info().Msg("读取config和环境变量开始")
@@ -76,13 +78,18 @@ func main() {
 	}
 
 	firstArgument := os.Args[1]
-	if firstArgument == "Redis" {
+	switch firstArgument {
+	case "Redis":
 		// 调用Redis
 		redis.RedisClient()
-	} else if firstArgument == "Etcd" {
+	case "Etcd":
 		// 调用Etcd
 		etcd.EtcdClient()
-	} else {
+	case "Postgre":
+		// 调用Postgre
+		postgre.PostgreBase()
+		postgre.PostgreOrm()
+	default:
 		log.Logger.Warn().Msg("无法识别此参数")
 		os.Exit(1)
 	}

@@ -1,5 +1,14 @@
 # Chrome相关
 
+## 离线版下载地址
+https://www.google.cn/chrome/?standalone=1&platform=win64&extra=stablechannel
+
+- ``standalone=1`` : 指离线安装包
+- ``platform=win64`` : 指64位Windows版本
+
+只加 standalone=1 则会下载32位的Chrome离线包  
+用 mac 替换 win ，就可以下载 Mac版本  
+
 ## 官方网站
 #### Google网页开发课程
 https://web.developers.google.cn/

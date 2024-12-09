@@ -1,6 +1,9 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
 	"files.eol": "\n", // LF 换行
+	"files.associations": {
+		"*.json": "jsonc", //允许json文件带注释
+	},
 	"dotnetAcquisitionExtension.existingDotnetPath": [
 		// 配置install tool，避免每次都下载
 		{

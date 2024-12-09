@@ -1,0 +1,9 @@
+{
+	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
+	"files.exclude": { //隐藏node_modules目录
+		"**/node_modules": true
+	},
+	// 指定使用工程内的typescript
+	"typescript.tsdk": "node_modules\\typescript\\lib"
+}

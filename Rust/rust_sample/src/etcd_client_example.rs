@@ -1,7 +1,12 @@
-use etcd_client::{Client, ConnectOptions, Error, EventType, GetOptions, PutOptions};
+use etcd_client::{Client, ConnectOptions, EventType, GetOptions, PutOptions};
+use std::error::Error;
 use std::time::Duration;
 use tracing as log;
+use tracing::instrument;
 use uuid::Uuid;
+
+// 导入utils模块（utils.rs）
+mod utils;
 
 // 编译此文件需要 PATH 里面有 protoc.exe
 static PREFIX: &str = "/RustKey";
@@ -28,7 +33,8 @@ impl KV {
     }
 }
 
-async fn etcd_client_async() -> Result<(), Error> {
+#[instrument]
+async fn etcd_client_async() -> Result<(), Box<dyn Error>> {
     // 连接参数
     let conn_timeout: u64 = 1000;
     let option =
@@ -103,7 +109,7 @@ async fn etcd_client_async() -> Result<(), Error> {
 }
 
 // 租约函数
-async fn lease_register_async(client: &mut Client) -> Result<(), Error> {
+async fn lease_register_async(client: &mut Client) -> Result<(), Box<dyn Error>> {
     // 创建租约
     let ttl: i64 = 5;
     let resp = client.lease_grant(ttl, None).await?;
@@ -134,7 +140,7 @@ async fn lease_register_async(client: &mut Client) -> Result<(), Error> {
 }
 
 // 监听函数
-async fn watch_service_async(client: &mut Client) -> Result<(), Error> {
+async fn watch_service_async(client: &mut Client) -> Result<(), Box<dyn Error>> {
     let watch_key: String = format!("{}{}", PREFIX, "/LsKey1");
     let (watcher, mut stream) = client.watch(watch_key, None).await?;
     log::info!("添加监听器成功 watch_id:{}", watcher.watch_id());
@@ -152,11 +158,16 @@ async fn watch_service_async(client: &mut Client) -> Result<(), Error> {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
-    // install global collector configured based on RUST_LOG env var.
-    tracing_subscriber::fmt::init();
-
-    etcd_client_async().await?;
-
+async fn main() -> Result<(), Box<dyn Error>> {
+    // 初始化日志
+    utils::log::init_log_async().await?;
+    // 调用开始
+    let ret = etcd_client_async().await;
+    match ret {
+        Ok(()) => log::info!("Etcd示例运行结束"),
+        Err(e) => {
+            log::error!("Etcd示例运行失败: {}", e)
+        }
+    }
     Ok(())
 }

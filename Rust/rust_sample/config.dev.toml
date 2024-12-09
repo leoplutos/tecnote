@@ -4,3 +4,6 @@ env = "dev"
 log_min_level = "debug"
 # file|console
 log_output = "console"
+
+[datasource]
+url = "postgres://postgres:123456@172.30.8.172:5432/postgres"

@@ -99,5 +99,20 @@
 			"problemMatcher": [],
 			"detail": "运行Etcd示例",
 		},
+		{
+			"label": "cargo_runPostgre",
+			"type": "shell",
+			"command": "cargo",
+			"args": [
+				"run",
+				"--bin",
+				"postgre",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "运行Postgre示例",
+		},
 	]
 }

@@ -9,12 +9,7 @@ mod utils;
 
 #[instrument]
 async fn start_app_async() -> Result<(), Box<dyn Error>> {
-    // 初始化日志
-    // ?的意思为错误传播，如果发生错误就将错误返回(向上传播)
-    // ?可以用来传播Result和Option枚举
-    utils::log::init_log_async().await?;
-
-    // 从config.yaml读取内容
+    // 从config.toml读取内容
     log::info!("读取config和环境变量开始");
     let hacker = utils::config::CONFIG.try_read()?.get_bool("hacker")?;
     log::info!("hacker: {}", hacker);
@@ -24,6 +19,10 @@ async fn start_app_async() -> Result<(), Box<dyn Error>> {
     log::info!("age: {}", age);
     let env = utils::config::CONFIG.try_read()?.get_string("env")?;
     log::info!("env: {}", env);
+    let datasource_url = utils::config::CONFIG
+        .try_read()?
+        .get_string("datasource.url")?;
+    log::info!("datasource_url: {}", datasource_url);
     let src_path = utils::config::CONFIG
         .try_read()?
         .get_string("environment")?;
@@ -39,11 +38,16 @@ async fn start_app_async() -> Result<(), Box<dyn Error>> {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
+    // 初始化日志
+    // ?的意思为错误传播，如果发生错误就将错误返回(向上传播)
+    // ?可以用来传播Result和Option枚举
+    utils::log::init_log_async().await?;
+    // 调用开始
     let ret = start_app_async().await;
     match ret {
-        Ok(()) => log::info!("main运行结束"),
+        Ok(()) => log::info!("App示例运行结束"),
         Err(e) => {
-            log::error!("main运行失败: {}", e)
+            log::error!("App示例运行失败: {}", e)
         }
     }
     Ok(())

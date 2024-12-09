@@ -10,6 +10,8 @@
 				]
 			},
 			"env": { //自定义环境变量
+				// 是否启用Postgre数据库
+				"ASPNETCORE_IS_USE_POSTGRE": "false",
 			}
 		},
 	},
@@ -19,6 +21,8 @@
 				"executable": "bash",
 			},
 			"env": { //自定义环境变量
+				// 是否启用Postgre数据库
+				"ASPNETCORE_IS_USE_POSTGRE": "false",
 			}
 		},
 	},

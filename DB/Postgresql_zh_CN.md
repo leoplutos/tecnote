@@ -28,15 +28,33 @@ docker run -p 5432:5432 --name postgre -v $HOME/workspace/postgre_data/data:/var
 ### C# / .NET
 示例代码  
 [Postgre](../Dotnet/dotnet-core-sample/dotnet-console-sample/Postgre/)
-- PostgreBase.cs : 基础用法
-- PostgreEFCore.cs : ORM用法
+- PostgreBase.cs : 基础用法, 使用 [Npgsql](https://www.npgsql.org/doc/index.html)
+- PostgreEFCore.cs : ORM用法, 使用 [Entity Framework Core](https://www.npgsql.org/efcore/index.html)
 
 ### Java
 示例代码  
 [SpringBootConsole](../Java/SpringBootConsole/)
-- PostgreBaseService.java : 基础 JDBC 用法
-- PostgreJpaService.java : Spring Data JPA 用法
-- PostgreJdbcClientService.java : Spring Boot JdbcClient 用法
+- PostgreBaseService.java : 基础用法, 使用 [JDBC](https://jdbc.postgresql.org/documentation/setup/)
+- PostgreJpaService.java : Java Persistence API 用法, 使用 [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+- PostgreJdbcClientService.java : Spring JdbcClient 用法, 使用 [JdbcClient](https://docs.spring.io/spring-boot/reference/data/sql.html)
+
+### Golang
+示例代码  
+[postgre](../Go/GoSampleProject/src/postgre/)
+- postgre_base.go : 基础用法, 使用 [pgx](https://github.com/jackc/pgx)
+- postgre_orm.go : ORM用法, 使用 [gorm](https://gorm.io/zh_CN/docs/index.html)
+
+### Rust
+示例代码  
+[postgre](../Go/GoSampleProject/src/postgre/)
+- postgre_base.rs : 基础用法, 使用 [sqlx](https://github.com/launchbadge/sqlx)
+- postgre_sea_orm.rs : ORM用法, 使用 [sea-orm](https://github.com/SeaQL/sea-orm)
+
+### Node.js(TypeScript)
+示例代码  
+[postgre](../Web/TSSampleProject/src/postgre/)
+- PostgreBase.ts : 基础用法, 使用 [node-postgres](https://github.com/brianc/node-postgres)
+- PostgreOrm.ts : ORM用法, 使用 [prisma](https://github.com/prisma/prisma)
 
 ## EDB设定
 Oracle中，默认情况下事务中有异常的SQL时，异常SQL前执行的正常SQL对数据库产生的应用会继续保留，并且可以继续执行SQL。提交时正常执行SQL产生的影响都会被提交。

@@ -1,0 +1,19 @@
+// 生成器（表示要生成 Prisma 客户端）
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 数据源（通过环境变量指定数据库连接）
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 数据模型（定义应用程序模型）
+model t_employee {
+  te_pk          String  @id @db.Uuid
+  employee_id    String
+  employe_name   String?
+  employe_email  String?
+  employe_status Int?    @db.SmallInt
+}

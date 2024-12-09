@@ -4,3 +4,6 @@ env = "prd"
 log_min_level = "info"
 # file|console
 log_output = "console"
+
+[datasource]
+url = "postgres://postgres:123456@host.docker.internal:5432/postgres"

@@ -22,7 +22,7 @@ RUN dotnet nuget add source https://nuget.cdn.azure.cn/v3/index.json -n nuget_cn
 RUN dotnet nuget disable source nuget.org
 
 # 设置工作目录
-WORKDIR /opt/app/BackendAspCore
+WORKDIR /opt/app/BackendAspCore/AspWebapi
 
 # 安装依赖
 RUN dotnet clean
@@ -61,7 +61,7 @@ RUN apt-get install -y --no-install-recommends \
         zlib1g
 
 # 从阶段1复制编译结果
-COPY --from=builder /opt/app/BackendAspCore/target /opt/app/BackendAspCore/
+COPY --from=builder /opt/app/BackendAspCore/AspWebapi/target /opt/app/BackendAspCore/
 
 # 设定环境变量
 ENV ASPNETCORE_HTTP_PORTS=9501
@@ -86,7 +86,7 @@ EXPOSE 9501
 CMD ["./AspWebapi"]
 
 # 启动命令
-# docker run -itd \
+# docker run -d \
 #  -p 9501:9501 \
 #  -e ASPNETCORE_HTTP_PORTS=9501 \
 #  --name aspcore_9501 \

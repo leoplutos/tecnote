@@ -63,3 +63,11 @@ http://localhost:9500/
 http://localhost:9501/login  
 取得清单列表接口  
 http://localhost:9501/todo/getAll  
+
+## 其他
+
+### Go 整洁模板
+[Go 整洁模板](https://github.com/evrone/go-clean-template/blob/master/README_CN.md) 是一个 Golang 服务的整洁架构模板
+
+### Gin-vue-admin
+[Gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) 是一套为快速研发准备的一整套前后端分离架构式的开源框架，旨在快速搭建中小型项目  

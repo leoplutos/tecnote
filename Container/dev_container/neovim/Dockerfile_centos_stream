@@ -1,0 +1,443 @@
+# 构建CentOS Stream 9开发环境
+# 使用NeoVim编辑器
+
+# 基础镜像-CentOS Stream 9
+FROM quay.io/centos/centos:stream9
+
+# [参数传递]
+# 宿主机的用户和组
+ARG ARG_USER_ID=1000
+ARG ARG_USER_NAME="centos_dev_usr"
+ARG ARG_USER_PWD="123456"
+ARG ARG_GROUP_ID=1000
+ARG ARG_GROUP_NAME="centos_dev_grp"
+ARG ARG_GITHUB_URL="https://bgithub.xyz"
+ARG ARG_CONTAINER_NAME="centos_dev"
+
+# 设定环境变量
+# 在nvim中判断用
+ENV DOCKER_CONTAINER="true"
+ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
+ENV DOCKER_CONTAINER_USER=$ARG_USER_NAME
+ENV DOCKER_CONTAINER_GROUP=$ARG_GROUP_NAME
+# Github下载地址
+ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_CONFIG_URL=$ARG_GITHUB_URL
+RUN echo "Dev User/Group ID is : ${ARG_USER_ID}/${ARG_GROUP_ID}" && \
+    echo "Dev User/Group NAME is : ${ARG_USER_NAME}/${ARG_GROUP_NAME}" && \
+    echo "Github URL is : ${GITHUB_URL}" && \
+    echo "Github Config URL is : ${GITHUB_CONFIG_URL}"
+
+# 设定 CentOS Stream 9 镜像仓库为国内源
+RUN mv /etc/yum.repos.d/centos.repo /etc/yum.repos.d/centos.repo.backup && \
+    mv /etc/yum.repos.d/centos-addons.repo /etc/yum.repos.d/centos-addons.repo.backup
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+
+RUN echo $'[baseos]\n\
+name=CentOS Stream $releasever - BaseOS\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/BaseOS/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=1\n\
+\n\
+[baseos-debuginfo]\n\
+name=CentOS Stream $releasever - BaseOS - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/BaseOS/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[baseos-source]\n\
+name=CentOS Stream $releasever - BaseOS - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/BaseOS/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[appstream]\n\
+name=CentOS Stream $releasever - AppStream\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/AppStream/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=1\n\
+\n\
+[appstream-debuginfo]\n\
+name=CentOS Stream $releasever - AppStream - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/AppStream/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[appstream-source]\n\
+name=CentOS Stream $releasever - AppStream - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/AppStream/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[crb]\n\
+name=CentOS Stream $releasever - CRB\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/CRB/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-crb-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=1\n\
+\n\
+[crb-debuginfo]\n\
+name=CentOS Stream $releasever - CRB - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/CRB/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-crb-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[crb-source]\n\
+name=CentOS Stream $releasever - CRB - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/CRB/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-crb-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0' > /etc/yum.repos.d/centos.repo
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+
+RUN echo $'[highavailability]\n\
+name=CentOS Stream $releasever - HighAvailability\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/HighAvailability/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=0\n\
+\n\
+[highavailability-debuginfo]\n\
+name=CentOS Stream $releasever - HighAvailability - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/HighAvailability/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[highavailability-source]\n\
+name=CentOS Stream $releasever - HighAvailability - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/HighAvailability/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[nfv]\n\
+name=CentOS Stream $releasever - NFV\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/NFV/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=0\n\
+\n\
+[nfv-debuginfo]\n\
+name=CentOS Stream $releasever - NFV - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/NFV/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[nfv-source]\n\
+name=CentOS Stream $releasever - NFV - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/NFV/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[rt]\n\
+name=CentOS Stream $releasever - RT\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/RT/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-rt-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=0\n\
+\n\
+[rt-debuginfo]\n\
+name=CentOS Stream $releasever - RT - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/RT/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-rt-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[rt-source]\n\
+name=CentOS Stream $releasever - RT - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/RT/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-rt-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[resilientstorage]\n\
+name=CentOS Stream $releasever - ResilientStorage\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/ResilientStorage/$basearch/os\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=0\n\
+\n\
+[resilientstorage-debuginfo]\n\
+name=CentOS Stream $releasever - ResilientStorage - Debug\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/ResilientStorage/$basearch/debug/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-debug-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[resilientstorage-source]\n\
+name=CentOS Stream $releasever - ResilientStorage - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/$releasever-stream/ResilientStorage/source/tree/\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0\n\
+\n\
+[extras-common]\n\
+name=CentOS Stream $releasever - Extras packages\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/SIGs/$releasever-stream/extras/$basearch/extras-common\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-extras-sig-extras-common-$stream&arch=$basearch&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Extras-SHA512\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+countme=1\n\
+enabled=1\n\
+\n\
+[extras-common-source]\n\
+name=CentOS Stream $releasever - Extras packages - Source\n\
+baseurl=https://mirrors.aliyun.com/centos-stream/SIGs/$releasever-stream/extras/source/extras-common\n\
+# metalink=https://mirrors.centos.org/metalink?repo=centos-extras-sig-extras-common-source-$stream&arch=source&protocol=https,http\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Extras-SHA512\n\
+gpgcheck=1\n\
+repo_gpgcheck=0\n\
+metadata_expire=6h\n\
+enabled=0' > /etc/yum.repos.d/centos-addons.repo
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+
+# 创建应用路径
+RUN mkdir /workspace
+# 设置工作目录
+WORKDIR /workspace
+
+# 创建开发用户（避免数据卷为权限为root）
+RUN groupadd -r -g ${ARG_GROUP_ID} ${DOCKER_CONTAINER_GROUP} && \
+    useradd -r -g ${DOCKER_CONTAINER_GROUP} -u ${ARG_USER_ID} -s /bin/bash -m ${DOCKER_CONTAINER_USER}
+# 设定用户密码
+RUN echo "${DOCKER_CONTAINER_USER}:${ARG_USER_PWD}" | chpasswd
+
+# 更新缓存
+RUN dnf clean all && \
+    dnf makecache && \
+    dnf update && \
+# 安装 所需内容
+    dnf install -y epel-release && \
+    dnf install -y which sudo git-all zip unzip xclip ripgrep fd-find dpkg gcc gcc-c++ make
+# RUN dnf group install "Development Tools"
+
+# 安装 protoc
+RUN curl -Lo protoc-29.0-linux-x86_64.zip "${GITHUB_URL}/protocolbuffers/protobuf/releases/download/v29.0/protoc-29.0-linux-x86_64.zip"
+RUN unzip protoc-29.0-linux-x86_64.zip -d protoc
+RUN mv protoc /usr/local/protoc
+RUN rm -f protoc-29.0-linux-x86_64.zip
+RUN ln -s /usr/local/protoc/bin/protoc /usr/bin/protoc
+
+# 安装neovim
+#RUN curl -Lo nvim.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
+RUN curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz"
+RUN tar xzvf nvim-linux64.tar.gz
+RUN mv nvim-linux64 /usr/local/nvim
+RUN rm -f nvim-linux64.tar.gz
+RUN ln -s /usr/local/nvim/bin/nvim /usr/bin/nvim
+
+# 安装 gosu
+# gosu 是经常出现在官方Docker镜像中的一个小工具。它是"su"和"sudo"命令的轻量级替代品，并解决了它们在tty和信号传递中的一些问题
+RUN curl -sSL -o /usr/local/bin/gosu "${GITHUB_URL}/tianon/gosu/releases/download/1.17/gosu-$(dpkg --print-architecture | awk -F- '{ print $NF }')"
+RUN chmod +x /usr/local/bin/gosu
+
+# 安装lazygit
+#RUN LAZYGIT_VERSION=$(curl -s "https://api.kkgithub.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+RUN curl -Lo lazygit.tar.gz "${GITHUB_URL}/jesseduffield/lazygit/releases/latest/download/lazygit_0.44.1_Linux_x86_64.tar.gz"
+RUN tar xf lazygit.tar.gz lazygit
+RUN install lazygit /usr/local/bin
+RUN rm -f lazygit.tar.gz
+RUN rm -f lazygit
+
+# 将用户添加到 sudo 组以便可以运行 sudo 命令（默认情况下 CentOS 使用 wheel 组来管理 sudo 权限）
+RUN usermod -aG wheel ${DOCKER_CONTAINER_USER}
+
+# 修改权限
+RUN chown -R $DOCKER_CONTAINER_USER:$DOCKER_CONTAINER_GROUP /workspace
+
+# 安装 .NET SDK
+# https://learn.microsoft.com/zh-cn/dotnet/core/install/linux-rhel
+# dnf install dotnet-sdk-8.0
+# dnf install aspnetcore-runtime-8.0
+# dnf install dotnet-runtime-8.0
+# dotnet --version
+# 确认是否含有依赖库
+# dnf list installed krb5-libs libicu openssl-libs zlib
+
+# 安装 Java21
+# export GITHUB_URL="https://bgithub.xyz"
+# curl -Lo OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz "${GITHUB_URL}/adoptium/temurin21-binaries/releases/download/jdk-21.0.5%2B11/OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz"
+# tar -xvf OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+# mkdir -p /opt/java
+# mv jdk-21.0.5+11 /opt/java/openjdk
+# rm -f OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+# 生成软连接（Debian系下此命令为update-alternatives）
+# alternatives --install /usr/bin/java java /opt/java/openjdk/bin/java 10
+# ls -l /usr/bin/java
+# java --version
+# 选择软连接
+# alternatives --config java
+# 安装Maven
+# curl -Lo apache-maven-3.9.9-bin.tar.gz "https://mirrors.aliyun.com/apache/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz"
+# tar -xvf apache-maven-3.9.9-bin.tar.gz
+# mkdir -p /usr/share
+# mv apache-maven-3.9.9 /usr/share/maven
+# rm -f apache-maven-3.9.9-bin.tar.gz
+# 生成软连接（Debian系下此命令为update-alternatives）
+# alternatives --install /usr/bin/mvn mvn /usr/share/maven/bin/mvn 10
+# ls -l /usr/bin/mvn
+# mvn --version
+
+# 安装 Golang
+# curl -Lo go1.23.3.linux-amd64.tar.gz "https://go.dev/dl/go1.23.3.linux-amd64.tar.gz"
+# tar -xvf go1.23.3.linux-amd64.tar.gz
+# mkdir -p /usr/local
+# mv go /usr/local/go
+# rm -f go1.23.3.linux-amd64.tar.gz
+# 生成软连接（Debian系下此命令为update-alternatives）
+# alternatives --install /usr/bin/go go /usr/local/go/bin/go 10
+# ls -l /usr/bin/go
+# go version
+
+# 安装 Rust
+# dnf install -y gcc gcc-c++ make
+# export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+# export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# source "$HOME/.cargo/env"
+# cargo --version
+# rustc --version
+
+# 安装 Node.js 20
+# dnf module enable nodejs:20 -y
+# dnf module install nodejs -y
+# node --version
+# npm --version
+
+# 安装 Python
+# dnf install python python3-pip -y
+# python --version
+# pip --version
+
+# 切换用户
+USER ${DOCKER_CONTAINER_USER}
+
+# git设定
+RUN git config --global user.name "yourname" && \
+    git config --global user.email "your@email.com" && \
+    git config --global gui.encoding utf-8 && \
+    git config --global color.ui true && \
+    git config --global core.autoCRLF false && \
+    git config --global core.ignorecase false && \
+    git config --global core.sparseCheckout true && \
+    git config --global credential.helper store
+
+# neovim配置一键安装
+ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
+# ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
+RUN set -eux && curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+
+WORKDIR /workspace
+
+# 个人习惯定制化
+RUN echo $'\n\
+PS_GREEN="\[\033[0;32m\]"\n\
+PS_YELLOW="\[\033[0;33m\]"\n\
+PS_BLUE="\[\033[0;34m\]"\n\
+PS_MAGENTA="\[\033[0;35m\]"\n\
+PS_CLEAR="\[\033[0m\]"\n\
+export PS1="${PS_GREEN}[${DOCKER_CONTAINER_NAME}]${PS_MAGENTA}\u@\h${PS_CLEAR}:${PS_YELLOW}\w${PS_CLEAR}\n${PS_BLUE}\$ ${PS_CLEAR}"\n\
+alias ll="ls -hl --full-time --color=auto"\n\
+alias lg="lazygit"\n\
+alias vi="nvim"\n\
+alias vim="nvim"\n\
+' >> $HOME/.bashrc
+
+# 切换用户
+USER root
+
+# 设置默认入口命令
+# ENTRYPOINT ["/bin/bash"]
+# 使用gosu切换到开发用户
+ENTRYPOINT ["sh", "-c", "exec gosu ${DOCKER_CONTAINER_USER} /bin/bash"]

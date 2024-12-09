@@ -7,9 +7,10 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/
 # 创建应用路径
 RUN mkdir /opt/app
 
-# 添加bash
+# 添加bash和libc6-compat
+# https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine
 RUN apk update --quiet
-RUN apk add --no-cache --upgrade bash
+RUN apk add --no-cache --upgrade bash libc6-compat
 
 # 复制所有html文件
 COPY *.html /opt/app/FetchDemo/

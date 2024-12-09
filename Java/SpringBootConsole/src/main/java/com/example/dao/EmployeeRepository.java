@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // spring.datasource.url
 // spring.datasource.username
 // spring.datasource.password
-public interface LoginRepository extends JpaRepository<Login, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@SuppressWarnings({ "unchecked", "null" })
-	Login save(Login login);
+	Employee save(Employee employee);
 
-	Optional<Login> findByLoginId(String loginId);
+	Optional<Employee> findByEmployeeId(String employeeId);
 }

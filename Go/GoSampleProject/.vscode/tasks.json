@@ -49,6 +49,31 @@
 			"detail": "保持依赖整洁",
 		},
 		{
+			"label": "go_build",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"./bin/gosample",
+				"./src/main.go",
+			],
+			"windows": {
+				"command": "go",
+				"args": [
+					"build",
+					"-o",
+					"./bin/gosample.exe",
+					"./src/main.go",
+				],
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "编译工程",
+		},
+		{
 			"label": "go_run_hello",
 			"type": "shell",
 			"command": "go",
@@ -91,6 +116,21 @@
 			},
 			"problemMatcher": [],
 			"detail": "运行Etcd示例",
+		},
+		{
+			"label": "go_run_postgre",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"run",
+				"./src/main.go",
+				"Postgre",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "运行Postgre示例",
 		},
 	]
 }

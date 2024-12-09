@@ -11,12 +11,22 @@ path = "src/redis_client_example.rs"
 name = "etcd"
 path = "src/etcd_client_example.rs"
 
+[[bin]] # 运行 Postgre 客户端
+name = "postgre"
+path = "src/postgre_client_example.rs"
+
 [dependencies]
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["chrono"] }
 config = "0.14.0"
 lazy_static = "1.5.0"
-uuid = { version = "1.10.0", features = ["v4", "fast-rng", "macro-diagnostics"] }
+uuid = { version = "1.11.0", features = ["v4", "v7", "fast-rng", "macro-diagnostics"] }
 redis = "0.26.1"
 etcd-client = "0.14"
 tokio = { version = "1.0", features = ["full"] }
+rand = "0.8"
+sqlx = { version = "0.8", features = ["postgres", "runtime-tokio", "macros", "chrono", "uuid"] }
+sea-orm = { version = "1.1", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros", "debug-print", "with-chrono", "with-uuid"] }
+log = "0.4"
+# 将idna版本固定在1.0.2，如果使用 Rust 1.8.1以上可以删除下面这行
+idna = "=1.0.2"
