@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<!--
+	<meta http-equiv="Content-Security-Policy" content="base-uri 'self';
+			   default-src 'self';
+			   img-src data: https:;
+			   object-src 'none';
+			   script-src 'self';
+			   style-src 'self';
+			   upgrade-insecure-requests;">
+	-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<base href="/" />
+	<script src="_content/AntDesign/js/ant-design-blazor.js"></script>
+	<link rel="stylesheet" href="_content/AntDesign/css/ant-design-blazor.css" />
+	<link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" href="app.css" />
+	<link rel="stylesheet" href="FullStackBlazor.styles.css" />
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<script>
+		function submitLogoutForm() {
+			const form = document.querySelector('form[action="Account/Logout"]');
+			if (form) {
+				form.submit();
+			}
+		}
+	</script>
+	<HeadOutlet />
+</head>
+
+<body>
+	<Routes @rendermode="RenderMode.InteractiveServer" />
+	<AntContainer @rendermode="RenderMode.InteractiveServer" />
+	<script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>

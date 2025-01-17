@@ -5,6 +5,9 @@ Windows键 + s 打开搜索输入 Clear 会看到 “调整ClearType文本”。
 在第一个画面选择【启用 ClearType】，然后下一步,  
 后面会有5步选项，每步选择你看起来更清晰更舒服的即可。
 
+## 字体测试文件
+* [programmingfonts.js](./font/programmingfonts.js)
+
 ## 字体测试网站
 * [programmingfonts](https://www.programmingfonts.org/)
 
@@ -66,9 +69,15 @@ sarasa-mono-j-regular.ttf（日文开发）
 sarasa-mono-j-light.ttf（日文开发）
 ```
 
+#### Maple-font
+https://github.com/subframe7536/Maple-font
+
+下载 ``NF-CN`` 的 ``Hinted font`` 版本即可  
+如果用于高分辨率屏幕（例如 MacBook）则需要使用 ``Unhinted font`` 版本
+
 #### Inconsolata
 
-Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。
+Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。  
 
 * [**Inconsolata-NerdFont-github**](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Inconsolata)  
     下载地址为：  
@@ -86,6 +95,7 @@ Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一�
 
 * [**Consolas连字版本-github**](https://github.com/somq/consolas-ligaturized)  
 * [**Consolas-NerdFont版本-github**](https://github.com/Znuff/consolas-powerline)  
+* [**Consolas-霞鹜文楷lxgw-github**](https://github.com/MichaelC001/Consolas-Nerd-LXGW-Wenkai-Mono)  
 
 #### Cascadia Code
  Cascadia 是微软出品的一款开源等宽字体，Windows Terminal 中的默认字体就是它。目前有四个变种，Mono 表示不连字，PL 表示 PowerLine。

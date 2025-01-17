@@ -2,7 +2,7 @@
 
 ## 在 Docker 中运行 Postgres
 
-[Tags 说明](https://github.com/docker-library/docs/blob/master/postgres/README.md)
+- [postgres tags 说明](https://github.com/docker-library/docs/blob/master/postgres/README.md)
 
 拉取镜像与启动容器
 ```bash
@@ -10,7 +10,7 @@
 docker pull postgres:17.1-alpine3.20
 
 # 创建本地数据卷保存数据库内容
-mkdir $HOME/workspace/postgre_data/data
+mkdir -p $HOME/workspace/postgre_data/data
 
 # 启动容器
 docker run -p 5432:5432 --name postgre -v $HOME/workspace/postgre_data/data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 -d postgres:17.1-alpine3.20
@@ -19,6 +19,7 @@ docker run -p 5432:5432 --name postgre -v $HOME/workspace/postgre_data/data:/var
 使用 ``A5M2`` 或者 ``DBeaver`` 连接数据库
 
 - ``Server Name``: 容器宿主机的IP
+- ``Port Number``: 5432
 - ``Database Name``: postgres
 - ``User ID``: postgres
 - ``Password``: 123456

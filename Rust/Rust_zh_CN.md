@@ -1,5 +1,56 @@
 # Rust 相关
 
+## 编程技巧
+
+### Option 的匹配
+
+#### 使用 ``if let``
+
+``if let`` 用于匹配一个模式，而忽略剩下的所有模式
+```rust
+// if let 取得的值只可以在 {} 中使用
+if let Some(num1) = Some(123) {
+    println!("num1: {}", num1);
+}
+```
+
+#### 使用 ``let-else``（Rust 1.65 新增）
+
+``let-else`` 匹配，可使 let 变为可驳模式。它可以使用 else 分支来处理模式不匹配的情况，但是 else 分支中必须用发散的代码块处理（例如：break、return、panic）
+
+```rust
+// let-else 取得的值可以在 {} 外使用
+let Some(num2) = Some(123) else {
+    panic!("无法取得值")
+};
+println!("num2: {}", num2);
+```
+
+### Result 的匹配
+
+#### 使用 ``unwrap_or()``
+
+当 Result 对象是 Ok 时，返回 Ok 中的值。但是当 Result 对象是 Err 时，``unwrap_or()`` 用于返回一个默认值
+```rust
+let num3_result: Result<i32, &str> = Err("发生错误，无法取得数字");
+// 使用 unwrap_or 返回默认值
+let num3 = num3_result.unwrap_or(73);
+println!("num3: {}", num3);
+```
+
+#### 使用 ``unwrap_or_else()``
+
+当 Result 对象是 Ok 时，返回 Ok 中的值。但是当 Result 对象是 Err 时，``unwrap_or_else()`` 将调用一个闭包，并返回闭包的结果
+```rust
+let num3_result: Result<i32, &str> = Err("发生错误，无法取得数字");
+// 使用 unwrap_or_else 返回闭包的结果
+let num4 = num3_result.unwrap_or_else(|err| {
+    println!("error message: {}", err);
+    74
+});
+println!("num4: {}", num4);
+```
+
 ## Rust 的多模块工作区（Workspace）
 
 工程示例

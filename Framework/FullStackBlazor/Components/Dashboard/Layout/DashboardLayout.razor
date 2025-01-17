@@ -1,0 +1,136 @@
+@inherits LayoutComponentBase
+@inject ILogger<DashboardLayout> Logger
+@inject NavigationManager NavigationManager
+@inject IJSRuntime IJSRuntime
+@inject Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider AuthenticationStateProvider
+
+<!-- Ant Design Blazor组件必须使用 div 包裹 -->
+<div>
+	<Layout>
+		<Header>
+			<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+				<div>
+					<Space>
+						<SpaceItem>
+							@if (collapsed)
+							{
+								<Icon Type="@IconType.Outline.MenuUnfold" Class="header-icon" OnClick="toggle" />
+							}
+							else
+							{
+								<Icon Type="@IconType.Outline.MenuFold" Class="header-icon" OnClick="toggle" />
+							}
+						</SpaceItem>
+						<SpaceItem>
+							<PageHeader Class="site-page-header" Title="文件管理系统" />
+						</SpaceItem>
+					</Space>
+				</div>
+				<div>
+					<Space style="align-items: center;">
+						<SpaceItem>
+							<Icon Type="@IconType.Outline.Bell" Class="header-icon" />
+						</SpaceItem>
+						<SpaceItem>
+							<Menu Mode="MenuMode.Horizontal" Theme="MenuTheme.Light">
+								<SubMenu title="@($"欢迎, {userName ?? "访客"}")">
+									<MenuItemGroup Title="我的账号">
+									</MenuItemGroup>
+									<MenuDivider />
+									<MenuItemGroup>
+										<MenuItem Key="setting1" Icon="user">个人信息</MenuItem>
+										<MenuItem Key="setting2" Icon="setting">设置</MenuItem>
+									</MenuItemGroup>
+									<MenuDivider />
+									<MenuItemGroup>
+										<MenuItem Key="setting3" OnClick="HandleLogout">
+										<Icon Type="@IconType.Outline.Logout" />
+										<span class="nav-text">退出登录</span>
+										</MenuItem>
+									</MenuItemGroup>
+								</SubMenu>
+							</Menu>
+						</SpaceItem>
+					</Space>
+				</div>
+			</div>
+		</Header>
+		<Layout>
+			<Sider @bind-Collapsed=@collapsed OnCollapse="OnCollapse" Breakpoint="BreakpointType.Lg"
+				CollapsedWidth="64">
+				<div class="logo" />
+				<Menu Theme="MenuTheme.Light" Mode="MenuMode.Inline" DefaultSelectedKeys=@(new[]{"1"})>
+					<MenuItem Key="1" RouterLink="Dashboard">
+					<Icon Type="@IconType.Outline.Dashboard" />
+					<span class="nav-text">仪表盘</span>
+					</MenuItem>
+					<MenuItem Key="2" RouterLink="Dashboard/Counter">
+					<Icon Type="@IconType.Outline.Calculator" />
+					<span class="nav-text">计数器</span>
+					</MenuItem>
+					<MenuItem Key="3" RouterLink="Dashboard/Weather">
+					<Icon Type="@IconType.Outline.VideoCamera" />
+					<span class="nav-text">天气</span>
+					</MenuItem>
+					<MenuItem Key="4" RouterLink="Dashboard/Users">
+					<Icon Type="@IconType.Outline.Upload" />
+					<span class="nav-text">用户管理</span>
+					</MenuItem>
+				</Menu>
+			</Sider>
+			<Content>
+				@Body
+			</Content>
+		</Layout>
+		<Footer>Ant Design ©2025 Created by Ant</Footer>
+	</Layout>
+	<form action="Account/Logout" method="post" style="display: none;">
+		<AntiforgeryToken />
+		<input type="hidden" name="ReturnUrl" value="" />
+		<button type="submit" class="nav-link">
+			<span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
+		</button>
+	</form>
+</div>
+
+
+@code {
+	// 展开/关闭
+	private bool collapsed;
+	// 用户名
+	private string? userName;
+
+	// 画面初期化
+	protected override async Task OnInitializedAsync()
+	{
+		//获取用户状态
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var user = authState.User;
+		if (user?.Identity?.IsAuthenticated == true)
+		{
+			// 获取用户名字
+			userName = user.Identity.Name;
+		}
+	}
+
+	// 切换展开/关闭
+	private void toggle()
+	{
+		collapsed = !collapsed;
+	}
+
+	private void OnCollapse(bool isCollapsed)
+	{
+		//Console.WriteLine($"Collapsed: {isCollapsed}");
+		Logger.LogInformation($"Collapsed: {isCollapsed}");
+	}
+
+	// 登出
+	private async Task HandleLogout()
+	{
+		Logger.LogInformation("登出成功");
+		// NavigationManager.NavigateTo("/");
+		// 调用 JavaScript 提交表单, submitLogoutForm 函数在 App.razor 中定义
+		await IJSRuntime.InvokeVoidAsync("submitLogoutForm");
+	}
+}

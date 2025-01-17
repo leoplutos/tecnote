@@ -116,5 +116,31 @@
 			"problemMatcher": [],
 			"detail": "运行Postgre客户端示例",
 		},
+		{
+			"label": "bun_runMongoExample",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"src/MongoClientExample.ts",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "运行Mongo客户端示例",
+		},
+		{
+			"label": "bun_runAWSExample",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"src/AWSExample.ts",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "运行AWS客户端示例",
+		},
 	]
 }

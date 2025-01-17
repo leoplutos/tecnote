@@ -31,6 +31,20 @@ WebSocket 与 ``HTTP`` 和 ``HTTPS`` 使用相同的 ``TCP`` 端口（即 ``80``
 一个 WebSocket 客户端示例
  - [WebSocketClient.html](WebSocketClient.html)
 
+## Hoho.js
+Hono 在日语中意为火焰🔥，是一个快速、轻量的 Web 框架，它可以使用 Web 标准在任何 JavaScript 运行的环境中运行。包括 ``Cloudflare Workers``、``Fastly Compute``、``Deno``、``Bun``、``Vercel``、``Netlify``、``AWS Lambda``、``Lambda@Edge`` 和 ``Node.js``
+
+### 官网
+
+- [Github](https://github.com/honojs/hono)
+- [官网](https://hono.dev/)
+
+### 快速开始
+```bash
+# npm create hono@latest
+bun create hono@latest
+```
+
 ## CSS 开源 UI 框架 - Pico.css
 
 #### Pico.css 框架的特点
@@ -45,7 +59,7 @@ WebSocket 与 ``HTTP`` 和 ``HTTPS`` 使用相同的 ``TCP`` 端口（即 ``80``
 
 - 专为最新的稳定 Chrome、Firefox、Edge 和 Safari 版本而设计和测试。不支持任何版本的 IE，包括 IE 11
 
-#### 官网
+### 官网
 
 - [Github](https://github.com/picocss/pico)
 - [官网](https://picocss.com/)
@@ -83,6 +97,19 @@ node server.js
 ```bash
 dotnet run --project AspWebapi
 ```
+
+## Lodash
+Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库
+
+- [Github](https://github.com/lodash/lodash)
+- [中文官网](https://www.lodashjs.com/)
+- [debounce 防抖函数](https://www.lodashjs.com/docs/lodash.debounce#_debouncefunc-wait0-options)
+
+## ECharts
+ECharts 是一款基于 JavaScript 的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表
+
+- [Github](https://github.com/apache/echarts)
+- [中文官网](https://echarts.apache.org/zh/index.html)
 
 ## 公共API速查表
 https://github.com/public-apis/public-apis

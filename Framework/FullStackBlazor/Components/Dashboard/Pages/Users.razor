@@ -1,0 +1,13 @@
+@page "/Dashboard/Users"
+
+<PageTitle>用户管理</PageTitle>
+
+<Flex Gap="FlexGap.Middle" Vertical>
+	<PageHeader Title="用户管理" />
+	<div>你已通过校验</div>
+	<div>
+		<AuthorizeView>
+			你好 @context.User.Identity?.Name!
+		</AuthorizeView>
+	</div>
+</Flex>

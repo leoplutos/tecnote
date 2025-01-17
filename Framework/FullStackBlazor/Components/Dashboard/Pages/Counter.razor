@@ -1,0 +1,19 @@
+@page "/Dashboard/Counter"
+@rendermode InteractiveServer
+
+<PageTitle>计数器</PageTitle>
+
+<Flex Gap="FlexGap.Middle" Vertical>
+	<PageHeader Title="计数器" />
+	<div role="status">当前计数: @currentCount</div>
+	<div><Button Type="ButtonType.Primary" @onclick="IncrementCount">按 我</Button></div>
+</Flex>
+
+@code {
+	private int currentCount = 0;
+
+	private void IncrementCount()
+	{
+		currentCount++;
+	}
+}

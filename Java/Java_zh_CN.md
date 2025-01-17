@@ -218,6 +218,34 @@ javap -v com/spring/net/a.class
 ## OkHTTP,Moshi,Soap通信,JAXB,XSD解析,JUnit等例子
  - [OkHttpTest](./OkHttpTest)
 
+## XSD解析
+JAXB (Java Architecture for XML Binding) 是一个业界的标准，是一项可以根据 XML Schema 产生 Java 类的技术
+
+### 使用 XSD 生成 Java 类
+最简单的方式为在 pom.xml 中使用 ``jaxb2-maven-plugin`` 插件, 例子可以看 [pom.xml](./OkHttpTest/pom.xml)
+
+默认情况下，将 XSD 文件放在 ``src/main/xsd`` 中，即可在 ``target/generated-sources/jaxb`` 生成 Java 类
+
+### 使用 Java 类生成 XML
+
+```java
+// 创建自动生成的类的实例并设置属性
+CodeDescriptionPair shipmentType = new CodeDescriptionPair();
+shipmentType.setCode("SHI");
+Shipment shipment = new Shipment();
+shipment.setShipmentType(shipmentType);
+UniversalShipmentData data = new com.cargowise.schemas.universal._2011._11.ObjectFactory().createUniversalShipmentData();
+data.setShipment(shipment);
+// 这里一定要用ObjectFactory来生成跟节点, 不然报错缺少@XmlRootElement
+JAXBElement<UniversalShipmentData> root = new com.cargowise.schemas.universal._2011._11.ObjectFactory().createUniversalShipment(data);
+// 使用 JAXB 来生成 XML
+JAXBContext context = JAXBContext.newInstance(UniversalShipmentData.class);
+Marshaller mar = context.createMarshaller();
+mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+mar.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+mar.marshal(root, new File("./output.xml"));
+```
+
 ## 其他
 
 ### MapStruct-对象属性复制

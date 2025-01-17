@@ -1,0 +1,200 @@
+@page "/Dashboard/Weather"
+@attribute [StreamRendering]
+@using System.ComponentModel.DataAnnotations
+@using AntDesign.TableModels
+
+<PageTitle>天气</PageTitle>
+
+<!-- Ant Design Blazor组件必须使用 div 包裹 -->
+<div>
+	<Flex Gap="FlexGap.Middle" Vertical>
+		<PageHeader Title="天气" />
+		<div>
+			@if (_weatherList == null || _weatherList.Count == 0)
+			{
+				<div>
+					<Spin Size="SpinSize.Large" /> 天气信息加载中...
+				</div>
+			}
+			else
+			{
+				<Table @ref="_table" TItem="ItemData" PageSize="5" Total="_total" DataSource="_dataSource"
+					@bind-SelectedRows="_selectedRows" OnChange="OnChange">
+					<TitleTemplate>
+						<Flex Justify="FlexJustify.End" Gap="@("10")">
+							<Button Type="ButtonType.Primary" OnClick="() => StartEdit(default)">新建</Button>
+							<Button Disabled="!_selectedRows.Any()" Danger OnClick="DeleteAll">删除选中</Button>
+						</Flex>
+					</TitleTemplate>
+					<ColumnDefinitions Context="row">
+						<Selection />
+						<!-- <GenerateColumns Definitions="@((n,c) => { c.Filterable = true; c.Sortable = true; })" /> -->
+						<PropertyColumn Property="c=>c.Id" Sortable Filterable Title="ID">
+							<a class="tbl-lnk" @onclick="() => StartEdit(row)">@row.Id</a>
+						</PropertyColumn>
+						<PropertyColumn Property="c=>c.Name" Sortable Filterable Title="名称" />
+						<PropertyColumn Property="c=>c.Age" Sortable Filterable Title="年龄" />
+						<PropertyColumn Property="c=>c.Address" Sortable Filterable Title="地址" />
+						<ActionColumn Title="操作">
+							<a class="tbl-lnk" @onclick="() => StartEdit(row)">编辑</a>
+							<a class="tbl-lnk" @onclick="() => Delete(row)">删除</a>
+						</ActionColumn>
+					</ColumnDefinitions>
+				</Table>
+			}
+		</div>
+	</Flex>
+</div>
+
+@inject ModalService ModalService;
+@inject ConfirmService ComfirmService;
+
+@code {
+
+	// 天气信息
+	private List<ItemData> _weatherList = new();
+	// 当前页数据源
+	private List<ItemData>? _dataSource;
+	// 选择的行
+	private IEnumerable<ItemData> _selectedRows = [];
+	// Table引用
+	private ITable? _table;
+	// 总件数引用
+	private int _total;
+	// 页面是否连接
+	private bool _isConnected;
+
+	// 每次以交互方式呈现组件后调用的方法并且 UI 已完成更新
+	protected override Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			_isConnected = true;
+			return Task.CompletedTask;
+		}
+		return base.OnAfterRenderAsync(firstRender);
+	}
+
+	// 页面初始化
+	protected override async Task OnInitializedAsync()
+	{
+		await Task.Delay(500);
+		_weatherList = Enumerable.Range(0, 20).Select(i => new ItemData
+						{
+							Id = i + 1,
+							Name = $"Edrward {i + 1}",
+							Age = 32,
+							Address = $"London Park no. {i + 1}"
+						}).ToList();
+	}
+
+	// Table内容发生变化触发的事件
+	private async Task OnChange(QueryModel<ItemData> query)
+	{
+		await Task.Delay(0);
+		try
+		{
+			if (!_isConnected)
+			{
+				return;
+			}
+			// 过滤当前页天气信息
+			var queryResult = _weatherList.AsQueryable().ExecuteTableQuery(query);
+			_total = queryResult.Count();
+			_dataSource = queryResult.CurrentPagedRecords(query).ToList();
+		}
+		catch (Exception)
+		{
+			_total = 0;
+			_dataSource = null;
+		}
+		finally
+		{
+		}
+	}
+
+	// 编辑天气
+	private void StartEdit(ItemData? row)
+	{
+		var data = row == null ? new() : row with { };
+		ModalRef<bool> modalRef = default!;
+		IForm form = default!;
+		modalRef = ModalService.CreateModal<bool>(new()
+						{
+							Title = data.Id > 0 ? "编辑" : "新建",
+							Content = @<Form @ref="form" Model="data" OnFinish="()=> modalRef.OkAsync(true)" LabelColSpan="6" WrapperColSpan="18">
+										<GenerateFormItem NotGenerate="@(x=> x == "Id")" />
+									</Form>,
+							OnOk = async (e) =>
+							{
+								if (!form.Validate())
+								{
+									return;
+								}
+								// save db and refresh
+								modalRef.SetConfirmLoading(true);
+								if (data.Id > 0)
+								{
+									var index = _weatherList.FindIndex(x => x.Id == data.Id);
+									_weatherList[index] = data;
+								}
+								else
+								{
+									data.Id = _weatherList.Max(x => x.Id) + 1;
+									_weatherList.Add(data);
+								}
+								await Task.Delay(1000);
+								await modalRef.CloseAsync();
+								_table?.ReloadData();
+								StateHasChanged();
+							},
+							OnCancel = async (e) =>
+							{
+								if (form.IsModified && (!await Comfirm("表格已更新，确定退出？")))
+								{
+									return;
+								}
+								await modalRef.CloseAsync();
+							}
+						});
+	}
+
+	// 删除所有天气
+	private async Task DeleteAll()
+	{
+		if (!await Comfirm($"确定删除 {_selectedRows.Count()} 行天气？"))
+		{
+			return;
+		}
+		_weatherList = _weatherList.Except(_selectedRows).ToList();
+		_selectedRows = [];
+		_table?.ReloadData();
+	}
+
+	// 删除天气
+	private async Task Delete(ItemData row)
+	{
+		if (!await Comfirm($"确定删除 [{row.Name}] ？"))
+		{
+			return;
+		}
+		_weatherList = _weatherList.Except(new[] { row }).ToList();
+		_table?.ReloadData();
+	}
+
+	// 确认对话框
+	private async Task<bool> Comfirm(string message)
+	{
+		return await ComfirmService.Show(message, "确认", ConfirmButtons.YesNo, ConfirmIcon.Warning) == ConfirmResult.Yes;
+	}
+
+	// 天气数据
+	private record ItemData
+	{
+		public int Id { get; set; }
+		[Required]
+		public string? Name { get; set; }
+		public int? Age { get; set; }
+		public string? Address { get; set; }
+	}
+}

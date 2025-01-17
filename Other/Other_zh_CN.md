@@ -2,6 +2,9 @@
 
 ## 常用颜色
 
+#### 人工智能配色
+https://aicolors.co/  
+
 #### 取颜色码
 * [菜鸟工具-图片取色器](https://c.runoob.com/front-end/6214/)
 
@@ -277,6 +280,10 @@ https://github.com/gchq/CyberChef
 ## 自我托管的PDF操作神器:Stirling-PDF
 https://github.com/Stirling-Tools/Stirling-PDF
 
+## 重命名工具
+MediaFileDateFixer 用来将照片和视频元数据（Exif 等）的日期/时间复制到文件修改日期
+https://github.com/schellingb/MediaFileDateFixer
+
 ## 自我托管的软件列表
 https://github.com/awesome-selfhosted/awesome-selfhosted
 
@@ -295,6 +302,10 @@ https://github.com/RustScan/rustscan
 
 ## 无限画布工具 Lorien
 https://github.com/mbrlabs/Lorien
+
+## 画图
+https://www.drawio.com/  
+https://excalidraw.com/  
 
 ## 其他软件
 
@@ -322,5 +333,7 @@ https://github.com/Flow-Launcher/Flow.Launcher
 ## 开源的Google Play商店客户端，无需谷歌框架，可以使用匿名账户登录并下载应用程序
 https://mp.weixin.qq.com/s/2QHDHYBUuT-6VBGz1KywRQ
 
-
+## 简历生成器
+https://github.com/AmruthPillai/Reactive-Resume  
+https://rxresu.me/  
 

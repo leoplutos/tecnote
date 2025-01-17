@@ -44,9 +44,23 @@ export CDPATH=.:/var/log:/var/www
 
 # Shebang
 在Linux系统下文件的第一行注释叫做  ``Shebang``
-一般推荐如下写法
-```text
+
+``/usr/bin/env`` 是一种常用的 ``Unix/Linux`` 命令，主要用于查找和执行程序。它的主要作用是在不直接指定解释器路径的情况下运行脚本或程序，这样可以使脚本更具可移植性。
+
+``env`` 命令会在环境变量 ``PATH`` 中搜索指定的命令，并执行找到的第一个匹配的命令。这使得您可以不必关心命令的具体位置。
+
+下面给出几个例子
+
+## 使用系统bash运行
+```bash
 #!/usr/bin/env bash
+echo $BASH_VERSION
+```
+
+## 使用python运行
+```python
+#!/usr/bin/env python
+print('111')
 ```
 
 # 文件权限

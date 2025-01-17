@@ -100,6 +100,9 @@ npm run dev
 
 Next.js 特别适合个人项目, 一套代码前后端全部搞定
 
+### Next.js 全栈研发架构指南
+https://arno.surfacew.com/posts/cn/nextjs-architecture-cn
+
 ### 使用 Next.js 构建的示例
 
 #### 创建 Next.js 工程

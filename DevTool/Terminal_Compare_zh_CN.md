@@ -40,17 +40,24 @@ WindTerm虽然支持的功能很多，但是如果使用Vim等TUI程序的话显
 ```
 $HOME/.wezterm.lua
 ```
-注：Windows平台下，和``wezterm.exe``同路径下建立配置文件``wezterm.lua``也可以，这种情况文件名没有点
+注：Windows平台下，和 ``wezterm.exe`` 同路径下建立配置文件 ``wezterm.lua`` 也可以，这种情况文件名没有点
 
 ### WezTerm作为SSH客户端的启动方式
 正常使用命令
-```
+```bash
+# 使用 wezterm 命令会多弹出一个控制台显示一些信息
 wezterm ssh -- user@ipaddress:8122
+# 或者
+# 使用 wezterm-gui 不会多弹出一个控制台
+wezterm-gui ssh -- user@ipaddress:8122
 ```
-即可连接到SSH服务器使用，但是有一个问题是控制台会有2个，而且主控制台关闭之后，SSH客户端也跟着被一起杀死了  
+关于 ``wezterm`` 和 ``wezterm-gui`` 的区别可以看 [官方文档](https://wezfurlong.org/wezterm/cli/general.html)
 
-解决方式为新建一个cmd批处理文件
-```
+### 屏蔽使用 wezterm 时的多出的控制台
+直接使用 ``wezterm-gui`` 命令即可，如果非要使用 ``wezterm`` 命令可以按如下方式
+
+新建一个cmd批处理文件
+```bash
 @echo off
 if "%1" == "h" goto begin
 mshta vbscript:createobject("wscript.shell").run("%~nx0 h",0)(window.close)&&exit
@@ -61,11 +68,11 @@ start /b D:\Tools\WorkTool\Linux\WezTerm\wezterm ssh -- lchuser@172.20.115.248:8
 
 ### Lua配置文件调试方式
 可以用如下方式启动
-```
+```bash
 wezterm-gui.exe 2> D:\Tools\WorkTool\Linux\WezTerm\log_strerr.log
 ```
 然后在配置文件里
-```
+```lua
 wezterm.log_error('hello')
 ```
 就可以将log输出在文件里
@@ -81,7 +88,7 @@ wezterm.log_error('hello')
 
 #### Windows 一键设定配置文件
 需要 ``curl``，使用 cmd 运行
-```
+```bash
 SET GITHUB_RAW_URL=https://raw.bgithub.xyz
 ::SET GITHUB_RAW_URL=https://raw.githubusercontent.com
 curl --create-dirs -o %USERPROFILE%\.wezterm.lua %GITHUB_RAW_URL%/leoplutos/tecnote/refs/heads/master/DevTool/WezTerm_conf/wezterm.lua
@@ -90,12 +97,56 @@ curl --create-dirs -o %USERPROFILE%\.bashrc-personal %GITHUB_RAW_URL%/leoplutos/
 
 SSH 到目标服务器之后使用快捷键 ``Alt + s`` 即可 source 个性化设定
 
+### 使用 mRemoteNG 来制作 WezTerm 的启动菜单
+
+``mRemoteNG`` 是 mRemote 的一个分支，是一个开源的、选项卡式的、多协议的 Windows 远程连接管理器
+
+- [官网](https://mremoteng.org/)
+- [Github](https://github.com/mRemoteNG/mRemoteNG)
+
+#### 创建启动菜单
+1. 打开 ``mRemoteNG``
+2. ``工具`` → ``外部工具`` → ``新建``，按如下填写
+    - 显示名称 : ``WezTerm``
+    - 文件名 : ``D:\Tools\WorkTool\Linux\WezTerm\wezterm-gui.exe``
+    - 参数 : ``ssh -- %USERNAME%@%HOSTNAME%:%PORT%``
+3. ``连接`` → ``新建连接``，按如下填写
+    - 名称 : ``服务器名``
+    - 图标 : ``SSH``
+    - 主机名/IP : ``服务器IP``
+    - 用户名 : ``服务器用户``
+    - 协议 : ``外部应用``
+    - 外部工具 : ``WezTerm``
+    - 端口 : ``服务器SSH端口``
+4. 双击新建的连接即可启动 WezTerm
+
+### 使用 XPipe 来制作 WezTerm 的启动菜单
+
+``XPipe`` 是一款创新的 Shell 连接中心和远程文件管理器，旨在从本地机器轻松访问整个服务器基础设施。它构建在已安装的命令行程序之上，无需在远程系统上进行任何设置。
+
+- [官网](https://docs.xpipe.io/)
+- [Github](https://github.com/xpipe-io/xpipe)
+
+#### 创建启动菜单
+1. 打开 ``XPipe``
+2. ``设置`` → ``外观`` → ``语言`` → 修改为 ``中文``
+3. ``设置`` → ``终端`` → ``终端仿真器`` → ``自定义``，按如下填写
+    - 自定义终端命令 : ``D:\Tools\WorkTool\Linux\WezTerm\wezterm-gui.exe -e $CMD``  
+    点击 ``测试`` 确认可以打开终端
+4. ``连接`` → ``新建连接``  → ``远程主机``  → ``简单的 SSH 连接``，按如下填写
+    - 主机 : ``服务器IP``
+    - 端口 : ``服务器SSH端口``
+    - 用户 : ``服务器用户``
+    - 验证密码 : ``服务器密码``
+    - 基于密匙的身份验证 : ``无``
+    - 连接名称 : ``服务器名``
+
 ## Windows Terminal
 见 [这里](./Windows-Terminal_zh_CN.md)
 
 ## ConTour
-* [官网](http://contour-terminal.org/)
-* [Github](https://github.com/contour-terminal/contour/)
+- [官网](http://contour-terminal.org/)
+- [Github](https://github.com/contour-terminal/contour/)
 
 #### 配置文件地址
 ```

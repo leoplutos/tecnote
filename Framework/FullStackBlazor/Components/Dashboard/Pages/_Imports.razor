@@ -1,0 +1,8 @@
+@* 每个文件夹中都可以有 _Imports.razor，对当前文件夹及子文件夹有效 *@
+
+@* 为此文件夹中的所有 razor 组件同时指定特定的布局 *@
+@layout FullStackBlazor.Components.Dashboard.Layout.DashboardLayout
+
+@* 为此文件夹中的所有 razor 组件同时指定需要权限才可以访问 *@
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+

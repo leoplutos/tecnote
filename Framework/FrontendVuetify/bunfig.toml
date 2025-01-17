@@ -1,0 +1,3 @@
+[install]
+# 使用 ali 源
+registry = "https://registry.npmmirror.com/"

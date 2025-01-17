@@ -32,6 +32,34 @@ https://github.com/docker-library/docs/tree/master/debian
  - slim：是完整镜像的配对版本。这个镜像通常只安装运行特定工具所需的最小包
  - alpine：基于alpine linux项目，这是一个专门为容器内部使用而构建的操作系统。在很长一段时间里，这些是最受欢迎的镜像变体，因为它们的尺寸很小
 
+## jupyter 官方镜像
+https://github.com/jupyter/docker-stacks  
+jupyter 已经不在 DockerHub 上维护了，而是放在 quay.io 上  
+https://quay.io/repository/jupyter/base-notebook  
+
+```bash
+# 拉取镜像
+docker pull quay.io/jupyter/base-notebook:latest
+
+# 启动容器
+docker run -it --rm \
+    -p 10000:8888 \
+    -e DOCKER_STACKS_JUPYTER_CMD=notebook \
+    --name jupyter-notebook \
+    quay.io/jupyter/base-notebook:latest
+```
+
+启动后在控制台会生成一个 token 用来访问页面
+
+### 中文菜单
+访问页面之后 ``New`` → ``Terminal``  
+然后在终端里运行命令
+```bash
+pip install jupyterlab-language-pack-zh-CN
+```
+之后 ``New`` → ``Python3`` 激活一个环境后  
+``Settings`` → ``Language``` → 选择中文包即可
+
 ## 基于python镜像部署Sanic应用的实现示例
 
 ### 宿主机安装poetry

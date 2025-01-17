@@ -92,10 +92,10 @@
 * [BunJs相关](Web/BunJs_zh_CN.md)
 * [Deno相关](Web/Deno_zh_CN.md)
 * [WebAssembly相关](Web/WebAssembly_zh_CN.md)
-* [Vue相关](Web/Vue_zh_CN.md)
+* [Vue 和 Vuetify 相关](Web/Vue_zh_CN.md)
 * [AngularJS相关](Web/AngularJS_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本1.x
 * [Angular相关](Web/Angular_zh_CN.md)  &nbsp;&nbsp;  NOTE：版本2.x以后
-* [React相关](Web/React_zh_CN.md)
+* [React 和 Next.js 相关](Web/React_zh_CN.md)
 
 ## 容器技术相关
 * [Docker](Container/Docker_zh_CN.md)
@@ -139,9 +139,10 @@
 ## DB
 * [数据库相关](DB/DB_zh_CN.md)
 * [Postgresql](DB/Postgresql_zh_CN.md)
+* [MongoDB](DB/MongoDB_zh_CN.md)
 * [DBeaver和A5M2](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
-* [Sqlite3](DB/Sqlite3_zh_CN.md)
+* [Sqlite3和RocksDB](DB/Sqlite3_zh_CN.md)
 * [OpenSearch](DB/OpenSearch_zh_CN.md)
 
 ## 微服务和分布式协调服务相关
@@ -153,6 +154,9 @@
 * [Redis](Distributed/Redis_zh_CN.md)
 * [Etcd](Distributed/Etcd_zh_CN.md.md)
 
+## 云相关
+* [AWS](Cloud/AWS_zh_CN.md)
+
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)
 
@@ -162,6 +166,7 @@
 * [Chrome](Other/Chrome_zh_CN.md)
 * [编程相关术语](Other/Terminology_zh_CN.md)
 * [Cobol](Other/Cobol_zh_CN.md)
+* [Lua](Other/Lua_zh_CN.md)
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)
 * [ripgrep-文本搜索工具](Other/Ripgrep_zh_CN.md)
 * [Reqable-代理调试+请求测试+网络抓包](Other/Reqable_zh_CN.md)

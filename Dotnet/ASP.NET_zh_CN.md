@@ -77,6 +77,61 @@ IIS 为系统内置组件，只需要把组件设置启用即可，下面以 Win
 ### IIS命令
 
 #### 重启
-```
+```bash
 iisreset /restart
 ```
+
+## ASP.NET Core Blazor
+
+``Blazor`` 是微软 .NET 团队开发的一个新的 UI 框架，在概念上，Blazor 更像是 Vue 或 React，而不是 ASP.NET Core MVC。它是一个基于组件的框架，用于构建丰富的交互式 Web 应用程序。
+
+Blazor 与传统 JavaScript 框架的主要区别在于，Blazor 组件完全用 C# 和 Razor 编写，不需要用到 JavaScript，但可以和 JavaScript 交互。
+
+Blazor 有两种模式
+- 服务端模式（SSR） : 在服务器端运行再实时渲染到浏览器
+- 客户端模式（CSR） : 在客户端使用 WebAssembly 运行，叫 WebAssembly 模式
+
+更多可以看官方文档 [使用 Blazor 构建全堆栈 Web 应用](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-8.0#build-a-full-stack-web-app-with-blazor)
+
+### 笔者的 Blazor 示例工程
+
+```bash
+cd D:\WorkSpace\DotNet
+dotnet new blazor -n FullStackBlazor --framework net8.0 --interactivity Server --auth Individual
+```
+- ``--interactivity Server`` : 服务端渲染模式
+- ``--auth Individual`` : 添加个人身份验证模块
+
+创建的项目结构说明可以看 [这里](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/project-structure?view=aspnetcore-8.0)
+
+### 添加 Ant Design Blazor
+```bash
+cd FullStackBlazor
+dotnet add package AntDesign
+```
+
+### 复制代码
+将 [FullStackBlazor](../Framework/FullStackBlazor/) 的代码覆盖粘贴到创建的工程
+
+### 运行
+```bash
+dotnet run
+```
+访问 http://localhost:9500 即可
+
+### 其他
+下面情况不知道是 Bug 还是笔者有配置没有弄正确，需要有空再次调查一下
+
+#### 访问 注册账号 页面不跳转
+在浏览器地址栏直接访问 http://localhost:9500/Account/Register 即可  
+如果画面一直自动刷新的话，点击浏览器的 ``X``
+
+#### 账号注册后无法登录
+打开 ``Data/app.db`` 运行下面的 SQL
+```SQL
+UPDATE AspNetUsers SET EmailConfirmed = 1
+WHERE UserName = 'admin@exsample.com'
+```
+
+### Awesome-Blazor
+https://github.com/AdrienTorris/awesome-blazor

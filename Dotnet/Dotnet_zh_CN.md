@@ -398,6 +398,49 @@ https://www.cnblogs.com/Gyoung/archive/2012/10/19/2731519.html
 WCF服务对象实例化的三种方式  
 https://blog.csdn.net/weixin_36536176/article/details/105050876
 
+## XSD解析
+
+XML 架构定义工具 (XML Schema Definition Tool (``Xsd.exe``)) 是作为 Windows 软件开发工具包 (SDK) 的一部分随 .NET Framework 工具一起安装的
+
+XML 架构定义工具 (``Xsd.exe``) 通常可在以下路径中找到：
+```
+C:\Program Files (x86)\Microsoft SDKs\Windows\{version}\bin\NETFX {version} Tools\
+```
+
+### 一个使用例子
+1. 使用 XSD 生成 C# 类
+```bash
+set XSD_HOME="C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools"
+set PATH=%PATH%;%XSD_HOME%
+xsd --version
+cd D:\project_xsd_path
+# 运行后会生成 UniversalShipment.cs
+xsd UniversalShipment.xsd /classes
+```
+2. 使用 C# 类生成 XML
+```csharp
+using System.Xml.Serialization;
+
+// Shipment和UniversalShipmentData都是自动生成的类
+Shipment shipment = new Shipment()
+{
+    ShipmentType = new CodeDescriptionPair() { Code = "SHI" }
+};
+UniversalShipmentData data = new UniversalShipmentData()
+{
+    Shipment = shipment,
+};
+// 使用 XmlSerializer 来生成 XML
+XmlSerializer serializer = new XmlSerializer(typeof(UniversalShipmentData));
+using (StreamWriter writer = new StreamWriter("output.xml"))
+{
+    serializer.Serialize(writer, data);
+}
+```
+
+[官方文档 - XML 架构定义工具和 XML 序列化](https://learn.microsoft.com/zh-cn/dotnet/standard/serialization/the-xml-schema-definition-tool-and-xml-serialization)  
+[官方文档 - 如何：使用 XML 架构定义工具生成类和 XML 架构文档](https://learn.microsoft.com/zh-cn/dotnet/standard/serialization/xml-schema-def-tool-gen)
+
 ## 第三方库
 
 ### Log日志
@@ -431,3 +474,5 @@ NuGet源设定文件位置
 ### 一个可以在线运行C#的网站
 https://www.programiz.com/csharp-programming/online-compiler/
 
+### C#/.NET/.NET Core学习、工作、面试指南
+[C#/.NET/.NET Core学习、工作、面试指南](https://github.com/YSGStudyHards/DotNetGuide)

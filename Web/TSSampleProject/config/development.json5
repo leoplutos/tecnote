@@ -19,6 +19,9 @@
 			// "user": "postgres",
 			// "password": "123456"
 			"url": "postgres://postgres:123456@172.30.8.172:5432/postgres"
+		},
+		"mongo": {
+			"url": "mongodb://mongoroot:123456@172.30.8.172:27017"
 		}
 	}
 }

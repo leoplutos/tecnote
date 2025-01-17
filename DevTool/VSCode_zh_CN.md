@@ -12,6 +12,7 @@ https://code.visualstudio.com/#alt-downloads
 
 - [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 - [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
+- [**Cline**](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
 - [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
 - [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
 - [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
@@ -88,6 +89,7 @@ Java所需插件比较多。有2套方案：
 ### 其他语言
 
 - [Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+- [Lua](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
 - [COBOL语言支持](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.cobol-language-support)
 - [RPG语言支持](https://marketplace.visualstudio.com/items?itemName=NielsLiisberg.RPG)
 
@@ -116,6 +118,7 @@ Java所需插件比较多。有2套方案：
 ## Web插件
 
 - [**httpYac**](https://marketplace.visualstudio.com/items?itemName=anweber.vscode-httpyac)&nbsp;&nbsp;&nbsp;&nbsp;推荐，使用例子可以看[官网](https://httpyac.github.io/guide/request.html)&nbsp;&nbsp;&nbsp;&nbsp;笔者的一个例子文件 [httpYac.http](./httpYac.http)
+- [**LiveServer**](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 - [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 - [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
 - [Postcode(可选)](https://marketplace.visualstudio.com/items?itemName=rohinivsenthil.postcode)

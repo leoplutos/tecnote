@@ -1,0 +1,20 @@
+@page "/Dashboard"
+
+<PageTitle>文件管理系统</PageTitle>
+
+<Flex Gap="FlexGap.Middle" Vertical>
+	<PageHeader Title="欢迎来到文件管理系统" />
+	<div>请使用左侧菜单导航到不同的功能。</div>
+	<div>测试值: @testBool</div>
+</Flex>
+
+@code {
+	private bool testBool = false;
+
+	// 页面初始化
+	protected override async Task OnInitializedAsync()
+	{
+		await Task.Delay(500);
+		testBool = true;
+	}
+}

@@ -87,7 +87,9 @@ doskey /exename=powershell.exe ll=ls $*
 但是这样的坏处是显式卸载了PSReadLine，这意味着将失去它的所有好处。
 所以更好的办法是使用 ``Set-Alias`` 函数或者直接写函数。详见笔者的 ``默认ps1文件``
 
-## PowerShell的输出内容颜色
+## 其他
+
+### PowerShell的输出内容颜色
 使用以下代码可以输出颜色
 ```bash
 $colors = @'
@@ -99,3 +101,24 @@ foreach ($color in $colors) {
     Write-Host $color -ForegroundColor $color
 }
 ```
+
+### 使用 PowerShell 修改文件名
+
+安装文件创建日期重命名文件
+
+```bash
+cd D:\pathto
+
+Get-ChildItem |Foreach-Object { Rename-Item $_ -NewName ("{0}{1}" -f $_.CreationTime.ToString('yyyy-MM-dd-HH-mm-ss'),$_.Extension)  }
+
+# Get-ChildItem |Foreach-Object { Rename-Item $_ -NewName ("{0}-{1}{2}" -f $_.BaseName,$_.LastWriteTime.ToString('yyyyMMdd'),$_.Extension)  }
+```
+
+- ``Get-ChildItem`` ：获取目录中的所有项, 可以添加 ``-Recurse`` 来从子目录获取文件
+- ``Foreach-Object`` ：对每个文件运行以下代码块
+- ``$_`` ：当前迭代的文件作为对象
+- ``$_.BaseName`` ：不带扩展名的文件名
+- ``$_.CreationTime`` ：文件的创建时间
+- ``$_.LastWriteTime`` ：文件的修改时间
+- 方法 ``.ToString()`` ：根据需要进行格式设置
+- ``$_.Extension`` ：文件的扩展名

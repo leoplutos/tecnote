@@ -1,0 +1,36 @@
+{
+	"editor.guides.indentation": true, //缩进参考线
+	"files.eol": "\n", // LF 换行
+	"files.associations": {
+		"*.json": "jsonc", //允许json文件带注释
+	},
+	"dotnetAcquisitionExtension.existingDotnetPath": [
+		// 配置install tool，避免每次都下载
+		{
+			"extensionId": "ms-dotnettools.csharp",
+			"path": "C:\\Program Files\\dotnet\\dotnet.exe"
+		},
+		{
+			"extensionId": "visualstudiotoolsforunity.vstuc",
+			"path": "C:\\Program Files\\dotnet\\dotnet.exe"
+		},
+		{
+			"extensionId": "ms-dotnettools.csdevkit",
+			"path": "C:\\Program Files\\dotnet\\dotnet.exe"
+		}
+	],
+	"editor.codeLens": false,
+	"terminal.integrated.env.windows": { //设定所有终端环境变量
+	},
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.automationProfile.linux": {
+		"path": "bash",
+		"args": [
+			"-c"
+		],
+		"env": {},
+		"icon": "terminal-ubuntu",
+		"color": "terminal.ansiYellow",
+		"overrideName": true
+	},
+}

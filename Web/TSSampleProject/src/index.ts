@@ -2,6 +2,7 @@ import config from 'config';
 import { getLogger } from './log/log.js';
 import SubComp1 from "./components/SubComp1.js";
 import calcAsync from "./components/SubComp2.js";
+import bitwiseAuth from "./components/BitwiseAuth.js";
 
 // 日志
 const log = getLogger();
@@ -46,6 +47,8 @@ async function startAsync(): Promise<void> {
 	//调用SubComp2
 	const sub2Ret: number = await calcAsync({ id: 9527, name: "意式拿铁", callbackFun: mainCallback });
 	log.info(`sub2Ret = ${sub2Ret}`);
+	//调用二进制散列值和权限设计
+	await bitwiseAuth();
 }
 
 // 主函数

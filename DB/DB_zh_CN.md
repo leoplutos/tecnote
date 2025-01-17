@@ -20,7 +20,7 @@
 - ``Golang`` : [google/uuid](https://github.com/google/uuid)
 - ``Rust`` : [uuid-rs/uuid](https://github.com/uuid-rs/uuid)
 - ``Node/JavaScript`` : [uuidjs/uuid](https://github.com/uuidjs/uuid)
-- ``Python`` : [uuid-utils](https://github.site/aminalaee/uuid-utils)
+- ``Python`` : [uuid-utils](https://github.com/aminalaee/uuid-utils)
 
 ## 数据同步工具AirByte
  - [Github](https://github.com/airbytehq/airbyte)

@@ -21,7 +21,8 @@ import { useUser, UserInfo } from "@/context/UserContext";
 import { getCurrentUser } from "@/components/GetSession";
 
 export function Header() {
-	const router = useRouter();
+	// 使用 ReturnType 取得返回值类型
+	const router: ReturnType<typeof useRouter> = useRouter();
 	// 取得登录用户信息
 	//const { data: session, status } = useSession();
 	// 自定义用户信息
