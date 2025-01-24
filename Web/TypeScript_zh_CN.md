@@ -6,6 +6,9 @@ TypeScript 由微软开发的自由和开源的编程语言。
 TypeScript 设计目标是开发大型应用，它可以编译成纯 JavaScript，编译出来的 JavaScript 可以运行在任何浏览器上。  
 
 ## 中文教程
+
+https://wangdoc.com/typescript/
+
 https://www.tslang.cn/docs/handbook/basic-types.html
 
 ## 下载安装

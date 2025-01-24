@@ -104,6 +104,18 @@ docker run -itd \
 
 启动后用浏览器访问 http://localhost:18080
 
+### Web API模拟
+[mocktail](https://github.com/Huseyinnurbaki/mocktail) ``可以模拟任何 Get/Post/Put/Patch/Delete`` 请求
+
+```bash
+# 拉取镜像
+docker pull hhaluk/mocktail:latest
+
+# 启动容器
+docker run -d -p 4000:4000 --name mocktail hhaluk/mocktail:latest
+```
+
+
 ### HTTP测试服务器 httpbin.org
 [httpbin.org](https://httpbin.org/) 可以测试 HTTP 请求和响应的各种信息，比如 cookie、ip、headers 和登录验证等，且支持 GET、POST 等多种方法。对 Web 开发和测试很有帮助
 

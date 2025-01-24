@@ -1,5 +1,13 @@
 # Web相关
 
+## JavaScript 教程
+
+### JavaScript 教程
+https://wangdoc.com/javascript/
+
+### ES6 教程
+https://wangdoc.com/es6/
+
 ## Web Framework性能对比
 https://www.techempower.com/benchmarks/#section=data-r22&hw=ph&test=composite
 

@@ -12,7 +12,6 @@ https://code.visualstudio.com/#alt-downloads
 
 - [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 - [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
-- [**Cline**](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
 - [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
 - [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
 - [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
@@ -21,10 +20,13 @@ https://code.visualstudio.com/#alt-downloads
 - [**Markdown Preview Mermaid Support**](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode的Markdown中显示Mermaid
 - [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
 - [**VS Code Settings for Mac Windows and Linux**](https://marketplace.visualstudio.com/items?itemName=franmastromarino.vs-code-settings-os)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理多个平台的工程配置文件
-- [**Git Graph**](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
+- [豆包 MarsCode - 编程助手](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：豆包旗下的编程AI助手
+- [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
+- [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
 - [**Diff Folders**](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
 - [**Draw.io Integration**](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode中画图的插件
-- [**FindItFaster**](https://marketplace.visualstudio.com/items?itemName=TomRijndorp.find-it-faster)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``
+- [Periscope](https://marketplace.visualstudio.com/items?itemName=JoshMu.periscope)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``
+- ~~[FindItFaster](https://marketplace.visualstudio.com/items?itemName=TomRijndorp.find-it-faster)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``~~
 - ~~[VSCodeVim(不推荐)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)~~
 - [Sync-Rsync](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
 - [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
@@ -118,7 +120,7 @@ Java所需插件比较多。有2套方案：
 ## Web插件
 
 - [**httpYac**](https://marketplace.visualstudio.com/items?itemName=anweber.vscode-httpyac)&nbsp;&nbsp;&nbsp;&nbsp;推荐，使用例子可以看[官网](https://httpyac.github.io/guide/request.html)&nbsp;&nbsp;&nbsp;&nbsp;笔者的一个例子文件 [httpYac.http](./httpYac.http)
-- [**LiveServer**](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [**LiveServer**](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：快速启动HTTP服务
 - [REST Client(可选)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 - [Thunder Client(可选)](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
 - [Postcode(可选)](https://marketplace.visualstudio.com/items?itemName=rohinivsenthil.postcode)
