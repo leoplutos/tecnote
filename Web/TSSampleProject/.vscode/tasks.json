@@ -142,5 +142,20 @@
 			"problemMatcher": [],
 			"detail": "运行AWS客户端示例",
 		},
+		{
+			"label": "npm_dev",
+			"type": "shell",
+			"command": "npm run npm_dev",
+			"args": [],
+			"windows": {
+				// npm install tsx --save-dev
+				"command": "chcp 65001 && npm run npm_dev"
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "使用tsx运行index.ts",
+		},
 	]
 }

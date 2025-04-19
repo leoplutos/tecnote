@@ -38,9 +38,10 @@ for /f "delims=" %%i in ('echo ') do (set STR_LEFT_ARROW=%%i)
 for /f "delims=" %%i in ('echo ') do (set STR_WIN_ICON=%%i)
 for /f "delims=" %%i in ('echo ') do (set STR_TIME_ICON=%%i)
 for /f "delims=" %%i in ('echo ') do (set STR_USER_ICON=%%i)
-for /f "delims=" %%i in ('echo 󰩠') do (set STR_IP_ICON=%%i)
+::for /f "delims=" %%i in ('echo 󰩠') do (set STR_IP_ICON=%%i)
+for /f "delims=" %%i in ('echo ') do (set STR_IP_ICON=%%i)
 for /f "delims=" %%i in ('echo ') do (set STR_DIRECTORY_ICON=%%i)
-for /f "tokens=3" %%a in ('"netsh interface ip show address "以太网" | findstr "IP Address""') do (set STR_IP=%%a)
+for /f "tokens=3" %%a in ('"netsh interface ip show address "WLAN" | findstr "IP Address""') do (set STR_IP=%%a)
 set PS_BLACK=$E[30m
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
@@ -130,6 +131,7 @@ echo Prompt Setting Complited
 goto GoOn
 
 :GoOn
+set OLD_PROMPT=%PROMPT%
 ::设置环境变量
 ::C
 set MINGW_HOME=D:\Tools\WorkTool\C\MinGW64\bin

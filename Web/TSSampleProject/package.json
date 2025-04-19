@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bun run src/index.ts",
+		"npm_dev": "npx tsx src/index.ts",
 		"build": "bun x prisma generate && bun x tsc -p tsconfig.json",
 		"start": "NODE_ENV=production node dist/index.js",
 		"test": "jest"

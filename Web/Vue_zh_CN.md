@@ -87,6 +87,9 @@ npm run preview
 ```
 ``preview`` 命令会在本地启动一个静态 Web 服务器，将 dist 文件夹运行在 http://localhost:4173。这样在本地环境下查看该构建产物是否正常可用就方便多了
 
+## 自动路由插件
+https://github.com/posva/unplugin-vue-router
+
 ## 基于Vue的可视化拖拽库
 https://github.com/Alfred-Skyblue/vue-draggable-plus
 

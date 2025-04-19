@@ -94,6 +94,9 @@ npm run dev
 ```
 更多可以看 [这里](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#jsx-factories)
 
+### 自动路由插件
+https://github.com/hannoeru/vite-plugin-pages
+
 ## Next.js
 
 ``Next.js`` 是一个 ``Vercel`` 开发的用于构建 ``全栈`` Web 应用的 React 框架。它支持``服务端渲染（SSR）`` 。你可以使用 React Components 来构建用户界面，并使用 Next.js 来实现附加功能和优化

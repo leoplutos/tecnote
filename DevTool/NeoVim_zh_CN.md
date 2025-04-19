@@ -78,15 +78,44 @@ Neovim 新加了一个健康检查的命令
 ### Windows 一键设定配置文件
 需要安装 ``git``
 
+#### 无法直接访问github的环境
 使用 cmd 运行 [lazy_nvim_setting.cmd](../Windows/lazy_nvim_setting.cmd) 即可
+
+#### 可以直接访问github的环境
+```bash
+cd D:\Tools\WorkTool\Cmd
+
+SET GITHUB_RAW_URL=https://raw.githubusercontent.com
+
+curl -Lo lazy_nvim_setting.cmd "%GITHUB_RAW_URL%/leoplutos/tecnote/refs/heads/master/Windows/lazy_nvim_setting.cmd"
+
+powershell -Command "(Get-Content -Encoding UTF8 D:\Tools\WorkTool\Cmd\lazy_nvim_setting.cmd) -replace 'bgithub.xyz', 'github.com' | Out-File -Encoding utf8 D:\Tools\WorkTool\Cmd\lazy_nvim_setting.cmd"
+
+::powershell -Command "(Get-Content -Encoding UTF8 D:\Tools\WorkTool\Cmd\lazy_nvim_setting.cmd) -replace 'bgithub.xyz', 'github.com' | Set-Content D:\Tools\WorkTool\Cmd\lazy_nvim_setting.cmd" -Encoding UTF8
+
+lazy_nvim_setting.cmd
+
+powershell -Command "(Get-Content -Encoding UTF8 %LOCALAPPDATA%\nvim\lua\config\_basic.lua) -replace 'bgithub.xyz', 'github.com' | Out-File -Encoding utf8 %LOCALAPPDATA%\nvim\lua\config\_basic.lua"
+```
 
 ### Linux 一键设定配置文件
 需要安装 ``git`` 和 ``curl``
 
+
+#### 无法直接访问github的环境
 ```bash
 export GITHUB_RAW_URL=https://raw.bgithub.xyz
-# export GITHUB_RAW_URL=https://raw.githubusercontent.com
 curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+```
+
+#### 可以直接访问github的环境
+```bash
+cd $HOME
+export GITHUB_RAW_URL=https://raw.githubusercontent.com
+curl -Lo lazy_nvim_setting.sh "${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh"
+sed -i 's/bgithub.xyz/github.com/g' $HOME/lazy_nvim_setting.sh
+bash lazy_nvim_setting.sh
+sed -i 's/bgithub.xyz/github.com/g' $HOME/.config/nvim/lua/config/_basic.lua
 ```
 
 ## Python支持

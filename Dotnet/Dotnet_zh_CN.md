@@ -64,6 +64,8 @@ Dotnet 平台主要分为三个部分
 
 1. 先下载 ``dotnet``  
 https://dotnet.microsoft.com/zh-cn/download  
+
+可以选择安装文件安装，也可以选择下载二进制文件后设定到 ``PATH`` 中使用  
 安装后，确认  
 ```
 dotnet --version
@@ -125,6 +127,17 @@ dotnet run --project dotnet-console-sample
 安装VSCode插件（需要.net 7.0或者更高）  
 使用插件为  [**C#**](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 
+如果使用的是二进制文件安装，在启动VSCode时需要 ``PATH`` 内设定  
+新建 ``VSCode_Dotnet.cmd``
+内容如下
+```
+set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64
+set PATH=%PATH%;%VSCODE_HOME%
+set DOTNET_HOME=D:\Tools\WorkTool\DotNet\dotnet-sdk-8.0.407-win-x64
+set PATH=%PATH%;%DOTNET_HOME%;
+start /b code
+```
+运行 ``VSCode_Dotnet.cmd`` 启动 ``VSCode`` 即可
 
 ### 新版 .NET Core 的 Vim 配置
 使用LSP（需要.net 7.0或者更高）  
@@ -445,6 +458,11 @@ using (StreamWriter writer = new StreamWriter("output.xml"))
 
 ### Log日志
 https://github.com/serilog/serilog  
+
+### ORM
+- [Entity Framework Core](https://learn.microsoft.com/zh-cn/ef/core/)
+- [EF Core 基架（反向工程）- 从现有DB生成Entity](https://learn.microsoft.com/zh-cn/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli)
+
 
 ## 其他
 

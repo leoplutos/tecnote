@@ -81,6 +81,95 @@ IIS 为系统内置组件，只需要把组件设置启用即可，下面以 Win
 iisreset /restart
 ```
 
+## 前后端分离项目模板
+
+### 下载
+[模板地址](https://www.nuget.org/packages/microsoft.javascript.templates/)
+
+```bash
+# 安装模板
+dotnet new install microsoft.javascript.templates::0.1.9-preview
+# 确认
+dotnet new list
+```
+
+### 创建前后端分离工程
+```bash
+# 创建工程目录
+cd D:\WorkSpace\TestProject\Dotnet
+mkdir dotnet-react-sample
+cd dotnet-react-sample
+
+# 创建 React + ASP.NET Core 工程
+dotnet new reactwebapi --language typescript
+```
+
+### 修改配置
+
+#### 修改前端目录下的 ``vite.config.ts`` 文件
+
+```typescript
+//const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
+//    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7258';
+// 后端端口9501
+const target = 'http://localhost:9501/';
+
+// ...
+
+server: {
+    proxy: {
+        '^/weatherforecast': {
+            target,
+            secure: false
+        }
+    },
+    // 前端端口9500
+    port: 9500,
+    https: {
+        key: fs.readFileSync(keyFilePath),
+        cert: fs.readFileSync(certFilePath),
+    }
+}
+```
+
+#### 修改后端目录下的 ``Properties/launchSettings.json`` 文件
+
+参照 [这里](https://raw.githubusercontent.com/leoplutos/tecnote/refs/heads/master/Framework/BackendAspCore/AspWebapi/Properties/launchSettings.json) 修改为9501
+
+#### 修改后端目录下的 ``Program.cs`` 文件
+```cs
+// 禁用HTTPS（生产环境要打开）
+// app.UseHttpsRedirection();
+```
+
+#### 修改后端目录下的 ``csproj`` 文件
+
+SpaProxyServerUrl 配置了的话，后端项目如果启用了 UseSpa 或相关中间件，它会把请求（特别是针对 / 的请求）代理到前端的开发服务器（例如：Vite 本地开发环境）。
+
+```xml
+<!--
+<SpaRoot>..\dotnet_react_sample.client</SpaRoot>
+<SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+-->
+<SpaProxyServerUrl>https://localhost:9500</SpaProxyServerUrl>
+```
+
+### 启动工程
+
+```bash
+# 前端启动
+cd dotnet-react-sample.client
+npm install
+npm run dev
+
+# 后端启动
+cd dotnet-react-sample.Server
+dotnet restore
+dotnet run
+```
+
+[官方文档](https://learn.microsoft.com/zh-cn/visualstudio/javascript/tutorial-asp-net-core-with-react?view=vs-2022)
+
 ## ASP.NET Core Blazor
 
 ``Blazor`` 是微软 .NET 团队开发的一个新的 UI 框架，在概念上，Blazor 更像是 Vue 或 React，而不是 ASP.NET Core MVC。它是一个基于组件的框架，用于构建丰富的交互式 Web 应用程序。

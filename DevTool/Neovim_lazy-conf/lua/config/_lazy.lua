@@ -43,6 +43,7 @@ require("lazy").setup({
     cache = vim.g.lazy_nvim_root .. "/pkg-cache.lua",
   },
   rocks = {
+    enabled = false,
     root = vim.g.lazy_nvim_root .. "/lazy-rocks",
     server = "https://nvim-neorocks.github.io/rocks-binaries/",
   },

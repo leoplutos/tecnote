@@ -10,6 +10,8 @@
 				]
 			},
 			"env": { //自定义环境变量
+				//"DOTNET_HOME": "D:\\Tools\\WorkTool\\DotNet\\dotnet-sdk-8.0.407-win-x64",
+				//"PATH": "${env:path};D:\\Tools\\WorkTool\\DotNet\\dotnet-sdk-8.0.407-win-x64;",
 			}
 		},
 	},

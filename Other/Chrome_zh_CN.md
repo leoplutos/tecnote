@@ -171,6 +171,20 @@ Immersive Translate（沉浸式翻译），支持沉浸式双语网页翻译扩�
 - [Chrome插件本地安装指南](https://immersivetranslate.com/manual-chrome-extension/)
 - [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%BF%BB%E8%AF%91-%E7%BD%91%E9%A1%B5%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6-pdf%E7%BF%BB%E8%AF%91-/amkbmndfnliijdhojkpoglbnaaahippg?hl=zh-CN)
 
+## 截图插件 - GoFullPage（推荐）
+
+可以整页截图
+
+- [官网](https://gofullpage.com/)
+- [Github仓库](https://github.com/mrcoles/full-page-screen-capture-chrome-extension)
+- [Chrome插件商店](https://chromewebstore.google.com/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?pli=1)
+- [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/gofullpage-full-page-sc/hfaciehifhdcgoolaejkoncjciicbemc)
+
+## 二维码插件 - QR码生成与识别（推荐）
+- [官网](https://guokai.dev/)
+- [Chrome插件商店](https://chromewebstore.google.com/detail/qr%E7%A0%81%E7%94%9F%E6%88%90%E4%B8%8E%E8%AF%86%E5%88%AB/cbimgpnbgalffiohilfglgkkhpegpjlo)
+- [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/qr%E7%A0%81%E7%94%9F%E6%88%90%E4%B8%8E%E8%AF%86%E5%88%AB/nmddeihindhodaigflchmkmechmjjjbc)
+
 ## 下载插件 - cat-catch（猫抓 浏览器资源嗅探扩展)
 - [Github仓库](https://github.com/xifangczy/cat-catch)
 - [Chrome插件商店](https://chrome.google.com/webstore/detail/jfedfbgedapdagkghmgibemcoggfppbb)

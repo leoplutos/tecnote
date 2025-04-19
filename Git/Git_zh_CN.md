@@ -167,6 +167,23 @@ git sparse-checkout set --no-cone "DevTool/Neovim_lazy-conf" "DevTool/Vim-conf"
 git checkout
 ```
 
+### 创建分支
+```bash
+# 创建 develop 分支（在没有 develop 分支的情况下）
+git switch -c develop
+# git checkout -b develop
+
+# 推送本地 develop 分支到远程，因为远程还没有 develop 分支，所以需要使用 -u 参数建立追踪关系
+git push -u origin develop
+```
+
+使用 VSCode 操作
+
+1. 创建 develop 分支（在没有 develop 分支的情况下）  
+点击下面 ``状态栏`` 上面的 ``master`` → ``创建新分支`` → ``develop``
+
+2. ``源代码管理`` → 点击右上角的 ``三点菜单`` → 选择 ``推送 (Push)`` → 如果当前 develop 分支在远程没有，它会提示 ``分支 develop 没有远程分支。是否要发布此分支？`` → ``确定``
+
 ### 打开默认 GUI 画面
 
 笔者个人习惯在 ``GUI`` 里面进行 ``add/commit/push/pull`` 操作
@@ -208,15 +225,10 @@ git status
 
 ### 取消本地修改从仓库重新取文件
 比如本地的 ``a.java`` 想从仓库重新取。先把 ``a.java`` 重命名为 ``a.java_bak``，然后运行以下代码  
-旧版本:
-```bash
-git status
-git checkout /src/a.java
-```
-新版本:
 ```bash
 git status
 git restore /src/a.java
+# git checkout /src/a.java
 # 或者
 git restore .
 ```
@@ -259,9 +271,10 @@ git push origin :refs/tags/v1.6
 #### 利用tag功能切换并修改某个历史版本
 以修改v1.3版本举例  
 新建分支 feature-bugfix-v1.3  
-语法为 ``git checkout -b [branchName] [tagName]``
+语法为 ``git switch -c <新分支名> <起点>``
 ```bash
-git checkout -b feature-bugfix-v1.3 v1.3
+git switch -c feature-bugfix-v1.3 v1.3
+# git checkout -b feature-bugfix-v1.3 v1.3
 ```
 修改问题并且commit，然后切回 master分支 并 合并bugfix 分支
 ```bash
@@ -321,9 +334,94 @@ git config --system credential.helper manager
 ## gitignore
 可以看这个示例文件 [.gitignore](.gitignore_sample)
 
+# 最佳实践
+
+## 团队开发时的一般做法
+
+### 分支管理
+
+- master 分支对应 ``生产环境``
+- develop 分支对应 ``开发环境``（即开发中的内容）
+- feature 分支对应 ``添加特定功能``
+- bugfix 分支对应 ``常规问题修复``（修复开发过程中发现的非紧急Bug）
+- hotfix 分支对应 ``紧急修复``（紧急Bug，生产环境出问题必须立刻修复并上线）
+
+### 命令行操作流程（以 feature 分支举例）
+```bash
+# 切换到 develop 分支
+git switch develop
+# git checkout develop
+
+# 拉取最新代码
+git pull
+
+# 保证 develop 分支是最新的情况下，切出 feature 分支
+git switch -c feature/it_001
+# git checkout -b feature/it_001
+
+# 修改代码后提交
+git add .
+git commit -m "添加功能it_001"
+
+# 推送本地 feature 分支到远程，因为远程还没有 feature 分支，所以需要使用 -u 参数建立追踪关系
+git push -u origin feature/it_001
+```
+
+然后创建 ``Pull requests（合并请求）``，下面以 gogs 举例
+
+访问 gogs 的 git 仓库 → ``合并请求`` 标签 → ``创建合并请求`` 按钮，按如下填写
+
+- 基准分支：``develop``
+- 对比分支：``feature/it_001``
+
+填写 ``标题`` 和 ``内容`` → ``创建合并请求`` 按钮
+
+这时会在 git 仓库的 ``合并请求`` 标签 下看到已经有了一个请求，点击进入按下 ``合并请求`` 按钮合并即可
+
+### VSCode 操作流程（以 feature 分支举例）
+
+1. 切换到 develop 分支  
+点击下面 ``状态栏`` 上面的 ``master`` → 选择 ``develop``
+
+2. 拉取最新代码  
+``源代码管理`` → 点击右上角的 ``三点菜单`` → 选择 ``拉取``
+
+3. 保证 develop 分支是最新的情况下，切出 feature 分支  
+点击下面 ``状态栏`` 上面的 ``develop`` → ``创建新分支`` → ``feature/it_001``
+
+4. 修改代码后提交
+
+5. 推送本地 feature 分支到远程  
+``源代码管理`` → 点击右上角的 ``三点菜单`` → 选择 ``推送 (Push)`` → 如果当前 feature 分支在远程没有，它会提示 ``分支 feature 没有远程分支。是否要发布此分支？`` → ``确定``
+
+``Pull requests`` 合并操作同 ``命令行操作``
+
 # 其他
 
-### .gitignore文件不生效问题
+## 定制 Windows 下的命令
+
+前提条件: 在 [cmdautorun.cmd](../Windows/cmdautorun.cmd) 中设置好环境变量 ``OLD_PROMPT``
+
+1. 新建目录 ``D:\Tools\WorkTool\Team\Git_bat``
+
+2. 在 ``Git_bat`` 目录下新建文件 ``git.bat`` 内容如下
+```
+@echo off
+D:\Tools\WorkTool\Team\Git\cmd\git.exe %*
+set GITBRANCH=
+for /f %%I in ('D:\Tools\WorkTool\Team\Git\cmd\git.exe rev-parse --abbrev-ref HEAD 2^> NUL') do set GITBRANCH=%%I
+
+if "%GITBRANCH%" == "" (
+  prompt %OLD_PROMPT%
+) else (
+  prompt $P $C$E[32;7;32;47m%GITBRANCH%$E[0m$F $G 
+)
+```
+
+3. 将 ``D:\Tools\WorkTool\Team\Git_bat`` 配置到环境变量  
+确保每次在命令行中键入 ``git`` 时，都会触发 ``git.bat`` 而不是 ``git.exe``, 然后在 ``git.bat`` 中调用 ``git.exe`` 即可
+
+## .gitignore文件不生效问题
 原因是因为在git忽略目录中，新建的文件在git中会有缓存，如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的，
 这时候我们就应该先把本地缓存删除，然后再进行git的提交，这样就不会出现忽略的文件了。
 

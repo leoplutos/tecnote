@@ -78,7 +78,7 @@
 * [Java-Spring相关](Java/Java-Spring_zh_CN.md)
 * [Java-构建工具-Maven](Java/Java-Maven_zh_CN.md)
 * [Java-构建工具-Gradle](Java/Java-Gradle_zh_CN.md)
-* [Java-性能测试工具-Jmeter](Java/Java-Jmeter_zh_CN.md)
+* [性能测试工具](Java/Java-Jmeter_zh_CN.md)
 * [Kotlin相关](Java/Kotlin_zh_CN.md)
 
 ## Dotnet相关
@@ -165,6 +165,7 @@
 * [字体](Other/Font_zh_CN.md)
 * [Chrome](Other/Chrome_zh_CN.md)
 * [编程相关术语](Other/Terminology_zh_CN.md)
+* [Php](Other/Php_zh_CN.md)
 * [Cobol](Other/Cobol_zh_CN.md)
 * [Lua](Other/Lua_zh_CN.md)
 * [Sakura Editor](Other/SakuraEditor_zh_CN.md)

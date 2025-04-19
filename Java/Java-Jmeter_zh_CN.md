@@ -1,6 +1,6 @@
-# Java-JMeter相关
+# Jmeter
 
-## 什么是Jmeter
+## Jmeter
 Apache JMeter ，是一个 100% 纯 Java 的开源软件，旨在加载测试功能行为和测量性能。它最初设计用于测试Web应用程序，但后来扩展到其他测试功能。
 
 相较于世面上一些其他性能测试工具， Jmeter 是为数不多的既好用又开源免费的测试工具。
@@ -174,3 +174,34 @@ s:Envelope
 点击工具栏的 ``播放`` 按钮
 
 
+# wrk
+
+wrk 是一款针对 Http 协议的基准测试工具，它能够在单机多核 CPU 的条件下，使用系统自带的高性能 I/O 机制，如 epoll，kqueue 等，通过多线程和事件模式，对目标机器产生大量的负载。
+
+其实，wrk 是复用了 redis 的 ae 异步事件驱动框架，准确来说 ae 事件驱动框架并不是 redis 发明的, 它来至于 Tcl 的解释器 jim, 这个小巧高效的框架, 因为被 redis 采用而被大家所熟知。
+
+- [Github官网](https://github.com/wg/wrk)
+
+## 验证安装
+
+```bash
+wrk -v
+```
+
+## 简单使用
+
+压力测试
+```bash
+wrk -t12 -c400 -d30s http://www.baidu.com
+```
+
+压力测试并且生成报告
+```bash
+wrk -t12 -c400 -d30s --latency http://www.baidu.com
+```
+
+# Bombardier
+
+Bombardier 是一款专为HTTP(S)性能基准测试设计的工具，该工具基于Go语言开发，并且为了提升性能，特意选择了fasthttp库替代了Go标准库中的http库
+
+- [Github官网](https://github.com/codesenberg/bombardier)
