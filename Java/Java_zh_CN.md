@@ -4,11 +4,23 @@
 OpenJDK 各种版本的介绍  
 https://mp.weixin.qq.com/s/ke6ZSZt-CMoVg2t3YY_rIQ
 
-推荐使用 ``AdoptOpenJDK / Eclipse Temurin`` 或者 ``Liberica JDK`` 或者 ``Microsoft Build of OpenJDK™``  
+推荐使用 ``AdoptOpenJDK / Eclipse Temurin``, ``Amazon Corretto``, ``Liberica JDK`` 或者 ``Microsoft Build of OpenJDK``  
 官网：  
 https://adoptium.net  
+https://aws.amazon.com/cn/corretto/?nc1=h_ls  
 https://bell-sw.com/libericajdk/  
 https://www.microsoft.com/openjdk  
+
+
+### MacOS安装
+```bash
+brew install --cask temurin@21
+java -version
+```
+
+## Checkstyle for Java
+- [VSCode插件](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)
+- [配置文件示例 checkstyle.xml](../Framework/BackendSpring/src/main/resources/checkstyle/checkstyle.xml)
 
 
 ## Eclipse和VSCode用的忽略问题设定文件（老旧工程用）
@@ -115,7 +127,7 @@ set JRE_HOME=D:\Tools\WorkTool\Java\jdk17.0.6
 
 #### 端口冲突解决办法
 **确认端口是否有冲突**  
-```
+```bash
 netstat -nao | find "8080"
 ```
 
@@ -143,7 +155,7 @@ java.util.logging.ConsoleHandler.encoding = SJIS
 ```
 tomcathome/conf/tomcat-users.xml
 ```
-```
+```xml
 <user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status"/>
 ```
 
@@ -151,7 +163,7 @@ tomcathome/conf/tomcat-users.xml
 ```
 tomcathome/conf/Catalina/localhost/JavaWebProject.xml
 ```
-```
+```xml
 <Context path="/JavaWebProject" docBase="D:\Work\WorkSpace\Java\JavaWebProject\WebContent" workDir="D:\Work\WorkSpace\Java\JavaWebProject\Work" />
 ```
 

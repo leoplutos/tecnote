@@ -119,6 +119,14 @@ ECharts 是一款基于 JavaScript 的数据可视化图表库，提供直观，
 - [Github](https://github.com/apache/echarts)
 - [中文官网](https://echarts.apache.org/zh/index.html)
 
+## ESLint
+- [VSCode插件](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [配置文件示例 .eslintrc.yml](../Framework/fullstacknext/.eslintrc.yml)
+
+## Prettier
+- [VSCode插件](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [配置文件示例 .prettierrc.yml](../Framework/fullstacknext/.prettierrc.yml)
+
 ## 公共API速查表
 https://github.com/public-apis/public-apis
 

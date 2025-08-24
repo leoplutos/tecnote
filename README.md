@@ -174,3 +174,4 @@
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 * [USB启动](Other/Usbboot_zh_CN.md)
 * [免费的编程中文书籍索引](Other/Book_zh_CN.md)
+* [国内教育-PDF教材](https://github.com/TapXWorld/ChinaTextbook)

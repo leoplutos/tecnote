@@ -121,7 +121,7 @@ sed -i 's/bgithub.xyz/github.com/g' $HOME/.config/nvim/lua/config/_basic.lua
 ## Python支持
 Neovim 的 ``Python`` 支持方式和 Vim 不一样
 需要运行下面的命令
-```
+```bash
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pynvim
 ```
 运行之后运行 ``:checkhealth`` 确认
@@ -145,6 +145,11 @@ NeoVim 自带的 GUI 前端是基于 qt 的，笔者不太喜欢，用起来延�
 Github：https://github.com/neovide/neovide  
 下载：https://github.com/neovide/neovide/releases  
 最新版：https://github.com/neovide/neovide/releases/download/0.12.0/neovide.exe.zip  
+
+MacOS
+```bash
+brew install --cask neovide
+```
 
 #### 启动
 下载好执行文件之后，如果 ``nvim.exe`` 在环境变量里直接运行 ``neovide.exe`` 即可  

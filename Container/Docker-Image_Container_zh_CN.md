@@ -20,6 +20,10 @@ scratch 无法被 ``pull``，只能用于 ``Dockerfile`` 中
 常用tag : ``ubuntu:jammy`` (77.9MB) (Ubuntu22.04 Jammy)  
 官方仓库 : [ubuntu](https://github.com/docker-library/docs/tree/master/ubuntu)
 
+#### Amazon Linux
+常用tag : ``amazonlinux:2023``  
+官方仓库 : [amazonlinux](https://github.com/amazonlinux/container-images)
+
 ## Docker的常用仓库
 
 ### 默认仓库（docker.io）
@@ -172,6 +176,30 @@ docker run -itd \
 curl -X POST "http://127.0.0.1:50080/delay/2" -H "accept: application/json"
 ```
 
+### SSH服务器
+https://docs.linuxserver.io/images/docker-openssh-server/
+
+使用命令
+```bash
+docker pull linuxserver/openssh-server:latest
+
+docker run -d \
+  --name=openssh-server \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Tokyo \
+  -e PASSWORD_ACCESS=true \
+  -e USER_NAME=lch \
+  -e USER_PASSWORD=123456 \
+  -p 2222:2222 \
+  linuxserver/openssh-server:latest
+```
+
+启动后测试
+```bash
+ssh lch@localhost -p 2222
+```
+
 ### FTP服务器
 https://github.com/fauria/docker-vsftpd  
 https://hub.docker.com/r/fauria/vsftpd/  
@@ -253,6 +281,21 @@ docker run -itd \
 启动后使用 WinSCP 等工具测试连接
 
 ### 邮件服务器
+
+#### maildev（推荐）
+https://github.com/maildev/maildev  
+https://maildev.github.io/maildev/  
+
+使用命令
+```bash
+docker pull maildev/maildev
+docker run -d -p 9580:1080 -p 1025:1025 --name maildev maildev/maildev
+```
+启动容器后访问  
+http://localhost:9580/
+
+#### PMail
+
 https://github.com/Jinnrry/PMail  
 https://github.com/Jinnrry/PMail/blob/master/README_CN.md  
 https://github.com/jinnrry/PMail/pkgs/container/pmail  
@@ -345,6 +388,33 @@ vi ./config/config.json
 Ctrl + p + q
 ```
 再次访问 http://localhost:9600/ 即可
+
+
+#### BillionMail
+https://github.com/aaPanel/BillionMail
+
+BillionMail 是一款开源的邮件服务器、邮件订阅与邮件营销解决方案，致力于为企业和个人提供高效、灵活且成本可控的邮件管理工具
+
+### SQL Server
+- [Linux 上的 SQL Server 是什么](https://learn.microsoft.com/zh-cn/sql/linux/sql-server-linux-overview)
+- [使用 Docker 运行 SQL Server Linux 容器映像](https://learn.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-docker)
+
+```bash
+# 拉取镜像
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+# 启动 Express 版本
+# ACCEPT_EULA=Y 接受微软许可协议
+# MSSQL_PID=Express 指定使用 Express 版本
+# SA_PASSWORD 设置系统管理员账户密码，需符合复杂度要求
+docker run -d \
+  -e "ACCEPT_EULA=Y" \
+  -e "MSSQL_PID=Express" \
+  -e "SA_PASSWORD=YourStrongPassw0rd" \
+  -p 1433:1433 \
+  --name sqlserver-express \
+  mcr.microsoft.com/mssql/server:2022-latest
+```
 
 ## 镜像和容器的区别
 

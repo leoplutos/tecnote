@@ -18,7 +18,8 @@ curl命令的参数的含义为
  - java包名：com.example.spring
  - 工程名：SpringBootJava
  - 输出文件：SpringBootJava.zip
-```
+
+```bash
 cd D:\WorkSpace\Java
 mkdir SpringBootJava
 
@@ -29,7 +30,7 @@ del SpringBootJava.zip
 ```
 
 ### 查看所有参数
-```
+```bash
 curl -H 'Accept: application/json' https://start.spring.io
 ```
 
@@ -50,7 +51,7 @@ wrapperUrl=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-w
 因为使用的是 Maven Wrapper，所以要修改指定国内源
 在 ``工程根路径`` 下打开 ``pom.xml``  
 修改内容
-```
+```xml
 <project>
 	<artifactId>SpringBootJava</artifactId>
 	<description>SpringBootJava project for Spring Boot</description>
@@ -90,7 +91,7 @@ server.servlet.encoding.force-response=true
 ### 新建一个简单的Controller
 新建文件 ``src/main/java/com/example/spring/HelloController.java``，绑定URL ``/hello``  
 内容如下
-```
+```java
 package com.example.spring;
 
 import org.springframework.stereotype.Controller;
@@ -114,7 +115,7 @@ public class HelloController {
 
 #### 分别新建5个文件
 ``src/main/resources/templates/header.mustache``  
-```
+```html
 <html>
 <head>
   <title>{{title}}</title>
@@ -129,7 +130,7 @@ public class HelloController {
 ```
 
 ``src/main/resources/templates/footer.mustache``  
-```
+```html
 <hr />
 <h1>这是footer.mustache</h1>
 </body>
@@ -137,7 +138,7 @@ public class HelloController {
 ```
 
 ``src/main/resources/templates/hello.mustache``  
-```
+```html
 {{> header}}
 
 <h1>这是hello.mustache</h1>
@@ -149,7 +150,7 @@ public class HelloController {
 ```
 
 ``src/main/resources/static/css/style.css``  
-```
+```css
 h1 {
 	color: #005f5f
 }
@@ -159,14 +160,14 @@ p {
 ```
 
 ``src/main/resources/static/js/main.js``  
-```
+```javascript
 function aletMessage() {
   alert("测试按钮已按下");
 }
 ```
 
 ### 启动工程
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootJava
 mvnw spring-boot:run
 ```
@@ -182,7 +183,7 @@ Mustache的高亮插件 [mustache](https://marketplace.visualstudio.com/items?it
 ### 其他
 #### 编译jar文件
 
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootJava
 mvnw clean package
 ```
@@ -193,7 +194,7 @@ mvnw clean package
 所需文件参考 [SpringBootJava](./SpringBootJava/)  
 
 1. 新建文件 ``src/main/java/com/example/spring/ServletInitializer.java``
-```
+```java
 package com.example.spring;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -210,12 +211,12 @@ public class ServletInitializer extends SpringBootServletInitializer {
 2. 新建 ``pom_war.xml``  
 
 - 修改打包方式为war  
-```
+```xml
 <packaging>war</packaging>
 ```
 
 - 修改 内置Tomcat Servlet 容器的 scope
-```
+```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -225,7 +226,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 因为使用外部的 Tomcat，所以需要主动把嵌入式容器 spring-boot-starter-tomcat 依赖的 scope 声明为 ``provided``，表示该依赖只用于编译、测试
 
 - 在 build 节点下添加 finalName 节点来设置打包后的 war 文件的名称
-```
+```xml
 <build>
 	<finalName>SpringBootJava</finalName>
 </build>
@@ -236,7 +237,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
  - pom_war.xml：编译war文件用来部署
 
 编译war文件命令  
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootJava
 mvnw -f pom_war.xml clean package
 ```
@@ -256,7 +257,7 @@ curl命令的参数的含义为
  - 包名：com.example.spring
  - 工程名：SpringBootKotlin
  - 输出文件：SpringBootKotlin.zip
-```
+```bash
 cd D:\WorkSpace\Java
 mkdir SpringBootKotlin
 
@@ -267,7 +268,7 @@ del SpringBootKotlin.zip
 ```
 
 ### 查看所有参数
-```
+```bash
 curl -H 'Accept: application/json' https://start.spring.io
 ```
 
@@ -351,7 +352,7 @@ rootProject.name = "SpringBootKotlin"
 ```
 
 ### 启动工程
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootKotlin
 gradlew bootRun
 ```
@@ -366,7 +367,7 @@ http://localhost:8080/hello?message=mytest
 ### 其他
 
 #### 编译jar文件
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootKotlin
 gradlew clean bootJar
 ```
@@ -408,7 +409,7 @@ dependencies {
 因为使用外部的 Tomcat，所以需要主动把嵌入式容器 spring-boot-starter-tomcat 依赖的 scope 声明为 ``provided``，表示该依赖只用于编译、测试
 
 编译war文件命令  
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootKotlin
 gradlew clean bootWar
 ```
@@ -425,6 +426,40 @@ http://localhost:8081/SpringBootKotlin/hello?message=mytest
 ```
 spring.threads.virtual.enabled=true
 ```
+
+## 发送邮件
+
+#### pom.xml 添加
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-mail</artifactId>
+</dependency>
+```
+
+#### application-dev.yml 添加
+```yml
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            auth: false # 認証しない
+            starttls.enable: false # TLSを利用しない
+          auth: false # 認証しない
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    host: localhost
+    port: 1025
+```
+
+发送邮件的Service类 [MailServiceImpl.java](./SpringBootUndertow/src/main/java/com/example/service/impl/MailServiceImpl.java)
+
+发送邮件的测试类 [MailServiceTest.java](./SpringBootUndertow/src/test/java/com/example/service/MailServiceTest.java)
+
+单元测试类可以使用VSCode插件 [Test Runner for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test) 运行
 
 ## Spring Boot 控制台程序
 示例在 [SpringBootConsole](./SpringBootConsole/)
@@ -471,7 +506,7 @@ curl命令的参数的含义为
  - java包名：com.example.batch
  - 工程名：SpringBootBatch
  - 输出文件：SpringBootBatch.zip
-```
+```bash
 cd D:\WorkSpace\Java
 mkdir SpringBootBatch
 
@@ -482,7 +517,7 @@ del SpringBootBatch.zip
 ```
 
 ### 查看所有参数
-```
+```bash
 curl -H 'Accept: application/json' https://start.spring.io
 ```
 
@@ -503,7 +538,7 @@ wrapperUrl=https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-w
 因为使用的是 Maven Wrapper，所以要修改指定国内源
 在 ``工程根路径`` 下打开 ``pom.xml``  
 修改内容
-```
+```xml
 <project>
 	<artifactId>SpringBootBatch</artifactId>
 	<description>SpringBootBatch project for Spring Boot</description>
@@ -554,7 +589,7 @@ spring.h2.console.enabled=true
 
 ### 新建h2内存表
 ``src/main/resources/db/schema.sql``
-```
+```sql
 CREATE TABLE IF NOT EXISTS people(
 	person_id INT NOT NULL PRIMARY KEY,
 	person_name VARCHAR(20),
@@ -565,7 +600,7 @@ CREATE TABLE IF NOT EXISTS people(
 ### 新建实体类
 保证字段属性要和数据库中的数据类型对应  
 ``src/main/java/com/example/batch/Person.java``
-```
+```java
 package com.example.batch;
 
 public record Person(int personId, String personName, String personCareer) {
@@ -574,7 +609,7 @@ public record Person(int personId, String personName, String personCareer) {
 
 ### 新建ItemProcessor的实现用来处理数据
 ``src/main/java/com/example/batch/PersonItemProcessor.java``
-```
+```java
 package com.example.batch;
 
 import org.slf4j.Logger;
@@ -607,7 +642,7 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 ### 创建SpringBatch的配置类
 用来配置Job  
 ``src/main/java/com/example/batch/BatchConfiguration.java``
-```
+```java
 package com.example.batch;
 
 import javax.sql.DataSource;
@@ -691,7 +726,7 @@ public class BatchConfiguration {
 ### 新建监听器
 自定义监听器。在批处理作业在执行前后会调用监听器的方法；执行额外的统一逻辑
 ``src/main/java/com/example/batch/JobCompletionNotificationListener.java``
-```
+```java
 package com.example.batch;
 
 import org.slf4j.Logger;
@@ -746,7 +781,7 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
 
 ### 修改启动文件
 ``src/main/java/com/example/batch/SpringBootBatchApplication.java``
-```
+```java
 package com.example.batch;
 
 import org.springframework.boot.SpringApplication;
@@ -762,7 +797,7 @@ public class SpringBootBatchApplication {
 ```
 
 ### 运行工程
-```
+```bash
 chcp 936
 cd D:\WorkSpace\Java\SpringBootBatch
 
@@ -774,7 +809,7 @@ gradlew bootRun
 ```
 
 ### 编译并运行jar文件
-```
+```bash
 cd D:\WorkSpace\Java\SpringBootBatch
 
 # maven

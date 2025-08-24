@@ -66,7 +66,18 @@ git config --global credential.credentialStore wincredman
 ```
 
 如果想删除凭证的话，如下操作  
-打开 ``设置`` → 搜索 ``Windows 凭据`` → 选择 ``管理 Windows 凭据`` → 在普通凭据下面会看到，删除即可
+打开 ``设置`` → 搜索 ``Windows 凭据``（日文系统为``Windows 資格情報``） → 选择 ``管理 Windows 凭据`` → 在普通凭据下面会看到，删除即可
+
+#### MacOS
+```bash
+brew tap microsoft/git
+brew install --cask git-credential-manager-core
+
+# 确认gcm版本
+git credential-manager --version
+# 启用gcm
+git config --global credential.helper manager
+```
 
 #### Linux平台
 

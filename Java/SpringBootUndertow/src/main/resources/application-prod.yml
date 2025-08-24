@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://52.195.119.236:1433;encrypt=false;databaseName=MRG_dev
+    username: sa
+    password: TENP9EbRqnZxYyYdAGH3
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  sql:
+    init:
+      mode: never # 初期化 SQL スクリプトが存在しない場合は、無効化することを推奨
+  batch:
+    jdbc:
+      initialize-schema: never
+    job:
+      enabled: false
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            auth: false # 認証しない
+            starttls.enable: false # TLSを利用しない
+          auth: false # 認証しない
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    host: localhost
+    port: 1025
+
+# CORE設定
+cors:
+  allowed-origins:
+    - http://localhost:5173
+    - https://d2zzx4se8wzu8b.cloudfront.net

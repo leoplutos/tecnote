@@ -73,7 +73,7 @@ fork 自 markdown-here
 在配置文件夹下新建目录 ``chrome``  
 然后在 新建目录 ``chrome`` 下新建文件 ``userChrome.css``  
 内容如下
-```
+```css
 #threadTree treechildren::-moz-tree-row(odd) {
     background-color: #f5f7fa;
 }
@@ -87,7 +87,7 @@ fork 自 markdown-here
 在配置文件夹下新建目录 ``chrome``  
 然后在 新建目录 ``chrome`` 下新建文件 ``userChrome.css``  
 内容如下
-```
+```css
 menubar,
 toolbar,
 nav-bar,
@@ -276,6 +276,9 @@ https://yandex.com/
 
 ## 开源网络"瑞士军刀"
 https://github.com/gchq/CyberChef
+
+## FPDF转换成Markdown和JSON格式
+https://github.com/opendatalab/MinerU
 
 ## 自我托管的PDF操作神器:Stirling-PDF
 https://github.com/Stirling-Tools/Stirling-PDF

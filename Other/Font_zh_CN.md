@@ -40,6 +40,20 @@ https://www.nerdfonts.com/cheat-sheet
 * [**更纱黑体原版-清华源**](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/) 
 * [**更纱黑体原版-码云**](https://gitee.com/mirrors/Sarasa-Gothic)  
 
+
+**MacOS安装**
+```bash
+# 更纱黑体NerdFonts(Sarasa Gothic Nerd Fonts)
+brew tap jonz94/sarasa-nerd-fonts
+# 查看字体
+brew search jonz94/sarasa-nerd-fonts/
+# 安装简体中文字体
+brew install font-sarasa-mono-sc-nerd-font
+# 安装日文字体
+brew install font-sarasa-mono-j-nerd-font
+```
+
+
 更纱黑体的命名由6部分组成，分别是
 1. 字体家族名称：sarasa。每个文件名都由它开头，代表这是更纱黑体家族的字体。
 2. 字体风格 (Style)：fixed。字体风格决定了西文字符的字形，分为 Gothic、UI、Mono、Term、Fixed 五种。

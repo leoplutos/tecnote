@@ -1,0 +1,12 @@
+# 折り返す行の長さ
+printWidth: 120
+# インデントのスペース数の指定
+tabWidth: 2
+# 文字列などシングルクオートで囲む
+singleQuote: false
+# 末尾のカンマの設定
+trailingComma: none
+# ステートメントの最後のセミコロンの設定
+semi: true
+# VueのSCFのscript,styleタグにインデントの指定
+vueIndentScriptAndStyle: true

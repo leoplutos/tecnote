@@ -23,6 +23,7 @@ https://code.visualstudio.com/#alt-downloads
 - [**VS Code Settings for Mac Windows and Linux**](https://marketplace.visualstudio.com/items?itemName=franmastromarino.vs-code-settings-os)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理多个平台的工程配置文件
 - [豆包 MarsCode - 编程助手](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：豆包旗下的编程AI助手
 - [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
+- [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理PR神器
 - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
 - [**Diff Folders**](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
 - [**Draw.io Integration**](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode中画图的插件
@@ -239,7 +240,7 @@ https://vscode.download.prss.microsoft.com/dbazure/download/stable/af28b32d7e553
 
 ## 插件无法下载的解决办法
 笔者在使用 ``CodeLLDB`` 插件的时候，遇到了无法更新的问题，解决方式如下  
-```
+```bash
 curl --create-dirs -o D:\Download\codelldb-x86_64-windows.vsix https://download.njuu.cf/vadimcn/codelldb/releases/download/v1.10.0/codelldb-x86_64-windows.vsix
 ```
 打开VSCode → 扩展 → 右上角的 ``...`` → 从VSIX安装...
@@ -301,17 +302,25 @@ workbench.action.togglePanel(查看面板可见性)
 
 ## 配置编辑器
 刚下载好的 VSCode 还不符合我们的需求，需要进行配置才能顺手。各个设定所在路径如下
-### 全局用户设定文件位置
+
+### 全局用户设定文件位置（Windows）
 ```
 C:\Users\user\AppData\Roaming\Code\User
 ```
-* settings.json
-* keybindings.json
+- settings.json
+- keybindings.json
+
+### 全局用户设定文件位置（MacOS）
+```
+~/Library/Application\ Support/Code/User/settings.json
+```
+- settings.json
+- keybindings.json
 
 ### 工作区设定文件位置（不推荐使用）
 保存工作区的时候生成的扩展名 .code-workspace 文件，即为工作区设定文件  
 在settings语句块里面，加入设定即可
-```
+```json
 {
 	"folders": [
 		{
@@ -361,7 +370,7 @@ Neovim 插件使用的话只要:
 #### 关于Python的格式化
 使用 [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter) 插件  
 安装插件后在工程设定的settings.json内如下设定：
-```
+```json
 "editor.defaultFormatter": "ms-python.black-formatter", //使用Black Formatter插件
 "python.formatting.provider": "none",
 ```
@@ -446,20 +455,20 @@ tasks用于在launch前执行任务，launch用于读取执行文件。
 ## 预定义变量
 VSCode支持下面的预定义变量:  
 
-- ${workspaceFolder} - 当前工作目录(根目录)
-- ${workspaceFolderBasename} - 当前文件的父目录
-- ${file} - 当前打开的文件名(完整路径)
-- ${relativeFile} - 当前根目录到当前打开文件的相对路径(包括文件名)
-- ${relativeFileDirname} - 当前根目录到当前打开文件的相对路径(不包括文件名)
-- ${fileBasename} - 当前打开的文件名(包括扩展名)
-- ${fileBasenameNoExtension} - 当前打开的文件名(不包括扩展名)
-- ${fileDirname} - 当前打开文件的目录
-- ${fileExtname} - 当前打开文件的扩展名
-- ${cwd} - 启动时task工作的目录
-- ${lineNumber} - 当前激活文件所选行
-- ${selectedText} - 当前激活文件中所选择的文本
-- ${execPath} - vscode执行文件所在的目录
-- ${defaultBuildTask} - 默认编译任务(build task)的名字
+- ``${workspaceFolder}`` - 当前工作目录(根目录)
+- ``${workspaceFolderBasename}`` - 当前文件的父目录
+- ``${file}`` - 当前打开的文件名(完整路径)
+- ``${relativeFile}`` - 当前根目录到当前打开文件的相对路径(包括文件名)
+- ``${relativeFileDirname}`` - 当前根目录到当前打开文件的相对路径(不包括文件名)
+- ``${fileBasename}`` - 当前打开的文件名(包括扩展名)
+- ``${fileBasenameNoExtension}`` - 当前打开的文件名(不包括扩展名)
+- ``${fileDirname}`` - 当前打开文件的目录
+- ``${fileExtname}`` - 当前打开文件的扩展名
+- ``${cwd}`` - 启动时task工作的目录
+- ``${lineNumber}`` - 当前激活文件所选行
+- ``${selectedText}`` - 当前激活文件中所选择的文本
+- ``${execPath}`` - vscode执行文件所在的目录
+- ``${defaultBuildTask}`` - 默认编译任务(build task)的名字
 
 更多：  
 https://zhuanlan.zhihu.com/p/92175757?ivk_sa=1024320u&utm_id=0
@@ -469,7 +478,7 @@ https://zhuanlan.zhihu.com/p/92175757?ivk_sa=1024320u&utm_id=0
 Python插件是不支持格式代码的，这里笔者使用black格式代码。具体设置看设定文件即可。  
 除了设定还需要pip安装black。  
 使用清华源安装black
-```
+```bash
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple black
 ```
 安装好后会在python的Scripts内发现black.exe，配置到设定文件即可。
@@ -481,7 +490,7 @@ C:\Users\user\AppData\Roaming\Code\User\snippets
 ```
 按下 Ctrl + Shift + p，然后输入 snippets ，会有提示 Configure User Snippets。选择后再次选择对应的开发语言，即可打开配置文件。  
 下面以1个c语言举例(c.json)
-```
+```json
 {
 	// 添加main函数
 	"添加main函数": {
@@ -520,7 +529,7 @@ chcp.com 65001
 
 1. 使用默认 +  [显示换行符](https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf)  
 设定文件中如下设定即可在选中的时候表示
-```
+```json
 "editor.renderWhitespace": "selection",
 ```
 
@@ -530,7 +539,7 @@ Visible Whitespace这个插件可以渲染 TAB符，全角空格，回车，文�
 
 3. 使用插件 [Highlight](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)  
 通过正则表达式匹配来渲染
-```
+```json
 "highlight.regexes": {
 	"(\\t)": [ // 匹配tab符号
 		{
@@ -584,7 +593,7 @@ Developer: Startup Performance
 
 ### Thief-Book的使用
 下载好插件以后，在 ``settings.json`` 中设定如下
-```
+```json
 {
 	"thiefBook.filePath": "D:\\path\\to\\book.txt",
 	"thiefBook.isEnglish": false,
@@ -594,7 +603,7 @@ Developer: Startup Performance
 其中 ``thiefBook.currPageNumber`` 这个设定如果是在 ``文件夹设定下`` 只有快速跳转的时候打开注释，其他时候一定要注释掉，不然会导致跳转问题
 
 在 ``keybindings.json`` 中设定如下
-```
+```json
 [
 	{
 		"key": "pageup",

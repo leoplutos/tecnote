@@ -81,15 +81,10 @@ Windows Registry Editor Version 5.00
 ## Windows11 技巧
 
 ### 跳过微软账号登录
-安装完系统时，默认会强制用微软账号登录  
-在选择国家和地区时，按 ``Shift + F10`` 键，打开命令行程序（部分笔记本选按 ``Fn + Shift + F10`` ）  
-在命令行输入：``oobe\bypassnro.cmd`` 后，电脑会重启  
-重启后再次按 ``Shift + F10`` 键  
-在命令行输入：``ipconfig/release``，然后继续即可
-
-如果还是提示需要微软账号登录可以使用  
-账号：``8@8.com``  
+安装完系统时，默认会强制用微软在线账号登录，可以使用下面的方式创建本地账户  
+账号：``no@thankyou.com``  
 密码：``随意``  
+然后系统就会提示这个账户使用错误密码太多被暂时锁定，然后点击下一步就可以建立本地账户了
 
 ### 恢复经典右键菜单
 
@@ -132,6 +127,15 @@ reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\I
 
 - 日文系统设定
     ``追加の設定`` → ``日付`` → ``短い形式`` →  修改为 ``yyyy/M/d dddd``
+
+### Windows11系统下按下 Win + G 无法打开 XBox 录像
+
+1. 按下 Win + G
+
+2. 检查后台服务是否运行  
+    按 ``Ctrl + Shift + Esc`` 打开 任务管理器  
+    查看是否有 ``GameBar.exe`` 或 ``Xbox Game Bar 相关进程``正在运行  
+    如果没有，打开 ``Xbox`` → ``設定`` → ``ユーザー補助`` → ``Game Bar``
 
 ## Office
 

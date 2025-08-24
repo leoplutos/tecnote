@@ -116,3 +116,30 @@ http://localhost:9501/todo/getAll
 #### 后端H2后端控制台
 http://localhost:9501/h2-console  
 在这个界面中首先将会显示登录界面，在登录界面中适用的登录信息是你在 ``application.properties`` 文件中指定的登录信息，成功连接到控制台后，我们将会看到一个完整的控制台界面
+
+## 其他
+
+### SprintBoot 跨域支持
+
+```java
+package com.my.project.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+// 实现WebMvcConfigurer接口以配置全局CORS（跨域）
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")  // 匹配所有路径
+                .allowedOrigins("http://localhost:9500","https://prd.abc.net/")  // 允许的域
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // 允许的方法
+                .allowCredentials(true)  // 允许携带 cookie
+                .allowedHeaders("*")  // 允许的请求头
+                .maxAge(3600);  // 缓存预检请求（preflight request）的结果1小时
+    }
+}
+```

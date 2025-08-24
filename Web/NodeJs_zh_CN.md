@@ -9,9 +9,14 @@ https://nodejs.org/dist/v18.17.1/node-v18.17.1-win-x64.zip
 
 #### 确认
 解压缩后运行命令确认
-```
+```bash
 node --version
 npm --version
+```
+
+#### MacOS安装
+```bash
+brew install node@22
 ```
 
 ## 官方教程
@@ -58,12 +63,12 @@ npm --registry https://registry.npmmirror.com/ install <packagename>
 ```
 
 安装第三方包到全局（-g参数，模块将被下载安装到全局目录）
-```
+```bash
 npm instal <packagename> -g
 ```
 
 卸载全局包
-```
+```bash
 npm uninstall -g <package>
 ```
 
@@ -71,7 +76,7 @@ npm uninstall -g <package>
 
 #### 使用NodeJs内置库
 新建一个工程后，默认并不附带NodeJS中的对象库（比如 http），要使用这些对象的API，需要安装到本地
-```
+```bash
 npm i --save-dev @types/node
 ```
 ``--save-dev`` 选项为 添加条目到 package.json 文件中的开发依赖
@@ -84,21 +89,21 @@ https://github.com/pinojs/pino-pretty
 
 #### prettier格式化
 安装命令
-```
+```bash
 npm install -g --save-dev --save-exact prettier
 ```
 确认命令
-```
+```bash
 prettier.cmd --version
 ```
 
 #### sql-formatter格式化
 安装命令
-```
+```bash
 npm install -g sql-formatter
 ```
 确认命令
-```
+```bash
 sql-formatter.cmd --version
 ```
 
@@ -110,40 +115,40 @@ sql-formatter.cmd --version
 pm2，是一款用于守护进程的管理命令行工具，它能够帮你管理你的应用，让它全年无休不挂掉
 
 #### 安装
-```
+```bash
 npm install pm2 -g
 ```
 
 #### 启动应用
-```
+```bash
 pm2 start main.js
 ```
 项目会被启动，并默认后台运行。启动后 pm2 提供的应用名为被启动的文件名  
 可以用选项 ``--name <app_name>`` 来指定名字。
 
 #### 查看应用列表
-```
+```bash
 pm2 ls
 ```
 
 #### 停止应用
-```
+```bash
 pm2 stop <app_name | id | 'all'>
 ```
 
 #### 删除应用
-```
+```bash
 pm2 delete <app_name>
 ```
 和 stop 不同，一旦删除，就无法恢复
 
 #### 重启应用
-```
+```bash
 pm2 restart <app_name>
 ```
 
 #### 重载应用
-```
+```bash
 pm2 reload <app_name>
 ```
 
