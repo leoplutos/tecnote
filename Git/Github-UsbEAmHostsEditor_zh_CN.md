@@ -6,6 +6,7 @@
 ## 方法1：使用镜像网站（推荐）
 
 ### github镜像站
+https://ghproxy.link/  
 https://bgithub.xyz/  
 https://kkgithub.com/  
 https://github.site/  

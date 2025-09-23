@@ -294,4 +294,15 @@
 		"key": "pagedown",
 		"command": "extension.getNextPage"
 	},
+	// 新增 alt+g → Go to Implementation
+	{
+		"key": "alt+g",
+		"command": "editor.action.goToImplementation",
+		"when": "editorHasImplementationProvider && editorTextFocus"
+	},
+	{ //[Periscope插件]alt+shift+p:打开搜索
+		"key": "alt+shift+p",
+		"command": "periscope.search",
+		"when": "editorTextFocus"
+	},
 ]

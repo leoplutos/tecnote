@@ -66,6 +66,13 @@ start /b D:\Tools\WorkTool\Linux\WezTerm\wezterm ssh -- lchuser@172.20.115.248:8
 ```
 用这个批处理启动即可
 
+使用 pem 验证文件登录服务器的 cmd 批处理
+```bash
+@echo off
+
+start /b D:\Tools\WorkTool\Linux\WezTerm\wezterm-gui ssh -oIdentityFile=C:/Users/xxx/.ssh/xxxxxxxxxx.pem lchuser@172.20.115.248:8122
+```
+
 ### Lua配置文件调试方式
 可以用如下方式启动
 ```bash

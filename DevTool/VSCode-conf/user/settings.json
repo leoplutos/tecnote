@@ -52,6 +52,8 @@
 	"editor.semanticHighlighting.enabled": true, //开启基于LSP语义的高亮
 	"editor.unicodeHighlight.nonBasicASCII": false, //控制是否突出显示所有非基本 ASCII 字符
 	"editor.stickyScroll.enabled": false,
+	"editor.gotoLocation.multipleDefinitions": "goto",
+	"editor.gotoLocation.multipleImplementations": "goto",
 	"workbench.tree.stickyScrollMaxItemCount": 1,
 	//"window.menuBarVisibility": "toggle", //菜单处于隐藏状态，但通过按 Alt 键可在窗口顶部显示。
 	"window.confirmBeforeClose": "always", //控制是否在关闭窗口或退出应用程序之前显示确认对话框
@@ -1071,6 +1073,14 @@
 	"whitespacepp.backColorEOF": "#000000", //EOF（文件结尾）的背景色。
 	"whitespacepp.renderingDelayMs": 0, //渲染延迟时间，以毫秒为单位。间隔短于延迟时间的绘图请求将被取消。
 	"whitespacepp.adjustWidthEOF": 110, //以 % 为单位调整 EOF 的背景宽度。textEOF通过乘以by的长度adjustWidthEOF再除以 100 来计算。
+	//-----------------------------------------------"
+	//               periscope插件设定               "
+	//-----------------------------------------------"
+	"periscope.rgGlobExcludes": [
+		"**/dist/**",
+		"**/target/**",
+		"**/node_modules/**",
+	],
 	//-----------------------------------------------"
 	//               vim插件设定                     "
 	//-----------------------------------------------"

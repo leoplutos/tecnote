@@ -1,0 +1,19 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		// 需要 Debugger for Java 插件, 按下F5即可开始Debug
+		{
+			"type": "java",
+			"name": "Debug Spring Boot",
+			"request": "launch",
+			"mainClass": "com.example.spring.BackendSpringApplication",
+			// 可以在下面args里面设置参数
+			// "args": [
+			// 	"jobA",
+			// 	"zzz",
+			// 	"ttt"
+			// ],
+			"projectName": "BackendSpring"
+		}
+	]
+}

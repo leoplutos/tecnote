@@ -288,8 +288,12 @@ https://maildev.github.io/maildev/
 
 使用命令
 ```bash
+# 拉取镜像
 docker pull maildev/maildev
+# 启动，WebUI无认证
 docker run -d -p 9580:1080 -p 1025:1025 --name maildev maildev/maildev
+# 启动，WebUI有认证
+docker run -d -p 9580:1080 -p 1025:1025 --name maildev maildev/maildev --web-user user --web-pass user
 ```
 启动容器后访问  
 http://localhost:9580/
