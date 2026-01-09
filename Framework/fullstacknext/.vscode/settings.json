@@ -5,5 +5,16 @@
 		"**/node_modules": true
 	},
 	// 指定使用工程内的typescript
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"[typescript]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"liveServer.settings.root": "/dist"
 }

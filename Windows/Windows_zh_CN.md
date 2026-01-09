@@ -80,6 +80,21 @@ Windows Registry Editor Version 5.00
 
 ## Windows11 技巧
 
+### 重启网络服务
+有时候网络会变得很慢，使用下面的命令可以重启网络服务修复问题
+
+``Windows键 + X`` ，选择 ``终端管理员``，启动终端后运行下面的命令
+
+```
+netsh winsock reset
+netsh int ip reset
+ipconfig /release
+ipconfig /renew
+ipconfig /flushdns
+```
+
+然后重启电脑
+
 ### 跳过微软账号登录
 安装完系统时，默认会强制用微软在线账号登录，可以使用下面的方式创建本地账户  
 账号：``no@thankyou.com``  
@@ -146,3 +161,5 @@ reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\I
  - [官网](https://sanwhole.com/Products/VoleOffice)
  - [github](https://sanwhole.com/PubData/Installer/VoleOffice.exe)
 
+## iPhone
+ - [Apple 设备](https://apps.microsoft.com/detail/9np83lwlpz9k?hl=zh-CN&gl=JP)

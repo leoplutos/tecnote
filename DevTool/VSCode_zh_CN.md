@@ -21,8 +21,6 @@ https://code.visualstudio.com/#alt-downloads
 - [Markdown Table](https://marketplace.visualstudio.com/items?itemName=TakumiI.markdowntable)
 - [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
 - [**VS Code Settings for Mac Windows and Linux**](https://marketplace.visualstudio.com/items?itemName=franmastromarino.vs-code-settings-os)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理多个平台的工程配置文件
-- [豆包 MarsCode - 编程助手](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：豆包旗下的编程AI助手
-- [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
 - [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理PR神器
 - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
 - [**Diff Folders**](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
@@ -32,6 +30,12 @@ https://code.visualstudio.com/#alt-downloads
 - ~~[VSCodeVim(不推荐)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)~~
 - [Sync-Rsync](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
 - [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
+
+## AI插件
+- [Claude Code for VS Code](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [豆包 MarsCode - 编程助手](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)
+- [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
 
 ## 配置文件插件
 

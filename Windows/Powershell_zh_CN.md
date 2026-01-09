@@ -122,3 +122,9 @@ Get-ChildItem |Foreach-Object { Rename-Item $_ -NewName ("{0}{1}" -f $_.Creation
 - ``$_.LastWriteTime`` ：文件的修改时间
 - 方法 ``.ToString()`` ：根据需要进行格式设置
 - ``$_.Extension`` ：文件的扩展名
+
+### CSV内容过大，只读取前1000行另存为其他文件
+
+```
+Get-Content "C:\path\to\your\bigfile.csv" -TotalCount 1000 | Set-Content "C:\path\to\output.csv"
+```

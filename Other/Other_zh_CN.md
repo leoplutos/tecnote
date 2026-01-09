@@ -277,7 +277,11 @@ https://yandex.com/
 ## 开源网络"瑞士军刀"
 https://github.com/gchq/CyberChef
 
-## FPDF转换成Markdown和JSON格式
+## PDF查看器
+- [SumatraPDF reader](https://github.com/sumatrapdfreader/sumatrapdf)
+- [Sioyek](https://github.com/ahrm/sioyek)
+
+## PDF转换成Markdown和JSON格式
 https://github.com/opendatalab/MinerU
 
 ## 自我托管的PDF操作神器:Stirling-PDF

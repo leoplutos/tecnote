@@ -1,0 +1,65 @@
+{
+	"version": "2.0.0",
+	"windows": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
+			"shell": {
+				"executable": "cmd.exe",
+				"args": [
+					"/d",
+					"/c"
+				]
+			},
+			"env": { //自定义环境变量
+				"PATH": "${env:path};D:\\Tools\\WorkTool\\Python\\Python38;D:\\Tools\\WorkTool\\Python\\Python38\\Scripts;",
+			}
+		},
+	},
+	"linux": {
+		"options": { //tasks.json定义的所有内容都使用bash运行
+			"shell": {
+				"executable": "bash",
+			},
+			"env": { //自定义环境变量
+			}
+		},
+	},
+	"presentation": {
+		"echo": true,
+		"reveal": "always",
+		"focus": true,
+		"panel": "new"
+	},
+	"tasks": [
+		{
+			"label": "install_requirements",
+			"type": "shell",
+			"command": "pip",
+			"args": [
+				"install",
+				"-r",
+				"requirements.txt",
+				"--target",
+				"./libs",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "安装依赖到libs目录",
+		},
+		{
+			"label": "run_app",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-m",
+				"app",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"detail": "运行",
+		},
+	]
+}

@@ -1,7 +1,14 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-		// 需要 Debugger for Java 插件, 按下F5即可开始Debug
+		{
+			"type": "java",
+			"name": "CodeGenerator",
+			"request": "launch",
+			"mainClass": "com.mrg.ims.generator.CodeGenerator",
+			"projectName": "ims_backend"
+		},
+		// 需要 Debugger for Java 插件
 		{
 			"type": "java",
 			"name": "Debug Spring Boot",

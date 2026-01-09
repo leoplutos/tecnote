@@ -1,17 +1,33 @@
 {
 	"editor.guides.indentation": true, //缩进参考线
+	//"editor.insertSpaces": true, //按下tab时替换为空格
 	"files.eol": "\n", // LF 换行
-	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
+	"files.exclude": {
+		"**/target": true
+	},
+	"search.exclude": {
+		"**/target": true
+	},
+	"java.jdt.ls.java.home": "D:\\Tools\\WorkTool\\Java\\openjdk21",
 	"java.jdt.ls.vmargs": "-Dfile.encoding=UTF-8",
 	"java.configuration.runtimes": [
 		{
 			"name": "JavaSE-21",
-			"path": "D:\\Tools\\WorkTool\\Java\\jdk-21.0.3+9",
+			"path": "D:\\Tools\\WorkTool\\Java\\openjdk21",
 			"default": true
 		},
 	],
-	"java.configuration.maven.userSettings": "C:/Users/Leo-G5000/.m2/settings.xml",
-	"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.7/conf/settings.xml",
+	"java.project.sourcePaths": [ //明确告诉 VS Code 哪些目录才是源码
+		"src/main/java",
+		"src/test/java"
+	],
+	"java.project.outputPath": "target/classes", //指定 class 输出目录
+	"java.import.exclusions": [ // 彻底屏蔽 Java 语言服务对 target 的扫描
+		"**/node_modules/**",
+		"**/target/**"
+	],
+	//"java.configuration.maven.userSettings": "C:/Users/Leo/.m2/settings.xml",
+	//"java.configuration.maven.globalSettings": "D:/Tools/WorkTool/Java/apache-maven-3.9.7/conf/settings.xml",
 	//"editor.codeLens": false, //不在编辑器中显示codeLens，不表示main函数上方的[Run | Debug]
 	"java.format.settings.profile": "GoogleStyle", //使用gogole样式格式化代码
 	"java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8", //添加Java运行调试的参数

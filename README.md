@@ -157,6 +157,9 @@
 ## 云相关
 * [AWS](Cloud/AWS_zh_CN.md)
 
+## AI相关
+* [Claude Code](AI/ClaudeCode_zh_CN.md)
+
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)
 

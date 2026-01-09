@@ -90,6 +90,20 @@ Windows 是 ``Ctrl + X`` 剪切，但 Mac 上这样是没反应的
 ### 在右上角控制中心显示 VPN 的方法
 ``系统设置`` → ``控制中心与菜单栏`` → 找到 VPN → 选择 ``在控制中心显示``
 
+### MacOS显示节假日
+
+打开``日历`` → ``文件`` → ``新建日历订阅`` → 输入下面的 ``URL``
+
+#### 中国大陆节假日
+```
+https://calendars.icloud.com/holidays/cn_zh.ics
+```
+
+#### 日本の祝日
+```
+https://calendars.icloud.com/holidays/jp_ja.ics
+```
+
 ## 常用软件
 
 ### Homebrew

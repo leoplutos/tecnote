@@ -29,6 +29,16 @@ pip config list
 更多：  
 https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
+## 部署
+常见的部署方式有2种
+
+### 服务器允许访问外网
+直接使用 uv 即可，详细看 [这里](./Python-Poetry_zh_CN.md)
+
+### 服务器不允许访问外网
+这种情况我们需要在本地将依赖全部安装好，和代码一起打包到服务器，详细看 [PythonNormal](./PythonNormal/) 这个工程
+
+
 ## 关于Python的父目录子目录
 
 ### 引用子目录下的内容
