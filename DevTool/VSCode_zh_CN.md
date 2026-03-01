@@ -33,6 +33,7 @@ https://code.visualstudio.com/#alt-downloads
 
 ## AI插件
 - [Claude Code for VS Code](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
+- [Gemini CLI Companion](https://marketplace.visualstudio.com/items?itemName=google.gemini-cli-vscode-ide-companion)&nbsp;注：配合Gemini CLI使用
 - [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
 - [豆包 MarsCode - 编程助手](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)
 - [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
@@ -45,6 +46,7 @@ https://code.visualstudio.com/#alt-downloads
 - [**XML Tools**](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml)
 - [**YAML**](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 - [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：提升CSV查看和编辑效率，支持SQL
+- [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer)
 
 ## C/C++
 
@@ -81,6 +83,8 @@ Java所需插件比较多。有2套方案：
     - [Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle)&nbsp;&nbsp;Gradle支持，管理 Gradle 依赖
     - [Test Runner for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test)&nbsp;&nbsp;运行和调试 JUnit/TestNG 测试用  例
     - [Checkstyle for Java](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)&nbsp;&nbsp;检查错误
+    - [**Super Mybatis**](https://marketplace.visualstudio.com/items?itemName=yangbaopan.vscode-java-ibatisx)&nbsp;&nbsp;Mybatis支持
+    - [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency)&nbsp;&nbsp;管理Java项目、包括引用的  库、资源文件、包、类和类成员
     - [Spring3合1插件包](https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack)  包括3个插件（Spring Boot，Spring   Initializr Java，Spring Boot Dashboard）也可按需下载
     - [Java Decompiler](https://marketplace.visualstudio.com/items?itemName=dgileadi.java-decompiler)&nbsp;&nbsp;反编译
     - [Lombok Annotations Support](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-lombok)&nbsp;&nbsp;标注支持

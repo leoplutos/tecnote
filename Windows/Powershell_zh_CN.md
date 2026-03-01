@@ -71,6 +71,12 @@ Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser
 Test-NetConnection -ComputerName 172.30.8.172 -Port 9500
 ```
 
+## 在PowerShell中查看日志
+效果类似 ``tail`` 命令
+```bash
+Get-Content C:\logs\app.log -Encoding UTF8 -Tail 200 -Wait
+```
+
 ## 关于转义字符
 以下转义字符为 PowerShell 6.0 中新加的，旧版不可用
 ```bash

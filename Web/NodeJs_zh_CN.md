@@ -39,6 +39,11 @@ npm config set prefix "D:\Tools\WorkTool\Web\node-v20.15.1-win-x64\node_global"
 npm config set cache "D:\Tools\WorkTool\Web\node-v20.15.1-win-x64\node_cache"
 ```
 
+查看全局安装路径
+```bash
+npm root -g
+```
+
 ## 设置国内源
 ```bash
 # npm config set registry https://npmreg.proxy.ustclug.org/

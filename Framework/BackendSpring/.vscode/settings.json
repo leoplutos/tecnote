@@ -5,6 +5,14 @@
 	"files.exclude": {
 		"**/target": true
 	},
+	// 排除被监视的文件夹
+	"files.watcherExclude": {
+		"**/target/**": true,
+		"**/build/**": true,
+		"**/node_modules/**": true,
+		"**/.git/objects/**": true,
+		"**/logs/**": true
+	},
 	"search.exclude": {
 		"**/target": true
 	},

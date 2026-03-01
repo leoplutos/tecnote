@@ -229,6 +229,7 @@ mkdir -p /home/$USER/vsftpd_log
 # 拉取镜像
 docker pull fauria/vsftpd
 
+# 使用127.0.0.1启动不可以的话，将IP换成WSL的IP
 docker run -itd \
   -v /home/$USER/vsftpd:/home/vsftpd \
   -v /home/$USER/vsftpd_log/:/var/log/vsftpd/ \

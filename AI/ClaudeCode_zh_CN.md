@@ -55,8 +55,16 @@ your-project/
 
 ### 删除 Claude 的Session
 
-使用 cmd 查看 Claude 数据目录
+使用 CMD 查看 Claude 数据目录
 ```bash
 dir %USERPROFILE%\.claude\projects
 ```
 找到你的工程目录删除所有即可
+
+### 在 Windows 系统下使用 Claude 之后会有一个 nul 的文件删不掉
+
+使用 CMD 命令删除（不是 PowerShell，优先用 CMD）
+```bash
+del \\?\C:\pathto\project\nul
+```
+
