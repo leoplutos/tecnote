@@ -1,0 +1,66 @@
+[
+  {
+    "label": "npm_install",
+    "command": "npm install",
+    "shell": {
+      "program": "cmd.exe"
+    },
+    "env": {
+      "PATH": "%PATH%;C:\\qiao\\00_Tools\\Web\\node"
+    },
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success",
+    "show_summary": true,
+    "show_command": true
+  },
+  {
+    "label": "npm_run_dev",
+    "command": "npm run dev",
+    "shell": {
+      "program": "cmd.exe"
+    },
+    "env": {
+      "PATH": "%PATH%;C:\\qiao\\00_Tools\\Web\\node"
+    },
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success",
+    "show_summary": true,
+    "show_command": true
+  },
+  {
+    "label": "npm_run_build",
+    "command": "npm run build",
+    "shell": {
+      "program": "cmd.exe"
+    },
+    "env": {
+      "PATH": "%PATH%;C:\\qiao\\00_Tools\\Web\\node"
+    },
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success",
+    "show_summary": true,
+    "show_command": true
+  },
+  {
+    "label": "npm_run_buildStg",
+    "command": "npm run buildStg",
+    "shell": {
+      "program": "cmd.exe"
+    },
+    "env": {
+      "PATH": "%PATH%;C:\\qiao\\00_Tools\\Web\\node"
+    },
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success",
+    "show_summary": true,
+    "show_command": true
+  }
+]

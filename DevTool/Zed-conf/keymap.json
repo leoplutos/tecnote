@@ -1,0 +1,34 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }], // 关闭当前
+      "shift-space r": "workspace::Reload", // 重新载入Workspace
+      "shift-space t": "task::Spawn", //运行任务
+    },
+  },
+  {
+    "context": "Editor && !vim_mode",
+    "bindings": {
+      "ctrl-d": "editor::DeleteLine", //删除当前行
+      "alt-g": "editor::GoToImplementation", //跳转到实现
+      "shift-space ctrl-u": "editor::ConvertToUpperCase", //转大写
+      "shift-space ctrl-l": "editor::ConvertToLowerCase", //转小写
+      "shift-space ctrl-s": "editor::ConvertIndentationToSpaces", //将缩进转换为空格
+      "shift-space ctrl-t": "editor::ConvertIndentationToTabs", //将缩进转换为制表符
+      "shift-alt-r": "editor::RevealInFileManager", //在资源管理器中显示
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "(Editor && extension == md)",
+    "bindings": {
+      "shift-space m": "markdown::OpenPreviewToTheSide", //Markdown的编辑和预览垂直分割表示
+    },
+  },
+]

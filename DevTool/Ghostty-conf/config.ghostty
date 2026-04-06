@@ -1,0 +1,69 @@
+# 设置UI语言
+language = zh_CN
+# 自动更新
+auto-update = off
+
+# 设置字体
+# font-family = "更紗等幅ゴシック J Nerd Font"
+# font-size = 14
+
+# 输入时隐藏鼠标
+mouse-hide-while-typing = true
+# 复制选择内容
+copy-on-select = clipboard
+# 鼠标右键粘贴
+right-click-action = paste
+# 复制内容时去除多余空格
+clipboard-trim-trailing-spaces = true
+
+# 背景色
+background = 1D1F21
+# 前景色
+foreground = DADADA
+# 选择内容背景色
+selection-background = 224F76
+# 选择内容前景色
+selection-foreground = DADADA
+# 光标颜色
+cursor-color = 00FFFF
+#cursor-style = block
+# 分割线颜色
+split-divider-color = 235b76
+
+# ANSI colors - normal colors - black
+palette = 0=#000000
+# ANSI colors - normal colors - red
+palette = 1=#CD3131
+# ANSI colors - normal colors - green
+palette = 2=#0DBC79
+# ANSI colors - normal colors - yellow
+palette = 3=#E5E510
+# ANSI colors - normal colors - blue
+palette = 4=#2472C8
+# ANSI colors - normal colors - purple (magenta)
+palette = 5=#BC3FBC
+# ANSI colors - normal colors - cyan
+palette = 6=#11A8CD
+# ANSI colors - normal colors - white
+palette = 7=#E5E5E5
+# ANSI colors - bright colors - brightBlack
+palette = 8=#243C4F
+# ANSI colors - bright colors - brightRed
+palette = 9=#F14C4C
+# ANSI colors - bright colors - brightGreen
+palette = 10=#23D18B
+# ANSI colors - bright colors - brightYellow
+palette = 11=#F5F543
+# ANSI colors - bright colors - brightBlue
+palette = 12=#3B8EEA
+# ANSI colors - bright colors - brightPurple (bright magenta)
+palette = 13=#D670D6
+# ANSI colors - bright colors - brightCyan
+palette = 14=#29B8DB
+# ANSI colors - bright colors - brightWhite
+palette = 15=#E5E5E5
+
+# 自定义快捷键绑定
+# keybind = ctrl+z=close_surface
+# keybind = ctrl+d=new_split:right
+

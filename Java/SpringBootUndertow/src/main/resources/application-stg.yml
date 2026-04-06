@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://52.195.119.236:1433;encrypt=false;databaseName=MRG_dev
-    username: sa
-    password: TENP9EbRqnZxYyYdAGH3
+    url: jdbc:sqlserver://192.168.0.3:1433;encrypt=true;trustServerCertificate=true;databaseName=TestDB
+    username: dbname
+    password: dbpwd
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   sql:
     init:

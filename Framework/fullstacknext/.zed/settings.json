@@ -1,0 +1,46 @@
+{
+  // Zed 原生支持 TypeScript 和 TSX
+  // 默认情况下，Zed 使用 vtsls 处理 TypeScript、TSX 和 JavaScript 文件
+  // 下面的设定使用 Prettier 进行格式化，并使用 ESLint 检查 JavaScript 文件
+  "languages": {
+    "TypeScript": {
+      "formatter": [
+        {
+          "code_action": "source.fixAll.eslint"
+        },
+        {
+          "external": {
+            "command": "prettier",
+            "arguments": ["--stdin-filepath", "{buffer_path}"]
+          }
+        }
+      ]
+    },
+    "TSX": {
+      "formatter": [
+        {
+          "code_action": "source.fixAll.eslint"
+        },
+        {
+          "external": {
+            "command": "prettier",
+            "arguments": ["--stdin-filepath", "{buffer_path}"]
+          }
+        }
+      ]
+    },
+    "JavaScript": {
+      "formatter": [
+        {
+          "code_action": "source.fixAll.eslint"
+        },
+        {
+          "external": {
+            "command": "prettier",
+            "arguments": ["--stdin-filepath", "{buffer_path}"]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -6,6 +6,9 @@ https://github.com/abbodi1406/KMS_VL_ALL_AIO
 
 ## Windows10 技巧
 
+### 利用微软官方工具制作U盘启动盘
+[媒体创建工具](https://www.microsoft.com/zh-cn/software-download/windows10)
+
 ### 右键 → 发送到
 ``Win键 + r`` 然后输入
 ```bash
@@ -63,7 +66,7 @@ Windows Registry Editor Version 5.00
 
 ## 系统优化工具
 
-### Optimizer
+### Optimizer(已不维护)
 [Optimizer](https://github.com/hellzerg/optimizer) 是一款便携式实用工具，支持垃圾清理、注册表修复、启动项管理，关闭Windows系统中不需要的功能
 
 ### Win11Debloat
@@ -130,6 +133,22 @@ start explorer.exe
 reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /va /f
 ```
 
+### 删除我的电脑中的快捷键图标
+
+``regedit`` 打开注册表编辑器，找到
+```
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace
+```
+这里面即可快捷图标，右键删除即可
+
+### 让 VSCode 启动时默认英文输入法
+
+打开 ``Windows 设置`` → ``时间和语言（時刻と言語）`` → ``输入（入力）`` → ``高级键盘设置（キーボードの詳細設定）``
+
+勾选：
+
+``允许我为每个应用窗口使用不同的输入法（アプリ ウィンドウごとに異なる入力方式を設定する）``
+
 ### 日历定制
 
 ``Windows开始菜单`` → 输入``区域``(中文) 或者 ``地域``(日文)
@@ -148,6 +167,17 @@ reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\I
 
 - 日文系统设定
     ``追加の設定`` → ``日付`` → ``短い形式`` →  修改为 ``yyyy/M/d dddd``
+
+### 录屏使用OBS
+OBS（Open Broadcaster Software）是一款支持多平台（Windows、macOS、Linux）的免费开源软件，主要用于视频录制和实时流媒体直播
+
+ - [官网](https://obsproject.com/)
+ - [github](https://github.com/obsproject/obs-studio)
+
+### 截图和录屏
+- ``Win键 + Shift + s`` → 截图
+- ``Win键 + Shift + r`` → 录屏
+- ``Win键 + g`` → XBox录屏
 
 ### Windows11系统下按下 Win + G 无法打开 XBox 录像
 

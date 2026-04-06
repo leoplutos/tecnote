@@ -313,7 +313,7 @@ workbench.action.togglePanel(查看面板可见性)
 
 ### 全局用户设定文件位置（Windows）
 ```
-C:\Users\user\AppData\Roaming\Code\User
+%AppData%\Code\User
 ```
 - settings.json
 - keybindings.json

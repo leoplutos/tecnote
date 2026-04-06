@@ -22,6 +22,9 @@
 - ``Node/JavaScript`` : [uuidjs/uuid](https://github.com/uuidjs/uuid)
 - ``Python`` : [uuid-utils](https://github.com/aminalaee/uuid-utils)
 
+## TUI客户端
+ - [lazysql](https://github.com/jorgerojas26/lazysql)
+
 ## 数据同步工具AirByte
  - [Github](https://github.com/airbytehq/airbyte)
  - [公众号示例](https://mp.weixin.qq.com/s/n-4symNxeuP2Umiyi1xBMQ)

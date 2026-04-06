@@ -1,0 +1,25 @@
+{
+  "include": ["src"],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "src/experimental",
+    "src/typestubs",
+  ],
+  "reportAny": "none",
+  "reportUnknownArgumentType": "none",
+  "reportUnknownParameterType": "none",
+  "reportMissingParameterType": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnknownMemberType": "none",
+  "reportUnusedVariable": "none",
+  "reportAttributeAccessIssue": "none",
+  "reportUnusedCallResult": "none",
+  "reportCallIssue": "none",
+  "executionEnvironments": [
+    {
+      "root": "src",
+      "extraPaths": ["libs"],
+    },
+  ],
+}

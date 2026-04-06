@@ -319,6 +319,14 @@ eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default
 
 ```bash
 netsh interface portproxy add v4tov4 listenport=9500 listenaddress=0.0.0.0 connectport=9500 connectaddress=172.30.8.xxx
+
+# 或者转发到127.0.0.1
+netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=1433 connectaddress=127.0.0.1 connectport=1433
+```
+
+设定成功后运行 确认在监听 ``0.0.0.0`` 而不是 ``127.0.0.1``
+```bash
+netstat -ano | findstr 1433
 ```
 
 查看转发内容

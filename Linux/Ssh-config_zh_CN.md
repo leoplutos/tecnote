@@ -1,7 +1,15 @@
-# SSH Config
+# SSH 相关
+
+## SSH Manager
+SSHM（SSH Manager）是一个现代化的命令行工具，内置一个美观的 TUI 界面，让用户可以像使用图形软件一样管理 SSH 主机。支持主流 3 大桌面系统。
+
+- [Github](https://github.com/Gu1llaum-3/sshm)
+
+## SSH Config
+
 SSH Config 是 Linux 系统下针对 SSH 客户端的一个参数配置方案，可以将一些关于 SSH 命令的参数放到配置文件中去，执行 ssh 命令的时候从文件中读取，简化命令行的操作。
 
-## 概述
+### 概述
 SSH 参数配置有3个层次：
 
 #### 命令行参数

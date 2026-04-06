@@ -1,0 +1,28 @@
+{
+  "languages": {
+    "Python": {
+      "language_servers": ["basedpyright"],
+    },
+  },
+  "lsp": {
+    "basedpyright": {
+      //"binary": {
+      //  "path": ".venv/bin/basedpyright-langserver",
+      //  "arguments": ["--stdio"],
+      //},
+      "settings": {
+        "python": {
+          //"pythonPath": "D:\\Tools\\WorkTool\\Python\\Python313\\python.exe",
+        },
+        "basedpyright": {
+          "analysis": {
+            "diagnosticMode": "openFilesOnly",
+            "inlayHints": {
+              "callArgumentNames": true,
+            },
+          },
+        },
+      },
+    },
+  },
+}

@@ -330,6 +330,7 @@ https://excalidraw.com/
     - 可以直接用的地址 https://mirror.ghproxy.com/https://raw.githubusercontent.com/leyan1987/iptv/main/iptv.txt
 
 - 下载软件
+    - [motrix-next](https://github.com/AnInsomniacy/motrix-next)
     - [cobalt](https://github.com/imputnet/cobalt)
     - [Gopeed](https://gopeed.com/zh-CN)
     - [mediago](https://github.com/caorushizi/mediago)

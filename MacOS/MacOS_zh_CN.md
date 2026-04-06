@@ -124,7 +124,17 @@ https://brew.sh/
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/HomebrewUninstall.sh)"
 ```
 
-### 菜单栏隐藏 - Hidden Bar
+### 菜单栏隐藏
+
+#### Ice（推荐）
+- [官网](https://icemenubar.app/)
+- [Github](https://github.com/jordanbaird/Ice)
+
+```bash
+brew install --cask jordanbaird-ice
+```
+
+#### Hidden Bar
 - [MacAppStore](https://apps.apple.com/us/app/hidden-bar/id1452453066)
 - [Github](https://github.com/dwarvesf/hidden)
 
@@ -168,6 +178,14 @@ brew install --cask coteditor
 #### CotEditor主题文件
 - [lch.cottheme](../DevTool/coteditor_conf/lch.cottheme)
 
+### 大文件查看 - Klogg
+- [官网](https://klogg.filimonov.dev/)
+- [Github](https://github.com/variar/klogg)
+
+```bash
+brew install --cask klogg
+```
+
 ### 字体 Font
 - [SFMono-Nerd-Font-Ligaturized](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized)
 
@@ -186,6 +204,22 @@ brew install stats
 ```
 
 ### 终端
+
+#### Ghostty（推荐）
+- [官网](https://ghostty.org/)
+- [Github](https://github.com/ghostty-org/ghostty)
+
+```bash
+brew install --cask ghostty
+```
+
+默认设定文件目录
+```
+$HOME/Library/Application\ Support/com.mitchellh.ghostty/config.ghostty
+```
+
+笔者的设定文件
+- [config.ghostty](../DevTool/Ghostty-conf/config.ghostty)
 
 #### iTerms2
 - [官网](https://iterm2.com/)
@@ -237,6 +271,17 @@ brew install --cask iterm2
 
 ### 鼠标和触控板分别设置滚动方向
 
+#### MacMouseFix（推荐）
+
+Mac Mouse Fix可以将苹果触控板拥有的所有功能（甚至更多）赋予给你那只精准且符合人体工学设计的第三方鼠标
+
+- [官网](https://macmousefix.com/zh-Hans/)
+- [Github](https://github.com/noah-nuebling/mac-mouse-fix)
+
+```bash
+brew install mac-mouse-fix
+```
+
 #### MOS
 - [官网](https://mos.caldis.me/)
 - [Github](https://github.com/Caldis/Mos)
@@ -263,7 +308,7 @@ brew install scroll-reverser
 
 其他均不选即可
 
-### 窗口管理工具‌
+### 窗口管理工具‌ Rectangle
 - [官网](https://rectangleapp.com/)
 - [Github](https://github.com/rxhanson/Rectangle)
 
@@ -273,13 +318,80 @@ brew install --cask rectangle
 
 ``Control + Option + 回车`` : 窗口最大化
 
+### 应用卸载以及垃圾清理 腾讯柠檬
+- [官网](https://lemon.qq.com/)
+- [Github](https://github.com/Tencent/lemon-cleaner)
+
+```bash
+brew install --cask tencent-lemon
+```
+
 ### 启动器
+
+#### 选项1：Raycast（推荐）
 - [Raycast](https://www.raycast.com/)
+
+#### 选项2：Wox
 - [Wox](https://github.com/Wox-launcher/Wox)
+
+### 剪切板管理工具 Maccy
+- [官网](https://maccy.app/)
+- [Github](https://github.com/p0deje/Maccy)
+
+```bash
+brew install maccy
+```
+
+### 局域网文件传输 LocalSend
+
+LocalSend 是一个自由、开源的应用程序，允许你在本地网络上安全地与附近设备分享文件和消息，无需互联网连接。
+
+- [官网](https://localsend.org/zh-CN)
+- [Github](https://github.com/localsend/localsend)
+- [网页版](https://web.localsend.org/zh-CN)
+
+```bash
+brew install --cask localsend
+```
+
+### Finder在终端和文本编辑器中打开当前目录 OpenInTerminal
+- [Github](https://github.com/Ji4n1ng/OpenInTerminal)
+- [完全版中文说明](https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-zh.md)
+- [Lite版中文说明](https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-Lite-zh.md)
+
+```bash
+brew install --cask openinterminal-lite
+# 或者
+brew install --cask openineditor-lite
+```
+
+当设置了默认终端之后，选择框将不会再出现。如果想要重新设置默认终端，请在终端中输入以下命令。然后重新运行应用。
+
+```bash
+# 对于 OpenInTerminal-Lite:
+defaults remove wang.jianing.app.OpenInTerminal-Lite LiteDefaultTerminal
+# 对于 OpenInEditor-Lite:
+defaults remove wang.jianing.app.OpenInEditor-Lite LiteDefaultEditor
+```
+
+### Finder右键新建文件
+- [MacNewFile](https://github.com/GarfieldFluffJr/MacNewFile)
+- [iRightMenu](https://apps.apple.com/us/app/irightmenu/id1542347829?mt=12)
 
 ### Docker
 
-#### 选项1：Colima（推荐）
+#### 选项1：OrbStack（推荐）
+- [官网](https://orbstack.dev/)
+- [Github](https://github.com/orbstack/orbstack)
+
+```bash
+# 安装
+brew install orbstack
+# 运行容器
+docker run -p 80:80 docker/getting-started
+```
+
+#### 选项2：Colima
 - [Github](https://github.com/abiosoft/colima)
 
 ```bash
@@ -303,7 +415,7 @@ colima delete
 colima start --runtime docker
 ```
 
-#### 选项2：Podman
+#### 选项3：Podman
 - [官网](https://podman.io/docs/installation)
 
 ```bash
@@ -327,18 +439,23 @@ brew install snipaste --cask
 
 ### WinSCP替代
 
-#### Commander One（推荐）
+#### FileZilla（推荐）
+- [FileZilla](https://filezilla-project.org/)
+
+#### Commander One
 - [Commander One](https://mac.eltima.com/file-manager.html)
 ```bash
 brew install --cask commander-one
 ```
 
-#### FileZilla
-- [FileZilla](https://filezilla-project.org/)
-
 ### WinMerge替代
 
-#### P4Merge（推荐）
+#### FileMerge（推荐）
+FileMerge 是 Mac 自带的文件比较工具。它是 Xcode 开发工具包的一部分，可以轻松地比较文件差异并合并文件。
+
+``Xcode`` → ``Open Developer Tool`` → ``FileMerge``
+
+#### P4Merge
 - [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge)
 ```bash
 brew install --cask p4v
@@ -356,23 +473,61 @@ brew install --cask diffmerge
 - [官网](https://iina.io/)
 - [Github](https://github.com/iina/iina)
 
-### 录屏 - Kap
+```bash
+brew install --cask iina
+```
+
+### 录屏
+
+#### 选项1：OBS（推荐）
+- [官网](https://obsproject.com/)
+- [Github](https://github.com/obsproject/obs-studio)
+
+#### 选项2：QuickRecorder
+- [官网](https://lihaoyun6.github.io/quickrecorder/)
+- [Github](https://github.com/lihaoyun6/QuickRecorder)
+
+```bash
+brew install lihaoyun6/tap/quickrecorder
+```
+
+#### 选项3：Kap
 - [官网](https://getkap.co/)
 - [Github](https://github.com/wulkano/Kap)
 
 ### DB客户端
 
-#### ``SQL Workbench/J``
+#### 选项1：``SQL Workbench/J``
 - [官网](https://www.sql-workbench.eu/index.html)
 
 在 ``下载页面`` 直接下载 MacOS 版本即可 ``Download package for MacOS``
 
-#### DBeaver
+#### 选项2：DBeaver
 - [官网](https://dbeaver.io/)
 
 ```bash
 brew install --cask dbeaver-community
 ```
+
+#### 选项3：``Beekeeper Studio``
+- [官网](https://www.beekeeperstudio.io/)
+- [Github](https://github.com/beekeeper-studio/beekeeper-studio)
+
+#### 选项4：HeidiSQL
+- [官网](https://www.heidisql.com/)
+- [Github](https://github.com/HeidiSQL/HeidiSQL)
+
+#### 选项5：TablePlus
+- [官网](https://tableplus.com/)
+
+是一个收费的商用软件，但是 ``free trial`` 其实没有时间限制，只是功能限制（2个 tab / 2个窗口等）
+
+#### 选项6：``TablePro``
+
+TablePlus 的开源平替版本
+
+- [官网](https://tablepro.app/)
+- [Github](https://github.com/TableProApp/TablePro)
 
 ### 中低分辨率显示器开启 HiDPI 选项
 ```bash

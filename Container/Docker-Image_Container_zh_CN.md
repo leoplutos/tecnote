@@ -421,6 +421,16 @@ docker run -d \
   mcr.microsoft.com/mssql/server:2022-latest
 ```
 
+启动后可以使用下面连接
+```yml
+spring:
+  datasource:
+    url: jdbc:sqlserver://127.0.0.1:1433;encrypt=true;trustServerCertificate=true;databaseName=TestDB
+    username: sa
+    password: YourStrongPassw0rd
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+```
+
 ## 镜像和容器的区别
 
 ### 镜像

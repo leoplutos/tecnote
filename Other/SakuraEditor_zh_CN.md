@@ -139,3 +139,19 @@ sakura的正则表达式是用bregonig.dll的一个库，有很多和普通正�
 - [Go keyword](https://go.dev/ref/spec)  
 
 另外，vim的syntax定义也可以参考
+
+# Klogg 相关
+
+工作中经常需要查看日志来解决问题，当日志过大的时候很多编辑器都是力不从心的，这时使用 Klogg 即可
+
+klogg 是 glogg 的分支，主页
+
+https://github.com/variar/klogg
+
+在 Release 页面下载 ``klogg-24.11.0.1685-x64-Qt6-portable.zip`` 即可
+
+## MacOS 安装
+
+```bash
+brew install --cask klogg
+```
