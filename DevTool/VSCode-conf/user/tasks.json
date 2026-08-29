@@ -1,7 +1,7 @@
 {
 	"version": "2.0.0",
 	"windows": {
-		"options": {
+		"options": { //tasks.json定义的所有内容都使用cmd运行
 			"shell": {
 				"executable": "cmd.exe",
 				"args": [
@@ -9,24 +9,16 @@
 					"/c"
 				]
 			},
-			"env": { //在这里自定义环境变量
+			"env": { //自定义环境变量
 			}
-		}
+		},
 	},
 	"tasks": [
-		{ // [System][Env][Type]-user@hostip
-			"label": "ssh [System][Env][Type]-user@1.2.3.4",
+		{
+			"label": "Git Pull Rebase AutoStash",
 			"type": "shell",
-			"command": "${env:APPDATA}\\Code\\User\\vbs\\user@1.2.3.4.vbs",
-			"args": [],
-			"problemMatcher": [],
-			"presentation": {
-				"echo": false,
-				"reveal": "never",
-				"focus": false,
-				"panel": "dedicated",
-				"close": true, //控制任务退出时是否关闭运行任务的终端
-			},
-		},
+			"command": "git pull --rebase --autostash",
+			"problemMatcher": []
+		}
 	]
 }

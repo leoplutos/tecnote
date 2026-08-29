@@ -36,6 +36,7 @@
 * [CMake笔记](BuildTool/CMake_zh_CN.md)
 
 ## 架构(Framework)
+* [前端项目技术选型 Checklist](Framework/TechnologySelection.md)
 * [前后端分离-前端Vue-后端Spring](Framework/Frontend_Backend_Separation_zh_CN.md)
 * [前后端分离-后端Sanic](Framework/Backend_Python_Sanic_zh_CN.md)
 * [前后端分离-后端Gin](Framework/Backend_Golang_Gin_zh_CN.md)
@@ -133,16 +134,17 @@
 * [Vim-dap](DevTool/Vim-dap_zh_CN.md)
 * [Helix](DevTool/Helix_zh_CN.md)
 * [Eclipse](DevTool/Eclipse_zh_CN.md)
-* [Tmux](DevTool/Tmux_zh_CN.md)
+* [Tmux和Rmux](DevTool/Tmux_zh_CN.md)
 * [Teraterm](DevTool/Teraterm_zh_CN.md)
 * [WinSCP](DevTool/WinSCP_zh_CN.md)
 * [Code::Blocks](DevTool/CodeBlocks_zh_CN.md)
 
 ## DB
 * [数据库相关](DB/DB_zh_CN.md)
+* [数据库版本迁移（Database Migration）工具](DB/DBMigration_zh_CN.md)
 * [Postgresql](DB/Postgresql_zh_CN.md)
 * [MongoDB](DB/MongoDB_zh_CN.md)
-* [DBeaver和A5M2](DB/DBeaver_zh_CN.md)
+* [DB客户端](DB/DBeaver_zh_CN.md)
 * [Gobang-TUI DB客户端](DB/Gobang_zh_CN.md)
 * [Sqlite3和RocksDB](DB/Sqlite3_zh_CN.md)
 * [OpenSearch](DB/OpenSearch_zh_CN.md)
@@ -157,10 +159,16 @@
 * [Etcd](Distributed/Etcd_zh_CN.md.md)
 
 ## 云相关
+* [三大云平台服务对应关系](Cloud/CloudServiceMapping_zh_CN.md)
 * [AWS](Cloud/AWS_zh_CN.md)
+* [GCP](Cloud/GCP_zh_CN.md)
 
 ## AI相关
 * [Claude Code](AI/ClaudeCode_zh_CN.md)
+* [CodeX](AI/Codex_zh_CN.md)
+* [MCP](AI/MCP_zh_CN.md)
+* [ADE](AI/ADE_zh_CN.md)
+* [DESIGN.md](AI/Design_zh_CN.md)
 
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)
@@ -174,8 +182,8 @@
 * [Cobol](Other/Cobol_zh_CN.md)
 * [Lua](Other/Lua_zh_CN.md)
 * [Sakura Editor 和 Klogg](Other/SakuraEditor_zh_CN.md)
-* [ripgrep-文本搜索工具](Other/Ripgrep_zh_CN.md)
-* [Reqable-代理调试+请求测试+网络抓包](Other/Reqable_zh_CN.md)
+* [高效命令行工具ripgrep等](Other/Ripgrep_zh_CN.md)
+* [Reqable-代理调试+请求测试+网络抓包与Sniffnet](Other/Reqable_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
 * [USB启动](Other/Usbboot_zh_CN.md)
 * [免费的编程中文书籍索引](Other/Book_zh_CN.md)

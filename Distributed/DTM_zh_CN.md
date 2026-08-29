@@ -112,3 +112,14 @@ docker run -itd \
 
 调用后访问 http://localhost:36789/  
 在 ``Global Transactions`` → ``All Transactions`` 下，可以看到每个事务的结果
+
+# Temporal
+
+## 简介
+
+Temporal 是一个开源的 Durable Execution（持久化执行）平台，用来可靠地编排长时间运行、跨服务、容易失败的业务流程。
+
+Temporal = 把“业务流程 + 状态保存 + 重试 + 超时 + 故障恢复”交给平台处理。
+
+## Temporal 的 Saga Pattern
+https://docs.temporal.io/design-patterns/saga-pattern

@@ -1,142 +1,83 @@
 # CLAUDE.md - Project Configuration
 
-## Project Overview
+## 决策
+- 针对我的计划，对我进行审讯式的无情拷问，反复追问每一个细节，直到我们形成共同理解
+<!--    - 不要帮我决策，当你不确定的我想要什么的时候要问我，一直到从我口中问出结果-->
+- 沿着决策树的每个分支往下走，逐一清理各项决策直接的依赖关系，有些选择必须等钱一个问题确定了才能回答，AI会按这个先后顺序逐个问清楚。
+- 每个问题都要给出你的推荐答案
+- 每次只问一个问题，等我回答了再问下一个
+- 能通过查看环境（文件系统，工具等）找到的事实，直接去查，不用问我。但决策是我来做的，每个决策都要等我拍板
+- 确认双方理解一致之前，不要开始行动
 
-- **Project Name**: [项目名称]
-- **Project Type**: Web Application / API Service / Full-stack App
-- **Status**: Development / Maintenance / Enhancement
+## 执行任务策略
 
-## Tech Stack
+### 1. 编码前先思考
 
-### Frontend
-- Framework: React / Vue / Next.js / ...
-- UI Library: Tailwind CSS / Ant Design / MUI / ...
-- State Management: Redux / Zustand / Pinia / ...
+**不要假设。不要藏着困惑。把权衡摊开说。**
 
-### Backend
-- Runtime: Node.js / Python / Go / ...
-- Framework: Express / NestJS / FastAPI / ...
-- Database: PostgreSQL / MySQL / MongoDB / ...
-- ORM: Prisma / TypeORM / Sequelize / ...
+在动手实现之前：
+- 明确说出你的假设。不确定就问。
+- 如果存在多种解读，把它们都列出来——不要默默选一个。
+- 如果有更简单的做法，就说出来。必要时要提出反对意见。
+- 如果有不清楚的地方，停下来。指出到底哪里让你困惑。然后问。
 
-### Infrastructure
-- Cloud: AWS / GCP / Azure / ...
-- Container: Docker / Kubernetes
-- CI/CD: GitHub Actions / GitLab CI / ...
+### 2. 简单优先
 
-## Project Structure
+**用能解决问题的最少代码。不做任何推测性的开发。**
 
+- 不做超出要求范围的功能。
+- 不为一次性使用的代码做抽象。
+- 不做没被要求的"灵活性"或"可配置性"。
+- 不为不可能发生的场景做错误处理。
+- 如果你写了 200 行、而其实 50 行就够，那就重写。
+
+问问自己："资深工程师会不会觉得这过度复杂了？"如果会，就简化。
+
+### 3. 精准修改
+
+**只动必须动的地方。只清理自己制造的烂摊子。**
+
+修改现有代码时：
+- 不要"顺手改进"相邻的代码、注释或格式。
+- 不要重构没有问题的东西。
+- 沿用现有风格，即便你自己会用别的写法。
+- 如果发现无关的死代码，指出来——不要删。
+
+当你的改动产生了孤儿代码时：
+- 删除因你的改动而不再被使用的 import／变量／函数。
+- 未经要求，不要删除原本就存在的死代码。
+
+检验标准：每一行改动都应能直接追溯到用户的请求。
+
+### 4. 目标驱动执行
+
+**定义成功标准。循环直到验证通过。**
+
+把任务转化为可验证的目标：
+- "加上校验" → "写测试覆盖无效输入，然后让它通过"
+- "修复这个 bug" → "写一个能复现它的测试，然后让修复它并且让它通过"
+- "重构 X" → "确保重构前后测试全部通过"
+
+对于多步骤任务，先给出一个简短的计划：
 ```
-src/
-├── components/     # UI コンポーネント
-├── pages/          # ページ / ルーティング
-├── services/       # API 呼び出し / ビジネスロジック
-├── hooks/          # カスタムフック
-├── utils/          # ユーティリティ関数
-├── types/          # 型定義
-└── styles/         # スタイル
-```
-
-## Development Commands
-
-```bash
-# Install dependencies
-npm install
-
-# Development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Run tests
-npm run test
-
-# Lint
-npm run lint
-```
-
-## Code Conventions
-
-### Naming
-- Components: PascalCase (`UserProfile.tsx`)
-- Functions/Variables: camelCase (`getUserData`)
-- Constants: UPPER_SNAKE_CASE (`API_BASE_URL`)
-- Files: kebab-case (`user-profile.tsx`) or PascalCase for components
-
-### Git Branch
-- Feature: `feature/xxx`
-- Bugfix: `fix/xxx`
-- Release: `release/x.x.x`
-
-### Commit Message
-```
-feat: 新機能追加
-fix: バグ修正
-docs: ドキュメント更新
-refactor: リファクタリング
-test: テスト追加・修正
-chore: その他の変更
+1. [步骤] → 验证：[检查项]
+2. [步骤] → 验证：[检查项]
+3. [步骤] → 验证：[检查项]
 ```
 
-## API Endpoints
+明确的成功标准能让你独立地循环推进。模糊的标准（"让它能跑起来"）会导致不断需要澄清。
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET    | /api/users | ユーザー一覧取得 |
-| POST   | /api/users | ユーザー作成 |
-| ...    | ...        | ... |
+## 工具
+- node在这里 C:\qiao\00_Tools\Web\node
+- pnpm在这里 C:\qiao\00_Tools\Web\node\node_global
+- python在这里 C:\qiao\00_Tools\Python\Python313
+- uv.exe 在 C:\qiao\00_Tools\Python\Python313\Scripts\uv.exe（不在 PATH，用全路径调用）
+- openspec CLI 在这里 C:\qiao\00_Tools\Web\node\node_global
+- 我有安装ripgrep,bat,fzf
 
-## Environment Variables
+## 回复要求
+- 所有聊天回复使用**中文**
+- 代码里面的修改和注释请用**日文**
 
-```env
-# .env.example
-DATABASE_URL=
-API_KEY=
-JWT_SECRET=
-```
-
-## Key Business Logic
-
-<!-- 重要なビジネスロジックや注意点を記載 -->
-
-1. **認証フロー**: JWT + Refresh Token 方式
-2. **権限管理**: RBAC（Role-Based Access Control）
-3. **...**: ...
-
-## Known Issues / Tech Debt
-
-- [ ] TODO: ユニットテストのカバレッジ向上
-- [ ] TODO: パフォーマンス最適化（画像遅延読み込み）
-- [ ] FIXME: エラーハンドリングの統一
-
-## Claude Instructions
-
-### Working with this project
-
-1. このプロジェクトのコードを修正する際は、既存のコード規約に従ってください
-2. 新しい依存関係を追加する前に、既存の依存関係で解決できないか確認してください
-3. TypeScript の型定義を省略しないでください
-
-### Prompt Files
-
-| File | Purpose |
-|------|---------|
-| `.claude/prompts/estimate_prompt.md` | 見積書生成用プロンプト |
-| `.claude/prompts/review_prompt.md` | コードレビュー用プロンプト |
-| `.claude/prompts/docs_prompt.md` | ドキュメント生成用プロンプト |
-
-### Preferred Response Style
-
-- 日本語でコメントを書いてください
-- コードの説明は日本語 or 中国語で
-- 見積書は日本語フォーマットで出力
-
-## Contact
-
-- Tech Lead: [Name] <email@example.com>
-- PM: [Name] <email@example.com>
-
----
-
-*Last Updated: YYYY-MM-DD*
+## 目录约定
+- `references/` = 客户提供资料，**只读**，禁止改动；需要派生的内容放 `docs/` 或 `data/`。

@@ -158,6 +158,24 @@ sudo systemctl list-unit-files --type=service
 
 WSL2启动之后，如果开启了SSH服务，那么从宿主机可以直接用 ``127.0.0.1`` 访问
 
+## 便利工具 WSL Dashboard
+
+https://github.com/owu/wsl-dashboard  
+https://www.wslui.com/zh-CN/  
+一款现代、高性能、轻量级且低内存占用的 WSL (Windows Subsystem for Linux) 实例管理仪表板。基于 Rust 和 Slint 构建，提供顶级的原生体验。
+
+- 一键 Start / Stop / Terminate
+- 查看每个发行版运行状态
+- 一键打开 Windows Terminal
+- 一键打开 VS Code
+- 一键打开文件管理器
+- 查看磁盘使用情况和 VHDX 位置
+- 移动 VHDX 到其他硬盘
+- 导出/克隆 WSL
+- 系统托盘
+- Windows 开机自动启动 Dashboard
+- Dashboard 退出时自动关闭 WSL
+
 ## 让WSL开机启动，后台运行，以减少唤醒时间
 WSL2 会默认关闭不使用的实例，当你关闭了 WSL 的 Console 后，实例会自动关闭。
 如果你的计算机资源比较充足，那么是可以在开机时通过 VBS 脚本启动一个 WSL 实例，让它挂起在那里不要休眠。
@@ -213,12 +231,15 @@ sudo service ssh restart
 sudo service ssh status
 
 # neovim配置一键安装
-export GITHUB_RAW_URL=https://raw.bgithub.xyz
-curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+# export GITHUB_RAW_URL=https://raw.bgithub.xyz
+export GITHUB_RAW_URL=https://raw.githubusercontent.com
+# curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+# 这里改用LazyVim
 
 # 安装neovim
-export GITHUB_URL=https://bgithub.xyz
-curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz"
+# export GITHUB_URL=https://bgithub.xyz
+export GITHUB_URL=https://github.com/
+curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 tar xzvf nvim-linux64.tar.gz
 sudo mv nvim-linux64 /usr/local/nvim
 sudo chown -R root:root /usr/local/nvim
@@ -253,12 +274,15 @@ sudo service ssh restart
 sudo service ssh status
 
 # neovim配置一键安装
-export GITHUB_RAW_URL=https://raw.bgithub.xyz
-curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+# export GITHUB_RAW_URL=https://raw.bgithub.xyz
+export GITHUB_RAW_URL=https://raw.githubusercontent.com
+# curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
+# 这里改用LazyVim
 
 # 安装neovim
-export GITHUB_URL=https://bgithub.xyz
-curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz"
+# export GITHUB_URL=https://bgithub.xyz
+export GITHUB_URL=https://github.com/
+curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 tar xzvf nvim-linux64.tar.gz
 sudo mv nvim-linux64 /usr/local/nvim
 sudo chown -R root:root /usr/local/nvim
@@ -274,6 +298,24 @@ EOF
 sudo chmod +x /usr/local/bin/vim
 # 确认
 vim -V1 -v
+```
+
+## 使用Zsh
+
+```bash
+sudo apt update
+sudo apt install -y zsh
+
+# 确认安装
+zsh --version
+
+# 设置为默认 Shell
+chsh -s "$(which zsh)"
+```
+
+然后关闭 WSL 重启
+```
+wsl --shutdown
 ```
 
 ## WSL2的一些常用命令
@@ -364,7 +406,12 @@ netsh interface portproxy delete v4tov4 listenport=9500 listenaddress=0.0.0.0"
 /mnt/{Windows盘符}
 ```
 
-### 一个从Windows复制Vim/NeoVim设定文件到WSL的脚本
+也可以制作一个超链接
+```bash
+ln -s /mnt/c/path/to/workspace ~/workspace_windows
+```
+
+### 一个从 Windows 复制 Vim/NeoVim 设定文件到 WSL 的脚本
 - [install_wsl_vim_setting.cmd](./install_wsl_vim_setting.cmd)
 
 
@@ -375,4 +422,10 @@ netsh interface portproxy delete v4tov4 listenport=9500 listenaddress=0.0.0.0"
 netsh winsock reset
 ```
 执行后重启电脑解决
+
+## WSL Container
+
+WSL 2 提供的原生 Linux 容器运行能力，通过 wslc.exe 创建、运行和管理 Linux 容器，并支持 Windows 应用通过 API 直接集成容器能力
+
+https://learn.microsoft.com/zh-cn/windows/wsl/wsl-container
 

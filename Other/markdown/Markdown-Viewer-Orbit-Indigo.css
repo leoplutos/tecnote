@@ -1,0 +1,144 @@
+/* Markdown Viewer custom theme — Orbit Indigo
+   Adapted from lch_EDGE_new.css for simov/markdown-viewer. */
+
+:root {
+  --accent: #5b5fc7;
+  --accent-dark: #4338ca;
+  --accent-light: #eef0fb;
+  --text-main: #2a2640;
+  --text-muted: #6b6880;
+  --bg-page: #f7f7fb;
+  --bg-card: #ffffff;
+  --border-soft: #e6e6f0;
+  --code-bg: #f1f1f9;
+  --pre-bg: #faf9ff;
+  --shadow: 0 1px 3px rgba(60, 50, 100, .06), 0 8px 24px rgba(60, 50, 100, .05);
+}
+
+body {
+  box-sizing: border-box;
+  color: var(--text-main);
+  background: var(--bg-page);
+  font: 16px/1.75 "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+  margin: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    width: min(856px, calc(100% - 48px));
+    margin: 24px auto;
+    padding: 40px 48px;
+    background: var(--bg-card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+}
+
+p { margin: 1em 0; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(91, 95, 199, .3); }
+a:hover { color: var(--accent-dark); border-bottom-color: var(--accent-dark); }
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main); font-weight: 700; line-height: 1.3;
+  margin: 1.4em 0 .7em; letter-spacing: -.01em;
+}
+h1 { font-size: 2em; padding-bottom: .4em; border-bottom: 3px solid var(--accent); }
+h2 { font-size: 1.625em; padding-bottom: .3em; border-bottom: 1px solid var(--border-soft); }
+h3 { font-size: 1.375em; }
+h4 { font-size: 1.1875em; }
+h5 { font-size: 1.0625em; }
+h6 { font-size: 1em; color: var(--text-muted); }
+
+hr { height: 2px; margin: 28px 0; border: 0; background: linear-gradient(90deg, var(--accent), transparent); }
+blockquote {
+  color: var(--text-muted); background: var(--accent-light);
+  border-left: 4px solid var(--accent); margin: 1.2rem 0;
+  padding: .8rem 1.2rem; border-radius: 0 8px 8px 0;
+}
+blockquote p { margin: .4em 0; }
+
+code, pre, kbd { font-family: "Cascadia Code", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace; }
+/* Inline code only. Explicitly exclude fenced code blocks inside <pre>.
+   Use *= instead of ^= so language-* is detected even when it is not the first class. */
+code:not(pre code):not([class*="language-"]):not(.mermaid) {
+  color: var(--accent-dark); background: var(--code-bg);
+  padding: 2px 6px; font-size: .9em; border-radius: 5px;
+}
+pre {
+  color: var(--text-main); background: var(--pre-bg); padding: 16px 18px;
+  margin: 1.2em 0; line-height: 1.55; font-size: 14px;
+  border: 1px solid var(--border-soft); border-radius: 10px;
+  box-shadow: var(--shadow); overflow: auto;
+}
+/* Normalize code inside fenced blocks and avoid leaking inline-code decoration. */
+pre code {
+  background: transparent; color: inherit; padding: 0;
+  font-size: inherit; border-radius: 0;
+}
+kbd { color: #fff; background: var(--accent); padding: 1px 6px; border-radius: 4px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.2); }
+mark { color: var(--text-main); background: #e6db74; padding: 0 3px; border-radius: 3px; }
+
+ul, ol { padding-left: 1.6em; }
+li { margin: .3em 0; }
+li::marker { color: var(--accent); }
+
+table {
+  width: 100%; margin: 1.4em 0; border: 1px solid var(--border-soft);
+  border-collapse: separate; border-spacing: 0; border-radius: 10px;
+  overflow: hidden; box-shadow: var(--shadow);
+}
+table th, table td { padding: .6em 1em; border: 0; border-right: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+table th { color: #fff; background: var(--accent); font-weight: 600; }
+table tr:nth-child(even) td { background: var(--accent-light); }
+table th:last-child, table td:last-child { border-right: 0; }
+table tr:last-child td { border-bottom: 0; }
+
+/* Prism syntax colors used by Markdown Viewer */
+[class*="language-"] .token.comment, [class*="language-"] .token.prolog,
+[class*="language-"] .token.doctype, [class*="language-"] .token.cdata { color: #8b8898; font-style: italic; }
+[class*="language-"] .token.punctuation { color: #5b5670; }
+[class*="language-"] .token.property, [class*="language-"] .token.tag,
+[class*="language-"] .token.constant, [class*="language-"] .token.symbol,
+[class*="language-"] .token.deleted { color: #be185d; }
+[class*="language-"] .token.boolean, [class*="language-"] .token.number { color: #2563eb; }
+[class*="language-"] .token.selector, [class*="language-"] .token.attr-name,
+[class*="language-"] .token.string, [class*="language-"] .token.char,
+[class*="language-"] .token.builtin, [class*="language-"] .token.inserted { color: #c2410c; }
+[class*="language-"] .token.operator, [class*="language-"] .token.entity,
+[class*="language-"] .token.url, [class*="language-"] .token.variable { color: #5b5fc7; }
+[class*="language-"] .token.atrule, [class*="language-"] .token.attr-value,
+[class*="language-"] .token.function, [class*="language-"] .token.class-name { color: #0e7490; }
+[class*="language-"] .token.keyword { color: #6d28d9; font-weight: 600; }
+[class*="language-"] .token.regex, [class*="language-"] .token.important { color: #9333ea; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #9b9ee8; --accent-dark: #c4b5fd; --accent-light: #292844;
+    --text-main: #ecebf5; --text-muted: #b4b1c5; --bg-page: #151421;
+    --bg-card: #1d1c2b; --border-soft: #3a3850; --code-bg: #302e46;
+    --pre-bg: #242235; --shadow: 0 1px 3px rgba(0,0,0,.28), 0 8px 24px rgba(0,0,0,.22);
+  }
+  a { border-bottom-color: rgba(155, 158, 232, .4); }
+  table th { color: #171622; background: var(--accent); }
+  mark { color: #211f2c; }
+  [class*="language-"] .token.comment, [class*="language-"] .token.prolog,
+  [class*="language-"] .token.doctype, [class*="language-"] .token.cdata { color: #8f8ba3; }
+  [class*="language-"] .token.punctuation { color: #d2d0dc; }
+  [class*="language-"] .token.property, [class*="language-"] .token.tag,
+  [class*="language-"] .token.constant, [class*="language-"] .token.symbol,
+  [class*="language-"] .token.deleted { color: #f38ba8; }
+  [class*="language-"] .token.boolean, [class*="language-"] .token.number { color: #89b4fa; }
+  [class*="language-"] .token.selector, [class*="language-"] .token.attr-name,
+  [class*="language-"] .token.string, [class*="language-"] .token.char,
+  [class*="language-"] .token.builtin, [class*="language-"] .token.inserted { color: #fab387; }
+  [class*="language-"] .token.operator, [class*="language-"] .token.entity,
+  [class*="language-"] .token.url, [class*="language-"] .token.variable { color: #b4befe; }
+  [class*="language-"] .token.atrule, [class*="language-"] .token.attr-value,
+  [class*="language-"] .token.function, [class*="language-"] .token.class-name { color: #94e2d5; }
+  [class*="language-"] .token.keyword { color: #cba6f7; }
+  [class*="language-"] .token.regex, [class*="language-"] .token.important { color: #f5c2e7; }
+}
+
+@media print {
+  body { width: auto; margin: 0; padding: 0; background: #fff; box-shadow: none; }
+}

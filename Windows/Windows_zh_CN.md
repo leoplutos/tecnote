@@ -197,5 +197,82 @@ OBS（Open Broadcaster Software）是一款支持多平台（Windows、macOS、L
  - [官网](https://sanwhole.com/Products/VoleOffice)
  - [github](https://sanwhole.com/PubData/Installer/VoleOffice.exe)
 
+## Office Web Viewer 介绍
+
+Office Web Viewer 是微软提供的一项免费的在线 Office 文档预览服务，可以直接在网页浏览器中显示 Excel、Word、PowerPoint 等 Office 文档。
+通过该服务，即使用户的电脑或移动设备上没有安装 Microsoft Office，也可以直接在线查看文档内容，因此非常适合在网站或 Web 系统中实现 Office 文件的在线预览功能。
+
+Office Web Viewer 由微软提供，文档展示效果较为完整，使用方式也非常简单。首先，需要确保待预览的 Office 文件可以通过互联网公开访问，并取得该文件的 URL。
+例如，一个公开的 Excel 文件地址为：  
+https://webbibouroku.com/wp-content/uploads/Book1.xlsx
+
+然后，将该文件的 URL 作为 src 参数传递给 Office Web Viewer：  
+https://view.officeapps.live.com/op/view.aspx?src=文件URL
+
+实际使用时，建议先对文件 URL 进行 URL 编码。例如：  
+https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwebbibouroku.com%2Fwp-content%2Fuploads%2FBook1.xlsx
+
+如果文件存储在 Azure Blob Storage 等服务中，同样可以使用这种方式，只需要将 Blob 文件的可访问 URL 作为 src 参数即可：  
+https://view.officeapps.live.com/op/view.aspx?src=Blob文件的URL
+
+因此，在 Web 系统中集成 Office Web Viewer 时，整体流程可以概括为：获取 Office 文件的公开访问 URL → 对 URL 进行编码 → 拼接到 Office Web Viewer 的 src 参数中 → 在浏览器中打开生成的 Viewer URL。这样就可以在不要求用户安装 Office 软件的情况下，实现 Office 文档的在线浏览和预览。
+
 ## iPhone
  - [Apple 设备](https://apps.microsoft.com/detail/9np83lwlpz9k?hl=zh-CN&gl=JP)
+ - [iTunes64位下载](https://www.apple.com/itunes/download/win64)
+
+## 其他
+
+### mklink命令
+mklink 是 Windows 的一个命令，用来创建链接（Link），类似 Linux 中的 ln -s。
+```
+mklink C:\tools\claude.exe D:\ClaudeCode\claude.exe
+```
+在 `C:\tools` 目录下创建一个名为 `claude.exe` 的链接，实际指向 `D:\ClaudeCode\claude.exe`
+
+假设你把： `C:\tools` 加入了环境变量 PATH，那么无论当前在哪个目录，都可以直接执行：
+```
+claude
+```
+Windows 会：在 `PATH` 中找到 `C:\tools` 发现 `claude.exe`，
+实际跳转到 `D:\ClaudeCode\claude.exe` 运行程序
+
+例子：
+```
+mklink C:\path\to\rg.exe C:\Tools\Search\ripgrep\rg.exe
+mklink C:\path\to\bat.exe C:\Tools\Search\bat\bat.exe
+mklink C:\path\to\fzf.exe C:\Tools\Search\fzf\fzf.exe
+```
+
+### Coreutils for Windows
+Coreutils for Windows 是一组由 Microsoft 维护的 UNIX 风格命令行工具。将 Linux/Unix 常用命令（如 ls、cp、mv、cat 等）移植到 Windows，让你在 Windows 命令行中也能使用熟悉的 Unix 工具
+
+https://learn.microsoft.com/zh-cn/windows/core-utils/overview
+
+```bash
+winget install Microsoft.Coreutils
+```
+
+### PowerToys
+PowerToys 是微软为 `Windows 10 / 11` 提供的一套免费、开源的系统增强工具集，主要用于提高 Windows 的效率和可定制性。
+
+https://learn.microsoft.com/zh-cn/windows/powertoys/
+
+笔者最常用的这里面的屏幕画图工具 `ZoomIt`
+
+https://learn.microsoft.com/zh-cn/sysinternals/downloads/zoomit
+
+下载后运行 `ZoomIt64.exe` 按下 · 即可开始
+
+修改快捷键建议：除了draw的快捷键全部取消，draw的快捷键修改为 `ctrl + alt + d`
+
+### 开发环境构建 mise
+
+mise 是一个统一的开发环境与工具版本管理器，可用来安装、切换和管理 Node.js、Python、Go、Rust 等多种开发工具的版本。
+
+https://github.com/jdx/mise  
+https://mise.jdx.dev/  
+
+```
+winget install jdx.mise
+```

@@ -1,0 +1,181 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="AWS Classic (ALB + ECS Fargate)" id="aws-classic">
+    <mxGraphModel dx="1347" dy="708" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="1240" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="internet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Meiryo UI;fillColor=#F5F5F5;strokeColor=#666666;fontColor=#333333;fontSize=11;" value="Internet" vertex="1">
+          <mxGeometry height="34" width="120" x="399" y="58" as="geometry" />
+        </mxCell>
+        <mxCell id="route53" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;" value="Route 53 (任意)" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudfront" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;" value="CloudFront (任意)" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="223" as="geometry" />
+        </mxCell>
+        <mxCell id="waf" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" value="AWS WAF" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="igw" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet_gateway;" value="Internet Gateway&#xa;(VPC の属性 / Public Subnet の Internet 出口)" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="442" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" parent="1" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;fontFamily=Meiryo UI;whiteSpace=wrap;fillColor=none;strokeColor=#8C4FFF;dashed=0;verticalAlign=top;align=left;spacingLeft=30;fontColor=#8C4FFF;fontSize=11;shape=mxgraph.aws4.group;strokeWidth=3;grIcon=mxgraph.aws4.group_vpc;" value="VPC (10.0.0.0/16)" vertex="1">
+          <mxGeometry height="600" width="900" x="179" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="pubsub" parent="1" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;fontFamily=Meiryo UI;whiteSpace=wrap;fillColor=#E9F3E6;strokeColor=#7AA116;dashed=0;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;fontSize=11;shape=mxgraph.aws4.group;strokeWidth=3;grIcon=mxgraph.aws4.group_public_subnet;" value="Public Subnet" vertex="1">
+          <mxGeometry height="120" width="840" x="209" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="prisub" parent="1" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;fontFamily=Meiryo UI;whiteSpace=wrap;fillColor=#E6F2F8;strokeColor=#00A4A6;dashed=0;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;fontSize=11;shape=mxgraph.aws4.group;strokeWidth=3;grIcon=mxgraph.aws4.group_private_subnet;" value="Private Subnet" vertex="1">
+          <mxGeometry height="400" width="840" x="209" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="alb" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.elastic_load_balancing;" value="ALB" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="548" as="geometry" />
+        </mxCell>
+        <mxCell id="nat" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;labelPosition=center;align=center;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.nat_gateway;" value="NAT Gateway" vertex="1">
+          <mxGeometry height="56" width="56" x="791" y="548" as="geometry" />
+        </mxCell>
+        <mxCell id="fargate" parent="1" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;fontFamily=Meiryo UI;whiteSpace=wrap;fillColor=none;strokeColor=#ED7100;dashed=1;dashPattern=6 4;verticalAlign=top;align=left;spacingLeft=30;fontColor=#D45B07;fontSize=11;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_ecs;" value="ECS Service" vertex="1">
+          <mxGeometry height="120" width="130" x="399" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="webapi" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.fargate;" value="Fargate Task&lt;br&gt;(Backend API)" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="efs" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#7AA116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.elastic_file_system;" value="EFS" vertex="1">
+          <mxGeometry height="56" width="56" x="431" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="batch" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.fargate;" value="Fargate Task&lt;div&gt;(バッチ)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="56" width="56" x="259" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="rds" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds;" value="RDS (Multi-AZ)" vertex="1">
+          <mxGeometry height="56" width="56" x="679" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="extapi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Meiryo UI;fillColor=#F5F5F5;strokeColor=#666666;fontColor=#333333;fontSize=11;" value="外部 API" vertex="1">
+          <mxGeometry height="44" width="90" x="1119" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="ses" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.simple_email_service;" value="SES" vertex="1">
+          <mxGeometry height="56" width="56" x="1174" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="mail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Meiryo UI;fillColor=#FFF8E1;strokeColor=#F2A600;fontColor=#7A5A00;fontSize=11;" value="✉ メール" vertex="1">
+          <mxGeometry height="44" width="90" x="1157" y="596" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.bucket;" value="S3" vertex="1">
+          <mxGeometry height="54" width="52" x="1121" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=top;verticalAlign=bottom;align=center;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;" value="Amazon EventBridge&lt;br&gt;Scheduler" vertex="1">
+          <mxGeometry height="56" width="56" x="77" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" edge="1" parent="1" source="internet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;endArrow=block;strokeColor=#232F3E;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="route53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="route53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;endArrow=block;strokeColor=#232F3E;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="cloudfront" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;endArrow=block;strokeColor=#232F3E;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="waf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="waf" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#232F3E;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="alb" value="HTTP/HTTPS">
+          <mxGeometry relative="1" x="-0.5579" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c6" edge="1" parent="1" source="alb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#232F3E;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="webapi" value="ルーティング">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="459" y="644" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c7" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#2E73B8;fontColor=#2E73B8;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="rds" value="SQL">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#2E73B8;fontColor=#2E73B8;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="efs" value="ファイル共有">
+          <mxGeometry relative="1" x="0.3617" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c10" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#E7157B;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.05;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ses" value="メール送信">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="619" y="733" />
+              <mxPoint x="619" y="718" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c9" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#2E73B8;fontColor=#2E73B8;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.95;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="s3" value="オブジェクト保存">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="579" y="783" />
+              <mxPoint x="579" y="847" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c11" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#8C4FFF;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="nat" value="アウトバウンド">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="639" y="750" />
+              <mxPoint x="639" y="576" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c12" edge="1" parent="1" source="nat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#8C4FFF;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="extapi" value="外部API呼び出し">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c14" edge="1" parent="1" source="ses" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitPerimeter=0;" target="mail">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1369.96" y="886" as="sourcePoint" />
+            <mxPoint x="1328.96" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c15" edge="1" parent="1" source="eventbridge" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#E7157B;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="batch" value="スケジュール起動">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="287" y="868" />
+            </Array>
+            <mxPoint x="117" y="870" as="sourcePoint" />
+            <mxPoint x="383.98" y="887" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c17" edge="1" parent="1" source="batch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#2E73B8;fontColor=#2E73B8;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="rds" value="SQL">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="599" y="967" />
+              <mxPoint x="599" y="758" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c16" edge="1" parent="1" source="batch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#2E73B8;fontColor=#2E73B8;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="s3" value="オブジェクト読み取り">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1059" y="989" />
+              <mxPoint x="1059" y="847" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwlogs" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=middle;verticalAlign=middle;labelPosition=right;align=left;spacingLeft=6;html=1;fontFamily=Meiryo UI;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch;" value="CloudWatch Logs" vertex="1">
+          <mxGeometry height="56" width="56" x="369" y="1120" as="geometry" />
+        </mxCell>
+        <mxCell id="c_webapi_logs" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#E7157B;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cwlogs" value="Logs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="369" y="758" />
+              <mxPoint x="369" y="1095" />
+              <mxPoint x="397" y="1095" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_batch_logs" edge="1" parent="1" source="batch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;html=1;fontFamily=Meiryo UI;fontSize=11;endArrow=block;strokeColor=#E7157B;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cwlogs" value="Logs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="224" y="978" />
+              <mxPoint x="224" y="1148" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3dystjOOaiI1xBiiOEx-1" edge="1" parent="1" source="cwlogs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=1.5;endSize=6;startSize=6;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Meiryo UI;endArrow=block;strokeColor=#E7157B;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="ses" value="アラート通知">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Meiryo UI;fillColor=#FFFFFF;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=11;" value="&lt;b&gt;凡例 / Line Legend&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#232F3E;&quot;&gt;━━&lt;/span&gt; リクエストフロー (Internet→ALB→Task)&lt;br&gt;&lt;span style=&quot;color:#2E73B8;&quot;&gt;━━&lt;/span&gt; データアクセス (RDS / EFS / S3)&lt;br&gt;&lt;span style=&quot;color:#E7157B;&quot;&gt;━━&lt;/span&gt; 監視・通知・イベント (Logs / SES / EventBridge)&lt;br&gt;&lt;span style=&quot;color:#8C4FFF;&quot;&gt;━━&lt;/span&gt; ネットワーク (NAT / 外部API)" vertex="1">
+          <mxGeometry height="120" width="320" x="960" y="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

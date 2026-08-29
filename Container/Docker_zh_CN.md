@@ -591,9 +591,36 @@ docker run -it -v 主机目录:容器目录
 docker volume ls
 ```
 
+其他
+```bash
+# 列出来的是当前没有任何容器引用的 volume
+docker volume ls -f dangling=true
+# 只删匿名 volume
+docker volume prune
+```
+
 更多数据卷的介绍可以看 [这里](https://blog.csdn.net/huangjhai/article/details/119860628)
 
 ## 其他
+
+### Container Desktop（iongion）
+
+https://github.com/iongion/container-desktop  
+https://container-desktop.com/
+
+打开软件后不要用向导，按下面操作
+
+点击上面的 `Connections`，然后 `+ Create Connection`
+
+- Connection name:    `WSL`
+- Container engine:   `Docker`
+- Container host:     `Custom WSL distribution`
+- WSL distribution:   `Debian (选择你在WSL中安装的发行版)`
+- Auto-start the engine host if not already running:  ` OFF（不负责启动你的 Debian，生命周期还是你自己控制）`
+- Automatically reconnect if this connection drops:   `ON（如果 Docker/WSL 短暂断开，GUI 会自动重新连接）`
+- Mode:               `Automatic`
+
+然后 `Create`
 
 ### LazyDocker
 

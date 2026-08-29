@@ -43,3 +43,8 @@ http://localhost:8080/getHello
 http://go:8080/getHello
 ```
 即可实现本地流量抓包
+
+# Sniffnet
+一款用 Rust 编写的轻量、跨平台网络流量监控与抓包分析工具，可直观查看网络连接、流量、主机、服务和应用程序等信息
+
+https://github.com/GyulyVGC/sniffnet

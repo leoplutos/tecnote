@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "mssql-test": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@connorbritain/mssql-mcp-writer@latest"
+      ],
+      "env": {
+        "SERVER_NAME": "127.0.0.1",
+        "SQL_PORT": "1433",
+        "DATABASE_NAME": "DB_NAME",
+        "SQL_AUTH_MODE": "sql",
+        "SQL_USERNAME": "sa",
+        "SQL_PASSWORD": "password",
+        "TRUST_SERVER_CERTIFICATE": "true",
+        "REQUIRE_MUTATION_CONFIRMATION": "false"
+      }
+    }
+  }
+}

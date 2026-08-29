@@ -6,6 +6,13 @@ Nushell 是一个现代化的、结构感知的开源 shell 工具，基于 Rust
 ## 安装
 参考 [官网](https://www.nushell.sh/zh-CN/book/installation.html) 安装即可
 
+```bash
+# 安装到用户范围（默认）。
+winget install nushell
+# 系统范围安装（以管理员身份运行）。
+winget install nushell --scope machine
+```
+
 ## 设置
 
 ### 用户设定文件位置（Windows）
@@ -14,4 +21,4 @@ Nushell 是一个现代化的、结构感知的开源 shell 工具，基于 Rust
 ```
 
 ### 笔者的设定文件
-- [config.nu](../DevTool/NuShell-conf/config.nu)
+- [NuShell-conf](../DevTool/NuShell-conf)

@@ -303,6 +303,6 @@
 	{ //[Periscope插件]alt+shift+p:打开搜索
 		"key": "alt+shift+p",
 		"command": "periscope.search",
-		"when": "editorTextFocus"
+		"when": ""
 	},
 ]

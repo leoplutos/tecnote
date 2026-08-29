@@ -226,3 +226,9 @@ bun run dev
 - [如何优雅的调试 Vue 项目](https://mp.weixin.qq.com/s/zmjdy8wM76xRf9SfMiRx8A)
 
 
+### Vue Flow
+
+https://vueflow.dev/
+
+Vue Flow 可以理解为一套专门用来在前端构建节点编辑器（node-based UI）和可视化流程图的工具。
+

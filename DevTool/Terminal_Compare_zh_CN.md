@@ -24,12 +24,12 @@
 | 自定义脚本 | 支持    | 支持            | 不支持  | 不支持    | 支持     | 不支持 | 支持     |
 
 #### 总结
-- Windows平台：不喜欢折腾选 ``Windows Terminal``，喜欢折腾选 ``WezTerm``  
-- Linux平台：``WezTerm``  
-- MacOS平台：``WezTerm``  
+- Windows平台：不喜欢折腾选 `Windows Terminal`，喜欢折腾选 `WezTerm`。  笔者用的`WezTerm + nushell`  
+- Linux平台：`Ghostty` 或者 `WezTerm`。  笔者用的`Ghostty + zsh`  
+- MacOS平台：`Ghostty` 或者 `WezTerm`。  笔者用的`Ghostty + zsh`  
 
 WindTerm虽然支持的功能很多，但是如果使用Vim等TUI程序的话显示出现很大问题。只适合运维使用，不适合开发人员。  
-个别一些老爷机使用 ``WezTerm`` 会有卡顿现象，这种情况可以考虑一下 ``Alacritty``  或者 ``ConTour``
+个别一些老爷机使用 ``WezTerm`` 会有卡顿现象，这种情况可以考虑一下 ``Alacritty``  或者 ``Ghostty``
 
 ## WezTerm
 * [官网](https://wezfurlong.org/wezterm/index.html)
@@ -185,3 +185,10 @@ $HOME/.config/alacritty/alacritty.toml
 #### 配置文件例子
 [alacritty.toml](./alacritty_conf/alacritty.toml)  
 ~~[alacritty.yml](./alacritty_conf/alacritty.yml)~~
+
+### Octodo
+再介绍一个 Alacritty 的变种 Octodo。
+因为 Alacritty 不支持多Tab和分屏，所以诞生了Octodo
+
+https://github.com/invented-pro/octodo  
+https://github.com/invented-pro/octodo/blob/main/README.zh-CN.md

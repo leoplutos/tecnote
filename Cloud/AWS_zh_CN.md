@@ -1,6 +1,346 @@
 # AWS
 
-## Localstack
+AWS 是 Amazon Web Services（亚马逊云服务），是 Amazon 提供的一整套云计算服务，和 GCP、Microsoft Azure 属于同一类平台，也是目前市场份额最大的公有云。
+
+## 资源层级
+
+AWS 的资源按下面这条链组织，权限（IAM）在 Account 内生效，SCP（服务控制策略）从 Organization / OU 向下限制：
+
+```
+Organization（组织）
+  └─ OU（组织单元，可选）
+       └─ Account（账号）
+            └─ Region（区域）
+                 └─ Resource（EC2 / S3 桶 / RDS …）
+```
+
+**Account 是最核心的隔离单位**：计费、配额、IAM 权限都以账号为边界，通常按 `dev / staging / prod` 拆成多个账号。此外 **绝大多数资源属于某个 Region**，日常操作前先确认「当前在哪个账号、哪个区域」，这是最容易踩坑的地方。
+
+> 常用区域：`ap-northeast-1`（东京）、`ap-northeast-3`（大阪）、`us-east-1`（弗吉尼亚，很多全局服务的控制面在这里）。
+
+## 常用服务
+
+| 分类 | 服务 | 说明 |
+|---|---|---|
+| **计算** | EC2 | 虚拟机 |
+| **计算** | ECS / Fargate | 容器编排，Fargate 为免服务器模式 |
+| **计算** | App Runner | 容器化的 Serverless 服务，最接近 Cloud Run |
+| **计算** | EKS | 托管 Kubernetes |
+| **计算** | Lambda | 函数级 Serverless |
+| **计算** | Batch | 批处理任务 |
+| **存储** | S3 | 对象存储 |
+| **存储** | EBS / EFS | 块存储 / 共享文件系统 |
+| **数据库** | RDS / Aurora | 托管 MySQL / PostgreSQL / SQL Server |
+| **数据库** | DynamoDB | 键值型 NoSQL |
+| **数据库** | Redshift / Athena | 数据仓库 / 直接查询 S3 |
+| **网络** | VPC / ELB / Route 53 | 网络、负载均衡、DNS |
+| **网络** | CloudFront | CDN |
+| **消息** | SQS / SNS / EventBridge | 队列 / 主题订阅 / 事件总线 |
+| **CI/CD** | CodeBuild / CodePipeline | 构建与发布流水线 |
+| **CI/CD** | ECR | 容器镜像仓库 |
+| **权限** | IAM / IAM Identity Center | 账号、角色、权限管理 / SSO |
+| **运维** | CloudWatch | 日志、指标、告警 |
+| **运维** | CloudFormation | 基础设施即代码（也常用 Terraform）|
+| **安全** | Secrets Manager / Parameter Store | 密钥、配置管理 |
+| **安全** | KMS | 加密密钥管理 |
+
+## 认证方式
+
+| 方式 | 场景 |
+|---|---|
+| IAM Identity Center（SSO） | 本地开发的首选，凭据自动过期，无长期密钥 |
+| IAM User + Access Key | 传统方式，长期凭据，仅在无法用 SSO 时使用 |
+| IAM Role（AssumeRole） | 跨账号访问、EC2 / ECS / Lambda 上的服务身份 |
+| OIDC Federation | GitHub Actions 等 CI 免密钥接入，优先选它 |
+
+> 注意：Access Key（`AKIA...`）属于长期凭据，泄露风险高。能用 SSO 或 OIDC 就不要生成 Access Key，更不要提交进仓库。
+
+## 配置文件
+
+CLI 的凭据与配置分别放在这两个文件，按 profile 区分账号／环境：
+
+```
+~/.aws/credentials   # Access Key 等凭据
+~/.aws/config        # region、output、SSO、role 等配置
+```
+
+切换 profile 用 `--profile xxx` 参数，或设置环境变量 `AWS_PROFILE=xxx`。
+
+---
+
+# AWS CLI
+
+官方安装文档：https://docs.aws.amazon.com/zh_cn/cli/latest/userguide/getting-started-install.html
+
+## 安装（Linux x86_64 / WSL）
+
+### 1. 安装基础依赖
+
+```bash
+sudo apt-get update
+sudo apt-get install -y curl unzip
+```
+
+### 2. 下载 AWS CLI v2 安装包
+
+```bash
+cd ~
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+```
+
+### 3. 解压
+
+```bash
+unzip awscliv2.zip
+```
+
+### 4. 执行安装
+
+```bash
+sudo ./aws/install
+```
+
+> 已经装过要升级时，追加 `--update`：`sudo ./aws/install --update`
+
+### 5. 确认
+
+```bash
+aws --version
+```
+
+### 6. 安装过后目录清理
+
+```bash
+rm -rf aws awscliv2.zip
+```
+
+## 登录
+
+### 方式 A：IAM Identity Center（SSO，推荐）
+
+首次配置，按提示填入 SSO start URL、区域、账号与角色：
+
+```bash
+aws configure sso
+```
+
+之后每次凭据过期，重新登录即可。WSL 里没浏览器时加 `--no-browser`，会给你一个 URL，复制到 Windows 浏览器授权后回到终端确认：
+
+```bash
+aws sso login --no-browser
+```
+
+### 方式 B：Access Key
+
+交互式填入 Access Key ID / Secret Access Key / 默认区域 / 输出格式：
+
+```bash
+aws configure
+```
+
+## 认证与配置确认
+
+确认当前认证身份（账号 ID、IAM ARN）：
+
+```bash
+aws sts get-caller-identity
+```
+
+检查当前配置：
+
+```bash
+aws configure list
+```
+
+查看有哪些 profile：
+
+```bash
+aws configure list-profiles
+```
+
+## 账号与区域操作
+
+查看组织下所有账号（需要 Organizations 权限）：
+
+```bash
+aws organizations list-accounts
+```
+
+设定默认区域：
+
+```bash
+aws configure set region ap-northeast-1
+```
+
+指定 profile 执行命令：
+
+```bash
+aws sts get-caller-identity --profile xxx
+```
+
+## 资源查看
+
+查看该账号下所有 EC2 实例：
+
+```bash
+aws ec2 describe-instances
+```
+
+只看实例 ID、名称、状态：
+
+```bash
+aws ec2 describe-instances --query "Reservations[].Instances[].{ID:InstanceId,Name:Tags[?Key=='Name']|[0].Value,State:State.Name}" --output table
+```
+
+查看所有 S3 存储桶：
+
+```bash
+aws s3 ls
+```
+
+查看所有 Lambda 函数：
+
+```bash
+aws lambda list-functions --query "Functions[].FunctionName" --output table
+```
+
+查看所有 ECS 集群：
+
+```bash
+aws ecs list-clusters
+```
+
+查看指定集群下的 ECS 服务：
+
+```bash
+aws ecs list-services --cluster xxx
+```
+
+查看所有 RDS 实例：
+
+```bash
+aws rds describe-db-instances --query "DBInstances[].{ID:DBInstanceIdentifier,Engine:Engine,Status:DBInstanceStatus}" --output table
+```
+
+---
+
+# 认证信息的处理
+
+实际做多环境构建时踩过的东西，整理成惯例。核心只有一句：**凭据不落地、身份先确认、破坏要往安全的方向坏。**
+
+## 绝不进仓库的东西
+
+| 类别 | 具体 |
+|---|---|
+| AWS 凭据 | Access Key ID / Secret Access Key / Session Token |
+| 密码 | 数据库密码、检索引擎的 master 密码、任何 `*_PASSWORD` |
+| Secret 值 | Secrets Manager 里存的内容本身 |
+| 证书 | 私钥、`.pem`、`.key` |
+| SSO 缓存 | `~/.aws/sso/cache/` 下的 token |
+
+> CLI 的执行结果里如果混进了上面这些，不要原样粘贴到文档／Issue／聊天里。
+
+Account ID 和 Resource ARN 属于「不是机密但也别到处贴」的档次 —— 它们不能直接用来登录，但是攻击者做侦察的起点（知道 Account ID 就能推出 Role ARN 的完整形式）。**要看仓库的公开范围来决定记不记**。内部仓库可以记，要交付给第三方的话用占位符。
+
+## 多环境的 profile 组织
+
+### sso-session 与 profile 分离
+
+多个账号共用同一个 SSO 门户时，把「登录信息」和「账号信息」拆开写：登录一次，所有 profile 都能用。
+
+```ini
+# ~/.aws/config
+
+[sso-session mycompany]
+sso_start_url = https://d-xxxxxxxxxx.awsapps.com/start
+sso_region = ap-northeast-1
+sso_registration_scopes = sso:account:access
+
+[profile dev]
+sso_session = mycompany
+sso_account_id = 111111111111
+sso_role_name = AWSAdministratorAccess
+region = ap-northeast-1
+output = json
+
+[profile prod]
+sso_session = mycompany
+sso_account_id = 222222222222
+sso_role_name = AWSAdministratorAccess
+region = ap-northeast-1
+output = json
+```
+
+登录时指定 session 而不是 profile，一次登录覆盖所有账号：
+
+```bash
+aws sso login --sso-session mycompany
+```
+
+### 非交互式配置
+
+`aws configure sso` 是交互式的，要一路回答问题。已经知道所有值的话，直接追加进配置文件更快，也方便写进手册让别人照抄：
+
+```bash
+cat >> ~/.aws/config <<'EOF'
+
+[profile prod]
+sso_session = mycompany
+sso_account_id = 222222222222
+sso_role_name = AWSAdministratorAccess
+region = ap-northeast-1
+output = json
+EOF
+```
+
+### 作业开始时固定 profile
+
+命令里每次写 `--profile` 容易漏，漏了就打到默认账号去了。开工先固定：
+
+```bash
+export AWS_PROFILE=dev
+export AWS_PAGER=""      # v2 默认把输出送进 less，粘贴结果时很碍事
+```
+
+> 环境变量只在当前终端有效。**重开终端就没了** —— 之后的命令会静默地打到别的账号。养成重开终端就重设的习惯。
+
+## AWS 架构图标
+https://aws.amazon.com/cn/architecture/icons/
+
+## CIDR计算器
+计算网段里面有多少个IP地址
+
+https://cidr.xyz/
+
+## AWS 架构图
+
+- 经典架构1 [aws-classic-1.drawio](./drawio/aws-classic-1.drawio)
+- 经典架构2 [aws-classic-2.drawio](./drawio/aws-classic-2.drawio)
+
+## MinIO
+MinIO 是一个高性能、开源的 S3 兼容对象存储系统，可用于自建类似 Amazon S3 的存储服务，常用于文件、备份、日志以及 AI/大数据数据集的存储。
+
+https://github.com/minio/minio
+
+```bash
+docker run -d \
+  --name minio \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -e MINIO_ROOT_USER=user \
+  -e MINIO_ROOT_PASSWORD=password123 \
+  -v minio-data:/data \
+  minio/minio:RELEASE.2025-04-22T22-12-26Z \
+  server /data --console-address :9001
+```
+
+- 端口9000：S3 API，程序通过该端口访问 MinIO，对象上传、下载等操作都使用这个端口
+- 端口9001：MinIO Web 管理界面
+
+http://localhost:9001/
+
+
+## Localstack(已经不维护了)
 
 Localstack 是开发 JIRA 的公司 Atlassian 开发的, 用 Python ``山寨`` 了 AWS 的 API, 通过 REST API 提供跟 AWS 一模一样的服务
 

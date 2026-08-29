@@ -69,6 +69,13 @@ Windows 是 ``Ctrl + X`` 剪切，但 Mac 上这样是没反应的
 ### Finder中显示／隐藏隐藏文件
 ``Command + Shift + .（句号）``  显示／隐藏隐藏文件
 
+如果想让 Finder 永久默认显示隐藏文件，可以在终端执行：
+```bash
+defaults write com.apple.finder AppleShowAllFiles -bool true
+# 重启Finder
+killall Finder
+```
+
 ### Finder显示所有文件的扩展名
 ``Finder`` → ``设置`` → ``高级`` → ``显示所有文件名扩展名``
 
@@ -442,6 +449,9 @@ brew install snipaste --cask
 #### FileZilla（推荐）
 - [FileZilla](https://filezilla-project.org/)
 
+#### Oryxis（推荐）
+- [Oryxis](https://github.com/wilsonglasser/oryxis)
+
 #### Commander One
 - [Commander One](https://mac.eltima.com/file-manager.html)
 ```bash
@@ -450,7 +460,15 @@ brew install --cask commander-one
 
 ### WinMerge替代
 
-#### FileMerge（推荐）
+#### KDiff3（推荐）
+KDiff3是一款跨平台文件及目录对比与合并工具
+- [KDiff3](https://invent.kde.org/sdk/kdiff3)
+
+```bash
+brew install --cask kdiff3
+```
+
+#### FileMerge
 FileMerge 是 Mac 自带的文件比较工具。它是 Xcode 开发工具包的一部分，可以轻松地比较文件差异并合并文件。
 
 ``Xcode`` → ``Open Developer Tool`` → ``FileMerge``
@@ -497,50 +515,107 @@ brew install lihaoyun6/tap/quickrecorder
 
 ### DB客户端
 
-#### 选项1：``SQL Workbench/J``
+#### 推荐选项：``DBX``
+- [官网](https://dbxio.com/cn)
+- [Github](https://github.com/t8y2/dbx/blob/main/README.zh-CN.md)
+
+#### 选项1：``SQL Workbench/J`` (不推荐)
 - [官网](https://www.sql-workbench.eu/index.html)
 
 在 ``下载页面`` 直接下载 MacOS 版本即可 ``Download package for MacOS``
 
-#### 选项2：DBeaver
+#### 选项2：DBeaver (不推荐)
 - [官网](https://dbeaver.io/)
 
 ```bash
 brew install --cask dbeaver-community
 ```
 
-#### 选项3：``Beekeeper Studio``
+#### 选项3：``Beekeeper Studio`` (不推荐)
 - [官网](https://www.beekeeperstudio.io/)
 - [Github](https://github.com/beekeeper-studio/beekeeper-studio)
 
-#### 选项4：HeidiSQL
+#### 选项4：HeidiSQL (不推荐)
 - [官网](https://www.heidisql.com/)
 - [Github](https://github.com/HeidiSQL/HeidiSQL)
 
-#### 选项5：TablePlus
+#### 选项5：TablePlus (不推荐)
 - [官网](https://tableplus.com/)
 
 是一个收费的商用软件，但是 ``free trial`` 其实没有时间限制，只是功能限制（2个 tab / 2个窗口等）
 
-#### 选项6：``TablePro``
+#### 选项6：``TablePro`` (不推荐)
 
 TablePlus 的开源平替版本
 
 - [官网](https://tablepro.app/)
 - [Github](https://github.com/TableProApp/TablePro)
 
-### 中低分辨率显示器开启 HiDPI 选项
+### BetterDisplay
+
+BetterDisplay 是一款强大的 Mac 显示器管理工具,支持自定义分辨率、XDR/HDR 超级亮度、虚拟屏幕、画中画、DDC 控制等功能
+
+- [官网](https://betterdisplay.pro/)
+- [Github](https://github.com/waydabber/BetterDisplay)
+
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/master/hidpi.sh)"
+brew install --cask betterdisplay
 ```
 
-- [one-key-hidpi](https://github.com/xzhih/one-key-hidpi)
-- [BetterDisplay](https://github.com/waydabber/BetterDisplay)
+安装好了之后会在右上角的顶部菜单栏出现 BetterDisplay 图标（像一个显示器的小图标）
+
+点击 BetterDisplay 图标，选择你的外接显示器，按下面设定
+ - 打开 ``高分辨率（HiDPI）``
+ - ``显示模式`` → ``修改分辨率``，比如 ``1920 x 1080``
 
 ## Zsh
 从 MacOS Catalina 开始 默认Shell 修改为了 Zsh  
 下面是笔者的 zshrc 配置文件  
 - [.zshrc](./mac_rc/zshrc/.zshrc)
+
+## 开发环境构建 mise
+
+mise 是一个统一的开发环境与工具版本管理器，可用来安装、切换和管理 Node.js、Python、Go、Rust 等多种开发工具的版本。
+
+https://github.com/jdx/mise  
+https://mise.jdx.dev/  
+
+``` bash
+# 安装mise
+brew install mise
+
+# 安装开发工具
+mise install java@21
+mise install python@3.12
+mise install node@22
+
+# 切换
+mise use node@20
+```
+
+还可以使用 ``mise.toml``  管理项目级开发环境
+
+在项目根目录创建 `mise.toml`
+
+```toml
+[tools]
+
+java = "21"
+python = "3.12"
+node = "22"
+```
+
+然后确认
+```bash
+cd my-project
+java -version
+python --version
+node -v
+```
+
+windows也可以使用mise
+
+winget install jdx.mise
 
 ## awesome-mac
 - [Github](https://github.com/jaywcjlove/awesome-mac)

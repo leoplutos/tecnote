@@ -133,7 +133,17 @@ strip 命令用于清除二进制文件中的非关键信息. 可以通过 ``sud
 
 ## 第三方库
 
-#### log
+### GPUI
+https://gpui.rs/  
+GPUI 是一个用 Rust 编写的 UI 框架，最初为了开发 Zed 编辑器而从零打造。
+虽然它主要服务于 Zed，但也可以用于开发 Zed 之外的应用程序。
+
+### gpui-component
+https://github.com/longbridge/gpui-component  
+https://github.com/longbridge/gpui-component/blob/main/README.zh-CN.md  
+gpui-component 是基于 GPUI 构建出色桌面应用程序的 UI 组件库。
+
+### log
 - 简单的工程使用slog即可  https://github.com/slog-rs/slog  
 - 异步以及微服务使用  https://github.com/tokio-rs/tracing  
     一个[tracing的教程](https://course.rs/logs/tracing.html)

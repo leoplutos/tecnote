@@ -283,7 +283,30 @@ docker run -itd \
 
 ### 邮件服务器
 
-#### maildev（推荐）
+#### mailpit（推荐）
+Mailpit 是一个开源、轻量、零依赖的 SMTP 测试工具，用于在开发环境中拦截邮件并通过 Web UI 查看和测试邮件。
+
+https://github.com/axllent/mailpit  
+https://mailpit.axllent.org/  
+
+使用命令
+```bash
+# 拉取镜像
+docker pull axllent/mailpit:latest
+# 启动，WebUI无认证
+docker run -d --name=mailpit -p 9580:8025 -p 1025:1025 axllent/mailpit
+# 启动，WebUI有认证
+docker run -d \
+  --name=mailpit \
+  -p 9580:8025 \
+  -p 1025:1025 \
+  -e MP_UI_AUTH="user:pass" \
+  axllent/mailpit
+```
+启动容器后访问  
+http://localhost:9580/
+
+#### maildev
 https://github.com/maildev/maildev  
 https://maildev.github.io/maildev/  
 
@@ -294,111 +317,10 @@ docker pull maildev/maildev
 # 启动，WebUI无认证
 docker run -d -p 9580:1080 -p 1025:1025 --name maildev maildev/maildev
 # 启动，WebUI有认证
-docker run -d -p 9580:1080 -p 1025:1025 --name maildev maildev/maildev --web-user user --web-pass user
+docker run -d -p 9580:1080 -p 1025:1025 --name maildev maildev/maildev --web-user user --web-pass pass
 ```
 启动容器后访问  
 http://localhost:9580/
-
-#### PMail
-
-https://github.com/Jinnrry/PMail  
-https://github.com/Jinnrry/PMail/blob/master/README_CN.md  
-https://github.com/jinnrry/PMail/pkgs/container/pmail  
-``ghcr.io``是 ``GitHub`` 的容器镜像仓库  
-
-端口：
- - 80： 引导设置界面的http端口（下面的例子修改端口为9600）
- - 443： 引导设置界面的https端口
- - 25： SMTP端口
- - 465： SMTP SSL端口
- - 110： POP3端口
- - 995： POP3 SSL端口
-
-使用命令
-```bash
-# 拉取镜像
-# docker pull ghcr.io/jinnrry/pmail:latest
-# 使用南大加速镜像
-docker pull ghcr.nju.edu.cn/jinnrry/pmail:latest
-
-# 启动容器，修改入口为/bin/ash
-docker run -itd \
- -p 25:25 \
- -p 9600:9600 \
- -p 443:443 \
- -p 110:110 \
- -p 465:465 \
- -p 995:995 \
- --entrypoint /bin/ash \
- --name pmail \
- ghcr.nju.edu.cn/jinnrry/pmail:latest
-
-# 进入容器
-docker attach pmail
-
-# 设定alpine镜像仓库为国内源
-set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-# 安装OpenSSL
-apk add openssl
-# 创建一个 2048 位的私钥（private.key）和一个自签证书（public.crt）
-mkdir -p /work/config/ssl
-openssl req -newkey rsa:2048 -nodes -keyout /work/config/ssl/private.key -x509 -days 365 -out /work/config/ssl/public.crt
-
-# 使用端口9600启动服务
-./pmail -p 9600
-```
-
-启动后访问 http://localhost:9600/ 进入引导设置界面设定，如果是内网环境，是不会成功的，最后一步会一直转圈，此时按如下设置即可
-```bash
-# 停止服务
-Ctrl + c
-# 修改配置文件
-vi ./config/config.json
-```
-内容如下
-```json
-{
-	"logLevel": "warn",
-	"domain": "10.202.195.1",
-	"domains": [
-		"10.202.195.1"
-	],
-	"webDomain": "mail.10.202.195.1.com",
-	"dkimPrivateKeyPath": "config/dkim/dkim.priv",
-	"sslType": "1",
-	"SSLPrivateKeyPath": "./config/ssl/private.key",
-	"SSLPublicKeyPath": "./config/ssl/public.crt",
-	"dbDSN": "./config/pmail.db",
-	"dbType": "sqlite",
-	"httpsEnabled": 2,
-	"spamFilterLevel": 0,
-	"httpPort": 9600,
-	"httpsPort": 0,
-	"weChatPushAppId": "",
-	"weChatPushSecret": "",
-	"weChatPushTemplateId": "",
-	"weChatPushUserId": "",
-	"tgBotToken": "",
-	"tgChatId": "",
-	"isInit": true,
-	"webPushUrl": "",
-	"webPushToken": ""
-}
-```
-
-```bash
-# 使用端口9600启动服务
-./pmail -p 9600
-# 退出容器，同时按下
-Ctrl + p + q
-```
-再次访问 http://localhost:9600/ 即可
-
-
-#### BillionMail
-https://github.com/aaPanel/BillionMail
-
-BillionMail 是一款开源的邮件服务器、邮件订阅与邮件营销解决方案，致力于为企业和个人提供高效、灵活且成本可控的邮件管理工具
 
 ### SQL Server
 - [Linux 上的 SQL Server 是什么](https://learn.microsoft.com/zh-cn/sql/linux/sql-server-linux-overview)
@@ -430,6 +352,67 @@ spring:
     password: YourStrongPassw0rd
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 ```
+
+### Inkscape
+Inkscape是开源矢量图形编辑软件，支持XML、SVG及CSS等开放性标准格式。提供跨平台矢量图形创作能力，功能涵盖形状绘制、路径编辑、文本绕排及渐变填充等SVG特性实现
+```bash
+docker run -d \
+  --name=inkscape \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 3000:3000 \
+  -p 3001:3001 \
+  -e LC_ALL=zh_CN.UTF-8 \
+  -v /home/lch/workspace/images:/config \
+  --shm-size="1gb" \
+  --restart unless-stopped \
+  lscr.io/linuxserver/inkscape:latest
+```
+
+### NATS JetStream
+NATS JetStream 是一个轻量级、开源、高性能的消息队列（Message Broker），提供消息持久化、ACK、重试、消费组等可靠消息能力。
+
+```bash
+# 创建 NATS JetStream 和 NATSUI 容器
+mkdir -p ~/docker_compose/nats_jetstream
+cd ~/docker_compose/nats_jetstream
+touch docker-compose.yml
+```
+
+docker-compose.yml 内容如下
+```yml
+services:
+  nats:
+    image: nats:latest
+    container_name: nats_jetstream
+    command: ["-js", "-m", "8222"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    volumes:
+      - nats-data:/data
+    restart: unless-stopped
+
+  nui:
+    image: ghcr.io/nats-nui/nui:latest
+    container_name: nats_nui
+    ports:
+      - "31311:31311"
+    depends_on:
+      - nats
+    restart: unless-stopped
+
+volumes:
+  nats-data:
+```
+
+NATS Monitoring:  
+http://localhost:8222  
+
+NATSUI:  
+http://localhost:31311  
+
 
 ## 镜像和容器的区别
 

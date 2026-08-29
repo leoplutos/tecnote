@@ -1,6 +1,8 @@
-# 文本搜索工具ripgrep
+# 高效命令行工具
 
-## 简介
+## 文本搜索工具ripgrep
+
+### 简介
 > ripgrep recursively searches directories for a regex pattern
 
 
@@ -9,7 +11,7 @@
 笔者觉得 ``ripgrep`` 最大的好处是默认选项，默认选项就是没有选项，直接 ``rg xxx`` 就是在当前工作目录下，递归搜索所有的文本文件里出现 ``xxx`` 字符串的位置，完全不用记什么命令行。当然如果需要的时候，可以用 ``rg -h`` 来查看帮助。
 
 
-## 下载安装
+### 下载安装
 
 #### 方式1：Github下载
 * [Github地址](https://github.com/BurntSushi/ripgrep)  
@@ -35,7 +37,7 @@ set PATH=%PATH%;%RIPGREP_HOME%\bin
 rg --version
 ```
 
-## 使用方法
+### 使用方法
 进入目标目录检索 ``set`` 关键字  
 无参数时为递归当前文件夹下，包括子文件夹里所有的文本文件搜索
 ```
@@ -48,3 +50,60 @@ rg set
 rg set -E UTF-8
 ```
 
+## zoxide
+
+一个更智能的 cd 命令，会根据你常用的目录自动学习和排序，让你只需输入几个关键词就能快速跳转到目标目录
+
+### 安装
+#### macOS
+```bash
+brew install zoxide
+```
+
+#### Linux / WSL
+```bash
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+```
+
+#### Windows
+```bash
+winget install ajeetdsouza.zoxide
+```
+
+### 设定
+
+#### Bash
+把下面这一行添加到 `~/.bashrc` 的末尾
+```bash
+eval "$(zoxide init bash)"
+```
+
+#### Zsh
+把下面这一行添加到 `~/.zshrc` 的末尾
+```bash
+eval "$(zoxide init zsh)"
+```
+
+#### Nushell
+
+先查看 env 文件路径：
+```bash
+$nu.env-path
+```
+
+打开这个文件，在末尾加入：
+```bash
+zoxide init nushell | save -f ~/.zoxide.nu
+```
+
+再查看 config 文件路径：
+```bash
+$nu.config-path
+```
+
+打开这个文件，在末尾加入：
+```bash
+source ~/.zoxide.nu
+```
+
+重启 Nushell，或者重新加载配置后即可使用 zoxide。

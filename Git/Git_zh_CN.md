@@ -20,6 +20,16 @@ git config --global color.ui true
 git config --global core.autoCRLF false
 # 取消忽略大小写
 git config --global core.ignorecase false
+# 将 Git 新建仓库时的默认分支名设置为 main
+git config --global init.defaultBranch main
+# git pull 时自动 stash 未提交修改
+git config --global pull.autostash true
+# git pull 默认使用 merge，而不是 rebase
+git config --global pull.rebase false
+# git rebase 时自动 stash 未提交修改
+git config --global rebase.autoStash true
+# Git 在输出文件名时，不要把非 ASCII 字符（尤其是中文、日文等）转义成 \xxx，而是直接显示原字符。
+git config --global core.quotePath false
 ```
 
 ### 任选设置
@@ -45,89 +55,165 @@ git config --global pull.rebase true
 git config --global pull.ff only
 ```
 
-### 设置使用 Git 凭证管理器 （GCM） 管理账号密码
+### 设置使用 Git 凭证管理器（GCM）管理账号密码
 
-``Git Credential Manage`` 的 [官方文档](https://git-scm.com/doc/credential-helpers) 和 [GitHub](https://github.com/git-ecosystem/git-credential-manager)
+`Git Credential Manager`（GCM）的 [Git 官方文档](https://git-scm.com/doc/credential-helpers) 和 [GitHub](https://github.com/git-ecosystem/git-credential-manager)
 
-Git 凭证管理器 （GCM） 是一个基于 .NET 构建的安全 Git 凭证帮助程序，可在 Windows、macOS 和 Linux 上运行。它旨在为每个主要的源代码控制托管服务和平台提供一致且安全的身份验证体验，包括多重身份验证。
+Git Credential Manager（GCM）是一个基于 .NET 构建的跨平台 Git 凭证帮助程序，可在 Windows、macOS 和 Linux 上运行。它用于为 GitHub、GitLab、Azure DevOps、Bitbucket 等代码托管服务提供一致且安全的身份验证体验，并支持多重身份验证（MFA）。
 
-#### Windows平台
+#### Windows 平台
 
-已经包含在 ``Git for Windows`` 中  
-目录为 ``Git\mingw64\bin\git-credential-manager.exe``
+GCM 已经包含在 `Git for Windows` 中，通常无需单独安装。  
+默认目录通常为：
+
+```text
+C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+```
 
 ```bash
-# 确认gcm版本
+# 确认 GCM 版本
 git credential-manager --version
-# 启用gcm
+
+# Git for Windows 通常已经自动配置好 GCM。
+# 如需显式指定，可以执行：
 git config --global credential.helper manager
-# 配置存储方式为使用[Windows 凭据管理器]
+
+# 显式指定使用 Windows 凭据管理器保存凭证（通常无需手动设置）
 git config --global credential.credentialStore wincredman
 ```
 
-如果想删除凭证的话，如下操作  
-打开 ``设置`` → 搜索 ``Windows 凭据``（日文系统为``Windows 資格情報``） → 选择 ``管理 Windows 凭据`` → 在普通凭据下面会看到，删除即可
+如果想删除已经保存的凭证：  
+打开 `设置` → 搜索 `Windows 凭据`（日文系统为 `Windows 資格情報`） → 选择 `管理 Windows 凭据` → 在普通凭据中找到对应的 Git/GitHub/GitLab 凭证并删除。
 
-#### MacOS
+#### WSL 平台（推荐使用 Windows 中的 GCM）
+
+如果是在 Windows + WSL 环境中使用 Git，推荐直接让 WSL 中的 Git 调用 `Git for Windows` 自带的 GCM。这样凭证会保存在 Windows Credential Manager 中，也可以在 Windows Git 与多个 WSL 发行版之间共享凭证。
+
 ```bash
-brew tap microsoft/git
-brew install --cask git-credential-manager-core
+# 确认 WSL 中使用的是 Linux Git
+which git
+# 正常一般应为：/usr/bin/git
 
-# 确认gcm版本
-git credential-manager --version
-# 启用gcm
-git config --global credential.helper manager
+# 配置 WSL 中的 Git 使用 Windows 的 GCM
+git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
+
+# 确认当前 credential helper 及其来源
+git config --show-origin --get-all credential.helper
 ```
 
-#### Linux平台
+这种方式下，不需要在 WSL 中另外设置：
 
-**Debian12 /Ubuntu22.04** 使用 ``gcm``
 ```bash
-# 先安装git
-# sudo apt update
-# sudo apt install git
+git config --global credential.credentialStore wincredman
+```
 
-# 安装gcm依赖库：libicu
-sudo apt install libicu72
-# for Ubuntu22.04
-# sudo apt install libicu70
+因为实际运行的是 Windows 版 GCM，它会使用 Windows 的凭据存储机制。
 
-# 下载安装gcm
-export GITHUB_URL=https://bgithub.xyz
-# export GITHUB_URL=https://github.com
-curl -Lo gcm-linux_amd64.2.6.0.deb "${GITHUB_URL}/git-ecosystem/git-credential-manager/releases/download/v2.6.0/gcm-linux_amd64.2.6.0.deb"
-dpkg -i gcm-linux_amd64.2.6.0.deb
-rm gcm-linux_amd64.2.6.0.deb
+#### macOS
 
-# 确认gcm版本
+推荐使用 Homebrew 安装：
+
+```bash
+brew install --cask git-credential-manager
+
+# 确认 GCM 版本
 git credential-manager --version
-# 启用gcm
-git config --global credential.helper manager
-# 配置存储方式为使用[纯文本文件 ~/.gcm/store]
-# 不推荐，安全的做法为使用GPG/pass
-# https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/credstores.md
+
+# 配置 GCM（安装程序通常会自动完成）
+git-credential-manager configure
+```
+
+#### Linux 平台
+
+Linux 上可以使用 GCM，但需要自行选择凭证存储方式。优先使用系统安全存储，例如 `secretservice` 或 `gpg`，不推荐长期使用明文存储。
+
+##### 推荐方式：使用 .NET Tool 安装
+
+先安装当前 GCM 官方文档要求的 .NET SDK，然后执行：
+
+```bash
+# 安装 GCM
+dotnet tool install -g git-credential-manager
+
+# 配置 Git 使用 GCM
+git-credential-manager configure
+
+# 确认 GCM 版本
+git credential-manager --version
+```
+
+##### Debian / Ubuntu：使用 .deb 包安装
+
+也可以从 GCM 的 GitHub Releases 下载对应架构的 `.deb` 包。由于 GCM 会持续更新，不建议在文档中长期固定某个旧版本号。
+
+```bash
+# 示例：下载当前所需版本后安装
+sudo dpkg -i ./gcm-linux-x64-<VERSION>.deb
+
+# 配置 Git 使用 GCM
+git-credential-manager configure
+
+# 确认 GCM 版本
+git credential-manager --version
+```
+
+如果安装时提示缺少依赖，请根据当前 Linux 发行版和当前 .NET/GCM 版本安装对应依赖，不建议固定写死 `libicu70`、`libicu72` 等包名。
+
+##### Linux 凭证存储方式
+
+带桌面环境的 Linux 推荐使用 Secret Service：
+
+```bash
+git config --global credential.credentialStore secretservice
+```
+
+无 GUI 的服务器环境可以考虑使用 GPG/pass：
+
+```bash
+git config --global credential.credentialStore gpg
+```
+
+也可以使用 `plaintext`，但凭证会以明文保存到 `~/.gcm/store`，安全性较低，不推荐：
+
+```bash
+# 不推荐：以明文方式保存凭证
 git config --global credential.credentialStore plaintext
 ```
 
-**Debian12 /Ubuntu22.04** 使用内置 ``store``
+GCM 在 Linux 上可用的常见 credential store 包括：
+
+- `secretservice`：Linux Secret Service / libsecret
+- `gpg`：GPG + pass
+- `cache`：Git credential cache
+- `plaintext`：明文文件，不安全
+- `none`：不由 GCM 持久化保存凭证
+
+相关说明可参考：  
+<https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/credstores.md>
+
+#### Linux 平台使用 Git 内置 `store`
+
+如果不使用 GCM，也可以使用 Git 自带的 `store`：
+
 ```bash
-# 先安装git
+# 先安装 Git
 # sudo apt update
 # sudo apt install git
 
-# 配置存储方式为使用[纯文本文件 ~/.git-credentials]
-# 不推荐，安全的做法为使用gcm
+# 凭证会以纯文本形式保存到 ~/.git-credentials
+# 不推荐在安全要求较高的环境中使用
 git config --global credential.helper store
 ```
 
-**alpine** 使用内置 ``store``
+#### Alpine Linux 使用 Git 内置 `store`
+
 ```bash
-# 先安装git
+# 安装 Git
 apk update --quiet
 apk add --no-cache --upgrade git
 
-# 配置存储方式为使用[纯文本文件 ~/.git-credentials]
-# 不推荐，安全的做法为使用gcm
+# 凭证会以纯文本形式保存到 ~/.git-credentials
+# 不推荐在安全要求较高的环境中使用
 git config --global credential.helper store
 ```
 
@@ -378,17 +464,6 @@ git commit -m "添加功能it_001"
 git push -u origin feature/it_001
 ```
 
-然后创建 ``Pull requests（合并请求）``，下面以 gogs 举例
-
-访问 gogs 的 git 仓库 → ``合并请求`` 标签 → ``创建合并请求`` 按钮，按如下填写
-
-- 基准分支：``develop``
-- 对比分支：``feature/it_001``
-
-填写 ``标题`` 和 ``内容`` → ``创建合并请求`` 按钮
-
-这时会在 git 仓库的 ``合并请求`` 标签 下看到已经有了一个请求，点击进入按下 ``合并请求`` 按钮合并即可
-
 ### VSCode 操作流程（以 feature 分支举例）
 
 1. 切换到 develop 分支  
@@ -405,7 +480,104 @@ git push -u origin feature/it_001
 5. 推送本地 feature 分支到远程  
 ``源代码管理`` → 点击右上角的 ``三点菜单`` → 选择 ``推送 (Push)`` → 如果当前 feature 分支在远程没有，它会提示 ``分支 feature 没有远程分支。是否要发布此分支？`` → ``确定``
 
-``Pull requests`` 合并操作同 ``命令行操作``
+### Pull Request（PR）
+
+然后创建 ``Pull requests（合并请求）``，下面以 GitHub 举例
+
+#### 1.在 GitHub 上创建 Pull Request（PR）
+
+创建 PR 时确认以下内容：
+
+- base：``develop``
+- compare：``feature/it_001``
+
+填写 ``标题`` 和 ``内容``，如果需要还可以指定 `Reviewer` → ``创建合并请求`` 按钮
+
+这时会在仓库的 ``Pull requests`` 标签 下看到已经有了一个请求
+
+#### 2. Reviewer 对 PR 进行代码审查。
+
+##### 无问题时
+确认代码没有问题后，在 PR 中进行 `Approve`
+
+##### 有问题时
+如果 Reviewer 提出修改意见：
+
+根据 Review Comment 修改代码
+Commit 修改
+Push 到原来的工作分支
+```bash
+git add .
+git commit -m "fix: xxxxxx"
+git push
+```
+Push 后，原 PR 会自动更新，无需重新创建 PR。
+
+#### 3.合并 PR
+
+Review 通过后，由有合并权限的人员执行 `Merge Pull Request`
+
+确认以下内容后进行合并：
+
+- Code Review 已完成
+- Reviewer 已 Approve
+- CI / 自动检查通过（如有）
+- Bug 票对应的修改内容已完成
+- Target Branch 确认是 develop
+
+确认无误后，将 PR 合并到：`develop`
+
+
+## 将已有目录关联到 GitHub 仓库并 Push
+
+将本地已有项目目录关联到一个已有的 GitHub 仓库，并将代码 Push 到 `main` 分支。
+
+```bash
+# 进入项目目录
+cd C:\path\to\project
+
+# 检查是否已经是 Git 仓库
+git status
+# 如果报错则说明当前目录还没有初始化 Git
+
+# 初始化 Git
+git init
+
+# 关联 GitHub 仓库
+git remote add origin https://github.com/user/project.git
+
+git add .
+git commit -m "Initial commit"
+# 将当前分支设置为 main
+git branch -M main
+# Push 到 GitHub
+git push -u origin main
+```
+
+## Feature分支同步Develop
+你有一个自己开发用的分支 feature/mock-frontend-demo  
+每次都在这个分支上开发自己的内容然后提PR到develop的流程为  
+先保存当前未提交的修改 → 用最新 develop 重置你的 feature 分支 → 强制同步远程 feature 分支 → 再恢复你自己的修改。
+
+```bash
+# 检查当前是否在 feature/mock-frontend-demo 分支，不是则停止
+git branch --show-current
+
+# 临时保存当前所有未提交的修改（包括未跟踪的新文件），命名为 sync
+git stash push -u -m sync
+
+# 从远程 origin 获取最新的分支和提交信息，但不修改当前代码
+git fetch origin
+
+# 把当前分支强制重置为远程 develop 的最新状态
+git reset --hard origin/develop
+
+# 把重置后的 feature 分支安全地强制推送到远程，覆盖远程 feature 分支
+git push --force-with-lease origin feature/mock-frontend-demo
+
+# 把第①步保存的本地修改重新恢复到当前工作区
+git stash pop
+```
 
 # 其他
 
@@ -445,6 +617,14 @@ git commit -m ".gitignore重写缓存成功"
 git push
 ```
 
+# 客户端
+
+## GitButler
+一个现代化的 Git 客户端，通过并行分支、堆叠分支、可视化提交管理和 AI 能力，让复杂的 Git 分支与 PR 工作流变得更简单
+
+https://github.com/gitbutlerapp/gitbutler
+
 # 更多
 * [GIT CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/git.txt)
 * [团队项目开发的问题和解决方案](https://github.com/jackfrued/Python-100-Days/blob/master/Day91-100/91.%E5%9B%A2%E9%98%9F%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)
+

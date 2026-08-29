@@ -139,7 +139,17 @@ body[data-mode=sepia] {
 }
 ```
 
-## 预览MarkDown插件（推荐）
+## Markdown Viewer（推荐）
+github项目地址：[markdown-viewer](https://github.com/simov/markdown-viewer)  
+谷歌插件商店地址：[Markdown Viewer](https://chromewebstore.google.com/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk)  
+EDGE插件商店地址：[Markdown Viewer](https://microsoftedge.microsoft.com/addons/detail/markdown-viewer/cgfmehpekedojlmjepoimbfcafopimdg)
+
+#### 插件设置
+1. 开启 `允许访问文件网址`
+2. `Settings` → `Theme` → `Content Theme` → `CUSTOM`
+3. `Settings` → `Theme` → `Custom Theme` → `ADD`，上传 [Markdown-Viewer-Orbit-Indigo.css](./markdown/Markdown-Viewer-Orbit-Indigo.css)
+
+## 预览MarkDown插件（过时）
 
 可以使用浏览器渲染 ``markdown`` 文件，以便在浏览器里直接打印生成 ``pdf``  
 谷歌插件商店地址：[Markdown Preview Plus](https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl)  
@@ -153,7 +163,7 @@ github下载地址：[v0.8.0.zip](https://github.com/volca/markdown-preview/arch
 1. 开启 ``Mermaid & KaTeX support inline``
 2. ``Themes`` 可以选择主题，[lch_Chrome.css](./markdown/lch_Chrome.css) 是一个笔者使用的主题
 
-## EDGE版的预览MarkDown插件（推荐）
+## EDGE版的预览MarkDown插件（过时）
 EDGE插件商店地址：[Markdown Preview Plus](https://microsoftedge.microsoft.com/addons/detail/markdown-preview-plus/dhinnjfkfmhehkbhcblbocdcpmlnkhbh)  
 
 #### 权限设置
@@ -179,6 +189,14 @@ Immersive Translate（沉浸式翻译），支持沉浸式双语网页翻译扩�
 - [Github仓库](https://github.com/mrcoles/full-page-screen-capture-chrome-extension)
 - [Chrome插件商店](https://chromewebstore.google.com/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?pli=1)
 - [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/gofullpage-full-page-sc/hfaciehifhdcgoolaejkoncjciicbemc)
+
+## SingleFile（推荐）
+它可以把当前网页完整保存成一个独立的 .html 文件，以后即使网页下线，也可以直接打开这个 HTML 查看。
+
+- [官网](https://www.getsinglefile.com/)
+- [Github仓库](https://github.com/gildas-lormeau/SingleFile)
+- [Chrome插件商店](https://chromewebstore.google.com/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle?pli=1)
+- [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/singlefile/efnbkdcfmcmnhlkaijjjmhjjgladedno)
 
 ## 二维码插件 - QR码生成与识别（推荐）
 - [官网](https://guokai.dev/)
@@ -230,3 +248,9 @@ Access to script at 'file:///path/to/App.js' from origin 'null' has been blocked
 ```
 "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir=D:\Download\EdgeTmp
 ```
+
+## Brave
+Brave浏览器是一款由JavaScript创始人Brendan Eich等人于2015年创立的免费、开源网页浏览器，其核心特点是注重用户隐私与安全。浏览器默认内置广告拦截器和追踪保护功能，能提升网页加载速度并防止数据被收集
+
+https://github.com/brave/brave-browser
+https://brave.com/

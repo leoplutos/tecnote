@@ -1,21 +1,21 @@
 {
 	//-----------------------------------------------"
-	//               基本设定                        "
+	//			   基本设定						"
 	//-----------------------------------------------"
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
 	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'Consolas 7NF', 'Consolas ligaturized v3', 'Consolas', 'Cascadia Code NF', 'Cascadia Code', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Courier New', monospace",
-	// "editor.fontFamily": "'Liga SFMono Nerd Font', Menlo, Monaco, 'Hiragino Kaku Gothic ProN', 'PingFang SC', 'Courier New', monospace", // MacOS
-	"editor.fontSize": 16, //设置字体大小
+	// "editor.fontFamily": "'更紗等幅ゴシック J Nerd Font light', 'Consolas 7NF', 'Consolas ligaturized v3', 'Consolas', 'Cascadia Code NF', 'Cascadia Code', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Courier New', monospace",
+	"editor.fontSize": 14, //设置字体大小
 	"editor.fontWeight": "400", //设置字体粗细，可选normal,bold,100到1000之间的数字(400为默认)，选择合适的就行
 	"editor.fontLigatures": true, //设置启用连字
 	//"editor.codeLensFontFamily": "",
-	"editor.codeLensFontSize": 16,
+	"editor.codeLensFontSize": 14,
 	//"editor.fontVariations": "'Ligconsolata' 0.5",
 	"editor.formatOnSave": false, //在保存时格式化文件
 	// "editor.letterSpacing": 0.1, //字母间距
 	"editor.lineHeight": 20, //行高
 	"editor.minimap.enabled": true, //控制是否显示缩略图(右侧的minimap)
-	"editor.minimap.autohide": true, //控制是否自动隐藏缩略图(右侧的minimap)
+	"editor.minimap.autohide": "mouseover", //控制是否自动隐藏缩略图(右侧的minimap)
 	"editor.tabSize": 4, //设定tab长度
 	"editor.rulers": [
 		100,
@@ -100,15 +100,14 @@
 	"zenMode.centerLayout": false, //禅模式取消居中
 	"zenMode.hideLineNumbers": false, //禅模式显示行号
 	//-----------------------------------------------"
-	//               颜色设定                        "
+	//			   颜色设定						"
 	//-----------------------------------------------"
-	"workbench.preferredDarkColorTheme": "Default Dark+", // 深色主题首选项
-	"workbench.preferredLightColorTheme": "Default Light+", // 浅色主题首选项
-	"workbench.preferredHighContrastColorTheme": "Default Dark+", // 深色高对比度主题首选项
-	"workbench.preferredHighContrastLightColorTheme": "Default Light+", // 浅色高对比度主题首选项
-	"workbench.colorTheme": "Default Dark+",
+	"workbench.preferredDarkColorTheme": "Dark+", // 深色主题首选项
+	"workbench.preferredLightColorTheme": "Light+", // 浅色主题首选项
+	"workbench.preferredHighContrastColorTheme": "Dark+", // 深色高对比度主题首选项
+	"workbench.preferredHighContrastLightColorTheme": "Light+",
 	"workbench.colorCustomizations": {
-		"[Default Dark+]": { //Default Dark+主题的自定义
+		"[Dark+]": { //Default Dark+主题的自定义
 			"editor.background": "#1e1e1e", //设定编辑器背景
 			"editor.foreground": "#D4D4D4", //设定编辑器前景
 			"editorLineNumber.foreground": "#6c8086", //设定行号颜色
@@ -172,7 +171,7 @@
 			"statusBar.foreground": "#cecece",
 			"statusBar.background": "#2e2e2e",
 		},
-		"[Default Light+]": { //Default Light+主题的自定义(Eclipse风格)
+		"[Light+]": { //Default Light+主题的自定义(Eclipse风格)
 			"editor.background": "#ffffff",
 			"editor.foreground": "#000000",
 			"activityBar.background": "#dddddd",
@@ -330,7 +329,7 @@
 		"terminal.ansiYellow": "#e5e510",
 	},
 	"editor.tokenColorCustomizations": {
-		"[Default Dark+]": { //Default Dark+主题的自定义
+		"[Dark+]": { //Default Dark+主题的自定义
 			"comments": "#5f6167", //设定注释颜色(备用#606060)(备用#6A9955)
 			"numbers": "#00e8ef", //设定数字颜色(备用#e5c07b)
 			"strings": "#809980", //设定字符串颜色(备用#669199)(备用#007f7f)(备用#809980)(备用#CE9178)(备用#01a252)
@@ -413,7 +412,7 @@
 				},
 			],
 		},
-		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
+		"[Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
 			"comments": "#afafaf", //设定注释颜色liang 备用#a8a8a8
 			//"comments": "#008000", //设定注释颜色qiao
 			"numbers": "#000000", //设定数字颜色
@@ -546,7 +545,7 @@
 	},
 	"editor.semanticTokenColorCustomizations": {
 		//基于语义的颜色自定义
-		"[Default Dark+]": { //Default Dark+主题的自定义
+		"[Dark+]": { //Default Dark+主题的自定义
 			"enabled": true,
 			"rules": {
 				// 定义方法为 (*|type)(.modifier)*(:language)?
@@ -677,7 +676,7 @@
 				},
 			}
 		},
-		"[Default Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
+		"[Light+][Visual Studio Light]": { //Default Light+主题的自定义(灰色背景和SakuraEditor风格)
 			"enabled": true,
 			"rules": {
 				"variable": {
@@ -732,7 +731,7 @@
 		},
 	},
 	//-----------------------------------------------"
-	//               终端设定                        "
+	//			   终端设定						"
 	//-----------------------------------------------"
 	"terminal.integrated.profiles.windows": {
 		"Git-Bash": {
@@ -783,6 +782,13 @@
 			"icon": "terminal-powershell",
 			"color": "terminal.ansiYellow"
 		},
+		"Nushell": {
+			"path": "C:/qiao/00_Tools/Shell/NuShell/nu.exe",
+			"overrideName": true,
+			"env": {},
+			"icon": "terminal-cmd",
+			"color": "terminal.ansiBlue"
+		},
 	},
 	"terminal.integrated.profiles.linux": {
 		"bash": {
@@ -808,7 +814,7 @@
 	//"terminal.integrated.defaultProfile.windows": "Win-PowerShell", //设定默认终端-PowerShell
 	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
 	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用
-	"terminal.integrated.fontSize": 16, //设置字体大小
+	"terminal.integrated.fontSize": 14, //设置字体大小
 	"terminal.integrated.fontWeight": "normal", //设置字体粗细，可选normal,bold,100到1000之间的数字，选择合适的就行
 	"terminal.integrated.fontLigatures": true, //设置启用连字
 	"terminal.integrated.cursorStyle": "block", // 光标样式
@@ -840,10 +846,10 @@
 	"terminal.integrated.suggest.enabled": true,
 	"terminal.integrated.suggest.runOnEnter": "exactMatchIgnoreExtension",
 	//-----------------------------------------------"
-	//               git设定                         "
+	//			   git设定						 "
 	//-----------------------------------------------"
-	"git.enabled": false, //是否启用git组件
-	"git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git可执行文件的路径和文件名
+	"git.enabled": true, //是否启用git组件
+	// "git.path": "D:\\Tools\\WorkTool\\Team\\Git\\cmd\\git.exe", //设定git可执行文件的路径和文件名
 	"git.mergeEditor": true, // 启用三向合并编辑器
 	"git.autofetch": true, // git是否自动fetch
 	"git.autorefresh": true, // git是否自动刷新
@@ -856,7 +862,7 @@
 	"git.openRepositoryInParentFolders": "always", //是否打开父文件夹的git仓库
 	"scm.experimental.showHistoryGraph": true, //打开可视化视图
 	//-----------------------------------------------"
-	//               emmet设定                       "
+	//			   emmet设定					   "
 	//-----------------------------------------------"
 	"emmet.showSuggestionsAsSnippets": true, //显式弹出语法展开提示
 	"emmet.triggerExpansionOnTab": true, //在按 Tab 时会展开 Emmet 缩写
@@ -870,7 +876,7 @@
 		"plaintext": "jade"
 	},
 	//-----------------------------------------------"
-	//               其他设定                        "
+	//			   其他设定						"
 	//-----------------------------------------------"
 	"debug.inlineValues": "on", //当处于调试过程中时，在编辑器中内联显示变量值。
 	"debug.allowBreakpointsEverywhere": true, //允许在任何文件中设置断点
@@ -887,12 +893,12 @@
 		"sound": "on"
 	},
 	"telemetry.telemetryLevel": "off", //禁用错误报告
-	"extensions.autoUpdate": false, //禁用扩展自动更新
+	"extensions.autoUpdate": "off", //禁用扩展自动更新
 	"extensions.ignoreRecommendations": true, //忽略插件建议
 	"workbench.enableExperiments": false, //禁用实验
 	"update.showReleaseNotes": false, // 更新后不显示发行说明
 	//-----------------------------------------------"
-	//               特别语言设定                    "
+	//			   特别语言设定					"
 	//-----------------------------------------------"
 	"[java][java-properties]": {
 		"editor.guides.indentation": true, //启用缩进参考线
@@ -958,14 +964,14 @@
 		"editor.stickyTabStops": true, // 在使用空格进行缩进时模拟制表符的选择行为。所选内容将始终使用制表符停止位
 	},
 	//-----------------------------------------------"
-	//               Remote-SSH设定                  "
+	//			   Remote-SSH设定				  "
 	//-----------------------------------------------"
 	"remote.SSH.localServerDownload": "always", //扩展将首先在客户端上安装 VS Code 服务器，然后通过 SCP 将其复制到服务器
 	"remote.SSH.remotePlatform": {
 		"WSL-SSH": "linux",
 	},
 	//-----------------------------------------------"
-	//           visible-whitespace插件设定          "
+	//		   visible-whitespace插件设定		  "
 	//-----------------------------------------------"
 	"visibleWhitespace.updateDelay": 0, //渲染延迟时间（以毫秒为单位）。值越小，着色速度越快，但会增加处理成本。
 	//亮色系颜色C0C0C0
@@ -991,14 +997,14 @@
 	"visibleWhitespace.eof.text": "[EOF]", //文件结束符（EOF）内容
 	"visibleWhitespace.eof.color": "#6464FF", //文件结束符（EOF）颜色
 	//-----------------------------------------------"
-	//           Trailing Spaces插件设定             "
+	//		   Trailing Spaces插件设定			 "
 	//-----------------------------------------------"
 	"trailing-spaces.deleteModifiedLinesOnly": true, //只删除修改的行
 	"trailing-spaces.trimOnSave": false, //保存时不自动删除行尾空格（只对修改的行生效）
 	// 匹配所有特殊空格
 	"trailing-spaces.regexp": "[\u0009\u000C\u0020\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000]+",
 	//-----------------------------------------------"
-	//               Neovim插件设定                  "
+	//			   Neovim插件设定				  "
 	//-----------------------------------------------"
 	"vscode-neovim.neovimExecutablePaths.win32": "D:\\Tools\\WorkTool\\Text\\nvim-win64\\bin\\nvim.exe",
 	"vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\Leo-G5000\\AppData\\Local\\nvim\\init.lua",
@@ -1006,7 +1012,7 @@
 		"asvetliakov.vscode-neovim": 1
 	},
 	//-----------------------------------------------"
-	//               ErrorLens插件设定               "
+	//			   ErrorLens插件设定			   "
 	//-----------------------------------------------"
 	//"errorLens.statusBarIconsEnabled": true,
 	"errorLens.messageBackgroundMode": "message",
@@ -1017,13 +1023,13 @@
 		"hint"
 	],
 	//-----------------------------------------------"
-	//            FindItFaster插件设定               "
+	//			FindItFaster插件设定			   "
 	//-----------------------------------------------"
 	"find-it-faster.advanced.disableStartupChecks": true, //禁用启动检查PATH
 	"find-it-faster.general.batTheme": "Monokai Extended Origin", // 设定预览高亮主题，更多：bat --list-themes
 	//"find-it-faster.general.showMaximizedTerminal": true, //最大化终端窗口
 	//-----------------------------------------------"
-	//              Highlight插件设定                "
+	//			  Highlight插件设定				"
 	//-----------------------------------------------"
 	"highlight.decorations": {
 		"rangeBehavior": 3
@@ -1046,7 +1052,7 @@
 		],
 	},
 	//-----------------------------------------------"
-	//              Whitespace++插件设定             "
+	//			  Whitespace++插件设定			 "
 	//-----------------------------------------------"
 	"whitespacepp.renderTAB": true, // 是否渲染 TAB (\t) 字符
 	"whitespacepp.renderWS": true, //是否渲染宽空格字符
@@ -1074,7 +1080,7 @@
 	"whitespacepp.renderingDelayMs": 0, //渲染延迟时间，以毫秒为单位。间隔短于延迟时间的绘图请求将被取消。
 	"whitespacepp.adjustWidthEOF": 110, //以 % 为单位调整 EOF 的背景宽度。textEOF通过乘以by的长度adjustWidthEOF再除以 100 来计算。
 	//-----------------------------------------------"
-	//               periscope插件设定               "
+	//			   periscope插件设定			   "
 	//-----------------------------------------------"
 	"periscope.rgGlobExcludes": [
 		"**/dist/**",
@@ -1082,7 +1088,7 @@
 		"**/node_modules/**",
 	],
 	//-----------------------------------------------"
-	//               vim插件设定                     "
+	//			   vim插件设定					 "
 	//-----------------------------------------------"
 	"vim.incsearch": true, //搜索时在未完全输入完毕要检索的文本时就开始检索
 	"vim.useSystemClipboard": true, //使用系统剪切板
@@ -1258,4 +1264,13 @@
 		} //打开建议
 	],
 	"hediet.vscode-drawio.resizeImages": null,
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"claudeCode.preferredLocation": "panel",
+	"workbench.colorTheme": "Dark+",
+	"claudeCodeUsage.language": "zh-CN",
+	"claudeCodeUsage.refreshInterval": 120,
+	"security.promptForLocalFileProtocolHandling": false,
+	"githubPullRequests.pullBranch": "never",
 }

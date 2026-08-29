@@ -99,3 +99,7 @@ tmux list-command　　列出所有命令
 # 更多
 * [TMUX CHEATSHEET (中文速查表)](https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/tmux.txt)
 
+# Rmux
+一个用 Rust 编写的跨平台终端复用器，兼容 90+ 个 tmux 命令，并支持 Linux、macOS、Windows 以及 Python/TypeScript SDK
+
+https://github.com/helvesec/rmux

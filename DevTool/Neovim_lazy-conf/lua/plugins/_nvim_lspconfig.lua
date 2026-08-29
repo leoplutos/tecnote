@@ -48,8 +48,8 @@ return {
         vim.wait(timeout_ms, function()
           return next(vim.lsp.get_clients({ name = "jdtls", bufnr = buf })) ~= nil
         end)
-        --local client = vim.lsp.get_clients({ name = "jdtls", bufnr = buf })[1]
-        local client = vim.lsp.get_active_clients()[1]
+        -- get_active_clients は 0.12 で削除されたため get_clients を使う
+        local client = vim.lsp.get_clients({ name = "jdtls", bufnr = buf })[1]
         assert(client, 'Must have a `jdtls` client to load class file or jdt uri')
 
         local content
@@ -76,7 +76,8 @@ return {
           --vim.notify(vim.inspect(params))
           --vim.notify(vim.inspect(handler))
           --vim.notify(vim.inspect(buf))
-          client.request("java/classFileContents", params, handler, buf)
+          -- client.request（ドット形式）は非推奨。コロン形式に変更
+          client:request("java/classFileContents", params, handler, buf)
         end
         -- Need to block. Otherwise logic could run that sets the cursor to a position
         -- that's still missing.
@@ -86,22 +87,10 @@ return {
       --设定浮动窗口样式
       -- none/single/double/rounded/solid/shadow
       local _border = "rounded"
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover, {
-          border = _border,
-          --title = "hover"
-        }
-      )
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, {
-          border = _border,
-        }
-      )
+      -- vim.lsp.with + handlers 上書きは非推奨。
+      -- hover / signatureHelp の border はキーマップ側で opts として渡す（下の LspAttach 参照）
       vim.diagnostic.config{
         float={border=_border}
-      }
-      require('lspconfig.ui.windows').default_options = {
-        border = _border
       }
 
       -- 当前缓冲区的快捷键绑定
@@ -136,14 +125,14 @@ return {
           vim.keymap.set('n', '<Space>gt', require('telescope.builtin').lsp_type_definitions, opts('Type Definitions'))
           vim.keymap.set('n', '<Space>gr', vim.lsp.buf.rename, opts('Rename'))
           vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts('Rename'))
-          vim.keymap.set('n', '<Space>h', vim.lsp.buf.hover, opts('Hover'))
+          vim.keymap.set('n', '<Space>h', function() vim.lsp.buf.hover({ border = _border }) end, opts('Hover'))
           --vim.keymap.set('n', '<C-UP>', vim.lsp.buf.references, opts)
           --vim.keymap.set('n', '<C-Down>', vim.lsp.buf.references, opts)
           vim.keymap.set('n', '<Space>fm', function()
             vim.lsp.buf.format { async = true }
           end, opts('Lsp Format'))
           vim.keymap.set('n', '<Space>gD', vim.lsp.buf.declaration, opts('Declaration'))
-          vim.keymap.set('n', '<Space>gh', vim.lsp.buf.signature_help, opts('Signature Help'))
+          vim.keymap.set('n', '<Space>gh', function() vim.lsp.buf.signature_help({ border = _border }) end, opts('Signature Help'))
           --vim.keymap.set('n', '<Space>ic', vim.lsp.buf.incoming_calls, opts)
           vim.keymap.set('n', '<Space>ic', require('telescope.builtin').lsp_incoming_calls, opts('Incoming Calls'))
           --vim.keymap.set('n', '<Space>oc', vim.lsp.buf.outgoing_calls, opts)
@@ -183,14 +172,9 @@ return {
         group = 'UserLspConfig',
       })
 
-      --Lsp相关的高亮设定
-      --:sign list 查看所有定义
-      vim.fn.sign_define("DiagnosticSignError", {text=vim.g.diagnosticsErrorIcon, texthl="DiagnosticSignError"})
-      vim.fn.sign_define("DiagnosticSignWarn", {text=vim.g.diagnosticsWarnIcon, texthl="DiagnosticSignWarn"})
-      vim.fn.sign_define("DiagnosticSignInfo", {text=vim.g.diagnosticsInfoIcon, texthl="DiagnosticSignInfo"})
-      vim.fn.sign_define("DiagnosticSignHint", {text=vim.g.diagnosticsHintrIcon, texthl="DiagnosticSignHint"})
-
       -- diagnostics设定
+      -- 診断アイコンは sign_define（0.11以降は無効）ではなく
+      -- diagnostic.config の signs.text で設定する
       vim.diagnostic.config({
           virtual_text = true,
           underline = true,
@@ -203,7 +187,14 @@ return {
             prefix = vim.g.virtualTextPrefixIcon,
             spacing = 4,
           },
-          signs = true,
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = vim.g.diagnosticsErrorIcon,
+              [vim.diagnostic.severity.WARN]  = vim.g.diagnosticsWarnIcon,
+              [vim.diagnostic.severity.INFO]  = vim.g.diagnosticsInfoIcon,
+              [vim.diagnostic.severity.HINT]  = vim.g.diagnosticsHintrIcon,
+            },
+          },
           update_in_insert = false,
       })
 
@@ -214,8 +205,9 @@ return {
       { "<Leader>ls", mode = { "n" }, '<cmd>LspInfo<cr>', noremap = true, silent = true, nowait = true, desc = "LSP: Info" },
       { "<Space>q", mode = { "n" }, vim.diagnostic.setloclist, noremap = true, silent = true, nowait = true, desc = "LSP: Toggle Diagnostics" },
       { "<Space>e", mode = { "n" }, vim.diagnostic.open_float, noremap = true, silent = true, nowait = true, desc = "LSP: Open Float Diagnostics" },
-      { "<C-j>", mode = { "n" }, vim.diagnostic.goto_next, noremap = true, silent = true, nowait = true, desc = "LSP: Next Diagnostics" },
-      { "<C-k>", mode = { "n" }, vim.diagnostic.goto_prev, noremap = true, silent = true, nowait = true, desc = "LSP: Prev Diagnostics" },
+      -- goto_next/goto_prev は非推奨。jump に変更
+      { "<C-j>", mode = { "n" }, function() vim.diagnostic.jump({ count = 1, float = true }) end, noremap = true, silent = true, nowait = true, desc = "LSP: Next Diagnostics" },
+      { "<C-k>", mode = { "n" }, function() vim.diagnostic.jump({ count = -1, float = true }) end, noremap = true, silent = true, nowait = true, desc = "LSP: Prev Diagnostics" },
     },
   }
 }

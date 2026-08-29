@@ -1,0 +1,16 @@
+[
+  {
+    "label": "git_pull_rebase",
+    "command": "git pull --rebase --autostash",
+    "shell": {
+      "program": "cmd.exe",
+    },
+    "env": {},
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success",
+    "show_summary": true,
+    "show_command": true,
+  },
+]

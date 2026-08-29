@@ -27,19 +27,14 @@ https://www.nerdfonts.com/cheat-sheet
 - Gvim
 - nvim-qt
 
-## 程序员字体
+## 编程字体
 
-#### 更纱黑体
+### 更纱黑体
 
 * [**更纱黑体NerdFonts(Sarasa Gothic Nerd Fonts)-github**](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts)  
-    下载地址为：  
-    [sarasa-mono-sc-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-sc-nerd-font.zip)  
-    [sarasa-mono-j-nerd-font.zip](https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v0.42.1-0/sarasa-mono-j-nerd-font.zip)  
-
 * [**更纱黑体(Sarasa Gothic)原版-github**](https://github.com/be5invis/Sarasa-Gothic)  
 * [**更纱黑体原版-清华源**](https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/) 
 * [**更纱黑体原版-码云**](https://gitee.com/mirrors/Sarasa-Gothic)  
-
 
 **MacOS安装**
 ```bash
@@ -52,7 +47,6 @@ brew install font-sarasa-mono-sc-nerd-font
 # 安装日文字体
 brew install font-sarasa-mono-j-nerd-font
 ```
-
 
 更纱黑体的命名由6部分组成，分别是
 1. 字体家族名称：sarasa。每个文件名都由它开头，代表这是更纱黑体家族的字体。
@@ -83,13 +77,17 @@ sarasa-mono-j-regular.ttf（日文开发）
 sarasa-mono-j-light.ttf（日文开发）
 ```
 
-#### Maple-font
+### Maple-font
 https://github.com/subframe7536/Maple-font
 
 下载 ``NF-CN`` 的 ``Hinted font`` 版本即可  
 如果用于高分辨率屏幕（例如 MacBook）则需要使用 ``Unhinted font`` 版本
 
-#### Inconsolata
+### Google Sans Code
+https://github.com/wylu1037/google-sans-code-nerd-font  
+https://github.com/yuru7/guguru-sans-code
+
+### Inconsolata
 
 Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一直是一款开源和可免费获取的字体。Inconsolata包含了 ``Inconsolata`` 和 ``Ligconsolata``。其中 ``Ligconsolata`` 是默认开启连字的。  
 
@@ -105,20 +103,23 @@ Inconsolata 是最为漂亮的等宽字体之一。从 2006 年开始它便一�
     [Ligconsolata-Bold.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Bold.ttf)  
     [Ligconsolata-Regular.ttf](https://github.com/googlefonts/Inconsolata/blob/v3.000/fonts/ttf/Ligconsolata-Regular.ttf)  
 
-#### Consolas
+### Consolas
 
 * [**Consolas连字版本-github**](https://github.com/somq/consolas-ligaturized)  
 * [**Consolas-NerdFont版本-github**](https://github.com/Znuff/consolas-powerline)  
 * [**Consolas-霞鹜文楷lxgw-github**](https://github.com/MichaelC001/Consolas-Nerd-LXGW-Wenkai-Mono)  
 
-#### Cascadia Code
+### Cascadia Code
  Cascadia 是微软出品的一款开源等宽字体，Windows Terminal 中的默认字体就是它。目前有四个变种，Mono 表示不连字，PL 表示 PowerLine。
 
 * [微软官网介绍](https://learn.microsoft.com/zh-cn/windows/terminal/cascadia-code)
 * [Cascadia Code](https://github.com/microsoft/cascadia-code)  
 
 
-#### 其他
+### 其他
+
+* [UDEV Gothic](https://github.com/yuru7/udev-gothic)  
+ UDEV Gothic 是一款面向程序员的日文字体，将易读的 BIZ UD Gothic 日文与 JetBrains Mono 英文字符融合，适合代码编辑器和终端使用
 
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)  
  JetBrains推出的一款专门为了开发人员设计的字体

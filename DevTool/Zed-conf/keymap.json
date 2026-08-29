@@ -5,6 +5,7 @@
       "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }], // 关闭当前
       "shift-space r": "workspace::Reload", // 重新载入Workspace
       "shift-space t": "task::Spawn", //运行任务
+      "shift-alt-r": "editor::RevealInFileManager", //在资源管理器中显示
     },
   },
   {
@@ -16,7 +17,15 @@
       "shift-space ctrl-l": "editor::ConvertToLowerCase", //转小写
       "shift-space ctrl-s": "editor::ConvertIndentationToSpaces", //将缩进转换为空格
       "shift-space ctrl-t": "editor::ConvertIndentationToTabs", //将缩进转换为制表符
-      "shift-alt-r": "editor::RevealInFileManager", //在资源管理器中显示
+      "ctrl-shift-up": "editor::GoToPreviousSymbol", //上一个符号
+      "ctrl-shift-down": "editor::GoToNextSymbol", //下一个符号
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "shift-j": ["editor::MoveDownByLines", { "lines": 10 }],
+      "shift-k": ["editor::MoveUpByLines", { "lines": 10 }],
     },
   },
   {
@@ -29,6 +38,41 @@
     "context": "(Editor && extension == md)",
     "bindings": {
       "shift-space m": "markdown::OpenPreviewToTheSide", //Markdown的编辑和预览垂直分割表示
+    },
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      // 提示菜单
+      // 向上
+      "ctrl-j": "editor::ContextMenuNext",
+      // 向下
+      "ctrl-k": "editor::ContextMenuPrevious",
+    },
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      // ... or other keybindings
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-1": ["pane::ActivateItem", 0],
+      "ctrl-2": ["pane::ActivateItem", 1],
+      "ctrl-3": ["pane::ActivateItem", 2],
+      "ctrl-4": ["pane::ActivateItem", 3],
+      "ctrl-5": ["pane::ActivateItem", 4],
+      "ctrl-6": ["pane::ActivateItem", 5],
+      "ctrl-7": ["pane::ActivateItem", 6],
+      "ctrl-8": ["pane::ActivateItem", 7],
+      "ctrl-9": ["pane::ActivateItem", 8],
+      "ctrl-0": "pane::ActivateLastItem",
     },
   },
 ]

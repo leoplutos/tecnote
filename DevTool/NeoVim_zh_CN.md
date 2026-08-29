@@ -24,6 +24,11 @@ Neovim支持LSP，支持Tree-sitter，支持Lua
 - nvim.exe  
   nvim的核心程序，需要在终端下 ``CLI`` 命令行运行打开
 
+或者使用 winget
+```
+winget install Neovim.Neovim
+```
+
 ## 配置文件
 
 ### Windows平台
@@ -53,10 +58,29 @@ Neovim 新加了一个健康检查的命令
 可以查看当前的运行情况
 
 ## 笔者的设定文件
-笔者已经将设定全部迁移到了 [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+笔者有2套设定文件
+
+- LazyVim ： 基于 lazy.nvim 构建的 Neovim 配置框架，提供开箱即用的 IDE 开发环境
+- lazy.nvim ： Neovim 的现代化插件管理器，负责插件的安装、更新、依赖和懒加载
+
+### 1. 直接使用 LazyVim
+懒得自己折腾了，笔者现在长期用此方案
+
+安装  
+https://www.lazyvim.org/installation
+
+然后将 [LazyVim_conf](LazyVim_conf) 目录内的内容替换到
+```
+%LOCALAPPDATA%\nvim
+```
+
+### 2. 基于 lazy.nvim 的自定义
+
+基于 [lazy.nvim](https://github.com/folke/lazy.nvim) ，可以在 v0.12.x 运行，笔者已经不维护了
 
 - [Neovim_lazy-conf](Neovim_lazy-conf)
-- ~~[Neovim-conf](Neovim-conf)~~
+- ~~[Neovim-conf](Neovim-conf)~~（这个更老的版本，也已经不维护了）
 
 ```
 ~/.config/nvim

@@ -1,0 +1,58 @@
+# MCP
+
+## 简介
+ADE（Agent Development Environment，智能体开发环境）是专门用于开发、调试、测试和部署 AI Agent 的开发环境。
+
+可以把它理解成：
+
+传统 IDE（如 VS Code）是开发程序的环境 → ADE 是开发 AI Agent 的环境。
+
+一般会提供：
+
+- 🤖 Agent 开发：定义 Agent 的角色、Prompt、Tools、Workflow
+- 🔧 Tool 管理：接入 MCP、API、数据库、浏览器等工具
+- 🧠 上下文管理：Memory、Context、Knowledge Base
+- 🐛 调试：查看 Agent 每一步的思考、Tool Call、输入输出
+- 📊 Tracing / Observability：追踪一次 Agent 执行全过程
+- 🧪 Evaluation：批量测试 Agent 的准确率、稳定性
+- 🚀 Deployment：将 Agent 部署到生产环境
+
+## 一些流行的ADE
+
+### Delta（还在开发中）
+https://zed.dev/blog/introducing-delta  
+https://zed.dev/deltadb  
+
+### Orca
+
+一款面向 AI Agent 的开源开发工具，帮助开发者通过自然语言让 AI 自主完成代码编写、调试、测试和项目操作。
+
+https://github.com/stablyai/orca/blob/main/docs/readme/README.zh-CN.md
+
+https://www.onorca.dev/
+
+### Warp
+一款现代化 AI 终端，将命令行、AI 助手和开发工作流结合，让开发者更高效地执行命令、编写代码和排查问题。
+
+https://www.warp.dev/
+
+https://github.com/warpdotdev/warp
+
+### cmux
+cmux：一款基于终端的 AI Agent 工作环境，将多个终端、分屏、浏览器和 AI Agent 集成在一个窗口中，方便同时管理和监控多个 Agent。
+
+https://github.com/manaflow-ai/cmux/blob/main/README.zh-CN.md
+
+https://cmux.com/zh-CN
+
+### Intelligent Terminal
+微软推出的 Windows Terminal 实验性分支，将 AI Agent 原生集成到终端中，可直接利用 Shell 上下文辅助执行、诊断和修复命令
+
+https://github.com/microsoft/intelligent-terminal
+
+### Herdr
+一个专为 AI Coding Agent 设计的终端运行时和多路复用器，可让 Claude Code、Codex 等 Agent 在后台持续运行，并支持会话持久化、远程重连和多 Agent 管理
+
+https://github.com/herdrdev/herdr
+
+

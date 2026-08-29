@@ -198,3 +198,13 @@ cd D:\WorkSpace\React\ReactTS
 npm --registry https://npmreg.proxy.ustclug.org/ install
 npm run dev
 ```
+
+## 其他
+
+### React Flow
+
+https://reactflow.dev/
+
+React Flow 可以理解为一套专门用来在前端构建节点编辑器（node-based UI）和可视化流程图的工具。比如工作流编辑器、电气设备图、AI Agent 编排、DAG、数据管道、低代码编辑器、状态机、知识图谱等，都很适合用它。  
+（XYFlow是项目/团队以及整个生态的名称。React Flow：XYFlow 面向 React 的节点编辑器库，npm 包现在是 `@xyflow/react`）
+

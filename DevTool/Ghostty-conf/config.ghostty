@@ -16,19 +16,30 @@ right-click-action = paste
 # 复制内容时去除多余空格
 clipboard-trim-trailing-spaces = true
 
+# ============================================================
+# 配色：尽量与 WezTerm 保持一致
+# ============================================================
 # 背景色
 background = 1D1F21
 # 前景色
 foreground = DADADA
 # 选择内容背景色
-selection-background = 224F76
+selection-background = 20374c
 # 选择内容前景色
 selection-foreground = DADADA
 # 光标颜色
 cursor-color = 00FFFF
+# 光标下文字颜色（WezTerm: cursor_fg = #1e1e1e）
+cursor-text = 1e1e1e
 #cursor-style = block
 # 分割线颜色
 split-divider-color = 235b76
+
+# 非当前焦点 split 的暗化效果。
+# WezTerm 使用 inactive_pane_hsb: saturation=0.9, brightness=0.2。
+# Ghostty 没有 HSB 等价项，下面通过 unfocused split opacity/fill 做近似
+unfocused-split-opacity = 0.2
+unfocused-split-fill = 1D1F21
 
 # ANSI colors - normal colors - black
 palette = 0=#000000
@@ -63,7 +74,42 @@ palette = 14=#29B8DB
 # ANSI colors - bright colors - brightWhite
 palette = 15=#E5E5E5
 
-# 自定义快捷键绑定
-# keybind = ctrl+z=close_surface
-# keybind = ctrl+d=new_split:right
+# ============================================================
+# 快捷键
+# ============================================================
+# ALT+V: 左右分屏（在当前 pane 右侧创建 split）
+keybind = alt+v=new_split:right
+# ALT+H: 上下分屏（在当前 pane 下方创建 split）
+keybind = alt+h=new_split:down
+
+# ALT+方向键: 直接移动 split 焦点
+keybind = alt+left=goto_split:left
+keybind = alt+right=goto_split:right
+keybind = alt+up=goto_split:up
+keybind = alt+down=goto_split:down
+
+# CTRL+数字: 切换到对应 Tab
+keybind = ctrl+1=goto_tab:1
+keybind = ctrl+2=goto_tab:2
+keybind = ctrl+3=goto_tab:3
+keybind = ctrl+4=goto_tab:4
+keybind = ctrl+5=goto_tab:5
+keybind = ctrl+6=goto_tab:6
+keybind = ctrl+7=goto_tab:7
+keybind = ctrl+8=goto_tab:8
+keybind = ctrl+9=goto_tab:9
+
+# CTRL+W: 关闭当前 Tab
+keybind = ctrl+w=close_tab
+
+# ALT+E: 重命名当前 Tab
+keybind = alt+e=prompt_tab_title
+
+# ALT+F: 搜索（对应 WezTerm Search）
+keybind = alt+f=start_search
+
+# ALT+K: 在当前 shell 输入 clear 并执行。
+# 不使用 Ghostty clear_screen，因为 clear_screen 会同时清空 scrollback，
+# 而 WezTerm 原配置发送的是 shell 命令 `clear`，保留这种语义更接近
+keybind = alt+k=text:clear\r
 

@@ -1,4 +1,7 @@
 {
+  "collaboration_panel": {
+    "dock": "left",
+  },
   "autosave": "off", //自动保存
   "format_on_save": "off", //保存时格式化
   "remove_trailing_whitespace_on_save": true,
@@ -19,6 +22,7 @@
     "metrics": false,
   },
   "icon_theme": {
+    //图标主题
     "mode": "dark",
     "light": "Zed (Default)",
     "dark": "Zed (Default)",
@@ -27,28 +31,39 @@
   "base_keymap": "VSCode",
   "ui_font_family": ".SystemUIFont", //UI字体
   "ui_font_fallbacks": [".ZedSans"], //UI字体回退
-  "ui_font_size": 15,
-  "buffer_font_family": "更紗等幅ゴシック J Nerd Font", //文本字体
-  //"buffer_font_family": "Consolas 7NF", //文本字体
+  "ui_font_size": 15, //UI尺寸
+  // "buffer_font_family": "更紗等幅ゴシック J Nerd Font", //编辑文本字体
+  "buffer_font_family": "等距更纱黑体 SC Nerd Font", //编辑文本字体
+  //"buffer_font_family": "Consolas 7NF", //编辑文本字体
   "buffer_font_fallbacks": [
-    //文本字体回退
+    //编辑文本字体回退
     "Consolas",
     "Cascadia Code",
-    "NSimSun",
-    "ＭＳ ゴシック",
+    "宋体",
+    "MS Gothic",
     ".ZedSans",
     ".SystemUIFont",
     "Courier New",
   ],
-  "buffer_font_size": 16, // 字体大小 默认15
-  "buffer_font_weight": 400, // 字体粗细 [100-900]
-  // 文本高度 "comfortable" (1.618), "standard" (1.3) or custom: `{ "custom": 2 }`
-  "buffer_line_height": "standard",
+  "buffer_font_size": 14, // 编辑文本大小 默认15
+  "buffer_font_weight": 400, // 编辑文本粗细 [100-900]
+  // 编辑文本高度 "comfortable" (1.618), "standard" (1.3) or custom: `{ "custom": 2 }`
+  "buffer_line_height": "standard", //行高
+  "agent_ui_font_size": 15, // 控制代理面板中代理回复的字体大小。如果未指定，则使用界面字体大小。
+  "agent_buffer_font_size": 12, // 控制代理面板消息编辑器、用户消息以及任何其他代码片段的字体大小。
   "theme": {
+    // 主题
     "mode": "dark",
     "light": "One Light",
     "dark": "One Dark",
   },
+  "markdown_preview": {
+    // "limit_content_width": true
+  },
+  "markdown_preview_font_size": 15,
+  "markdown_preview_code_font_family": "更紗等幅ゴシック J Nerd Font",
+  "markdown_preview_font_family": ".SystemUIFont",
+  // "markdown_preview_theme": "One Dark",
   "hide_mouse": "on_typing", //输入时隐藏鼠标
   "indent_guides": {
     //缩进参考线
@@ -66,7 +81,6 @@
     },
   },
   "title_bar": {
-    "show_branch_icon": true,
     "show_branch_name": true,
     "show_project_items": true,
     "show_onboarding_banner": true,
@@ -93,6 +107,7 @@
     "line_endings_button": true,
   },
   "project_panel": {
+    "dock": "left",
     "button": true,
     "entry_spacing": "standard",
     "file_icons": true,
@@ -109,21 +124,26 @@
     "inline_blame": {
       "enabled": true, // 谁把代码改崩了？
       "show_commit_summary": true,
+      "location": "status_bar",
     },
   },
   "git_panel": {
+    "dock": "left",
     "tree_view": true, // 树形显示
   },
   // Terminal Font Settings
   "terminal": {
-    "font_family": "更紗等幅ゴシック J Nerd Font",
-    "font_size": 15,
+    //终端设定
+    // "font_family": "更紗等幅ゴシック J Nerd Font",
+    "font_family": "等距更纱黑体 SC Nerd Font",
+    "font_size": 14,
     // Terminal line height: comfortable (1.618), standard(1.3) or `{ "custom": 2 }`
     "line_height": "standard",
     "copy_on_select": true,
     "cursor_shape": "bar",
     "blinking": "on",
     "shell": {
+      //"program": "C:\\qiao\\00_Tools\\Shell\\NuShell\\nu.exe",
       "program": "C:\\Windows\\System32\\cmd.exe",
       //"program": "C:\\Windows\\System32\\cmd.exe /K C:\\qiao\\00_Tools\\Cmd\\cmdautorun.cmd",
       //"program": "C:\\Liang\\Tools\\WorkTool\\Cmd\\zed_wrapper.cmd",
@@ -157,16 +177,22 @@
     },
   },
   "agent": {
+    "dock": "right",
     "use_modifier_to_send": true, // 防误触
     "single_file_review": true,
   },
   "agent_servers": {
     "claude-acp": {
+      "default_config_options": {
+        "mode": "auto",
+      },
       "type": "registry",
     },
   },
+  "cli_default_open_behavior": "new_window", // 始终在新窗口中打开文件夹
   "semantic_tokens": "combined", // 将 LSP 语义标记与树状图高亮显示结合使用。树状图高亮显示提供基础高亮显示，语义标记则叠加额外信息
   "theme_overrides": {
+    //主题覆盖
     "One Dark": {
       "text": "#D4D4D4",
       "text.muted": "#D4D4D4",
@@ -250,9 +276,19 @@
           "color": "#64afef", //标题
           "font_weight": 600,
         },
+        "emphasis": {
+          //"font_style": "normal",
+        },
         "emphasis.strong": {
+          //"font_style": "normal",
           "color": "#9CDCFE", //强调
           "font_weight": 600,
+        },
+        "link_text": {
+          "font_style": "normal",
+        },
+        "text.uri": {
+          "font_style": "normal",
         },
         "text.literal": {
           "color": "#a1c181ff", //文本字面量
@@ -333,7 +369,8 @@
           "color": "#4d8a94", //参数变量
         },
         "property": {
-          "color": "#4ec9b0", //属性
+          //"color": "#4ec9b0", //属性
+          "color": "#9CDCFE", //属性
         },
         "label": {
           "color": "#9CDCFE", //标签
@@ -362,6 +399,212 @@
       },
     },
     "One Light": {
+      "text": "#000000",
+      "text.muted": "#000000",
+      "text.placeholder": "#000000",
+      "background": "#ffffff",
+      "editor.foreground": "#000000", //设定编辑器前景
+      "editor.background": "#ffffff", //设定编辑器背景
+      "elevated_surface.background": "#f1f1f1", //浮层 UI（hover / tooltip / completion 文档）背景
+      "editor.active_line.background": "#e8f2fe", //当前行背景颜色
+      "editor.line_number": "#787878", //设定行号颜色
+      "editor.active_line_number": "#787878", //设定当前行的行号颜色
+      "editor.gutter.background": "#ffffff", //设定行号背景色
+      // "editor.subheader.background": "#0000ff", //subheader
+      // "search.match_background": "#ffff0077", //查找内容
+      "panel.background": "#f3f3f3", //左侧panel背景色
+      "toolbar.background": "#ffffff", // 面包屑颜色
+      "status_bar.background": "#718c9b", //下面状态栏
+      "title_bar.background": "#dddddd", //顶部标题栏
+      "tab.active_background": "#ffffff", //当前TAB背景
+      "tab.inactive_background": "#ececec", //其他TAB背景
+      "tab_bar.background": "#e7e7e7", //TAB背景
+      "hint": "#7274a7ff", //hint
+      "hint.background": "#e2e2faff",
+      "info": "#5c78e2ff", //info
+      "info.background": "#e2e2faff",
+      "warning": "#a48819ff", //warning
+      "warning.background": "#faf2e6ff",
+      "error": "#CD3131", //error
+      "error.background": "#fbdfd9ff",
+      "version_control.added": "#48985d", //添加内容颜色
+      "version_control.modified": "#2090d3", //修改内容颜色
+      "version_control.deleted": "#e51400", //删除内容颜色
+      "terminal.foreground": "#1E1E1E", //终端前景色
+      "terminal.background": "#fcf4dc", //终端背景色
+      "terminal.ansi.red": "#FF0000",
+      "terminal.ansi.blue": "#4040FF",
+      "terminal.ansi.cyan": "#00C0C0",
+      "terminal.ansi.black": "#1E1E1E",
+      "terminal.ansi.green": "#4E9A06",
+      "terminal.ansi.white": "#E7E7E7",
+      "terminal.ansi.yellow": "#C4A000",
+      "terminal.ansi.magenta": "#75507B",
+      "terminal.ansi.bright_red": "#EF2929",
+      "terminal.ansi.bright_blue": "#8080FF",
+      "terminal.ansi.bright_cyan": "#00DCDC",
+      "terminal.ansi.bright_black": "#243C4F",
+      "terminal.ansi.bright_green": "#16C60C",
+      "terminal.ansi.bright_white": "#FFFFFF",
+      "terminal.ansi.bright_yellow": "#FCE94F",
+      "terminal.ansi.bright_magenta": "#FF1CFF",
+      "players": [
+        {
+          "cursor": "#1d1f21ff",
+          "background": "#ebebe365",
+          "selection": "#7f94da65",
+        },
+      ],
+      "syntax": {
+        "comment": {
+          "color": "#3F7F5F", //注释
+        },
+        "comment.doc": {
+          "color": "#3F5FBF", //注释
+        },
+        "string": {
+          "color": "#2A00FF", //普通字符串  #2F5E5E
+        },
+        "string.escape": {
+          "color": "#2A00FF", //字符串转义字符
+        },
+        "string.regex": {
+          "color": "#2A00FF", //字符串正则表达式
+        },
+        "string.special": {
+          "color": "#2A00FF", //特殊字符串
+        },
+        "string.special.symbol": {
+          "color": "#2A00FF", //符号字符串
+        },
+        "title": {
+          "color": "#800000", //标题
+          "font_weight": 600,
+        },
+        "emphasis": {
+          "font_style": "italic",
+        },
+        "emphasis.strong": {
+          "color": "#000080", //强调
+          "font_weight": 600,
+        },
+        "link_text": {
+          "font_style": "normal",
+        },
+        "text.uri": {
+          "font_style": "normal",
+        },
+        "text.literal": {
+          "color": "#800000", //文本字面量
+        },
+        "number": {
+          "color": "#000000", //数字 #0087ff
+        },
+        "boolean": {
+          "color": "#7F0055", //true flase
+        },
+        "constant": {
+          "color": "#0000C0", //常量
+          "font_style": "italic",
+          "font_weight": 600,
+        },
+        "keyword": {
+          "color": "#7F0055", //关键字
+          "font_weight": 600,
+        },
+        "operator": {
+          "color": "#000000", //操作符
+        },
+        "preproc": {
+          "color": "#7F0055", //预处理指令
+        },
+        "function": {
+          "color": "#000000", //函数  #006400
+        },
+        "function.method": {
+          "color": "#000000",
+        },
+        "method": {
+          "color": "#000000",
+        },
+        "macro": {
+          "color": "#000000", //宏
+        },
+        "constructor": {
+          "color": "#000000", //构造函数
+        },
+        "attribute": {
+          "color": "#646464", //属性
+        },
+        "type": {
+          "color": "#000000", //类型  #0000ff
+        },
+        "type.parameter": {
+          "color": "#000000", //参数
+        },
+        "parameter": {
+          "color": "#000000",
+        },
+        "typeParameter": {
+          "color": "#000000",
+        },
+        "struct": {
+          "color": "#000000", //结构体
+        },
+        "class": {
+          "color": "#000000", //类
+        },
+        "enum": {
+          "color": "#000000", //枚举  #318495
+        },
+        "enumMember": {
+          "color": "#0000C0", //枚举变体
+        },
+        "interface": {
+          "color": "#000000", //接口
+        },
+        "namespace": {
+          "color": "#000000", //命名空间
+        },
+        "variable": {
+          "color": "#6A3E3E", //变量
+        },
+        "variable.special": {
+          "color": "#7F0055", //特殊变量
+        },
+        "variable.parameter": {
+          "color": "#000000", //参数变量
+        },
+        "property": {
+          "color": "#0000C0", //属性
+        },
+        "label": {
+          "color": "#000000", //标签
+        },
+        "punctuation": {
+          "color": "#000000", //普通标点符号
+        },
+        "punctuation.bracket": {
+          "color": "#000000", //括号类符号
+        },
+        "punctuation.delimiter": {
+          "color": "#000000", //分隔符
+        },
+        "punctuation.list_marker": {
+          "color": "#0451A5", //Markdown列表标记
+        },
+        "punctuation.markup": {
+          "color": "#0451A5", //Markup 标记符号
+        },
+        "punctuation.special": {
+          "color": "#000000", //特殊符号
+        },
+        "tag": {
+          "color": "#3F7F7F", //tag
+        },
+      },
+    },
+    "One Light - Classis": {
       "text": "#000000",
       "text.muted": "#000000",
       "text.placeholder": "#000000",
@@ -531,200 +774,6 @@
         },
         "property": {
           "color": "#0000C0", //属性
-        },
-        "label": {
-          "color": "#5c78e2ff", //标签
-        },
-        "punctuation": {
-          "color": "#242529ff", //普通标点符号
-        },
-        "punctuation.bracket": {
-          "color": "#4d4f52ff", //括号类符号
-        },
-        "punctuation.delimiter": {
-          "color": "#4d4f52ff", //分隔符
-        },
-        "punctuation.list_marker": {
-          "color": "#0000ff", //Markdown列表标记
-        },
-        "punctuation.markup": {
-          "color": "#713933", //Markup 标记符号
-        },
-        "punctuation.special": {
-          "color": "#036a07", //特殊符号
-        },
-        "tag": {
-          "color": "#0000ff", //tag
-        },
-      },
-    },
-    "One Light - Classis": {
-      "text": "#000000",
-      "text.muted": "#000000",
-      "text.placeholder": "#000000",
-      "background": "#ffffff",
-      "editor.foreground": "#000000", //设定编辑器前景
-      "editor.background": "#ffffff", //设定编辑器背景
-      "elevated_surface.background": "#f1f1f1", //浮层 UI（hover / tooltip / completion 文档）背景
-      "editor.active_line.background": "#e8f2fe", //当前行背景颜色
-      "editor.line_number": "#93939d", //设定行号颜色
-      "editor.active_line_number": "#0000ff", //设定当前行的行号颜色
-      "editor.gutter.background": "#ffffff", //设定行号背景色
-      // "editor.subheader.background": "#0000ff", //subheader
-      // "search.match_background": "#ffff0077", //查找内容
-      "panel.background": "#f3f3f3", //左侧panel背景色
-      "toolbar.background": "#ffffff", // 面包屑颜色
-      "status_bar.background": "#a1bccb", //下面状态栏
-      "title_bar.background": "#dddddd", //顶部标题栏
-      "tab.active_background": "#ffffff", //当前TAB背景
-      "tab.inactive_background": "#ececec", //其他TAB背景
-      "tab_bar.background": "#e7e7e7", //TAB背景
-      "hint": "#7274a7ff", //hint
-      "hint.background": "#e2e2faff",
-      "info": "#5c78e2ff", //info
-      "info.background": "#e2e2faff",
-      "warning": "#a48819ff", //warning
-      "warning.background": "#faf2e6ff",
-      "error": "#d36151ff", //error
-      "error.background": "#fbdfd9ff",
-      "version_control.added": "#48985d", //添加内容颜色
-      "version_control.modified": "#2090d3", //修改内容颜色
-      "version_control.deleted": "#e51400", //删除内容颜色
-      "terminal.foreground": "#1E1E1E", //终端前景色
-      "terminal.background": "#fcf4dc", //终端背景色
-      "terminal.ansi.red": "#FF0000",
-      "terminal.ansi.blue": "#4040FF",
-      "terminal.ansi.cyan": "#00C0C0",
-      "terminal.ansi.black": "#1E1E1E",
-      "terminal.ansi.green": "#4E9A06",
-      "terminal.ansi.white": "#E7E7E7",
-      "terminal.ansi.yellow": "#C4A000",
-      "terminal.ansi.magenta": "#75507B",
-      "terminal.ansi.bright_red": "#EF2929",
-      "terminal.ansi.bright_blue": "#8080FF",
-      "terminal.ansi.bright_cyan": "#00DCDC",
-      "terminal.ansi.bright_black": "#243C4F",
-      "terminal.ansi.bright_green": "#16C60C",
-      "terminal.ansi.bright_white": "#FFFFFF",
-      "terminal.ansi.bright_yellow": "#FCE94F",
-      "terminal.ansi.bright_magenta": "#FF1CFF",
-      "players": [
-        {
-          "cursor": "#1d1f21ff",
-          "background": "#ebebe365",
-          "selection": "7f94da65",
-        },
-      ],
-      "syntax": {
-        "comment": {
-          "color": "#65997f", //注释
-        },
-        "comment.doc": {
-          "color": "#65997f", //注释
-        },
-        "string": {
-          "color": "#036a07", //普通字符串  #2F5E5E
-        },
-        "string.escape": {
-          "color": "#585cf6", //字符串转义字符
-        },
-        "string.regex": {
-          "color": "#036a07", //字符串正则表达式
-        },
-        "string.special": {
-          "color": "#811f3f", //特殊字符串
-        },
-        "string.special.symbol": {
-          "color": "#811f3f", //符号字符串
-        },
-        "title": {
-          "color": "#993333", //标题
-          "font_weight": 600,
-        },
-        "emphasis.strong": {
-          "color": "#333399", //强调
-          "font_weight": 600,
-        },
-        "text.literal": {
-          "color": "#649f57ff", //文本字面量
-        },
-        "number": {
-          "color": "#0000cd", //数字 #0087ff
-        },
-        "boolean": {
-          "color": "#318495", //true flase
-        },
-        "constant": {
-          "color": "#0000ff", //常量
-        },
-        "keyword": {
-          "color": "#0000ff", //关键字
-        },
-        "operator": {
-          "color": "#333333", //操作符
-        },
-        "preproc": {
-          "color": "#0000ff", //预处理指令
-        },
-        "function": {
-          "color": "#0000a2", //函数  #006400
-        },
-        "function.method": {
-          "color": "#0000a2",
-        },
-        "method": {
-          "color": "#0000a2",
-        },
-        "macro": {
-          "color": "#0930aa", //宏
-        },
-        "constructor": {
-          "color": "#0000a2", //构造函数
-        },
-        "attribute": {
-          "color": "#3333cd", //属性
-        },
-        "type": {
-          "color": "#318495", //类型  #0000ff
-        },
-        "type.parameter": {
-          "color": "#408080", //参数
-        },
-        "parameter": {
-          "color": "#408080",
-        },
-        "typeParameter": {
-          "color": "#408080",
-        },
-        "struct": {
-          "color": "#318495", //结构体
-        },
-        "class": {
-          "color": "#318495", //类
-        },
-        "enum": {
-          "color": "#3333cd", //枚举  #318495
-        },
-        "enumMember": {
-          "color": "#3333cd", //枚举变体
-        },
-        "interface": {
-          "color": "#318495", //接口
-        },
-        "namespace": {
-          "color": "#be00be", //命名空间
-        },
-        "variable": {
-          "color": "#000000", //变量
-        },
-        "variable.special": {
-          "color": "#809fcb", //特殊变量
-        },
-        "variable.parameter": {
-          "color": "#408080", //参数变量
-        },
-        "property": {
-          "color": "#3333cd", //属性
         },
         "label": {
           "color": "#5c78e2ff", //标签
