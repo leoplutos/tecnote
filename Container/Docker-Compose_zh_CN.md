@@ -14,6 +14,12 @@ Docker-Compose 项目由 Python 编写，调用 Docker 服务提供的API来对�
 
 通过 ``Docker-Compose`` ，不需要使用shell脚本来启动容器，而使用 ``YAML`` 文件来配置应用程序需要的所有服务，然后使用一个命令，根据 YAML 的文件配置创建并启动所有服务。
 
+## 便利工具 ComposeLab
+
+采用可视化拖拽的方式帮你制作 `docker-compose.yml`
+
+https://composelab.app/app
+
 ### Docker-compose模板文件简介
 
 Compose允许用户通过一个``docker-compose.yml``模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
@@ -47,7 +53,7 @@ docker compose version
 
 - [docker-compose.yml](./mycompose1/docker-compose.yml)
 
-工程根目录再 ``~/workspace``
+工程根目录 ``~/workspace``
 
 ```
 📂 ~/workspace

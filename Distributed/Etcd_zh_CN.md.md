@@ -12,11 +12,11 @@ Etcd 默认端口
 
 ## 下载安装
  - [官网](https://etcd.io/)
- - [Github](https://bgithub.xyz/etcd-io/etcd)
+ - [Github](https://github.com/etcd-io/etcd)
 
 ### Windows
 下载地址  
-https://bgithub.xyz/etcd-io/etcd/releases
+https://github.com/etcd-io/etcd/releases
 
 ### Docker
 
@@ -216,8 +216,8 @@ https://github.com/kragniz/python-etcd3
 ```bash
 # 0.12.0的库代码存在问题，作者的github上面的最新版本没有问题，所以添加git为依赖
 # 详见此issues: https://github.com/kragniz/python-etcd3/issues/2149
-# poetry add git+https://github.com/kragniz/python-etcd3
-poetry add git+https://bgithub.xyz/kragniz/python-etcd3
+# poetry add git+https://bgithub.xyz/kragniz/python-etcd3
+poetry add git+https://github.com/kragniz/python-etcd3
 ```
 
 示例代码  

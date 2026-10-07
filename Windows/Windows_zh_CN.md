@@ -174,6 +174,11 @@ OBS（Open Broadcaster Software）是一款支持多平台（Windows、macOS、L
  - [官网](https://obsproject.com/)
  - [github](https://github.com/obsproject/obs-studio)
 
+### mouse-control.autohotkey
+一个基于 AutoHotkey 的键盘鼠标控制工具，用 WASD 或 Vim 的 HJKL 操作鼠标、点击和滚动，可作为 Windows 自带 `鼠标键（Mouse Keys）` 的增强替代方案
+
+https://github.com/4strid/mouse-control.autohotkey
+
 ### 截图和录屏
 - ``Win键 + Shift + s`` → 截图
 - ``Win键 + Shift + r`` → 录屏
@@ -197,7 +202,9 @@ OBS（Open Broadcaster Software）是一款支持多平台（Windows、macOS、L
  - [官网](https://sanwhole.com/Products/VoleOffice)
  - [github](https://sanwhole.com/PubData/Installer/VoleOffice.exe)
 
-## Office Web Viewer 介绍
+## Office Web Viewer 介绍（公网解决方案）
+
+如果你的项目文件公网可以访问，那么选择它即可
 
 Office Web Viewer 是微软提供的一项免费的在线 Office 文档预览服务，可以直接在网页浏览器中显示 Excel、Word、PowerPoint 等 Office 文档。
 通过该服务，即使用户的电脑或移动设备上没有安装 Microsoft Office，也可以直接在线查看文档内容，因此非常适合在网站或 Web 系统中实现 Office 文件的在线预览功能。
@@ -216,6 +223,32 @@ https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwebbibouroku.com
 https://view.officeapps.live.com/op/view.aspx?src=Blob文件的URL
 
 因此，在 Web 系统中集成 Office Web Viewer 时，整体流程可以概括为：获取 Office 文件的公开访问 URL → 对 URL 进行编码 → 拼接到 Office Web Viewer 的 src 参数中 → 在浏览器中打开生成的 Viewer URL。这样就可以在不要求用户安装 Office 软件的情况下，实现 Office 文档的在线浏览和预览。
+
+
+## Collabora CODE 介绍（私网解决方案）
+
+如果你的项目文件在私网，那么选择它即可
+
+一个免费、开源、可通过 Docker 自托管的网页版 Office 文档查看与编辑服务，支持 Word、Excel、PowerPoint 等格式
+
+https://github.com/CollaboraOnline/online.mirror
+
+https://hub.docker.com/r/collabora/code
+
+自部署方式
+```bash
+# 拉取镜像
+docker pull collabora/code:24.04.13.2.1
+# 启动容器
+docker run -d \
+  --name collabora \
+  -p 9980:9980 \
+  -e "extra_params=--o:ssl.enable=false" \
+  --restart unless-stopped \
+  collabora/code:24.04.13.2.1
+```
+启动后访问  
+http://localhost:9980
 
 ## iPhone
  - [Apple 设备](https://apps.microsoft.com/detail/9np83lwlpz9k?hl=zh-CN&gl=JP)
@@ -258,13 +291,33 @@ PowerToys 是微软为 `Windows 10 / 11` 提供的一套免费、开源的系统
 
 https://learn.microsoft.com/zh-cn/windows/powertoys/
 
-笔者最常用的这里面的屏幕画图工具 `ZoomIt`
+
+### PowerToys - ZoomIt
+
+ZoomIt 是一个屏幕画图工具
 
 https://learn.microsoft.com/zh-cn/sysinternals/downloads/zoomit
 
-下载后运行 `ZoomIt64.exe` 按下 · 即可开始
+下载后运行 `ZoomIt64.exe` 即可开始，笔者一般的设定如下
 
-修改快捷键建议：除了draw的快捷键全部取消，draw的快捷键修改为 `ctrl + alt + d`
+- Draw（屏幕画图）：快捷键 `Ctrl + Alt + D`
+- Record（屏幕录制）：快捷键 `Ctrl + Alt + R`
+- 其他全部设定为： `None`
+
+### voidImageViewer
+一款专注速度与轻量化的 Windows 图片查看器，支持 BMP、GIF、PNG、JPG、TIF、WEBP 及动画 GIF/WEBP，并可与 Everything 联动快速浏览图片。
+
+https://github.com/voidtools/voidImageViewer
+
+### TizuMark
+基于 Rust + Tauri 打造的轻量开源 Markdown 编辑器，主打类似 Typora 的所见即所得、实时预览、大纲、KaTeX、Mermaid 和多格式导出，目前支持 Windows，macOS/Linux 仍在规划中。
+
+https://github.com/tizuio/TizuMark-Markdown-Editor
+
+### WindowsDeveloperConfig
+微软官方提供的 Windows 开发环境自动化配置工具，可一键安装常用开发工具、配置 Windows/WSL，并按需部署 Java、Python、.NET、Node.js、SQL 等开发环境
+
+https://github.com/microsoft/WindowsDeveloperConfig
 
 ### 开发环境构建 mise
 

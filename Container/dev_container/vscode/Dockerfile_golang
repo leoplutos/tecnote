@@ -12,7 +12,8 @@ ARG ARG_USER_PWD="123456"
 ARG ARG_GROUP_ID=1000
 ARG ARG_GROUP_NAME="golang_vscode_grp"
 # Github下载地址
-ARG ARG_GITHUB_URL="https://bgithub.xyz"
+# ARG ARG_GITHUB_URL="https://bgithub.xyz"
+ARG ARG_GITHUB_URL="https://github.com"
 ARG ARG_CONTAINER_NAME="golang_vscode"
 
 # 在nvim中判断用
@@ -21,7 +22,8 @@ ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
 ENV DOCKER_CONTAINER_USER=$ARG_USER_NAME
 ENV DOCKER_CONTAINER_GROUP=$ARG_GROUP_NAME
 # Github下载地址
-ENV GITHUB_URL="https://bgithub.xyz"
+# ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_URL="https://github.com"
 ENV GITHUB_CONFIG_URL=$ARG_GITHUB_URL
 RUN echo "Dev User/Group ID is : ${ARG_USER_ID}/${ARG_GROUP_ID}"
 RUN echo "Dev User/Group NAME is : ${ARG_USER_NAME}/${ARG_GROUP_NAME}"

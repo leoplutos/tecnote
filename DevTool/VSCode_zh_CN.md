@@ -12,38 +12,36 @@ https://code.visualstudio.com/#alt-downloads
 
 - [**简体中文**](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 - [日文(可选)](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
-- [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
-- [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
+- [**项目仪表板**](https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard)&nbsp;&nbsp;&nbsp;&nbsp;注：可以将经常访问的文件夹、文件和SSH访问，固定到仪表板上以快速访问它们
+- [**VSCode Neovim**](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)&nbsp;&nbsp;&nbsp;&nbsp;注：最好用的Vim绑定插件
 - [**显示行尾空格**](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
-- [**Visible Whitespace**](https://marketplace.visualstudio.com/items?itemName=yoshi389111.visible-whitespace)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：可以渲染 TAB符，全角空格，回车，文件结束符（EOF） 的显示内容和颜色
-- [**Error Lens**](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
-- [**Markdown Preview Mermaid Support**](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode的Markdown中显示Mermaid
+- [**Visible Whitespace**](https://marketplace.visualstudio.com/items?itemName=yoshi389111.visible-whitespace)&nbsp;&nbsp;&nbsp;&nbsp;注：可以渲染 TAB符，全角空格，回车，文件结束符（EOF） 的显示内容和颜色
+- [**Error Lens**](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)&nbsp;&nbsp;&nbsp;&nbsp;注：把代码检查（错误、警告、语法问题）进行突出显示
+- ~~[Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode的Markdown中显示Mermaid~~ 已默认支持
 - [Markdown Table](https://marketplace.visualstudio.com/items?itemName=TakumiI.markdowntable)
-- [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
-- [**VS Code Settings for Mac Windows and Linux**](https://marketplace.visualstudio.com/items?itemName=franmastromarino.vs-code-settings-os)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理多个平台的工程配置文件
-- [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：管理PR神器
-- [mergev](https://marketplace.visualstudio.com/items?itemName=riconext.mergev-vscode)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在 VS Code 里用三栏界面解决 Git 冲突
-- [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
-- [**Diff Folders**](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
-- [**Draw.io Integration**](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode中画图的插件
-- [Periscope](https://marketplace.visualstudio.com/items?itemName=JoshMu.periscope)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``
-- ~~[FindItFaster](https://marketplace.visualstudio.com/items?itemName=TomRijndorp.find-it-faster)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``~~
+- [**Remote - SSH**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)&nbsp;&nbsp;&nbsp;&nbsp;注：远程开发神器
+- [**VS Code Settings for Mac Windows and Linux**](https://marketplace.visualstudio.com/items?itemName=franmastromarino.vs-code-settings-os)&nbsp;&nbsp;&nbsp;&nbsp;注：管理多个平台的工程配置文件
+- [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)&nbsp;&nbsp;&nbsp;&nbsp;注：管理PR神器
+- [**mergev**](https://marketplace.visualstudio.com/items?itemName=riconext.mergev-vscode)&nbsp;&nbsp;&nbsp;&nbsp;注：在 VS Code 里用三栏界面解决 Git 冲突
+- [**Git Graph**](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)&nbsp;&nbsp;&nbsp;&nbsp;注：查看Git仓库的插件
+- [Diff Folders](https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff)&nbsp;&nbsp;&nbsp;&nbsp;注：文件夹比较
+- [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)&nbsp;&nbsp;&nbsp;&nbsp;注：在VSCode中画图的插件
+- [Periscope](https://marketplace.visualstudio.com/items?itemName=JoshMu.periscope)&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``
+- ~~[FindItFaster](https://marketplace.visualstudio.com/items?itemName=TomRijndorp.find-it-faster)&nbsp;&nbsp;&nbsp;&nbsp;注：VSCode下的``telescope``~~
 - ~~[VSCodeVim(不推荐)](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)~~
-- [Sync-Rsync](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
-- [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
+- [Sync-Rsync](https://marketplace.visualstudio.com/items?itemName=vscode-ext.sync-rsync)&nbsp;&nbsp;&nbsp;&nbsp;注：本地和服务器代码同步插件（支持双向）
+- [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)  &nbsp;&nbsp;&nbsp;&nbsp;注：自动补全插件
 
 ## AI插件
 - [Claude Code for VS Code](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
-- [Claude Code Usage](https://marketplace.visualstudio.com/items?itemName=growthjack.claude-code-usage)
 - [Codex – OpenAI’s coding agent](https://marketplace.visualstudio.com/items?itemName=openai.chatgpt)
-- [Gemini CLI Companion](https://marketplace.visualstudio.com/items?itemName=google.gemini-cli-vscode-ide-companion)&nbsp;注：配合Gemini CLI使用
-- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
-- [豆包 MarsCode - 编程助手](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)
-- [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Cline 是一个开源的插件，能够与 DeepSeek 等 AI 模型无缝集成，提供智能代码编辑功能
+- [Gemini CLI Companion](https://marketplace.visualstudio.com/items?itemName=google.gemini-cli-vscode-ide-companion)&nbsp;&nbsp;&nbsp;&nbsp;注：配合Gemini CLI使用
+- [deepseek-v4-for-copilot](https://marketplace.visualstudio.com/items?itemName=Vizards.deepseek-v4-for-copilot)&nbsp;&nbsp;&nbsp;&nbsp;注：在 Copilot Chat 模型选择器中直接使用 DeepSeek V4
+- [TraeCode](https://marketplace.visualstudio.com/items?itemName=MarsCode.marscode-extension)
 
 ## 配置文件插件
 
-- [**Protobuf3**](https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3)
+- [Protobuf3](https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3)
 - [**Even Better TOML**](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml)
 - [Java Properties](https://marketplace.visualstudio.com/items?itemName=Spitfire1900.java-properties-2)&nbsp;&nbsp;properties文件支持
 - [**XML Tools**](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml)
@@ -60,7 +58,8 @@ https://code.visualstudio.com/#alt-downloads
 ## Python
 
 - [**Python**](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：Python插件安装好后会依赖安装Pylance和Jupyter，只要保留Python和Pylance，卸载Jupyter相关即可
-- [**Black Formatter**](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)
+- [**Ruff**](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff)
+- ~~[Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)~~
 
 ## Rust
 
@@ -249,6 +248,10 @@ https://vscode.download.prss.microsoft.com/dbazure/download/stable/af28b32d7e553
 - Ctrl + g ： 跳转到特定行
 - Ctrl + Alt ： 查看内嵌提示
 
+## 建两个空白临时文件进行 Diff
+按下 `F1` → `File: Compare New Untitled Text Files`
+
+
 ## 插件无法下载的解决办法
 笔者在使用 ``CodeLLDB`` 插件的时候，遇到了无法更新的问题，解决方式如下  
 ```bash
@@ -256,44 +259,6 @@ curl --create-dirs -o D:\Download\codelldb-x86_64-windows.vsix https://download.
 ```
 打开VSCode → 扩展 → 右上角的 ``...`` → 从VSIX安装...
 
-## 搜索神器插件-FindItFaster
-笔者一直很喜欢 NeoVim下的 ``telescope``，逛github的时候无意间发现了这款插件``FindItFaster``，虽然中文支持有一些问题，但是已经做的很不错了
-- [Github地址](https://github.com/tomrijndorp/vscode-finditfaster)
-
-使用前准备：  
-1. 将VSCode的默认内置终端设定为 ``PowerShell``  
-2. 将4个工具添加到PATH（或者配置到``terminal.integrated.env.windows``）：[fzf](https://github.com/junegunn/fzf) ， [rg](https://github.com/BurntSushi/ripgrep) ， [bat](https://github.com/sharkdp/bat) ，  ``sed``  
-NOTE：安装Windows下的git后就有``sed``
-3. 设定 ``PowerShell安全策略``
-```
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-4. 删除VSCode默认的 ``Ctrl+j`` 快捷键绑定
-```
-workbench.action.togglePanel(查看面板可见性)
-```
-
-使用方式：  
-- Ctrl + Shift + j ： 查找文件
-- Ctrl + Shift + u ： 模糊查找内容
-- 查找时 Ctrl + j ： 下一个
-- 查找时 Ctrl + k ： 上一个
-
-
-## 常用命令
-命令的运行方式为按下 F1 或者 Ctrl + Shift + P
-- 将缩进全部转换为制表符(TAB)
-```
->Convert indentation to Tabs
-```
-- 将缩进全部转换为空格
-```
->Convert indentation to Spaces
-```
-- 打开/关闭辅助侧边栏
-```
->workbench.action.toggleAuxiliaryBar
-```
 
 ## VSCode的设定层次关系
 系统默认设置（不可修改） → ``用户设置`` → 工作区设置 → ``文件夹设置``  
@@ -354,7 +319,7 @@ workbench.action.togglePanel(查看面板可见性)
 #### 用户设置（全局）
 - [settings.json](VSCode-conf/user/settings.json)
 - [keybindings.json](VSCode-conf/user/keybindings.json)
-- [tasks.json](VSCode-conf/user/tasks.json) &nbsp;&nbsp;&nbsp;&nbsp;这里定义了使用vbs自动ssh登录服务器的任务，需要将[user@1.2.3.4.vbs](VSCode-conf/vbs/user@1.2.3.4.vbs)放到 ``%AppData%\Code\User\vbs`` 路径下
+- [tasks.json](VSCode-conf/user/tasks.json)
 - [c.json](VSCode-conf/snippets/c.json)&nbsp;&nbsp;&nbsp;&nbsp;c代码片段配置文件（snippets）
 - [python.json](VSCode-conf/snippets/python.json)&nbsp;&nbsp;&nbsp;&nbsp;python代码片段配置文件（snippets）
 - [java.json](VSCode-conf/snippets/java.json)&nbsp;&nbsp;&nbsp;&nbsp;java代码片段配置文件（snippets）
@@ -377,26 +342,6 @@ Neovim 插件使用的话只要:
 所需插件（2个）：Python，Pylance  
 可选插件（1个）：Black Formatter  
 [示例工程](../Python/PoetryTest/)
-
-#### 关于Python的格式化
-使用 [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter) 插件  
-安装插件后在工程设定的settings.json内如下设定：
-```json
-"editor.defaultFormatter": "ms-python.black-formatter", //使用Black Formatter插件
-"python.formatting.provider": "none",
-```
-如果使用的是嵌入版（绿色版）Python，需要修改插件脚本 ``lsp_server.py`` (修改前注意备份)
-```
-C:\Users\user\.vscode\extensions\ms-python.black-formatter-2023.2.0\bundled\tool\lsp_server.py
-```
-加入内容
-```
-update_sys_path(
-    os.fspath(pathlib.Path(__file__).parent),
-    os.getenv("LS_IMPORT_STRATEGY", "useBundled"),
-)
-```
-按下F1，输入 ```black```，选择 ``black formatter：重启服务器`` 重启后即可使用
 
 ## 文件夹设置（Rust工程）
 所需插件（2个）：rust-analyzer, CodeLLDB  
@@ -483,16 +428,6 @@ VSCode支持下面的预定义变量:
 
 更多：  
 https://zhuanlan.zhihu.com/p/92175757?ivk_sa=1024320u&utm_id=0
-
-## Python工程的格式化代码
-
-Python插件是不支持格式代码的，这里笔者使用black格式代码。具体设置看设定文件即可。  
-除了设定还需要pip安装black。  
-使用清华源安装black
-```bash
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple black
-```
-安装好后会在python的Scripts内发现black.exe，配置到设定文件即可。
 
 ## 配置代码片段
 代码片段配置所在路径

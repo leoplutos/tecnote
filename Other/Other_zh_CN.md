@@ -274,11 +274,23 @@ web-frameworks
 ## StackOverFlow的搜索
 https://yandex.com/
 
+## 解压缩 - Nanazip
+NanaZip 是基于 7-Zip 衍生开发、面向现代 Windows 10/11 的开源压缩解压工具，提供更现代的界面和系统集成。
+
+https://github.com/M2Team/Nanazip  
+https://nanazip.org/  
+
 ## 开源网络"瑞士军刀"
 https://github.com/gchq/CyberChef
 
+## Readest（推荐）
+Readest 是一款开源、跨平台的现代电子书阅读器，基于 Tauri + Next.js，支持 EPUB、PDF、MOBI 等格式，并提供笔记、高亮、翻译、TTS、同步等功能。
+
+https://github.com/readest/readest
+
 ## PDF查看器
 - [SumatraPDF reader](https://github.com/sumatrapdfreader/sumatrapdf)
+- [SumatraPDF 分支 - 支持中文 EPUB/MOBI 格式文件](https://github.com/dengxibo/sumatrapdf-plus)
 - [Sioyek](https://github.com/ahrm/sioyek)
 
 ## PDF转换成Markdown和JSON格式
@@ -313,6 +325,16 @@ https://github.com/mbrlabs/Lorien
 ## 画图
 https://www.drawio.com/  
 https://excalidraw.com/  
+
+## Linux 服务器 Web 管理面板 - 1Panel
+一款开源的 Linux 服务器 Web 管理面板，集成 Docker/容器、网站、数据库、文件、应用商店、监控和备份等功能，可理解为现代化的 Webmin / 宝塔类服务器管理工具。
+
+https://github.com/1Panel-dev/1Panel
+
+## 开源建站工具 - Halo
+一款强大易用的开源建站工具，从个人博客、知识库，到企业官网、在线商城，Halo 都能助您轻松实现，一站式满足您的多样化建站需求
+
+https://github.com/halo-dev/halo
 
 ## 其他软件
 

@@ -1,6 +1,3 @@
-::参数说明
-::参数1：是否启用NerdFont图标，如果传递则启用，不传递则不启用。传递值例子：cmdautorun.cmd 1
-
 @echo off
 
 ::设置命令提示符
@@ -16,8 +13,16 @@ if %WIN_VERSION% geq 10 (
 )
 
 :SetPrompt
-::取得参数1
+::取得参数1: Nerd Font 开关
 set "USE_NERD_FONT_FLG=%~1"
+
+::取得参数2: Prompt 主题 (dark / light)
+::未指定时默认 dark，保持原来的显示效果
+set "PROMPT_THEME=%~2"
+if not defined PROMPT_THEME set "PROMPT_THEME=dark"
+if /i not "%PROMPT_THEME%"=="light" if /i not "%PROMPT_THEME%"=="dark" set "PROMPT_THEME=dark"
+::set "PROMPT_THEME=light"
+
 if defined USE_NERD_FONT_FLG (
   ::如果参数1存在-使用NerdFont
   chcp 65001
@@ -41,7 +46,7 @@ for /f "delims=" %%i in ('echo ') do (set STR_USER_ICON=%%i)
 ::for /f "delims=" %%i in ('echo 󰩠') do (set STR_IP_ICON=%%i)
 for /f "delims=" %%i in ('echo ') do (set STR_IP_ICON=%%i)
 for /f "delims=" %%i in ('echo ') do (set STR_DIRECTORY_ICON=%%i)
-for /f "tokens=3" %%a in ('"netsh interface ip show address "WLAN" | findstr "IP Address""') do (set STR_IP=%%a)
+for /f "tokens=3" %%a in ('"netsh interface ip show address "Wi-Fi" | findstr "IP Address""') do (set STR_IP=%%a)
 set PS_BLACK=$E[30m
 set PS_RED=$E[31m
 set PS_GREEN=$E[32m
@@ -62,11 +67,30 @@ set PS_SHELL=$E[90;43m
 set PS_HOST=$E[37;44m
 set PS_IPADDR=$E[90;106m
 set PS_PATH=$E[33;100m
-::暗色用
+:: =============================
+:: Prompt Theme
+:: =============================
+if /i "%PROMPT_THEME%"=="light" goto :SetPromptNerdFontLight
+goto :SetPromptNerdFontDark
+
+:SetPromptNerdFontLight
+::亮色: 与 Nushell config.nu 使用相同 RGB 配色
+set PS_LINE=$E[38;2;122;79;163m
+set PS_LIGHT_TIME_BG=$E[38;2;220;230;235m
+set PS_LIGHT_TIME=$E[38;2;23;107;135;48;2;220;230;235m
+set PS_LIGHT_SHELL=$E[38;2;61;58;40;48;2;243;223;141m
+set PS_LIGHT_HOST=$E[38;2;81;69;154;48;2;216;213;242m
+set PS_LIGHT_IPADDR=$E[38;2;23;107;104;48;2;191;232;227m
+set PS_LIGHT_PATH=$E[38;2;52;73;94;48;2;216;226;234m
+set PS_LIGHT_PATH_BG=$E[38;2;216;226;234m
+set PROMPT=%PS_LINE%%STR_LINE1_PRE%%PS_LIGHT_TIME_BG%%STR_LEFT_SEMICIRCLE%%PS_LIGHT_TIME%%STR_TIME_ICON%$s$t$s%PS_LIGHT_SHELL%$s%STR_WIN_ICON%$scmd$s%PS_LIGHT_HOST%$s%STR_USER_ICON%$s%USERNAME%@%ComputerName%$s%PS_LIGHT_IPADDR%$s%STR_IP_ICON%$s%STR_IP%$s%PS_LIGHT_PATH%$s%STR_DIRECTORY_ICON%$s$s$P$s%PS_CLEAR%%PS_LIGHT_PATH_BG%%STR_LEFT_ARROW%%PS_CLEAR%$_%PS_LINE%%STR_LINE2_PRE%%PS_BLUE%#%PS_CLEAR%$s
+goto :SetPromptNerdFontCleanup
+
+:SetPromptNerdFontDark
+::暗色: 保持原来的 CMD Prompt 配色
 set PROMPT=%PS_MAGENTA%%STR_LINE1_PRE%%PS_BRIGHTBLACK%%STR_LEFT_SEMICIRCLE%%PS_TIME%%STR_TIME_ICON%$s$t$s%PS_SHELL%$s%STR_WIN_ICON%$scmd$s%PS_HOST%$s%STR_USER_ICON%$s%USERNAME%@%ComputerName%$s%PS_IPADDR%$s%STR_IP_ICON%$s%STR_IP%$s%PS_PATH%$s%STR_DIRECTORY_ICON%$s$s$P$s%PS_CLEAR%%PS_BRIGHTBLACK%%STR_LEFT_ARROW%%PS_CLEAR%$_%PS_MAGENTA%%STR_LINE2_PRE%%PS_BLUE%#%PS_CLEAR%$s
-::set PROMPT=%PS_MAGENTA%%STR_LINE1_PRE%%PS_YELLOW%%STR_WIN_ICON%$s[cmd]%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P$_%PS_MAGENTA%%STR_LINE2_PRE%%PS_BLUE%#%PS_CLEAR%$s
-::亮色用(qiao)
-::set PROMPT=%PS_BLUE%%STR_WIN_ICON%$s[cmd]%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P$_%PS_BLUE%#%PS_CLEAR%$s
+
+:SetPromptNerdFontCleanup
 set STR_LINE1_PRE=
 set STR_LINE2_PRE=
 set STR_LEFT_SEMICIRCLE=
@@ -98,7 +122,16 @@ set PS_SHELL=
 set PS_HOST=
 set PS_IPADDR=
 set PS_PATH=
-echo Prompt Setting Complited
+set PS_LINE=
+set PS_LIGHT_TIME_BG=
+set PS_LIGHT_TIME=
+set PS_LIGHT_SHELL=
+set PS_LIGHT_HOST=
+set PS_LIGHT_IPADDR=
+set PS_LIGHT_PATH=
+set PS_LIGHT_PATH_BG=
+echo Prompt Theme: %PROMPT_THEME%
+echo Prompt Setting Completed
 ::进入用户文件夹
 cd /d %USERPROFILE%
 goto GoOn
@@ -114,10 +147,13 @@ set PS_BLUE=$E[34m
 set PS_MAGENTA=$E[35m
 set PS_CYAN=$E[36m
 set PS_CLEAR=$E[0m
-::暗色用
-set PROMPT=%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P$_%PS_BLUE%#%PS_CLEAR%$s
-::亮色用(qiao)
-::set PROMPT=%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_BLACK%$P$_%PS_BLUE%#%PS_CLEAR%$s
+if /i "%PROMPT_THEME%"=="light" (
+    ::无 Nerd Font 时也使用 Nushell 亮色主题中的 RGB 主色
+    set PROMPT=$E[38;2;23;107;104m[%STR_IP%]$E[38;2;81;69;154m%USERNAME%@%ComputerName%%PS_CLEAR%:$E[38;2;52;73;94m$P$_%PS_BLUE%#%PS_CLEAR%$s
+) else (
+    ::暗色: 保持原来的配色
+    set PROMPT=%PS_GREEN%[%STR_IP%]%PS_MAGENTA%%USERNAME%@%ComputerName%%PS_CLEAR%:%PS_YELLOW%$P$_%PS_BLUE%#%PS_CLEAR%$s
+)
 set STR_IP=
 set PS_BLACK=
 set PS_RED=
@@ -151,16 +187,16 @@ set GOROOT=D:\Tools\WorkTool\Go\go1.22.5.windows-amd64
 set GOPATH=D:\Tools\WorkTool\Go\go_global
 set PATH=%PATH%;%GOROOT%\bin;%GOPATH%\bin
 ::Java
-set JAVA_HOME=D:\Tools\WorkTool\Java\jdk-21.0.3+9
+set JAVA_HOME=C:\Liang\Tools\WorkTool\Java\jdk21.0.8_9_amazon-corretto
 set PATH=%PATH%;%JAVA_HOME%\bin
 ::set ANT_HOME=D:\Tools\WorkTool\Java\apache-ant-1.10.13
 ::set PATH=%PATH%;%ANT_HOME%\bin
-set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.7
-set PATH=%PATH%;%MAVEN_HOME%\bin
-set GRADLE_HOME=D:\Tools\WorkTool\Java\gradle-8.5
-set PATH=%PATH%;%GRADLE_HOME%\bin
+::set MAVEN_HOME=D:\Tools\WorkTool\Java\apache-maven-3.9.7
+::set PATH=%PATH%;%MAVEN_HOME%\bin
+::set GRADLE_HOME=D:\Tools\WorkTool\Java\gradle-8.5
+::set PATH=%PATH%;%GRADLE_HOME%\bin
 ::Python
-set PYTHON_HOME=D:\Tools\WorkTool\Python\Python312
+set PYTHON_HOME=C:\Liang\Tools\WorkTool\Python\Python313
 set PATH=%PATH%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts
 ::Zig
 set ZIG_HOME=D:\Tools\WorkTool\Zig\zig-windows-x86_64-0.13.0
@@ -169,7 +205,7 @@ set PATH=%PATH%;%ZIG_HOME%
 set KOTLIN_HOME=D:\Tools\WorkTool\Kotlin\kotlin-compiler-1.9.10
 set PATH=%PATH%;%KOTLIN_HOME%\bin
 ::NodeJs
-set NODEJS_HOME=D:\Tools\WorkTool\Web\node-v20.15.1-win-x64
+set NODEJS_HOME=C:\Liang\Tools\WorkTool\Web\node
 set PATH=%PATH%;%NODEJS_HOME%
 set NODEJS_GLOBAL_HOME=%NODEJS_HOME%\node_global
 set PATH=%PATH%;%NODEJS_GLOBAL_HOME%
@@ -180,21 +216,21 @@ set PATH=%PATH%;%BUNJS_HOME%
 set DENO_HOME=D:\Tools\WorkTool\Web\deno
 set PATH=%PATH%;%DENO_HOME%
 ::Git
-set GIT_HOME=D:\Tools\WorkTool\Team\Git\cmd
-set PATH=%PATH%;%GIT_HOME%
-set GITUI_HOME=D:\Tools\WorkTool\Team\gitui-win
-set PATH=%PATH%;%GITUI_HOME%
-set LAZYGIT_HOME=D:\Tools\WorkTool\Team\Lazygit
-set PATH=%PATH%;%LAZYGIT_HOME%
+::set GIT_HOME=C:\Liang\Tools\WorkTool\Team\Git\cmd
+::set PATH=%PATH%;%GIT_HOME%
+::set GITUI_HOME=D:\Tools\WorkTool\Team\gitui-win
+::set PATH=%PATH%;%GITUI_HOME%
+::set LAZYGIT_HOME=D:\Tools\WorkTool\Team\Lazygit
+::set PATH=%PATH%;%LAZYGIT_HOME%
 ::Search
 set RIPGREP_HOME=D:\Tools\WorkTool\Search\ripgrep\bin
 set PATH=%PATH%;%RIPGREP_HOME%
-set FZF_HOME=D:\Tools\WorkTool\Search\fzf\bin
-set PATH=%PATH%;%FZF_HOME%
-set BAT_HOME=D:\Tools\WorkTool\Search\bat\bin
-set PATH=%PATH%;%BAT_HOME%
+::set FZF_HOME=D:\Tools\WorkTool\Search\fzf\bin
+::set PATH=%PATH%;%FZF_HOME%
+::set BAT_HOME=D:\Tools\WorkTool\Search\bat\bin
+::set PATH=%PATH%;%BAT_HOME%
 ::VSCode
-set VSCODE_HOME=D:\Tools\WorkTool\Text\VSCode-win32-x64
+set VSCODE_HOME=C:\Liang\Tools\WorkTool\Text\VSCode-win32-x64
 set PATH=%PATH%;%VSCODE_HOME%
 ::NeoVim
 ::set VIM_HOME=D:\Tools\WorkTool\Team\Git\usr\bin
@@ -206,31 +242,31 @@ set PATH=%PATH%;%NVIM_HOME%
 ::BuildTool
 set BUF_HOME=D:\Tools\WorkTool\Build\buf
 set PATH=%PATH%;%BUF_HOME%
-set NINJA_HOME=D:\Tools\WorkTool\Build\ninja-win
-set PATH=%PATH%;%NINJA_HOME%
+::set NINJA_HOME=D:\Tools\WorkTool\Build\ninja-win
+::set PATH=%PATH%;%NINJA_HOME%
 ::gRPC
 set PROTOC_HOME=D:\Tools\WorkTool\Build\protoc-win64
 set PATH=%PATH%;%PROTOC_HOME%\bin
 ::Editor
-set HELIX_HOME=D:\Tools\WorkTool\Text\helix
-set PATH=%PATH%;%HELIX_HOME%
+::set HELIX_HOME=D:\Tools\WorkTool\Text\helix
+::set PATH=%PATH%;%HELIX_HOME%
 ::WezTerm
 set WEZTERM_HOME=D:\Tools\WorkTool\Linux\WezTerm
 set PATH=%PATH%;%WEZTERM_HOME%
 ::Sqlite
-set SQLITE3_HOME=D:\Tools\WorkTool\DB\Sqlite3
-set PATH=%PATH%;%SQLITE3_HOME%
+::set SQLITE3_HOME=D:\Tools\WorkTool\DB\Sqlite3
+::set PATH=%PATH%;%SQLITE3_HOME%
 ::Gobang
-set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
-set PATH=%PATH%;%GOBANG_HOME%
+::set GOBANG_HOME=D:\Tools\WorkTool\DB\Gobang
+::set PATH=%PATH%;%GOBANG_HOME%
 ::Redis
-set REDIS_HOME=D:\Tools\WorkTool\DB\Redis-x64-5.0.14.1
-set PATH=%PATH%;%REDIS_HOME%
+::set REDIS_HOME=D:\Tools\WorkTool\DB\Redis-x64-5.0.14.1
+::set PATH=%PATH%;%REDIS_HOME%
 ::Etcd
-set ETCDCTL_API=3
-set ENDPOINTS=localhost:2379
-set ETCD_HOME=D:\Tools\WorkTool\DB\etcd-v3.5.15-windows-amd64
-set PATH=%PATH%;%ETCD_HOME%
+::set ETCDCTL_API=3
+::set ENDPOINTS=localhost:2379
+::set ETCD_HOME=D:\Tools\WorkTool\DB\etcd-v3.5.15-windows-amd64
+::set PATH=%PATH%;%ETCD_HOME%
 ::7-Zip
 set ZIP7_HOME=C:\Program Files\7-Zip
 set PATH=%PATH%;%ZIP7_HOME%
@@ -239,7 +275,7 @@ set PATH=%PATH%;%ZIP7_HOME%
 ::set PATH=%PATH%;%DOCKER_HOME%
 ::set DOCKER_HOST=tcp://localhost:3101
 ::echo 环境变量载入完成
-echo Environment Variable Setting Complited
+echo Environment Variable Setting Completed
 
 ::设置常用路径
 set personal_workspace=D:\WorkSpace
@@ -252,6 +288,9 @@ doskey llt=dir /OD $*
 doskey lla=dir /a $*
 doskey env=set $*
 doskey which=where $*
+:: Docker-compatible command using Windows Subsystem for Linux Containers (wslc)
+:: All arguments are passed directly to wslc.
+doskey docker=wslc $*
 doskey cat=type $*
 doskey rm=del $*
 doskey mv=move $*
@@ -285,6 +324,6 @@ doskey nvimf=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1"
 doskey nvimc=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_lsp_type = 3"
 doskey nvimv=nvim $* --cmd "let g:g_use_lsp = 1 | let g:g_use_dap = 1 | let g:g_front_dev_type = 1"
 ::echo 别名载入完成，键入alias查看
-echo Alias Setting Complited
+echo Alias Setting Completed
 
 @echo on

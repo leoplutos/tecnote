@@ -1,49 +1,72 @@
 ## WSL
 
-WSL 的全称是 ``Windows Subsystem for Linux``，也就是 Windows 的 Linux 子系统，它是由微软与Canonical公司合作开发的，从 ``Win10`` 开始支持  
-现在最新版本为 ``WSL2``，相比于 WSL1 ，``WSL2`` 使用的是全新的体系结构，能够通过子系统方式运行真正的 Linux 内核。它能够无需重新打包或翻译，直接运行 ELF64 Linux 二进制文件。
+WSL 的全称是 Windows Subsystem for Linux，即 Windows 的 Linux 子系统。
+
+WSL 可以让 Windows 直接运行 Linux 环境，而不需要单独安装虚拟机或双系统。
+
+目前 WSL 主要有两种运行架构：
+
+- WSL 1：使用兼容层将 Linux 系统调用转换为 Windows 系统调用
+- WSL 2：使用真正的 Linux Kernel，通过轻量级虚拟化运行 Linux 环境
+
+目前新安装一般推荐使用 `WSL 2`
 
 ## 安装
 
 ### 前提条件
-安装 WSL2 需要满足以下条件：
-1. Windows 11 或 Windows 10  版本1903，内部版本18362.1049 或更高版本
-2. 64 位版本的 Windows
-3. 启用了虚拟化功能  
 
-可以使用如下命令确认版本
+对于现代 Windows，微软推荐直接使用：
+```bash
+# 将 WSL2 设置为默认版本
+wsl --set-default-version 2
+# 该命令会自动完成 WSL 所需组件的安装，并默认安装 Ubuntu
+wsl --install
+# 该命令会自动完成 WSL 所需组件的安装，并安装 Debian
+wsl --install -d Debian
+```
+当前官方安装命令适用于：
+
+- Windows 10 版本 2004（Build 19041）及以上
+- Windows 11
+
+可以使用以下命令查看 Windows 版本：
+对于现代 Windows，微软推荐直接使用：
+
 ```bash
 winver
 ```
 
+也可以在 PowerShell 中查看系统信息：
+
+```bash
+systeminfo
+```
+
+较旧的 Windows 版本仍然可以使用 WSL 的手动安装方式，但这已经不是普通用户推荐的安装方式。
+
 如果 Windows10 的版本过低，可以使用 [Windows 10 更新助手](https://www.microsoft.com/zh-cn/software-download/windows10) 来更新到最新版本
 
-### 启用 WSL
-需要先启用“适用于 Linux 的 Windows 子系统”可选功能，然后才能在 Windows 上安装 Linux 分发。  
-以管理员身份打开 PowerShell（“开始”菜单 >“PowerShell” >单击右键 >“以管理员身份运行”），然后输入以下命令：
+### 启用 WSL（不需要）
+~~需要先启用“适用于 Linux 的 Windows 子系统”可选功能，然后才能在 Windows 上安装 Linux 分发。~~
+~~以管理员身份打开 PowerShell（“开始”菜单 >“PowerShell” >单击右键 >“以管理员身份运行”），然后输入以下命令：~~
+
 ```bash
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
-### 启用虚拟机功能
-安装 WSL2 之前，必须启用“虚拟机平台”可选功能  
-以管理员身份打开 PowerShell 并运行：
+### 启用虚拟机功能（不需要）
+~~安装 WSL2 之前，必须启用“虚拟机平台”可选功能~~
+~~以管理员身份打开 PowerShell 并运行：~~
 ```bash
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
-### 重启
-启用上面两项设定后，重启计算机
+### 重启（不需要）
+~~启用上面两项设定后，重启计算机~~
 
 ### 下载 Linux 内核更新包（不需要）
 ~~下载WSL Kernel Update包，并手动安装（双击以运行 - 系统将提示你提供提升的权限，选择“是”以批准此安装。）~~  
 ~~[wsl_update_x64.msi](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)~~
-
-### 将 WSL2 设置为默认版本
-以管理员身份打开 PowerShell 并运行：
-```bash
-wsl --set-default-version 2
-```
 
 ### 更新 WSL 内核
 
@@ -69,7 +92,8 @@ wsl --update --web-download
 wsl --list --online
 ```
 如果报错可以用这个url  
-https://raw.bgithub.xyz/microsoft/WSL/master/distributions/DistributionInfo.json
+https://raw.githubusercontent.com/microsoft/WSL/master/distributions/DistributionInfo.json  
+https://raw.bgithub.xyz/microsoft/WSL/master/distributions/DistributionInfo.json  
 
 查看已安装的Linux子系统
 ```bash
@@ -176,23 +200,8 @@ https://www.wslui.com/zh-CN/
 - Windows 开机自动启动 Dashboard
 - Dashboard 退出时自动关闭 WSL
 
-## 让WSL开机启动，后台运行，以减少唤醒时间
-WSL2 会默认关闭不使用的实例，当你关闭了 WSL 的 Console 后，实例会自动关闭。
-如果你的计算机资源比较充足，那么是可以在开机时通过 VBS 脚本启动一个 WSL 实例，让它挂起在那里不要休眠。
-
-**方法如下**：
-
-``Win + r`` 运行 ``shell:startup`` 打开启动目录  
-在此目录中创建文件 ``wsl-startup.vbs`` 内容如下
-```vb
-set ws=wscript.CreateObject("wscript.shell")
-ws.run "wsl -d Ubuntu-22.04", 0
-```
-``Ubuntu-22.04`` 需替换为你使用的发行版名称
-
-这样当你系统启动，登录系统后，Windows会开启 WSL 实例，它会永久等待输入，不会关闭。所以当你下次再使用WSL命令时，就不会遇到需要重新唤醒 WSL 的耗时
-
-如果你担心后台挂着WSL对系统资源占用过高，可以通过配置 ``.wslconfig`` 文件来限制 WSL 的资源占用。 WSL 会默认占用50%内存，最大8GB。使用所有CPU线程。我一般会限制到4GB,2线程
+## 配置
+可以通过配置 ``.wslconfig`` 文件来限制 WSL 的资源占用。 WSL 会默认占用50%内存，最大8GB。使用所有CPU线程。我一般会限制到4GB,2线程
 
 文件：``%USERPROFILE%\.wslconfig``
 内容如下
@@ -314,7 +323,7 @@ chsh -s "$(which zsh)"
 ```
 
 然后关闭 WSL 重启
-```
+```bash
 wsl --shutdown
 ```
 
@@ -336,6 +345,34 @@ wsl --mount <Disk>
 wsl --shutdown
 ```
 
+## 容器支持
+在 3.0.1 版本之后官方提供了容器支持
+
+```bash
+# 更新WSL
+wsl --update
+
+# 需要3.0.1
+wsl --version
+
+# 容器命令
+wslc --version
+# container是wslc的别名
+container --version
+
+# 只限本机可用
+wslc run -d --rm -p 8080:80 --name web nginx
+
+# 区域网可用
+wslc run -p 0.0.0.0:8080:80 -d --rm --name web nginx
+
+# 停止
+wslc stop web
+
+# 查看容器
+wslc ps
+```
+
 ## WSL2重启
 ```bash
 wsl -l -v
@@ -343,7 +380,15 @@ wsl --terminate Ubuntu-22.04
 ```
 
 ## 如何将WSL下的服务公开到内网
-在 [issues 4150](https://github.com/microsoft/WSL/issues/4150) 有相关讨论
+https://learn.microsoft.com/windows/wsl/networking
+
+文件：``%USERPROFILE%\.wslconfig``
+添加
+```
+[wsl2]
+networkingMode=mirrored
+```
+然后重启 WSL 即可
 
 ### WSL2 下 Debian 实例的 ``ip -4 addr show | grep eth0`` 结果
 

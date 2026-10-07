@@ -11,7 +11,8 @@
 #---------------------------------------------------
 
 #变量设定
-export GITHUB_URL=https://bgithub.xyz
+# export GITHUB_URL=https://bgithub.xyz
+export GITHUB_URL=https://github.com
 export WORK_DIR=${HOME}/.cache/lazy_nvim_setting
 export NVIM_CONF_DIR=${HOME}/.config/nvim
 

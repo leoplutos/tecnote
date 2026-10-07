@@ -181,6 +181,13 @@ Immersive Translate（沉浸式翻译），支持沉浸式双语网页翻译扩�
 - [Chrome插件本地安装指南](https://immersivetranslate.com/manual-chrome-extension/)
 - [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%BF%BB%E8%AF%91-%E7%BD%91%E9%A1%B5%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6-pdf%E7%BF%BB%E8%AF%91-/amkbmndfnliijdhojkpoglbnaaahippg?hl=zh-CN)
 
+## 翻译插件 - FluentRead（推荐）
+FluentRead（流畅阅读）是一款开源浏览器翻译插件，支持网页双语对照、划词翻译、整页翻译，并可灵活接入 Google、DeepL、微软及 AI/Ollama 等翻译服务
+
+- [Github仓库](https://github.com/FluentRead/FluentRead)
+- [Chrome插件商店](https://chromewebstore.google.com/detail/%E6%B5%81%E7%95%85%E9%98%85%E8%AF%BB/djnlaiohfaaifbibleebjggkghlmcpcj)
+- [Edge插件商店](https://microsoftedge.microsoft.com/addons/detail/%E6%B5%81%E7%95%85%E9%98%85%E8%AF%BB/kakgmllfpjldjhcnkghpplmlbnmcoflp)
+
 ## 截图插件 - GoFullPage（推荐）
 
 可以整页截图

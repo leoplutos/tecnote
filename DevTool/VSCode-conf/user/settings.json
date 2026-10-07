@@ -2,6 +2,7 @@
 	//-----------------------------------------------"
 	//			   基本设定						"
 	//-----------------------------------------------"
+	"chat.disableAIFeatures": true, //禁用AI功能
 	//"editor.fontFamily": "Consolas, 'Courier New', monospace", //默认
 	"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'Consolas 7NF', 'Consolas ligaturized v3', 'Consolas', 'Cascadia Code NF', 'Cascadia Code', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Courier New', monospace",
 	// "editor.fontFamily": "'更紗等幅ゴシック J Nerd Font light', 'Consolas 7NF', 'Consolas ligaturized v3', 'Consolas', 'Cascadia Code NF', 'Cascadia Code', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Courier New', monospace",
@@ -172,7 +173,8 @@
 			"statusBar.background": "#2e2e2e",
 		},
 		"[Light+]": { //Default Light+主题的自定义(Eclipse风格)
-			"editor.background": "#ffffff",
+			//"editor.background": "#ffffff",
+			"editor.background": "#fefefe",
 			"editor.foreground": "#000000",
 			"activityBar.background": "#dddddd",
 			"activityBar.inactiveForeground": "#383838",
@@ -204,10 +206,14 @@
 			"editor.findMatchHighlightBackground": "#ffff0077", //所有查找内容颜色
 			"editorCodeLens.foreground": "#859900", //代码镜头的颜色-main函数上方的[Run | Debug]
 			//终端设置
-			"terminal.background": "#1d1f21", //终端背景色
-			"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			//"terminal.background": "#1d1f21", //终端背景色
+			//"terminal.foreground": "#dadada", //终端前景色（备用：#c5c8c6）（备用：#F2F2F2）（备用：#BFBFBF）
+			//"terminalCursor.background": "#000000", //终端光标背景色
+			//"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			"terminal.background": "#f5fafb", //终端背景色
+			"terminal.foreground": "#000000", //终端前景色
 			"terminalCursor.background": "#000000", //终端光标背景色
-			"terminalCursor.foreground": "#00ffff", //终端光标前景色
+			"terminalCursor.foreground": "#000000", //终端光标前景色
 			//状态栏设置
 			"statusBar.background": "#718c9b",
 			"statusBarItem.activeBackground": "#262a2c",
@@ -423,7 +429,7 @@
 				"foreground": "#0000ff",
 				"fontStyle": ""
 			},
-			"functions": "#cc9966", //设定函数颜色(备用#795E26)(备用深绿#008300)(备用深绿#006400)
+			"functions": "#795E26", //设定函数颜色(备用#cc9966)(备用深绿#008300)(备用深绿#006400)
 			"textMateRules": [ //作用域所对应的颜色
 				{
 					"scope": [ //grep搜索结果的文件路径和文件名
@@ -783,7 +789,7 @@
 			"color": "terminal.ansiYellow"
 		},
 		"Nushell": {
-			"path": "C:/qiao/00_Tools/Shell/NuShell/nu.exe",
+			"path": "C:/Liang/Tools/WorkTool/Shell/Nushell/nu.exe",
 			"overrideName": true,
 			"env": {},
 			"icon": "terminal-cmd",
@@ -810,7 +816,7 @@
 	},
 	"terminal.integrated.env.osx": {},
 	"terminal.integrated.env.linux": {},
-	"terminal.integrated.defaultProfile.windows": "Win-Cmd", //设定默认终端-cmd
+	"terminal.integrated.defaultProfile.windows": "Nushell", //设定默认终端-cmd
 	//"terminal.integrated.defaultProfile.windows": "Win-PowerShell", //设定默认终端-PowerShell
 	"terminal.integrated.fontFamily": "", //设置终端字体，默认为空，是使用editor.fontFamily的值
 	//"terminal.integrated.fontFamily": "'等距更纱黑体 SC Nerd Font light', '更紗等幅ゴシック J Nerd Font light', 'JetBrains Mono', 'Ligconsolata', 'Inconsolata', 'Terminal', 'Microsoft YaHei UI', '更紗等幅ゴシック J', 'ＭＳ ゴシック', 'MS Gothic', 'Cascadia Code', 'Consolas', 'Courier New', monospace", //中文系统用

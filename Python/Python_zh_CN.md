@@ -123,6 +123,10 @@ D:\Tools\WorkTool\Python\Python312\python.exe
 ## 工程打包分发
 https://github.com/skywind3000/PyStand
 
+## LSP - basedpyright
+基于 Pyright 的增强版 Python 静态类型检查器，加入更严格的类型检查、改进的 VS Code 支持以及部分 Pylance 特性
+- [basedpyright](https://github.com/detachhead/basedpyright)
+
 ## 网页自动化工具DrissionPage
  - [官网](https://www.drissionpage.cn/)
  - [Github](https://github.com/g1879/DrissionPage)

@@ -2,6 +2,7 @@
 	//-----------------------------------------------"
 	//               基本设定                        "
 	//-----------------------------------------------"
+	"chat.disableAIFeatures": true, //禁用AI功能
 	//"editor.fontFamily": "'等距更纱黑体 SC Nerd Font light', '等距更纱黑体 SC light', '更紗等幅ゴシック J Nerd Font light', '更紗等幅ゴシック J light', 'MS Gothic', 'ＭＳ ゴシック', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace",
 	"editor.fontFamily": "'Consolas 7NF', 'Consolas', 'Consolas ligaturized v3', 'NSimSun', '新宋体', 'MS Gothic', 'ＭＳ ゴシック', 'Cascadia Code NF', 'Courier New', monospace",
 	//"editor.fontFamily": "'Consolas 7NF', 'Consolas', 'Consolas ligaturized v3', 'MS Gothic', 'ＭＳ ゴシック', 'NSimSun', '新宋体', 'Cascadia Code NF', 'Courier New', monospace",

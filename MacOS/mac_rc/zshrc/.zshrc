@@ -4,33 +4,94 @@
 # Prompt 常量
 # ============================================================
 
-readonly STR_LINE1_PRE='╭'
-readonly STR_LINE2_PRE='╰'
-readonly STR_LEFT_SEMICIRCLE=''
-readonly STR_RIGHT_SEMICIRCLE=''
-readonly STR_LEFT_ARROW=''
-readonly STR_MAC_ICON=''
-readonly STR_UBUNTU_ICON=''
-readonly STR_TIME_ICON=''
-readonly STR_USER_ICON=''
-readonly STR_IP_ICON='󰩠'
-readonly STR_DIRECTORY_ICON=''
-readonly STR_REPO_ICON=''
-readonly STR_BRANCH_ICON=''
+STR_LINE1_PRE='╭'
+STR_LINE2_PRE='╰'
+STR_LEFT_SEMICIRCLE=''
+STR_RIGHT_SEMICIRCLE=''
+STR_LEFT_ARROW=''
+STR_MAC_ICON=''
+STR_UBUNTU_ICON=''
+STR_TIME_ICON=''
+STR_USER_ICON=''
+STR_IP_ICON='󰩠'
+STR_DIRECTORY_ICON=''
+STR_REPO_ICON=''
+STR_BRANCH_ICON=''
 
-# 原始 Prompt 配色
-readonly C_MAGENTA='#BC3FBC'
-readonly C_DARK='#243C4F'
-readonly C_CYAN='#11A8CD'
-readonly C_YELLOW='#E5E510'
-readonly C_BLUE='#2472C8'
-readonly C_WHITE='#E5E5E5'
-readonly C_BLACK='#000000'
+# ============================================================
+# Prompt 主题
+# ============================================================
+# 可在当前 Zsh 会话中执行：
+#   PROMPT_THEME=light
+#   PROMPT_THEME=dark
+#
+# 如果没有设定 PROMPT_THEME，则默认使用 dark。
+# 如希望启动时固定为亮色，可改成：
+#   export PROMPT_THEME=light
 
-# Git Prompt 配色 - 与 config.nu 保持一致
-readonly C_GIT_PURPLE='#c678dd'
-readonly C_GIT_YELLOW='#e5c07b'
-readonly C_GIT_GREEN='#98c379'
+: ${PROMPT_THEME:=dark}
+
+# 根据 config.nu 的 light / dark 配色关系设置 Prompt 颜色。
+# 这里只切换颜色，不改变 Prompt 的布局、分隔符或 Git 状态逻辑。
+prompt_apply_theme() {
+    local theme="${PROMPT_THEME:l}"
+
+    if [[ "$theme" == 'light' ]]; then
+        C_LINE='#7A4FA3'
+
+        C_TIME_FG='#176B87'
+        C_TIME_BG='#DCE6EB'
+
+        C_SHELL_FG='#3D3A28'
+        C_SHELL_BG='#F3DF8D'
+
+        C_USER_FG='#51459A'
+        C_USER_BG='#D8D5F2'
+
+        C_IP_FG='#176B68'
+        C_IP_BG='#BFE8E3'
+
+        C_PATH_FG='#34495E'
+        C_PATH_BG='#D8E2EA'
+
+        C_GIT_REPO_FG='#563D66'
+        C_GIT_REPO_BG='#E4D4ED'
+        C_GIT_DIRTY_FG='#6A5420'
+        C_GIT_DIRTY_BG='#F1DDA8'
+        C_GIT_CLEAN_FG='#365B31'
+        C_GIT_CLEAN_BG='#CFE4C8'
+
+        C_INDICATOR='#2472C8'
+    else
+        # Dark 模式保持原来的 Zsh 配色，并与 config.nu 的角色关系一致。
+        C_LINE='#BC3FBC'
+
+        C_TIME_FG='#11A8CD'
+        C_TIME_BG='#243C4F'
+
+        C_SHELL_FG='#000000'
+        C_SHELL_BG='#E5E510'
+
+        C_USER_FG='#E5E5E5'
+        C_USER_BG='#2472C8'
+
+        C_IP_FG='#000000'
+        C_IP_BG='#11A8CD'
+
+        C_PATH_FG='#E5E510'
+        C_PATH_BG='#243C4F'
+
+        C_GIT_REPO_FG='#000000'
+        C_GIT_REPO_BG='#c678dd'
+        C_GIT_DIRTY_FG='#000000'
+        C_GIT_DIRTY_BG='#e5c07b'
+        C_GIT_CLEAN_FG='#000000'
+        C_GIT_CLEAN_BG='#98c379'
+
+        # Dark 模式的 %# 保持终端默认前景色，与 Nushell 的 "# " 一致。
+        C_INDICATOR=''
+    fi
+}
 
 # ============================================================
 # 平台辅助函数
@@ -136,17 +197,21 @@ prompt_build_left() {
 
     # 此布局刻意保持用户原始 macOS .zshrc 的样式。
     PROMPT=""
-    PROMPT+="%F{${C_MAGENTA}}${STR_LINE1_PRE}%f"
-    PROMPT+="%F{${C_DARK}}${STR_LEFT_SEMICIRCLE}%f"
-    PROMPT+="%F{${C_CYAN}}%K{${C_DARK}}${STR_TIME_ICON} %* %k%f"
-    PROMPT+="%F{${C_BLACK}}%K{${C_YELLOW}} ${os_icon} ${os_name} %k%f"
-    PROMPT+="%F{${C_WHITE}}%K{${C_BLUE}} ${STR_USER_ICON} %n@%m %k%f"
-    PROMPT+="%F{${C_BLACK}}%K{${C_CYAN}} ${STR_IP_ICON} ${ip_addr} %k%f"
-    PROMPT+="%F{${C_YELLOW}}%K{${C_DARK}} ${STR_DIRECTORY_ICON} %~ %k%f"
-    PROMPT+="%F{${C_DARK}}${STR_LEFT_ARROW}%f"
+    PROMPT+="%F{${C_LINE}}${STR_LINE1_PRE}%f"
+    PROMPT+="%F{${C_TIME_BG}}${STR_LEFT_SEMICIRCLE}%f"
+    PROMPT+="%F{${C_TIME_FG}}%K{${C_TIME_BG}}${STR_TIME_ICON} %* %k%f"
+    PROMPT+="%F{${C_SHELL_FG}}%K{${C_SHELL_BG}} ${os_icon} ${os_name} %k%f"
+    PROMPT+="%F{${C_USER_FG}}%K{${C_USER_BG}} ${STR_USER_ICON} %n@%m %k%f"
+    PROMPT+="%F{${C_IP_FG}}%K{${C_IP_BG}} ${STR_IP_ICON} ${ip_addr} %k%f"
+    PROMPT+="%F{${C_PATH_FG}}%K{${C_PATH_BG}} ${STR_DIRECTORY_ICON} %~ %k%f"
+    PROMPT+="%F{${C_PATH_BG}}${STR_LEFT_ARROW}%f"
     PROMPT+=$'\n'
-    PROMPT+="%F{${C_MAGENTA}}${STR_LINE2_PRE}%f"
-    PROMPT+="%F{${C_BLUE}}%#%f "
+    PROMPT+="%F{${C_LINE}}${STR_LINE2_PRE}%f"
+    if [[ -n "$C_INDICATOR" ]]; then
+        PROMPT+="%F{${C_INDICATOR}}%#%f "
+    else
+        PROMPT+="%# "
+    fi
 }
 
 # ============================================================
@@ -180,9 +245,9 @@ prompt_build_git_right() {
 
         # 轻量模式：
         #   repo   branch 
-        RPROMPT="%F{${C_GIT_PURPLE}}${STR_LEFT_SEMICIRCLE}%f"
-        RPROMPT+="%F{${C_BLACK}}%K{${C_GIT_PURPLE}} ${STR_REPO_ICON} ${repo}  ${STR_BRANCH_ICON} ${branch} %k%f"
-        RPROMPT+="%F{${C_GIT_PURPLE}}${STR_RIGHT_SEMICIRCLE}%f"
+        RPROMPT="%F{${C_GIT_REPO_BG}}${STR_LEFT_SEMICIRCLE}%f"
+        RPROMPT+="%F{${C_GIT_REPO_FG}}%K{${C_GIT_REPO_BG}} ${STR_REPO_ICON} ${repo}  ${STR_BRANCH_ICON} ${branch} %k%f"
+        RPROMPT+="%F{${C_GIT_REPO_BG}}${STR_RIGHT_SEMICIRCLE}%f"
         return
     fi
 
@@ -240,29 +305,33 @@ prompt_build_git_right() {
     git_status_text="${git_status_text% }"
 
     if [[ -z "$git_status_text" ]]; then
-        RPROMPT="%F{${C_GIT_PURPLE}}${STR_LEFT_SEMICIRCLE}%f"
-        RPROMPT+="%F{${C_BLACK}}%K{${C_GIT_PURPLE}} ${STR_REPO_ICON} ${repo}  ${STR_BRANCH_ICON} ${branch} %k%f"
-        RPROMPT+="%F{${C_GIT_GREEN}}%K{${C_GIT_PURPLE}}"
-        RPROMPT+="%F{${C_BLACK}}%K{${C_GIT_GREEN}} ✓ %k%f"
-        RPROMPT+="%F{${C_GIT_GREEN}}${STR_RIGHT_SEMICIRCLE}%f"
+        RPROMPT="%F{${C_GIT_REPO_BG}}${STR_LEFT_SEMICIRCLE}%f"
+        RPROMPT+="%F{${C_GIT_REPO_FG}}%K{${C_GIT_REPO_BG}} ${STR_REPO_ICON} ${repo}  ${STR_BRANCH_ICON} ${branch} %k%f"
+        RPROMPT+="%F{${C_GIT_CLEAN_BG}}%K{${C_GIT_REPO_BG}}"
+        RPROMPT+="%F{${C_GIT_CLEAN_FG}}%K{${C_GIT_CLEAN_BG}} ✓ %k%f"
+        RPROMPT+="%F{${C_GIT_CLEAN_BG}}${STR_RIGHT_SEMICIRCLE}%f"
     else
-        RPROMPT="%F{${C_GIT_PURPLE}}${STR_LEFT_SEMICIRCLE}%f"
-        RPROMPT+="%F{${C_BLACK}}%K{${C_GIT_PURPLE}} ${STR_REPO_ICON} ${repo}  ${STR_BRANCH_ICON} ${branch} %k%f"
-        RPROMPT+="%F{${C_GIT_YELLOW}}%K{${C_GIT_PURPLE}}"
-        RPROMPT+="%F{${C_BLACK}}%K{${C_GIT_YELLOW}} ${git_status_text} %k%f"
-        RPROMPT+="%F{${C_GIT_YELLOW}}${STR_RIGHT_SEMICIRCLE}%f"
+        RPROMPT="%F{${C_GIT_REPO_BG}}${STR_LEFT_SEMICIRCLE}%f"
+        RPROMPT+="%F{${C_GIT_REPO_FG}}%K{${C_GIT_REPO_BG}} ${STR_REPO_ICON} ${repo}  ${STR_BRANCH_ICON} ${branch} %k%f"
+        RPROMPT+="%F{${C_GIT_DIRTY_BG}}%K{${C_GIT_REPO_BG}}"
+        RPROMPT+="%F{${C_GIT_DIRTY_FG}}%K{${C_GIT_DIRTY_BG}} ${git_status_text} %k%f"
+        RPROMPT+="%F{${C_GIT_DIRTY_BG}}${STR_RIGHT_SEMICIRCLE}%f"
     fi
 }
 
 # 每次显示 Prompt 前重新构建左侧和右侧 Prompt。
 autoload -Uz add-zsh-hook
 prompt_precmd() {
+    prompt_apply_theme
     prompt_build_left
     prompt_build_git_right
 }
+# 先移除旧注册，保证反复 source ~/.zshrc 时不会重复添加 hook。
+add-zsh-hook -d precmd prompt_precmd 2>/dev/null
 add-zsh-hook precmd prompt_precmd
 
-# 加载 .zshrc 时也立即构建一次，方便交互式执行 source 后马上生效。
+# 加载 .zshrc 时也立即应用主题并构建一次，方便交互式执行 source 后马上生效。
+prompt_apply_theme
 prompt_build_left
 prompt_build_git_right
 
@@ -340,6 +409,12 @@ zstyle ':completion:*' cache-path \
 # 其他
 # ============================================================
 # zoxide 必须在 compinit 后
-export PATH="$HOME/.local/bin:$PATH"
-eval "$(zoxide init zsh)"
+# 使用 zsh 的 path 数组并去重，避免反复 source 时重复追加 ~/.local/bin。
+typeset -U path PATH
+path=("$HOME/.local/bin" $path)
+
+# zoxide init 本身可重复加载；这里保留在 compinit 之后。
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
 

@@ -155,3 +155,9 @@ https://github.com/variar/klogg
 ```bash
 brew install --cask klogg
 ```
+
+# LogAnalyzer
+
+LogAnalyzer 是一款跨 Windows、macOS、Linux 的高性能开源日志查看器，专为快速打开、搜索和过滤数 GB 级超大日志文件而设计
+
+https://github.com/Marukooh/LogAnalyzer

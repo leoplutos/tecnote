@@ -1,11 +1,12 @@
-# CLAUDE.md - Project Configuration
+# Project Configuration
 
 ## 决策
 - 针对我的计划，对我进行审讯式的无情拷问，反复追问每一个细节，直到我们形成共同理解
 <!--    - 不要帮我决策，当你不确定的我想要什么的时候要问我，一直到从我口中问出结果-->
-- 沿着决策树的每个分支往下走，逐一清理各项决策直接的依赖关系，有些选择必须等钱一个问题确定了才能回答，AI会按这个先后顺序逐个问清楚。
+- 沿着决策树的每个分支往下走，逐一清理各项决策直接的依赖关系，有些选择必须等前一个问题确定了才能回答，AI会按这个先后顺序逐个问清楚。
 - 每个问题都要给出你的推荐答案
 - 每次只问一个问题，等我回答了再问下一个
+- 我发出的指令目标清晰但方案不是最佳，直接告诉我并建议更好的办法
 - 能通过查看环境（文件系统，工具等）找到的事实，直接去查，不用问我。但决策是我来做的，每个决策都要等我拍板
 - 确认双方理解一致之前，不要开始行动
 
@@ -38,6 +39,7 @@
 **只动必须动的地方。只清理自己制造的烂摊子。**
 
 修改现有代码时：
+- 先读后写，每次修改文件之前都要重新读取目标文件的最新内容
 - 不要"顺手改进"相邻的代码、注释或格式。
 - 不要重构没有问题的东西。
 - 沿用现有风格，即便你自己会用别的写法。
@@ -67,17 +69,35 @@
 
 明确的成功标准能让你独立地循环推进。模糊的标准（"让它能跑起来"）会导致不断需要澄清。
 
+## Windows 开发环境规范
+
+### Shell 规则
+
+- 需要脚本处理文本时，使用 Python，并显式指定 UTF-8。
+- 文本搜索和读取优先使用 `rg --encoding utf-8`。
+
+### PowerShell 文本编码规范
+
+- 如果需要在 PowerShell 中执行命令，优先使用 pwsh -NoLogo -NoProfile -Command "..."
+- 使用 PowerShell 读取文本文件时，**必须显式指定 UTF-8 编码，不得依赖 PowerShell 的默认编码**。
+
+### Python 依赖管理
+
+如果当前环境已经安装 `uv`：
+
+* **优先使用 `uv` 管理 Python 包和项目依赖**。
+* 不要直接使用 `pip`。
+* 例如优先使用 `uv add`、`uv sync`、`uv run` 等命令。
+
 ## 工具
-- node在这里 C:\qiao\00_Tools\Web\node
-- pnpm在这里 C:\qiao\00_Tools\Web\node\node_global
-- python在这里 C:\qiao\00_Tools\Python\Python313
-- uv.exe 在 C:\qiao\00_Tools\Python\Python313\Scripts\uv.exe（不在 PATH，用全路径调用）
-- openspec CLI 在这里 C:\qiao\00_Tools\Web\node\node_global
-- 我有安装ripgrep,bat,fzf
+如果你在PATH下找不到相关工具，使用下面的全路径调用
+- python在这里 C:\Liang\Tools\WorkTool\Python\Python313
+- uv.exe 在 C:\Liang\Tools\WorkTool\Python\Python313\Scripts\uv.exe
 
 ## 回复要求
-- 所有聊天回复使用**中文**
+- 始终以**简体中文**输出计划和回复
 - 代码里面的修改和注释请用**日文**
+- 每次回复都叫我老大
 
 ## 目录约定
 - `references/` = 客户提供资料，**只读**，禁止改动；需要派生的内容放 `docs/` 或 `data/`。

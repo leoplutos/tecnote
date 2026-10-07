@@ -72,8 +72,39 @@ https://github.com/microsoft/terminal/releases
     ],
 ```
 
+### 亮色系1
 
-### 亮色系
+配色名为``lch-light``
+```
+    "schemes":
+    [
+        {
+            "background": "#F5FAFB",
+            "black": "#000000",
+            "blue": "#4040FF",
+            "brightBlack": "#243C4F",
+            "brightBlue": "#8080FF",
+            "brightCyan": "#00DCDC",
+            "brightGreen": "#16C60C",
+            "brightPurple": "#FF1CFF",
+            "brightRed": "#EF2929",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FCE94F",
+            "cursorColor": "#000000",
+            "cyan": "#00C0C0",
+            "foreground": "#000000",
+            "green": "#4E9A06",
+            "name": "lch-light",
+            "purple": "#75507B",
+            "red": "#FF0000",
+            "selectionBackground": "#595AB7",
+            "white": "#E7E7E7",
+            "yellow": "#C4A000"
+        }
+    ],
+```
+
+### 亮色系2
 
 配色名为``qy-light``
 ```

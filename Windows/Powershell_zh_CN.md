@@ -1,19 +1,27 @@
 # PowerShell命令
 
 ## ps1 文件
-ps1 文件类似 linux 的 ``~/.profile`` 文件，在 shell 初始化时会预先执行。在 PowerShell 中， ps1 文件的路径保存在 ``$Profile`` 变量中，输入
+
+PowerShell5 和 PowerShell7 的设定文件是分开的
+
+Windows PowerShell 5.1 通常是：
+```
+C:\Users\<用户名>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+```
+
+PowerShell 7 通常是：
+```
+C:\Users\<用户名>\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+```
+
+确认命令
 ```bash
 echo $Profile
 ```
-能看到它的绝对路径，文件不存在则需要新建  
-修改好内容保存后，每次启动PowerShell它都会自动载入。  
-想手动载入可以使用点命令
-```bash
-. $Profile
-```
-#### 笔者的默认ps1文件
-* [Microsoft.PowerShell_profile.ps1](Microsoft.PowerShell_profile.ps1)
 
+#### 笔者的默认ps1文件
+- [PowerShell5](./PowerShell5_conf/Microsoft.PowerShell_profile.ps1)
+- [PowerShell7](./PowerShell7_conf/Microsoft.PowerShell_profile.ps1)
 
 ## 提示 无法加载文件 xxx.ps1，因为在此系统上禁止运行脚本。
 

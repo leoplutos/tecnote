@@ -18,3 +18,11 @@ https://winscp.net/eng/translations.php?v=5.21.8.13000&lang=0409&isinstalled=0&u
 
 ## 显示树状文件夹
 Ctrl + Alt + T
+
+# UniTerm
+
+一款跨平台的轻量级的全能终端工具，在非 Windows 环境下可以做为 WinSCP 的替代，集成 SSH、SFTP、RDP、数据库、Docker/Kubernetes 等 30+ 协议，并内置 AI Agent
+
+https://github.com/ys-ll/uniterm
+
+下载 `uniterm-windows-amd64-portable-v1.9.4.zip` 即可

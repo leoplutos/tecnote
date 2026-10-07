@@ -131,7 +131,8 @@ K3s 默认的容器运行时是 ``containerd``，因为 ctr 和 crictl 设计对
 
 #### 下载安装
 ```bash
-export GITHUB_URL="https://bgithub.xyz"
+# export GITHUB_URL="https://bgithub.xyz"
+export GITHUB_URL="https://github.com"
 ```
 
 **精简版**

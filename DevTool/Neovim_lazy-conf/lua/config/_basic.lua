@@ -1,8 +1,8 @@
 --配置路径为 %LOCALAPPDATA%\nvim\lua
 -- 全局设定
 
---vim.g.github_url = 'https://github.com'
-vim.g.github_url = 'https://bgithub.xyz'
+--vim.g.github_url = 'https://bgithub.xyz'
+vim.g.github_url = 'https://github.com'
 vim.g.pip_url = 'https://mirrors.aliyun.com/pypi/simple'
 vim.g.user_home = vim.fn.expand('~')
 vim.g.lazy_nvim_root = vim.fn.stdpath("config") .. "/lazy"

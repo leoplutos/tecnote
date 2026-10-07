@@ -82,7 +82,7 @@ cargo install wasm-bindgen-cli
 rustup target add wasm32-unknown-unknown
 ```
 
-wasm-pack 默认会使用 ``wasm-opt`` 工具进行大小优化，而这个工具也是运行时下载安装的，提前在 [这里](https://bgithub.xyz/WebAssembly/binaryen/releases/download/version_117/binaryen-version_117-x86_64-windows.tar.gz) 下载
+wasm-pack 默认会使用 ``wasm-opt`` 工具进行大小优化，而这个工具也是运行时下载安装的，提前在 [这里](https://github.com/WebAssembly/binaryen/releases/download/version_117/binaryen-version_117-x86_64-windows.tar.gz) 下载
 
 下载后解压缩到 ``D:\Tools\WorkTool\Rust\binaryen`` 并添加到 ``PATH`` 环境变量
 
@@ -137,7 +137,7 @@ wasm-pack build --target web
 # https://github.com/TheWaWaR/simple-http-server
 cargo install simple-http-server
 # alpine下安装命令
-# curl -sSL -o /usr/local/cargo/bin/simple-http-server https://bgithub.xyz/TheWaWaR/simple-http-server/releases/download/v0.6.9/x86_64-unknown-linux-musl-simple-http-server
+# curl -sSL -o /usr/local/cargo/bin/simple-http-server https://github.com/TheWaWaR/simple-http-server/releases/download/v0.6.9/x86_64-unknown-linux-musl-simple-http-server
 # chmod +x /usr/local/cargo/bin/simple-http-server
 
 cd D:\WorkSpace\Rust\rust-wasm

@@ -245,7 +245,7 @@ git clone \
   --filter=blob:none \
   --no-checkout \
   --sparse \
-  https://bgithub.xyz/leoplutos/tecnote.git \
+  https://github.com/leoplutos/tecnote.git \
 
 ```
 - ``filter=blob:none`` : Blobless克隆，将大文件的 blob 移除
@@ -618,6 +618,16 @@ git push
 ```
 
 # 客户端
+
+## rgitui
+一个使用 Rust + GPUI（Zed 的 UI 框架）开发的、支持 GPU 加速和跨平台的现代桌面 Git GUI 客户端。
+
+https://github.com/noahbclarkson/rgitui
+
+## git-Agent
+基于 Rust 和 egui 构建的原生桌面 Git 客户端，支持 Windows、macOS 和 Linux。 在一个应用中管理仓库、审查改动、浏览历史和解决冲突，并可选用 AI 辅助三方合并
+
+https://github.com/adoin/git-Agent
 
 ## GitButler
 一个现代化的 Git 客户端，通过并行分支、堆叠分支、可视化提交管理和 AI 能力，让复杂的 Git 分支与 PR 工作流变得更简单

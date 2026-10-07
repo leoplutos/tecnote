@@ -12,7 +12,8 @@ ARG ARG_USER_PWD="123456"
 ARG ARG_GROUP_ID=1000
 ARG ARG_GROUP_NAME="java21_dev_grp"
 # Github下载地址
-ARG ARG_GITHUB_URL="https://bgithub.xyz"
+# ARG ARG_GITHUB_URL="https://bgithub.xyz"
+ARG ARG_GITHUB_URL="https://github.com"
 ARG ARG_CONTAINER_NAME="java21_dev"
 
 # 设定Java用环境变量
@@ -24,7 +25,8 @@ ENV DOCKER_CONTAINER_NAME=$ARG_CONTAINER_NAME
 ENV DOCKER_CONTAINER_USER=$ARG_USER_NAME
 ENV DOCKER_CONTAINER_GROUP=$ARG_GROUP_NAME
 # Github下载地址
-ENV GITHUB_URL="https://bgithub.xyz"
+# ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_URL="https://github.com"
 ENV GITHUB_CONFIG_URL=$ARG_GITHUB_URL
 RUN echo "Dev User/Group ID is : ${ARG_USER_ID}/${ARG_GROUP_ID}"
 RUN echo "Dev User/Group NAME is : ${ARG_USER_NAME}/${ARG_GROUP_NAME}"
@@ -57,7 +59,7 @@ RUN ln -s $(which fdfind) /usr/local/bin/fd
 
 # 安装neovim
 #RUN curl -Lo nvim.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
-RUN curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz"
+RUN curl -Lo nvim-linux64.tar.gz "${GITHUB_URL}/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 RUN tar xzvf nvim-linux64.tar.gz
 RUN mv nvim-linux64 /usr/local/nvim
 RUN rm nvim-linux64.tar.gz
@@ -118,8 +120,8 @@ RUN git config --global core.sparseCheckout true
 RUN git config --global credential.helper store
 
 # neovim配置一键安装
-ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
 # ENV GITHUB_RAW_URL=https://raw.bgithub.xyz
+ENV GITHUB_RAW_URL=https://raw.githubusercontent.com
 RUN set -eux && curl -fsSL ${GITHUB_RAW_URL}/leoplutos/tecnote/refs/heads/master/Linux/lazy_nvim_setting.sh | bash
 
 WORKDIR /workspace

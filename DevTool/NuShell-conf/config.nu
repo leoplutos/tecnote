@@ -11,13 +11,82 @@ let STR_IP_ICON = ""
 let STR_DIRECTORY_ICON = ""
 
 # =============================
-# 颜色
+# Prompt 主题开关
 # =============================
-let C_TIME = (ansi { fg: "cyan" bg: "dark_gray" })
-let C_SHELL = (ansi { fg: "black" bg: "yellow" })
-let C_USER = (ansi { fg: "white" bg: "blue" })
-let C_IP = (ansi { fg: "black" bg: "light_cyan" })
-let C_PATH = (ansi { fg: "yellow" bg: "dark_gray" })
+# 可在当前 Nushell 会话中执行：
+#   $env.PROMPT_THEME = "light"
+#   $env.PROMPT_THEME = "dark"
+#
+# 如果没有设定 PROMPT_THEME，则默认使用 dark。
+# 如希望启动时固定为亮色，可取消下一行注释：
+# $env.PROMPT_THEME = "light"
+
+if (($env.PROMPT_THEME? | default "") | is-empty) {
+    $env.PROMPT_THEME = "dark"
+}
+
+# =============================
+# Prompt 配色
+# =============================
+# 注意：这里只切换颜色，不改变原 Prompt 的分隔符/连接方式。
+def get-prompt-theme [] {
+    let theme = ($env.PROMPT_THEME? | default "dark" | str downcase)
+
+    if $theme == "light" {
+        {
+            line: "#7A4FA3"
+
+            time_fg: "#176B87"
+            time_bg: "#DCE6EB"
+
+            shell_fg: "#3D3A28"
+            shell_bg: "#F3DF8D"
+
+            user_fg: "#51459A"
+            user_bg: "#D8D5F2"
+
+            ip_fg: "#176B68"
+            ip_bg: "#BFE8E3"
+
+            path_fg: "#34495E"
+            path_bg: "#D8E2EA"
+
+            git_repo_fg: "#563D66"
+            git_repo_bg: "#E4D4ED"
+            git_dirty_fg: "#6A5420"
+            git_dirty_bg: "#F1DDA8"
+            git_clean_fg: "#365B31"
+            git_clean_bg: "#CFE4C8"
+        }
+    } else {
+        {
+            line: "magenta"
+
+            time_fg: "cyan"
+            time_bg: "dark_gray"
+
+            shell_fg: "black"
+            shell_bg: "yellow"
+
+            user_fg: "white"
+            user_bg: "blue"
+
+            ip_fg: "black"
+            ip_bg: "light_cyan"
+
+            path_fg: "yellow"
+            path_bg: "dark_gray"
+
+            git_repo_fg: "black"
+            git_repo_bg: "#c678dd"
+            git_dirty_fg: "black"
+            git_dirty_bg: "#e5c07b"
+            git_clean_fg: "black"
+            git_clean_bg: "#98c379"
+        }
+    }
+}
+
 let RESET = (ansi reset)
 
 # =============================
@@ -33,39 +102,57 @@ let MY_IP = (get-ip)
 # 提示符
 # =============================
 $env.PROMPT_COMMAND = {||
+    let theme = (get-prompt-theme)
+
     let time = (date now | format date "%H:%M:%S")
     let user = $env.USERNAME
     let host = (hostname)
     let path = (pwd)
 
-    let line1 = [
-        $"(ansi magenta)($STR_LINE1_PRE)"
+    let C_TIME = (ansi { fg: $theme.time_fg bg: $theme.time_bg })
+    let C_SHELL = (ansi { fg: $theme.shell_fg bg: $theme.shell_bg })
+    let C_USER = (ansi { fg: $theme.user_fg bg: $theme.user_bg })
+    let C_IP = (ansi { fg: $theme.ip_fg bg: $theme.ip_bg })
+    let C_PATH = (ansi { fg: $theme.path_fg bg: $theme.path_bg })
 
-        $"(ansi {fg: 'dark_gray'})"
+    let line1 = [
+        $"(ansi {fg: $theme.line})($STR_LINE1_PRE)"
+
+        $"(ansi {fg: $theme.time_bg})"
         $"($C_TIME) ($STR_TIME_ICON) ($time) "
 
-        $"(ansi {fg: 'yellow' bg: 'dark_gray'})"
+        # 与原版完全一致：这里只切换 ANSI 前景/背景，不插入分隔符字符
+        $"(ansi {fg: $theme.shell_bg bg: $theme.time_bg})"
         $"($C_SHELL) ($STR_WIN_ICON) NuShell "
 
-        $"(ansi {fg: 'blue' bg: 'yellow'})"
+        $"(ansi {fg: $theme.user_bg bg: $theme.shell_bg})"
         $"($C_USER) ($STR_USER_ICON) ($user)@($host) "
 
-        $"(ansi {fg: 'light_cyan' bg: 'blue'})"
+        $"(ansi {fg: $theme.ip_bg bg: $theme.user_bg})"
         $"($C_IP) ($STR_IP_ICON) ($MY_IP) "
 
-        $"(ansi {fg: 'dark_gray' bg: 'light_cyan'})"
+        $"(ansi {fg: $theme.path_bg bg: $theme.ip_bg})"
         $"($C_PATH) ($STR_DIRECTORY_ICON) ($path) "
 
         $"($RESET)"
-        $"(ansi {fg: 'dark_gray'})"
+        $"(ansi {fg: $theme.path_bg})"
         $"($RESET)"
     ] | str join ""
 
-    let line2 = $"(ansi magenta)($STR_LINE2_PRE)(ansi blue)(ansi reset)"
+    let line2 = $"(ansi {fg: $theme.line})($STR_LINE2_PRE)(ansi blue)(ansi reset)"
 
     $"($line1)\n($line2) "
 }
-$env.PROMPT_INDICATOR = {|| "# " }
+$env.PROMPT_INDICATOR = {||
+    let theme = ($env.PROMPT_THEME? | default "dark" | str downcase)
+
+    if $theme == "light" {
+        $"(ansi blue)# (ansi reset)"
+    } else {
+        # Dark 模式保持原来的颜色不变
+        "# "
+    }
+}
 def git-prompt-right [] {
     let result = (
         do -i {
@@ -173,9 +260,10 @@ def git-prompt-right [] {
     #
     # Colors
     #
-    let purple = (ansi { fg: "black" bg: "#c678dd" })
-    let yellow = (ansi { fg: "black" bg: "#e5c07b" })
-    let green = (ansi { fg: "black" bg: "#98c379" })
+    let theme = (get-prompt-theme)
+    let purple = (ansi { fg: $theme.git_repo_fg bg: $theme.git_repo_bg })
+    let yellow = (ansi { fg: $theme.git_dirty_fg bg: $theme.git_dirty_bg })
+    let green = (ansi { fg: $theme.git_clean_fg bg: $theme.git_clean_bg })
     let reset = (ansi reset)
 
     #
@@ -210,11 +298,11 @@ def git-prompt-right [] {
     #
     if ($items | length) == 0 {
         return (
-            $"(ansi {fg:'#c678dd'})" +
+            $"(ansi {fg: $theme.git_repo_bg})" +
             $"($purple)  ($repo)   ($branch) " +
-            $"(ansi {fg:'#98c379' bg:'#c678dd'})" +
+            $"(ansi {fg: $theme.git_clean_bg bg: $theme.git_repo_bg})" +
             $"($green) ✓ " +
-            $"($reset)(ansi {fg:'#98c379'})($reset)"
+            $"($reset)(ansi {fg: $theme.git_clean_bg})($reset)"
         )
     }
 
@@ -222,11 +310,11 @@ def git-prompt-right [] {
     # Dirty
     #
     (
-        $"(ansi {fg:'#c678dd'})" +
+        $"(ansi {fg: $theme.git_repo_bg})" +
         $"($purple)  ($repo)   ($branch) " +
-        $"(ansi {fg:'#e5c07b' bg:'#c678dd'})" +
+        $"(ansi {fg: $theme.git_dirty_bg bg: $theme.git_repo_bg})" +
         $"($yellow) ($status) " +
-        $"($reset)(ansi {fg:'#e5c07b'})($reset)"
+        $"($reset)(ansi {fg: $theme.git_dirty_bg})($reset)"
     )
 }
 
@@ -237,44 +325,44 @@ $env.config.render_right_prompt_on_last_line = true
 # 关闭 Nushell 的 OSC 133 Shell Integration。
 $env.config.shell_integration.osc133 = false
 # yazi设定
-$env.YAZI_FILE_ONE = 'C:\Program Files\Git\usr\bin\file.exe'
+# $env.YAZI_FILE_ONE = 'C:\Program Files\Git\usr\bin\file.exe'
 
 # 设定环境变量
 # C
-$env.path ++= ["C:\\qiao\\00_Tools\\C\\mingw64\\bin"]
+# $env.path ++= ["C:\\qiao\\00_Tools\\C\\mingw64\\bin"]
 # Rust
-$env.CARGO_HOME = "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79"
-$env.RUSTUP_HOME = "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79"
-$env.RUST_SRC_PATH = "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src"
-$env.RUSTUP_DIST_SERVER = "https://rsproxy.cn"
-$env.RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup"
-$env.BINARYEN_HOME = "D:\\Tools\\WorkTool\\Rust\\binaryen"
-$env.PATH ++= [
-    ($env.CARGO_HOME | path join "bin")
-    ($env.BINARYEN_HOME | path join "bin")
-]
+# $env.CARGO_HOME = "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79"
+# $env.RUSTUP_HOME = "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79"
+# $env.RUST_SRC_PATH = "D:\\Tools\\WorkTool\\Rust\\Rust_gnu_1.79\\toolchains\\stable-x86_64-pc-windows-gnu\\lib\\rustlib\\src\\rust\\src"
+# $env.RUSTUP_DIST_SERVER = "https://rsproxy.cn"
+# $env.RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup"
+# $env.BINARYEN_HOME = "D:\\Tools\\WorkTool\\Rust\\binaryen"
+# $env.PATH ++= [
+    # ($env.CARGO_HOME | path join "bin")
+    # ($env.BINARYEN_HOME | path join "bin")
+# ]
 # Go
-$env.GO111MODULE = "on"
-$env.GOROOT = "C:\\qiao\\00_Tools\\Go\\go"
-$env.GOPATH = "C:\\qiao\\00_Tools\\Go\\go_global"
-$env.PATH ++= [
-    ($env.GOROOT | path join "bin")
-    ($env.GOPATH | path join "bin")
-]
+# $env.GO111MODULE = "on"
+# $env.GOROOT = "C:\\qiao\\00_Tools\\Go\\go"
+# $env.GOPATH = "C:\\qiao\\00_Tools\\Go\\go_global"
+# $env.PATH ++= [
+#     ($env.GOROOT | path join "bin")
+#     ($env.GOPATH | path join "bin")
+# ]
 # Java
-$env.JAVA_HOME = "C:\\qiao\\00_Tools\\Java\\jdk21.0.8_9_amazon-corretto"
+$env.JAVA_HOME = "C:\\Liang\\Tools\\WorkTool\\Java\\jdk21.0.8_9_amazon-corretto"
 $env.PATH ++= [
     ($env.JAVA_HOME | path join "bin")
 ]
 # Python
-$env.PYTHON_HOME = "C:\\qiao\\00_Tools\\Python\\Python313"
+$env.PYTHON_HOME = "C:\\Liang\\Tools\\WorkTool\\Python\\Python313"
 $env.PATH ++= [
     $env.PYTHON_HOME
     ($env.PYTHON_HOME | path join "Scripts")
 ]
 # NodeJs
-$env.path ++= ["C:\\qiao\\00_Tools\\Web\\node"]
-$env.path ++= ["C:\\qiao\\00_Tools\\Web\\node\\node_global"]
+# $env.path ++= ["C:\\qiao\\00_Tools\\Web\\node"]
+# $env.path ++= ["C:\\qiao\\00_Tools\\Web\\node\\node_global"]
 
 # 设定别名
 #alias ll = ls -l
@@ -306,6 +394,16 @@ def tail [
             -Tail ($lines) `
             -Wait
     "
+}
+# Docker-compatible command using Windows Subsystem for Linux Containers (wslc)
+# Examples:
+#   docker --version
+#   docker ps
+#   docker stop web
+#   docker run -d --rm -p 8080:80 --name web nginx
+#   docker run -d --rm -p 0.0.0.0:8080:80 --name web nginx
+def --wrapped docker [...args] {
+    ^wslc ...$args
 }
 
 # 其他

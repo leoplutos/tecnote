@@ -1,3 +1,4 @@
+# PowerShell 5 Profile
 #设置utf-8
 #chcp 65001
 

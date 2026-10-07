@@ -304,6 +304,274 @@ export AWS_PAGER=""      # v2 默认把输出送进 less，粘贴结果时很碍
 
 > 环境变量只在当前终端有效。**重开终端就没了** —— 之后的命令会静默地打到别的账号。养成重开终端就重设的习惯。
 
+## CloudWatch
+
+CloudWatch 是 AWS 提供的监控与可观测性服务，可用于集中收集日志、查询日志、监控 Metrics，以及配置 Alarm 和通知。
+
+### EC2 场景
+
+对于 **EC2 + Docker Compose** 应用，推荐应用只向 `stdout / stderr` 输出日志，由 Docker 的 `awslogs` logging driver 直接发送到 CloudWatch Logs，不需要在业务容器中安装 CloudWatch Agent。
+
+```
+Application → stdout / stderr → Docker daemon → awslogs → CloudWatch Logs
+```
+
+### Docker Compose 配置示例
+
+```yaml
+services:
+  app:
+    image: demo/app:latest
+    logging:
+      driver: awslogs
+      options:
+        mode: non-blocking                    # CloudWatch 异常时不阻塞应用
+        max-buffer-size: 8m                   # 日志缓冲区，可按日志量调整
+        awslogs-region: ap-northeast-1
+        awslogs-group: /demo-dev/demo-app     # CloudWatch Log Group
+        awslogs-create-group: "true"          # Log Group 不存在时自动创建
+        tag: "{{.Name}}"                      # Container Name 作为 Log Stream
+```
+
+### 日志传输原理
+
+Docker daemon 会捕获容器主进程的 `stdout / stderr`，配置 `awslogs` 后，由 Docker 负责调用 CloudWatch Logs API 上传日志，应用本身不需要实现日志上传逻辑。
+
+```
+Application → stdout / stderr → Docker daemon → CloudWatch Logs API → CloudWatch Logs
+```
+
+### Log Group / Log Stream 设计
+
+CloudWatch Logs 主要分为两层：
+
+```
+/demo-dev/demo-app     ← Log Group
+├── demo-app-1         ← Log Stream
+├── demo-nginx-1
+└── demo-worker-1
+```
+
+* **Log Group**：一个项目 / 环境 / 应用的日志集合，推荐命名 `/{project}-{environment}/{application}`
+* **Log Stream**：具体 Container 的日志流，推荐使用 Container Name，方便识别和查询
+
+例如：`/demo-dev/demo-app`、`/demo-stg/demo-app`、`/demo-prd/demo-app`
+
+### 推荐使用 non-blocking
+
+`non-blocking` 会在 Application 和 CloudWatch 之间增加 Docker Buffer：
+
+```
+Application → Docker Log Buffer → CloudWatch Logs
+```
+
+CloudWatch 短暂异常时，日志会暂存在 Buffer 中；如果 Buffer 最终写满，部分日志可能被丢弃，但不会因为日志上传异常持续阻塞应用。
+
+> **宁可在极端情况下丢失部分日志，也不要因为日志系统异常影响业务请求。**
+
+`max-buffer-size: 8m` 是 Buffer 大小，可根据项目实际日志量调整。
+
+### awslogs 与 CloudWatch Agent 的区别
+
+| 项目                     | Docker `awslogs` | CloudWatch Agent |
+| ---------------------- | ---------------- | ---------------- |
+| Docker stdout / stderr | ◎                | ○                |
+| EC2 系统日志               | ×                | ◎                |
+| 自定义日志文件                | ×                | ◎                |
+| Memory / Disk Metrics  | ×                | ◎                |
+| 配置复杂度                  | 低                | 较高               |
+
+只需要 **Docker stdout/stderr → CloudWatch Logs** 时，优先使用 Docker `awslogs` driver；如果还需要采集 **EC2 Memory、Disk、系统日志、自定义日志文件**等，则考虑 CloudWatch Agent。
+
+### ECS Fargate 场景
+
+ECS Fargate 不需要管理 EC2 或 Docker daemon。推荐应用只向 `stdout / stderr` 输出日志，在 **ECS Task Definition** 中配置 `awslogs`，由 Fargate 将日志发送到 CloudWatch Logs。
+
+```
+Application → stdout / stderr → ECS Fargate → awslogs → CloudWatch Logs
+```
+
+Task Definition 配置示例：
+
+```json
+{
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-region": "ap-northeast-1",
+      "awslogs-group": "/demo-prd/demo-app",
+      "awslogs-stream-prefix": "app"
+    }
+  }
+}
+```
+
+对于普通应用日志，直接使用 **`awslogs`** 即可。如果需要日志过滤、加工、同时发送到多个目的地（CloudWatch / S3 / OpenSearch 等），可以考虑 **FireLens + Fluent Bit**。
+
+```text
+简单场景：Application → awslogs → CloudWatch Logs
+复杂场景：Application → FireLens / Fluent Bit → CloudWatch / S3 / OpenSearch
+```
+
+# AWS 监视运维
+
+## 1. 监视整体构成
+
+一个监视链路通知到 Microsoft Teams 的例子
+
+```mermaid
+flowchart LR
+    subgraph TARGET["① 监视对象"]
+        direction TB
+        EC2["EC2"]
+        AGENT["CloudWatch Agent"]
+        ALB["Application Load Balancer"]
+        BACKUP["DB Backup"]
+        APPLOG["Application Log"]
+        EBS["EBS Snapshot"]
+    end
+
+    subgraph METRIC["② Metric / Event"]
+        direction TB
+        STATUS["StatusCheckFailed"]
+        CREDIT["CPUCreditBalance"]
+        DISK["disk_used_percent"]
+        MEMORY["mem_used_percent"]
+        HEALTH["UnHealthyHostCount"]
+        BACKUP_METRIC["BackupSuccess"]
+        CRITICAL["AppLogCritical"]
+        ERROR["AppLogError"]
+        SNAPSHOT_EVENT["Snapshot Failed Event"]
+    end
+
+    subgraph ALARM["③ CloudWatch Alarm"]
+        direction TB
+        A1["EC2 Status Check"]
+        A2["CPU Credit Low"]
+        A3["Disk High"]
+        A4["Memory High"]
+        A5["Application Health Check"]
+        A6["DB Backup Missing"]
+        A7["Critical Log"]
+        A8["Error Log"]
+    end
+
+    subgraph NOTIFY["④ 通知"]
+        direction TB
+        SNS["Amazon SNS"]
+        LAMBDA["AWS Lambda"]
+        PA["Power Automate"]
+        TEAMS["Microsoft Teams"]
+    end
+
+    FILTER["CloudWatch Logs<br/>Metric Filter"]
+    EVENTBRIDGE["Amazon EventBridge"]
+
+    EC2 --> STATUS
+    EC2 --> CREDIT
+
+    AGENT --> DISK
+    AGENT --> MEMORY
+
+    ALB --> HEALTH
+
+    BACKUP --> BACKUP_METRIC
+
+    APPLOG --> FILTER
+    FILTER --> CRITICAL
+    FILTER --> ERROR
+
+    EBS --> SNAPSHOT_EVENT
+    SNAPSHOT_EVENT --> EVENTBRIDGE
+
+    STATUS --> A1
+    CREDIT --> A2
+    DISK --> A3
+    MEMORY --> A4
+    HEALTH --> A5
+    BACKUP_METRIC --> A6
+    CRITICAL --> A7
+    ERROR --> A8
+
+    A1 --> SNS
+    A2 --> SNS
+    A3 --> SNS
+    A4 --> SNS
+    A5 --> SNS
+    A6 --> SNS
+    A7 --> SNS
+    A8 --> SNS
+
+    EVENTBRIDGE --> SNS
+
+    SNS --> LAMBDA
+    LAMBDA --> PA
+    PA --> TEAMS
+```
+
+其中 EBS Snapshot 失败与其他监视不同，不经过 CloudWatch Alarm，而是由 EventBridge 直接发送到 SNS。
+
+---
+
+## 2. 实际监视项目
+
+| # | 监视对象              | AWS Metric / Event             | 监视内容                   |
+| - | ----------------- | ------------------------------ | ---------------------- |
+| 1 | EC2               | `StatusCheckFailed`            | EC2 Instance / Host 异常 |
+| 2 | EC2               | `CPUCreditBalance`             | Burst CPU Credit 不足    |
+| 3 | Disk              | `disk_used_percent`            | 磁盘使用率过高                |
+| 4 | Memory            | `mem_used_percent`             | 内存使用率过高                |
+| 5 | ALB / Application | `UnHealthyHostCount`           | Application 无法正常响应     |
+| 6 | DB Backup         | Custom Metric `BackupSuccess`  | 一定时间内没有成功 Backup       |
+| 7 | Application Log   | Custom Metric `AppLogCritical` | `CRITICAL` Log 出现      |
+| 8 | Application Log   | Custom Metric `AppLogError`    | `ERROR` Log 出现         |
+| 9 | EBS Snapshot      | EventBridge Event              | Snapshot 创建失败          |
+
+最终创建了 8 个 CloudWatch Alarm，另外增加了 1 个 EventBridge 监视。
+
+---
+
+## 3. 通知链路
+
+所有 CloudWatch Alarm 共用同一个通知链路。
+
+```mermaid
+flowchart LR
+    A["CloudWatch Alarm × 8"] --> SNS["Amazon SNS"]
+
+    EB["EventBridge<br/>Snapshot Failed"] --> SNS
+
+    SNS --> L["AWS Lambda"]
+
+    SSM["SSM Parameter Store<br/>Webhook URL"] -.-> L
+
+    L -->|"HTTPS POST"| PA["Power Automate"]
+
+    PA --> TEAMS["Microsoft Teams"]
+```
+
+Lambda 负责把 SNS Message 转换成 Teams 可以显示的 Adaptive Card。
+
+Webhook URL 保存在 SSM Parameter Store 的 `SecureString` 中，不直接写入代码。
+
+---
+
+## 4. 异常发生到 Teams 到达的时间
+
+「Metric 的收集间隔」和「CloudWatch Alarm 的评价周期」是不同的。
+
+| Alarm               | Metric 间隔 |  Period | 判定条件     | 异常 → Teams |
+| ------------------- | --------: | ------: | -------- | ---------: |
+| `ec2-status-check`  |      60 秒 |    60 秒 | 2/2 连续   |     约 3 分钟 |
+| `app-healthcheck`   |      60 秒 |    60 秒 | 3 次中 2 次 |     约 3 分钟 |
+| `cpu-credits-low`   |      5 分钟 |   300 秒 | 3/3 连续   |    约 16 分钟 |
+| `db-backup-missing` |        每日 | 86400 秒 | 1/1      |     约 7 小时 |
+| `disk-high`         |      60 秒 |   300 秒 | 2/2 连续   |    约 11 分钟 |
+| `memory-high`       |      60 秒 |   300 秒 | 3/3 连续   |    约 16 分钟 |
+| `log-critical`      |   Log 到达时 |   300 秒 | 1/1      |     约 6 分钟 |
+| `log-error`         |   Log 到达时 |   300 秒 | 1/1      |     约 6 分钟 |
+| `snapshot-failed`   | Event 发生时 |       — | —        |     约 1 分钟 |
+
 ## AWS 架构图标
 https://aws.amazon.com/cn/architecture/icons/
 

@@ -1,4 +1,5 @@
 {
+  "disable_ai": true,
   "collaboration_panel": {
     "dock": "left",
   },
@@ -32,15 +33,14 @@
   "ui_font_family": ".SystemUIFont", //UI字体
   "ui_font_fallbacks": [".ZedSans"], //UI字体回退
   "ui_font_size": 15, //UI尺寸
-  // "buffer_font_family": "更紗等幅ゴシック J Nerd Font", //编辑文本字体
-  "buffer_font_family": "等距更纱黑体 SC Nerd Font", //编辑文本字体
+  "buffer_font_family": "更紗等幅ゴシック J Nerd Font", //编辑文本字体
   //"buffer_font_family": "Consolas 7NF", //编辑文本字体
   "buffer_font_fallbacks": [
     //编辑文本字体回退
     "Consolas",
     "Cascadia Code",
-    "宋体",
-    "MS Gothic",
+    "NSimSun",
+    "ＭＳ ゴシック",
     ".ZedSans",
     ".SystemUIFont",
     "Courier New",
@@ -59,12 +59,16 @@
   },
   "markdown_preview": {
     // "limit_content_width": true
+    "code_font_family": "更紗等幅ゴシック J Nerd Font",
+    "font_family": ".SystemUIFont",
+    "font_size": 14,
   },
-  "markdown_preview_font_size": 15,
-  "markdown_preview_code_font_family": "更紗等幅ゴシック J Nerd Font",
-  "markdown_preview_font_family": ".SystemUIFont",
+  //"markdown_preview_font_family": "更紗等幅ゴシック J Nerd Font",
   // "markdown_preview_theme": "One Dark",
   "hide_mouse": "on_typing", //输入时隐藏鼠标
+  "cursor_animation": { //光标平滑移动动画
+    "enabled": true,
+  },
   "indent_guides": {
     //缩进参考线
     "enabled": true,
@@ -111,7 +115,7 @@
     "button": true,
     "entry_spacing": "standard",
     "file_icons": true,
-    "folder_icons": true,
+    //"folder_icons": true,
     "git_status": true,
     "auto_reveal_entries": true,
     "auto_fold_dirs": true,
@@ -134,8 +138,7 @@
   // Terminal Font Settings
   "terminal": {
     //终端设定
-    // "font_family": "更紗等幅ゴシック J Nerd Font",
-    "font_family": "等距更纱黑体 SC Nerd Font",
+    "font_family": "更紗等幅ゴシック J Nerd Font",
     "font_size": 14,
     // Terminal line height: comfortable (1.618), standard(1.3) or `{ "custom": 2 }`
     "line_height": "standard",
@@ -143,14 +146,9 @@
     "cursor_shape": "bar",
     "blinking": "on",
     "shell": {
-      //"program": "C:\\qiao\\00_Tools\\Shell\\NuShell\\nu.exe",
-      "program": "C:\\Windows\\System32\\cmd.exe",
+      "program": "C:\\Liang\\Tools\\WorkTool\\Shell\\Nushell\\nu.exe",
+      //"program": "C:\\Windows\\System32\\cmd.exe",
       //"program": "C:\\Windows\\System32\\cmd.exe /K C:\\qiao\\00_Tools\\Cmd\\cmdautorun.cmd",
-      //"program": "C:\\Liang\\Tools\\WorkTool\\Cmd\\zed_wrapper.cmd",
-      // "with_arguments": {
-      //   "program": "C:\\Windows\\System32\\cmd.exe",
-      //   "args": ["/K", "C:\\qiao\\00_Tools\\Cmd\\cmdautorun.cmd", "2"],
-      // },
     },
     "env": {
       //"JAVA_HOME": "C:\\qiao\\00_Tools\\Java\\jdk21.0.8_9_amazon-corretto",
@@ -402,21 +400,21 @@
       "text": "#000000",
       "text.muted": "#000000",
       "text.placeholder": "#000000",
-      "background": "#ffffff",
+      "background": "#fefefe",
       "editor.foreground": "#000000", //设定编辑器前景
-      "editor.background": "#ffffff", //设定编辑器背景
+      "editor.background": "#fefefe", //设定编辑器背景
       "elevated_surface.background": "#f1f1f1", //浮层 UI（hover / tooltip / completion 文档）背景
       "editor.active_line.background": "#e8f2fe", //当前行背景颜色
       "editor.line_number": "#787878", //设定行号颜色
       "editor.active_line_number": "#787878", //设定当前行的行号颜色
-      "editor.gutter.background": "#ffffff", //设定行号背景色
+      "editor.gutter.background": "#fefefe", //设定行号背景色
       // "editor.subheader.background": "#0000ff", //subheader
       // "search.match_background": "#ffff0077", //查找内容
       "panel.background": "#f3f3f3", //左侧panel背景色
-      "toolbar.background": "#ffffff", // 面包屑颜色
+      "toolbar.background": "#fefefe", // 面包屑颜色
       "status_bar.background": "#718c9b", //下面状态栏
       "title_bar.background": "#dddddd", //顶部标题栏
-      "tab.active_background": "#ffffff", //当前TAB背景
+      "tab.active_background": "#fefefe", //当前TAB背景
       "tab.inactive_background": "#ececec", //其他TAB背景
       "tab_bar.background": "#e7e7e7", //TAB背景
       "hint": "#7274a7ff", //hint
@@ -430,8 +428,8 @@
       "version_control.added": "#48985d", //添加内容颜色
       "version_control.modified": "#2090d3", //修改内容颜色
       "version_control.deleted": "#e51400", //删除内容颜色
-      "terminal.foreground": "#1E1E1E", //终端前景色
-      "terminal.background": "#fcf4dc", //终端背景色
+      "terminal.foreground": "#000000", //终端前景色
+      "terminal.background": "#f5fafb", //终端背景色 #fcf4dc
       "terminal.ansi.red": "#FF0000",
       "terminal.ansi.blue": "#4040FF",
       "terminal.ansi.cyan": "#00C0C0",
@@ -482,7 +480,7 @@
           "font_weight": 600,
         },
         "emphasis": {
-          "font_style": "italic",
+          //"font_style": "italic",
         },
         "emphasis.strong": {
           "color": "#000080", //强调
@@ -505,7 +503,7 @@
         },
         "constant": {
           "color": "#0000C0", //常量
-          "font_style": "italic",
+          //"font_style": "italic",
           "font_weight": 600,
         },
         "keyword": {
@@ -608,21 +606,21 @@
       "text": "#000000",
       "text.muted": "#000000",
       "text.placeholder": "#000000",
-      "background": "#ffffff",
+      "background": "#fefefe",
       "editor.foreground": "#000000", //设定编辑器前景
-      "editor.background": "#ffffff", //设定编辑器背景
+      "editor.background": "#fefefe", //设定编辑器背景
       "elevated_surface.background": "#f1f1f1", //浮层 UI（hover / tooltip / completion 文档）背景
       "editor.active_line.background": "#e8f2fe", //当前行背景颜色
       "editor.line_number": "#93939d", //设定行号颜色
       "editor.active_line_number": "#0000ff", //设定当前行的行号颜色
-      "editor.gutter.background": "#ffffff", //设定行号背景色
+      "editor.gutter.background": "#fefefe", //设定行号背景色
       // "editor.subheader.background": "#0000ff", //subheader
       // "search.match_background": "#ffff0077", //查找内容
       "panel.background": "#f3f3f3", //左侧panel背景色
-      "toolbar.background": "#ffffff", // 面包屑颜色
+      "toolbar.background": "#fefefe", // 面包屑颜色
       "status_bar.background": "#a1bccb", //下面状态栏
       "title_bar.background": "#dddddd", //顶部标题栏
-      "tab.active_background": "#ffffff", //当前TAB背景
+      "tab.active_background": "#fefefe", //当前TAB背景
       "tab.inactive_background": "#ececec", //其他TAB背景
       "tab_bar.background": "#e7e7e7", //TAB背景
       "hint": "#7274a7ff", //hint
@@ -636,8 +634,8 @@
       "version_control.added": "#48985d", //添加内容颜色
       "version_control.modified": "#2090d3", //修改内容颜色
       "version_control.deleted": "#e51400", //删除内容颜色
-      "terminal.foreground": "#1E1E1E", //终端前景色
-      "terminal.background": "#fcf4dc", //终端背景色
+      "terminal.foreground": "#000000", //终端前景色
+      "terminal.background": "#f5fafb", //终端背景色 #fcf4dc
       "terminal.ansi.red": "#FF0000",
       "terminal.ansi.blue": "#4040FF",
       "terminal.ansi.cyan": "#00C0C0",

@@ -47,13 +47,13 @@ Zig 管理依赖项为先在 ``build.zig.zon`` 添加包的元信息，然后在
 
 获取包的 hash
 ```bash
-zig fetch https://bgithub.xyz/JakubSzark/zig-string/archive/refs/heads/master.tar.gz
+zig fetch https://github.com/JakubSzark/zig-string/archive/refs/heads/master.tar.gz
 122047e740a48165ed1cdd10b8c595cb5b37d2ae2128364957ba0a8de5c7dc396adf
 ```
 
 将包直接添加到 zon 文件中
 ```bash
-zig fetch --save https://bgithub.xyz/JakubSzark/zig-string/archive/refs/heads/master.tar.gz
+zig fetch --save https://github.com/JakubSzark/zig-string/archive/refs/heads/master.tar.gz
 ```
 
 ## 示例工程

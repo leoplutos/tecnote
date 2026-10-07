@@ -43,7 +43,8 @@ RUN --mount=type=cache,target=/root/.m2/repository \
 
 WORKDIR /opt/app/JavaGrpc/build
 # 下载 OpenTelemetry Java Agent 零代码插桩
-ENV GITHUB_URL="https://bgithub.xyz"
+# ENV GITHUB_URL="https://bgithub.xyz"
+ENV GITHUB_URL="https://github.com"
 RUN curl -Lo opentelemetry-javaagent.jar "${GITHUB_URL}/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.9.0/opentelemetry-javaagent.jar"
 
 #---------------------------------------------------------------------

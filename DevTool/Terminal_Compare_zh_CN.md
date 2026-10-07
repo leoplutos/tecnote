@@ -96,8 +96,8 @@ wezterm.log_error('hello')
 #### Windows 一键设定配置文件
 需要 ``curl``，使用 cmd 运行
 ```bash
-SET GITHUB_RAW_URL=https://raw.bgithub.xyz
-::SET GITHUB_RAW_URL=https://raw.githubusercontent.com
+::SET GITHUB_RAW_URL=https://raw.bgithub.xyz
+SET GITHUB_RAW_URL=https://raw.githubusercontent.com
 curl --create-dirs -o %USERPROFILE%\.wezterm.lua %GITHUB_RAW_URL%/leoplutos/tecnote/refs/heads/master/DevTool/WezTerm_conf/wezterm.lua
 curl --create-dirs -o %USERPROFILE%\.bashrc-personal %GITHUB_RAW_URL%/leoplutos/tecnote/refs/heads/master/Linux/linux_rc/bashrc/.bashrc-personal
 ```

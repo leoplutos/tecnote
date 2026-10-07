@@ -1,0 +1,57 @@
+# ============================================================
+# 配色：Dark（与 WezTerm Dark 保持一致）
+# ============================================================
+# 背景色
+background = 1D1F21
+# 前景色
+foreground = DADADA
+# 选择内容背景色
+selection-background = 20374c
+# 选择内容前景色
+selection-foreground = DADADA
+# 光标颜色
+cursor-color = 00FFFF
+# 光标下文字颜色（WezTerm: cursor_fg = #1e1e1e）
+cursor-text = 1e1e1e
+#cursor-style = block
+# 分割线颜色
+split-divider-color = 235b76
+
+# 非当前焦点 split 的暗化效果。
+# WezTerm 使用 inactive_pane_hsb: saturation=0.9, brightness=0.2。
+# Ghostty 没有 HSB 等价项，下面通过 unfocused split opacity/fill 做近似
+unfocused-split-opacity = 0.2
+unfocused-split-fill = 1D1F21
+
+# ANSI colors - normal colors - black
+palette = 0=#000000
+# ANSI colors - normal colors - red
+palette = 1=#CD3131
+# ANSI colors - normal colors - green
+palette = 2=#0DBC79
+# ANSI colors - normal colors - yellow
+palette = 3=#E5E510
+# ANSI colors - normal colors - blue
+palette = 4=#2472C8
+# ANSI colors - normal colors - purple (magenta)
+palette = 5=#BC3FBC
+# ANSI colors - normal colors - cyan
+palette = 6=#11A8CD
+# ANSI colors - normal colors - white
+palette = 7=#E5E5E5
+# ANSI colors - bright colors - brightBlack
+palette = 8=#243C4F
+# ANSI colors - bright colors - brightRed
+palette = 9=#F14C4C
+# ANSI colors - bright colors - brightGreen
+palette = 10=#23D18B
+# ANSI colors - bright colors - brightYellow
+palette = 11=#F5F543
+# ANSI colors - bright colors - brightBlue
+palette = 12=#3B8EEA
+# ANSI colors - bright colors - brightPurple (bright magenta)
+palette = 13=#D670D6
+# ANSI colors - bright colors - brightCyan
+palette = 14=#29B8DB
+# ANSI colors - bright colors - brightWhite
+palette = 15=#E5E5E5

@@ -14,6 +14,9 @@ https://code.claude.com/docs/zh-CN/overview
 ### 使用向导
 https://johng.cn/ai/claude-code-guide
 
+## 推荐选项
+除了 `Git for Windows` 之外，参考 [这里](../Other/Ripgrep_zh_CN.md) 安装 `rg` 和 `fd`
+
 ## 安装
 
 ### 1. 在终端中使用 Claude Code CLI
@@ -42,8 +45,38 @@ https://code.claude.com/docs/zh-CN/desktop-quickstart
 请阅读 .claude/prompts/estimate_prompt.md，分析当前项目并生成报价书，生成md文件
 ```
 
+### 4. 在 JetBrains IDEs 中使用插件
+在 JetBrains IDE 中提供与 VS Code 的 Claude Code 完全相同的 UI UX
+
+https://github.com/Swttch/swttch
+
 ## 配置
+
+全局文件默认放在：
+```
+~/.claude/CLAUDE.md
+```
+
+项目层放在：
+```
+my-project/
+├── CLAUDE.md          # 项目公共规则，团队共享，进仓库
+├── CLAUDE.local.md    # 个人针对这个项目的额外规则/配置，通常加入 .gitignore
+├── .gitignore
+└── src/
+```
+
 参考 [claude_conf](./claude_conf) 目录
+
+### AGENTS.md 支持
+Claude Code 从 `2.1.277` 版本开始支持 `AGENTS.md`
+
+**具体规则**：
+
+- 如果某个目录下存在 CLAUDE.md，Claude Code 优先使用 CLAUDE.md
+- 如果该目录下没有 CLAUDE.md，Claude Code 会检查 AGENTS.md，如果存在就使用它
+
+这个行为可以在 Claude Code 的 `/config` 中开启或关闭
 
 ## 使用技巧
 
@@ -55,27 +88,43 @@ https://code.claude.com/docs/zh-CN/desktop-quickstart
 关于当前的情况，我最大的遗漏是什么？我没有意识到什么？
 ```
 
-## Skill
+## UI/UX设计 - Claude Design
 
-### SIer 制作納品物的 Skill
-可根据需求自动生成基本设计书、详细设计书、UML 图和画面功能设计书等 SIer 风格的系统设计文档。
+`Claude Design` 是 专门做的 AI 设计，原型制作工具。它和普通的 Claude Chat 最大区别是：不是只跟你聊天，而是直接生成一个可以交互、修改、导出的视觉设计作品
 
-https://github.com/kazu2377/skills_sample
+用来做 `UI` / `Wireframe` / `Mockup` / `PPT资料` / `产品介绍页` 都可以
 
-### grill-me
-Matt Pocock 的 Skills 是一套面向 Claude Code、Codex 等 AI Coding Agent 的工程化 Skills，帮助 AI 按规范进行需求分析、设计、TDD、调试、代码审查和架构改进。
+https://claude.ai/design
 
-https://github.com/mattpocock/skills
+制作完毕后还可以 `Hand off to Claude Code` 非常方便
 
-其中最有名的就是 `grill-me`
+### 制作 Claude Design 模板
 
-添加到你的工程
-```bash
-cd /path/to/project_root
-npx skills add mattpocock/skills
+先自己制作一个 pptx 模板文件，然后在 Claude Design 开启会话
+
+把 design_template_liang.pptx 拖进去，再贴上下面这段 prompt
+
+```
+请根据上传的 design_template_liang.pptx 为我建立一个设计系统（演示文稿用，不是 Web 应用）。
+
+这份 PPT 共 15 页：
+- 第 1–7 页是规则：使用方法、配色、字体、版式骨架、组件
+- 第 8–15 页是空白模板：表紙、章扉、要点、数字、メッセージ、導入効果、実績マップ、体制図
+
+要求：
+1. 颜色、字号、间距严格按 PPT 里的实际数值提取，不要自己发挥
+2. 字体：日文和英文都用 Meiryo
+3. 第 8–15 页各做成一个可复用的幻灯片模板
+4. 第 1–7 页的规则整理进 Readme
 ```
 
 ## 其他
+
+### 每次和和AI结束对话后必须问的2句话
+```
+眼下你最没把握的事情是什么
+关于当前的情况，我最大的遗漏是什么？我没有意识到什么？
+```
 
 ### 删除 Claude 的Session
 
@@ -92,3 +141,6 @@ dir %USERPROFILE%\.claude\projects
 del \\?\C:\pathto\project\nul
 ```
 
+### 一个开源版的Claude - OpenClaude
+
+https://github.com/Gitlawb/openclaude

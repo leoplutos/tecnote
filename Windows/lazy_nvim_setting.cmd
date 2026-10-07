@@ -11,7 +11,8 @@
 @echo off
 
 ::变量设定
-SET GITHUB_URL=https://bgithub.xyz
+::SET GITHUB_URL=https://bgithub.xyz
+SET GITHUB_URL=https://github.com
 SET WORK_DIR=%USERPROFILE%\.cache\lazy_nvim_setting
 SET NVIM_CONF_DIR=%LOCALAPPDATA%\nvim
 set PREV_DIR=%CD%

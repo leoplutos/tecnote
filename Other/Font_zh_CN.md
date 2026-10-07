@@ -83,9 +83,41 @@ https://github.com/subframe7536/Maple-font
 下载 ``NF-CN`` 的 ``Hinted font`` 版本即可  
 如果用于高分辨率屏幕（例如 MacBook）则需要使用 ``Unhinted font`` 版本
 
-### Google Sans Code
-https://github.com/wylu1037/google-sans-code-nerd-font  
-https://github.com/yuru7/guguru-sans-code
+### Google Sans Code + Noto Sans Mono CJK
+
+`Google Sans Code` + `Noto Sans Mono CJK` 是一种将 Google Sans Code 的英文编程字体与 Noto Sans Mono CJK 的中日韩字符结合使用的字体方案，适合终端、编辑器等等宽场景。
+英文、数字和 Nerd Font 图标使用 Google Sans Code Nerd Font Mono，中文/日文等 CJK 字符通过 Noto Sans Mono CJK fallback 显示，兼顾编程字体风格与中日韩字符支持。
+
+#### Google Sans Code Nerd Fonts
+官方  
+https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/GoogleSansCode  
+
+下载地址  
+https://github.com/ryanoasis/nerd-fonts/releases/latest  
+下载 `GoogleSansCode.zip` 后解压缩，安装 `GoogleSansCodeNerdFontMono-Regular.ttf`
+
+**MacOS安装**
+```bash
+brew install --cask font-googlesanscode
+```
+
+### Noto Sans Mono CJK
+官方  
+https://github.com/notofonts/noto-cjk  
+下载地址  
+https://github.com/notofonts/noto-cjk/releases/tag/Sans2.004  
+
+下载
+-  `Language Specific Monospace OTFs Simplified Chinese (简体中文)` ： 13_NotoSansMonoCJKsc.zip
+-  `Language Specific Monospace OTFs Japanese (日本語)` ： 11_NotoSansMonoCJKjp.zip
+
+安装 `NotoSansMonoCJKjp-Regular.otf` 即可
+
+VSCode设定示例
+```json
+"editor.fontFamily": "'GoogleSansCode Nerd Font Mono', 'Noto Sans Mono CJK JP', monospace",
+```
+
 
 ### Inconsolata
 

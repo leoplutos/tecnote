@@ -603,7 +603,9 @@ docker volume prune
 
 ## 其他
 
-### Container Desktop（iongion）
+### Container Desktop（iongion）（推荐）
+
+功能较全，镜像，容器，卷，网络全部可以管理
 
 https://github.com/iongion/container-desktop  
 https://container-desktop.com/
@@ -621,6 +623,15 @@ https://container-desktop.com/
 - Mode:               `Automatic`
 
 然后 `Create`
+
+### UniTerm（推荐）
+
+一款跨平台的轻量级的全能终端工具，支持WSL下的 Docker/Kubernetes 等 30+ 协议  
+功能单一，只能管理镜像和容器
+
+https://github.com/ys-ll/uniterm
+
+下载 `uniterm-windows-amd64-portable-v1.9.4.zip` 即可
 
 ### LazyDocker
 

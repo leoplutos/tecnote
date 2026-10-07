@@ -222,11 +222,25 @@ brew install --cask ghostty
 
 默认设定文件目录
 ```
-$HOME/Library/Application\ Support/com.mitchellh.ghostty/config.ghostty
+$HOME/.config/
+└── ghostty/
+    ├── config.ghostty
+    └── themes/
+        ├── lch-dark
+        └── lch-light
 ```
 
 笔者的设定文件
-- [config.ghostty](../DevTool/Ghostty-conf/config.ghostty)
+- [ghostty](../DevTool/Ghostty-conf)
+
+Ghostty 只是一个终端模拟器，如果想要 SSH 管理的功能可以安装 `SSHVault`
+
+#### SSHVault（推荐）
+`SSHVault` 是一款基于 SwiftUI 开发的 macOS 原生 SSH 连接管理器，用于集中管理服务器、SSH 配置和密钥。
+
+支持 Ghostty、iTerm2、Terminal.app 等终端，可快速启动 SSH 连接和 SFTP 会话。
+
+https://github.com/LZDevs/SSHVault
 
 #### iTerms2
 - [官网](https://iterm2.com/)
@@ -271,6 +285,10 @@ brew install --cask iterm2
 #### WezTerm
 - [官网](https://wezterm.org/index.html)
 
+```bash
+brew install --cask wezterm
+```
+
 #### 默认终端 Terminal.app
 
 **Terminal.app主题文件**  
@@ -278,18 +296,7 @@ brew install --cask iterm2
 
 ### 鼠标和触控板分别设置滚动方向
 
-#### MacMouseFix（推荐）
-
-Mac Mouse Fix可以将苹果触控板拥有的所有功能（甚至更多）赋予给你那只精准且符合人体工学设计的第三方鼠标
-
-- [官网](https://macmousefix.com/zh-Hans/)
-- [Github](https://github.com/noah-nuebling/mac-mouse-fix)
-
-```bash
-brew install mac-mouse-fix
-```
-
-#### MOS
+#### MOS（推荐）
 - [官网](https://mos.caldis.me/)
 - [Github](https://github.com/Caldis/Mos)
 
@@ -299,7 +306,49 @@ brew install --cask mos
 
 默认设定即可
 
-#### Scroll Reverser
+#### Hammerspoon（推荐）
+
+Hammerspoon 是一款 MacOS 自动化工具，可以用 Lua 脚本自定义键盘、鼠标、窗口管理和各种系统操作。  
+
+https://github.com/hammerspoon/hammerspoon
+
+笔者用它来自定义鼠标中键的自定义事件  
+- 鼠标中键`单击` → Mission Control：显示所有窗口（模拟触控板四指向上）
+- 鼠标中键`双击` → App Exposé：显示当前 App 的所有窗口（模拟触控板四指向下）
+
+```bash
+brew install --cask hammerspoon
+```
+
+第一次打开 Hammerspoon 后，MacOS 会要求“辅助功能”权限。到：`系统设置` → `隐私与安全性` → `辅助功能`
+```bash
+mkdir -p ~/.hammerspoon
+vim ~/.hammerspoon/init.lua
+```
+
+然后将 [init.lua](../DevTool/hammerspoon_conf/init.lua) 复制到 `init.lua`
+
+保存好后 `Reload Config` 一下，即可看到效果
+
+笔者的设定为
+
+```
+鼠标
+├─ 中键
+│  ├─ 单击 → Mission Control
+│  └─ 双击 → App Exposé
+│
+├─ Button 4 → Mission Control
+└─ Button 5 → App Exposé
+
+Shift + Space
+├─ v → VS Code
+├─ f → Finder
+├─ g → Ghostty
+└─ c → Claude Code
+```
+
+#### Scroll Reverser（不推荐）
 - [官网](https://pilotmoon.com/scrollreverser/)
 
 ```bash
@@ -315,6 +364,23 @@ brew install scroll-reverser
 
 其他均不选即可
 
+### 键盘
+
+#### Karabiner-Elements
+一款开源免费的键盘按键重映射工具，可以自定义按键功能、组合键以及针对不同键盘设置不同映射规则
+
+https://github.com/pqrs-org/Karabiner-Elements
+
+```bash
+brew install --cask karabiner-elements
+```
+
+笔者将键盘右侧的 command 和 option 都映射为了输入法切换
+
+``Karabiner-Elements`` → ``Simple Modifications`` → 设备选择你要设定的键盘，然后分别添加
+- `right_command` → `fn (globe)`
+- `right_option`  → `fn (globe)`
+
 ### 窗口管理工具‌ Rectangle
 - [官网](https://rectangleapp.com/)
 - [Github](https://github.com/rxhanson/Rectangle)
@@ -323,7 +389,9 @@ brew install scroll-reverser
 brew install --cask rectangle
 ```
 
-``Control + Option + 回车`` : 窗口最大化
+- ``Control + Option + 回车`` : 窗口最大化
+- ``Control + Option + 左方向键`` : 窗口移动/调整到左半屏
+- ``Control + Option + 右方向键`` : 窗口移动/调整到右半屏
 
 ### 应用卸载以及垃圾清理 腾讯柠檬
 - [官网](https://lemon.qq.com/)
@@ -437,6 +505,18 @@ curl localhost:8000
 
 ### 截图贴图工具
 使用系统自带的截屏（``Command + Shift + 5``） 可以满足基本需求，下面的按需选择
+
+#### macshot（推荐）
+
+功能最丰富的开源截图工具。19种以上的注释工具、带完整视频编辑器的屏幕录制、OCR + 翻译、自动隐藏个人身份信息、滚动截图、美化——全部原生支持，全部免费
+
+https://github.com/sw33tlie/macshot
+
+```bash
+brew install --cask macshot
+```
+
+#### 其他
 - [Snipaste](https://www.snipaste.com/)
 ```bash
 brew install snipaste --cask
@@ -444,12 +524,24 @@ brew install snipaste --cask
 - [shottr](https://shottr.cc/)
 - [iShot](https://apps.apple.com/cn/app/ishot-%E4%BC%98%E7%A7%80%E7%9A%84%E6%88%AA%E5%9B%BE%E8%B4%B4%E5%9B%BE%E5%BD%95%E5%B1%8F%E5%BD%95%E9%9F%B3ocr%E7%BF%BB%E8%AF%91%E5%8F%96%E8%89%B2%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/id1485844094)
 
+### 右键创建txt
+NewFile：一款为 macOS Finder 添加“右键新建文件”功能的开源工具，支持自定义文件类型和模板。
+
+https://github.com/mariusgm/newfile
+
+```bash
+brew install mariusgm/newfile/newfile
+```
+
 ### WinSCP替代
 
-#### FileZilla（推荐）
+#### UniTerm（推荐）
+- [UniTerm](https://github.com/ys-ll/uniterm)
+
+#### FileZilla
 - [FileZilla](https://filezilla-project.org/)
 
-#### Oryxis（推荐）
+#### Oryxis
 - [Oryxis](https://github.com/wilsonglasser/oryxis)
 
 #### Commander One
@@ -568,6 +660,17 @@ brew install --cask betterdisplay
  - 打开 ``高分辨率（HiDPI）``
  - ``显示模式`` → ``修改分辨率``，比如 ``1920 x 1080``
 
+### QLMarkdown - 空格预览Markdown
+ `QLMarkdown` 是一款 MacOS 的 Quick Look 插件，让你在 Finder 中按空格键即可直接预览 `Markdown（.md）` 文件的渲染效果
+
+https://github.com/sbarex/QLMarkdown
+
+```bash
+brew install --cask qlmarkdown
+```
+
+安装后必须至少启动一次该应用程序才会生效
+
 ## Zsh
 从 MacOS Catalina 开始 默认Shell 修改为了 Zsh  
 下面是笔者的 zshrc 配置文件  
@@ -625,3 +728,5 @@ https://dortania.github.io/OpenCore-Install-Guide/
 https://rufus.ie/zh/  
 https://github.com/daliansky/Hackintosh  
 
+## 绕过 MacOS 环境下的 Mobile Device Management (MDM) 限制
+https://github.com/assafdori/bypass-mdm

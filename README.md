@@ -162,13 +162,19 @@
 * [三大云平台服务对应关系](Cloud/CloudServiceMapping_zh_CN.md)
 * [AWS](Cloud/AWS_zh_CN.md)
 * [GCP](Cloud/GCP_zh_CN.md)
+* [Azure](Cloud/Azure_zh_CN.md)
+* [Cloudflare](Cloud/Cloudflare_zh_CN.md)
 
 ## AI相关
 * [Claude Code](AI/ClaudeCode_zh_CN.md)
 * [CodeX](AI/Codex_zh_CN.md)
+* [Pi Coding Agent](AI/PI_zh_CN.md)
+* [Skills和相关工具](AI/Skill_zh_CN.md)
 * [MCP](AI/MCP_zh_CN.md)
 * [ADE](AI/ADE_zh_CN.md)
 * [DESIGN.md](AI/Design_zh_CN.md)
+* [Harness Engineering - 编排工程](AI/Harness_Engineering_zh_CN.md)
+* [AI模型订阅](AI/AI_Model_Subscriptions_zh_CN.md)
 
 ## Mac相关
 * [Mac相关](MacOS/MacOS_zh_CN.md)
@@ -181,7 +187,7 @@
 * [Php](Other/Php_zh_CN.md)
 * [Cobol](Other/Cobol_zh_CN.md)
 * [Lua](Other/Lua_zh_CN.md)
-* [Sakura Editor 和 Klogg](Other/SakuraEditor_zh_CN.md)
+* [Sakura Editor 和 Klogg等日志查看工具](Other/SakuraEditor_zh_CN.md)
 * [高效命令行工具ripgrep等](Other/Ripgrep_zh_CN.md)
 * [Reqable-代理调试+请求测试+网络抓包与Sniffnet](Other/Reqable_zh_CN.md)
 * [废旧手机安装Linux](Other/Android-Linux_zh_CN.md)
